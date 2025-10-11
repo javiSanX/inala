@@ -27,6 +27,6 @@ export interface FooterData {
 }
 
 export async function getFooterNavigationData() {
-	const { default: data } = await import('../data/json-files/footerNavigationData.json')
+	const { default: data } = await import('../data/footerNavigationData.json')
 	return data as FooterData
 }

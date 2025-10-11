@@ -13,7 +13,7 @@
 // - UI
 import { Icon } from 'astro-icon/components'
 import Decorations from './Decor.astro'
-import Switcher from './ModeSwitcher.astro'
+// import Switcher from './ModeSwitcher.astro'
 import Badge from './Badge.astro'
 
 // Content
@@ -151,7 +151,7 @@ const savedNavActions = navActions.map((action: any) => ({
 				}
 			</ul>
 
-			{/* Navigation action buttons */}
+			{/* Lets Talk buttons */}
 			<div class="header__actions">
 				{
 					savedNavActions.map((action) => (
@@ -163,7 +163,7 @@ const savedNavActions = navActions.map((action: any) => ({
 			</div>
 
 			{/* Theme Switcher */}
-			<Switcher />
+			<!-- <Switcher /> -->
 		</nav>
 	</div>
 </header>

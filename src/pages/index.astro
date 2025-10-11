@@ -5,38 +5,39 @@
 
 // Components
 // - Layout
-import Layout from '../layouts/Layout.astro'
+import Layout from '../layouts/Layout.astro';
 // - Blocks
-import Hero from '../components/blocks/hero/BasicHeroCTA.astro'
-import Video from '../components/blocks/video/VideoSection.astro'
-import Statistics from '../components/blocks/stats/Statistics.astro'
-import Services from '../components/blocks/services/ServicesBasic.astro'
-import BrandSlider from '../components/blocks/slider/BrandSlider.astro'
-import Work from '../components/blocks/work/WorkBasic.astro'
-import Testimonials from '../components/blocks/testimonials/TestimonialsBasic.astro'
-import Blog from '../components/blocks/blog/PostsSlider.astro'
+import Blog from '../components/blocks/blog/PostsSlider.astro';
+import Hero from '../components/blocks/hero/MediaHeroCTA.astro';
+import Services from '../components/blocks/services/ServicesBasic.astro';
+import BrandSlider from '../components/blocks/slider/BrandSlider.astro';
+import Statistics from '../components/blocks/stats/Statistics.astro';
+import Testimonials from '../components/blocks/testimonials/TestimonialsBasic.astro';
+import Video from '../components/blocks/video/VideoSection.astro';
+import Work from '../components/blocks/work/WorkBasic.astro';
 
 // Content
 // - SEO
 const SEO = {
-	title: 'Toki | Agency Theme Template',
-	description:
-		'Toki is a creative studio helping brands find their voice, shape their presence, and make things people remember.'
-}
+   title: 'Inala | Psicología general sanitaria en Pamplona',
+   description:
+      'Inala es un centro de psicología general sanitaria que ofrece servicios de terapia y apoyo psicológico.',
+};
 // - Hero
 const hero = {
-	title: 'We make things that click',
-	text: 'Toki is a creative studio helping brands find their voice, shape their presence, and make things people remember.'
-}
+   // title: 'We design like we mean it.',
+   title: 'Salud mentalen Pamplona',
+   text: 'Inala es un centro de psicología general sanitaria que ofrece servicios de terapia y apoyo psicológico.',
+};
 ---
 
 <Layout title={SEO.title} description={SEO.description}>
-	<Hero title={hero.title} text={hero.text} />
-	<Video />
-	<Statistics />
-	<Services />
-	<BrandSlider />
-	<Work />
-	<Testimonials />
-	<Blog />
+   <Hero title={hero.title} text={hero.text} />
+   <Video />
+   <Statistics />
+   <Services />
+   <BrandSlider />
+   <Work />
+   <Testimonials />
+   <Blog />
 </Layout>

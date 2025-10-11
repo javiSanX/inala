@@ -13,31 +13,31 @@
 
 // Components
 // - UI
-import Card from './Card.astro'
+import Card from './Card.astro';
 // - Scripts
-import { postSubtitle } from '../../../components/scripts/postScripts.ts'
+import { postSubtitle } from '../../../scripts/postScripts.ts';
 
 // Content
 // - Props
 type Props = {
-	title?: string
-	image?: any
-	video?: any
-	link?: string
-	author?: string
-	date?: string
-	classes?: string
-}
-const { title = '', image, video, link, classes, author, date } = Astro.props
+   title?: string;
+   image?: any;
+   video?: any;
+   link?: string;
+   author?: string;
+   date?: string;
+   classes?: string;
+};
+const { title = '', image, video, link, classes, author, date } = Astro.props;
 ---
 
 <div class="flex flex-col gap-7.5">
-	<Card
-		image={image}
-		video={video}
-		classes={`${classes ? classes : ''}`}
-		cardMediaClasses="h-[600px]"
-		mediaEffect="parallax"
-	/>
-	<Card title={title} subtitle={postSubtitle(author, date)} titleLink={link} />
+   <Card
+      image={image}
+      video={video}
+      classes={`${classes ? classes : ''}`}
+      cardMediaClasses="h-[600px]"
+      mediaEffect="parallax"
+   />
+   <Card title={title} subtitle={postSubtitle(author, date)} titleLink={link} />
 </div>

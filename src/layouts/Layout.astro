@@ -7,63 +7,125 @@
 // - description: The description of the page
 // - ogImage: The image for the Open Graph
 // - noindex: Whether to add the noindex meta tag
+// - Canonical: whether to include canonical URLs
 // - navigation: The navigation bar type. Default is sticky , other options are none, transparent (fixed), and none
 
 // Components
-import NavigationBar from '../components/ui/NavigationBar.astro'
-import Main from '../components/ui/Main.astro'
-import Footer from '../components/ui/Footer.astro'
-import Header from '../components/blocks/head/Header.astro'
+import Footer from '../components/ui/Footer.astro';
+import Main from '../components/ui/Main.astro';
+import NavigationBar from '../components/ui/NavigationBar.astro';
 // Scripts
-import Scripts from '../components/scripts/ThemeScripts.astro'
-import GoogleTagManager from '../components/scripts/googleTagManagerBody.astro'
+import Scripts from '../scripts/ThemeScripts.astro';
 // Styles
-import '../styles/global.css'
+import '../styles/global.css';
 // Fonts
-import '@fontsource-variable/inter'
-import '@fontsource-variable/outfit'
+import '@fontsource-variable/inter';
+import '@fontsource-variable/outfit';
 // Data
-import { configData } from '../config/config'
 
 // - Swiper
-import 'swiper/css'
-import 'swiper/css/autoplay'
+import 'swiper/css';
+import 'swiper/css/autoplay';
+
+// Imports
+import { ClientRouter } from 'astro:transitions';
+// Partials
+// Data
+
+import { googleSiteVerification, googleTagManagerID } from '../config/analytics';
 
 // Props
 type Props = {
-	title?: string
-	description?: string
-	ogImage?: string
-	noindex?: boolean
-	navigation?: 'none' | 'transparent' | 'sticky'
-	footer?: 'none' | 'basic'
-}
+   title?: string;
+   description?: string;
+   ogImage?: string;
+   noindex?: boolean;
+   navigation?: 'none' | 'transparent' | 'sticky';
+   footer?: 'none' | 'basic';
+};
 // Page Metadata
-const {
-	title,
-	description,
-	ogImage,
-	noindex,
-	navigation = 'sticky',
-	footer = 'basic'
-} = Astro.props
+const { title, description, ogImage, noindex, navigation = 'sticky' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-animation mode-auto">
-	<Header title={title} description={description} ogImage={ogImage} noindex={noindex} />
-	<body
-		class:list={[
-			{ ['mode-' + `${configData.mode}`]: configData.mode },
-			{ ['scroll-animation']: configData.scrollAnimations }
-		]}
-	>
-		<GoogleTagManager />
-		{navigation !== 'none' && <NavigationBar type={navigation} />}
-		<Main>
-			<slot />
-		</Main>
-		{footer !== 'none' && <Footer />}
-		<Scripts />
-	</body>
+<html lang="es" class="scroll-animation mode-auto">
+   <head>
+      <!-- {googleAnalyticsMeasurementID && 
+         <script
+            type="text/partytown"
+            src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementID}`}></script>
+
+         <script type="text/partytown" data-ga-measurement-id={googleAnalyticsMeasurementID} id="ga-init">
+            const measurementId = document.getElementById('ga-init').getAttribute('data-ga-measurement-id')
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+               dataLayer.push(arguments) // eslint-disable-line
+            }
+            gtag('js', new Date())
+            gtag('config', measurementId)
+         </script>
+      } -->
+      <!-- {googleTagManagerID &&
+         <script type="text/partytown" data-gtm-measurement-id={googleTagManagerID} id="gtm-init">
+            const tagtId = document.getElementById('gtm-init').getAttribute('data-gtm-measurement-id')
+            ;(function (w, d, s, l, i) {
+               w[l] = w[l] || []
+               w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+               var f = d.getElementsByTagName(s)[0],
+               j = d.createElement(s),
+               dl = l != 'dataLayer' ? '&l=' + l : ''
+            j.async = true
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+            f.parentNode.insertBefore(j, f)
+            })(window, document, 'script', 'dataLayer', tagtId)
+         </script>
+      } -->
+      {
+         googleSiteVerification && (
+            <meta name="google-site-verification" content={googleSiteVerification} />
+         )
+      }
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={Astro.url} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content={Astro.url} />
+      <meta property="twitter:title" content={title} />
+      <meta property="twitter:description" content={description} />
+      <meta property="twitter:image" content={ogImage} />
+      <link rel="canonical" href={Astro.url} />
+      <link rel="canonical" href={Astro.url} item-prop="url" />
+      {noindex && <meta name="robots" content="noindex,nofollow" />}
+      <link rel="icon" href="/logo-light.webp" type="image/svg+xml" />
+      <link rel="sitemap" href="/sitemap-index.xml" />
+      <meta name="generator" content={Astro.generator} />
+      <meta name="theme-color" content="#134e4a" />
+      <ClientRouter fallback="swap" />
+   </head>
+   <body class="mode-light scroll-animation">
+      {
+         googleTagManagerID && (
+            <noscript>
+               <iframe
+                  src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerID}`}
+                  height="0"
+                  width="0"
+                  style="display:none;visibility:hidden"
+               />
+            </noscript>
+         )
+      }
+      <NavigationBar type={navigation} />
+      <Main>
+         <slot />
+      </Main>
+      <Footer />
+      <Scripts />
+   </body>
 </html>

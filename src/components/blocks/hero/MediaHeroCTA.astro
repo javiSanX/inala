@@ -25,15 +25,15 @@ const { title = '', text = '' } = Astro.props
 
 <Section classes="lg:py-40!">
 	<Row>
-		<Col span="6">
-			<h1>{title}</h1>
+		<Col span="7">
+			<h1 class="min-[1000px]:!text-8xl min-[1200px]:!text-9xl">Salud mental en Pamplona</h1>
 
-			<p class="text-lead max-w-[600px]">{text}</p>
+			<p class="text-lead !text-3xl max-w-[600px]">{text}</p>
 		</Col>
 
-		<Col span="6" classes="self-end">
+		<Col span="5" classes="self-end">
 			<div
-				class="grid max-h-[620px] grid-cols-3 grid-rows-3 gap-3 lg:grid-cols-4 lg:grid-rows-4 lg:gap-7.5"
+				class="grid max-h-[620px] grid-cols-3 grid-rows-3 gap-3 lg:grid-cols-4 lg:grid-rows-4 lg:gap-1"
 			>
 				<Card
 					image="/assets/images/image-01.webp"
