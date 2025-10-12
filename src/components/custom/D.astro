@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import Card from '../ui/cards/Card.astro';
+import Col from '../ui/Col.astro';
+import Row from '../ui/Row.astro';
+import Section from '../ui/Section.astro';
+import TitleSection from '../blocks/basic/TitleSection.astro';
+
+// - About Section
+const aboutSection = {
+   leftCardContent: [
+      `Toki is a compact crew of designers, developers, and brand strategists who think small teams
+    can do big things — especially when they like each other. We work closely (and laugh often),
+    fueled by strong opinions, open Slack threads, and the occasional espresso-fueled hot take.`,
+
+      `We believe the best work comes from good process, honest feedback, and the freedom to chase
+    weird ideas all the way through. Collaborating directly with our clients. We’re
+    remote-first, time-zone friendly, and occasionally chaotic in the best way.`,
+
+      `We believe the best work comes from good process, honest feedback, and the freedom to chase
+    weird ideas all the way through. Collaborating directly with our clients. We’re
+    remote-first, time-zone friendly, and occasionally chaotic in the best way. We believe the best work comes from good process, honest feedback, and the freedom to chase
+    weird ideas all the way through. Collaborating directly with our clients. We’re
+    remote-first, time-zone friendly, and occasionally chaotic in the best way.`,
+   ],
+};
+---
+
+<Section classes="">
+    <TitleSection
+      title="Los beneficios del acompañamiento"
+      text="Descubre cómo otras personas han transformado su vida y bienestar emocional gracias a nuestro acompañamiento profesional. Cada historia es una muestra de que el cambio es posible."
+      link="/blog"
+      classes="lg:pb-15! pl-0!"
+   />
+   <Row classes="!gap-5 max-[500px]:px-0">
+      <Col span="6" classes='flex flex-col gap-5'>
+         <Card>
+            <h3>Queremos escucharte</h3>
+            <p class="last:mb-0">
+               Toki is a compact crew of designers, developers, and brand strategists who think
+               small teams can do big things.
+            </p>
+         </Card>
+         <Card>
+            <h3>Queremos escucharte</h3>
+            <p class="last:mb-0">
+               Toki is a compact crew of designers, developers, and brand strategists who think
+               small teams can do big things..
+            </p>
+         </Card>
+         <Card>
+            <h3>Queremos escucharte</h3>
+            <p class="last:mb-0">
+               Toki is a compact crew of designers, developers, and brand strategists who think
+               small teams can do big things..
+            </p>
+         </Card>
+         <Card>
+            <h3>Queremos escucharte</h3>
+            <p class="last:mb-0">
+               Toki is a compact crew of designers, developers, and brand strategists who think
+               small teams can do big things..
+            </p>
+         </Card>
+      </Col>
+      <Col span="6">
+         <Card>
+            <Image
+               src={'/assets/images/image-06.webp'}
+               alt={'imagen 02'}
+               width={800}
+               height={800}
+               inferSize
+            />
+         </Card>
+      </Col>
+   </Row>
+</Section>

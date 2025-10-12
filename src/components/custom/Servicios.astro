@@ -1,0 +1,75 @@
+---
+// Statistics
+// ------------
+// Description: A statistics section with a title, a subtitle, a description and a grid of statistics
+// Properties:
+// - title: The title of the statistics section
+// - text: The subtitle of the statistics section
+
+// Components
+// - Layout
+import { Icon } from 'astro-icon/components';
+import Col from '../ui/Col.astro';
+import Row from '../ui/Row.astro';
+import Section from '../ui/Section.astro';
+import Card from '../ui/cards/Card.astro';
+
+//Content
+// - Data
+
+const datos = [
+   {
+      iconName: 'heart',
+      suffix: '+',
+      title: 'Terapia personalizada',
+      description:
+         "From bold startups to growing legends, we've built brands and sites. All of them successful and many award-winning. From bold startups to growing legends, we've built brands and sites. All of them successful and many award-winning.",
+   },
+   {
+      iconName: 'sun',
+      title: 'Comienza tu acompañamiento',
+      description:
+         "Full identities crafted from scratch — logos, voices, and vibes included. All of them successful and many award-winning. From bold startups to growing legends, we've built brands and sites.",
+   },
+   {
+      iconName: 'shield-check',
+      title: 'Crecimiento que transforma',
+      description:
+         "Tech, fashion, wellness, SaaS, and whatever comes next — we like a good challenge. All of them successful and many award-winning. From bold startups to growing legends, we've built brands and sites.",
+   },
+];
+
+// - Props
+type Props = {
+   title?: string;
+   text?: string;
+};
+---
+
+<Section decoration="all" type="none" classes="pt-0!">
+   <Row classes="">
+      <Col span="9">
+         <h2 class="text-left">¿Por qué dar el primer paso con nosotros?</h2>
+      </Col>
+   </Row>
+</Section>
+<Section decoration="all" type="none" classes="pt-0!">
+   <Row classes="!p-0 !m-0">
+     
+      {
+         datos.map(({ iconName, suffix, title, description }, index) => (
+            <Card classes="relative col-span-12 lg:col-span-4 p-0">
+               <div class="flex h-full flex-col gap-6 lg:gap-12">
+                  <div class=" ">
+                     <Icon name={iconName} class="size-20" />
+                  </div>
+                  <div class="flex flex-col gap-2">
+                     <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!">{title}</span>
+                     <p>{description}</p>
+                  </div>
+               </div>
+            </Card>
+         ))
+      }
+   </Row>
+</Section>
