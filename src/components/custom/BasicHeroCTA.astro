@@ -1,0 +1,76 @@
+---
+// Basic Hero CTA
+// ------------
+// Description: A hero section with a title and a subtitle
+
+import Section from '../ui/Section.astro';
+import Row from '../ui/Row.astro';
+import Col from '../ui/Col.astro';
+import BasicCard from '../ui/cards/Card.astro';
+
+// Content
+// - Props
+type Props = {
+   title?: string;
+   text?: string;
+   titleSpan?: string;
+   type?: 'basic' | 'vertical';
+   textStyle?: 'none' | 'card';
+   classes?: string;
+};
+const {
+   title = '',
+   text = '',
+   type = 'basic',
+   titleSpan = '6',
+   textStyle = 'card',
+   classes = 'py-40!',
+} = Astro.props;
+---
+
+<Section classes={`${classes ? classes : ''}`}>
+   <Row>
+      <Col span={titleSpan}>
+         <h1>{title}</h1>
+         {
+            text &&
+               type === 'vertical' &&
+               (textStyle === 'none' ? (
+                  <p class="text-lead max-w-[600px]">{text}</p>
+               ) : (
+                  <BasicCard decoration="all" style="transparent" classes="mt-12 max-w-[720px]">
+                     <p class="text-lead">{text}</p>
+                  </BasicCard>
+               ))
+         }
+      </Col>
+      {
+         text &&
+            type === 'basic' &&
+            (textStyle === 'none' ? (
+               <Col span="6" classes="self-end">
+                  <p class="text-lead max-w-[600px]">{text}</p>
+               </Col>
+            ) : (
+               <Col span="6" classes="self-end">
+                  <BasicCard decoration="all" style="transparent">
+                     <p class="text-lead">
+                        Te damos la bienvenida a un{' '}
+                        <strong class="font-bold">
+                           espacio seguro y acompañamiento profesional
+                        </strong>{' '}
+                        que integra técnicas basadas en evidencia científica para alcanzar el
+                        bienestar que buscas.
+                     </p>
+                  </BasicCard>
+                  <button
+                     class="absolute right-0 mt-5 cursor-pointer rounded bg-black px-6 py-3 text-2xl text-white hover:bg-gray-800"
+                     onclick="location.href='/contacto'"
+                  >
+                     Primer consulta gratuita
+                  </button>
+               </Col>
+            ))
+      }
+   </Row>
+</Section>

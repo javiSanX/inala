@@ -1,0 +1,89 @@
+---
+// Services List
+// ------------
+// Description: A services section with a title, a subtitle, a description and a grid of services
+
+import TitleSection from '../custom/TitleSection.astro';
+import Card from '../ui/cards/Card.astro';
+import Col from '../ui/Col.astro';
+import Row from '../ui/Row.astro';
+import Section from '../ui/Section.astro';
+
+// - Data
+const servicesData = [
+   {
+      title: 'Contacto',
+      text: [
+         'Desde el primer momento, te recibimos en un entorno seguro y de confianza, donde puedes sentirte libre de expresar tus inquietudes y emociones. Nos enfocamos en escucharte de manera activa y empática.',
+         'Este primer paso es fundamental para que te sientas cómodo/a y comprendido/a. Queremos que percibas que tu bienestar es nuestra prioridad y que estamos aquí para acompañarte en todo el proceso.',
+      ],
+      image: '/assets/images/image-03.webp',
+   },
+   {
+      title: 'Objetivos',
+      text: [
+         'Realizamos una evaluación personalizada de tu situación emocional y psicológica. Analizamos tus necesidades y expectativas para entender qué te gustaría conseguir con la terapia.',
+         'A partir de esta evaluación, definimos de manera conjunta los objetivos terapéuticos, adaptados a tus metas personales. Así, el proceso tiene un rumbo claro y alineado con lo que realmente buscas.',
+      ],
+      image: '/assets/images/image-04.webp',
+   },
+   {
+      title: 'Intervención',
+      text: [
+         'Desarrollamos un plan de intervención ajustado a ti, aplicando técnicas y recursos psicológicos que mejor se adaptan a tu caso. En cada sesión te acompañamos, te guiamos y te proporcionamos herramientas prácticas para afrontar tus retos.',
+         'Nuestro objetivo es que te sientas apoyado/a y que cada sesión te acerque más a tus objetivos de bienestar.',
+      ],
+      image: '/assets/images/image-10.webp',
+   },
+   {
+      title: 'Crecimiento',
+      text: [
+         'Te ayudamos a consolidar los aprendizajes y a integrar nuevas habilidades en tu día a día, para que el bienestar alcanzado sea duradero.',
+         'El acompañamiento continúa hasta que te sientas preparado/a para avanzar con autonomía y confianza. Queremos que al finalizar el proceso, cuentes con las herramientas necesarias para mantener tu equilibrio emocional y afrontar los desafíos futuros.',
+      ],
+      image: '/assets/images/image-19.webp',
+   },
+];
+
+// - Props
+const { title = '', text = '' } = Astro.props;
+---
+
+<Section stickyCol classes="overflow-visible! ">
+   <TitleSection
+      title="Pasos para transformar tu vida"
+      text="A continuación te mostramos, de forma sencilla, los pasos que seguimos en nuestro proceso terapéutico. Cada etapa está pensada para acompañarte y ayudarte a avanzar hacia tu bienestar emocional, desde el primer contacto hasta tu crecimiento personal."
+      classes="lg:pb-15!"
+   />
+   {
+      servicesData.map((service: any, index: number) => (
+         <Row classes="mb-12 ">
+            <Col span="4" classes="h-full min-w-[420px] max-w-[460px] w-full ">
+               <div class="sticky top-32 hidden lg:block">
+                  <h3 class="mb-2 flex flex-col justify-start gap-3 text-4xl! md:flex-row lg:text-5xl!">
+                     <span class="text-primary-500 hidden xl:block!">
+                        {String(index + 1).padStart(2, '0')}
+                     </span>
+                     {service.title}
+                  </h3>
+               </div>
+            </Col>
+            <Col span="8" classes="h-full w-full grow">
+               <Card
+                  title={service.title}
+                  cardHeaderClasses="block lg:hidden!"
+                  classes="h-full w-full"
+                  cardBodyClasses="h-full lg:pt-7.5! "
+                  cardMediaClasses="lg:order-2 h-[400px]"
+                  orientation="horizontal"
+                  image={service.image}
+               >
+                  {service.text.map((text: string) => (
+                     <p class="relative z-10 text-lg">{text}</p>
+                  ))}
+               </Card>
+            </Col>
+         </Row>
+      ))
+   }
+</Section>

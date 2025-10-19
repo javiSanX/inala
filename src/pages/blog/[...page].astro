@@ -8,14 +8,12 @@
 import Layout from '../../layouts/Layout.astro'
 // - Blocks
 import Hero from '../../components/blocks/hero/BasicHeroCTA.astro'
-import BlogEditorialLayout from '../../components/blocks/blog/BlogEditorialLayout.astro'
-
+import BlogMasonryGrid from '../../components/blocks/blog/BlogMasonryGrid.astro'
 // - Collection
 import { getCollection } from 'astro:content'
-
 export async function getStaticPaths({ paginate }: any) {
 	const allPosts = await getCollection('blog', ({ id }) => id)
-	return paginate(allPosts, { pageSize: 8 })
+	return paginate(allPosts, { pageSize: 6 })
 }
 const { page } = Astro.props as any
 
@@ -26,11 +24,6 @@ const SEO = {
 	description:
 		"Explore Toki's latest work projects designed to enhance productivity, ensure top-notch security, and integrate seamlessly with your favorite tools."
 }
-
-// Sort blog posts by publication date (newest first)
-const sortedBlogPosts = page.data.sort((a: any, b: any) => {
-	return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
-})
 ---
 
 <Layout title={SEO.title} description={SEO.description}>
@@ -39,8 +32,8 @@ const sortedBlogPosts = page.data.sort((a: any, b: any) => {
 		text="Notes from the studio on work, process, and creative problem-solving. No fluff, just ideas we wanted to share."
 		classes="pb-0!"
 	/>
-	<BlogEditorialLayout
-		data={sortedBlogPosts}
+	<BlogMasonryGrid
+		data={page.data}
 		{...page.lastPage === 1
 			? {}
 			: {

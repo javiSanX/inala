@@ -4,6 +4,7 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import keystatic from '@keystatic/astro';
 import tailwindcss from '@tailwindcss/vite';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 import icon from 'astro-icon';
 import lottie from 'astro-integration-lottie';
 import { defineConfig } from 'astro/config';
@@ -25,6 +26,6 @@ export default defineConfig({
       keystatic(),
    ],
    vite: {
-      plugins: [tailwindcss()],
+      plugins: [tailwindcss(), basicSsl()],
    },
 });

@@ -1,0 +1,97 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import TitleSection from '../custom/TitleSection.astro';
+import Card from '../ui/cards/Card.astro';
+import Col from '../ui/Col.astro';
+import Row from '../ui/Row.astro';
+import Section from '../ui/Section.astro';
+---
+
+<Section classes="">
+   <TitleSection
+      title="Los beneficios de nuestro método"
+      text="Descubre cómo otras personas han transformado su vida y bienestar emocional gracias a nuestro acompañamiento profesional. Cada historia es una muestra de que el cambio es posible."
+      classes="lg:pb-15! pl-0!"
+   />
+   <Row classes="!gap-5 max-[500px]:px-0">
+      <Col span="6" classes="flex flex-col gap-5">
+         <Card>
+            <div class="mb-4 flex items-center gap-4">
+               <Icon
+                  name="check-circle"
+                  class="testimonial__quote"
+                  size={40}
+                  width={40}
+                  height={40}
+               />
+               <h3>Bienestar emocional</h3>
+            </div>
+
+            <p class="">
+               La terapia te ayuda a gestionar tus emociones, reducir el estrés y la ansiedad, y
+               encontrar mayor equilibrio en tu día a día.
+            </p>
+         </Card>
+         <Card>
+            <div class="mb-4 flex items-center gap-4">
+               <Icon
+                  name="check-circle"
+                  class="testimonial__quote"
+                  size={40}
+                  width={40}
+                  height={40}
+               />
+               <h3>Autoconocimiento</h3>
+            </div>
+            <p class="">
+               Descubrirás más sobre ti mismo/a, tus pensamientos y comportamientos, lo que te
+               permitirá tomar decisiones más conscientes y saludables.
+            </p>
+         </Card>
+         <Card>
+            <div class="mb-4 flex items-center gap-4">
+               <Icon
+                  name="check-circle"
+                  class="testimonial__quote"
+                  size={40}
+                  width={40}
+                  height={40}
+               />
+               <h3>Herramientas</h3>
+            </div>
+            <p class="">
+               Aprenderás estrategias y recursos prácticos para enfrentar retos personales, superar
+               obstáculos y resolver conflictos de manera efectiva.
+            </p>
+         </Card>
+         <Card>
+            <div class="mb-4 flex items-center gap-4">
+               <Icon
+                  name="check-circle"
+                  class="testimonial__quote"
+                  size={40}
+                  width={40}
+                  height={40}
+               />
+               <h3>Cambio duradero</h3>
+            </div>
+            <p class="">
+               La terapia te ayuda a lograr mejoras duraderas, consolidando hábitos y recursos que
+               te permiten mantener tu bienestar emocional a largo plazo.
+            </p>
+         </Card>
+      </Col>
+      <Col span="6">
+         <Card>
+            <Image
+               src={'/assets/images/image-06.webp'}
+               alt={'imagen 02'}
+               width={800}
+               height={800}
+               inferSize
+            />
+         </Card>
+      </Col>
+   </Row>
+</Section>

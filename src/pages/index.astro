@@ -7,14 +7,13 @@
 // - Layout
 import Layout from '../layouts/Layout.astro';
 // - Blocks
-import A from '../components/custom/A.astro';
-import B from '../components/custom/B.astro';
-import Faq from '../components/custom/Faq.astro';
+import PasosTerapia from '../components/custom/PasosTerapia.astro';
 import Frases from '../components/custom/Frases.astro';
 import Hero from '../components/custom/Hero.astro';
 import JoinBox from '../components/custom/JoinBox.astro';
 import Servicios from '../components/custom/Servicios.astro';
-import Testimonios from '../components/custom/Testimonios.astro';
+import SobreInala from '../components/custom/SobreInala.astro';
+import VideoSection from '../components/custom/VideoSection.astro';
 // Content
 // - SEO
 const SEO = {
@@ -22,24 +21,31 @@ const SEO = {
    description:
       'Inala es un centro de psicología general sanitaria que ofrece servicios de terapia y apoyo psicológico.',
 };
-// - Hero
-const hero = {
-   // title: 'We design like we mean it.',
-   title: 'Salud mentalen Pamplona',
-   // text: 'Inala es un centro de psicología general sanitaria que ofrece servicios de terapia y apoyo psicológico.',
-   text: 'Inala es un centro de psicología general sanitaria, un lugar para cuidarte y sanar.',
-};
 ---
 
 <Layout title={SEO.title} description={SEO.description}>
-   <Hero title={hero.title} text={hero.text} />
+   <Hero
+      title="Salud mentalen Pamplona"
+      text="Inala es un centro de psicología general sanitaria, un lugar para cuidarte y sanar."
+   />
    <Servicios />
-   <JoinBox />
-   <A />
-   <Frases text="Inala te acompaña a descubrir tu fuerza interior y avanzar hacia el bienestar que mereces." />
-   <B />
-   <Frases text="La salud mental es un viaje, no un destino." type='none'/>
+   <JoinBox
+      title="Realiza ahora tu primera consulta psicológica"
+      subtitle=" Te apoyamos como necesitas, brindándote un espacio seguro y libre de juicios."
+      buttonText="Haz click aquí"
+   />
+   <SobreInala />
+   <Frases
+      title="Inala te acompaña a descubrir tu fuerza interior y avanzar hacia el bienestar que mereces."
+      text=""
+   />
+   <PasosTerapia />
+   <JoinBox
+      title="Da el primer paso hacia tu bienestar."
+      subtitle="Empieza hoy tu proceso de cambio y recibe el apoyo profesional que necesitas para cuidar tu salud emocional."
+      buttonText="Reserva tu cita"
+   />
    <!-- <Testimonios /> -->
-   <JoinBox />
-   <Faq />
+   <VideoSection video="https://oxygenna-themes.b-cdn.net/toki-astro/videos/about-us-video.mp4" />
+   <Frases title="La salud mental es un viaje, no un destino." text="" type="block" />
 </Layout>

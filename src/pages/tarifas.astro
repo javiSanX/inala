@@ -1,0 +1,44 @@
+---
+import Faq from '../components/custom/Faq.astro';
+import JoinBox from '../components/custom/JoinBox.astro';
+import Precios from '../components/custom/Precios.astro';
+import BasicCard from '../components/ui/cards/Card.astro';
+import Col from '../components/ui/Col.astro';
+import Row from '../components/ui/Row.astro';
+import Section from '../components/ui/Section.astro';
+import Layout from '../layouts/Layout.astro';
+import PasosReserva from '../components/custom/PasosReserva.astro';
+// - Content
+// Content
+// - SEO
+const SEO = {
+   title: 'Inala | Tarifas de Psicología en Pamplona',
+   description:
+      'Consulta las tarifas de los servicios de psicología general sanitaria que ofrece Inala en Pamplona.',
+};
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+   <Section>
+      <Row>
+         <Col>
+            <h1>Tarifas de Psicología en Pamplona</h1>
+         </Col>
+         <Col span="6" classes="self-end">
+            <BasicCard decoration="all" style="transparent">
+               <p class="text-lead">
+                  Descubre nuestras tarifas accesibles para servicios de psicología general
+                  sanitaria en Inala.
+               </p>
+            </BasicCard>
+         </Col>
+      </Row>
+   </Section>
+   <Precios />
+   <JoinBox
+      title="Da el primer paso hacia tu bienestar."
+      subtitle="Forma parte de nuestra comunidad"
+      buttonText="Únete"
+   />
+   <Faq />
+</Layout>

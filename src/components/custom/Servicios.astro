@@ -8,7 +8,7 @@
 
 // Components
 // - Layout
-import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import Col from '../ui/Col.astro';
 import Row from '../ui/Row.astro';
 import Section from '../ui/Section.astro';
@@ -16,28 +16,6 @@ import Card from '../ui/cards/Card.astro';
 
 //Content
 // - Data
-
-const datos = [
-   {
-      iconName: 'heart',
-      suffix: '+',
-      title: 'Terapia personalizada',
-      description:
-         "From bold startups to growing legends, we've built brands and sites. All of them successful and many award-winning. From bold startups to growing legends, we've built brands and sites. All of them successful and many award-winning.",
-   },
-   {
-      iconName: 'sun',
-      title: 'Comienza tu acompañamiento',
-      description:
-         "Full identities crafted from scratch — logos, voices, and vibes included. All of them successful and many award-winning. From bold startups to growing legends, we've built brands and sites.",
-   },
-   {
-      iconName: 'shield-check',
-      title: 'Crecimiento que transforma',
-      description:
-         "Tech, fashion, wellness, SaaS, and whatever comes next — we like a good challenge. All of them successful and many award-winning. From bold startups to growing legends, we've built brands and sites.",
-   },
-];
 
 // - Props
 type Props = {
@@ -48,28 +26,81 @@ type Props = {
 
 <Section decoration="all" type="none" classes="pt-0!">
    <Row classes="">
-      <Col span="9">
-         <h2 class="text-left">¿Por qué dar el primer paso con nosotros?</h2>
+      <Col span="8">
+         <h2 class="text-left">¿Por qué dar el primer paso en Inala?</h2>
       </Col>
    </Row>
 </Section>
 <Section decoration="all" type="none" classes="pt-0!">
    <Row classes="!p-0 !m-0">
-     
-      {
-         datos.map(({ iconName, suffix, title, description }, index) => (
-            <Card classes="relative col-span-12 lg:col-span-4 p-0">
-               <div class="flex h-full flex-col gap-6 lg:gap-12">
-                  <div class=" ">
-                     <Icon name={iconName} class="size-20" />
-                  </div>
-                  <div class="flex flex-col gap-2">
-                     <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!">{title}</span>
-                     <p>{description}</p>
-                  </div>
-               </div>
-            </Card>
-         ))
-      }
+      <Card classes="relative col-span-12 lg:col-span-4 p-0">
+         <div class="flex h-full flex-col gap-6 lg:gap-12">
+            <div class="">
+               <Image
+                  src={'/assets/images/image-01.webp'}
+                  alt={'imagen 01'}
+                  width={800}
+                  height={800}
+                  inferSize
+               />
+            </div>
+            <div class="flex flex-col gap-2">
+               <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!"
+                  >Terapia adaptada y personalizada</span
+               >
+               <p class="text-lg">
+                  En Inala, cada proceso terapéutico es único. Analizamos tu situación y necesidades
+                  para ofrecerte una atención adaptada, utilizando herramientas y
+                  enfoques que mejor se ajustan a ti.
+               </p>
+            </div>
+         </div>
+      </Card>
+      <Card classes="relative col-span-12 lg:col-span-4 p-0">
+         <div class="flex h-full flex-col gap-6 lg:gap-12">
+            <div class="">
+               <Image
+                  src={'/assets/images/image-11.webp'}
+                  alt={'imagen 11'}
+                  width={800}
+                  height={800}
+                  inferSize
+               />
+            </div>
+            <div class="flex flex-col gap-2">
+               <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!"
+                  >Acompañamiento profesional</span
+               >
+               <p class="text-lg">
+                  Te ofrecemos un acompañamiento cercano, creando un espacio
+                  basado en el respeto y la empatía, poniendo a tu disposición recursos prácticos
+                  que te ayudarán a avanzar con confianza.
+               </p>
+            </div>
+         </div>
+      </Card>
+      <Card classes="relative col-span-12 lg:col-span-4 p-0">
+         <div class="flex h-full flex-col gap-6 lg:gap-12">
+            <div class="">
+               <Image
+                  src={'/assets/images/image-18.webp'}
+                  alt={'imagen 18'}
+                  width={800}
+                  height={800}
+                  inferSize
+               />
+            </div>
+            <div class="flex flex-col gap-2">
+               <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!"
+                  >Crecimiento que transforma</span
+               >
+               <p class="text-lg">
+                  Logra cambios profundos y duraderos en tu vida, promoviendo un crecimiento
+                  personal que se refleja en tu día a día y permitiéndote superar obstáculos y
+                  alcanzar mayor equilibrio emocional.
+               </p>
+            </div>
+         </div>
+      </Card>
    </Row>
 </Section>

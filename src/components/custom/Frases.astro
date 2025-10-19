@@ -10,9 +10,9 @@ const { title = '', text = '', type = 'alt' } = Astro.props;
    <Row classes="mt-15 lg:mt-25">
       <Col span="3" />
       <Col span="9" classes="self-end justify-self-end">
-         <h2 class="md:text-right">{text}</h2>
+         <h2 class="md:text-right">{title}</h2>
          <p class="text-lead md:text-right">
-            read more about our team and our culture in Toki studios
+            {text}
          </p>
       </Col>
    </Row>

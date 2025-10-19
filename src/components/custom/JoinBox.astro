@@ -18,16 +18,18 @@ import Section from '../ui/Section.astro';
 // - Props
 type Props = {
    title?: string;
+   subtitle?: string;
+   buttonText?: string;
 };
-const { title = 'Contactanos' } = Astro.props;
+const { title = '', subtitle = '', buttonText = '' } = Astro.props;
 ---
 
 <Section decoration="all" type="alt">
    <Row classes="">
       <Col span="9" classes="self-end justify-self-end">
-         <h2 class="md:text-left">Realiza ahora tu primera consulta psicológica</h2>
+         <h2 class="md:text-left">{title}</h2>
          <p class="text-lead md:text-left">
-            Te apoyamos como necesitas, brindándote un espacio seguro y libre de juicios.
+            {subtitle}
          </p>
       </Col>
       <Col span="3" classes='flex items-center'>
@@ -35,7 +37,7 @@ const { title = 'Contactanos' } = Astro.props;
             class="cursor-pointer rounded bg-black px-6 py-2 text-2xl text-white hover:bg-gray-800"
             onclick="location.href='/contacto'"
          >
-            Haz click aquí
+            {buttonText}
          </button>
       </Col>
    </Row>

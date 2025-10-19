@@ -1,0 +1,51 @@
+---
+// Services Page
+// ------------
+// Description: The services page is a page that displays all the services.
+
+// Components
+// - Layout
+import Layout from '../layouts/Layout.astro';
+// - Blocks
+import Hero from '../components/custom/BasicHeroCTA.astro';
+import Beneficios from '../components/custom/Beneficios.astro';
+import AreasMejoras from '../components/custom/AreasMejora.astro';
+import PrimerEncuentro from '../components/custom/PrimerEncuetro.astro';
+import Frases from '../components/custom/Frases.astro';
+import JoinBox from '../components/custom/JoinBox.astro';
+import ListaServicios from '../components/custom/ListaServicios.astro';
+import Servicios2 from '../components/custom/Servicios2.astro';
+import TitleSection from '../components/custom/TitleSection.astro';
+
+const SEO = {
+   title: 'Inala | Psicología general sanitaria en Pamplona',
+   description:
+      'nuestro método integra técnicas basadas en evidencia científica para alcanzar el bienestar que buscas.',
+};
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+   <Hero
+      title="Sana y alcanza bienestar."
+      text="Te damos la bienvenida a un espacio seguro y acompañamiento profesional que integra técnicas basadas en evidencia científica para alcanzar el bienestar que buscas."
+   />
+   <Servicios2 />
+   <ListaServicios />
+   <Frases
+      title="Regálate un espacio para reconectar y cuidar de ti"
+      text="Cuando la mente no descansa y el cuerpo lo siente, es momento de escucharte. Encuentra en la terapia un lugar seguro y profesional para comprenderte, aliviar el malestar y recuperar tu equilibrio. Cada parte de ti merece atención y cuidado."
+   />
+   <PrimerEncuentro />
+   <JoinBox
+      title="Ahora es tu oportunidad. Comienza a priorizarte."
+      subtitle="dfdf"
+      buttonText="Dar el primer paso"
+   />
+   <Beneficios />
+   <AreasMejoras />
+   <TitleSection
+      title="Los beneficios de nuestro método"
+      text="Descubre cómo otras personas han transformado su vida y bienestar emocional gracias a nuestro acompañamiento profesional. Cada historia es una muestra de que el cambio es posible."
+      classes="lg:pb-15! pl-0!"
+   />
+</Layout>

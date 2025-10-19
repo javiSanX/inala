@@ -1,0 +1,62 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import TitleSection from '../custom/TitleSection.astro';
+import Card from '../ui/cards/Card.astro';
+import Col from '../ui/Col.astro';
+import Row from '../ui/Row.astro';
+import Section from '../ui/Section.astro';
+---
+
+<Section classes="">
+   <TitleSection
+      title="Los beneficios de nuestro método"
+      text="Descubre cómo otras personas han transformado su vida y bienestar emocional gracias a nuestro acompañamiento profesional. Cada historia es una muestra de que el cambio es posible."
+      classes="lg:pb-15! pl-0!"
+   />
+   <Row classes="!gap-5 max-[500px]:px-0">
+      <Col span="6" classes="flex flex-col gap-5">
+         <Card>
+            <div class="mb-4 flex items-center gap-4">
+               <h3>Paso 1 - Consulta gratuita</h3>
+            </div>
+            <p class="">
+               Comunícate mediante el formulario web o por WhatsApp. Programamos una llamada
+               gratuita de 20 minutos para responder tus preguntas y explicarte cómo funciona la
+               terapia online y nuestro método de trabajo.
+            </p>
+         </Card>
+         <Card>
+            <div class="mb-4 flex items-center gap-4">
+
+               <h3>Paso 2 - Agenda tu cita</h3>
+            </div>
+            <p class="">
+               Descubrirás más sobre ti mismo/a, tus pensamientos y comportamientos, lo que te
+               permitirá tomar decisiones más conscientes y saludables.
+            </p>
+         </Card>
+         <Card>
+
+               <h3>Paso 3 - Herramientas</h3>
+            </div>
+            <p class="">
+               Aprenderás estrategias y recursos prácticos para enfrentar retos personales, superar
+               obstáculos y resolver conflictos de manera efectiva.
+            </p>
+         </Card>
+    
+      </Col>
+      <Col span="6">
+         <Card>
+            <Image
+               src={'/assets/images/image-06.webp'}
+               alt={'imagen 02'}
+               width={800}
+               height={800}
+               inferSize
+            />
+         </Card>
+      </Col>
+   </Row>
+</Section>

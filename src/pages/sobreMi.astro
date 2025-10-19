@@ -1,0 +1,64 @@
+---
+// About Page
+// ------------
+// Description: The about page is a page that displays information about the company.
+
+import BasicHeroCTA from '../components/blocks/hero/BasicHeroCTA.astro';
+import TwoColVideoSection from '../components/blocks/video/TwoColVideoSection.astro';
+import MiHIstoria from '../components/custom/MiHIstoria.astro';
+import Card from '../components/ui/cards/Card.astro';
+import Col from '../components/ui/Col.astro';
+import Row from '../components/ui/Row.astro';
+import Section from '../components/ui/Section.astro';
+import Layout from '../layouts/Layout.astro';
+
+// Content
+// - SEO
+const SEO = {
+   title: 'Toki | About us',
+   description: 'About us',
+};
+// - Hero
+const hero = {
+   title: 'El equipo detrás de Inala',
+};
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+   <BasicHeroCTA title={hero.title} titleSpan="12" classes="[&_h1]:max-w-[920px]" />
+
+   <TwoColVideoSection
+      classes="pt-0! overflow-visible!"
+      video="https://oxygenna-themes.b-cdn.net/toki-astro/videos/about-us-video.mp4"
+   >
+      <Card>
+         <p class="mb-9! last:mb-0">
+            Me llamo María, soy Psicóloga sanitaria especializada en terapia familiar y de pareja, y
+            experta en la salud mental perinatal.
+         </p>
+         <p class="mb-9! last:mb-0">
+            Detrás de Inala encontrarás a una profesional comprometida con tu bienestar emocional.
+            Mi misión es acompañarte con cercanía, empatía y experiencia en cada paso de tu proceso
+            personal. Creo en el poder de la escucha, el respeto y la atención personalizada para
+            ayudarte a alcanzar una vida más plena y equilibrada. Conoce más sobre la persona que te
+            guiará en este camino de transformación.
+         </p>
+      </Card>
+   </TwoColVideoSection>
+   <MiHIstoria />
+
+   <Section>
+      <Row classes="mt-15 lg:mt-25">
+         <Col span="3" />
+         <Col span="9" classes="self-end justify-self-end">
+            <h2 class="md:text-right">
+               Toki designs and builds digital products brands and experiences with offices in New
+               York and Athens.
+            </h2>
+            <p class="text-lead md:text-right">
+               read more about our team and our culture in Toki studios
+            </p>
+         </Col>
+      </Row>
+   </Section>
+</Layout>

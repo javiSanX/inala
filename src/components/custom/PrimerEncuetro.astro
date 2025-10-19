@@ -1,0 +1,64 @@
+---
+import TitleSection from '../custom/TitleSection.astro';
+import Card from '../ui/cards/Card.astro';
+import Col from '../ui/Col.astro';
+import Row from '../ui/Row.astro';
+import Section from '../ui/Section.astro';
+---
+
+<Section classes="text-lg">
+   <TitleSection
+      title="¿Cómo es el primer encuentro?"
+      text="Sabemos que dar el paso de comenzar terapia no siempre es fácil, y que la primera sesión puede generar muchas dudas, nervios o incluso inseguridad. Te explicamos cómo te recibimos y qué puedes esperar en tu primera sesión de terapia, para que te sientas cómodo/a y seguro/a desde el inicio."
+      classes="lg:pb-15! pl-0!"
+   />
+   <Row classes="!gap-5 max-[500px]:px-0">
+      <Col span="6">
+         <Card>
+            <div class="text-lg">
+               <h3>Primer encuentro</h3>
+               <p class="">
+                  No tienes que traer nada preparado ni preocuparte por decir lo correcto. No
+                  existen respuestas perfectas ni formas «ideales» de empezar: estamos aquí para
+                  construir juntos ese camino.
+               </p>
+            </div>
+         </Card>
+      </Col>
+      <Col span="6">
+         <Card>
+            <div class="text-lg">
+               <h3>¿Qué puedes esperar?</h3>
+               <p class="">
+                  En esta primera sesión, nuestro objetivo es conocerte. Nos enfocamos en escucharte
+                  y comenzamos a crear una relación de confianza.
+               </p>
+            </div>
+         </Card>
+      </Col>
+      <Col span="6">
+         <Card>
+            <div class="text-lg">
+               <h3>Estableciendo objetivos</h3>
+               <p class="">
+                  Te ayudamos a identificar tus necesidades y expectativas. Juntos definimos los
+                  primeros objetivos, para que el proceso terapéutico tenga un rumbo claro y
+                  adaptado a ti desde el inicio.
+               </p>
+            </div>
+         </Card>
+      </Col>
+      <Col span="6">
+         <Card>
+            <div class="text-lg">
+               <h3>Tu espacio seguro</h3>
+               <p class="">
+                  Tú marcas el ritmo de cada encuentro. Te acompañamos, te guiamos y te cuidamos,
+                  ofreciéndote un espacio seguro donde puedes expresarte libremente y sentirte
+                  acogido/a.
+               </p>
+            </div>
+         </Card>
+      </Col>
+   </Row>
+</Section>

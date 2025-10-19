@@ -1,0 +1,64 @@
+---
+import Card from '../ui/cards/Card.astro';
+import Col from '../ui/Col.astro';
+import Row from '../ui/Row.astro';
+import Section from '../ui/Section.astro';
+// - About Section
+---
+
+<Section classes="mt-0! pt-0!">
+   <Row classes="!gap-5 max-[500px]:px-0">
+      <Col span="6">
+         <Card>
+            <div class="text-lg">
+               <div class="flex">
+                  <h3>Sesion individual</h3>
+                  <h3 class="absolute right-10">50 €</h3>
+               </div>
+
+               <ul>
+                  <li>Sesión de 50 minutos para ti, enfocada en tu bienestar emocional.</li>
+                  <li>Espacio seguro y confidencial para expresarte libremente.</li>
+                  <li>Atención personalizada y adaptada a tus necesidades.</li>
+                  <li>Acceso online o presencial, según tu preferencia.</li>
+                  <li>Acompañamiento profesional durante todo el proceso terapéutico.</li>
+                  <li>Saber mas...</li>
+               </ul>
+               <button
+                  class="mt-5 cursor-pointer rounded bg-black px-6 py-3 text-2xl text-white hover:bg-gray-800"
+                  onclick="location.href='/contacto'"
+               >
+                  Reserva tu cita
+               </button>
+            </div>
+         </Card>
+      </Col>
+      <Col span="6">
+         <Card>
+            <div class="text-lg">
+               <div class="flex">
+                  <h3>Sesion de pareja</h3>
+                  <h3 class="absolute right-10">70 €</h3>
+               </div>
+               <ul>
+                  <li>60 minutos para cuidarte, escucharte y atenderte.</li>
+                  <li>Accede fácilmente mediante un enlace de acceso.</li>
+                  <li>
+                     Cercanía emocional. Siente el apoyo, la calidez y la cercanía de nuestras
+                     psicólogas online. Recibe el apoyo que necesitas.
+                  </li>
+                  <li>Flexibilidad horaria gracias a la terapia online.</li>
+
+                  <li>Acompañamiento terapéutico durante todas las fases del proceso.</li>
+               </ul>
+               <button
+                  class="mt-5 cursor-pointer rounded bg-black px-6 py-3 text-2xl text-white hover:bg-gray-800"
+                  onclick="location.href='/contacto'"
+               >
+                  Reserva tu cita
+               </button>
+            </div>
+         </Card>
+      </Col>
+   </Row>
+</Section>
