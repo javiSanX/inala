@@ -10,7 +10,7 @@
       "format": "prettier --write ."
    },
    "engines": {
-      "node": "22.18.0"
+      "node": "22"
    },
    "dependencies": {
       "@astrojs/check": "0.9.4",
