@@ -9,9 +9,12 @@ import icon from 'astro-icon';
 import lottie from 'astro-integration-lottie';
 import { defineConfig } from 'astro/config';
 
+import vercel from '@astrojs/vercel';
+
 // https://astro.build/config
 export default defineConfig({
    site: 'http://inala.es',
+
    integrations: [
       icon(),
       sitemap(),
@@ -25,7 +28,10 @@ export default defineConfig({
       markdoc(),
       keystatic(),
    ],
+
    vite: {
       plugins: [tailwindcss(), basicSsl()],
    },
+
+   adapter: vercel(),
 });
