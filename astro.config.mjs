@@ -9,7 +9,7 @@ import icon from 'astro-icon';
 import lottie from 'astro-integration-lottie';
 import { defineConfig } from 'astro/config';
 
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel/static';
 
 // https://astro.build/config
 export default defineConfig({
@@ -32,6 +32,6 @@ export default defineConfig({
    vite: {
       plugins: [tailwindcss(), basicSsl()],
    },
-
+   output: 'static',
    adapter: vercel(),
 });
