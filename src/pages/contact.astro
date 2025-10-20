@@ -7,7 +7,7 @@
 // - Layout
 import Layout from '../layouts/Layout.astro';
 // - Blocks
-import ContactHeroCTA from '../components/blocks/hero/ContactHeroCTA.astro';
+import ContactHeroCTA from '../components/custom/ContactHeroCTA.astro';
 import Col from '../components/ui/Col.astro';
 import Row from '../components/ui/Row.astro';
 import Section from '../components/ui/Section.astro';
@@ -22,15 +22,14 @@ const SEO = {
 <Layout title={SEO.title} description={SEO.description}>
    <ContactHeroCTA
       title="Agenda tu cita hoy mismo"
-      text="Reserva tu sesión de terapia online/presencial o solicit a más información."
+      text="Tienes dudas o necesitas más información? Estamos aquí para ayudarte. Contáctanos y te responderemos a la brevedad."
    />
    <Section>
       <Row classes="mt-15 lg:mt-25">
          <Col span="3" />
          <Col span="9" classes="self-end justify-self-end">
             <h2 class="md:text-right">
-               Toki designs and builds digital products brands and experiences with offices in New
-               York and Athens.
+              La terapia es un viaje de autoconocimiento y transformación que te ayuda a sanar, crecer y vivir con mayor plenitud.
             </h2>
             <p class="text-lead md:text-right">
                read more about our team and our culture in Toki studios

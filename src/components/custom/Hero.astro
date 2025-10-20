@@ -12,6 +12,7 @@ import Col from '../ui/Col.astro';
 import Row from '../ui/Row.astro';
 import Section from '../ui/Section.astro';
 // - UI
+import Button from '../ui/Button.astro';
 import Card from '../ui/cards/Card.astro';
 
 // Content
@@ -26,15 +27,12 @@ const { title = '', text = '' } = Astro.props;
 <Section classes="lg:py-40!">
    <Row>
       <Col span="7">
-         <h1 class="min-[1000px]:!text-8xl min-[1200px]:!text-9xl">Salud mental en Pamplona</h1>
+         <h1 class="min-[1000px]:!text-8xl min-[1200px]:!text-9xl">Centro de Psicoterapia INALA</h1>
 
          <p class="text-lead max-w-[600px] !text-3xl">{text}</p>
-          <button
-            class="cursor-pointer rounded bg-black px-6 py-3 text-2xl mt-5 text-white hover:bg-gray-800"
-            onclick="location.href='/contacto'"
-         >
+         <Button style="primary" type="link" link="./contact" size="lg" classes="absolute right-0 mt-5">
             Reserva tu cita gratuita
-         </button>
+         </Button>
       </Col>
 
       <Col span="5" classes="self-end">

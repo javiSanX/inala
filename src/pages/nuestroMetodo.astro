@@ -7,13 +7,13 @@
 // - Layout
 import Layout from '../layouts/Layout.astro';
 // - Blocks
+import AreasMejoras from '../components/custom/AreasMejora.astro';
 import Hero from '../components/custom/BasicHeroCTA.astro';
 import Beneficios from '../components/custom/Beneficios.astro';
-import AreasMejoras from '../components/custom/AreasMejora.astro';
-import PrimerEncuentro from '../components/custom/PrimerEncuetro.astro';
 import Frases from '../components/custom/Frases.astro';
 import JoinBox from '../components/custom/JoinBox.astro';
 import ListaServicios from '../components/custom/ListaServicios.astro';
+import PrimerEncuentro from '../components/custom/PrimerEncuetro.astro';
 import Servicios2 from '../components/custom/Servicios2.astro';
 import TitleSection from '../components/custom/TitleSection.astro';
 
@@ -38,14 +38,15 @@ const SEO = {
    <PrimerEncuentro />
    <JoinBox
       title="Ahora es tu oportunidad. Comienza a priorizarte."
-      subtitle="dfdf"
+      subtitle="Ahora es tu oportunidad de dar el primer paso y comenzar a priorizarte, cuidando tu bienestar y dedicando tiempo a lo que realmente necesitas."
       buttonText="Dar el primer paso"
    />
    <Beneficios />
    <AreasMejoras />
-   <TitleSection
-      title="Los beneficios de nuestro método"
+   <Frases
+      title="La terapia es un espacio donde puedes reencontrarte contigo mismo y descubrir nuevas formas de crecer y sanar."
       text="Descubre cómo otras personas han transformado su vida y bienestar emocional gracias a nuestro acompañamiento profesional. Cada historia es una muestra de que el cambio es posible."
       classes="lg:pb-15! pl-0!"
+      type="block"
    />
 </Layout>

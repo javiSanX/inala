@@ -7,23 +7,31 @@
       {
          "subCategories": [
             {
-               "subCategory": "Our culture",
-               "subCategoryLink": "/about-v1"
+               "subCategory": "Nuestro metodo",
+               "subCategoryLink": "/nuestroMetodo"
             },
             {
-               "subCategory": "Journal",
+               "subCategory": "Sobre mí",
+               "subCategoryLink": "/sobreMi"
+            },
+            {
+               "subCategory": "Tarifas",
+               "subCategoryLink": "/tarifas"
+            },
+            {
+               "subCategory": "Blog",
                "subCategoryLink": "/blog"
             },
             {
-               "subCategory": "Services",
-               "subCategoryLink": "/services"
+               "subCategory": "Contacto",
+               "subCategoryLink": "/contacto"
             },
             {
-               "subCategory": "Contact",
-               "subCategoryLink": "/contact"
+               "subCategory": "Faqs",
+               "subCategoryLink": "/faqs"
             },
             {
-               "subCategory": "Terms",
+               "subCategory": "Terminos",
                "subCategoryLink": "/terms"
             }
          ]

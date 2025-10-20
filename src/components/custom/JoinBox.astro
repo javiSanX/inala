@@ -11,6 +11,7 @@
 import Col from '../ui/Col.astro';
 import Row from '../ui/Row.astro';
 import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
 
 //Content
 // - Data
@@ -32,13 +33,12 @@ const { title = '', subtitle = '', buttonText = '' } = Astro.props;
             {subtitle}
          </p>
       </Col>
-      <Col span="3" classes='flex items-center'>
-         <button
-            class="cursor-pointer rounded bg-black px-6 py-2 text-2xl text-white hover:bg-gray-800"
-            onclick="location.href='/contacto'"
-         >
-            {buttonText}
-         </button>
+      <Col span="3" classes="flex items-center">
+       
+
+         <Button style="primary" type="link" link="./contact" size="lg" classes="absolute right-0 mt-5">
+       {buttonText}
+         </Button>
       </Col>
    </Row>
 </Section>

@@ -1,4 +1,5 @@
 ---
+import Button from '../ui/Button.astro';
 import Card from '../ui/cards/Card.astro';
 import Col from '../ui/Col.astro';
 import Row from '../ui/Row.astro';
@@ -17,19 +18,19 @@ import Section from '../ui/Section.astro';
                </div>
 
                <ul>
-                  <li>Sesión de 50 minutos para ti, enfocada en tu bienestar emocional.</li>
+                  <li>Sesión de 60 minutos para ti, enfocada en tu bienestar emocional.</li>
                   <li>Espacio seguro y confidencial para expresarte libremente.</li>
                   <li>Atención personalizada y adaptada a tus necesidades.</li>
                   <li>Acceso online o presencial, según tu preferencia.</li>
                   <li>Acompañamiento profesional durante todo el proceso terapéutico.</li>
-                  <li>Saber mas...</li>
+                  <li>
+                     <a href="/nuestroMetodo">Saber mas...</a>
+                  </li>
                </ul>
-               <button
-                  class="mt-5 cursor-pointer rounded bg-black px-6 py-3 text-2xl text-white hover:bg-gray-800"
-                  onclick="location.href='/contacto'"
-               >
+
+               <Button style="primary" type="link" link="./contact" size="lg" classes="absolute right-0 mt-5">
                   Reserva tu cita
-               </button>
+               </Button>
             </div>
          </Card>
       </Col>
@@ -41,22 +42,18 @@ import Section from '../ui/Section.astro';
                   <h3 class="absolute right-10">70 €</h3>
                </div>
                <ul>
-                  <li>60 minutos para cuidarte, escucharte y atenderte.</li>
-                  <li>Accede fácilmente mediante un enlace de acceso.</li>
+                  <li>Sesión de 60 minutos para ti, enfocada en tu bienestar emocional.</li>
+                  <li>Espacio seguro y confidencial para expresarte libremente.</li>
+                  <li>Atención personalizada y adaptada a tus necesidades.</li>
+                  <li>Acceso online o presencial, según tu preferencia.</li>
+                  <li>Acompañamiento profesional durante todo el proceso terapéutico.</li>
                   <li>
-                     Cercanía emocional. Siente el apoyo, la calidez y la cercanía de nuestras
-                     psicólogas online. Recibe el apoyo que necesitas.
+                     <a href="/nuestroMetodo">Saber mas...</a>
                   </li>
-                  <li>Flexibilidad horaria gracias a la terapia online.</li>
-
-                  <li>Acompañamiento terapéutico durante todas las fases del proceso.</li>
                </ul>
-               <button
-                  class="mt-5 cursor-pointer rounded bg-black px-6 py-3 text-2xl text-white hover:bg-gray-800"
-                  onclick="location.href='/contacto'"
-               >
+               <Button style="primary" type="link" link="./contact" size="lg" classes="absolute right-0 mt-5">
                   Reserva tu cita
-               </button>
+               </Button>
             </div>
          </Card>
       </Col>

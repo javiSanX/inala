@@ -7,6 +7,7 @@ import Section from '../ui/Section.astro';
 import Row from '../ui/Row.astro';
 import Col from '../ui/Col.astro';
 import BasicCard from '../ui/cards/Card.astro';
+import Button from '../ui/Button.astro';
 
 // Content
 // - Props
@@ -63,12 +64,10 @@ const {
                         bienestar que buscas.
                      </p>
                   </BasicCard>
-                  <button
-                     class="absolute right-0 mt-5 cursor-pointer rounded bg-black px-6 py-3 text-2xl text-white hover:bg-gray-800"
-                     onclick="location.href='/contacto'"
-                  >
+                  <Button style="primary" type="link" link="./contact" size="lg" classes="absolute right-0 mt-5">
                      Primer consulta gratuita
-                  </button>
+                  </Button>
+                
                </Col>
             ))
       }
