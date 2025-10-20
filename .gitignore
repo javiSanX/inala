@@ -38,3 +38,4 @@ pnpm-lock.yaml
 
 # Optional: ignore public assets (if generated)
 # public/
+.vercel
