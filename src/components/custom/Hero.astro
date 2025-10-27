@@ -27,10 +27,16 @@ const { title = '', text = '' } = Astro.props;
 <Section classes="lg:py-40!">
    <Row>
       <Col span="7">
-         <h1 class="min-[1000px]:!text-8xl min-[1200px]:!text-9xl">Centro de Psicoterapia INALA</h1>
+         <h1 class="min-[1000px]:!text-8xl min-[1200px]:!text-9xl text-cyan-900!"> INALA Centro de Psicoterapia</h1>
 
          <p class="text-lead max-w-[600px] !text-3xl">{text}</p>
-         <Button style="primary" type="link" link="./contact" size="lg" classes="absolute right-0 mt-5">
+         <Button
+            style="primary"
+            type="link"
+            link="./contact"
+            size="lg"
+            classes="absolute right-0 mt-5"
+         >
             Reserva tu cita gratuita
          </Button>
       </Col>
