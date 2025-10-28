@@ -3,6 +3,6 @@
 // - Google Analytics Measurement ID: for Google Analytics
 // - Google Tag Manager ID: for Google Tag Manager
 
-export const googleSiteVerification = ''
-export const googleAnalyticsMeasurementID = import.meta.env.PUBLIC_GA_TRACKING_ID // Replace with your Google Analytics Measurement ID (e.g. "G-XXXXXXXXXX")
-export const googleTagManagerID = ''
+export const googleSiteVerification = 'tPXeMdX0nIDCBwsNwGIKYV56PGlxsBqEMzj2aU3zFXg';
+export const googleAnalyticsMeasurementID = import.meta.env.PUBLIC_GA_TRACKING_ID; // Replace with your Google Analytics Measurement ID (e.g. "G-XXXXXXXXXX")
+export const googleTagManagerID = 'GTM-W39Z2VCV';

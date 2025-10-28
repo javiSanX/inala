@@ -1,38 +1,15 @@
 ---
-// Layout
-// ------------
-// Description: The layout for the page with header and footer
-// Properties:
-// - title: The title of the page
-// - description: The description of the page
-// - ogImage: The image for the Open Graph
-// - noindex: Whether to add the noindex meta tag
-// - Canonical: whether to include canonical URLs
-// - navigation: The navigation bar type. Default is sticky , other options are none, transparent (fixed), and none
-
-// Components
+import '@fontsource-variable/inter';
+import '@fontsource-variable/outfit';
+import { ClientRouter } from 'astro:transitions';
+import 'swiper/css';
+import 'swiper/css/autoplay';
 import Footer from '../components/ui/Footer.astro';
 import Main from '../components/ui/Main.astro';
 import NavigationBar from '../components/ui/NavigationBar.astro';
-// Scripts
+import { googleSiteVerification, googleTagManagerID, googleAnalyticsMeasurementID } from '../config/analytics';
 import Scripts from '../scripts/ThemeScripts.astro';
-// Styles
 import '../styles/global.css';
-// Fonts
-import '@fontsource-variable/inter';
-import '@fontsource-variable/outfit';
-// Data
-
-// - Swiper
-import 'swiper/css';
-import 'swiper/css/autoplay';
-
-// Imports
-import { ClientRouter } from 'astro:transitions';
-// Partials
-// Data
-
-import { googleSiteVerification, googleTagManagerID } from '../config/analytics';
 
 // Props
 type Props = {
@@ -43,14 +20,14 @@ type Props = {
    navigation?: 'none' | 'transparent' | 'sticky';
    footer?: 'none' | 'basic';
 };
-// Page Metadata
-const { title, description, ogImage, noindex, navigation = 'sticky' } = Astro.props;
+
+const { title, description, ogImage = 'og.png', noindex=false, navigation = 'sticky' } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es" class="scroll-animation mode-auto light">
    <head>
-      <!-- {googleAnalyticsMeasurementID && 
+      {googleAnalyticsMeasurementID && 
          <script
             type="text/partytown"
             src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementID}`}></script>
@@ -64,8 +41,8 @@ const { title, description, ogImage, noindex, navigation = 'sticky' } = Astro.pr
             gtag('js', new Date())
             gtag('config', measurementId)
          </script>
-      } -->
-      <!-- {googleTagManagerID &&
+      }
+      {googleTagManagerID &&
          <script type="text/partytown" data-gtm-measurement-id={googleTagManagerID} id="gtm-init">
             const tagtId = document.getElementById('gtm-init').getAttribute('data-gtm-measurement-id')
             ;(function (w, d, s, l, i) {
@@ -79,7 +56,7 @@ const { title, description, ogImage, noindex, navigation = 'sticky' } = Astro.pr
             f.parentNode.insertBefore(j, f)
             })(window, document, 'script', 'dataLayer', tagtId)
          </script>
-      } -->
+      }
       {
          googleSiteVerification && (
             <meta name="google-site-verification" content={googleSiteVerification} />
