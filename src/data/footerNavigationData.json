@@ -19,10 +19,6 @@
                "subCategoryLink": "/tarifas"
             },
             {
-               "subCategory": "Blog",
-               "subCategoryLink": "/blog"
-            },
-            {
                "subCategory": "Contacto",
                "subCategoryLink": "/contacto"
             },
@@ -31,8 +27,12 @@
                "subCategoryLink": "/faqs"
             },
             {
-               "subCategory": "Terminos",
-               "subCategoryLink": "/terms"
+               "subCategory": "Aviso legal",
+               "subCategoryLink": "/aviso-legal-y-politica-de-cookies"
+            },
+            {
+               "subCategory": "Política de privacidad",
+               "subCategoryLink": "/política-de-privacidad"
             }
          ]
       }

@@ -3,21 +3,13 @@
 // Description: The social links data for the website.
 
 export interface SocialLink {
-	name: string
-	link: string
+   name: string;
+   link: string;
 }
 
 export const socialLinks: SocialLink[] = [
-	{
-		name: 'Instagram',
-		link: '/'
-	},
-	{
-		name: 'LinkedIn',
-		link: '/'
-	},
-	{
-		name: 'Threads',
-		link: '/'
-	}
-]
+   {
+      name: 'Instagram',
+      link: 'https://www.instagram.com/inala_psicoterapia?igsh=Z2I1N3k1ODh4Nnhv',
+   },
+];

@@ -7,8 +7,7 @@ import Card from '../ui/cards/Card.astro';
 const preguntas = [
    {
       question: '¿La terapia es presencial, online o ambas?',
-      answer:
-         'Es tanto terapia presencial y online. Depende de lo que quieras.',
+      answer: 'Es tanto terapia presencial y online. Depende de lo que quieras.',
    },
 
    {
@@ -18,18 +17,15 @@ const preguntas = [
    },
    {
       question: '¿Con qué frecuencia recomiendas asistir a terapia?',
-      answer:
-         'Depende de cada persona y la situación en la que se encuentre.',
+      answer: 'Depende de cada persona y la situación en la que se encuentre.',
    },
    {
       question: '¿Cuánto dura cada sesión?',
-      answer:
-         '60 minutos',
+      answer: '60 minutos',
    },
    {
       question: '¿Trabajan con adultos, adolescentes y/o niños?',
-      answer:
-         'Si, trabajamos tanto con con niños/as, adolescentes y adultos',
+      answer: 'Si, trabajamos tanto con con niños/as, adolescentes y adultos',
    },
 ];
 ---
@@ -62,12 +58,7 @@ const preguntas = [
                            </svg>
                         </span>
                      </summary>
-                     <p class="group-open:animate-fadeIn mt-3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.
-                     </p>
+                     <p class="group-open:animate-fadeIn mt-3">{pregunta.answer}</p>
                   </details>
                </Card>
             ))
