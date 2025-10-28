@@ -88,24 +88,36 @@
    /* Cookie Banner Styles */
    .cookie-banner {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 10px;
+      right: 10px;
       background: black;
       color: white;
       padding: 20px;
       box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
       z-index: 9999;
-      transition: transform 0.3s ease-in-out;
-
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 50%;
+      opacity: 0;
+      transform: translateY(100%) scale(0.95);
+   }
+   @media (max-width: 800px) {
+      .cookie-banner {
+         width: 90%;
+         left: 5%;
+         right: 5%;
+      }
    }
 
    .cookie-banner.hidden {
-      transform: translateY(100%);
+      opacity: 0;
+      transform: translateY(100%) scale(0.95);
+      pointer-events: none;
    }
 
    .cookie-banner.show {
-      transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
    }
 
    .cookie-content {
@@ -149,7 +161,7 @@
    .cookie-btn {
       padding: 8px 16px;
       border: none;
-      border-radius: 6px;
+      border-radius: 0px;
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
@@ -340,12 +352,9 @@
    /* Responsive */
    @media (max-width: 768px) {
       .cookie-content {
-         flex-direction: column;
-         text-align: center;
       }
 
       .cookie-buttons {
-         justify-content: center;
       }
 
       .cookie-modal-content {
@@ -369,6 +378,9 @@
       class CookieManager {
          constructor() {
             this.cookieName = 'inala_cookie_consent';
+            // Configuración del trigger de scroll
+            this.scrollThreshold = 200; // Píxeles de scroll antes de mostrar
+            this.autoShowDelay = 5000; // Mostrar automáticamente después de 5s
             this.init();
          }
 
@@ -376,12 +388,48 @@
             // Check if user has already made a choice
             const consent = this.getConsent();
             if (!consent) {
-               this.showBanner();
+               this.setupScrollTrigger();
             } else {
                this.applyConsent(consent);
             }
 
             this.bindEvents();
+         }
+
+         setupScrollTrigger() {
+            const self = this;
+            let scrollTriggered = false;
+
+            function handleScroll() {
+               if (!scrollTriggered && window.scrollY > self.scrollThreshold) {
+                  scrollTriggered = true;
+                  self.showBanner();
+                  window.removeEventListener('scroll', handleScroll);
+               }
+            }
+
+            // También mostrar después del delay si no hay scroll
+            const timeoutId = setTimeout(() => {
+               if (!scrollTriggered) {
+                  scrollTriggered = true;
+                  self.showBanner();
+                  window.removeEventListener('scroll', handleScroll);
+               }
+            }, self.autoShowDelay);
+
+            // Event listener para scroll
+            window.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Limpiar timeout si se hace scroll antes
+            window.addEventListener(
+               'scroll',
+               function () {
+                  if (scrollTriggered) {
+                     clearTimeout(timeoutId);
+                  }
+               },
+               { once: true, passive: true },
+            );
          }
 
          bindEvents() {
@@ -438,8 +486,13 @@
          showBanner() {
             const banner = document.getElementById('cookie-banner');
             if (banner) {
+               // Añadir clase para preparar la animación
                banner.classList.remove('hidden');
-               banner.classList.add('show');
+
+               // Pequeño delay para que se renderice primero
+               requestAnimationFrame(() => {
+                  banner.classList.add('show');
+               });
             }
          }
 
