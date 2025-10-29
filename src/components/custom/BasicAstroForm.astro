@@ -1,51 +1,100 @@
 ---
-// Basic Astro Form
-// ------------
-// Description: A form that can be used to collect user information
-// Properties:
-// - formData: The data of the form
-// - classes: Additional classes to be added to the form
-
-// Components
-// - UI
-import Card from '../ui/cards/Card.astro'
-import AstroForm from '../ui/forms/AstroForm.astro'
-import FormField from '../ui/forms/partials/FormField.astro'
-import InputField from '../ui/forms/form-elements/InputField.astro'
-import TextArea from '../ui/forms/form-elements/TextArea.astro'
-import Button from '../ui/Button.astro'
+import Card from '../ui/cards/Card.astro';
+import AstroForm from '../ui/forms/AstroForm.astro';
+import FormField from '../ui/forms/partials/FormField.astro';
+import InputField from '../ui/forms/form-elements/InputField.astro';
+import TextArea from '../ui/forms/form-elements/TextArea.astro';
+import Button from '../ui/Button.astro';
 
 // Props
 type Props = {
-	formData?: any
-	classes?: string
-}
-const { formData, classes } = Astro.props
+   formData?: any;
+   classes?: string;
+};
+const { formData, classes } = Astro.props;
 ---
 
 <Card
-	classes={classes}
-	cardBodyClasses="lg:p-15!"
-	decoration="all"
-	classes="bg-white/60! dark:bg-neutral-900/80!"
+   classes={classes}
+   cardBodyClasses="lg:p-15!"
+   decoration="all"
+   classes="bg-white/60! dark:bg-neutral-900/80!"
 >
-	<AstroForm>
-		<FormField>
-			<InputField type="text" id="firstName" label={formData.firstName} />
-			<InputField type="text" id="lastName" label={formData.lastName} />
-		</FormField>
-		<FormField>
-			<InputField
-				type="email"
-				id="email"
-				label={formData.email.label}
-				required
-				value={formData.email.value}
-			/>
-		</FormField>
-		<FormField>
-			<TextArea id="message" label={formData.message} />
-		</FormField>
-		<Button style="primary" type="submit" size="lg">{formData.button}</Button>
-	</AstroForm>
+   <AstroForm>
+      <FormField>
+         <InputField type="text" id="firstName" label={formData.firstName} />
+         <InputField type="text" id="lastName" label={formData.lastName} />
+      </FormField>
+      <FormField>
+         <InputField
+            type="email"
+            id="email"
+            label={formData.email.label}
+            required
+            value={formData.email.value}
+         />
+      </FormField>
+      <FormField>
+         <TextArea id="message" label={formData.message} />
+      </FormField>
+      <Button style="primary" type="submit" size="lg">{formData.button}</Button>
+   </AstroForm>
 </Card>
+
+<script>
+   import { actions } from 'astro:actions';
+
+   const form = document.querySelector('form');
+   const submitButton = document.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+   if (form && submitButton) {
+      form.addEventListener('submit', async (event) => {
+         event.preventDefault();
+
+         // Deshabilitar botón durante envío
+         submitButton.disabled = true;
+         const originalText = submitButton.textContent;
+         submitButton.textContent = 'Enviando...';
+
+         try {
+            const formData = new FormData(form);
+            const formDataObj = Object.fromEntries(formData.entries());
+
+            console.log('📤 DATOS DEL FORMULARIO:', formDataObj);
+
+            // Verificar que los campos requeridos están presentes
+            if (
+               !formDataObj.email ||
+               !formDataObj.firstName ||
+               !formDataObj.lastName ||
+               !formDataObj.message
+            ) {
+               throw new Error('Todos los campos son obligatorios');
+            }
+
+            const { data, error } = await actions.sendData(formData);
+
+            if (error) {
+               console.error('❌ Error de validación:', error);
+
+               // Mostrar errores específicos de validación
+               if (error.code === 'BAD_REQUEST' && error.message) {
+                  console.error('Error en el formulario:', error.message);
+                  // Aquí puedes añadir lógica para mostrar errores en la UI
+               }
+
+               console.log('Error en el formulario: ' + (error.message || 'Verifica los datos'));
+            } else {
+               console.log('✅ RESPUESTA DEL SERVIDOR:', data);
+               form.reset(); // Limpiar formulario
+            }
+         } catch (error) {
+            console.error('❌ Error inesperado:', error);
+         } finally {
+            // Restaurar botón
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+         }
+      });
+   }
+</script>
