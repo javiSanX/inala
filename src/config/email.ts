@@ -8,7 +8,7 @@ export const emailConfig = {
       secure: false,
       auth: {
          user: 'hola@inala.es', // Tu email completo
-         pass: '[4JB3DLx(DVY)S',
+         pass: import.meta.env.SMTP_PASSWORD, // Tu contraseña de email
       },
       tls: {
          rejectUnauthorized: false,
