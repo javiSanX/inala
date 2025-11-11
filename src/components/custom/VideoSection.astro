@@ -16,6 +16,7 @@ import Decoration from '../ui/Decor.astro';
 import Kursor from '../ui/kursor.astro';
 import Video from '../ui/Video.astro';
 import Card from '../ui/cards/Card.astro';
+import { Image } from 'astro:assets';
 
 // Content
 // - Props
@@ -34,15 +35,13 @@ const { video = 'https://oxygenna-themes.b-cdn.net/toki-astro/videos/home-video.
             class="animate-cursor relative border border-neutral-100 lg:cursor-none dark:border-neutral-600"
          >
             <div class="parallax overflow-hidden">
-               <Video
-                  video={video}
+               <Image
+                  src="/assets/images/oficina.jpeg"
+                  alt={'Video promocional Inala Centro de Psicoterapia'}
                   id="promo"
                   width={470}
                   height={600}
-                  loop={true}
-                  autoplay={false}
-                  muted={false}
-                  classes="max-h-[830px] w-full object-cover media--parallax"
+                  class="aspect-video w-full object-cover"
                />
             </div>
             <Decoration type="all" />

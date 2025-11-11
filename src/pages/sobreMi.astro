@@ -4,8 +4,8 @@
 // Description: The about page is a page that displays information about the company.
 
 import BasicHeroCTA from '../components/blocks/hero/BasicHeroCTA.astro';
-import TwoColVideoSection from '../components/blocks/video/TwoColVideoSection.astro';
 import MiHIstoria from '../components/custom/MiHIstoria.astro';
+import TwoColVideoSection from '../components/custom/TwoColVideoSection.astro';
 import Card from '../components/ui/cards/Card.astro';
 import Col from '../components/ui/Col.astro';
 import Row from '../components/ui/Row.astro';
@@ -15,7 +15,7 @@ import Layout from '../layouts/Layout.astro';
 // Content
 // - SEO
 const SEO = {
-   title: 'Toki | About us',
+   title: 'Inala | About us',
    description: 'About us',
 };
 // - Hero
@@ -27,10 +27,7 @@ const hero = {
 <Layout title={SEO.title} description={SEO.description}>
    <BasicHeroCTA title={hero.title} titleSpan="12" classes="[&_h1]:max-w-[920px]" />
 
-   <TwoColVideoSection
-      classes="pt-0! overflow-visible!"
-      video="https://oxygenna-themes.b-cdn.net/toki-astro/videos/about-us-video.mp4"
-   >
+   <TwoColVideoSection image="/assets/images/oficina.jpeg">
       <Card title="Maria Sanchez" subtitle="Psicologa Sanitaria -  Numero de colegiada 02300">
          <p class="mb-9! last:mb-0">
             Me llamo María, soy Psicóloga sanitaria especializada en terapia familiar y de pareja, y

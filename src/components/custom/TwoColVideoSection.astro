@@ -1,0 +1,46 @@
+---
+// Two Col Video Section
+// ------------
+// Description: A two column video section with a title, a subtitle, a description and a video
+// Properties:
+// - video: The video of the two column video section
+// - classes: The classes of the two column video section
+
+// Components
+// - Layout
+import Col from '../ui/Col.astro';
+import Row from '../ui/Row.astro';
+import Section from '../ui/Section.astro';
+// - UI
+import { Image } from 'astro:assets';
+import Decoration from '../ui/Decor.astro';
+
+type Props = {
+   image?: string;
+};
+const { image } = Astro.props;
+---
+
+<Section>
+   <Row>
+      <Col span="4">
+         <slot />
+      </Col>
+      <Col span="8">
+         <div
+            class="animate-cursor relative border border-neutral-100 lg:cursor-none dark:border-neutral-600"
+         >
+            <Image
+               src={image}
+               alt={'imagen 02'}
+               width={800}
+               height={800}
+               inferSize
+               class="max-h-[830px] w-full object-cover"
+            />
+
+            <Decoration type="all" />
+         </div>
+      </Col>
+   </Row>
+</Section>
