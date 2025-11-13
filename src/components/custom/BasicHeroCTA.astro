@@ -3,11 +3,11 @@
 // ------------
 // Description: A hero section with a title and a subtitle
 
-import Section from '../ui/Section.astro';
-import Row from '../ui/Row.astro';
-import Col from '../ui/Col.astro';
-import BasicCard from '../ui/cards/Card.astro';
 import Button from '../ui/Button.astro';
+import Col from '../ui/Col.astro';
+import Row from '../ui/Row.astro';
+import Section from '../ui/Section.astro';
+import BasicCard from '../ui/cards/Card.astro';
 
 // Content
 // - Props
@@ -64,10 +64,15 @@ const {
                         bienestar que buscas.
                      </p>
                   </BasicCard>
-                  <Button style="primary" type="link" link="./contacto" size="lg" classes="absolute right-0 mt-5">
-                     Primer consulta gratuita
+                  <Button
+                     style="primary"
+                     type="link"
+                     link="./contacto"
+                     size="lg"
+                     classes="absolute right-0 mt-5"
+                  >
+                     Reserva tu cita
                   </Button>
-                
                </Col>
             ))
       }
