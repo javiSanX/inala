@@ -12,6 +12,7 @@ import Col from '../ui/Col.astro';
 import Row from '../ui/Row.astro';
 import Section from '../ui/Section.astro';
 // - Blocks
+import Image from 'astro/components/Image.astro';
 import BasicAstroForm from './BasicAstroForm.astro';
 
 // Content
@@ -31,7 +32,7 @@ const formData = {
 const locationData = [
    {
       city: 'Mi WhatsApp',
-      address: ['+34 623 050 773'],
+      address: ['Contactame por WhatsApp al', '+34 623 050 773'],
    },
    {
       city: 'Email',
@@ -39,7 +40,10 @@ const locationData = [
    },
    {
       city: 'Dirección',
-      address: ['Maria Lacunza 6, portal 4', '31011 Pamplona, España'],
+      address: [
+         'Maria Lacunza 6, portal 4',
+         '31011 Pamplona, España',
+      ],
    },
 ];
 // - Props
@@ -78,5 +82,19 @@ const { title, text } = Astro.props;
             </Col>
          ))
       }
+      <Col
+         classes="relative col-span-12 before:absolute before:bottom-0 before:h-px before:w-full before:bg-linear-to-r before:from-stone-200/0 before:via-stone-200 before:to-stone-200/0 after:absolute after:top-0 after:right-0 after:hidden after:h-full after:w-px after:bg-linear-to-b after:from-stone-200/0 after:via-stone-200 after:to-stone-200/0 last:after:hidden lg:col-span-3 lg:before:hidden lg:after:block dark:before:from-neutral-800/0 dark:before:via-neutral-800 dark:before:to-neutral-800/0 dark:after:from-neutral-700/0 dark:after:via-neutral-800 dark:after:to-neutral-800/0"
+      >
+         <div class="flex h-full flex-col py-[40px] lg:px-7.5">
+            <p>Nos encontramos en centro Yssana.</p>
+            <Image
+               src={'/assets/images/yssana.webp'}
+               alt={'imagen 02'}
+               width={150}
+               height={150}
+               inferSize
+            />
+         </div>
+      </Col>
    </Row>
 </Section>
