@@ -1,16 +1,4 @@
 ---
-// Header - Navigation bar
-// ------------
-// Description: persistent and accessible navigation bar for primary site navigation.
-// Structure:
-// - Logo: website logo with light/dark versions and optional text
-// - Menu toggle: mobile hamburger toggle for navigation menu
-// - Navigation Links: main navigation items with optional submenus and badges
-// - Actions: action buttons in the navigation bar
-// - Theme Switcher: toggle between light and dark modes
-
-// Components
-// - UI
 import { Icon } from 'astro-icon/components';
 import Decorations from './Decor.astro';
 // import Switcher from './ModeSwitcher.astro'
@@ -32,8 +20,27 @@ const navigationBarData = {
       alt: 'The tailwind astro theme',
    },
    navItems: [
-      { name: 'Nuestro método', link: '/nuestroMetodo' },
-      { name: 'Sobre mí', link: '/sobreMi' },
+      { name: 'Nuestro método', link: '/nuestro-metodo' },
+      {
+         name: 'Servicios',
+         link: '/servicios',
+         align: 'full',
+         submenu: [
+            {
+               links: [
+                  { name: 'Terapia individual', link: '/servicios/terapia-individual' },
+                  { name: 'Terapia de pareja', link: '/servicios/terapia-de-pareja' },
+                  { name: 'Terapia familiar', link: '/servicios/terapia-familiar' },
+                  {
+                     name: 'Psicología perinatal',
+                     link: '/servicios/psicologia-perinatal',
+                  },
+                  { name: 'Terapia online', link: '/servicios/terapia-online' },
+               ],
+            },
+         ],
+      },
+      { name: 'Sobre mí', link: '/sobre-mi' },
       { name: 'Tarifas', link: '/tarifas' },
       // { name: 'Blog', link: '/blog' },
    ],
@@ -59,8 +66,14 @@ const savedNavActions = navActions.map((action: any) => ({
    <div class="header__container">
       <nav aria-label="main navigation" role="navigation" class="header__nav">
          {/* Logo */}
-         <a href={`/`} class="header__logo p-0! m-0!">
-            <img src={logo.src} alt={logo.alt} width="100" height="100" class="block dark:hidden p-2" />
+         <a href={`/`} class="header__logo m-0! p-0!">
+            <img
+               src={logo.src}
+               alt={logo.alt}
+               width="100"
+               height="100"
+               class="block p-2 dark:hidden"
+            />
             <img
                src={logo.srcDark}
                alt={logo.alt}

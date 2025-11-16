@@ -1,0 +1,198 @@
+---
+// About Page
+// ------------
+// Description: The about page is a page that displays information about the company.
+
+import { Image } from 'astro:assets';
+import BasicHeroCTA from '../components/custom/BasicHeroCTA.astro';
+import TwoColVideoSection from '../components/custom/TwoColVideoSection.astro';
+import Card from '../components/ui/cards/Card.astro';
+import Col from '../components/ui/Col.astro';
+import Row from '../components/ui/Row.astro';
+import Section from '../components/ui/Section.astro';
+import Layout from '../layouts/Layout.astro';
+
+// Content
+// - SEO
+const SEO = {
+   title: 'María Sánchez · Psicóloga Sanitaria en Pamplona | Nº Colegiada NA-02300',
+   description:
+      'Conoce a María Sánchez, Psicóloga Sanitaria en Pamplona (Nº Colegiada NA-02300). Enfoque cercano, integrador y basado en la evidencia para acompañarte en tu bienestar emocional, presencial y online.',
+};
+// - Hero
+const hero = {
+   title: 'El equipo detrás de Inala',
+};
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+   <BasicHeroCTA title={hero.title} titleSpan="12" classes="[&_h1]:max-w-[920px]" />
+
+   <TwoColVideoSection image="/assets/images/oficina.webp">
+      <Card>
+         <h3 class="!m-0 !p-0">Maria Sanchez</h3>
+         <p class="!m-0 !mb-2 !p-0 text-sm font-light">
+            Psicologa Sanitaria - Numero de colegiada 02300
+         </p>
+         <div class="flex gap-2">
+            <a href="https://www.instagram.com/inala_psicoterapia/" target="_blank" rel="noopener">
+               <Image
+                  src={'/assets/images/instagram.webp'}
+                  alt={'imagen instagram'}
+                  width={30}
+                  height={30}
+                  inferSize
+               />
+            </a>
+            <a href="https://www.instagram.com/inala_psicoterapia/" target="_blank" rel="noopener">
+               <Image
+                  src={'/assets/images/tikTok.webp'}
+                  alt={'imagen tikTok'}
+                  width={30}
+                  height={30}
+                  inferSize
+               />
+            </a>
+             <a href="https://www.instagram.com/inala_psicoterapia/" target="_blank" rel="noopener">
+               <Image
+                  src={'/assets/images/youtube.webp'}
+                  alt={'imagen youtube'}
+                  width={30}
+                  height={30}
+                  inferSize
+               />
+            </a>
+             <a href="https://www.instagram.com/inala_psicoterapia/" target="_blank" rel="noopener">
+               <Image
+                  src={'/assets/images/facebook.webp'}
+                  alt={'imagen facebook'}
+                  width={30}
+                  height={30}
+                  inferSize
+               />
+            </a>
+         </div>
+
+         <p class="mt-5 mb-9! last:mb-0">
+            Me llamo María, soy Psicóloga sanitaria especializada en terapia familiar y de pareja, y
+            experta en la salud mental perinatal.
+         </p>
+         <p class="mb-9! last:mb-0">
+            Detrás de Inala encontrarás a una profesional comprometida con tu bienestar emocional.
+            Mi misión es acompañarte con cercanía, empatía y experiencia en cada paso de tu proceso
+            personal. Creo en el poder de la escucha, el respeto y la atención personalizada para
+            ayudarte a alcanzar una vida más plena y equilibrada. Conoce más sobre la persona que te
+            guiará en este camino de transformación.
+         </p>
+      </Card>
+   </TwoColVideoSection>
+
+   <Section>
+      <Row classes="pb-12">
+         <Col span="4" classes="lg:block">
+            <Card
+               image="/assets/images/maria5.webp"
+               cardMediaClasses="max-h-[429px] lg:max-h-[600px] object-cover object-top w-full"
+               mediaEffect="parallax"
+            />
+         </Col>
+
+         <Col span="4" classes="lg:block">
+            <Card
+               title="Mis inicios"
+               subtitle=""
+               classes="col-span-3 row-span-1"
+               cardHeaderClasses="gap-0!"
+            >
+               <p>
+                  Mi camino profesional comenzó en el mundo empresarial, donde aprendí a trabajar
+                  bajo presión y en entornos competitivos, esa experiencia me permitió comprender
+                  cómo el estrés y la autoexigencia afectan tanto el rendimiento laboral como el
+                  bienestar personal y las relaciones. Hoy, esa vivencia enriquece mi manera de
+                  acompañar, aportando una mirada más amplia, empática y real sobre los desafíos que
+                  enfrentan muchas personas en su día a día.
+               </p>
+            </Card>
+         </Col>
+      </Row>
+      <Row classes="pb-12 sel">
+         <Col span="4" classes="lg:block">
+            {/* Este espacio queda vacío para crear el margen inicial */}
+         </Col>
+         <Col span="4" classes="lg:block">
+            <Card
+               title="Mi vocación"
+               subtitle=""
+               classes="col-span-3 row-span-1"
+               cardHeaderClasses="gap-0!"
+            >
+               <p>
+                  Pronto descubrí que mi verdadero interés estaba en las emociones, las relaciones y
+                  la forma en que nos vinculamos con los demás, lo que me llevó a estudiar
+                  Psicología, graduarme con mención en clínica y realizar el Máster General
+                  Sanitario. Acompañar a personas en su salud mental me ha enseñado el valor de
+                  comprender los procesos de enfermedad, duelo y la influencia que tiene todo ello
+                  en el entorno mas cercano de la persona que lo padece. Todo ello dentro de una
+                  sociedad que necesita avanzar hacia una visión más profunda y libre de estigmas.
+               </p>
+            </Card>
+         </Col>
+         <Col span="4" classes="lg:block">
+            <Card
+               image="/assets/images/maria3.webp"
+               cardMediaClasses="max-h-[429px] lg:max-h-[600px] object-cover object-top w-full"
+               mediaEffect="parallax"
+            />
+         </Col>
+      </Row>
+      <Row classes="pb-12">
+         <Col span="4" classes="lg:block">
+            <Card
+               image="/assets/images/maria2.webp"
+               cardMediaClasses="max-h-[429px] lg:max-h-[600px] object-cover object-top w-full"
+               mediaEffect="parallax"
+            />
+         </Col>
+
+         <Col span="8" classes="lg:block">
+            <Card
+               title="Mi proposito"
+               subtitle=""
+               classes="col-span-3 row-span-1"
+               cardHeaderClasses="gap-0!"
+            >
+               <p>
+                  Mi propio proceso personal me permitió ver con claridad cómo la familia y el
+                  entorno en el que crecemos influyen profundamente en nuestro desarrollo y manera
+                  de relacionarnos. Esta comprensión me llevó a especializarme en terapia familiar y
+                  de pareja, y a trabajar en el ámbito de la desprotección infantil, acompañando
+                  procesos de trauma complejo y duelo en la primera infancia, lo que reforzó mi
+                  compromiso con un acompañamiento respetuoso y humano.
+               </p>
+               <p>
+                  Como madre, y habiendome formado en Salud Mental Perinatal, conozco de primera
+                  mano la intensidad de los procesos vitales que acompañan la maternidad y la
+                  crianza, asi como una visión profesional de todo este cambio vital. Estoy en
+                  constante formación y creo que cada persona merece una atención personalizada y
+                  actualizada, adaptada a sus necesidades. Acompaño a personas de todas las edades,
+                  parejas y familias en procesos de cambio y bienestar emocional, desde una mirada
+                  integradora y respetuosa, ofreciendo un espacio de escucha y cuidado.
+               </p>
+            </Card>
+         </Col>
+      </Row>
+   </Section>
+
+   <Section>
+      <Row classes="mt-15 lg:mt-25">
+         <Col span="3" />
+         <Col span="9" classes="self-end justify-self-end">
+            <h2 class="md:text-right">
+               Cuidar de tu salud mental es el primer paso para descubrir tu verdadera fortaleza y
+               transformar cada desafío en una oportunidad de crecimiento.
+            </h2>
+            <p class="text-lead md:text-right"></p>
+         </Col>
+      </Row>
+   </Section>
+</Layout>

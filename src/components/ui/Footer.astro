@@ -1,23 +1,48 @@
 ---
-// Footer
-// ------------
-// Description: Website footer containing about section, navigation columns, social links, and decorative accents.
-// Properties:
-// - footerAbout: content for the about section including text and email link
-// - footerColumns: array of navigation column data with subcategories and links
-// - subFooter: content for the sub-footer including copyright text
-
-// Components
-// - UI
 import Decor from './Decor.astro';
 import Row from './Row.astro';
 import Col from './Col.astro';
+import { Image } from 'astro:assets';
 
-// Data
-import { socialLinks } from '../../config/socialLinks';
-import { getFooterNavigationData } from '../../config/footerNavigation';
-
-const footerNavigationData = await getFooterNavigationData();
+const footerNavigationData = {
+   footerAbout: {
+      aboutText: '¿Te animas? ¡Hablemos!',
+      aboutLink: 'hola@inala.es',
+   },
+   footerColumns: [
+      {
+         subCategories: [
+            {
+               subCategory: 'Nuestro metodo',
+               subCategoryLink: '/nuestro-metodo',
+            },
+            {
+               subCategory: 'Sobre mí',
+               subCategoryLink: '/sobre-mi',
+            },
+            {
+               subCategory: 'Tarifas',
+               subCategoryLink: '/tarifas',
+            },
+            {
+               subCategory: 'Contacto',
+               subCategoryLink: '/contacto',
+            },
+            {
+               subCategory: 'Aviso legal',
+               subCategoryLink: '/aviso-legal-y-politica-de-cookies',
+            },
+            {
+               subCategory: 'Política de privacidad',
+               subCategoryLink: '/política-de-privacidad',
+            },
+         ],
+      },
+   ],
+   subFooter: {
+      copywriteText: 'Copyright © 2025 Centro Psicológico Inala',
+   },
+};
 const { footerAbout, footerColumns, subFooter } = footerNavigationData;
 ---
 
@@ -53,7 +78,62 @@ const { footerAbout, footerColumns, subFooter } = footerNavigationData;
                   <div class="footer__copy-text">
                      <p class="footer__copywrite">{subFooter.copywriteText}</p>
                      <div class="footer__social">
-                        {socialLinks.map((social) => <a href={social.link}>{social.name}</a>)}
+                        <div class="flex gap-2">
+                           <a
+                              href="https://www.instagram.com/inala_psicoterapia/"
+                              target="_blank"
+                              rel="noopener"
+                           >
+                              <Image
+                                 src={'/assets/images/instagram.webp'}
+                                 alt={'imagen instagram'}
+                                 width={30}
+                                 height={30}
+                                 inferSize
+                              />
+                           </a>
+                           <a
+                              href="https://www.instagram.com/inala_psicoterapia/"
+                              target="_blank"
+                              rel="noopener"
+                           >
+                              <Image
+                                 src={'/assets/images/tikTok.webp'}
+                                 alt={'imagen instagram'}
+                                 width={30}
+                                 height={30}
+                                 class="rounded-md border border-neutral-800"
+                                 inferSize
+                              />
+                           </a>
+
+                           <a
+                              href="https://www.instagram.com/inala_psicoterapia/"
+                              target="_blank"
+                              rel="noopener"
+                           >
+                              <Image
+                                 src={'/assets/images/youtube.webp'}
+                                 alt={'imagen youtube'}
+                                 width={30}
+                                 height={30}
+                                 inferSize
+                              />
+                           </a>
+                           <a
+                              href="https://www.instagram.com/inala_psicoterapia/"
+                              target="_blank"
+                              rel="noopener"
+                           >
+                              <Image
+                                 src={'/assets/images/facebook.webp'}
+                                 alt={'imagen facebook'}
+                                 width={30}
+                                 height={30}
+                                 inferSize
+                              />
+                           </a>
+                        </div>
                         <button
                            onclick="window.revokeCookieConsent && window.revokeCookieConsent()"
                            class="footer__cookie-settings"

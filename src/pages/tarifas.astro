@@ -1,19 +1,17 @@
 ---
-import Faq from '../components/custom/Faq.astro';
 import JoinBox from '../components/custom/JoinBox.astro';
-import Precios from '../components/custom/Precios.astro';
-import BasicCard from '../components/ui/cards/Card.astro';
+import Button from '../components/ui/Button.astro';
+import { default as BasicCard, default as Card } from '../components/ui/cards/Card.astro';
 import Col from '../components/ui/Col.astro';
 import Row from '../components/ui/Row.astro';
 import Section from '../components/ui/Section.astro';
 import Layout from '../layouts/Layout.astro';
-// - Content
-// Content
-// - SEO
+import Frases from '../components/custom/Frases.astro';
+
 const SEO = {
-   title: 'Inala | Tarifas de Psicología en Pamplona',
+   title: 'Tarifas de Terapia | Precios Psicóloga Sanitaria en Pamplona y Online',
    description:
-      'Consulta las tarifas de los servicios de psicología general sanitaria que ofrece Inala en Pamplona.',
+      'Consulta las tarifas de terapia individual, de pareja, familiar y online. Precios claros, sin sorpresas y con opción de sesiones presenciales en Pamplona u online. Conoce cómo trabajo y el valor de cada proceso terapéutico.',
 };
 ---
 
@@ -33,11 +31,123 @@ const SEO = {
          </Col>
       </Row>
    </Section>
-   <Precios />
+
+   <Section classes="mt-0! pt-0!">
+      <Row classes="!gap-5 max-[500px]:px-0">
+         <Col span="6">
+            <Card>
+               <div class="text-lg">
+                  <div class="flex">
+                     <h3>Sesion individual u online</h3>
+                     <h3 class="absolute right-10">50 €</h3>
+                  </div>
+
+                  <ul>
+                     <li>Sesión de 60 minutos para ti, enfocada en tu bienestar emocional.</li>
+                     <li>Espacio seguro y confidencial para expresarte libremente.</li>
+                     <li>Atención personalizada y adaptada a tus necesidades.</li>
+                     <li>Acceso online o presencial, según tu preferencia.</li>
+                     <li>Acompañamiento profesional durante todo el proceso terapéutico.</li>
+                     <li>
+                        <a href="/servicios/terapia-individual">Saber mas individual...</a>
+                     </li>
+                     <li>
+                        <a href="/servicios/terapia-online">Saber mas online...</a>
+                     </li>
+                  </ul>
+
+                  <Button
+                     style="primary"
+                     type="link"
+                     link="./contacto"
+                     size="lg"
+                     classes="absolute right-0 mt-5"
+                  >
+                     Reserva tu cita
+                  </Button>
+               </div>
+            </Card>
+         </Col>
+         <Col span="6">
+            <Card>
+               <div class="text-lg">
+                  <div class="flex">
+                     <h3>Sesion de pareja o familiar</h3>
+                     <h3 class="absolute right-10">60 €</h3>
+                  </div>
+                  <ul>
+                     <li>Sesión de 60 minutos para ti, enfocada en tu bienestar emocional.</li>
+                     <li>Espacio seguro y confidencial para expresarte libremente.</li>
+                     <li>Atención personalizada y adaptada a tus necesidades.</li>
+                     <li>Acceso online o presencial, según tu preferencia.</li>
+                     <li>Acompañamiento profesional durante todo el proceso terapéutico.</li>
+                     <li>
+                        <a href="/servicios/terapia-de-pareja">Saber mas pareja...</a>
+                     </li>
+                     <li>
+                        <a href="/servicios/terapia-familiar">Saber mas familiar...</a>
+                     </li>
+                  </ul>
+                  <Button
+                     style="primary"
+                     type="link"
+                     link="./contacto"
+                     size="lg"
+                     classes="absolute right-0 mt-5"
+                  >
+                     Reserva tu cita
+                  </Button>
+               </div>
+            </Card>
+         </Col>
+      </Row>
+   </Section>
+
    <JoinBox
       title="Da el primer paso hacia tu bienestar: agenda tu sesión hoy mismo."
       subtitle=""
       buttonText="reserva tu cita"
    />
-   <Faq />
+
+    <Frases
+      title="Ahora es el momento de cuidar de ti"
+      text="Invertir en tu bienestar emocional es el primer paso hacia una vida más plena y satisfactoria. No esperes más para comenzar tu viaje de autodescubrimiento y crecimiento personal."
+      type="none"
+      />
+
+
+   <!-- ENLACES INTERNOS -->
+   <Section decoration="all" type="none" classes="pt-0!">
+      <h3>También te puede interesar</h3>
+      <Row classes="!p-0 !m-0">
+         <Card classes="relative col-span-12 lg:col-span-3 !p-0">
+            <a href="./terapia-individual" class="h-full w-full cursor-pointer">
+               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
+                  >Terapia individual {'>'}</button
+               >
+            </a>
+         </Card>
+         <Card classes="relative col-span-12 lg:col-span-3 p-0">
+            <a href="./terapia-pareja" class="h-full w-full cursor-pointer">
+               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
+                  >Terapia de pareja {'>'}</button
+               >
+            </a>
+         </Card>
+         <Card classes="relative col-span-12 lg:col-span-3 p-0">
+            <a href="./terapia-familiar" class="h-full w-full cursor-pointer">
+               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
+                  >Terapia familiar {'>'}</button
+               >
+            </a>
+         </Card>
+         <Card classes="relative col-span-12 lg:col-span-3 p-0">
+            <a href="./psicologia-perinatal" class="h-full w-full cursor-pointer">
+               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
+                  >Psicología perinatal {'>'}</button
+               >
+            </a>
+         </Card>
+      </Row>
+   </Section>
 </Layout>

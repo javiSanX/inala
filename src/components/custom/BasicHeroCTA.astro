@@ -55,19 +55,12 @@ const {
             ) : (
                <Col span="6" classes="self-end">
                   <BasicCard decoration="all" style="transparent">
-                     <p class="text-lead">
-                        Te damos la bienvenida a un{' '}
-                        <strong class="font-bold">
-                           espacio seguro y acompañamiento profesional
-                        </strong>{' '}
-                        que integra técnicas basadas en evidencia científica para alcanzar el
-                        bienestar que buscas.
-                     </p>
+                     <p class="text-lead">{text}</p>
                   </BasicCard>
                   <Button
                      style="primary"
                      type="link"
-                     link="./contacto"
+                     link={`${Astro.url.origin}/contacto`}
                      size="lg"
                      classes="absolute right-0 mt-5"
                   >

@@ -1,51 +1,303 @@
 ---
-// Home Page
-// ------------
-// Description: The home page is a page that displays the most important information.
-
-// Components
-// - Layout
-import Layout from '../layouts/Layout.astro';
-// - Blocks
-import PasosTerapia from '../components/custom/PasosTerapia.astro';
+import { Image } from 'astro:assets';
 import Frases from '../components/custom/Frases.astro';
-import Hero from '../components/custom/Hero.astro';
 import JoinBox from '../components/custom/JoinBox.astro';
-import Servicios from '../components/custom/Servicios.astro';
-import SobreInala from '../components/custom/SobreInala.astro';
+import TitleSection from '../components/custom/TitleSection.astro';
 import VideoSection from '../components/custom/VideoSection.astro';
-// Content
-// - SEO
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/cards/Card.astro';
+import Col from '../components/ui/Col.astro';
+import Row from '../components/ui/Row.astro';
+import Section from '../components/ui/Section.astro';
+import Layout from '../layouts/Layout.astro';
+
 const SEO = {
    title: 'Inala | Psicología general sanitaria en Pamplona',
    description:
       'Inala es un centro de psicología general sanitaria que ofrece servicios de terapia y apoyo psicológico.',
 };
+
+const servicesData = [
+   {
+      title: 'Contacto',
+      text: [
+         'Desde el primer momento, te recibimos en un entorno seguro y de confianza, donde puedes sentirte libre de expresar tus inquietudes y emociones. Nos enfocamos en escucharte de manera activa y empática.',
+         'Este primer paso es fundamental para que te sientas cómodo/a y comprendido/a. Queremos que percibas que tu bienestar es nuestra prioridad y que estamos aquí para acompañarte en todo el proceso.',
+      ],
+      image: '/assets/images/image4.webp',
+   },
+   {
+      title: 'Objetivos',
+      text: [
+         'Realizamos una evaluación personalizada de tu situación emocional y psicológica. Analizamos tus necesidades y expectativas para entender qué te gustaría conseguir con la terapia.',
+         'A partir de esta evaluación, definimos de manera conjunta los objetivos terapéuticos, adaptados a tus metas personales. Así, el proceso tiene un rumbo claro y alineado con lo que realmente buscas.',
+      ],
+      image: '/assets/images/image5.webp',
+   },
+   {
+      title: 'Intervención',
+      text: [
+         'Desarrollamos un plan de intervención ajustado a ti, aplicando técnicas y recursos psicológicos que mejor se adaptan a tu caso. En cada sesión te acompañamos, te guiamos y te proporcionamos herramientas prácticas para afrontar tus retos.',
+         'Nuestro objetivo es que te sientas apoyado/a y que cada sesión te acerque más a tus objetivos de bienestar.',
+      ],
+      image: '/assets/images/image-10.webp',
+   },
+   {
+      title: 'Crecimiento',
+      text: [
+         'Te ayudamos a consolidar los aprendizajes y a integrar nuevas habilidades en tu día a día, para que el bienestar alcanzado sea duradero.',
+         'El acompañamiento continúa hasta que te sientas preparado/a para avanzar con autonomía y confianza. Queremos que al finalizar el proceso, cuentes con las herramientas necesarias para mantener tu equilibrio emocional y afrontar los desafíos futuros.',
+      ],
+      image: '/assets/images/image6.webp',
+   },
+];
 ---
 
 <Layout title={SEO.title} description={SEO.description}>
-   <Hero
-      title="Salud mental en Pamplona"
-      text="Te acompaño en tu proceso terapéutico."
-   />
-   <Servicios />
+   <Section classes="lg:py-40!">
+      <Row>
+         <Col span="7">
+            <h1 class="max-w-[800px] min-[1000px]:!text-8xl min-[1200px]:!text-9xl">
+               INALA Centro de Psicoterapia
+            </h1>
+
+            <p class="text-lead max-w-[600px] !text-3xl">Te acompaño en tu proceso terapéutico.</p>
+            <Button
+               style="primary"
+               type="link"
+               link="./contacto"
+               size="lg"
+               classes="absolute right-0 mt-5"
+            >
+               Reserva tu cita
+            </Button>
+         </Col>
+
+         <Col span="5" classes="self-end">
+            <div
+               class="grid max-h-[620px] grid-cols-3 grid-rows-3 gap-3 lg:grid-cols-4 lg:grid-rows-4 lg:gap-1"
+            >
+               <Card
+                  image="/assets/images/hero5.webp"
+                  classes="col-span-1 row-span-1 col-start-1 row-start-1 lg:row-start-4 h-full"
+                  cardMediaClasses="h-full w-full object-cover "
+               />
+               <Card
+                  image="/assets/images/hero4.webp"
+                  classes="col-span-1 row-span-2 lg:col-start-2 col-start-1 lg:row-start-3 row-start-2 h-full"
+                  cardMediaClasses="h-full w-full object-cover"
+               />
+               <Card
+                  image="/assets/images/hero1.webp"
+                  classes="col-span-1 row-span-1 lg:col-start-4 lg:row-start-1 h-full hidden! lg:block!"
+                  cardMediaClasses="h-full w-full object-cover"
+               />
+               <Card
+                  image="/assets/images/hero2.webp"
+                  classes="col-span-2 row-span-2 lg:col-start-3 col-start-2 lg:row-start-2 row-start-1 h-full"
+                  cardMediaClasses="h-full w-full object-cover"
+               />
+               <Card
+                  image="/assets/images/hero3.webp"
+                  classes="col-span-2 row-span-1 lg:col-start-3 lg:row-start-4 col-start-2 row-start-3 h-full"
+                  cardMediaClasses="h-full w-full object-cover "
+               />
+            </div>
+         </Col>
+      </Row>
+   </Section>
+
+   <Section decoration="all" type="none" classes="pt-0!">
+      <TitleSection title="¿Por qué dar el primer paso en Inala?" text="" classes="" />
+      <Row classes="!p-0 !m-0">
+         <Card classes="relative col-span-12 lg:col-span-4 p-0">
+            <div class="flex h-full flex-col gap-6 lg:gap-12">
+               <div class="">
+                  <Image
+                     src={'/assets/images/image1.webp'}
+                     alt={'imagen del encabezado 1'}
+                     width={400}
+                     height={400}
+                     sizes="(max-width: 768px) 100vw, 50vw"
+                     format="webp"
+                     inferSize
+                     class="aspect-video object-cover"
+                  />
+               </div>
+               <div class="flex flex-col gap-2">
+                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!"
+                     >Terapia adaptada y personalizada</span
+                  >
+                  <p class="text-lg">
+                     En Inala, cada proceso terapéutico es único. Analizamos tu situación y
+                     necesidades para ofrecerte una atención adaptada, utilizando herramientas y
+                     enfoques que mejor se ajustan a ti.
+                  </p>
+               </div>
+            </div>
+         </Card>
+         <Card classes="relative col-span-12 lg:col-span-4 p-0">
+            <div class="flex h-full flex-col gap-6 lg:gap-12">
+               <div class="">
+                  <Image
+                     src={'/assets/images/image2.webp'}
+                     alt={'imagen del encabezado 2'}
+                     width={400}
+                     height={400}
+                     sizes="(max-width: 768px) 100vw, 50vw"
+                     format="webp"
+                     inferSize
+                     class="aspect-video object-cover"
+                  />
+               </div>
+               <div class="flex flex-col gap-2">
+                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!"
+                     >Acompañamiento profesional</span
+                  >
+                  <p class="text-lg">
+                     Te ofrecemos un acompañamiento cercano, creando un espacio basado en el respeto
+                     y la empatía, poniendo a tu disposición recursos prácticos que te ayudarán a
+                     avanzar con confianza.
+                  </p>
+               </div>
+            </div>
+         </Card>
+         <Card classes="relative col-span-12 lg:col-span-4 p-0">
+            <div class="flex h-full flex-col gap-6 lg:gap-12">
+               <div class="">
+                  <Image
+                     src={'/assets/images/image3.webp'}
+                     alt={'imagen del encabezado 3'}
+                     width={400}
+                     height={400}
+                     sizes="(max-width: 768px) 100vw, 50vw"
+                     format="webp"
+                     inferSize
+                     class="aspect-video object-cover"
+                  />
+               </div>
+               <div class="flex flex-col gap-2">
+                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!"
+                     >Crecimiento que transforma</span
+                  >
+                  <p class="text-lg">
+                     Logra cambios profundos y duraderos en tu vida, promoviendo un crecimiento
+                     personal que se refleja en tu día a día y permitiéndote superar obstáculos y
+                     alcanzar mayor equilibrio emocional.
+                  </p>
+               </div>
+            </div>
+         </Card>
+      </Row>
+   </Section>
+
    <JoinBox
       title="Realiza ahora tu primera consulta psicológica"
       subtitle=" Te acompañamos como necesitas, brindándote un espacio seguro."
       buttonText="Reserva tu cita"
    />
-   <SobreInala />
+
+   <Section classes="">
+      <TitleSection title="Te damos la bienvenida a Inala" text="" classes="lg:pb-15!" />
+      <Row classes="!gap-5 max-[500px]:px-0">
+         <Col span="6">
+            <Card>
+               <Image
+                  src={'/assets/images/maria1.webp'}
+                  alt={'imagen de maria sanchez cobos'}
+                  width={800}
+                  height={800}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  format="webp"
+                  inferSize
+                  class="lg:aspect-[3/4] lg:object-cover"
+               />
+            </Card>
+         </Col>
+         <Col span="6">
+            <Card>
+               <div class="max-[500px]:text-md text-lg">
+                  <p>
+                     En Inala, te acompañamos en los momentos complejos de la vida, ofreciéndote un
+                     apoyo cercano y constante. Creemos en la importancia de crear un espacio seguro
+                     donde puedas sentirte comprendido/a y acompañado/a en todo momento.
+                  </p>
+                  <p>
+                     Para mí, la terapia es mucho más que técnicas: es empatía, dedicación y
+                     presencia. Queremos que encuentres un entorno cuidado, donde puedas iniciar tu
+                     proceso de cambio y crecimiento personal. Caminamos a tu lado, ayudándote a
+                     conocerte, a cuidarte y a mejorar tu relación contigo y con quienes te rodean.
+                  </p>
+                  <p>
+                     En un ambiente de confianza, podrás expresar tus emociones y preocupaciones con
+                     libertad, sabiendo que siempre serás recibido/a con respeto y calidez. Nuestro
+                     compromiso es acompañarte en cada etapa, brindándote herramientas y apoyo para
+                     que logres el bienestar y equilibrio que mereces.
+                  </p>
+                  <p></p>
+               </div>
+            </Card>
+         </Col>
+      </Row>
+   </Section>
+
    <Frases
       title="Te acompañamos a descubrir tu fuerza interior"
       text="Te acompañamos en cada paso para que avances hacia el bienestar pleno que mereces, brindándote apoyo y herramientas para tu crecimiento personal."
    />
-   <PasosTerapia />
+
+   <Section stickyCol classes="overflow-visible! ">
+      <TitleSection
+         title="Pasos para transformar tu vida"
+         text="A continuación te mostramos, de forma sencilla, los pasos que seguimos en nuestro proceso terapéutico. Cada etapa está pensada para acompañarte y ayudarte a avanzar hacia tu bienestar emocional, desde el primer contacto hasta tu crecimiento personal."
+         classes="lg:pb-15!"
+      />
+      {
+         servicesData.map((service: any, index: number) => (
+            <Row classes="mb-12 ">
+               <Col span="4" classes="h-full min-w-[420px] max-w-[460px] w-full ">
+                  <div class="sticky top-32 hidden lg:block">
+                     <h3 class="mb-2 flex flex-col justify-start gap-3 text-4xl! md:flex-row lg:text-5xl!">
+                        <span class="text-primary-500 hidden xl:block!">
+                           {String(index + 1).padStart(2, '0')}
+                        </span>
+                        {service.title}
+                     </h3>
+                  </div>
+               </Col>
+               <Col span="8" classes="h-full w-full grow">
+                  <Card
+                     title={service.title}
+                     cardHeaderClasses="block lg:hidden!"
+                     classes="h-full w-full"
+                     cardBodyClasses="h-full lg:pt-7.5! "
+                     cardMediaClasses="lg:order-2 h-[400px]"
+                     orientation="horizontal"
+                     image={service.image}
+                  >
+                     {service.text.map((text: string) => (
+                        <p class="relative z-10 text-lg">{text}</p>
+                     ))}
+                  </Card>
+               </Col>
+            </Row>
+         ))
+      }
+   </Section>
+
    <JoinBox
       title="Da el primer paso hacia tu bienestar."
       subtitle="Empieza hoy tu proceso de cambio y recibe el apoyo profesional que necesitas para cuidar tu salud mental y emocional."
       buttonText="Reserva tu cita"
    />
+
    <!-- <Testimonios /> -->
+
    <VideoSection video="https://oxygenna-themes.b-cdn.net/toki-astro/videos/about-us-video.mp4" />
-   <Frases title="La salud mental es un viaje de crecimiento y descubrimiento, no un destino al que llegar." text="Un camino hacia el bienestar emocional" type="block" />
+
+   <Frases
+      title="La salud mental es un viaje de crecimiento y descubrimiento, no un destino al que llegar."
+      text="Un camino hacia el bienestar emocional"
+      type="block"
+   />
 </Layout>

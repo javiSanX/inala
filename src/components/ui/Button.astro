@@ -21,8 +21,9 @@ type Props = {
 	modal?: string
 	style?: 'primary' | 'link'
 	classes?: string
+   openTab?: boolean
 }
-const { type = 'button', size = 'base', link, modal, style = 'primary', classes } = Astro.props
+const { type = 'button', size = 'base', link, modal, style = 'primary', classes, openTab=false } = Astro.props
 
 const isAbsoluteURL = (url: string) => /^https?:\/\//i.test(url)
 ---
@@ -31,7 +32,7 @@ const isAbsoluteURL = (url: string) => /^https?:\/\//i.test(url)
 	type === 'link' || link ? (
 		<a
 			href={link}
-			target={link && isAbsoluteURL(link) ? '_blank' : '_self'}
+			target={link && openTab ? '_blank' : '_self'}
 			class:list={[
 				'button',
 				{ ['button--' + `${size}`]: size },

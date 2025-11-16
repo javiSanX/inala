@@ -1,0 +1,296 @@
+---
+import { Image } from 'astro:assets';
+import Hero from '../../components/custom/BasicHeroCTA.astro';
+import Frases from '../../components/custom/Frases.astro';
+import JoinBox from '../../components/custom/JoinBox.astro';
+import TitleSection from '../../components/custom/TitleSection.astro';
+import Col from '../../components/ui/Col.astro';
+import Row from '../../components/ui/Row.astro';
+import Section from '../../components/ui/Section.astro';
+import Card from '../../components/ui/cards/Card.astro';
+import Layout from '../../layouts/Layout.astro';
+
+const SEO = {
+   title: 'Terapia de pareja en Pamplona | Psicóloga especialista en relaciones',
+   description:
+      'Terapia de pareja en Pamplona para mejorar comunicación, resolver conflictos, fortalecer vínculos y superar crisis de pareja. Sesiones presenciales y online. Espacio seguro y profesional.',
+};
+
+const preguntas = [
+   {
+      question: '¿Cuándo es recomendable acudir a terapia de pareja?',
+      answer:
+         'Es recomendable cuando hay problemas de comunicación recurrentes, conflictos no resueltos, crisis de confianza, rutina que afecta la relación, diferencias en objetivos vitales, o cuando sienten que se han distanciado emocionalmente. También es útil para fortalecer la relación en momentos de cambio.',
+   },
+   {
+      question: '¿Cuánto dura un proceso de terapia de pareja?',
+      answer:
+         'La duración varía según cada pareja y sus objetivos. Algunas parejas ven mejoras en pocas sesiones, mientras que otras necesitan un proceso más profundo. Generalmente se inicia con sesiones semanales que después se espacian según la evolución de la pareja.',
+   },
+   {
+      question: '¿Qué se hace en una sesión de terapia de pareja?',
+      answer:
+         'En cada sesión trabajamos la comunicación entre ambos, identificamos patrones de conflicto, exploramos emociones y necesidades, practicamos herramientas de diálogo constructivo y fortalecemos la conexión emocional. Todo en un espacio neutro y seguro para ambos.',
+   },
+   {
+      question: '¿Pueden venir por separado a terapia de pareja?',
+      answer:
+         'Aunque lo habitual es que vengan juntos, en ocasiones puede ser útil alguna sesión individual para explorar aspectos personales que influyen en la relación. Siempre se evalúa caso por caso y con transparencia hacia ambos miembros.',
+   },
+   {
+      question: '¿Qué pasa si solo uno de los dos quiere venir a terapia?',
+      answer:
+         'Idealmente ambos deben estar motivados, pero si solo uno puede acudir inicialmente, trabajaremos estrategias para mejorar su parte de la relación y motivar al otro miembro para que se sume al proceso cuando esté preparado.',
+   },
+];
+---
+
+<Layout title={SEO.title} description={SEO.description}>
+   <Hero
+      title="Terapia de pareja"
+      text="La terapia de pareja es un espacio seguro donde fortalecer vuestra relación, mejorar la comunicación y superar los obstáculos que os separan. Desde un enfoque empático y profesional, acompaño a parejas que desean reconectar, resolver conflictos y construir una relación más sólida y satisfactoria."
+   />
+
+   <Section classes="mt-0! pt-0!">
+      <TitleSection
+         title="¿En qué consiste la terapia de pareja?"
+         text="La terapia de pareja es un proceso donde podéis expresar vuestras emociones, comprender vuestras diferencias y aprender nuevas formas de relacionaros. En las sesiones trabajamos vuestra comunicación, confianza y conexión emocional para que podáis:"
+         classes="lg:pb-15!"
+      />
+      <Row classes="!gap-5 max-[500px]:px-0">
+         <Col span="6">
+            <Card>
+               <div class="text-lg">
+                  <ul>
+                     <li>Mejorar la comunicación y el diálogo</li>
+                     <li>Resolver conflictos de forma constructiva</li>
+                     <li>Fortalecer la confianza mutua</li>
+                     <li>Reconectar emocionalmente</li>
+                     <li>Superar crisis y momentos difíciles</li>
+                     <li>Establecer límites saludables</li>
+                     <li>Redescubrir la intimidad y complicidad</li>
+                     <li>Construir objetivos comunes</li>
+                  </ul>
+               </div>
+            </Card>
+         </Col>
+         <Col span="6">
+            <Card>
+               <div class="text-lg">
+                  <ul>
+                     <li>Sesiones de 60 minutos en pareja</li>
+                     <li>Modalidad presencial u online según preferencia</li>
+                     <li>Espacio neutral y confidencial para ambos</li>
+                     <li>Terapia personalizada para vuestra relación</li>
+                     <li>Herramientas de comunicación efectiva</li>
+                     <li>Seguimiento del progreso conjunto</li>
+                     <li>Estrategias prácticas para el día a día</li>
+                     <li>Recursos para fortalecer el vínculo</li>
+                  </ul>
+               </div>
+            </Card>
+         </Col>
+      </Row>
+   </Section>
+
+   <Frases
+      title="Reconectar es posible cuando hay voluntad de ambos"
+      text="Todas las relaciones atraviesan momentos difíciles. La terapia de pareja os ofrece un espacio profesional donde redescubrir vuestra conexión, aprender a comunicaros mejor y construir la relación que ambos deseáis. Vuestro amor merece una oportunidad."
+   />
+
+   <!-- PARA QUIÉN ES -->
+   <Section decoration="all" type="none" classes="pt-0!">
+      <TitleSection title="¿Para qué parejas es esta terapia?" text="" classes="lg:pb-15!" />
+
+      <Row classes="!p-0 !m-0">
+         <Card classes="relative col-span-12 lg:col-span-4 p-0">
+            <div class="flex h-full flex-col gap-6 lg:gap-12">
+               <div class="">
+                  <Image
+                     src={'/assets/images/image1.webp'}
+                     alt={'parejas en crisis'}
+                     width={800}
+                     height={800}
+                     inferSize
+                     class="aspect-video object-cover"
+                  />
+               </div>
+               <div class="flex flex-col gap-2">
+                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!">Parejas en crisis</span>
+                  <p class="text-lg">
+                     Acompaño a parejas que atraviesan momentos difíciles: problemas de confianza,
+                     infidelidades, distanciamiento emocional, conflictos recurrentes o cuando
+                     sienten que han perdido la conexión que les unía.
+                  </p>
+               </div>
+            </div>
+         </Card>
+         <Card classes="relative col-span-12 lg:col-span-4 p-0">
+            <div class="flex h-full flex-col gap-6 lg:gap-12">
+               <div class="">
+                  <Image
+                     src={'/assets/images/image2.webp'}
+                     alt={'parejas con problemas comunicación'}
+                     width={800}
+                     height={800}
+                     inferSize
+                     class="aspect-video object-cover"
+                  />
+               </div>
+               <div class="flex flex-col gap-2">
+                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!"
+                     >Problemas de comunicación</span
+                  >
+                  <p class="text-lg">
+                     Un espacio para parejas que discuten frecuentemente, no se entienden, evitan
+                     conversaciones importantes o sienten que no pueden expresar sus necesidades sin
+                     generar conflicto.
+                  </p>
+               </div>
+            </div>
+         </Card>
+         <Card classes="relative col-span-12 lg:col-span-4 p-0">
+            <div class="flex h-full flex-col gap-6 lg:gap-12">
+               <div class="">
+                  <Image
+                     src={'/assets/images/image3.webp'}
+                     alt={'parejas fortalecimiento relación'}
+                     width={800}
+                     height={800}
+                     inferSize
+                     class="aspect-video object-cover"
+                  />
+               </div>
+               <div class="flex flex-col gap-2">
+                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!"
+                     >Fortalecimiento preventivo</span
+                  >
+                  <p class="text-lg">
+                     También para parejas que desean fortalecer su relación antes de grandes
+                     cambios: convivencia, matrimonio, llegada de hijos o simplemente para mejorar
+                     su vínculo y crecer juntos.
+                  </p>
+               </div>
+            </div>
+         </Card>
+      </Row>
+   </Section>
+
+   <JoinBox
+      title="Vuestra relación merece una oportunidad"
+      subtitle="Dar el primer paso hacia la terapia de pareja es un acto de amor y compromiso mutuo. Juntos podéis redescubrir la conexión y construir la relación que ambos deseáis."
+      buttonText="Comenzar juntos"
+   />
+
+   <Section classes="mt-0! pt-0!">
+      <TitleSection title="¿Qué problemas trabajamos en pareja?" text="" classes="lg:pb-15!" />
+      <Row classes="!gap-5 max-[500px]:px-0">
+         <Col span="6">
+            <Card>
+               <div class="text-lg">
+                  <ul>
+                     <li>Problemas de comunicación y diálogo</li>
+                     <li>Conflictos recurrentes sin resolver</li>
+                     <li>Crisis de confianza e infidelidades</li>
+                     <li>Distanciamiento emocional y físico</li>
+                     <li>Diferencias en objetivos vitales</li>
+                     <li>Celos y inseguridades en la relación</li>
+                  </ul>
+               </div>
+            </Card>
+         </Col>
+         <Col span="6">
+            <Card>
+               <div class="text-lg">
+                  <ul>
+                     <li>Rutina y pérdida de intimidad</li>
+                     <li>Problemas con familias políticas</li>
+                     <li>Dificultades en la toma de decisiones</li>
+                     <li>Estrés laboral que afecta la pareja</li>
+                     <li>Transiciones vitales (hijos, trabajo, mudanza)</li>
+                     <li>Diferentes estilos de manejo de conflictos</li>
+                  </ul>
+               </div>
+            </Card>
+         </Col>
+      </Row>
+   </Section>
+
+   <JoinBox
+      title="Empezad juntos el camino hacia la reconciliación"
+      subtitle="La terapia de pareja es una inversión en vuestra relación y bienestar mutuo. Juntos podemos trabajar para superar los obstáculos y construir una relación más fuerte y satisfactoria."
+      buttonText="Reserva tu cita"
+   />
+
+   <Section decoration="all" type="" classes="">
+      <Row classes="">
+         <Col span="5">
+            <h2 class="text-left">Preguntas Frecuentes</h2>
+         </Col>
+         <Col span="7">
+            {
+               preguntas.map((pregunta) => (
+                  <Card classes="mb-5">
+                     <details class="group">
+                        <summary class="flex cursor-pointer list-none items-center justify-between">
+                           <h4 class="!m-0 p-0">{pregunta.question}</h4>
+                           <span class="transition group-open:rotate-180">
+                              <svg
+                                 fill="none"
+                                 height="24"
+                                 shape-rendering="geometricPrecision"
+                                 stroke="currentColor"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 stroke-width="1.5"
+                                 viewBox="0 0 24 24"
+                                 width="24"
+                              >
+                                 <path d="M6 9l6 6 6-6" />
+                              </svg>
+                           </span>
+                        </summary>
+                        <p class="group-open:animate-fadeIn mt-3">{pregunta.answer}</p>
+                     </details>
+                  </Card>
+               ))
+            }
+         </Col>
+      </Row>
+   </Section>
+
+   <!-- ENLACES INTERNOS -->
+   <Section decoration="all" type="none" classes="pt-0!">
+      <h3>También te puede interesar</h3>
+      <Row classes="!p-0 !m-0">
+         <Card classes="relative col-span-12 lg:col-span-3 !p-0">
+            <a href="./terapia-individual" class="h-full w-full cursor-pointer">
+               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
+                  >Terapia individual {'>'}</button
+               >
+            </a>
+         </Card>
+         <Card classes="relative col-span-12 lg:col-span-3 p-0">
+            <a href="./terapia-familiar" class="h-full w-full cursor-pointer">
+               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
+                  >Terapia familiar {'>'}</button
+               >
+            </a>
+         </Card>
+         <Card classes="relative col-span-12 lg:col-span-3 p-0">
+            <a href="./psicologia-perinatal" class="h-full w-full cursor-pointer">
+               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
+                  >Psicología perinatal {'>'}</button
+               >
+            </a>
+         </Card>
+         <Card classes="relative col-span-12 lg:col-span-3 p-0">
+            <a href="./terapia-online" class="h-full w-full cursor-pointer">
+               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
+                  >Terapia online {'>'}</button
+               >
+            </a>
+         </Card>
+      </Row>
+   </Section>
+</Layout>
