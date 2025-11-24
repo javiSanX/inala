@@ -14,8 +14,6 @@ La **ansiedad social** (o fobia social) es más que ser simplemente tímido. Es 
 
 Si sientes que el corazón se te acelera antes de una reunión de trabajo, o evitas eventos sociales por miedo a "quedarte en blanco", esta guía te ofrece herramientas prácticas.
 
-> A design system isn’t a prison—it’s a playground with fences. It gives just enough structure to support freedom.
-
 ## 🎯 5 Técnicas Clave para Gestionar la Ansiedad Social
 
 La terapia cognitivo-conductual (TCC) y otras **técnicas de psicología** han demostrado ser muy efectivas. Aplicar estas técnicas te ayudará a desafiar tus patrones de pensamiento y a reducir tu **miedo social**.
