@@ -37,6 +37,11 @@ const { formData, classes } = Astro.props;
       <FormField>
          <TextArea id="message" label={formData.message} />
       </FormField>
+      <p>
+         Al enviar este formulario, aceptas nuestra <a href="/política-de-privacidad"
+            >política de privacidad</a
+         > y <a href="/aviso-legal-y-politica-de-cookies">términos de servicio</a>.
+      </p>
       <Button style="primary" type="submit" size="lg">{formData.button}</Button>
    </AstroForm>
 </Card>
