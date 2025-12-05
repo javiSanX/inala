@@ -1,4 +1,5 @@
 ---
+title: El coraje de seguir adelante
 subtitle: aaa
 pubDate: 2025-12-05
 author: Maria Sanchez
