@@ -62,5 +62,3 @@ Si la **ansiedad social** está interfiriendo significativamente con tu calidad 
 En Inala, ofrecemos **terapia online y presencial** especializada en el manejo de la ansiedad. Un **psicólogo** puede ofrecerte herramientas personalizadas y un espacio seguro para explorar las raíces de tu **miedo social**.
 
 > **¿Estás listo/a para dar el primer paso?** Agenda hoy mismo una primera consulta.
-
----
