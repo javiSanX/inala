@@ -3,10 +3,10 @@ import { collection, config, fields } from '@keystatic/core';
 export default config({
    storage: import.meta.env.DEV ? { kind: 'local' } : { kind: 'cloud' },
    cloud: {
-      project: 'toki-astro-theme/toki-astro-theme',
+      project: 'inala/inala',
    },
    ui: {
-      brand: { name: 'Toki Astro Themes' },
+      brand: { name: 'Inala' },
    },
    collections: {
       blog: collection({
