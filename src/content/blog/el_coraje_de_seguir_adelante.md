@@ -1,9 +1,16 @@
 ---
+slug: El coraje de seguir adelante
 title: El coraje de seguir adelante
-subtitle: aaa
+subtitle: >-
+  Ansiedad y Enfermedad: Manejando la Incertidumbre Médica y el Miedo a la
+  Espera
 pubDate: 2025-12-05
 author: Maria Sanchez
-description: descripcion del blog...
+description: >-
+  ¿Sientes que el tiempo se detiene? La incertidumbre médica genera una profunda
+  ansiedad por enfermedad y miedo al diagnóstico. Aprende en nuestro blog de
+  psicoterapia cómo recuperar el control, gestionar el miedo a la espera y
+  encontrar apoyo emocional cuando el cuerpo dice "algo no está bien".
 image: /collections/blog/images/burnout.webp
 imageThumbnail: /collections/blog/images/burnout.webp
 ---
