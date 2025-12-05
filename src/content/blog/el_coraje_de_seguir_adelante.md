@@ -1,5 +1,5 @@
 ---
-slug: El coraje de seguir adelante
+slug: El_coraje_de_seguir_adelante
 title: El coraje de seguir adelante
 subtitle: >-
   Ansiedad y Enfermedad: Manejando la Incertidumbre Médica y el Miedo a la
