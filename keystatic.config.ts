@@ -39,10 +39,16 @@ export default config({
                label: 'Description',
                validation: { isRequired: true },
             }),
-            image: fields.text({ label: 'Image URL' }),
+            image: fields.image({
+               label: 'Image',
+               directory: 'public/collections/blog/images',
+               publicPath: '/collections/blog/images/',
+            }),
             video: fields.text({ label: 'Video URL' }),
-            imageThumbnail: fields.text({
+            imageThumbnail: fields.image({
                label: 'Image Thumbnail',
+               directory: 'public/collections/blog/images',
+               publicPath: '/collections/blog/images/',
             }),
             videoThumbnail: fields.text({
                label: 'Video Thumbnail',
@@ -81,11 +87,17 @@ export default config({
             list: fields.array(fields.text({ label: 'List Item' }), {
                label: 'List',
             }),
-            imageThumbnail: fields.text({
+            imageThumbnail: fields.image({
                label: 'Image Thumbnail',
+               directory: 'public/collections/work/images',
+               publicPath: '/collections/work/images/',
                validation: { isRequired: true },
             }),
-            image: fields.text({ label: 'Image URL' }),
+            image: fields.image({
+               label: 'Image',
+               directory: 'public/collections/work/images',
+               publicPath: '/collections/work/images/',
+            }),
             video: fields.text({ label: 'Video URL' }),
             introduction: fields.object(
                {
@@ -115,9 +127,16 @@ export default config({
                      label: 'Subtitle',
                      validation: { isRequired: true },
                   }),
-                  images: fields.array(fields.text({ label: 'Image URL' }), {
-                     label: 'Images',
-                  }),
+                  images: fields.array(
+                     fields.image({
+                        label: 'Image',
+                        directory: 'public/collections/work/images',
+                        publicPath: '/collections/work/images/',
+                     }),
+                     {
+                        label: 'Images',
+                     },
+                  ),
                   body: fields.text({
                      label: 'Body',
                      validation: { isRequired: true },
