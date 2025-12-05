@@ -12,9 +12,16 @@ export default config({
       blog: collection({
          label: 'Blog',
          path: 'src/content/blog/**',
-         slugField: 'title',
+         slugField: 'slug',
          format: { contentField: 'body' },
          schema: {
+            slug: fields.slug({
+               name: {
+                  label: 'Slug',
+                  description: 'Nombre del archivo (URL amigable)',
+                  validation: { isRequired: true },
+               },
+            }),
             title: fields.text({
                label: 'Title',
                validation: { isRequired: true },
@@ -49,9 +56,16 @@ export default config({
       work: collection({
          label: 'Work',
          path: 'src/content/work/**',
-         slugField: 'title',
+         slugField: 'slug',
          format: { contentField: 'body' },
          schema: {
+            slug: fields.slug({
+               name: {
+                  label: 'Slug',
+                  description: 'Nombre del archivo (URL amigable)',
+                  validation: { isRequired: true },
+               },
+            }),
             title: fields.text({
                label: 'Title',
                validation: { isRequired: true },
