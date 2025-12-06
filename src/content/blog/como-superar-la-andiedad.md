@@ -36,9 +36,7 @@ En medio de todo eso, nace un deseo casi desesperado: saber. Necesitas ponerle n
 
 Si te sientes identificado con esta sensación de **ansiedad desbordada** y parálisis ante la espera, recuerda que no tienes que transitar este camino en soledad. La terapia online es un espacio seguro y confidencial, accesible desde tu casa, para empezar a gestionar la incertidumbre ahora mismo.
 
-> **[BOTÓN CLARO Y PERSUASIVO]** **¿Cansado de la Ansiedad? Empieza tu Terapia Online Hoy** *(Enlace a la Página de Servicios/Reserva)*
-
-<hr>
+> **¿Cansado de la Ansiedad? Empieza tu Terapia Online Hoy** *inala.es*
 
 Cuando por fin llega la respuesta, te agarras al tratamiento como si fuera una tabla en aguas turbulentas. Empiezas a confiar en que puede funcionar. Te dices que sí, que esto tiene un camino, que hay una dirección.
 
