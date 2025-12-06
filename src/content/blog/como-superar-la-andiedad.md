@@ -46,7 +46,7 @@ Y cuando el tratamiento termina, la historia no se cierra. Vuelven las pruebas, 
 
 Una incertidumbre que no se elige, pero que se acepta. Que duele, pero también regala una pena que nunca creímos tener. Una incertidumbre que nos enfrenta a lo más humano de nosotros mismos: el miedo, la vulnerabilidad, la esperanza... y ese impulso inexplicable que nos hace seguir, incluso cuando el camino se vive con temblor en el pecho.
 
-## **Supera la Ansiedad y Recupera el Control: La Terapia Psicológica Online es el Camino**
+## **Supera la Ansiedad y Recupera el Control**
 
 La verdadera fortaleza no está en eliminar la incertidumbre (algo imposible), sino en aprender a manejar la **ansiedad** que esta provoca. El objetivo de la terapia psicológica no es curar el diagnóstico médico, sino darte las herramientas mentales y emocionales para:
 
