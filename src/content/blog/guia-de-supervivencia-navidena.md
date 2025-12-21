@@ -41,8 +41,7 @@ Tus emociones son indicadores de cómo te sientes y señales vitales para tu sup
 
 - ¿Cómo se siente tu cuerpo al pensarlo?
 
-  >   > 
-  > **¿Sientes que la ansiedad por las fiestas te supera?** No tienes que gestionar estas emociones sin ayuda. En **INALA**, te ofrecemos un espacio seguro para trabajar tus miedos y fortalecer tu asertividad antes de las reuniones familiares. 👉 [**Reserva tu sesión de terapia aquí**]
+  **¿Sientes que la ansiedad por las fiestas te supera?** No tienes que gestionar estas emociones sin ayuda. En **INALA**, te ofrecemos un espacio seguro para trabajar tus miedos y fortalecer tu asertividad antes de las reuniones familiares.
 
 ---
 
@@ -112,4 +111,4 @@ En **INALA Centro de Psicoterapia**, acompañamos a personas que, como tú, dese
 
 ### **¿Hablamos?**
 
-Si este manual te ha ayudado, pero sientes que necesitas herramientas personalizadas para tu caso concreto, estamos aquí para ti. 👉 [**Pide tu cita informativa en INALA y empieza tu proceso terapéutico**]
+Si este manual te ha ayudado, pero sientes que necesitas herramientas personalizadas para tu caso concreto, estamos aquí para ti. 👉 **Pide tu cita informativa en INALA y empieza tu proceso terapéutico**.
