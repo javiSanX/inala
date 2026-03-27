@@ -14,6 +14,7 @@ import Col from '../../../components/ui/Col.astro'
 // - UI
 import BlogCard from '../../../components/ui/cards/BlogCard.astro'
 import Pagination from '../../../components/ui/Pagination.astro'
+import { getPostSlug } from '../../../utils/seo'
 
 // Content
 // - Props
@@ -44,14 +45,14 @@ const columnMap = ['1', '3', '1', '2', '2', '3']
 
 				return (
 					<Col span="1" start={gridColumn}>
-						<BlogCard
-							title={post.data.title}
-							image={post.data.imageThumbnail}
-							video={post.data.videoThumbnail}
-							link={`/blog/${post.id}`}
-							date={post.data.pubDate}
-							author={post.data.author}
-							classes="h-full"
+							<BlogCard
+								title={post.data.title}
+								image={post.data.imageThumbnail}
+								video={post.data.videoThumbnail}
+								link={`/blog/${getPostSlug(post)}`}
+								date={post.data.pubDate}
+								author={post.data.author}
+								classes="h-full"
 						>
 							{post.data.description}
 						</BlogCard>

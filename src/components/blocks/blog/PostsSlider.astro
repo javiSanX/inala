@@ -19,6 +19,7 @@ import TitleSection from '../basic/TitleSection.astro';
 import BasicCard from '../../ui/cards/Card.astro';
 // - Scripts
 import { postSubtitle } from '../../../scripts/postScripts.ts';
+import { getPostSlug } from '../../../utils/seo';
 
 // - Collection
 import { getCollection } from 'astro:content';
@@ -56,7 +57,7 @@ const sortedBlogPosts = allWorkProjects.sort((a, b) => {
                      >
                         <BasicCard
                            title={post.data.title}
-                           titleLink={`/blog/${post.id}`}
+                           titleLink={`/blog/${getPostSlug(post)}`}
                            subtitle={postSubtitle(
                               post.data.author,
                               post.data.pubDate.toISOString(),

@@ -1,5 +1,5 @@
 ---
-slug: como_superar_la_andiedad
+slug: como-superar-la-ansiedad-diagnostico
 title: Como superar la ansiedad
 subtitle: 'Cómo Superar la Ansiedad por un Diagnóstico: Terapia Online'
 pubDate: 2025-12-06

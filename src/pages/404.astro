@@ -17,13 +17,13 @@ import BasicCard from '../components/ui/cards/Card.astro';
 // Content
 // - SEO
 const SEO = {
-   title: 'Oops! You Lost the Trail - Page Not Found',
+   title: 'Página no encontrada | Inala Psicoterapia',
    description:
-      " Looks like we chased our tail and lost the page. Don't worry, let's get you back on the trail!",
+      'La página que buscas no existe o ha cambiado de dirección. Puedes volver al inicio o visitar nuestras páginas principales.',
 };
 ---
 
-<Layout title={SEO.title} description={SEO.description}>
+<Layout title={SEO.title} description={SEO.description} noindex={true}>
    <Section>
       <Row>
          <Col span="6" classes="flex justify-center flex-col">

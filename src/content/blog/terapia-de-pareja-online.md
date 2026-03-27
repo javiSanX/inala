@@ -3,7 +3,7 @@ title: 'Terapia de Pareja Online'
 subtitle: 'Descubre cómo la terapia de pareja virtual puede transformar tu relación y superar desafíos desde la comodidad de tu hogar.'
 pubDate: 2025-11-01T10:30:00.000Z
 author: 'Maria Sanchez'
-description: 'La terapia de pareja online ofrece un espacio accesible y flexible para resolver conflictos, mejorar la comunicación y reconstruir la intimidad. Explora los beneficios de la terapia virtual, cómo funciona y cuándo es el momento ideal para buscar un psicólogo de pareja online. Fortalece tu relación desde cualquier lugar. [Palabras clave SEO: terapia de pareja online, psicólogo de pareja online, problemas de pareja, comunicación en pareja, terapia virtual]'
+description: 'La terapia de pareja online ofrece un espacio accesible y flexible para resolver conflictos, mejorar la comunicación y reconstruir la intimidad. Descubre sus beneficios, cómo funciona y cuándo puede ser el momento adecuado para pedir ayuda profesional.'
 imageThumbnail: '/collections/blog/images/terapiaParejaOnline.webp'
 image: '/collections/blog/images/terapiaParejaOnline.webp'
 ---

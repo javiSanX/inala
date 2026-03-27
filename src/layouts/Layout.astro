@@ -17,23 +17,38 @@ type Props = {
    title?: string;
    description?: string;
    ogImage?: string;
+   canonical?: string;
+   ogType?: 'website' | 'article';
    noindex?: boolean;
    navigation?: 'none' | 'transparent' | 'sticky';
    footer?: 'none' | 'basic';
+   structuredData?: Record<string, any> | Record<string, any>[];
 };
 
-const { title, description, page="", ogImage = 'og.png', noindex=false, navigation = 'sticky' } = Astro.props;
+const {
+   title,
+   description,
+   ogImage = '/og.png',
+   canonical,
+   ogType = 'website',
+   noindex = false,
+   navigation = 'sticky',
+   structuredData,
+} = Astro.props;
 
-const ldJson = {
+const canonicalUrl = canonical ?? Astro.url.href;
+const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
+
+const businessLdJson = {
    '@context': "https://schema.org",
    '@type': 'Psychologist',
    name: 'Maria Sanchez Cobos',
-   image: `https://inala.es/${ogImage}`,
-   '@id': `https://inala.es/${page}`,
-   url: 'https://inala.es/',
+   image: ogImageUrl,
+   '@id': `${canonicalUrl}#psychologist`,
+   url: canonicalUrl,
    telephone: '+34 623 050 773',
    priceRange: '€50',
-   description: { description },
+   description,
    address: {
       '@type': 'PostalAddress',
       streetAddress: 'Maria Lacunza 6, portal 4',
@@ -108,6 +123,8 @@ const ldJson = {
    ],
 };
 
+const ldJson = [businessLdJson].concat(structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : []);
+
 ---
 
 <!doctype html>
@@ -168,19 +185,19 @@ const ldJson = {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>{title}</title>
       <meta name="description" content={description} />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={Astro.url} />
+      <meta property="og:type" content={ogType} />
+      <meta property="og:url" content={canonicalUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogImage} />
+      <meta property="og:image" content={ogImageUrl} />
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={Astro.url} />
+      <meta property="twitter:url" content={canonicalUrl} />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
-      <meta property="twitter:image" content={ogImage} />
-      <link rel="canonical" href={Astro.url} item-prop="url" />
+      <meta property="twitter:image" content={ogImageUrl} />
+      <link rel="canonical" href={canonicalUrl} item-prop="url" />
       {noindex && <meta name="robots" content="noindex,nofollow" />}
-      <link rel="icon" href="/logo-light.webp" type="image/svg+xml" />
+      <link rel="icon" href="/logo-light.webp" type="image/webp" />
       <link rel="sitemap" href="/sitemap-index.xml" />
       <meta name="generator" content={Astro.generator} />
       <meta name="theme-color" content="#134e4a" />

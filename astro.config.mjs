@@ -9,15 +9,22 @@ import icon from 'astro-icon';
 import lottie from 'astro-integration-lottie';
 import { defineConfig } from 'astro/config';
 
-import vercel from '@astrojs/vercel/static';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-   site: 'http://inala.es',
+   site: 'https://inala.es',
 
    integrations: [
       icon(),
-      sitemap(),
+      sitemap({
+         filter: (page) => {
+            const pathname = new URL(page).pathname;
+            if (pathname.startsWith('/blog/author/')) return false;
+            if (/^\/blog\/\d+\/$/.test(pathname)) return false;
+            return true;
+         },
+      }),
       lottie(),
       partytown({
          config: {

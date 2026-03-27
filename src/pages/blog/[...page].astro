@@ -26,7 +26,7 @@ const SEO = {
 };
 ---
 
-<Layout title={SEO.title} description={SEO.description}>
+<Layout title={SEO.title} description={SEO.description} noindex={page.currentPage > 1}>
    <Hero
       title="Blog de Psicología y Salud Mental"
       text="Explora nuestras últimas publicaciones sobre psicología y todo lo relacionado con la salud mental."

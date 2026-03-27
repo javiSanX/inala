@@ -16,6 +16,7 @@ import Card from '../../ui/cards/Card.astro';
 import Pagination from '../../ui/Pagination.astro';
 // - Scripts
 import { postSubtitle } from '../../../scripts/postScripts.ts';
+import { getPostSlug } from '../../../utils/seo';
 // Content
 // - Props
 type Props = {
@@ -45,12 +46,12 @@ const sortedBlogPosts = allPosts.sort((a: any, b: any) => {
          // Render the first post if it exists
          sortedBlogPosts[0] && (
             <Col span="8">
-               <Card
-                  title={sortedBlogPosts[0].data.title}
-                  subtitle={sortedBlogPosts[0].data.subtitle}
-                  link={`/blog/${sortedBlogPosts[0].id}`}
-                  image={sortedBlogPosts[0].data.imageThumbnail}
-                  video={sortedBlogPosts[0].data.videoThumbnail}
+                  <Card
+                     title={sortedBlogPosts[0].data.title}
+                     subtitle={sortedBlogPosts[0].data.subtitle}
+                     link={`/blog/${getPostSlug(sortedBlogPosts[0])}`}
+                     image={sortedBlogPosts[0].data.imageThumbnail}
+                     video={sortedBlogPosts[0].data.videoThumbnail}
                   classes="h-full"
                   cardMediaClasses="order-2 max-h-[380px] w-full object-cover"
                   cardHeaderClasses="lg:p-12! pb-7.5! [&_span]:lg:text-[21px]! [&_span]:text-base! [&_span]:lg:leading-9! [&_span]:max-w-[600px] [&_span]:inline-block!"
@@ -75,7 +76,7 @@ const sortedBlogPosts = allPosts.sort((a: any, b: any) => {
                      <Card
                         title={p.data.title}
                         subtitle={postSubtitle(p.data.author, p.data.pubDate)}
-                        titleLink={`/blog/${p.id}`}
+                        titleLink={`/blog/${getPostSlug(p)}`}
                         classes="h-full only:h-fit!"
                      >
                         <p class="line-clamp-5">{p.data.description}</p>
@@ -94,7 +95,7 @@ const sortedBlogPosts = allPosts.sort((a: any, b: any) => {
                   <Card
                      title={post.data.title}
                      subtitle={postSubtitle(post.data.author, post.data.pubDate)}
-                     titleLink={`/blog/${post.id}`}
+                     titleLink={`/blog/${getPostSlug(post)}`}
                      classes="h-full"
                   >
                      <p class="line-clamp-5">{post.data.description}</p>

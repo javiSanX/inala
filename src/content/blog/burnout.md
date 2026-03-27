@@ -3,7 +3,7 @@ title: 'Burnout: El Agotamiento Crónico'
 subtitle: 'Más allá del cansancio: Una inmersión en el Síndrome de Quemarse y las vías para recuperar tu bienestar mental y físico.'
 pubDate: 2025-11-15T11:00:00.000Z
 author: 'Maria Sanchez'
-description: 'El burnout, o síndrome de quemarse, es una respuesta severa al estrés laboral crónico, manifestándose como agotamiento, cinismo y disminución de la eficacia. Esta entrada explora qué es el burnout, sus síntomas clave y cómo la terapia psicológica y el autocuidado consciente son fundamentales para su recuperación. Descubre cómo afrontar el agotamiento y restablecer tu equilibrio. [Palabras clave SEO: burnout, agotamiento laboral, estrés crónico, terapia psicológica, salud mental, síndrome de quemarse]'
+description: 'El burnout, o síndrome de quemarse, es una respuesta severa al estrés laboral crónico, manifestándose como agotamiento, cinismo y disminución de la eficacia. Esta entrada explora qué es, sus síntomas clave y cómo la terapia psicológica y el autocuidado consciente pueden ayudarte a recuperar el equilibrio.'
 imageThumbnail: '/collections/blog/images/burnout.webp'
 image: '/collections/blog/images/burnout.webp'
 ---

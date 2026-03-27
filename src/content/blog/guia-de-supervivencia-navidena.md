@@ -1,5 +1,5 @@
 ---
-slug: Guia_de_supervivencia_navideña
+slug: guia-de-supervivencia-navidena
 title: Guía de supervivencia navideña a las reuniones familiares
 subtitle: >-
   Herramientas psicológicas y consejos prácticos para poner límites y proteger

@@ -12,48 +12,40 @@ import Col from '../../../components/ui/Col.astro'
 // - Blocks
 import BlogCard from '../../../components/ui/cards/BlogCard.astro'
 import Hero from '../../../components/custom/BasicHeroCTA.astro'
+import { getAuthorSlug, getPostSlug } from '../../../utils/seo'
 
 // Data
 import { getCollection } from 'astro:content'
 export async function getStaticPaths() {
 	const allAuthors = await getCollection('blog', ({ id }) => id)
-	const uniqueAuthors = [...new Set(allAuthors.map((blogAuthor) => blogAuthor.data.author).flat())]
+	const uniqueAuthors = [...new Set(allAuthors.map((blogAuthor) => blogAuthor.data.author))]
 
 	return uniqueAuthors.map((author) => {
-		const filteredGuides = allAuthors.filter((blogAuthor) =>
-			blogAuthor.data.author.includes(author)
-		)
+		const filteredGuides = allAuthors.filter((blogAuthor) => blogAuthor.data.author === author)
 		return {
-			params: { author },
-			props: { authors: filteredGuides }
+			params: { author: getAuthorSlug(author) },
+			props: { authorName: author, authors: filteredGuides }
 		}
 	})
 }
-const { author } = Astro.params
-const { authors } = Astro.props
-
-// Format and hold the formatted author name in one statement
-const formattedAuthorName = author
-	.split('-')
-	.map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-	.join(' ')
+const { authorName, authors } = Astro.props
 
 // Content
 // - SEO
 const SEO = {
-	title: `Toki | Author ` + formattedAuthorName,
+	title: `Artículos de ${authorName} | Inala Psicoterapia`,
 	description:
-		"Explore Toki's latest news designed to enhance productivity, ensure top-notch security, and integrate seamlessly with your favorite tools. Join thousands of satisfied users and transform your workflow with Toki today!"
+		`Archivo de artículos escritos por ${authorName} en Inala Psicoterapia.`
 }
 
 // - Page Header
 const header = {
-	title: `Blog posts writter by ` + formattedAuthorName,
-	text: `View all the latest Toki posts from ` + formattedAuthorName + `.`
+	title: `Artículos de ${authorName}`,
+	text: `Consulta todas las publicaciones del blog de Inala firmadas por ${authorName}.`
 }
 ---
 
-<Layout title={SEO.title} description={SEO.description}>
+<Layout title={SEO.title} description={SEO.description} noindex={true}>
 	<Hero title={header.title} text={header.text} titleSpan="8" type="vertical" />
 	<Section classes="pt-0!">
 		<Row>
@@ -65,9 +57,9 @@ const header = {
 								title={post.data.title}
 								image={post.data.image}
 								video={post.data.video}
-								link={`/blog/${post.id}`}
+								link={`/blog/${getPostSlug(post)}`}
 								date={post.data.pubDate}
-								author={author}
+								author={authorName}
 								classes="h-full"
 							>
 								{post.data.description}

@@ -9,12 +9,12 @@ import Layout from '../../layouts/BlogLayout.astro'
 
 // Data
 import { getCollection, render } from 'astro:content'
+import { getPostSlug } from '../../utils/seo'
 export async function getStaticPaths() {
 	const workProjects = await getCollection('blog')
 	return workProjects.map((entry) => {
-		const workProjectsId = entry.id
 		return {
-			params: { id: workProjectsId },
+			params: { id: getPostSlug(entry) },
 			props: { entry }
 		}
 	})
@@ -23,6 +23,6 @@ const { entry } = Astro.props
 const { Content } = await render(entry)
 ---
 
-<Layout frontmatter={entry.data}>
+<Layout frontmatter={entry.data} entry={entry}>
 	<Content />
 </Layout>

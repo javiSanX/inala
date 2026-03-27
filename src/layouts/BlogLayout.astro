@@ -6,7 +6,7 @@
 // - frontmatter: The frontmatter of the blog post
 
 // Imports
-const { frontmatter } = Astro.props
+const { frontmatter, entry } = Astro.props
 
 // Components
 // - Layout
@@ -16,16 +16,33 @@ import Row from '../components/ui/Row.astro'
 import Section from '../components/ui/Section.astro'
 // - UI
 import Card from '../components/ui/cards/Card.astro'
-// Content
-// - Formatting author slug like "john-doe" into "John Doe"
-export const formattedAuthorName = (author: string) =>
-	author
-		.split('-')
-		.map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-		.join(' ')
+import { getAuthorSlug, getPostSlug } from '../utils/seo'
+
+const authorName = frontmatter.author
+const authorSlug = getAuthorSlug(authorName)
+const articleUrl = new URL(`/blog/${getPostSlug(entry)}/`, Astro.site).href
+const articleLdJson = {
+	'@context': 'https://schema.org',
+	'@type': 'Article',
+	headline: frontmatter.title,
+	description: frontmatter.description,
+	datePublished: new Date(frontmatter.pubDate).toISOString(),
+	author: {
+		'@type': 'Person',
+		name: authorName
+	},
+	mainEntityOfPage: articleUrl,
+	...(frontmatter.image ? { image: [new URL(frontmatter.image, Astro.site).href] } : {})
+}
 ---
 
-<Layout title={frontmatter.title} description={frontmatter.description}>
+<Layout
+	title={frontmatter.title}
+	description={frontmatter.description}
+	ogImage={frontmatter.image ?? '/og.png'}
+	ogType="article"
+	structuredData={articleLdJson}
+>
 	<Section classes="pb-0! overflow-visible!">
 		<Row>
 			<Col span="12">
@@ -59,20 +76,20 @@ export const formattedAuthorName = (author: string) =>
 				)
 			}
 		</Row>
-		<Row>
-			<Col span="3" classes="no-scroll-animation">
-				<div class="sticky top-32">
-					<Card
-						title={formattedAuthorName(frontmatter.author)}
-						subtitle={new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
-							year: 'numeric',
-							month: 'long',
-							day: 'numeric'
-						})}
-						titleLink={`/blog/author/${frontmatter.author}`}
-					/>
-				</div>
-			</Col>
+			<Row>
+				<Col span="3" classes="no-scroll-animation">
+					<div class="sticky top-32">
+						<Card
+							title={authorName}
+							subtitle={new Date(frontmatter.pubDate).toLocaleDateString('en-US', {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric'
+							})}
+							titleLink={`/blog/author/${authorSlug}`}
+						/>
+					</div>
+				</Col>
 			<Col span="9" classes="basic-text text-lead no-scroll-animation">
 				<slot />
 			</Col>

@@ -12,16 +12,22 @@ import Col from '../../../components/ui/Col.astro'
 // - Blocks
 import BlogCard from '../../../components/ui/cards/BlogCard.astro'
 import Hero from '../../../components/custom/BasicHeroCTA.astro'
+import { getAuthorSlug, getPostSlug } from '../../../utils/seo'
 // - Collection
 import { getCollection } from 'astro:content'
 const allPosts = await getCollection('blog', ({ id }) => id)
+const authors = [...new Set(allPosts.map((post: any) => post.data.author))].map((author) => ({
+	name: author,
+	slug: getAuthorSlug(author),
+	count: allPosts.filter((post: any) => post.data.author === author).length,
+}))
 
 // Content
 // - SEO
 const SEO = {
-	title: 'Toki | Work Projects',
+	title: 'Autores del Blog | Inala Psicoterapia',
 	description:
-		"Explore Toki's latest work projects designed to enhance productivity, ensure top-notch security, and integrate seamlessly with your favorite tools."
+		'Archivo interno de autores del blog de Inala Psicoterapia.'
 }
 
 // Sort blog posts by publication date (newest first)
@@ -32,11 +38,29 @@ const sortedBlogPosts = allPosts.sort((a: any, b: any) => {
 const columnMap = ['1', '3', '1', '2', '2', '3']
 ---
 
-<Layout title={SEO.title} description={SEO.description}>
+<Layout title={SEO.title} description={SEO.description} noindex={true}>
 	<Hero
-		title="What we’re thinking about."
-		text="Notes from the studio on work, process, and creative problem-solving. No fluff, just ideas we wanted to share."
+		title="Autores del blog"
+		text="Archivo interno para navegar por autor."
 	/>
+	<Section classes="pt-0!">
+		<Row>
+			{
+				authors.map((author) => (
+					<Col span="4">
+						<BlogCard
+							title={author.name}
+							link={`/blog/author/${author.slug}`}
+							author={author.name}
+							classes="h-full"
+						>
+							{`${author.count} artículo${author.count === 1 ? '' : 's'} publicado${author.count === 1 ? '' : 's'}.`}
+						</BlogCard>
+					</Col>
+				))
+			}
+		</Row>
+	</Section>
 	<Section classes="pt-0!">
 		<Row classes="grid-cols-3! gap-y-15!">
 			{
@@ -49,7 +73,7 @@ const columnMap = ['1', '3', '1', '2', '2', '3']
 								title={post.data.title}
 								image={post.data.image}
 								video={post.data.video}
-								link={`/blog/${post.id}`}
+								link={`/blog/${getPostSlug(post)}`}
 								date={post.data.pubDate}
 								author={post.data.author}
 								classes="h-full"
