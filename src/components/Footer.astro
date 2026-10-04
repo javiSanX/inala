@@ -1,0 +1,45 @@
+---
+const links = [
+	{ name: "Nuestro metodo", href: "/nuestro-metodo" },
+	{ name: "Sobre mí", href: "/sobre-mi" },
+	{ name: "Tarifas", href: "/tarifas" },
+	{ name: "Contacto", href: "/contacto" },
+	{ name: "Aviso legal", href: "/aviso-legal-y-politica-de-cookies" },
+	{ name: "Política de privacidad", href: "/política-de-privacidad" },
+];
+---
+
+<footer>
+	<p>
+		¿Te animas? ¡Hablemos!
+		<a href="mailto:hola@inala.es">hola@inala.es</a>
+	</p>
+	<nav aria-label="Pie de página">
+		<ul>
+			{
+				links.map((link) => (
+					<li>
+						<a href={link.href}>{link.name}</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+	<p>Copyright © 2025 Centro Psicológico Inala</p>
+	<ul>
+		<li>
+			<a
+				href="https://www.instagram.com/inala_psicoterapia/"
+				target="_blank"
+				rel="noopener">Instagram</a
+			>
+		</li>
+		<li>TikTok [PENDIENTE: URL del perfil; en main enlaza a Instagram]</li>
+		<li>YouTube [PENDIENTE: URL del canal; en main enlaza a Instagram]</li>
+		<li>Facebook [PENDIENTE: URL de la página; en main enlaza a Instagram]</li>
+	</ul>
+	<p>
+		Gestionar Cookies [PENDIENTE: botón que reabre el banner de cookies; depende
+		de la decisión sobre cookies y analítica]
+	</p>
+</footer>

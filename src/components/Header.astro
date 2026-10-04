@@ -1,0 +1,47 @@
+---
+const services = [
+	{ name: "Terapia individual", href: "/servicios/terapia-individual" },
+	{ name: "Terapia de pareja", href: "/servicios/terapia-de-pareja" },
+	{ name: "Terapia familiar", href: "/servicios/terapia-familiar" },
+	{ name: "Psicología perinatal", href: "/servicios/psicologia-perinatal" },
+	{ name: "Terapia online", href: "/servicios/terapia-online" },
+];
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const current = (href: string) => (path === href ? "page" : undefined);
+---
+
+<header>
+	<a href="/">Inala</a>
+	<nav aria-label="Principal">
+		<ul>
+			<li>
+				<a href="/nuestro-metodo" aria-current={current("/nuestro-metodo")}>
+					Nuestro método
+				</a>
+			</li>
+			<li>
+				Servicios
+				<ul>
+					{
+						services.map((service) => (
+							<li>
+								<a href={service.href} aria-current={current(service.href)}>
+									{service.name}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</li>
+			<li>
+				<a href="/sobre-mi" aria-current={current("/sobre-mi")}>Sobre mí</a>
+			</li>
+			<li>
+				<a href="/tarifas" aria-current={current("/tarifas")}>Tarifas</a>
+			</li>
+			<li><a href="/blog">Blog</a></li>
+		</ul>
+	</nav>
+	<a href="/contacto">¡Hablemos!</a>
+</header>
