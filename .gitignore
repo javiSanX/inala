@@ -1,41 +1,24 @@
-# Astro project .gitignore template
-# Node modules
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
 node_modules/
 
-# Build output
-/dist/
-/.astro/
-
-# Local env files
-.env*
-
-# Logs
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# OS generated files
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
 .DS_Store
-Thumbs.db
 
-# IDE files
+# jetbrains setting folder
 .idea/
-
-# Optional: ignore local cache
-.cache/
-
-# Optional: ignore coverage reports
-coverage/
-
-# Optional: ignore lock files (if you don't want to commit them)
-package-lock.json
-yarn.lock
-
-
-# Netlify deployment files
-.netlify/
-
-# Optional: ignore public assets (if generated)
-# public/
-.vercel
