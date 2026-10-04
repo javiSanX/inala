@@ -1,47 +1,195 @@
 ---
-const services = [
-	{ name: "Terapia individual", href: "/servicios/terapia-individual" },
-	{ name: "Terapia de pareja", href: "/servicios/terapia-de-pareja" },
-	{ name: "Terapia familiar", href: "/servicios/terapia-familiar" },
-	{ name: "Psicología perinatal", href: "/servicios/psicologia-perinatal" },
-	{ name: "Terapia online", href: "/servicios/terapia-online" },
+import { Image } from "astro:assets";
+import espiral from "../assets/images/inala-espiral.webp";
+import { servicios as services } from "../data/servicios";
+import Flecha from "./Flecha.astro";
+import Icon from "./Icon.astro";
+
+const links = [
+	{ name: "Nuestro método", href: "/nuestro-metodo" },
+	{ name: "Sobre mí", href: "/sobre-mi" },
+	{ name: "Tarifas", href: "/tarifas" },
+	{ name: "Blog", href: "/blog" },
 ];
 
-const path = Astro.url.pathname.replace(/\/$/, "") || "/";
-const current = (href: string) => (path === href ? "page" : undefined);
+const path = decodeURI(Astro.url.pathname).replace(/\/$/, "") || "/";
+const isCurrent = (href: string) => path === href;
+const inServices = path.startsWith("/servicios");
+
+// Popover panels sit in the top layer, just under the bar.
+const panel =
+	"m-0 inset-x-0 top-(--header-h) bottom-auto w-full max-w-none border-0 p-0 bg-transparent text-tinta opacity-0 -translate-y-2 transition-[opacity,translate,display,overlay] transition-discrete duration-300 ease-out-expo open:opacity-100 open:translate-y-0 starting:open:opacity-0 starting:open:-translate-y-2 motion-reduce:transition-none";
 ---
 
-<header>
-	<a href="/">Inala</a>
-	<nav aria-label="Principal">
-		<ul>
-			<li>
-				<a href="/nuestro-metodo" aria-current={current("/nuestro-metodo")}>
-					Nuestro método
-				</a>
-			</li>
-			<li>
-				Servicios
-				<ul>
-					{
-						services.map((service) => (
-							<li>
-								<a href={service.href} aria-current={current(service.href)}>
-									{service.name}
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</li>
-			<li>
-				<a href="/sobre-mi" aria-current={current("/sobre-mi")}>Sobre mí</a>
-			</li>
-			<li>
-				<a href="/tarifas" aria-current={current("/tarifas")}>Tarifas</a>
-			</li>
-			<li><a href="/blog">Blog</a></li>
-		</ul>
-	</nav>
-	<a href="/contacto">¡Hablemos!</a>
+<header
+	class="sticky top-0 z-40 h-(--header-h) border-b border-linea bg-papel/95 backdrop-blur-sm"
+>
+	<div class="shell flex h-full items-center justify-between gap-6">
+		<a
+			href="/"
+			class="flex items-center gap-2.5 rounded-sm text-2xl font-extrabold tracking-tight no-underline"
+		>
+			<Image src={espiral} alt="" width={44} height={44} class="size-10" />
+			Inala
+		</a>
+
+		<nav aria-label="Principal" class="hidden lg:block">
+			<ul role="list" class="flex items-center gap-1">
+				<li>
+					<a
+						href="/nuestro-metodo"
+						aria-current={isCurrent("/nuestro-metodo") ? "page" : undefined}
+						class="nav-link">Nuestro método</a
+					>
+				</li>
+				<li>
+					<button
+						type="button"
+						popovertarget="menu-servicios"
+						class="nav-link"
+						data-current={inServices ? "true" : undefined}
+					>
+						Servicios
+						<Icon name="chevron-down" class="size-4" />
+					</button>
+				</li>
+				{
+					links.slice(1).map((link) => (
+						<li>
+							<a
+								href={link.href}
+								aria-current={isCurrent(link.href) ? "page" : undefined}
+								class="nav-link"
+							>
+								{link.name}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<div class="flex items-center gap-2">
+			<a
+				href="/contacto"
+				aria-current={isCurrent("/contacto") ? "page" : undefined}
+				class="hidden min-h-11 items-center gap-2 rounded-plaque bg-flecha px-4 font-semibold no-underline shadow-plaque transition-colors duration-200 hover:bg-flecha-hondo sm:inline-flex"
+			>
+				¡Hablemos!
+				<Icon name="arrow-right" class="size-4" strokeWidth={2.5} />
+			</a>
+			<button
+				type="button"
+				popovertarget="menu-movil"
+				class="inline-flex min-h-11 items-center gap-2 rounded-plaque px-3 font-semibold ring-1 ring-linea transition-colors duration-200 hover:bg-piedra lg:hidden"
+			>
+				<Icon name="menu" class="size-5" />
+				Menú
+			</button>
+		</div>
+	</div>
+
+	<div id="menu-servicios" popover class={panel}>
+		<div class="border-b border-linea bg-papel shadow-lift">
+			<ul role="list" class="shell grid grid-cols-5 divide-x divide-linea">
+				{
+					services.map((service) => (
+						<li>
+							<a
+								href={service.href}
+								aria-current={isCurrent(service.href) ? "page" : undefined}
+								class="group flex h-full min-h-28 flex-col justify-between gap-4 p-5 text-lead font-semibold no-underline transition-colors duration-200 hover:bg-piedra"
+							>
+								{service.name}
+								<Flecha class="w-10 text-camino transition-transform duration-300 ease-out-expo group-hover:translate-x-1.5 group-aria-[current=page]:text-flecha motion-reduce:transition-none" />
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+
+	<div id="menu-movil" popover class:list={[panel, "h-[calc(100dvh-var(--header-h))]"]}>
+		<nav
+			aria-label="Principal"
+			class="h-full overflow-y-auto overscroll-contain bg-papel pb-10"
+		>
+			<ul role="list" class="shell divide-y divide-linea">
+				<li>
+					<a
+						href="/nuestro-metodo"
+						aria-current={isCurrent("/nuestro-metodo") ? "page" : undefined}
+						class="mobile-link">Nuestro método</a
+					>
+				</li>
+				<li class="py-4">
+					<span class="label text-tinta-suave">Servicios</span>
+					<ul role="list" class="mt-2">
+						{
+							services.map((service) => (
+								<li>
+									<a
+										href={service.href}
+										aria-current={isCurrent(service.href) ? "page" : undefined}
+										class="mobile-link py-2.5 text-lead"
+									>
+										{service.name}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</li>
+				{
+					links.slice(1).map((link) => (
+						<li>
+							<a
+								href={link.href}
+								aria-current={isCurrent(link.href) ? "page" : undefined}
+								class="mobile-link"
+							>
+								{link.name}
+							</a>
+						</li>
+					))
+				}
+				<li class="pt-6">
+					<a
+						href="/contacto"
+						class="flex min-h-14 items-center justify-between rounded-plaque bg-flecha px-5 text-lead font-semibold no-underline"
+					>
+						¡Hablemos!
+						<Icon name="arrow-right" class="size-5" strokeWidth={2.5} />
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
 </header>
+
+<style>
+	@reference "../styles/global.css";
+
+	.nav-link {
+		@apply relative inline-flex min-h-11 cursor-pointer items-center gap-1 rounded-plaque px-3.5 font-medium text-tinta no-underline transition-colors duration-200 hover:bg-piedra;
+	}
+
+	/* The current page is marked like a waymark: a small yellow arrow, never a colour swap. */
+	.nav-link[aria-current="page"]::after,
+	.nav-link[data-current]::after {
+		content: "";
+		@apply absolute -bottom-1 left-1/2 h-3 w-6 -translate-x-1/2 bg-flecha;
+		clip-path: polygon(0 30%, 60% 30%, 60% 0, 100% 50%, 60% 100%, 60% 70%, 0 70%);
+	}
+
+	.mobile-link {
+		@apply flex min-h-12 items-center gap-3 py-3 text-title font-semibold no-underline;
+	}
+
+	.mobile-link[aria-current="page"]::before {
+		content: "";
+		@apply h-4 w-6 shrink-0 bg-flecha;
+		clip-path: polygon(0 30%, 60% 30%, 60% 0, 100% 50%, 60% 100%, 60% 70%, 0 70%);
+	}
+</style>

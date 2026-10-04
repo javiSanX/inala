@@ -1,0 +1,24 @@
+---
+// The Camino waymark: a broad painted arrow. Decorative; meaning always lives in text.
+interface Props {
+	class?: string;
+	direction?: "right" | "down" | "left" | "up";
+}
+
+const { class: className = "w-16 text-flecha", direction = "right" } =
+	Astro.props;
+
+const rotation = { right: 0, down: 90, left: 180, up: -90 }[direction];
+---
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="0 0 120 64"
+	class:list={["shrink-0", className]}
+	style={`transform: rotate(${rotation}deg)`}
+	aria-hidden="true"
+	focusable="false"
+>
+	<polygon points="0,22 74,22 74,2 120,32 74,62 74,42 0,42" fill="currentColor"
+	></polygon>
+</svg>

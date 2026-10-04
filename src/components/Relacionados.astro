@@ -1,0 +1,35 @@
+---
+import Icon from "./Icon.astro";
+
+// Waymarks to the neighbouring pages.
+interface Props {
+	links: { href: string; label: string }[];
+}
+
+const { links } = Astro.props;
+---
+
+<nav aria-labelledby="relacionados" class="pb-20 lg:pb-28">
+	<div class="shell">
+		<h2 id="relacionados" class="text-title font-bold">
+			También te puede interesar
+		</h2>
+		<ul role="list" class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+			{
+				links.map((link) => (
+					<li>
+						<a
+							href={link.href}
+							class="group flex min-h-16 items-center justify-between gap-4 rounded-card bg-papel px-5 py-4 text-lead font-semibold no-underline shadow-card transition-[box-shadow,transform] duration-300 ease-out-expo hover:-translate-y-0.5 hover:shadow-lift motion-reduce:transition-none"
+						>
+							{link.label}
+							<span class="grid size-9 shrink-0 place-items-center rounded-full bg-flecha text-tinta transition-transform duration-300 ease-out-expo group-hover:translate-x-1 motion-reduce:transition-none">
+								<Icon name="arrow-right" class="size-4" strokeWidth={2.5} />
+							</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</nav>

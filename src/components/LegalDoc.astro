@@ -1,0 +1,92 @@
+---
+// Long legal reading: achromatic card, colour only at the edges, a sticky index of sections.
+interface Props {
+	sections: { id: string; title: string }[];
+}
+
+const { sections } = Astro.props;
+---
+
+<div class="shell grid grid-cols-1 gap-10 py-16 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-16 lg:py-24">
+	<nav aria-labelledby="indice" class="lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:self-start">
+		<h2 id="indice" class="label text-tinta-suave">Índice</h2>
+		<ol role="list" class="mt-4 border-l-2 border-linea">
+			{
+				sections.map((section) => (
+					<li>
+						<a
+							href={`#${section.id}`}
+							class="-ml-0.5 flex min-h-11 items-center border-l-2 border-transparent py-1.5 pl-4 font-medium text-tinta-suave no-underline transition-colors duration-200 hover:border-flecha hover:text-tinta"
+						>
+							{section.title}
+						</a>
+					</li>
+				))
+			}
+		</ol>
+	</nav>
+	<article class="legal rounded-card border-t-4 border-camino bg-papel p-6 shadow-card sm:p-10 lg:p-14">
+		<slot />
+	</article>
+</div>
+
+<style>
+	@reference "../styles/global.css";
+
+	.legal :global(section + section) {
+		@apply mt-16 border-t border-linea pt-12;
+	}
+
+	.legal :global(h2) {
+		@apply text-headline font-extrabold;
+	}
+
+	.legal :global(h3) {
+		@apply mt-10 text-title font-bold;
+	}
+
+	.legal :global(h4) {
+		@apply mt-6 text-lead font-semibold;
+	}
+
+	.legal :global(p),
+	.legal :global(ul),
+	.legal :global(table) {
+		@apply measure mt-4 text-tinta-suave;
+	}
+
+	.legal :global(h2 + p) {
+		@apply text-lead;
+	}
+
+	.legal :global(ul) {
+		@apply grid gap-2 pl-5;
+		list-style: disc;
+	}
+
+	.legal :global(li::marker) {
+		color: var(--color-camino);
+	}
+
+	.legal :global(strong) {
+		@apply font-semibold text-tinta;
+	}
+
+	.legal :global(a) {
+		@apply font-medium break-words text-camino;
+	}
+
+	.legal :global(table) {
+		@apply block w-full overflow-x-auto text-small;
+		border-collapse: collapse;
+	}
+
+	.legal :global(th),
+	.legal :global(td) {
+		@apply border-b border-linea px-3 py-2.5 text-left align-top;
+	}
+
+	.legal :global(th) {
+		@apply label bg-piedra text-tinta;
+	}
+</style>

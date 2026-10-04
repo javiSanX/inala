@@ -1,4 +1,8 @@
 ---
+import { contacto } from "../data/servicios";
+import Icon from "./Icon.astro";
+
+// The mojón: the Camino marker in blue tile that closes every page.
 const links = [
 	{ name: "Nuestro metodo", href: "/nuestro-metodo" },
 	{ name: "Sobre mí", href: "/sobre-mi" },
@@ -9,37 +13,84 @@ const links = [
 ];
 ---
 
-<footer>
-	<p>
-		¿Te animas? ¡Hablemos!
-		<a href="mailto:hola@inala.es">hola@inala.es</a>
-	</p>
-	<nav aria-label="Pie de página">
-		<ul>
-			{
-				links.map((link) => (
+<footer class="on-camino bg-camino text-white">
+	<div class="shell pt-16 pb-10 lg:pt-24">
+		<div class="grid gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+			<div>
+				<p class="text-headline font-extrabold">
+					¿Te animas? ¡Hablemos!
+					<a
+						href={`mailto:${contacto.email}`}
+						class="mt-2 block break-words text-flecha underline decoration-2 underline-offset-[0.18em] transition-colors duration-200 hover:text-white"
+						>{contacto.email}</a
+					>
+				</p>
+				<ul role="list" class="mt-10 grid gap-3 text-lead sm:grid-cols-2">
 					<li>
-						<a href={link.href}>{link.name}</a>
+						<a
+							href={contacto.whatsappUrl}
+							class="inline-flex min-h-11 items-center gap-3 no-underline hover:underline"
+							target="_blank"
+							rel="noopener"
+						>
+							<Icon name="message-circle" class="size-5 text-flecha" />
+							<span>
+								<span class="sr-only">WhatsApp: </span>
+								{contacto.whatsapp}
+							</span>
+						</a>
 					</li>
-				))
-			}
-		</ul>
-	</nav>
-	<p>Copyright © 2025 Centro Psicológico Inala</p>
-	<ul>
-		<li>
-			<a
-				href="https://www.instagram.com/inala_psicoterapia/"
-				target="_blank"
-				rel="noopener">Instagram</a
-			>
-		</li>
-		<li>TikTok [PENDIENTE: URL del perfil; en main enlaza a Instagram]</li>
-		<li>YouTube [PENDIENTE: URL del canal; en main enlaza a Instagram]</li>
-		<li>Facebook [PENDIENTE: URL de la página; en main enlaza a Instagram]</li>
-	</ul>
-	<p>
-		Gestionar Cookies [PENDIENTE: botón que reabre el banner de cookies; depende
-		de la decisión sobre cookies y analítica]
-	</p>
+					<li class="flex items-start gap-3 py-2">
+						<Icon name="map-pin" class="mt-1 size-5 text-camino-claro" />
+						<address class="not-italic">
+							Maria Lacunza 6, portal 4<br />31011 Pamplona, España
+						</address>
+					</li>
+				</ul>
+			</div>
+
+			<nav aria-label="Pie de página" class="lg:justify-self-end">
+				<ul role="list" class="grid gap-1 text-lead">
+					{
+						links.map((link) => (
+							<li>
+								<a
+									href={link.href}
+									class="inline-flex min-h-11 items-center gap-3 no-underline decoration-flecha hover:underline"
+								>
+									{link.name}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+		</div>
+
+		<div
+			class="mt-16 flex flex-col gap-6 border-t border-white/25 pt-8 text-small text-camino-claro lg:flex-row lg:items-start lg:justify-between"
+		>
+			<p>Copyright © 2025 Centro Psicológico Inala</p>
+			<ul role="list" class="flex flex-col gap-2 lg:items-end">
+				<li>
+					<a
+						href={contacto.instagram}
+						target="_blank"
+						rel="noopener"
+						class="inline-flex min-h-11 items-center gap-2 text-white no-underline hover:underline"
+					>
+						<Icon name="instagram" class="size-5" />
+						Instagram
+					</a>
+				</li>
+				<li>TikTok [PENDIENTE: URL del perfil; en main enlaza a Instagram]</li>
+				<li>YouTube [PENDIENTE: URL del canal; en main enlaza a Instagram]</li>
+				<li>Facebook [PENDIENTE: URL de la página; en main enlaza a Instagram]</li>
+				<li>
+					Gestionar Cookies [PENDIENTE: botón que reabre el banner de cookies;
+					depende de la decisión sobre cookies y analítica]
+				</li>
+			</ul>
+		</div>
+	</div>
 </footer>

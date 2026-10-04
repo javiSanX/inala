@@ -1,4 +1,6 @@
 ---
+import Accion from "../components/Accion.astro";
+import Flecha from "../components/Flecha.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -8,11 +10,17 @@ import Layout from "../layouts/Layout.astro";
 	noindex
 >
 	<section>
-		<h1>Ups! <br />Esta pagina no existe</h1>
-		<p>
-			Parece que nos hemos perdido en el camino y no hemos encontrado la página
-			que buscabas. ¡No te preocupes! Vamos a volver al sendero principal
-			juntos.
-		</p>
+		<div class="shell grid min-h-[70dvh] content-center gap-10 py-20">
+			<Flecha class="w-32 text-camino sm:w-44" direction="left" />
+			<h1 class="text-display font-extrabold">Ups! <br />Esta pagina no existe</h1>
+			<p class="max-w-[52ch] text-lead text-tinta-suave">
+				Parece que nos hemos perdido en el camino y no hemos encontrado la página
+				que buscabas. ¡No te preocupes! Vamos a volver al sendero principal
+				juntos.
+			</p>
+			<div>
+				<Accion href="/" size="lg" variant="camino">Volver al inicio</Accion>
+			</div>
+		</div>
 	</section>
 </Layout>

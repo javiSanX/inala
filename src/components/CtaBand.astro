@@ -1,0 +1,62 @@
+---
+import Accion from "./Accion.astro";
+import Flecha from "./Flecha.astro";
+
+// The "next step" band: one arrow pointing at the single yellow action.
+interface Props {
+	title: string;
+	text?: string;
+	label: string;
+	href?: string;
+	variant?: "flecha" | "camino";
+}
+
+const {
+	title,
+	text,
+	label,
+	href = "/contacto",
+	variant = "flecha",
+} = Astro.props;
+const onBlue = variant === "camino";
+---
+
+<section
+	class:list={[
+		"relative overflow-hidden",
+		onBlue
+			? "on-camino bg-camino text-white"
+			: "border-y border-linea bg-papel text-tinta",
+	]}
+>
+	<div
+		class="shell grid gap-8 py-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:py-20"
+	>
+		<div class="max-w-3xl">
+			<h2 class="text-headline font-extrabold">{title}</h2>
+			{
+				text && (
+					<p
+						class:list={[
+							"mt-5 max-w-[60ch] text-lead",
+							onBlue ? "text-camino-claro" : "text-tinta-suave",
+						]}
+					>
+						{text}
+					</p>
+				)
+			}
+		</div>
+		<div class="flex items-center gap-6">
+			<Flecha
+				class:list={[
+					"hidden w-28 xl:block",
+					onBlue ? "text-camino-claro" : "text-camino",
+				]}
+			/>
+			<Accion href={href} size="lg">
+				{label}
+			</Accion>
+		</div>
+	</div>
+</section>

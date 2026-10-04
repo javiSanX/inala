@@ -1,23 +1,38 @@
 ---
+import LegalDoc from "../components/LegalDoc.astro";
+import PageHero from "../components/PageHero.astro";
 import Layout from "../layouts/Layout.astro";
+
+const sections = [
+	{
+		id: "informacion-basica-sobre-proteccion-de-datos",
+		title: "Información Básica sobre Protección de Datos",
+	},
+	{ id: "responsable-del-tratamiento", title: "Responsable del Tratamiento" },
+	{
+		id: "destinatarios-y-transferencias",
+		title: "Destinatarios y Transferencias",
+	},
+	{ id: "sus-derechos", title: "Sus Derechos" },
+	{ id: "formularios-y-procedimientos", title: "Formularios y Procedimientos" },
+];
 ---
 
 <Layout
 	title="Inala | Política de Privacidad"
 	description="Política de Privacidad y Protección de Datos del Centro de Psicoterapia Inala"
 >
-	<section>
-		<h1>Política de Privacidad</h1>
-		<p>
-			Información sobre el tratamiento de sus datos personales conforme al
-			Reglamento General de Protección de Datos (RGPD) y normativa española
-			aplicable.
-		</p>
-		<a href="/contacto">Reserva tu cita</a>
-	</section>
+	<PageHero
+		title="Política de Privacidad"
+		lead="Información sobre el tratamiento de sus datos personales conforme al Reglamento General de Protección de Datos (RGPD) y normativa española aplicable."
+		cta={{ href: "/contacto", label: "Reserva tu cita" }}
+		compact
+	/>
+
+	<LegalDoc sections={sections}>
 
 	<section>
-		<h2>Información Básica sobre Protección de Datos</h2>
+		<h2 id="informacion-basica-sobre-proteccion-de-datos">Información Básica sobre Protección de Datos</h2>
 		<p>
 			Resumen de la información esencial sobre el tratamiento de sus datos
 			personales en el Centro de Psicoterapia Inala, conforme al RGPD.
@@ -85,7 +100,7 @@ import Layout from "../layouts/Layout.astro";
 	</section>
 
 	<section>
-		<h2>Responsable del Tratamiento</h2>
+		<h2 id="responsable-del-tratamiento">Responsable del Tratamiento</h2>
 		<p>
 			Información completa sobre la entidad responsable del tratamiento de sus
 			datos personales y las finalidades para las que se utilizan.
@@ -149,7 +164,7 @@ import Layout from "../layouts/Layout.astro";
 	</section>
 
 	<section>
-		<h2>Destinatarios y Transferencias</h2>
+		<h2 id="destinatarios-y-transferencias">Destinatarios y Transferencias</h2>
 		<p>
 			Información sobre a quién se pueden comunicar sus datos y las medidas de
 			seguridad implementadas para garantizar su protección.
@@ -198,7 +213,7 @@ import Layout from "../layouts/Layout.astro";
 	</section>
 
 	<section>
-		<h2>Sus Derechos</h2>
+		<h2 id="sus-derechos">Sus Derechos</h2>
 		<p>
 			Detalles completos sobre todos los derechos que le asisten como titular de
 			los datos personales y cómo ejercerlos.
@@ -278,7 +293,7 @@ import Layout from "../layouts/Layout.astro";
 	</section>
 
 	<section>
-		<h2>Formularios y Procedimientos</h2>
+		<h2 id="formularios-y-procedimientos">Formularios y Procedimientos</h2>
 		<p>
 			Información práctica sobre cómo ejercer sus derechos, formularios
 			disponibles y plazos de respuesta.
@@ -321,4 +336,5 @@ import Layout from "../layouts/Layout.astro";
 			variación que fuere necesaria introducir para cumplir con la ley.
 		</p>
 	</section>
+	</LegalDoc>
 </Layout>

@@ -1,188 +1,142 @@
 ---
+import CtaBand from "../../components/CtaBand.astro";
+import Faq from "../../components/Faq.astro";
+import Frase from "../../components/Frase.astro";
+import PageHero from "../../components/PageHero.astro";
+import Relacionados from "../../components/Relacionados.astro";
+import Consiste from "../../components/servicio/Consiste.astro";
+import ParaQuien from "../../components/servicio/ParaQuien.astro";
+import Problemas from "../../components/servicio/Problemas.astro";
 import Layout from "../../layouts/Layout.astro";
+
+const logros = [
+	"Mejorar la comunicación y el diálogo",
+	"Resolver conflictos de forma constructiva",
+	"Fortalecer la confianza mutua",
+	"Reconectar emocionalmente",
+	"Superar crisis y momentos difíciles",
+	"Establecer límites saludables",
+	"Redescubrir la intimidad y complicidad",
+	"Construir objetivos comunes",
+];
+
+const incluye = [
+	"Sesiones de 60 minutos en pareja",
+	"Modalidad presencial u online según preferencia",
+	"Espacio neutral y confidencial para ambos",
+	"Terapia personalizada para vuestra relación",
+	"Herramientas de comunicación efectiva",
+	"Seguimiento del progreso conjunto",
+	"Estrategias prácticas para el día a día",
+	"Recursos para fortalecer el vínculo",
+];
+
+const paraQuien = [
+	{
+		title: "Parejas en crisis",
+		text: "Acompaño a parejas que atraviesan momentos difíciles: problemas de confianza, infidelidades, distanciamiento emocional, conflictos recurrentes o cuando sienten que han perdido la conexión que les unía.",
+	},
+	{
+		title: "Problemas de comunicación",
+		text: "Un espacio para parejas que discuten frecuentemente, no se entienden, evitan conversaciones importantes o sienten que no pueden expresar sus necesidades sin generar conflicto.",
+	},
+	{
+		title: "Fortalecimiento preventivo",
+		text: "También para parejas que desean fortalecer su relación antes de grandes cambios: convivencia, matrimonio, llegada de hijos o simplemente para mejorar su vínculo y crecer juntos.",
+	},
+];
+
+const problemas = [
+	"Problemas de comunicación y diálogo",
+	"Conflictos recurrentes sin resolver",
+	"Crisis de confianza e infidelidades",
+	"Distanciamiento emocional y físico",
+	"Diferencias en objetivos vitales",
+	"Celos y inseguridades en la relación",
+	"Rutina y pérdida de intimidad",
+	"Problemas con familias políticas",
+	"Dificultades en la toma de decisiones",
+	"Estrés laboral que afecta la pareja",
+	"Transiciones vitales (hijos, trabajo, mudanza)",
+	"Diferentes estilos de manejo de conflictos",
+];
+
+const preguntas = [
+	{
+		question: "¿Cuándo es recomendable acudir a terapia de pareja?",
+		answer:
+			"Es recomendable cuando hay problemas de comunicación recurrentes, conflictos no resueltos, crisis de confianza, rutina que afecta la relación, diferencias en objetivos vitales, o cuando sienten que se han distanciado emocionalmente. También es útil para fortalecer la relación en momentos de cambio.",
+	},
+	{
+		question: "¿Cuánto dura un proceso de terapia de pareja?",
+		answer:
+			"La duración varía según cada pareja y sus objetivos. Algunas parejas ven mejoras en pocas sesiones, mientras que otras necesitan un proceso más profundo. Generalmente se inicia con sesiones semanales que después se espacian según la evolución de la pareja.",
+	},
+	{
+		question: "¿Qué se hace en una sesión de terapia de pareja?",
+		answer:
+			"En cada sesión trabajamos la comunicación entre ambos, identificamos patrones de conflicto, exploramos emociones y necesidades, practicamos herramientas de diálogo constructivo y fortalecemos la conexión emocional. Todo en un espacio neutro y seguro para ambos.",
+	},
+	{
+		question: "¿Pueden venir por separado a terapia de pareja?",
+		answer:
+			"Aunque lo habitual es que vengan juntos, en ocasiones puede ser útil alguna sesión individual para explorar aspectos personales que influyen en la relación. Siempre se evalúa caso por caso y con transparencia hacia ambos miembros.",
+	},
+	{
+		question: "¿Qué pasa si solo uno de los dos quiere venir a terapia?",
+		answer:
+			"Idealmente ambos deben estar motivados, pero si solo uno puede acudir inicialmente, trabajaremos estrategias para mejorar su parte de la relación y motivar al otro miembro para que se sume al proceso cuando esté preparado.",
+	},
+];
+
+const relacionados = [
+	{ href: "/servicios/terapia-individual", label: "Terapia individual" },
+	{ href: "/servicios/terapia-familiar", label: "Terapia familiar" },
+	{ href: "/servicios/psicologia-perinatal", label: "Psicología perinatal" },
+	{ href: "/servicios/terapia-online", label: "Terapia online" },
+];
 ---
 
 <Layout
 	title="Terapia de pareja en Pamplona | Psicóloga especialista en relaciones"
 	description="Terapia de pareja en Pamplona para mejorar comunicación, resolver conflictos, fortalecer vínculos y superar crisis de pareja. Sesiones presenciales y online. Espacio seguro y profesional."
 >
-	<section>
-		<h1>Terapia de pareja</h1>
-		<p>
-			La terapia de pareja es un espacio seguro donde fortalecer vuestra
-			relación, mejorar la comunicación y superar los obstáculos que os separan.
-			Desde un enfoque empático y profesional, acompaño a parejas que desean
-			reconectar, resolver conflictos y construir una relación más sólida y
-			satisfactoria.
-		</p>
-		<a href="/contacto">Reserva tu cita</a>
-	</section>
+	<PageHero
+		title="Terapia de pareja"
+		lead="La terapia de pareja es un espacio seguro donde fortalecer vuestra relación, mejorar la comunicación y superar los obstáculos que os separan. Desde un enfoque empático y profesional, acompaño a parejas que desean reconectar, resolver conflictos y construir una relación más sólida y satisfactoria."
+		cta={{ href: "/contacto", label: "Reserva tu cita" }}
+	/>
 
-	<section>
-		<h2>¿En qué consiste la terapia de pareja?</h2>
-		<p>
-			La terapia de pareja es un proceso donde podéis expresar vuestras
-			emociones, comprender vuestras diferencias y aprender nuevas formas de
-			relacionaros. En las sesiones trabajamos vuestra comunicación, confianza y
-			conexión emocional para que podáis:
-		</p>
-		<ul>
-			<li>Mejorar la comunicación y el diálogo</li>
-			<li>Resolver conflictos de forma constructiva</li>
-			<li>Fortalecer la confianza mutua</li>
-			<li>Reconectar emocionalmente</li>
-			<li>Superar crisis y momentos difíciles</li>
-			<li>Establecer límites saludables</li>
-			<li>Redescubrir la intimidad y complicidad</li>
-			<li>Construir objetivos comunes</li>
-		</ul>
-		<ul>
-			<li>Sesiones de 60 minutos en pareja</li>
-			<li>Modalidad presencial u online según preferencia</li>
-			<li>Espacio neutral y confidencial para ambos</li>
-			<li>Terapia personalizada para vuestra relación</li>
-			<li>Herramientas de comunicación efectiva</li>
-			<li>Seguimiento del progreso conjunto</li>
-			<li>Estrategias prácticas para el día a día</li>
-			<li>Recursos para fortalecer el vínculo</li>
-		</ul>
-	</section>
+	<Consiste
+		title="¿En qué consiste la terapia de pareja?"
+		text="La terapia de pareja es un proceso donde podéis expresar vuestras emociones, comprender vuestras diferencias y aprender nuevas formas de relacionaros. En las sesiones trabajamos vuestra comunicación, confianza y conexión emocional para que podáis:"
+		logros={logros}
+		incluye={incluye}
+	/>
 
-	<section>
-		<h2>Reconectar es posible cuando hay voluntad de ambos</h2>
-		<p>
-			Todas las relaciones atraviesan momentos difíciles. La terapia de pareja os
-			ofrece un espacio profesional donde redescubrir vuestra conexión, aprender
-			a comunicaros mejor y construir la relación que ambos deseáis. Vuestro amor
-			merece una oportunidad.
-		</p>
-	</section>
+	<Frase
+		title="Reconectar es posible cuando hay voluntad de ambos"
+		text="Todas las relaciones atraviesan momentos difíciles. La terapia de pareja os ofrece un espacio profesional donde redescubrir vuestra conexión, aprender a comunicaros mejor y construir la relación que ambos deseáis. Vuestro amor merece una oportunidad."
+	/>
 
-	<section>
-		<h2>¿Para qué parejas es esta terapia?</h2>
-		<article>
-			<h3>Parejas en crisis</h3>
-			<p>
-				Acompaño a parejas que atraviesan momentos difíciles: problemas de
-				confianza, infidelidades, distanciamiento emocional, conflictos
-				recurrentes o cuando sienten que han perdido la conexión que les unía.
-			</p>
-		</article>
-		<article>
-			<h3>Problemas de comunicación</h3>
-			<p>
-				Un espacio para parejas que discuten frecuentemente, no se entienden,
-				evitan conversaciones importantes o sienten que no pueden expresar sus
-				necesidades sin generar conflicto.
-			</p>
-		</article>
-		<article>
-			<h3>Fortalecimiento preventivo</h3>
-			<p>
-				También para parejas que desean fortalecer su relación antes de grandes
-				cambios: convivencia, matrimonio, llegada de hijos o simplemente para
-				mejorar su vínculo y crecer juntos.
-			</p>
-		</article>
-	</section>
+	<ParaQuien title="¿Para qué parejas es esta terapia?" items={paraQuien} />
 
-	<section>
-		<h2>Vuestra relación merece una oportunidad</h2>
-		<p>
-			Dar el primer paso hacia la terapia de pareja es un acto de amor y
-			compromiso mutuo. Juntos podéis redescubrir la conexión y construir la
-			relación que ambos deseáis.
-		</p>
-		<a href="/contacto">Comenzar juntos</a>
-	</section>
+	<CtaBand
+		title="Vuestra relación merece una oportunidad"
+		text="Dar el primer paso hacia la terapia de pareja es un acto de amor y compromiso mutuo. Juntos podéis redescubrir la conexión y construir la relación que ambos deseáis."
+		label="Comenzar juntos"
+	/>
 
-	<section>
-		<h2>¿Qué problemas trabajamos en pareja?</h2>
-		<ul>
-			<li>Problemas de comunicación y diálogo</li>
-			<li>Conflictos recurrentes sin resolver</li>
-			<li>Crisis de confianza e infidelidades</li>
-			<li>Distanciamiento emocional y físico</li>
-			<li>Diferencias en objetivos vitales</li>
-			<li>Celos y inseguridades en la relación</li>
-		</ul>
-		<ul>
-			<li>Rutina y pérdida de intimidad</li>
-			<li>Problemas con familias políticas</li>
-			<li>Dificultades en la toma de decisiones</li>
-			<li>Estrés laboral que afecta la pareja</li>
-			<li>Transiciones vitales (hijos, trabajo, mudanza)</li>
-			<li>Diferentes estilos de manejo de conflictos</li>
-		</ul>
-	</section>
+	<Problemas title="¿Qué problemas trabajamos en pareja?" items={problemas} />
 
-	<section>
-		<h2>Empezad juntos el camino hacia la reconciliación</h2>
-		<p>
-			La terapia de pareja es una inversión en vuestra relación y bienestar
-			mutuo. Juntos podemos trabajar para superar los obstáculos y construir una
-			relación más fuerte y satisfactoria.
-		</p>
-		<a href="/contacto">Reserva tu cita</a>
-	</section>
+	<CtaBand
+		variant="camino"
+		title="Empezad juntos el camino hacia la reconciliación"
+		text="La terapia de pareja es una inversión en vuestra relación y bienestar mutuo. Juntos podemos trabajar para superar los obstáculos y construir una relación más fuerte y satisfactoria."
+		label="Reserva tu cita"
+	/>
 
-	<section>
-		<h2>Preguntas Frecuentes</h2>
-		<details>
-			<summary>¿Cuándo es recomendable acudir a terapia de pareja?</summary>
-			<p>
-				Es recomendable cuando hay problemas de comunicación recurrentes,
-				conflictos no resueltos, crisis de confianza, rutina que afecta la
-				relación, diferencias en objetivos vitales, o cuando sienten que se han
-				distanciado emocionalmente. También es útil para fortalecer la relación
-				en momentos de cambio.
-			</p>
-		</details>
-		<details>
-			<summary>¿Cuánto dura un proceso de terapia de pareja?</summary>
-			<p>
-				La duración varía según cada pareja y sus objetivos. Algunas parejas ven
-				mejoras en pocas sesiones, mientras que otras necesitan un proceso más
-				profundo. Generalmente se inicia con sesiones semanales que después se
-				espacian según la evolución de la pareja.
-			</p>
-		</details>
-		<details>
-			<summary>¿Qué se hace en una sesión de terapia de pareja?</summary>
-			<p>
-				En cada sesión trabajamos la comunicación entre ambos, identificamos
-				patrones de conflicto, exploramos emociones y necesidades, practicamos
-				herramientas de diálogo constructivo y fortalecemos la conexión
-				emocional. Todo en un espacio neutro y seguro para ambos.
-			</p>
-		</details>
-		<details>
-			<summary>¿Pueden venir por separado a terapia de pareja?</summary>
-			<p>
-				Aunque lo habitual es que vengan juntos, en ocasiones puede ser útil
-				alguna sesión individual para explorar aspectos personales que influyen
-				en la relación. Siempre se evalúa caso por caso y con transparencia hacia
-				ambos miembros.
-			</p>
-		</details>
-		<details>
-			<summary>¿Qué pasa si solo uno de los dos quiere venir a terapia?</summary>
-			<p>
-				Idealmente ambos deben estar motivados, pero si solo uno puede acudir
-				inicialmente, trabajaremos estrategias para mejorar su parte de la
-				relación y motivar al otro miembro para que se sume al proceso cuando esté
-				preparado.
-			</p>
-		</details>
-	</section>
+	<Faq items={preguntas} />
 
-	<nav aria-labelledby="related-title">
-		<h2 id="related-title">También te puede interesar</h2>
-		<ul>
-			<li><a href="/servicios/terapia-individual">Terapia individual</a></li>
-			<li><a href="/servicios/terapia-familiar">Terapia familiar</a></li>
-			<li><a href="/servicios/psicologia-perinatal">Psicología perinatal</a></li>
-			<li><a href="/servicios/terapia-online">Terapia online</a></li>
-		</ul>
-	</nav>
+	<Relacionados links={relacionados} />
 </Layout>

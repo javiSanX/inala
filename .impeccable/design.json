@@ -1,0 +1,406 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T17:20:40+00:00",
+  "title": "Design System: Inala",
+  "extensions": {
+    "colorMeta": {
+      "piedra": {
+        "role": "neutral",
+        "displayName": "Stone",
+        "canonical": "oklch(92.7% 0.005 247.9)",
+        "tonalRamp": [
+          "#090b0d",
+          "#232527",
+          "#404245",
+          "#5f6164",
+          "#808385",
+          "#a2a5a8",
+          "#c6c9cc",
+          "#eceff2"
+        ]
+      },
+      "piedra-hondo": {
+        "role": "neutral",
+        "displayName": "Deep Stone",
+        "canonical": "oklch(86.4% 0.012 252.1)",
+        "tonalRamp": [
+          "#080c10",
+          "#21262b",
+          "#3e4348",
+          "#5d6268",
+          "#7d8389",
+          "#a0a6ac",
+          "#c4cad1",
+          "#e9eff6"
+        ]
+      },
+      "papel": {
+        "role": "neutral",
+        "displayName": "Cardstock",
+        "canonical": "oklch(99.1% 0.002 247.8)",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#242526",
+          "#414243",
+          "#606162",
+          "#818283",
+          "#a4a5a6",
+          "#c8c9ca",
+          "#edeeef"
+        ]
+      },
+      "linea": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "oklch(81.2% 0.026 263.3)",
+        "tonalRamp": [
+          "#080b12",
+          "#20252f",
+          "#3c424e",
+          "#5a6170",
+          "#7b8392",
+          "#9ea5b3",
+          "#c3c9d6",
+          "#e9effa"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(25.3% 0.060 263.8)",
+        "tonalRamp": [
+          "#040a1b",
+          "#1a253b",
+          "#34425d",
+          "#516182",
+          "#7182a5",
+          "#95a5c6",
+          "#bacae7",
+          "#e1efff"
+        ]
+      },
+      "tinta-suave": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "oklch(43.2% 0.048 265.9)",
+        "tonalRamp": [
+          "#060b18",
+          "#1d2536",
+          "#384258",
+          "#55617b",
+          "#76829e",
+          "#99a5bf",
+          "#bec9e1",
+          "#e5efff"
+        ]
+      },
+      "camino": {
+        "role": "primary",
+        "displayName": "Camino Blue",
+        "canonical": "oklch(38.9% 0.136 263.9)",
+        "tonalRamp": [
+          "#00042f",
+          "#0a2055",
+          "#213e7e",
+          "#3a5daa",
+          "#5a80cf",
+          "#80a4ed",
+          "#a8c9ff",
+          "#d1efff"
+        ]
+      },
+      "camino-hondo": {
+        "role": "primary",
+        "displayName": "Deep Camino",
+        "canonical": "oklch(32.1% 0.111 263.8)",
+        "tonalRamp": [
+          "#010728",
+          "#0f224d",
+          "#273f74",
+          "#425f9d",
+          "#6181c2",
+          "#87a5e1",
+          "#aec9ff",
+          "#d6efff"
+        ]
+      },
+      "camino-claro": {
+        "role": "primary",
+        "displayName": "Pale Camino",
+        "canonical": "oklch(87.0% 0.041 267.1)",
+        "tonalRamp": [
+          "#070b16",
+          "#1e2534",
+          "#3a4255",
+          "#576178",
+          "#78829a",
+          "#9ba5bc",
+          "#c0c9de",
+          "#e7eeff"
+        ]
+      },
+      "flecha": {
+        "role": "secondary",
+        "displayName": "Arrow Yellow",
+        "canonical": "oklch(83.4% 0.163 89.2)",
+        "tonalRamp": [
+          "#1c0400",
+          "#3c1d00",
+          "#5f3a00",
+          "#845900",
+          "#a77b00",
+          "#c7a023",
+          "#e9c566",
+          "#ffec9b"
+        ]
+      },
+      "flecha-hondo": {
+        "role": "secondary",
+        "displayName": "Deep Arrow",
+        "canonical": "oklch(76.9% 0.156 85.8)",
+        "tonalRamp": [
+          "#1d0300",
+          "#3d1c00",
+          "#603900",
+          "#865700",
+          "#a97900",
+          "#ca9e30",
+          "#ebc46c",
+          "#ffeaa0"
+        ]
+      },
+      "sello": {
+        "role": "tertiary",
+        "displayName": "Stamp Aqua",
+        "canonical": "oklch(54.7% 0.084 190.7)",
+        "tonalRamp": [
+          "#001110",
+          "#002e2c",
+          "#004e4b",
+          "#146f6c",
+          "#40928d",
+          "#6eb4af",
+          "#9ad7d3",
+          "#c6fbf7"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "marca": {
+        "displayName": "Marca",
+        "purpose": "The word INALA on the home credential only."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Interior page H1 on the blue field."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section H2s, compact hero H1s, prices, footer sign-off."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "H3s, card titles, mobile menu links."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Intro paragraphs, service list rows, large plaques, FAQ questions."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text, max 66ch."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Contact meta, notes, footer fine print."
+      },
+      "label": {
+        "displayName": "Box Label",
+        "purpose": "Barlow Condensed caps for form labels and box names only; never eyebrows."
+      }
+    },
+    "shadows": [
+      {
+        "name": "card",
+        "value": "0 1px 2px rgb(19 33 63 / 0.08), 0 12px 32px -12px rgb(19 33 63 / 0.28)",
+        "purpose": "Resting cardstock on the stone ground."
+      },
+      {
+        "name": "lift",
+        "value": "0 2px 4px rgb(19 33 63 / 0.1), 0 24px 48px -20px rgb(19 33 63 / 0.4)",
+        "purpose": "Home credential, price cards, contact form, services popover, hover of link cards."
+      },
+      {
+        "name": "plaque-bevel",
+        "value": "inset 0 -3px 0 rgb(19 33 63 / 0.18)",
+        "purpose": "Painted bottom edge of yellow plaques (rgb(0 0 0 / 0.25) on blue plaques)."
+      },
+      {
+        "name": "fold-left / fold-top",
+        "value": "linear-gradient(to right|bottom, rgb(19 33 63 / 0.09|0.08), transparent 1.75rem|1.5rem)",
+        "purpose": "Fold shading where the credential's cardstock bends between panels."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-quart",
+        "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "purpose": "Plaque colour and press transitions (200ms)."
+      },
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Arrow nudge, popovers, FAQ disc turn, link-card lift (300ms)."
+      },
+      {
+        "name": "stamp-press",
+        "value": "scale 1.35 + blur 2px + opacity 0 -> scale 0.96 at 55% -> rest; animation-timeline: view(); range entry 35% to cover 42%",
+        "purpose": "Signature: the four process-step stamps only. Visible by default; only under prefers-reduced-motion: no-preference and @supports (animation-timeline: view())."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "40rem"
+      },
+      {
+        "name": "md",
+        "value": "48rem"
+      },
+      {
+        "name": "lg",
+        "value": "64rem"
+      },
+      {
+        "name": "xl",
+        "value": "80rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Plaque",
+      "kind": "button",
+      "refersTo": "button-flecha",
+      "description": "The one shape every action takes: yellow waymark plaque with a right arrow.",
+      "html": "<a href=\"#\" class=\"ds-plaque-flecha\"><span>Reserva tu cita</span><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-plaque-flecha{display:inline-flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:12px 20px;border:0;border-radius:var(--radius-plaque,0.25rem);font-family:var(--font-sans,'Bricolage Grotesque',system-ui,sans-serif);font-size:1.125rem;font-weight:600;text-decoration:none;cursor:pointer;transition:background-color .2s cubic-bezier(0.25,1,0.5,1),box-shadow .2s cubic-bezier(0.25,1,0.5,1),transform .2s cubic-bezier(0.25,1,0.5,1);background:#f3c224;color:#13213f;box-shadow:inset 0 -3px 0 rgb(19 33 63/0.18);} .ds-plaque-flecha:hover{background:#e0ab0b;} .ds-plaque-flecha:hover svg{transform:translateX(4px);} .ds-plaque-flecha:active{transform:translateY(1px);} .ds-plaque-flecha:focus-visible{outline:3px solid #1d3e8c;outline-offset:3px;} .ds-plaque-flecha svg{transition:transform .3s cubic-bezier(0.16,1,0.3,1);} @media (prefers-reduced-motion:reduce){.ds-plaque-flecha svg{transition:none;}}"
+    },
+    {
+      "name": "Camino Plaque",
+      "kind": "button",
+      "refersTo": "button-camino",
+      "description": "Secondary action on light ground: blue plaque, white text.",
+      "html": "<a href=\"#\" class=\"ds-plaque-camino\"><span>Ver servicios</span><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-plaque-camino{display:inline-flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:12px 20px;border:0;border-radius:var(--radius-plaque,0.25rem);font-family:var(--font-sans,'Bricolage Grotesque',system-ui,sans-serif);font-size:1.125rem;font-weight:600;text-decoration:none;cursor:pointer;transition:background-color .2s cubic-bezier(0.25,1,0.5,1),box-shadow .2s cubic-bezier(0.25,1,0.5,1),transform .2s cubic-bezier(0.25,1,0.5,1);background:#1d3e8c;color:#fff;box-shadow:inset 0 -3px 0 rgb(0 0 0/0.25);} .ds-plaque-camino:hover{background:#142e6b;} .ds-plaque-camino:hover svg{transform:translateX(4px);} .ds-plaque-camino:active{transform:translateY(1px);} .ds-plaque-camino:focus-visible{outline:3px solid #1d3e8c;outline-offset:3px;} .ds-plaque-camino svg{transition:transform .3s cubic-bezier(0.16,1,0.3,1);} @media (prefers-reduced-motion:reduce){.ds-plaque-camino svg{transition:none;}}"
+    },
+    {
+      "name": "Ghost Plaque",
+      "kind": "button",
+      "refersTo": "button-papel",
+      "description": "Quiet action: cardstock with a hairline ring that darkens to ink.",
+      "html": "<a href=\"#\" class=\"ds-plaque-papel\"><span>Saber más</span><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-plaque-papel{display:inline-flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:12px 20px;border:0;border-radius:var(--radius-plaque,0.25rem);font-family:var(--font-sans,'Bricolage Grotesque',system-ui,sans-serif);font-size:1.125rem;font-weight:600;text-decoration:none;cursor:pointer;transition:background-color .2s cubic-bezier(0.25,1,0.5,1),box-shadow .2s cubic-bezier(0.25,1,0.5,1),transform .2s cubic-bezier(0.25,1,0.5,1);background:#fbfcfd;color:#13213f;box-shadow:0 0 0 1px #b9c2d3;} .ds-plaque-papel:hover{box-shadow:0 0 0 1px #13213f;} .ds-plaque-papel:hover svg{transform:translateX(4px);} .ds-plaque-papel:active{transform:translateY(1px);} .ds-plaque-papel:focus-visible{outline:3px solid #1d3e8c;outline-offset:3px;} .ds-plaque-papel svg{transition:transform .3s cubic-bezier(0.16,1,0.3,1);} @media (prefers-reduced-motion:reduce){.ds-plaque-papel svg{transition:none;}}"
+    },
+    {
+      "name": "Ruled Field",
+      "kind": "input",
+      "refersTo": "field-ruled",
+      "description": "Form field printed on the credential: condensed caps label over a 2px ink rule.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Correo electrónico</span><input class=\"ds-field-input\" type=\"email\" placeholder=\"tu@correo.es\"></label>",
+      "css": ".ds-field{display:grid;gap:4px;max-width:360px;} .ds-field-label{font-family:var(--font-label,'Barlow Condensed','Arial Narrow',sans-serif);font-size:.9375rem;line-height:1.1;letter-spacing:.08em;font-weight:600;text-transform:uppercase;color:#44506b;} .ds-field-input{min-height:48px;border:0;border-bottom:2px solid #13213f;background:transparent;padding:8px 0;font:inherit;font-size:1.1875rem;color:#13213f;caret-color:#1d3e8c;transition:border-color .2s;} .ds-field-input::placeholder{color:#44506b;} .ds-field-input:focus-visible{outline:3px solid #1d3e8c;outline-offset:3px;border-bottom-color:#1d3e8c;}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Cardstock bar; current page marked by a small yellow arrow under the link, never a colour swap.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav-link\">Nuestro método</a><a href=\"#\" class=\"ds-nav-link\" aria-current=\"page\">Sobre mí</a><a href=\"#\" class=\"ds-nav-link\">Tarifas</a></nav>",
+      "css": ".ds-nav{display:flex;gap:4px;padding:12px 16px;background:rgb(251 252 253/0.95);border-bottom:1px solid #b9c2d3;} .ds-nav-link{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:.25rem;font-weight:500;color:#13213f;text-decoration:none;transition:background-color .2s;} .ds-nav-link:hover{background:#e4e7ea;} .ds-nav-link:focus-visible{outline:3px solid #1d3e8c;outline-offset:3px;} .ds-nav-link[aria-current=page]::after{content:'';position:absolute;bottom:-4px;left:50%;width:24px;height:12px;transform:translateX(-50%);background:#f3c224;clip-path:polygon(0 30%,60% 30%,60% 0,100% 50%,60% 100%,60% 70%,0 70%);}"
+    },
+    {
+      "name": "Ruled List (Casillas)",
+      "kind": "custom",
+      "refersTo": "card-credencial",
+      "description": "Repeated content as hairline-ruled rows on cardstock; arrow or check markers in Camino blue.",
+      "html": "<div class=\"ds-card\"><ul class=\"ds-casillas\"><li><span class=\"ds-mark\"><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg></span>Sesión de 60 minutos.</li><li><span class=\"ds-mark\"><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg></span>Espacio seguro y confidencial.</li><li><span class=\"ds-mark\"><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 6 9 17l-5-5\"/></svg></span>Online o presencial.</li></ul></div>",
+      "css": ".ds-card{background:#fbfcfd;border-radius:.375rem;padding:40px;box-shadow:0 1px 2px rgb(19 33 63/0.08),0 12px 32px -12px rgb(19 33 63/0.28);color:#13213f;max-width:420px;} .ds-casillas{list-style:none;margin:0;padding:0;border-top:1px solid #b9c2d3;} .ds-casillas li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #b9c2d3;} .ds-mark{display:grid;place-items:center;width:20px;height:20px;margin-top:4px;flex-shrink:0;border-radius:50%;background:#1d3e8c;color:#fff;}"
+    },
+    {
+      "name": "Practice Stamp (Sello)",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Aqua stamp pressed onto cardstock; the only place aqua appears. Never on the blue field. Pressed in on scroll for the four process steps only.",
+      "html": "<div class=\"ds-sello-host\"><div class=\"ds-sello\" aria-hidden=\"true\"><svg viewBox=\"0 0 200 200\"><defs><path id=\"ds-ring\" d=\"M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0\"/></defs><circle cx=\"100\" cy=\"100\" r=\"96\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\"/><circle cx=\"100\" cy=\"100\" r=\"62\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><text fill=\"currentColor\" font-family=\"Barlow Condensed, Arial Narrow, sans-serif\" font-weight=\"600\" font-size=\"19\" letter-spacing=\"3.4\"><textPath href=\"#ds-ring\">INALA · PAMPLONA · INALA · PAMPLONA ·</textPath></text><text x=\"100\" y=\"118\" text-anchor=\"middle\" fill=\"currentColor\" font-family=\"Bricolage Grotesque, system-ui, sans-serif\" font-weight=\"800\" font-size=\"52\">1</text></svg></div></div>",
+      "css": ".ds-sello-host{background:#fbfcfd;padding:24px;display:inline-block;border-radius:.375rem;} .ds-sello{width:128px;height:128px;color:#23807c;mix-blend-mode:multiply;transform:rotate(-9deg);} .ds-sello svg{width:100%;height:100%;display:block;} @keyframes ds-stamp-press{0%{opacity:0;transform:scale(1.35) rotate(-9deg);filter:blur(2px);}55%{opacity:1;transform:scale(.96) rotate(-9deg);filter:blur(0);}100%{opacity:1;transform:scale(1) rotate(-9deg);filter:blur(0);}} @media (prefers-reduced-motion:no-preference){.ds-sello-host:hover .ds-sello{animation:ds-stamp-press .6s cubic-bezier(0.16,1,0.3,1) both;}}"
+    },
+    {
+      "name": "CTA Band",
+      "kind": "custom",
+      "refersTo": "field-camino",
+      "description": "The next-step band on the blue field: headline, Pale Camino decorative arrow, one yellow plaque.",
+      "html": "<section class=\"ds-band\"><h2 class=\"ds-band-title\">Da el primer paso hacia tu bienestar.</h2><div class=\"ds-band-act\"><span class=\"ds-band-arrow\"><svg viewBox=\"0 0 120 64\" width=\"64\" aria-hidden=\"true\"><polygon points=\"0,22 74,22 74,2 120,32 74,62 74,42 0,42\" fill=\"currentColor\"/></svg></span><a href=\"#\" class=\"ds-band-plaque\"><span>Reserva tu cita</span><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a></div></section>",
+      "css": ".ds-band{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px;padding:56px 40px;background:#1d3e8c;color:#fff;} .ds-band-title{margin:0;font-size:2.25rem;line-height:1.02;letter-spacing:-.03em;font-weight:800;max-width:18ch;} .ds-band-act{display:flex;align-items:center;gap:24px;} .ds-band-arrow{color:#c8d4f0;display:flex;} .ds-band-plaque{display:inline-flex;align-items:center;gap:16px;min-height:56px;padding:16px 24px;border-radius:.25rem;background:#f3c224;color:#13213f;font-weight:600;font-size:1.25rem;text-decoration:none;box-shadow:inset 0 -3px 0 rgb(19 33 63/0.18);transition:background-color .2s;} .ds-band-plaque:hover{background:#e0ab0b;} .ds-band-plaque:focus-visible{outline:3px solid #f3c224;outline-offset:3px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Camino Credential",
+    "overview": "Inala's site is a pilgrim's credential for the first steps of therapy. The secular waymarking of the Camino Francés as it crosses Pamplona supplies the whole vocabulary: a cool stone-grey wall as ground, white credential cardstock printed with hairline boxes, a Camino-blue field like the tiled mojón markers, a painted yellow arrow wherever the visitor can take the next step, and Inala's own spiral pressed as an aqua stamp. The visitor is walked from doubt to a first appointment the way a pilgrim is walked between waymarks: one clear arrow at a time.\n\nThe world is calm and legible rather than decorative. Density is moderate: generous section rhythm, long reading at a comfortable measure, colour concentrated at the edges (hero field, footer, CTA bands, actions) while the reading surfaces stay near-achromatic. Real photographs of María and the consulting room carry the warmth; the system never substitutes illustration or stock imagery.\n\nConfirmed rejections: the category default of beige ground, sage accents, italic serif display and stock hands; dark mode (light theme only, `color-scheme: light`).",
+    "keyCharacteristics": [
+      "Stone ground, cardstock surfaces, one committed blue field.",
+      "Yellow means \"act here\", nothing else.",
+      "Aqua lives only inside the stamp.",
+      "Repeated content is ruled into rows (casillas), not tiled into icon cards.",
+      "Heavy, tight Bricolage Grotesque display over a plain, roomy body.",
+      "One signature motion: the stamp pressed into the four process boxes."
+    ],
+    "rules": [
+      {
+        "name": "The Arrow Means Go Rule",
+        "body": "Yellow is reserved for actions and the current-page arrow mark. A decorative arrow (Frase, CtaBand, \"Por qué\" rows) is Camino blue on light ground and Pale Camino on blue. If tapping it does nothing, it is not yellow.",
+        "section": "colors"
+      },
+      {
+        "name": "The Stamp Ink Rule",
+        "body": "Aqua appears only inside the stamp. No aqua text, borders, buttons or backgrounds.",
+        "section": "colors"
+      },
+      {
+        "name": "The Colour At The Edges Rule",
+        "body": "Long reading (legal pages, service explanations) sits on cardstock in ink and soft ink; colour appears at the edges: the blue top rule of the legal card, list markers, links, the closing bands.",
+        "section": "colors"
+      },
+      {
+        "name": "The Box Label Rule",
+        "body": "Barlow Condensed caps label a box or a field, never introduce a section. No eyebrows or kickers above headings.",
+        "section": "typography"
+      },
+      {
+        "name": "The Folded Card Rule",
+        "body": "Depth is paper depth: one card shadow at rest, lift only for the primary credential surface or on hover. No hard offset shadows, no coloured glows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use yellow (`flecha`) for every action and for the current-page arrow mark, and for nothing else.",
+      "Do colour decorative arrows Camino blue on light ground and Pale Camino on the blue field.",
+      "Do place the aqua stamp on cardstock or a light photo area, rotated a few degrees, with multiply blending.",
+      "Do present repeated content as ruled rows (casillas) with hairline dividers.",
+      "Do keep reading text at 66ch or less, in soft ink on cardstock.",
+      "Do mark the current page with the small yellow arrow.",
+      "Do ship every motion with a `prefers-reduced-motion` fallback; content must be visible without the animation.",
+      "Do define any new colour, radius, shadow or easing once in `@theme` in `src/styles/global.css`."
+    ],
+    "donts": [
+      "Don't use beige grounds, sage accents, italic serif display or stock hands.",
+      "Don't use aqua anywhere except inside the stamp.",
+      "Don't put the stamp on the blue field.",
+      "Don't tile repeated content into same-size icon cards.",
+      "Don't use Barlow Condensed caps as eyebrows or kickers above headings; it labels fields and boxes only.",
+      "Don't mark the current page with a colour or weight swap.",
+      "Don't add a dark theme; the system is light only.",
+      "Don't add motion beyond the stamp press and small state transitions (arrow nudge, popover fade, FAQ disc turn); never `transition: all`.",
+      "Don't use hard offset shadows or coloured glows."
+    ]
+  }
+}

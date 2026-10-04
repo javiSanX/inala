@@ -1,165 +1,386 @@
 ---
+import { Image } from "astro:assets";
+import maria1 from "../assets/images/maria1.webp";
+import maria2 from "../assets/images/maria2.webp";
+import oficina from "../assets/images/oficina.webp";
+import CtaBand from "../components/CtaBand.astro";
+import Flecha from "../components/Flecha.astro";
+import Frase from "../components/Frase.astro";
+import Icon from "../components/Icon.astro";
+import Sello from "../components/Sello.astro";
+import { contacto } from "../data/servicios";
 import Layout from "../layouts/Layout.astro";
+
+const terapias = [
+	"Terapia individual",
+	"Terapia de pareja",
+	"Terapia familiar",
+	"Psicología perinatal",
+];
+
+const razones = [
+	{
+		title: "Terapia adaptada y personalizada",
+		text: "En Inala, cada proceso terapéutico es único. Analizamos tu situación y necesidades para ofrecerte una atención adaptada, utilizando herramientas y enfoques que mejor se ajustan a ti.",
+	},
+	{
+		title: "Acompañamiento profesional",
+		text: "Te ofrecemos un acompañamiento cercano, creando un espacio basado en el respeto y la empatía, poniendo a tu disposición recursos prácticos que te ayudarán a avanzar con confianza.",
+	},
+	{
+		title: "Crecimiento que transforma",
+		text: "Logra cambios profundos y duraderos en tu vida, promoviendo un crecimiento personal que se refleja en tu día a día y permitiéndote superar obstáculos y alcanzar mayor equilibrio emocional.",
+	},
+];
+
+const pasos = [
+	{
+		title: "Contacto",
+		text: [
+			"Desde el primer momento, te recibimos en un entorno seguro y de confianza, donde puedes sentirte libre de expresar tus inquietudes y emociones. Nos enfocamos en escucharte de manera activa y empática.",
+			"Este primer paso es fundamental para que te sientas cómodo/a y comprendido/a. Queremos que percibas que tu bienestar es nuestra prioridad y que estamos aquí para acompañarte en todo el proceso.",
+		],
+		rotate: -9,
+	},
+	{
+		title: "Objetivos",
+		text: [
+			"Realizamos una evaluación personalizada de tu situación emocional y psicológica. Analizamos tus necesidades y expectativas para entender qué te gustaría conseguir con la terapia.",
+			"A partir de esta evaluación, definimos de manera conjunta los objetivos terapéuticos, adaptados a tus metas personales. Así, el proceso tiene un rumbo claro y alineado con lo que realmente buscas.",
+		],
+		rotate: 7,
+	},
+	{
+		title: "Intervención",
+		text: [
+			"Desarrollamos un plan de intervención ajustado a ti, aplicando técnicas y recursos psicológicos que mejor se adaptan a tu caso. En cada sesión te acompañamos, te guiamos y te proporcionamos herramientas prácticas para afrontar tus retos.",
+			"Nuestro objetivo es que te sientas apoyado/a y que cada sesión te acerque más a tus objetivos de bienestar.",
+		],
+		rotate: -4,
+	},
+	{
+		title: "Crecimiento",
+		text: [
+			"Te ayudamos a consolidar los aprendizajes y a integrar nuevas habilidades en tu día a día, para que el bienestar alcanzado sea duradero.",
+			"El acompañamiento continúa hasta que te sientas preparado/a para avanzar con autonomía y confianza. Queremos que al finalizar el proceso, cuentes con las herramientas necesarias para mantener tu equilibrio emocional y afrontar los desafíos futuros.",
+		],
+		rotate: 11,
+	},
+];
 ---
 
 <Layout
 	title="Inala | Psicología general sanitaria en Pamplona"
 	description="Inala es un centro de psicología general sanitaria que ofrece servicios de terapia y apoyo psicológico."
 >
-	<section>
-		<h1>INALA Centro de Psicoterapia</h1>
-		<p>Te acompaño en tu proceso terapéutico.</p>
-		<a href="/contacto">Reserva tu cita</a>
+	{/* The credential, opened flat: title panel, portrait panel, appointment panel. */}
+	<section class="on-camino bg-camino pt-4 pb-14 sm:pt-10 lg:pb-20">
+		<div class="shell">
+			<div
+				class="grid rounded-card bg-papel text-tinta shadow-lift lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.8fr)_minmax(0,1fr)]"
+			>
+				<div class="flex flex-col justify-between gap-6 p-6 sm:gap-10 sm:p-10 lg:p-12">
+					<h1 class="font-extrabold">
+						<span class="block text-marca text-camino"
+							>INALA</span
+						>
+						<span class="mt-1 block text-headline sm:mt-3">Centro de Psicoterapia</span>
+					</h1>
+					<div class="flex items-center gap-4">
+						<Flecha class="w-14 text-camino" />
+						<p class="text-lead font-medium">Te acompaño en tu proceso terapéutico.</p>
+					</div>
+				</div>
+
+				<div class="relative h-40 sm:h-72 lg:h-auto">
+					<Image
+						src={maria1}
+						alt="María Sánchez Cobos, psicóloga sanitaria de Inala, sentada en la consulta"
+						widths={[400, 640, 864]}
+						sizes="(min-width: 1024px) 24vw, 100vw"
+						loading="eager"
+						fetchpriority="high"
+						class="absolute inset-0 size-full object-cover object-[50%_30%]"
+					/>
+					<span
+						aria-hidden="true"
+						class="pointer-events-none absolute inset-0 fold-top lg:fold-left"
+					></span>
+					<Sello
+						class="absolute -top-7 right-3 z-10 size-24 sm:size-32 lg:top-4 lg:right-auto lg:-left-10"
+						rotate={-10}
+					/>
+				</div>
+
+				<div class="fold-top p-6 sm:p-10 lg:fold-left lg:p-10">
+					<form
+						id="cita"
+						action={contacto.whatsappUrl}
+						method="get"
+						target="_blank"
+						class="flex h-full flex-col gap-4 sm:gap-6"
+					>
+						<input
+							type="hidden"
+							name="text"
+							value="Hola, me gustaría pedir una primera cita."
+							data-cita-texto
+						/>
+						<div class="grid gap-2">
+							<label for="cita-servicio" class="label text-tinta-suave">Servicio</label>
+							<div class="relative">
+								<select
+									id="cita-servicio"
+									data-cita-servicio
+									class="min-h-12 w-full cursor-pointer appearance-none border-0 border-b-2 border-tinta bg-transparent py-2 pr-10 text-lead font-semibold focus-visible:border-camino"
+								>
+									{terapias.map((terapia) => <option>{terapia}</option>)}
+								</select>
+								<Icon
+									name="chevron-down"
+									class="pointer-events-none absolute top-1/2 right-1 size-5 -translate-y-1/2 text-camino"
+								/>
+							</div>
+						</div>
+
+						<fieldset class="grid gap-3">
+							<legend class="label mb-1 text-tinta-suave sm:mb-2">Modalidad</legend>
+							<div class="grid grid-cols-2 gap-3">
+								{
+									["Presencial", "Online"].map((modalidad, i) => (
+										<label class="group relative flex min-h-14 cursor-pointer items-center gap-2.5 rounded-plaque pr-2 pl-3 font-semibold ring-1 ring-linea transition-[box-shadow,background-color] duration-200 hover:bg-piedra has-checked:bg-piedra has-checked:ring-2 has-checked:ring-tinta has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-camino">
+											<input
+												type="radio"
+												name="cita-modalidad"
+												value={modalidad}
+												checked={i === 0}
+												data-cita-modalidad
+												class="sr-only"
+											/>
+											<span class="grid size-5 shrink-0 place-items-center rounded-full ring-2 ring-tinta-suave group-has-checked:bg-camino group-has-checked:ring-camino">
+												<Icon
+													name="check"
+													class="size-3.5 text-white opacity-0 group-has-checked:opacity-100"
+													strokeWidth={3}
+												/>
+											</span>
+											{modalidad}
+										</label>
+									))
+								}
+							</div>
+						</fieldset>
+
+						<div class="mt-auto grid gap-4">
+							<button
+								type="submit"
+								class="group inline-flex min-h-14 w-full cursor-pointer sm:min-h-16 items-center justify-between gap-4 rounded-plaque bg-flecha px-6 text-lead font-bold text-tinta shadow-plaque transition-colors duration-200 hover:bg-flecha-hondo active:translate-y-px"
+							>
+								Reserva tu cita
+								<span class="flex items-center gap-2">
+									<Icon name="message-circle" class="size-5" />
+									<Icon
+										name="arrow-right"
+										class="size-5 transition-transform duration-300 ease-out-expo group-hover:translate-x-1 motion-reduce:transition-none"
+										strokeWidth={2.5}
+									/>
+								</span>
+							</button>
+							<ul role="list" class="grid gap-1 text-small text-tinta-suave">
+								<li>
+									<a
+										href={contacto.telUrl}
+										class="inline-flex min-h-10 items-center gap-2 no-underline hover:text-camino hover:underline"
+									>
+										<Icon name="phone" class="size-4" />
+										<span class="tabular">{contacto.whatsapp}</span>
+									</a>
+								</li>
+								<li>
+									<a
+										href={`mailto:${contacto.email}`}
+										class="inline-flex min-h-10 items-center gap-2 no-underline hover:text-camino hover:underline"
+									>
+										<Icon name="mail" class="size-4" />
+										{contacto.email}
+									</a>
+								</li>
+							</ul>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</section>
 
-	<section>
-		<h2>¿Por qué dar el primer paso en Inala?</h2>
-		<article>
-			<h3>Terapia adaptada y personalizada</h3>
-			<p>
-				En Inala, cada proceso terapéutico es único. Analizamos tu situación y
-				necesidades para ofrecerte una atención adaptada, utilizando herramientas
-				y enfoques que mejor se ajustan a ti.
-			</p>
-		</article>
-		<article>
-			<h3>Acompañamiento profesional</h3>
-			<p>
-				Te ofrecemos un acompañamiento cercano, creando un espacio basado en el
-				respeto y la empatía, poniendo a tu disposición recursos prácticos que te
-				ayudarán a avanzar con confianza.
-			</p>
-		</article>
-		<article>
-			<h3>Crecimiento que transforma</h3>
-			<p>
-				Logra cambios profundos y duraderos en tu vida, promoviendo un crecimiento
-				personal que se refleja en tu día a día y permitiéndote superar obstáculos
-				y alcanzar mayor equilibrio emocional.
-			</p>
-		</article>
+	<section class="py-20 lg:py-28">
+		<div class="shell">
+			<h2 class="max-w-3xl text-headline font-extrabold">
+				¿Por qué dar el primer paso en Inala?
+			</h2>
+			<ul role="list" class="mt-12 grid gap-10 lg:grid-cols-3 lg:gap-0">
+				{
+					razones.map((razon, i) => (
+						<li
+							class:list={[
+								"border-t-2 border-tinta pt-6 lg:px-8 lg:first:pl-0 lg:last:pr-0",
+								{ "lg:mt-16": i === 1, "lg:mt-32": i === 2 },
+							]}
+						>
+							<Flecha class="w-12 text-camino" />
+							<h3 class="mt-5 text-title">{razon.title}</h3>
+							<p class="mt-3 text-tinta-suave">{razon.text}</p>
+						</li>
+					))
+				}
+			</ul>
+		</div>
 	</section>
 
-	<section>
-		<h2>Realiza ahora tu primera consulta psicológica</h2>
-		<p>Te acompañamos como necesitas, brindándote un espacio seguro.</p>
-		<a href="/contacto">Reserva tu cita</a>
+	<CtaBand
+		title="Realiza ahora tu primera consulta psicológica"
+		text="Te acompañamos como necesitas, brindándote un espacio seguro."
+		label="Reserva tu cita"
+	/>
+
+	<section class="py-20 lg:py-28">
+		<div class="shell grid items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+			<div class="relative">
+				<div class="rounded-card bg-papel p-3 shadow-card sm:p-4">
+					<Image
+						src={maria2}
+						alt="María Sánchez Cobos sonriendo en su consulta"
+						widths={[480, 800, 1200]}
+						sizes="(min-width: 1024px) 38vw, 100vw"
+						class="aspect-4/5 w-full rounded-sm object-cover"
+					/>
+				</div>
+				<Sello
+					class="absolute right-2 -bottom-8 size-28 sm:-right-8 sm:size-36"
+					rotate={9}
+				/>
+			</div>
+			<div>
+				<h2 class="text-headline font-extrabold">Te damos la bienvenida a Inala</h2>
+				<div class="measure mt-8 grid gap-5 text-lead text-tinta-suave">
+					<p>
+						En Inala, te acompañamos en los momentos complejos de la vida,
+						ofreciéndote un apoyo cercano y constante. Creemos en la importancia
+						de crear un espacio seguro donde puedas sentirte comprendido/a y
+						acompañado/a en todo momento.
+					</p>
+					<p>
+						Para mí, la terapia es mucho más que técnicas: es empatía, dedicación
+						y presencia. Queremos que encuentres un entorno cuidado, donde puedas
+						iniciar tu proceso de cambio y crecimiento personal. Caminamos a tu
+						lado, ayudándote a conocerte, a cuidarte y a mejorar tu relación
+						contigo y con quienes te rodean.
+					</p>
+					<p>
+						En un ambiente de confianza, podrás expresar tus emociones y
+						preocupaciones con libertad, sabiendo que siempre serás recibido/a
+						con respeto y calidez. Nuestro compromiso es acompañarte en cada
+						etapa, brindándote herramientas y apoyo para que logres el bienestar
+						y equilibrio que mereces.
+					</p>
+				</div>
+			</div>
+		</div>
 	</section>
 
-	<section>
-		<h2>Te damos la bienvenida a Inala</h2>
-		<p>
-			En Inala, te acompañamos en los momentos complejos de la vida,
-			ofreciéndote un apoyo cercano y constante. Creemos en la importancia de
-			crear un espacio seguro donde puedas sentirte comprendido/a y acompañado/a
-			en todo momento.
-		</p>
-		<p>
-			Para mí, la terapia es mucho más que técnicas: es empatía, dedicación y
-			presencia. Queremos que encuentres un entorno cuidado, donde puedas iniciar
-			tu proceso de cambio y crecimiento personal. Caminamos a tu lado,
-			ayudándote a conocerte, a cuidarte y a mejorar tu relación contigo y con
-			quienes te rodean.
-		</p>
-		<p>
-			En un ambiente de confianza, podrás expresar tus emociones y
-			preocupaciones con libertad, sabiendo que siempre serás recibido/a con
-			respeto y calidez. Nuestro compromiso es acompañarte en cada etapa,
-			brindándote herramientas y apoyo para que logres el bienestar y equilibrio
-			que mereces.
-		</p>
+	<Frase
+		title="Te acompañamos a descubrir tu fuerza interior"
+		text="Te acompañamos en cada paso para que avances hacia el bienestar pleno que mereces, brindándote apoyo y herramientas para tu crecimiento personal."
+	/>
+
+	{/* Signature: credential boxes receive their stamp as they scroll into view. */}
+	<section class="pb-20 lg:pb-28">
+		<div class="shell">
+			<div class="grid gap-6 lg:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] lg:items-end">
+				<h2 class="text-headline font-extrabold">Pasos para transformar tu vida</h2>
+				<p class="measure text-lead text-tinta-suave">
+					A continuación te mostramos, de forma sencilla, los pasos que seguimos
+					en nuestro proceso terapéutico. Cada etapa está pensada para
+					acompañarte y ayudarte a avanzar hacia tu bienestar emocional, desde
+					el primer contacto hasta tu crecimiento personal.
+				</p>
+			</div>
+			<ol
+				role="list"
+				class="mt-12 grid gap-px overflow-hidden rounded-card bg-linea shadow-card md:grid-cols-2"
+			>
+				{
+					pasos.map((paso, i) => (
+						<li class="relative flex flex-col gap-4 bg-papel p-6 sm:p-8">
+							<div class="flex items-start justify-between gap-4">
+								<h3 class="text-title">{paso.title}</h3>
+								<Sello
+									center={String(i + 1)}
+									ring="INALA · PAMPLONA · INALA · PAMPLONA ·"
+									class="size-28 sm:size-32"
+									rotate={paso.rotate}
+									animate
+								/>
+							</div>
+							{paso.text.map((parrafo) => (
+								<p class="text-tinta-suave">{parrafo}</p>
+							))}
+						</li>
+					))
+				}
+			</ol>
+		</div>
 	</section>
 
-	<section>
-		<h2>Te acompañamos a descubrir tu fuerza interior</h2>
-		<p>
-			Te acompañamos en cada paso para que avances hacia el bienestar pleno que
-			mereces, brindándote apoyo y herramientas para tu crecimiento personal.
-		</p>
+	<CtaBand
+		variant="camino"
+		title="Da el primer paso hacia tu bienestar."
+		text="Empieza hoy tu proceso de cambio y recibe el apoyo profesional que necesitas para cuidar tu salud mental y emocional."
+		label="Reserva tu cita"
+	/>
+
+	<section class="pt-20 lg:pt-28">
+		<div class="shell">
+			<figure class="relative overflow-hidden rounded-card shadow-lift">
+				<Image
+					src={oficina}
+					alt="La consulta de Inala: mesa blanca, sillas y armarios en verde agua, con luz natural"
+					widths={[640, 1024, 1600]}
+					sizes="(min-width: 1280px) 75rem, 100vw"
+					class="aspect-4/3 w-full object-cover sm:aspect-video"
+				/>
+				<figcaption
+					class="absolute right-4 bottom-4 left-4 max-w-xl rounded-card bg-papel p-5 shadow-card sm:right-auto sm:bottom-8 sm:left-8 sm:p-7"
+				>
+					<h2 class="text-title font-extrabold">
+						Disfruta de un espacio seguro y confidencial
+					</h2>
+				</figcaption>
+			</figure>
+		</div>
 	</section>
 
-	<section>
-		<h2>Pasos para transformar tu vida</h2>
-		<p>
-			A continuación te mostramos, de forma sencilla, los pasos que seguimos en
-			nuestro proceso terapéutico. Cada etapa está pensada para acompañarte y
-			ayudarte a avanzar hacia tu bienestar emocional, desde el primer contacto
-			hasta tu crecimiento personal.
-		</p>
-		<ol>
-			<li>
-				<h3>Contacto</h3>
-				<p>
-					Desde el primer momento, te recibimos en un entorno seguro y de
-					confianza, donde puedes sentirte libre de expresar tus inquietudes y
-					emociones. Nos enfocamos en escucharte de manera activa y empática.
-				</p>
-				<p>
-					Este primer paso es fundamental para que te sientas cómodo/a y
-					comprendido/a. Queremos que percibas que tu bienestar es nuestra
-					prioridad y que estamos aquí para acompañarte en todo el proceso.
-				</p>
-			</li>
-			<li>
-				<h3>Objetivos</h3>
-				<p>
-					Realizamos una evaluación personalizada de tu situación emocional y
-					psicológica. Analizamos tus necesidades y expectativas para entender qué
-					te gustaría conseguir con la terapia.
-				</p>
-				<p>
-					A partir de esta evaluación, definimos de manera conjunta los objetivos
-					terapéuticos, adaptados a tus metas personales. Así, el proceso tiene un
-					rumbo claro y alineado con lo que realmente buscas.
-				</p>
-			</li>
-			<li>
-				<h3>Intervención</h3>
-				<p>
-					Desarrollamos un plan de intervención ajustado a ti, aplicando técnicas
-					y recursos psicológicos que mejor se adaptan a tu caso. En cada sesión
-					te acompañamos, te guiamos y te proporcionamos herramientas prácticas
-					para afrontar tus retos.
-				</p>
-				<p>
-					Nuestro objetivo es que te sientas apoyado/a y que cada sesión te acerque
-					más a tus objetivos de bienestar.
-				</p>
-			</li>
-			<li>
-				<h3>Crecimiento</h3>
-				<p>
-					Te ayudamos a consolidar los aprendizajes y a integrar nuevas habilidades
-					en tu día a día, para que el bienestar alcanzado sea duradero.
-				</p>
-				<p>
-					El acompañamiento continúa hasta que te sientas preparado/a para avanzar
-					con autonomía y confianza. Queremos que al finalizar el proceso, cuentes
-					con las herramientas necesarias para mantener tu equilibrio emocional y
-					afrontar los desafíos futuros.
-				</p>
-			</li>
-		</ol>
-	</section>
-
-	<section>
-		<h2>Da el primer paso hacia tu bienestar.</h2>
-		<p>
-			Empieza hoy tu proceso de cambio y recibe el apoyo profesional que
-			necesitas para cuidar tu salud mental y emocional.
-		</p>
-		<a href="/contacto">Reserva tu cita</a>
-	</section>
-
-	<section>
-		<h2>Disfruta de un espacio seguro y confidencial</h2>
-	</section>
-
-	<section>
-		<h2>
-			La salud mental es un viaje de crecimiento y descubrimiento, no un destino
-			al que llegar.
-		</h2>
-		<p>Un camino hacia el bienestar emocional</p>
-	</section>
+	<Frase
+		title="La salud mental es un viaje de crecimiento y descubrimiento, no un destino al que llegar."
+		text="Un camino hacia el bienestar emocional"
+	/>
 </Layout>
+
+<script>
+	// Compose the WhatsApp message from the chosen service and modality.
+	const form = document.querySelector<HTMLFormElement>("#cita");
+	const texto = form?.querySelector<HTMLInputElement>("[data-cita-texto]");
+	const servicio = form?.querySelector<HTMLSelectElement>("[data-cita-servicio]");
+
+	const compose = () => {
+		if (!form || !texto || !servicio) return;
+		const modalidad = form.querySelector<HTMLInputElement>(
+			"[data-cita-modalidad]:checked",
+		);
+		texto.value = `Hola, me gustaría pedir una primera cita de ${servicio.value}, ${(modalidad?.value ?? "Presencial").toLowerCase()}.`;
+	};
+
+	form?.addEventListener("change", compose);
+	form?.addEventListener("submit", compose);
+	compose();
+</script>

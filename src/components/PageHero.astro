@@ -1,0 +1,46 @@
+---
+import Accion from "./Accion.astro";
+
+// Interior page opening: the Camino-blue field with the page title painted on it.
+interface Props {
+	title: string;
+	lead?: string;
+	cta?: { href: string; label: string };
+	compact?: boolean;
+}
+
+const { title, lead, cta, compact = false } = Astro.props;
+---
+
+<section class="on-camino relative overflow-hidden bg-camino text-white">
+	<div
+		class:list={[
+			"shell relative",
+			compact ? "pt-12 pb-14 lg:pt-16 lg:pb-16" : "pt-14 pb-16 lg:pt-24 lg:pb-24",
+		]}
+	>
+		<div class="max-w-4xl">
+			<h1
+				class:list={[
+					"font-extrabold",
+					compact ? "text-headline" : "text-display",
+				]}
+			>
+				{title}
+			</h1>
+			{
+				lead && (
+					<p class="mt-6 max-w-[60ch] text-lead text-camino-claro">{lead}</p>
+				)
+			}
+			<slot />
+			{
+				cta && (
+					<Accion href={cta.href} size="lg" class="mt-8">
+						{cta.label}
+					</Accion>
+				)
+			}
+		</div>
+	</div>
+</section>

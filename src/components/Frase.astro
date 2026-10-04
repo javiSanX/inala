@@ -1,0 +1,21 @@
+---
+import Flecha from "./Flecha.astro";
+
+// A sentence painted large on the stone wall, led by a small arrow.
+interface Props {
+	title: string;
+	text?: string;
+}
+
+const { title, text } = Astro.props;
+---
+
+<section class="py-20 lg:py-28">
+	<div class="shell grid gap-6 lg:grid-cols-[8rem_minmax(0,1fr)] lg:gap-10">
+		<Flecha class="mt-3 w-16 text-camino lg:mt-5 lg:w-24" />
+		<div class="max-w-5xl">
+			<h2 class="text-headline font-bold">{title}</h2>
+			{text && <p class="mt-6 max-w-[60ch] text-lead text-tinta-suave">{text}</p>}
+		</div>
+	</div>
+</section>

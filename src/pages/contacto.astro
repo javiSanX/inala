@@ -1,71 +1,168 @@
 ---
+import { Image } from "astro:assets";
+import yssana from "../assets/images/yssana.webp";
+import Accion from "../components/Accion.astro";
+import Frase from "../components/Frase.astro";
+import Icon from "../components/Icon.astro";
+import { contacto } from "../data/servicios";
 import Layout from "../layouts/Layout.astro";
+
+const field =
+	"min-h-12 w-full border-0 border-b-2 border-tinta bg-transparent px-0 py-2 text-lead placeholder:text-tinta-suave focus-visible:border-camino";
 ---
 
 <Layout
 	title="Contacto y Reserva de Cita | Psicóloga Sanitaria en Pamplona y Online"
 	description="Contacta con María Sánchez, Psicóloga Sanitaria en Pamplona. Reserva tu sesión presencial u online a través del formulario. Respuesta rápida, trato cercano y confidencial."
 >
-	<section>
-		<h1>Agenda tu cita hoy mismo</h1>
-		<p>
-			¿Tienes dudas o necesitas más información? Estamos aquí para ayudarte.
-			Contáctanos y te responderemos a la brevedad posible.
-		</p>
+	<section class="on-camino bg-camino pt-14 pb-16 text-white lg:pt-24 lg:pb-24">
+		<div class="shell grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+			<div>
+				<h1 class="text-display font-extrabold">Agenda tu cita hoy mismo</h1>
+				<p class="mt-6 max-w-[48ch] text-lead text-camino-claro">
+					¿Tienes dudas o necesitas más información? Estamos aquí para ayudarte.
+					Contáctanos y te responderemos a la brevedad posible.
+				</p>
+				
+				<Accion
+					href={contacto.whatsappUrl}
+					external
+					icon="message-circle"
+					size="lg"
+					class="mt-10 w-full sm:w-auto"
+				>
+					Contactame por WhatsApp al <span class="tabular whitespace-nowrap"
+						>{contacto.whatsapp}</span
+					>
+				</Accion>
+			</div>
 
-		<p>
-			[PENDIENTE: envío del formulario. En main se enviaba por email con una
-			Astro Action (SMTP), que necesita servidor; esta rama es estática y aún no
-			tiene backend.]
-		</p>
-		<form method="post">
-			<label for="firstName">Nombre</label>
-			<input type="text" id="firstName" name="firstName" autocomplete="given-name" />
-
-			<label for="lastName">Apellido</label>
-			<input type="text" id="lastName" name="lastName" autocomplete="family-name" />
-
-			<label for="email">Correo electrónico</label>
-			<input type="email" id="email" name="email" autocomplete="email" required />
-
-			<label for="message">Tu mensaje</label>
-			<textarea id="message" name="message"></textarea>
-
-			<p>
-				Al enviar este formulario, aceptas nuestra <a href="/política-de-privacidad"
-					>política de privacidad</a
-				> y <a href="/aviso-legal-y-politica-de-cookies">términos de servicio</a>.
-			</p>
-			<button type="submit">Enviar</button>
-		</form>
+			{/* The credential form: printed labels over ruled lines. */}
+			<div class="rounded-card bg-papel p-6 text-tinta shadow-lift sm:p-10">
+				<p
+					class="mb-8 rounded-plaque bg-piedra p-4 text-small text-tinta-suave"
+					role="note"
+				>
+					[PENDIENTE: envío del formulario. En main se enviaba por email con una
+					Astro Action (SMTP), que necesita servidor; esta rama es estática y aún
+					no tiene backend.]
+				</p>
+				<form method="post" class="grid gap-8">
+					<div class="grid gap-8 sm:grid-cols-2">
+						<div class="grid gap-1">
+							<label for="firstName" class="label text-tinta-suave">Nombre</label>
+							<input
+								type="text"
+								id="firstName"
+								name="firstName"
+								autocomplete="given-name"
+								class={field}
+							/>
+						</div>
+						<div class="grid gap-1">
+							<label for="lastName" class="label text-tinta-suave">Apellido</label>
+							<input
+								type="text"
+								id="lastName"
+								name="lastName"
+								autocomplete="family-name"
+								class={field}
+							/>
+						</div>
+					</div>
+					<div class="grid gap-1">
+						<label for="email" class="label text-tinta-suave">Correo electrónico</label>
+						<input
+							type="email"
+							id="email"
+							name="email"
+							autocomplete="email"
+							required
+							class={field}
+						/>
+					</div>
+					<div class="grid gap-1">
+						<label for="message" class="label text-tinta-suave">Tu mensaje</label>
+						<textarea
+							id="message"
+							name="message"
+							rows="5"
+							class:list={[field, "resize-y"]}></textarea>
+					</div>
+					<p class="text-small text-tinta-suave">
+						Al enviar este formulario, aceptas nuestra <a
+							href="/política-de-privacidad"
+							class="text-camino">política de privacidad</a
+						> y <a href="/aviso-legal-y-politica-de-cookies" class="text-camino"
+							>términos de servicio</a
+						>.
+					</p>
+					<button
+						type="submit"
+						disabled
+						class="inline-flex min-h-14 cursor-not-allowed items-center justify-between gap-4 rounded-plaque bg-flecha/60 px-6 text-lead font-bold text-tinta"
+					>
+						Enviar
+						<Icon name="arrow-right" class="size-5" strokeWidth={2.5} />
+					</button>
+				</form>
+			</div>
+		</div>
 	</section>
 
-	<section>
-		<article>
-			<h2>Mi WhatsApp</h2>
-			<address>
-				Contactame por WhatsApp al<br />
-				+34 623 050 773
-			</address>
-		</article>
-		<article>
-			<h2>Email</h2>
-			<address>hola@inala.es</address>
-		</article>
-		<article>
-			<h2>Dirección</h2>
-			<address>
-				Maria Lacunza 6, portal 4<br />
-				31011 Pamplona, España
-			</address>
-		</article>
-		<p>Nos encontramos en centro Yssana.</p>
+	{/* The rest of the ways in, as ruled rows on the stone. */}
+	<section class="py-20 lg:py-28">
+		<div class="shell">
+			<dl class="border-t-2 border-tinta">
+				<div
+					class="grid gap-2 border-b border-linea py-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16"
+				>
+					<dt class="text-title font-extrabold">Mi WhatsApp</dt>
+					<dd>
+						<a
+							href={contacto.whatsappUrl}
+							target="_blank"
+							rel="noopener"
+							class="tabular text-lead font-semibold text-camino">{contacto.whatsapp}</a
+						>
+					</dd>
+				</div>
+				<div
+					class="grid gap-2 border-b border-linea py-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16"
+				>
+					<dt class="text-title font-extrabold">Email</dt>
+					<dd>
+						<a
+							href={`mailto:${contacto.email}`}
+							class="text-lead font-semibold text-camino">{contacto.email}</a
+						>
+					</dd>
+				</div>
+				<div
+					class="grid gap-2 border-b border-linea py-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16"
+				>
+					<dt class="text-title font-extrabold">Dirección</dt>
+					<dd>
+						<address class="text-lead not-italic text-tinta-suave">
+							Maria Lacunza 6, portal 4<br />
+							31011 Pamplona, España
+						</address>
+						<div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+							<p class="font-semibold">Nos encontramos en centro Yssana.</p>
+							<Image
+								src={yssana}
+								alt="Logotipo de Yssana, nutrición y salud"
+								width={320}
+								class="h-auto w-36 mix-blend-multiply"
+							/>
+						</div>
+					</dd>
+				</div>
+			</dl>
+		</div>
 	</section>
 
-	<section>
-		<h2>
-			La terapia es un viaje de autoconocimiento y transformación que te ayuda a
-			sanar, crecer y vivir con mayor plenitud.
-		</h2>
-	</section>
+	<Frase
+		title="La terapia es un viaje de autoconocimiento y transformación que te ayuda a sanar, crecer y vivir con mayor plenitud."
+	/>
 </Layout>

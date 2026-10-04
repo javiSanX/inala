@@ -1,4 +1,13 @@
 ---
+import { Image } from "astro:assets";
+import maria3 from "../assets/images/maria3.webp";
+import maria5 from "../assets/images/maria5.webp";
+import oficina from "../assets/images/oficina.webp";
+import Frase from "../components/Frase.astro";
+import Icon from "../components/Icon.astro";
+import PageHero from "../components/PageHero.astro";
+import Sello from "../components/Sello.astro";
+import { contacto } from "../data/servicios";
 import Layout from "../layouts/Layout.astro";
 ---
 
@@ -6,93 +15,148 @@ import Layout from "../layouts/Layout.astro";
 	title="María Sánchez · Psicóloga Sanitaria en Pamplona | Nº Colegiada NA-02300"
 	description="Conoce a María Sánchez, Psicóloga Sanitaria en Pamplona (Nº Colegiada NA-02300). Enfoque cercano, integrador y basado en la evidencia para acompañarte en tu bienestar emocional, presencial y online."
 >
-	<section>
-		<h1>El equipo detrás de Inala</h1>
+	<PageHero title="El equipo detrás de Inala" compact />
+
+	{/* Portrait plate: one frontal portrait, every fact named in the ruled caption beneath. */}
+	<section class="py-20 lg:py-28">
+		<div class="shell grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+			<figure class="relative self-start rounded-card bg-papel p-3 shadow-lift sm:p-4">
+				<Image
+					src={maria3}
+					alt="Retrato de María Sánchez Cobos, de pie, con chaleco negro"
+					widths={[480, 800, 1200]}
+					sizes="(min-width: 1024px) 38vw, 100vw"
+					loading="eager"
+					class="aspect-3/4 w-full rounded-sm object-cover object-top"
+				/>
+				<figcaption class="mt-4 divide-y divide-linea border-t-2 border-tinta">
+					<h2 class="py-3 text-title font-extrabold">Maria Sanchez</h2>
+					<p class="py-3 text-tinta-suave">
+						Psicologa Sanitaria - Numero de colegiada 02300
+					</p>
+					<ul role="list" class="flex flex-wrap items-center gap-x-5 gap-y-1 py-3 text-small">
+						<li>
+							<a
+								href={contacto.instagram}
+								target="_blank"
+								rel="noopener"
+								class="inline-flex min-h-11 items-center gap-2 font-semibold text-camino no-underline hover:underline"
+							>
+								<Icon name="instagram" class="size-5" />
+								Instagram
+							</a>
+						</li>
+						<li class="text-tinta-suave">
+							TikTok [PENDIENTE: URL del perfil; en main enlaza a Instagram]
+						</li>
+						<li class="text-tinta-suave">
+							YouTube [PENDIENTE: URL del canal; en main enlaza a Instagram]
+						</li>
+						<li class="text-tinta-suave">
+							Facebook [PENDIENTE: URL de la página; en main enlaza a Instagram]
+						</li>
+					</ul>
+				</figcaption>
+				<Sello class="absolute -top-8 right-2 size-28 sm:-right-6 sm:size-36" rotate={10} />
+			</figure>
+
+			<div class="grid content-start gap-6 text-lead lg:pt-10">
+				<p class="text-title font-semibold">
+					Me llamo María, soy Psicóloga sanitaria especializada en terapia
+					familiar y de pareja, y experta en la salud mental perinatal.
+				</p>
+				<p class="measure text-tinta-suave">
+					Detrás de Inala encontrarás a una profesional comprometida con tu
+					bienestar emocional. Mi misión es acompañarte con cercanía, empatía y
+					experiencia en cada paso de tu proceso personal. Creo en el poder de la
+					escucha, el respeto y la atención personalizada para ayudarte a
+					alcanzar una vida más plena y equilibrada. Conoce más sobre la persona
+					que te guiará en este camino de transformación.
+				</p>
+			</div>
+		</div>
 	</section>
 
-	<section>
-		<h2>Maria Sanchez</h2>
-		<p>Psicologa Sanitaria - Numero de colegiada 02300</p>
-		<ul>
-			<li>
-				<a
-					href="https://www.instagram.com/inala_psicoterapia/"
-					target="_blank"
-					rel="noopener">Instagram</a
-				>
-			</li>
-			<li>TikTok [PENDIENTE: URL del perfil; en main enlaza a Instagram]</li>
-			<li>YouTube [PENDIENTE: URL del canal; en main enlaza a Instagram]</li>
-			<li>Facebook [PENDIENTE: URL de la página; en main enlaza a Instagram]</li>
-		</ul>
-		<p>
-			Me llamo María, soy Psicóloga sanitaria especializada en terapia familiar
-			y de pareja, y experta en la salud mental perinatal.
-		</p>
-		<p>
-			Detrás de Inala encontrarás a una profesional comprometida con tu
-			bienestar emocional. Mi misión es acompañarte con cercanía, empatía y
-			experiencia en cada paso de tu proceso personal. Creo en el poder de la
-			escucha, el respeto y la atención personalizada para ayudarte a alcanzar
-			una vida más plena y equilibrada. Conoce más sobre la persona que te guiará
-			en este camino de transformación.
-		</p>
+	{/* Three stages of one route, each a waypoint on the same line. */}
+	<section class="pb-20 lg:pb-28">
+		<div class="shell">
+		<div class="grid gap-px overflow-hidden rounded-card bg-linea shadow-card">
+			<article class="grid bg-papel lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+				<Image
+					src={maria5}
+					alt="María Sánchez Cobos con chaqueta azul marino"
+					widths={[480, 864]}
+					sizes="(min-width: 1024px) 40vw, 100vw"
+					class="aspect-4/3 size-full object-cover object-[50%_20%] lg:aspect-auto"
+				/>
+				<div class="p-6 sm:p-10 lg:p-14">
+					<h2 class="text-headline font-extrabold">Mis inicios</h2>
+					<p class="measure mt-6 text-lead text-tinta-suave">
+						Mi camino profesional comenzó en el mundo empresarial, donde aprendí a
+						trabajar bajo presión y en entornos competitivos, esa experiencia me
+						permitió comprender cómo el estrés y la autoexigencia afectan tanto el
+						rendimiento laboral como el bienestar personal y las relaciones. Hoy,
+						esa vivencia enriquece mi manera de acompañar, aportando una mirada más
+						amplia, empática y real sobre los desafíos que enfrentan muchas
+						personas en su día a día.
+					</p>
+				</div>
+			</article>
+			<article class="bg-papel p-6 sm:p-10 lg:px-14 lg:py-16">
+				<div class="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+					<h2 class="text-headline font-extrabold">Mi vocación</h2>
+					<p class="measure text-lead text-tinta-suave">
+						Pronto descubrí que mi verdadero interés estaba en las emociones, las
+						relaciones y la forma en que nos vinculamos con los demás, lo que me
+						llevó a estudiar Psicología, graduarme con mención en clínica y
+						realizar el Máster General Sanitario. Acompañar a personas en su salud
+						mental me ha enseñado el valor de comprender los procesos de
+						enfermedad, duelo y la influencia que tiene todo ello en el entorno
+						mas cercano de la persona que lo padece. Todo ello dentro de una
+						sociedad que necesita avanzar hacia una visión más profunda y libre de
+						estigmas.
+					</p>
+				</div>
+			</article>
+			<article class="grid bg-papel lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+				<div class="order-2 p-6 sm:p-10 lg:order-1 lg:p-14">
+					<h2 class="text-headline font-extrabold">Mi proposito</h2>
+					<div class="measure mt-6 grid gap-5 text-lead text-tinta-suave">
+						<p>
+							Mi propio proceso personal me permitió ver con claridad cómo la
+							familia y el entorno en el que crecemos influyen profundamente en
+							nuestro desarrollo y manera de relacionarnos. Esta comprensión me
+							llevó a especializarme en terapia familiar y de pareja, y a trabajar
+							en el ámbito de la desprotección infantil, acompañando procesos de
+							trauma complejo y duelo en la primera infancia, lo que reforzó mi
+							compromiso con un acompañamiento respetuoso y humano.
+						</p>
+						<p>
+							Como madre, y habiendome formado en Salud Mental Perinatal, conozco
+							de primera mano la intensidad de los procesos vitales que acompañan
+							la maternidad y la crianza, asi como una visión profesional de todo
+							este cambio vital. Estoy en constante formación y creo que cada
+							persona merece una atención personalizada y actualizada, adaptada a
+							sus necesidades. Acompaño a personas de todas las edades, parejas y
+							familias en procesos de cambio y bienestar emocional, desde una
+							mirada integradora y respetuosa, ofreciendo un espacio de escucha y
+							cuidado.
+						</p>
+					</div>
+				</div>
+				<Image
+					src={oficina}
+					alt="La consulta de Inala en Pamplona, con María sentada a la mesa"
+					widths={[480, 960]}
+					sizes="(min-width: 1024px) 40vw, 100vw"
+					class="order-1 aspect-4/3 size-full object-cover lg:order-2 lg:aspect-auto"
+				/>
+			</article>
+		</div>
+		</div>
 	</section>
 
-	<section>
-		<h2>Mis inicios</h2>
-		<p>
-			Mi camino profesional comenzó en el mundo empresarial, donde aprendí a
-			trabajar bajo presión y en entornos competitivos, esa experiencia me
-			permitió comprender cómo el estrés y la autoexigencia afectan tanto el
-			rendimiento laboral como el bienestar personal y las relaciones. Hoy, esa
-			vivencia enriquece mi manera de acompañar, aportando una mirada más amplia,
-			empática y real sobre los desafíos que enfrentan muchas personas en su día
-			a día.
-		</p>
-	</section>
-
-	<section>
-		<h2>Mi vocación</h2>
-		<p>
-			Pronto descubrí que mi verdadero interés estaba en las emociones, las
-			relaciones y la forma en que nos vinculamos con los demás, lo que me llevó
-			a estudiar Psicología, graduarme con mención en clínica y realizar el
-			Máster General Sanitario. Acompañar a personas en su salud mental me ha
-			enseñado el valor de comprender los procesos de enfermedad, duelo y la
-			influencia que tiene todo ello en el entorno mas cercano de la persona que
-			lo padece. Todo ello dentro de una sociedad que necesita avanzar hacia una
-			visión más profunda y libre de estigmas.
-		</p>
-	</section>
-
-	<section>
-		<h2>Mi proposito</h2>
-		<p>
-			Mi propio proceso personal me permitió ver con claridad cómo la familia y
-			el entorno en el que crecemos influyen profundamente en nuestro desarrollo
-			y manera de relacionarnos. Esta comprensión me llevó a especializarme en
-			terapia familiar y de pareja, y a trabajar en el ámbito de la desprotección
-			infantil, acompañando procesos de trauma complejo y duelo en la primera
-			infancia, lo que reforzó mi compromiso con un acompañamiento respetuoso y
-			humano.
-		</p>
-		<p>
-			Como madre, y habiendome formado en Salud Mental Perinatal, conozco de
-			primera mano la intensidad de los procesos vitales que acompañan la
-			maternidad y la crianza, asi como una visión profesional de todo este
-			cambio vital. Estoy en constante formación y creo que cada persona merece
-			una atención personalizada y actualizada, adaptada a sus necesidades.
-			Acompaño a personas de todas las edades, parejas y familias en procesos de
-			cambio y bienestar emocional, desde una mirada integradora y respetuosa,
-			ofreciendo un espacio de escucha y cuidado.
-		</p>
-	</section>
-
-	<section>
-		<h2>
-			Cuidar de tu salud mental es el primer paso para descubrir tu verdadera
-			fortaleza y transformar cada desafío en una oportunidad de crecimiento.
-		</h2>
-	</section>
+	<Frase
+		title="Cuidar de tu salud mental es el primer paso para descubrir tu verdadera fortaleza y transformar cada desafío en una oportunidad de crecimiento."
+	/>
 </Layout>

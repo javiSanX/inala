@@ -1,22 +1,35 @@
 ---
+import LegalDoc from "../components/LegalDoc.astro";
+import PageHero from "../components/PageHero.astro";
 import Layout from "../layouts/Layout.astro";
+
+const sections = [
+	{ id: "objeto-del-aviso-legal", title: "Objeto del Aviso Legal" },
+	{ id: "comunicaciones", title: "Comunicaciones" },
+	{
+		id: "exclusion-de-garantias-y-responsabilidad",
+		title: "Exclusión de Garantías y Responsabilidad",
+	},
+	{ id: "politica-de-privacidad", title: "Política de Privacidad" },
+	{ id: "politica-de-cookies", title: "Política de Cookies" },
+];
 ---
 
 <Layout
 	title="Inala | Aviso Legal y Política de Cookies"
 	description="Aviso legal, política de privacidad y política de cookies del Centro de Psicoterapia Inala"
 >
-	<section>
-		<h1>Aviso Legal y Cookies</h1>
-		<p>
-			Información legal sobre el uso de este sitio web, tratamiento de datos
-			personales y uso de cookies de Inala - Centro de Psicoterapia.
-		</p>
-		<a href="/contacto">Reserva tu cita</a>
-	</section>
+	<PageHero
+		title="Aviso Legal y Cookies"
+		lead="Información legal sobre el uso de este sitio web, tratamiento de datos personales y uso de cookies de Inala - Centro de Psicoterapia."
+		cta={{ href: "/contacto", label: "Reserva tu cita" }}
+		compact
+	/>
+
+	<LegalDoc sections={sections}>
 
 	<section>
-		<h2>Objeto del Aviso Legal</h2>
+		<h2 id="objeto-del-aviso-legal">Objeto del Aviso Legal</h2>
 		<p>
 			El presente aviso legal regula el uso y utilización del sitio web
 			https://www.inala.es/ del que es titular María Sánchez Cobos. La navegación
@@ -88,7 +101,7 @@ import Layout from "../layouts/Layout.astro";
 	</section>
 
 	<section>
-		<h2>Comunicaciones</h2>
+		<h2 id="comunicaciones">Comunicaciones</h2>
 		<p>
 			Para comunicarse con nosotros, ponemos a su disposición diferentes medios
 			de contacto. Todas las notificaciones y comunicaciones se considerarán
@@ -151,7 +164,7 @@ import Layout from "../layouts/Layout.astro";
 	</section>
 
 	<section>
-		<h2>Exclusión de Garantías y Responsabilidad</h2>
+		<h2 id="exclusion-de-garantias-y-responsabilidad">Exclusión de Garantías y Responsabilidad</h2>
 		<p>
 			El contenido de este sitio web tiene carácter general y finalidad meramente
 			informativa. María Sánchez Cobos excluye cualquier responsabilidad por
@@ -208,7 +221,7 @@ import Layout from "../layouts/Layout.astro";
 	</section>
 
 	<section>
-		<h2>Política de Privacidad</h2>
+		<h2 id="politica-de-privacidad">Política de Privacidad</h2>
 		<p>
 			Información sobre el tratamiento de datos personales conforme al
 			Reglamento General de Protección de Datos (RGPD) y la normativa española
@@ -280,7 +293,7 @@ import Layout from "../layouts/Layout.astro";
 	</section>
 
 	<section>
-		<h2>Política de Cookies</h2>
+		<h2 id="politica-de-cookies">Política de Cookies</h2>
 		<p>
 			Información sobre el uso de cookies en el sitio web de María Sánchez
 			Cobos, conforme a la Ley 34/2002, de 11 de Julio, de Servicios de la
@@ -431,4 +444,5 @@ import Layout from "../layouts/Layout.astro";
 			responsabilidad revisar la presente Política de Cookies.
 		</p>
 	</section>
+	</LegalDoc>
 </Layout>

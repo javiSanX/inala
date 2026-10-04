@@ -1,0 +1,26 @@
+---
+import Lista from "../Lista.astro";
+
+// "¿En qué consiste…?": what the visitor can work on, beside the session facts printed on a card.
+interface Props {
+	title: string;
+	text: string;
+	logros: string[];
+	incluye: string[];
+}
+
+const { title, text, logros, incluye } = Astro.props;
+---
+
+<section class="py-20 lg:py-28">
+	<div class="shell grid gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
+		<div>
+			<h2 class="text-headline font-extrabold">{title}</h2>
+			<p class="measure mt-6 text-lead text-tinta-suave">{text}</p>
+			<Lista items={logros} columns class="mt-10 text-lead" />
+		</div>
+		<div class="self-start rounded-card bg-papel p-6 shadow-card sm:p-8 lg:mt-24">
+			<Lista items={incluye} marker="check" />
+		</div>
+	</div>
+</section>

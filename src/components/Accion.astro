@@ -1,0 +1,49 @@
+---
+import type { IconName } from "./Icon.astro";
+import Icon from "./Icon.astro";
+
+// A waymark plaque: the one shape every action on the site takes.
+interface Props {
+	href: string;
+	variant?: "flecha" | "camino" | "papel";
+	size?: "md" | "lg";
+	icon?: IconName;
+	class?: string;
+	external?: boolean;
+}
+
+const {
+	href,
+	variant = "flecha",
+	size = "md",
+	icon = "arrow-right",
+	class: className,
+	external = false,
+} = Astro.props;
+---
+
+<a
+	href={href}
+	class:list={[
+		"group inline-flex min-h-12 items-center justify-between gap-4 rounded-plaque font-semibold no-underline",
+		"transition-[background-color,box-shadow,transform] duration-200 ease-out-quart active:translate-y-px",
+		{
+			"bg-flecha text-tinta shadow-plaque hover:bg-flecha-hondo":
+				variant === "flecha",
+			"bg-camino text-white shadow-plaque-hondo hover:bg-camino-hondo":
+				variant === "camino",
+			"bg-papel text-tinta ring-1 ring-linea hover:ring-tinta": variant === "papel",
+			"px-5 py-3 text-body": size === "md",
+			"px-6 py-4 text-lead": size === "lg",
+		},
+		className,
+	]}
+	{...external ? { target: "_blank", rel: "noopener" } : {}}
+>
+	<span><slot /></span>
+	<Icon
+		name={icon}
+		class="size-5 transition-transform duration-300 ease-out-expo group-hover:translate-x-1 motion-reduce:transition-none"
+		strokeWidth={2.5}
+	/>
+</a>

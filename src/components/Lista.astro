@@ -1,0 +1,47 @@
+---
+import Icon from "./Icon.astro";
+
+// A printed list on the credential: hairline rows, each marked like a box ticked off.
+interface Props {
+	items: string[];
+	marker?: "arrow" | "check";
+	columns?: boolean;
+	class?: string;
+}
+
+const {
+	items,
+	marker = "arrow",
+	columns = false,
+	class: className,
+} = Astro.props;
+---
+
+<ul
+	role="list"
+	class:list={[
+		"border-t border-linea",
+		{ "sm:grid sm:grid-cols-2 sm:gap-x-8": columns },
+		className,
+	]}
+>
+	{
+		items.map((item) => (
+			<li class="flex items-start gap-3 border-b border-linea py-3">
+				<span
+					class:list={[
+						"mt-1 grid size-5 place-items-center rounded-full",
+						marker === "check" ? "bg-camino text-white" : "text-camino",
+					]}
+				>
+					<Icon
+						name={marker === "check" ? "check" : "arrow-right"}
+						class={marker === "check" ? "size-3.5" : "size-5"}
+						strokeWidth={marker === "check" ? 3 : 2.5}
+					/>
+				</span>
+				<span>{item}</span>
+			</li>
+		))
+	}
+</ul>

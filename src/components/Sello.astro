@@ -1,0 +1,80 @@
+---
+import { Image } from "astro:assets";
+import espiral from "../assets/images/inala-espiral.webp";
+
+// The practice stamp: Inala's spiral inked in aqua inside a printed ring of text.
+// Decorative by default; every fact it shows is also present as page text.
+interface Props {
+	ring?: string;
+	center?: string;
+	class?: string;
+	rotate?: number;
+	animate?: boolean;
+}
+
+const {
+	ring = "INALA · CENTRO DE PSICOTERAPIA · PAMPLONA ·",
+	center,
+	class: className = "size-36",
+	rotate = -8,
+	animate = false,
+} = Astro.props;
+
+const id = `ring-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div
+	class:list={[
+		"pointer-events-none shrink-0 text-sello mix-blend-multiply",
+		{ relative: !className.includes("absolute") },
+		{ "stamp-on-view": animate },
+		className,
+	]}
+	style={`--stamp-rotate: ${rotate}deg; transform: rotate(${rotate}deg)`}
+	aria-hidden="true"
+>
+	<svg viewBox="0 0 200 200" class="absolute inset-0 size-full">
+		<defs>
+			<path id={id} d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0"
+			></path>
+		</defs>
+		<circle
+			cx="100"
+			cy="100"
+			r="96"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="4"></circle>
+		<circle
+			cx="100"
+			cy="100"
+			r="62"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"></circle>
+		<text
+			fill="currentColor"
+			font-family="var(--font-label)"
+			font-weight="600"
+			font-size="19"
+			letter-spacing="3.4"
+		>
+			<textPath href={`#${id}`} startOffset="0">{ring}</textPath>
+		</text>
+	</svg>
+	{
+		center ? (
+			<span class="absolute inset-0 grid place-items-center font-sans text-[2.6em] leading-none font-extrabold">
+				{center}
+			</span>
+		) : (
+			<Image
+				src={espiral}
+				alt=""
+				width={120}
+				height={120}
+				class="absolute top-1/2 left-1/2 w-[52%] -translate-x-1/2 -translate-y-1/2 opacity-90"
+			/>
+		)
+	}
+</div>
