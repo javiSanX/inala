@@ -37,11 +37,23 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+		/>
 		<meta name="generator" content={Astro.generator} />
 	</head>
-	<body>
+	<body
+		class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container"
+	>
 		<Header />
-		<main>
+		<main class="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
 			<slot />
 		</main>
 		<Footer />

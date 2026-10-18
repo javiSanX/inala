@@ -1,45 +1,135 @@
 ---
-const links = [
-	{ name: "Nuestro metodo", href: "/nuestro-metodo" },
-	{ name: "Sobre mí", href: "/sobre-mi" },
-	{ name: "Tarifas", href: "/tarifas" },
-	{ name: "Contacto", href: "/contacto" },
-	{ name: "Aviso legal", href: "/aviso-legal-y-politica-de-cookies" },
-	{ name: "Política de privacidad", href: "/política-de-privacidad" },
-];
+import {
+	contactHref,
+	email,
+	instagramUrl,
+	legalLinks,
+	logoSrc,
+	navLinks,
+	services,
+} from "../data/site";
+
+const footerNav = navLinks.filter((link) => link.href !== "/servicios");
+const year = new Date().getFullYear();
 ---
 
-<footer>
-	<p>
-		¿Te animas? ¡Hablemos!
-		<a href="mailto:hola@inala.es">hola@inala.es</a>
-	</p>
-	<nav aria-label="Pie de página">
-		<ul>
-			{
-				links.map((link) => (
-					<li>
-						<a href={link.href}>{link.name}</a>
-					</li>
-				))
-			}
-		</ul>
-	</nav>
-	<p>Copyright © 2025 Centro Psicológico Inala</p>
-	<ul>
-		<li>
-			<a
-				href="https://www.instagram.com/inala_psicoterapia/"
-				target="_blank"
-				rel="noopener">Instagram</a
+<footer
+	class="w-full bg-surface-container-low shadow-[0_-1px_8px_rgba(0,0,0,0.02)] pt-space-xl pb-space-lg"
+>
+	<div class="w-full px-margin-mobile lg:px-margin">
+		<div
+			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter mb-space-xl"
+		>
+			<div class="lg:col-span-4 flex flex-col gap-space-sm">
+				<div class="flex items-center gap-3">
+					<img
+						alt=""
+						class="h-8 w-auto object-contain"
+						src={logoSrc}
+						width="500"
+						height="500"
+					/>
+					<span class="font-headline-md text-headline-sm text-primary font-medium"
+						>INALA</span
+					>
+				</div>
+				<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+					Un santuario de bienestar, psicoterapia integrativa y acompañamiento
+					compasivo para reencontrarte con tu calma y equilibrio emocional.
+				</p>
+				<div
+					class="inline-flex items-center gap-2 mt-2 px-space-sm py-1.5 rounded-full bg-surface-container text-on-surface-variant w-fit"
+				>
+					<span class="material-symbols-outlined text-[18px] text-primary"
+						>verified_user</span
+					>
+					<span class="font-label-sm text-label-sm"
+						>Espacio seguro y confidencial</span
+					>
+				</div>
+			</div>
+			<nav class="lg:col-span-2 flex flex-col gap-space-xs" aria-label="Navegación">
+				<h4 class="font-title-md text-title-md text-on-surface mb-2">Navegación</h4>
+				{
+					footerNav.map((link) => (
+						<a
+							class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+							href={link.href}
+						>
+							{link.name}
+						</a>
+					))
+				}
+			</nav>
+			<nav
+				class="lg:col-span-3 flex flex-col gap-space-xs"
+				aria-label="Especialidades"
 			>
-		</li>
-		<li>TikTok [PENDIENTE: URL del perfil; en main enlaza a Instagram]</li>
-		<li>YouTube [PENDIENTE: URL del canal; en main enlaza a Instagram]</li>
-		<li>Facebook [PENDIENTE: URL de la página; en main enlaza a Instagram]</li>
-	</ul>
-	<p>
-		Gestionar Cookies [PENDIENTE: botón que reabre el banner de cookies; depende
-		de la decisión sobre cookies y analítica]
-	</p>
+				<h4 class="font-title-md text-title-md text-on-surface mb-2">
+					Especialidades
+				</h4>
+				{
+					services.map((service) => (
+						<a
+							class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
+							href={service.href}
+						>
+							{service.name}
+						</a>
+					))
+				}
+			</nav>
+			<div class="lg:col-span-3 flex flex-col gap-space-xs">
+				<h4 class="font-title-md text-title-md text-on-surface mb-2">Contacto</h4>
+				<p
+					class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2"
+				>
+					<span class="material-symbols-outlined text-[18px] text-primary">mail</span>
+					<a class="hover:text-primary transition-colors" href={`mailto:${email}`}
+						>{email}</a
+					>
+				</p>
+				<p
+					class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2"
+				>
+					<span class="material-symbols-outlined text-[18px] text-primary"
+						>location_on</span
+					>
+					<span>Calle Velázquez, Madrid &amp; Online</span>
+				</p>
+				<div class="flex items-center gap-space-xs mt-3">
+					<a
+						aria-label="Instagram"
+						class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container transition-colors"
+						href={instagramUrl}
+						target="_blank"
+						rel="noopener"
+					>
+						<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+					</a>
+					<a
+						aria-label="Calendario"
+						class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container transition-colors"
+						href={contactHref}
+					>
+						<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div
+			class="pt-space-md mt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm"
+		>
+			<p>© {year} INALA Centro de Psicoterapia. Todos los derechos reservados.</p>
+			<div class="flex items-center gap-space-md">
+				{
+					legalLinks.map((link) => (
+						<a class="hover:text-primary transition-colors" href={link.href}>
+							{link.name}
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</div>
 </footer>

@@ -1,47 +1,63 @@
 ---
-const services = [
-	{ name: "Terapia individual", href: "/servicios/terapia-individual" },
-	{ name: "Terapia de pareja", href: "/servicios/terapia-de-pareja" },
-	{ name: "Terapia familiar", href: "/servicios/terapia-familiar" },
-	{ name: "Psicología perinatal", href: "/servicios/psicologia-perinatal" },
-	{ name: "Terapia online", href: "/servicios/terapia-online" },
-];
+import { contactHref, logoSrc, navLinks } from "../data/site";
 
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const current = (href: string) => (path === href ? "page" : undefined);
 ---
 
-<header>
-	<a href="/">Inala</a>
-	<nav aria-label="Principal">
-		<ul>
-			<li>
-				<a href="/nuestro-metodo" aria-current={current("/nuestro-metodo")}>
-					Nuestro método
-				</a>
-			</li>
-			<li>
-				Servicios
-				<ul>
-					{
-						services.map((service) => (
-							<li>
-								<a href={service.href} aria-current={current(service.href)}>
-									{service.name}
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</li>
-			<li>
-				<a href="/sobre-mi" aria-current={current("/sobre-mi")}>Sobre mí</a>
-			</li>
-			<li>
-				<a href="/tarifas" aria-current={current("/tarifas")}>Tarifas</a>
-			</li>
-			<li><a href="/blog">Blog</a></li>
-		</ul>
-	</nav>
-	<a href="/contacto">¡Hablemos!</a>
+<header
+	class="fixed top-0 inset-x-0 z-50 bg-surface/75 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] transition-all duration-300"
+>
+	<div
+		class="max-w-[1240px] mx-auto px-margin-mobile lg:px-margin h-20 flex items-center justify-between"
+	>
+		<a class="flex items-center gap-3 group" href="/">
+			<img
+				alt="Inala Centro de Psicoterapia"
+				class="h-10 w-10 md:h-11 md:w-11 object-contain shrink-0"
+				src={logoSrc}
+				width="500"
+				height="500"
+			/>
+			<div class="flex flex-col text-left">
+				<span
+					class="font-headline-md text-headline-sm text-primary tracking-tight font-medium leading-none"
+					>INALA</span
+				>
+				<span
+					class="font-label-sm text-label-sm text-slate-muted uppercase tracking-widest mt-0.5"
+					>Centro de Psicoterapia</span
+				>
+			</div>
+		</a>
+		<nav class="hidden xl:flex items-center gap-8" aria-label="Principal">
+			{
+				navLinks.map((link) => (
+					<a
+						class:list={[
+							"font-title-md text-body-md transition-colors py-2",
+							current(link.href)
+								? "text-primary"
+								: "text-on-surface-variant hover:text-primary",
+						]}
+						aria-current={current(link.href)}
+						href={link.href}
+					>
+						{link.name}
+					</a>
+				))
+			}
+		</nav>
+		<div class="flex items-center gap-space-sm">
+			<a
+				class="inline-flex items-center justify-center font-label-lg text-label-lg px-6 py-2.5 rounded-full bg-primary text-on-primary shadow-xs hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+				href={contactHref}
+			>
+				<span class="material-symbols-outlined text-[18px] mr-1.5"
+					>calendar_today</span
+				>Reserva tu cita
+			</a>
+		
+		</div>
+	</div>
 </header>

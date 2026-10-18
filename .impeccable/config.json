@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "plus jakarta sans",
+        "createdAt": "2026-10-18T10:25:02.228Z",
+        "reason": "Font comes from the user-supplied HTML design (tailwind config fontFamily); conversion preserved it as designed"
+      }
+    ]
+  }
+}
