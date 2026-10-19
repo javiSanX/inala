@@ -7,7 +7,9 @@ Website for **inala.es**, a psychology / therapy practice for a Spanish-speaking
 
 ## Stack
 
-- **Astro 7**: static output, no adapter yet, `.astro` components, zero client JS by default.
+- **Astro 7**: static output, no adapter yet, `.astro` components, zero client JS by default. `site` is `https://inala.es`.
+- **`@astrojs/sitemap`** generates `sitemap-index.xml` at build time from `site`. Pages with `noindex` should be filtered out of it.
+- **`@vitejs/plugin-basic-ssl`**: the dev server runs on **HTTPS with a self-signed certificate**. Use `https://localhost:4321`, and `curl -k` when checking it from the shell.
 - **Tailwind CSS 4** via `@tailwindcss/vite`. Config is CSS-first in `src/styles/global.css` (`@import "tailwindcss"` plus design tokens in `@theme`). There is no `tailwind.config.js`; don't create one.
 - **TypeScript strict** (`astro/tsconfigs/strict`).
 - **Bun 1.3** as package manager and script runner (`bun.lock`). Node >= 22.12.
@@ -23,10 +25,8 @@ Website for **inala.es**, a psychology / therapy practice for a Spanish-speaking
 | Dev server (agents) | `bun astro dev --background`, then `bun astro dev status`, `bun astro dev logs`, `bun astro dev stop` |
 | Build | `bun run build` |
 | Preview build | `bun run preview` |
-| Format + lint | `bunx --bun @biomejs/biome check --write src astro.config.mjs` |
-| Type check | `bun astro check` (needs `@astrojs/check`, which is not installed; ask before adding it) |
-
-**Warning:** `bun run format` and `bun run lint` pass no path, so Biome also walks `.agents/` and `.claude/` and **rewrites the vendored skill scripts**. Use the scoped command above until `biome.json` excludes those folders.
+| Format + lint | `bun run check` (Biome; `biome.json` excludes `.agents/`, `.claude/` and `.impeccable/`) |
+| Type check | `bun run typecheck` (`astro check`; needs TypeScript 6, it does not support TypeScript 7 yet) |
 
 Always start the dev server in background mode. Never leave a foreground dev server blocking the session.
 
@@ -55,7 +55,7 @@ Follow these steps for every task. Scale the effort to the size of the task, but
 3. **Plan.** For multi-file changes, new pages or sections, new dependencies, or architecture and design-direction changes, give a short plan. Wait for the user's OK when the plan adds a dependency, changes the architecture or redesigns something.
 4. **Implement.** Work in small steps and follow the conventions above. When a skill snippet and project config disagree, see *Priority rules*.
 5. **Verify.** This step is required before saying a task is done:
-   - The scoped Biome check passes.
+   - `bun run check` and `bun run typecheck` pass.
    - `bun run build` succeeds, with no new warnings.
    - For UI changes: run the dev server in background and check desktop and mobile (375 px), keyboard navigation and focus, `prefers-reduced-motion`, and contrast.
    - Deal with every impeccable hook finding (raised after Edit/Write and on Stop): fix it, or explain why it doesn't apply.
