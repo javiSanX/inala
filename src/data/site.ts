@@ -28,9 +28,10 @@ export const navLinks = [
 	{ name: "Blog", href: "/blog" },
 ];
 
-// Single source for services: header menu, footer, services index, home,
-// pricing and the contact form. Prices and durations come from main
-// (60 min; 65 € individual/online, 75 € couple/family).
+// Single source for services: services index, home, pricing and the contact
+// form. Prices and durations come from main (60 min; 65 € individual,
+// 75 € couple/family). Online is a modality available for every service, so
+// it is not listed here; see `onlineLink`.
 export const services = [
 	{
 		name: "Terapia Individual",
@@ -38,15 +39,6 @@ export const services = [
 		icon: "person",
 		summary:
 			"Para adultos, adolescentes y niños que atraviesan ansiedad, desánimo, un duelo o un momento de cambio.",
-		price: "65 €",
-		duration: "60 minutos",
-	},
-	{
-		name: "Terapia Online",
-		href: "/servicios/terapia-online",
-		icon: "videocam",
-		summary:
-			"Las mismas sesiones, por videollamada, si vives lejos de Pamplona o te resulta más cómodo desde casa.",
 		price: "65 €",
 		duration: "60 minutos",
 	},
@@ -78,6 +70,16 @@ export const services = [
 		duration: "[PENDIENTE: duración]",
 	},
 ];
+
+// Online is how the sessions happen, not a separate service: menus list it
+// after the services and link to the page that explains how it works.
+export const onlineLink = {
+	name: "Terapia online",
+	href: "/servicios/terapia-online",
+	icon: "videocam",
+};
+
+export const serviceMenuLinks = [...services, onlineLink];
 
 export const legalLinks = [
 	{ name: "Aviso legal y cookies", href: "/aviso-legal-y-politica-de-cookies" },

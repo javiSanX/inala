@@ -1,145 +1,141 @@
 ---
 import OtherServices from "../../components/OtherServices.astro";
-import { contactHref, email, therapistName } from "../../data/site";
+import {
+	contactHref,
+	ctaLabel,
+	ctaNote,
+	email,
+	licenseNumber,
+	therapistName,
+	whatsappUrl,
+} from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
-const title =
-	"Terapia Online | Psicoterapia por videollamada segura, estés donde estés";
+const title = "Terapia online por videollamada | Inala Psicoterapia";
 const description =
-	"Terapia psicológica online por videollamada cifrada: el mismo rigor y cercanía que en consulta, con flexibilidad horaria para quienes viajan, viven fuera de España o necesitan conciliar.";
-
-// Real credentials come from the existing site content (src/pages1/sobre-mi.astro).
-const licenseNumber = "NA-02300";
+	"Terapia psicológica online por videollamada segura con María Sánchez, psicóloga general sanitaria. Terapia individual, de pareja, familiar y psicología parental, combinable con la consulta presencial en Pamplona.";
 
 const heroImage = "/terapia-online.jpg";
-const officeImage =
-	"https://lh3.googleusercontent.com/aida/AEtjO1X5k1jW9FkQ4V0xVbLS6sBf5fr49T1Z5NEisZTHk5KMpPBQgvYO55pHnX8URO3KruBn-o13NkOtF7aiFZTWrxIuoMKFXkDf4dQezimdABu6BwlHTrv928JKe1zPbYiA0VReSA5c_dUfCEA4OShgc_-fE-rYBdmEu11oTEFI2GOuicmKNL9pGzXQkHkgPRkf5q0tOJFijMxxdOWiwedGL-VCS1Mx2v9LixER4VfzQhNeCxKQscOqemqrL8A";
+const officeImage = "/oficina.webp";
 
 const eyebrow =
 	"font-label-sm text-label-sm text-primary uppercase tracking-widest font-semibold";
 const sectionHeading = "font-headline-lg text-headline-lg text-on-surface";
 
 const heroPills = [
-	{ icon: "timer", label: "Sesiones de 50 a 60 min" },
-	{ icon: "public", label: "Flexibilidad horaria internacional" },
-	{ icon: "lock", label: "Plataforma segura y cifrada E2E" },
-	{ icon: "verified", label: `Psicóloga Colegiada ${licenseNumber}` },
+	{ icon: "timer", label: "Sesiones de 60 min" },
+	{ icon: "pin_drop", label: "Pamplona y online" },
+	{ icon: "lock", label: "Plataforma segura y cifrada" },
+	{ icon: "verified", label: `Nº col. ${licenseNumber}` },
 ];
 
 const situations = [
 	{
 		icon: "language",
-		title: "Españoles y expatriados en el extranjero",
-		text: "La necesidad vital de procesar el dolor, la incertidumbre o el desarraigo en tu lengua materna y con un profesional que comprende tus raíces y códigos culturales.",
+		title: "Si vives lejos de Pamplona",
+		text: "Puedes hacer terapia con el mismo enfoque que en la consulta, aunque no vivas cerca de Pamplona.",
 	},
 	{
 		icon: "accessible_forward",
-		title: "Movilidad reducida o lejanía geográfica",
-		text: "Recibe atención psicológica sanitaria de alto nivel sin la fatiga física, dolores crónicos o las barreras arquitectónicas del transporte metropolitano.",
+		title: "Si desplazarte te cuesta",
+		text: "Por movilidad reducida, dolor o distancia: la sesión llega a ti sin el esfuerzo del trayecto.",
 	},
 	{
 		icon: "balance",
-		title: "Conciliación laboral y crianza exigente",
-		text: "Ahorra hasta dos horas en traslados. Integra tu espacio de introspección dentro de tu jornada laboral o durante los periodos de descanso de tus hijos.",
+		title: "Si tienes poco margen en tu día",
+		text: "Sin traslados, es más fácil encajar la sesión entre el trabajo y la crianza.",
 	},
 	{
 		icon: "flight_takeoff",
-		title: "Viajes recurrentes o vida nómada",
-		text: "Garantiza la regularidad y el sostén de tu proceso terapéutico sin interrupciones abruptas provocadas por desplazamientos profesionales o mudanzas continuas.",
-	},
-	{
-		icon: "psychology",
-		title: "Enfoque clínico integrador especializado",
-		text: "Accede a nuestra mirada centrada en la teoría del apego, trauma relacional y neurobiología de las emociones, aunque tu residencia no esté fijada en Pamplona.",
+		title: "Si viajas a menudo",
+		text: "Puedes mantener la continuidad de tu proceso aunque cambies de ciudad durante unas semanas.",
 	},
 	{
 		icon: "cottage",
-		title: "Comodidad desde tu propio espacio seguro",
-		text: "Ideal para personas que atraviesan episodios de agorafobia o fobia social severa, posibilitando dar el primer paso terapéutico desde su entorno protegido.",
+		title: "Si te resulta más cómodo desde casa",
+		text: "A algunas personas les ayuda empezar desde un lugar que ya sienten como suyo.",
 	},
 ];
 
 const pillars = [
 	{
-		title: "Evidencia Científica y Misma Eficacia",
-		text: "Múltiples metaanálisis de la APA (American Psychological Association) confirman que la psicoterapia online consigue resultados equivalentes a la presencial en el tratamiento de la ansiedad, el estado de ánimo bajo y la regulación emocional.",
+		title: "Una opción útil para muchos motivos de consulta",
+		text: "Para muchos motivos de consulta, la terapia por videollamada puede ser tan útil como la presencial. En la primera conversación valoramos juntos si el formato online encaja con tu situación.",
 		icon: "verified",
-		tag: "Estudios clínicos controlados",
+		tag: "Lo valoramos juntos",
 	},
 	{
-		title: "Seguridad Tecnológica y Privacidad Médica",
-		text: "Utilizamos una sala de videoconsulta protegida y cifrada de extremo a extremo conforme a la legislación europea de datos sanitarios. Sin software invasivo ni registros que comprometan tu intimidad.",
+		title: "Privacidad y seguridad",
+		text: "Utilizo plataformas seguras y cifradas específicas para terapia online, que cumplen con la normativa de protección de datos. Te oriento sobre cómo preparar un espacio privado en casa.",
 		icon: "lock",
-		tag: "RGPD & Encriptación 256-bit",
+		tag: "Normativa de protección de datos",
 	},
 	{
-		title: "Vínculo Humano y Sintonía Somática",
-		text: "El trabajo corporal y emocional no se detiene por la pantalla. Guiamos prácticas de anclaje somático, respiración diafragmática y focalización afectiva con el mismo tacto, compasión y presencia sostenida.",
+		title: "La misma relación terapéutica",
+		text: "También a través de la pantalla trabajamos con las emociones y el cuerpo: respiración, pausas y ejercicios sencillos que puedes practicar en casa.",
 		icon: "favorite",
-		tag: "Resonancia empática en directo",
+		tag: "Mismo enfoque que en consulta",
 	},
 ];
 
 const steps = [
 	{
-		title: "Reserva y Cuestionario Breve",
-		text: "Eliges el día y franja horaria que mejor encaje en tu rutina. Recibes un correo de confirmación con tu enlace personal y un breve formulario clínico.",
+		title: "Me escribes",
+		text: "Me escribes por el formulario, por correo o por WhatsApp y acordamos día y hora.",
 	},
 	{
-		title: "Preparación de tu Rincón",
-		text: "Te compartimos recomendaciones simples: auriculares para mayor intimidad, un rincón iluminado donde nadie te interrumpa y un vaso de agua o infusión.",
+		title: "Te envío el enlace",
+		text: "Antes de la sesión te envío el enlace de la videollamada. [PENDIENTE: confirmar cómo se envía el enlace]",
 	},
 	{
-		title: "Sesión por Videoconsulta",
-		text: "50 a 60 minutos de escucha atenta, mapa clínico y herramientas aplicadas. Sin prisas, explorando tu malestar a un ritmo respetuoso con tus tiempos.",
+		title: "Preparas tu rincón",
+		text: "Un lugar tranquilo donde nadie te interrumpa y, si puedes, auriculares para más intimidad.",
 	},
 	{
-		title: "Soporte Inter-sesiones",
-		text: "Envío de resúmenes reflexivos, guías de autorregulación descargables y canal de correo electrónico abierto para resolver dudas puntuales.",
+		title: "Sesión de 60 minutos",
+		text: "Hablamos con calma de lo que te trae, a tu ritmo, y vemos qué herramientas te pueden ayudar.",
 	},
 ];
 
 const myths = [
 	{
-		myth: "«La terapia online es impersonal, distante y fría.»",
+		myth: "«La terapia online es impersonal y fría.»",
 		reality:
-			"La pantalla se desvanece a los pocos minutos de conversación. La atención sin distracciones y la sintonía emocional generan una atmósfera de profunda cercanía humana.",
+			"A los pocos minutos de conversación la pantalla pasa a un segundo plano. Lo que importa es la escucha y la relación que se construye.",
 	},
 	{
-		myth: "«No sirve para procesar heridas o problemas profundos.»",
+		myth: "«No sirve para problemas profundos.»",
 		reality:
-			"Trabajamos apego, duelos no resueltos, ansiedad compleja y dinámicas relacionales con protocolos sanitarios homologados de la misma intensidad.",
+			"Online trabajo los mismos temas que en consulta: duelos, ansiedad, relaciones o heridas del pasado. Si en algún caso no es el formato adecuado, te lo diré.",
 	},
 	{
-		myth: "«Es un proceso complicado a nivel informático.»",
+		myth: "«Es complicado a nivel informático.»",
 		reality:
-			"Basta con un clic sobre el enlace que te enviamos, accesible desde cualquier móvil, tablet o portátil sin instalaciones previas ni registros tediosos.",
+			"Basta con abrir el enlace que te envío desde el móvil, la tablet o el ordenador, sin instalaciones complicadas.",
 	},
 ];
 
 const faqs = [
 	{
-		question: "¿Qué necesito técnicamente para realizar la sesión?",
+		question: "¿Qué necesito para hacer la sesión?",
 		answer:
-			"Solo precisas un dispositivo con cámara y micrófono (ordenador portátil, tablet o smartphone) y una conexión a internet estable. Recomendamos el uso de auriculares para preservar tu intimidad y mejorar la acústica. No requieres instalar ninguna aplicación compleja.",
+			"Un móvil, tablet u ordenador con cámara y micrófono, y una conexión a internet estable. Te recomiendo usar auriculares para tener más intimidad y oír mejor.",
 		open: true,
 	},
 	{
-		question: "¿Qué ocurre si la conexión a internet falla durante la consulta?",
+		question: "¿Qué pasa si falla la conexión durante la sesión?",
 		answer:
-			"Contamos siempre con un protocolo de respaldo. Si hay una caída de red puntual, retomamos de inmediato mediante llamada telefónica o por una sala alternativa. Los minutos perdidos por fallos técnicos ajenos se recuperan íntegramente en la misma sesión o en la siguiente.",
+			"Si se corta, volvemos a conectar o seguimos por teléfono. [PENDIENTE: confirmar qué ocurre con el tiempo perdido por fallos técnicos]",
 	},
 	{
-		question:
-			"Vivo en otra zona horaria (América, resto de Europa o Asia), ¿cómo lo coordinamos?",
+		question: "Vivo en otra zona horaria, ¿cómo lo coordinamos?",
 		answer:
-			"Atendemos regularmente a pacientes en distintas franjas horarias (costa este y oeste de EE.UU., Latinoamérica, Reino Unido y Europa Central). Nuestro sistema de citas adapta automáticamente la hora a tu zona local para evitar cualquier confusión.",
+			"Si vives en otra zona horaria, buscamos juntos una hora que encaje. [PENDIENTE: confirmar si se atiende a residentes fuera de España]",
 	},
 	{
-		question:
-			"¿Puedo alternar sesiones online con presenciales en Pamplona cuando viaje?",
+		question: "¿Puedo combinar sesiones online y presenciales en Pamplona?",
 		answer:
-			"Absolutamente sí. Muchos de nuestros pacientes que viajan con frecuencia a Pamplona eligen tener sesiones puntuales en nuestra consulta de la C/ María Lacunza y continuar con el formato online el resto del año.",
+			"Sí. Puedes alternar sesiones online con sesiones en mi consulta de la C/ María Lacunza, en Pamplona, según te encaje en cada momento.",
 	},
 ];
 ---
@@ -178,7 +174,7 @@ const faqs = [
 					></span>
 					<span
 						class="font-label-sm text-label-sm uppercase tracking-wider font-semibold"
-						>Atención psicológica donde estés • Eficacia clínica demostrada</span
+						>Terapia online · 60 minutos</span
 					>
 				</div>
 			</div>
@@ -200,22 +196,21 @@ const faqs = [
 							>wifi_tethering</span
 						>
 						<span class="font-label-lg text-label-lg"
-							>Psicoterapia Integrativa Remota</span
+							>Terapia por videollamada</span
 						>
 					</div>
 					<h1
 						class="font-headline-lg text-headline-lg lg:text-[44px] lg:leading-[54px] text-on-surface text-balance"
 					>
-						Tu refugio terapéutico, sin importar dónde estés: <span
-							class="text-primary italic">cercanía, rigor y calidez</span
-						>.
+						Terapia online: la misma cercanía, <span
+							class="text-primary italic">estés donde estés</span
+						>
 					</h1>
 					<p class="font-body-lg text-body-lg text-on-surface-variant text-balance">
-						La distancia física no compromete la profundidad del vínculo
-						terapéutico. En INALA te ofrecemos un espacio confidencial, seguro y
-						flexible mediante videollamada cifrada de alta calidad, diseñado para
-						quienes viajan, viven fuera de España o necesitan conciliar su
-						autocuidado con sus ritmos cotidianos.
+						Sesiones por videollamada segura, con el mismo enfoque que en mi
+						consulta de Pamplona: terapia individual, de pareja, familiar o
+						psicología parental. Una buena opción si vives lejos, viajas a menudo
+						o te cuesta encajar los desplazamientos en tu semana.
 					</p>
 					<!-- Pills grid -->
 					<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
@@ -238,21 +233,24 @@ const faqs = [
 					>
 						<a
 							class="inline-flex items-center justify-center gap-2 font-label-lg text-label-lg px-7 py-3.5 rounded-full bg-primary text-on-primary shadow-[0_8px_24px_rgba(36,105,91,0.25)] hover:shadow-[0_12px_28px_rgba(36,105,91,0.35)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-							href="#tarifa-reserva"
+							href={contactHref}
 						>
-							<span>Reservar sesión online (65€)</span>
+							<span>{ctaLabel}</span>
 							<span class="material-symbols-outlined text-[18px]"
 								>calendar_today</span
 							>
 						</a>
 						<a
 							class="inline-flex items-center justify-center gap-2 font-label-lg text-label-lg px-6 py-3.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-all duration-300"
-							href="#contacto-orientacion"
+							href={whatsappUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)"
 						>
 							<span class="material-symbols-outlined text-[18px] text-primary"
-								>phone_in_talk</span
+								>chat</span
 							>
-							<span>Llamada orientativa (15 min gratis)</span>
+							<span>Escribir por WhatsApp</span>
 						</a>
 					</div>
 					<!-- Trust note -->
@@ -263,8 +261,7 @@ const faqs = [
 							>shield</span
 						>
 						<span
-							>Confidencialidad absoluta y cumplimiento riguroso de la RGPD y
-							Código Deontológico Sanitario.</span
+							>Confidencial y protegido por el secreto profesional.</span
 						>
 					</div>
 				</div>
@@ -289,7 +286,7 @@ const faqs = [
 								>lock</span
 							>
 							<span class="font-label-sm text-label-sm font-semibold text-primary"
-								>Espacio Seguro &amp; Privado</span
+								>Confidencial</span
 							>
 						</div>
 						<div
@@ -301,7 +298,7 @@ const faqs = [
 							</p>
 							<span
 								class="block mt-1 font-label-sm text-label-sm text-primary font-semibold tracking-wide uppercase"
-								>Equipo Clínico INALA</span
+								>María Sánchez</span
 							>
 						</div>
 					</div>
@@ -316,10 +313,10 @@ const faqs = [
 						</div>
 						<div>
 							<p class="font-title-md text-title-md text-on-surface leading-tight">
-								100% Cifrada
+								Videollamada segura
 							</p>
 							<p class="font-body-sm text-body-sm text-slate-muted">
-								Sin descargas complejas
+								Sin instalaciones complicadas
 							</p>
 						</div>
 					</div>
@@ -331,13 +328,13 @@ const faqs = [
 		<section class="w-full px-margin-mobile lg:px-margin py-14 bg-surface-container-low">
 			<div class="max-w-[1240px] mx-auto flex flex-col gap-10">
 				<div class="text-center max-w-2xl mx-auto flex flex-col gap-3">
-					<span class={eyebrow}>Situaciones &amp; Acompañamiento</span>
+					<span class={eyebrow}>Para quién</span>
 					<h2 class={sectionHeading}>
 						¿Para quién y en qué momentos está pensada la terapia online?
 					</h2>
 					<p class="font-body-md text-body-md text-on-surface-variant">
-						Adaptamos el marco clínico a tu realidad individual para que cuidar de
-						tu salud mental no suponga un obstáculo logístico.
+						Para que cuidar de tu salud mental no dependa de la distancia o de tus
+						horarios.
 					</p>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -367,14 +364,14 @@ const faqs = [
 			<div class="max-w-[1240px] mx-auto flex flex-col gap-12">
 				<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
 					<div class="max-w-2xl flex flex-col gap-2">
-						<span class={eyebrow}>Garantía Científica</span>
+						<span class={eyebrow}>Dudas habituales</span>
 						<h2 class={sectionHeading}>
-							Eficacia y Rigor: Desmontando dudas sobre el formato online
+							¿Funciona igual la terapia online?
 						</h2>
 					</div>
 					<p class="font-body-md text-body-md text-slate-muted max-w-sm">
-						La telepsicología practicada con marco sanitario homologado ofrece la
-						misma tasa de recuperación que la terapia de sillón convencional.
+						Cada persona es distinta. Por eso, antes de empezar, valoramos juntos
+						si el formato online es el adecuado para ti.
 					</p>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -412,13 +409,12 @@ const faqs = [
 		<section class="w-full px-margin-mobile lg:px-margin py-16 bg-surface-container-low">
 			<div class="max-w-[1240px] mx-auto flex flex-col gap-12">
 				<div class="text-center max-w-xl mx-auto flex flex-col gap-3">
-					<span class={eyebrow}>Paso a Paso</span>
+					<span class={eyebrow}>Cómo empezar</span>
 					<h2 class={sectionHeading}>
-						¿Cómo funciona el proceso terapéutico online?
+						¿Cómo funciona la terapia online?
 					</h2>
 					<p class="font-body-md text-body-md text-on-surface-variant">
-						Un camino fluido, sencillo y transparente desde tu primera toma de
-						contacto.
+						Cuatro pasos sencillos desde que me escribes.
 					</p>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -445,8 +441,8 @@ const faqs = [
 		<section class="w-full px-margin-mobile lg:px-margin py-16">
 			<div class="max-w-[1240px] mx-auto flex flex-col gap-10">
 				<div class="max-w-xl flex flex-col gap-2">
-					<span class={eyebrow}>Claridad y Transparencia</span>
-					<h2 class={sectionHeading}>Mitos vs. Realidad sobre la consulta virtual</h2>
+					<span class={eyebrow}>Mitos y realidad</span>
+					<h2 class={sectionHeading}>Lo que se suele pensar de la terapia online</h2>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 					{
@@ -460,7 +456,7 @@ const faqs = [
 										cancel
 									</span>
 									<span class="font-label-sm text-label-sm uppercase font-semibold">
-										Mito Frecuente
+										Mito frecuente
 									</span>
 								</div>
 								<p class="font-title-md text-title-md text-on-surface">{item.myth}</p>
@@ -473,7 +469,7 @@ const faqs = [
 									</span>
 									<div>
 										<span class="font-label-sm text-label-sm text-primary font-semibold uppercase block mb-1">
-											La Realidad
+											La realidad
 										</span>
 										<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
 											{item.reality}
@@ -499,7 +495,7 @@ const faqs = [
 					>
 						<img
 							class="w-full h-full object-cover"
-							alt="Retrato de la psicóloga de INALA sentada en su consulta, junto a una planta y una mesa auxiliar."
+							alt="María Sánchez, psicóloga de Inala, sentada en su consulta junto a una planta y una mesa auxiliar."
 							src="/maria1.webp"
 							width="864"
 							height="1184"
@@ -512,7 +508,7 @@ const faqs = [
 								{therapistName}
 							</h3>
 							<p class="font-body-sm text-body-sm text-slate-muted">
-								Psicóloga Sanitaria • Col. {licenseNumber}
+								Psicóloga general sanitaria · Nº col. {licenseNumber}
 							</p>
 						</div>
 					</div>
@@ -520,16 +516,14 @@ const faqs = [
 				<!-- Text & physical office (7 cols) -->
 				<div class="lg:col-span-7 flex flex-col gap-6">
 					<div class="flex flex-col gap-2">
-						<span class={eyebrow}>Dirección Clínica</span>
+						<span class={eyebrow}>Quién te atiende</span>
 						<h2 class={sectionHeading}>
 							Un rostro humano y cercano al otro lado de la pantalla
 						</h2>
 						<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-							«Mi objetivo es que sientas que la sesión online no es un simple
-							intercambio de palabras frente a un monitor, sino un espacio sagrado
-							donde detenerte, exhalar y mirarte con amabilidad. Estructuramos el
-							proceso con rigor científico pero desde el respeto más sincero a tu
-							ritmo.»
+							«Mi objetivo es que la sesión online no se sienta como hablar con una
+							pantalla, sino como un rato para detenerte y mirarte con amabilidad.
+							Trabajo con rigor y respetando tu ritmo.»
 						</p>
 					</div>
 					<!-- Hybrid option with physical office -->
@@ -538,7 +532,7 @@ const faqs = [
 					>
 						<div class="w-full sm:w-44 h-32 rounded-xl overflow-hidden shrink-0">
 							<img
-								alt="Consulta de psicoterapia presencial en C/ María Lacunza 6, portal 4, 31011 Pamplona, España"
+								alt="Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua y luz natural."
 								class="w-full h-full object-cover"
 								src={officeImage}
 								loading="lazy"
@@ -549,15 +543,14 @@ const faqs = [
 								class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container w-fit text-xs font-semibold"
 							>
 								<span class="material-symbols-outlined text-[14px]">pin_drop</span>
-								<span>Posibilidad de formato híbrido</span>
+								<span>Online y presencial</span>
 							</div>
 							<h3 class="font-title-md text-title-md text-on-surface">
 								Consulta presencial en Pamplona
 							</h3>
 							<p class="font-body-sm text-body-sm text-on-surface-variant">
-								Si en algún momento viajas o regresas a Pamplona, puedes combinar tus
-								consultas virtuales con sesiones presenciales en nuestra consulta de
-								la C/ María Lacunza 6, portal 4.
+								Si vienes a Pamplona, puedes combinar las sesiones online con
+								sesiones en mi consulta de la C/ María Lacunza 6, portal 4.
 							</p>
 						</div>
 					</div>
@@ -565,15 +558,11 @@ const faqs = [
 			</div>
 		</section>
 
-		<!-- Pricing (empty in the original design) -->
-		<section class="w-full px-margin-mobile lg:px-margin py-16" id="tarifa-reserva">
-		</section>
-
 		<!-- FAQ (native <details>, no JS) -->
 		<section class="w-full px-margin-mobile lg:px-margin py-16 bg-surface-container-low">
 			<div class="max-w-[900px] mx-auto flex flex-col gap-10">
 				<div class="text-center flex flex-col gap-2">
-					<span class={eyebrow}>Respuestas Rápidas</span>
+					<span class={eyebrow}>Preguntas frecuentes</span>
 					<h2 class={sectionHeading}>Preguntas frecuentes sobre la terapia online</h2>
 				</div>
 				<div class="flex flex-col gap-4">
@@ -605,7 +594,6 @@ const faqs = [
 		<!-- Final CTA banner -->
 		<section
 			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-20 bg-inverse-surface text-on-primary"
-			id="contacto-orientacion"
 		>
 			<div class="max-w-[1000px] mx-auto text-center flex flex-col items-center gap-6">
 				<div
@@ -616,31 +604,33 @@ const faqs = [
 				<h2
 					class="font-headline-lg text-headline-lg lg:text-[44px] leading-tight text-white max-w-2xl text-balance"
 				>
-					¿Sientes que es el momento de cuidar de ti, sin importar dónde te
-					encuentres?
+					¿Sientes que es el momento de cuidarte, estés donde estés?
 				</h2>
 				<p
 					class="font-body-lg text-body-lg text-inverse-on-surface/85 max-w-xl text-balance"
 				>
-					Da el primer paso hacia una mayor serenidad emocional. Estamos a un solo
-					clic de distancia para acompañarte en tu proceso.
+					Solicita tu primera cita o escríbeme si antes quieres resolver alguna
+					duda. Sesión online de 60 minutos: 65 € individual; 75 € en pareja o familia.
 				</p>
 				<div class="flex flex-col sm:flex-row items-center gap-4 pt-3">
 					<a
 						class="inline-flex items-center justify-center gap-2 font-label-lg text-label-lg px-8 py-4 rounded-full bg-primary-container text-on-primary-container shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
 						href={contactHref}
 					>
-						<span>Agendar primera sesión (65€)</span>
+						<span>{ctaLabel}</span>
 						<span class="material-symbols-outlined text-[18px]"
 							>calendar_today</span
 						>
 					</a>
 					<a
 						class="inline-flex items-center justify-center gap-2 font-label-lg text-label-lg px-6 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-						href={`mailto:${email}?subject=Llamada%20orientativa%20gratuita%2015%20min`}
+						href={whatsappUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)"
 					>
-						<span class="material-symbols-outlined text-[18px]">phone_in_talk</span>
-						<span>Llamada orientativa (15 min gratis)</span>
+						<span class="material-symbols-outlined text-[18px]">chat</span>
+						<span>Escribir por WhatsApp</span>
 					</a>
 				</div>
 				<div
@@ -648,10 +638,10 @@ const faqs = [
 				>
 					<span class="material-symbols-outlined text-[16px]">mail</span>
 					<span
-						>Escríbenos directamente a <a
+						>{ctaNote} También puedes escribirme a <a
 							class="underline hover:text-white transition-colors"
 							href={`mailto:${email}`}>{email}</a
-						> • Respuesta en menos de 24 horas</span
+						>.</span
 					>
 				</div>
 			</div>

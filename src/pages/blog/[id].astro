@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
+import { contactHref, ctaLabel, ctaNote } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -65,6 +66,35 @@ const date = pubDate.toLocaleDateString("es-ES", {
 			<div class="prose-inala">
 				<Content />
 			</div>
+			<aside
+				class="mt-space-xl border-t border-border-subtle pt-space-lg flex flex-col gap-space-sm"
+				aria-labelledby="post-cta"
+			>
+				<h2
+					id="post-cta"
+					class="font-headline-sm text-headline-sm text-on-surface"
+				>
+					¿Te has reconocido en este artículo?
+				</h2>
+				<p class="font-body-md text-body-md text-on-surface-variant">
+					Si quieres hablarlo con calma, puedo acompañarte en mi consulta de
+					Pamplona o por videollamada. {ctaNote}
+				</p>
+				<div class="flex flex-wrap items-center gap-x-space-md gap-y-space-sm">
+					<a
+						href={contactHref}
+						class="inline-flex items-center justify-center rounded-full px-6 py-2.5 font-label-lg text-label-lg bg-primary-container text-on-primary-container shadow-cta hover:bg-primary-container-hover hover:shadow-cta-hover transition-[background-color,box-shadow] duration-300"
+					>
+						{ctaLabel}
+					</a>
+					<a
+						href="/servicios"
+						class="font-label-lg text-label-lg text-primary underline underline-offset-4 hover:text-on-primary-container transition-colors duration-200"
+					>
+						Ver servicios y tarifas
+					</a>
+				</div>
+			</aside>
 		</div>
 	</article>
 </Layout>

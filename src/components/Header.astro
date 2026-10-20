@@ -1,5 +1,11 @@
 ---
-import { contactHref, logoSrc, navLinks, servicesMenu } from "../data/site";
+import {
+	contactHref,
+	ctaLabel,
+	logoSrc,
+	navLinks,
+	serviceMenuLinks,
+} from "../data/site";
 
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const current = (href: string) => (path === href ? "page" : undefined);
@@ -8,10 +14,10 @@ const inServices = path.startsWith(servicesHref);
 ---
 
 <header
-	class="fixed top-0 inset-x-0 z-50 bg-surface/75 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] transition-all duration-300"
+	class="fixed top-0 inset-x-0 z-50 bg-surface/75 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
 >
 	<div
-		class="max-w-[1240px] mx-auto px-margin-mobile lg:px-margin h-20 flex items-center justify-between"
+		class="max-w-content mx-auto px-margin-mobile lg:px-margin h-20 flex items-center justify-between"
 	>
 		<a class="flex items-center gap-3 group" href="/">
 			<img
@@ -58,7 +64,7 @@ const inServices = path.startsWith(servicesHref);
 							</a>
 							<div class="absolute left-1/2 top-full -translate-x-1/2 pt-3 invisible opacity-0 motion-safe:translate-y-1 transition-[opacity,translate,visibility] duration-300 ease-exhale group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 group-data-closed:invisible group-data-closed:opacity-0">
 								<ul class="min-w-64 rounded-2xl bg-surface-container-lowest border border-border-subtle shadow-ethereal p-2">
-									{servicesMenu.map((service) => (
+									{serviceMenuLinks.map((service) => (
 										<li>
 											<a
 												class:list={[
@@ -96,19 +102,89 @@ const inServices = path.startsWith(servicesHref);
 		</nav>
 		<div class="flex items-center gap-space-sm">
 			<a
-				class="inline-flex items-center justify-center font-label-lg text-label-lg px-6 py-2.5 rounded-full bg-primary text-on-primary shadow-xs hover:opacity-90 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+				class="hidden sm:inline-flex items-center justify-center font-label-lg text-label-lg px-6 py-2.5 rounded-full bg-primary text-on-primary shadow-xs hover:opacity-90 motion-safe:hover:-translate-y-0.5 active:translate-y-0 transition-[opacity,translate] duration-300"
 				href={contactHref}
 			>
-				<span class="material-symbols-outlined text-[18px] mr-1.5"
+				<span class="material-symbols-outlined text-[18px] mr-1.5" aria-hidden="true"
 					>calendar_today</span
-				>Reserva tu cita
+				>Solicitar cita
 			</a>
-		
+			<details class="mobile-menu xl:hidden">
+				<summary
+					class="list-none [&::-webkit-details-marker]:hidden cursor-pointer inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 font-label-lg text-label-lg text-on-surface border border-border-soft hover:bg-tint-hover transition-colors duration-200"
+				>
+					<span class="material-symbols-outlined text-[20px]" aria-hidden="true"
+						>menu</span
+					>
+					Menú
+				</summary>
+				<nav
+					class="fixed inset-x-0 top-20 max-h-[calc(100dvh-5rem)] overflow-y-auto bg-surface-container-lowest border-t border-border-subtle shadow-ethereal px-margin-mobile py-space-md"
+					aria-label="Principal (móvil)"
+				>
+					<ul class="flex flex-col">
+						{
+							navLinks.map((link) => (
+								<li>
+									<a
+										class:list={[
+											"block py-3 font-title-md text-title-md border-b border-border-subtle",
+											current(link.href)
+												? "text-primary"
+												: "text-on-surface hover:text-primary",
+										]}
+										aria-current={current(link.href)}
+										href={link.href}
+									>
+										{link.name}
+									</a>
+									{link.href === servicesHref && (
+										<ul class="py-2 pl-4 border-b border-border-subtle">
+											{serviceMenuLinks.map((service) => (
+												<li>
+													<a
+														class:list={[
+															"block py-2 font-body-md text-body-md",
+															current(service.href)
+																? "text-primary"
+																: "text-on-surface-variant hover:text-primary",
+														]}
+														aria-current={current(service.href)}
+														href={service.href}
+													>
+														{service.name}
+													</a>
+												</li>
+											))}
+										</ul>
+									)}
+								</li>
+							))
+						}
+					</ul>
+					<a
+						class="mt-space-md flex w-full items-center justify-center rounded-full px-6 py-3 font-label-lg text-label-lg bg-primary text-on-primary hover:opacity-90 transition-opacity duration-200"
+						href={contactHref}
+					>
+						{ctaLabel}
+					</a>
+				</nav>
+			</details>
 		</div>
 	</div>
 </header>
 
 <script>
+	// Escape closes the mobile menu and returns focus to its toggle.
+	for (const menu of document.querySelectorAll<HTMLDetailsElement>(".mobile-menu")) {
+		menu.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && menu.open) {
+				menu.open = false;
+				menu.querySelector("summary")?.focus();
+			}
+		});
+	}
+
 	// Escape dismisses the hover/focus dropdown (WCAG 1.4.13); it reopens on the next hover or focus.
 	for (const menu of document.querySelectorAll<HTMLElement>(".services-menu")) {
 		const reopen = () => delete menu.dataset.closed;

@@ -1,40 +1,40 @@
 ---
 import OtherServices from "../../components/OtherServices.astro";
-import { contactHref, email } from "../../data/site";
+import { contactHref, ctaLabel, ctaNote, email } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
 const title =
-	"Psicología Parental | Acompañamiento en la crianza desde el apego seguro";
+	"Psicología parental en Pamplona y online | Inala Psicoterapia";
 const description =
-	"Acompañamiento psicológico para madres, padres y figuras de apego: culpa, cansancio, rabietas, límites y discrepancias de crianza. Presencial y online.";
+	"Apoyo psicológico para madres, padres y cuidadores en Pamplona y online: cansancio, culpa, rabietas, límites y desacuerdos de crianza. Con María Sánchez, psicóloga general sanitaria.";
 
 const heroImage = "/psicologia-parental.png";
 const heroImageAlt =
-	"Madre sosteniendo a su hijo en un cálido abrazo, psicología parental y apego seguro en INALA";
+	"Madre abrazando a su hijo pequeño.";
 
 const eyebrow =
 	"inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container/70 text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider";
 
 const sessionSteps = [
 	{
-		title: "Sesiones pausadas de 60 a 75 minutos",
-		text: "Tiempo suficiente para desahogarse, analizar dinámicas cotidianas y sentirse verdaderamente escuchado/a sin prisas ni reproches.",
+		title: "Sesiones de [PENDIENTE: duración]",
+		text: "Tiempo para desahogarte, mirar con calma lo que pasa en casa y sentirte escuchado/a, sin prisas ni reproches.",
 	},
 	{
-		title: "Validación emocional y desactivación de la culpa",
-		text: "Un espacio compasivo donde normalizar la ambivalencia, el cansancio y las dudas que a menudo se viven en soledad.",
+		title: "Menos culpa, más comprensión",
+		text: "Un lugar donde hablar sin juicios del cansancio, las dudas y los sentimientos contradictorios que a menudo se viven en soledad.",
 	},
 	{
-		title: "Comprensión del neurodesarrollo y del apego",
-		text: "Interpretamos el comportamiento, rabietas y necesidades reales de tus hijos a través de la neurociencia afectiva.",
+		title: "Entender a tus hijos",
+		text: "Vemos juntos qué hay detrás de su comportamiento, sus rabietas y lo que necesitan en cada etapa.",
 	},
 	{
 		title: "Herramientas prácticas y límites respetuosos",
-		text: "Estrategias de comunicación asertiva, gestión de desbordamientos emocionales y acuerdos de crianza aplicables en casa.",
+		text: "Formas concretas de comunicaros, de manejar los momentos de desborde y de llegar a acuerdos de crianza en casa.",
 	},
 	{
-		title: "Modalidad Presencial y Online flexible",
-		text: "En nuestra consulta de Pamplona o por videollamada cifrada, adaptándonos al ritmo y la logística familiar.",
+		title: "En Pamplona o por videollamada",
+		text: "En mi consulta de Pamplona o por videollamada segura, según os encaje mejor con la rutina familiar.",
 	},
 ];
 
@@ -43,19 +43,16 @@ const audiences = [
 		icon: "child_care",
 		title: "Familias en primeros años y primera infancia",
 		text: "Para quienes transitan el posparto, la primera crianza, la adaptación al rol de madre/padre, el cansancio crónico, rabietas infantiles o dificultades con el sueño y el apego temprano.",
-		cta: "Acompañar la primera infancia",
 	},
 	{
 		icon: "self_improvement",
 		title: "Desbordamiento, culpa y autoexigencia parental",
 		text: 'Madres y padres que sienten agotamiento físico o mental ("burnout parental"), sensación de perder la paciencia con facilidad o una pesada culpa por no llegar a todo.',
-		cta: "Recuperar la serenidad",
 	},
 	{
 		icon: "diversity_1",
 		title: "Etapa escolar, preadolescencia y cambios de ciclo",
 		text: "Acompañamiento en el establecimiento de límites saludables, gestión de pantallas, dificultades escolares, celos entre hermanos o discrepancias de crianza en la pareja.",
-		cta: "Fortalecer la comunicación",
 	},
 ];
 
@@ -63,12 +60,12 @@ const problems = [
 	{
 		icon: "sentiment_very_dissatisfied",
 		title: "Gestión de rabietas y desbordes emocionales",
-		text: "Entender qué ocurre en el cerebro del niño, cómo regular su sistema nervioso y cómo responder sin gritos ni descontrol.",
+		text: "Entender qué le pasa a tu hijo en esos momentos, cómo ayudarle a calmarse y cómo responder sin gritos.",
 	},
 	{
 		icon: "battery_alert",
 		title: "Culpa, autoexigencia y burnout parental",
-		text: "Desactivar el perfeccionismo, el miedo a equivocarse y el agotamiento acumulado de la carga mental cotidiana.",
+		text: "Soltar el perfeccionismo, el miedo a equivocarte y el agotamiento de la carga mental diaria.",
 	},
 	{
 		icon: "shield",
@@ -78,11 +75,11 @@ const problems = [
 	{
 		icon: "favorite",
 		title: "Discrepancias de crianza en la pareja",
-		text: "Alinear criterios educativos, evitar triangulaciones y proteger el espacio conyugal frente a la vorágine de la crianza.",
+		text: "Poneros de acuerdo en cómo educar, no meter a los hijos en medio y cuidar vuestro espacio de pareja.",
 	},
 	{
 		icon: "volunteer_activism",
-		title: "Vínculo de apego seguro y regulación somática",
+		title: "Vínculo y heridas de la propia infancia",
 		text: "Fortalecer la conexión afectiva, reparar momentos de desconexión y sanar heridas de la propia infancia que resuenan al criar.",
 	},
 	{
@@ -97,7 +94,7 @@ const faqs = [
 		question:
 			"¿Tienen que venir los hijos a las sesiones de psicología parental?",
 		answer:
-			"Generalmente no. La psicología parental se centra en las figuras de referencia (madre, padre o cuidadores principales). Al dotaros a vosotros de herramientas de comprensión y regulación, el impacto positivo se transmite de forma directa y natural al bienestar de los niños sin necesidad de sobreexponerlos. En ocasiones puntuales se puede valorar alguna sesión de observación o vínculo.",
+			"Generalmente no. La psicología parental se centra en las figuras de referencia (madre, padre o cuidadores principales). Cuando vosotros contáis con más herramientas y calma, los niños lo notan, sin necesidad de exponerlos a la terapia. En ocasiones puntuales se puede valorar alguna sesión de observación o vínculo.",
 	},
 	{
 		question:
@@ -108,12 +105,12 @@ const faqs = [
 	{
 		question: "¿Cuánto duran las sesiones y con qué frecuencia se realizan?",
 		answer:
-			"Las sesiones suelen tener una duración de 60 a 75 minutos. La frecuencia suele ser quincenal o mensual según el grado de urgencia y vuestras necesidades, adaptándonos con total flexibilidad a las rutinas familiares y escolares.",
+			"Las sesiones duran [PENDIENTE: duración]. La frecuencia se acuerda según vuestras necesidades y vuestra rutina familiar [PENDIENTE: confirmar frecuencia habitual].",
 	},
 	{
-		question: "¿Nos diréis cómo tenemos que educar a nuestros hijos?",
+		question: "¿Nos dirás cómo tenemos que educar a nuestros hijos?",
 		answer:
-			"En absoluto. En INALA respetamos profundamente la singularidad y los valores de cada hogar. Nuestro objetivo es ofreceros una base sólida en neurodesarrollo y apego para que encontréis vuestro propio estilo educativo consciente, libre de juicios y enfocado en la conexión.",
+			"No. Respeto los valores de cada familia. Mi objetivo es ayudaros a entender mejor a vuestros hijos y a vosotros mismos, para que encontréis vuestra propia forma de educar, sin juicios.",
 	},
 ];
 ---
@@ -149,15 +146,14 @@ const faqs = [
 				<div class="lg:col-span-7 flex flex-col gap-6">
 					<div></div>
 					<h1 class="font-display-xl text-display-xl text-on-surface">
-						Psicología Parental: Un espacio seguro para <span
-							class="italic font-normal text-primary">acompañar tu materni</span
+						Psicología parental: apoyo para madres y padres en la <span
+							class="italic font-normal text-primary">crianza</span
 						>
 					</h1>
 					<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-						Un proceso de acompañamiento psicológico cercano y especializado donde
-						abordar las dudas, el cansancio, la culpa y los desafíos de la
-						crianza. Construimos pautas conscientes desde el respeto y el apego
-						seguro, cuidando el bienestar emocional de los progenitores.
+						Un acompañamiento cercano para hablar de las dudas, el cansancio y la
+						culpa que trae la crianza, y para encontrar pautas que funcionen en
+						vuestra casa, desde el respeto y el vínculo con vuestros hijos.
 					</p>
 					<!-- CTAs -->
 					<div class="flex flex-wrap items-center gap-4 pt-2">
@@ -165,7 +161,7 @@ const faqs = [
 							class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-primary-container text-on-primary-container shadow-md hover:bg-primary hover:text-on-primary hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
 							href={contactHref}
 						>
-							Reservar primera sesión parental
+							{ctaLabel}
 							<span class="material-symbols-outlined ml-2 text-[18px]"
 								>calendar_today</span
 							>
@@ -201,8 +197,7 @@ const faqs = [
 								<p
 									class="font-body-sm text-body-sm text-on-surface font-medium leading-snug"
 								>
-									Espacio de sostén y escucha empática · 100% adaptado a vuestra
-									realidad familiar
+									Sin juicios · adaptado a vuestra familia
 								</p>
 							</div>
 						</div>
@@ -219,19 +214,17 @@ const faqs = [
 			<div class="w-full px-margin-mobile lg:px-margin flex flex-col gap-12">
 				<div class="flex flex-col gap-4 max-w-3xl">
 					<div>
-						<span class={eyebrow}>¿EN QUÉ CONSISTE EL ACOMPAÑAMIENTO PARENTAL?</span>
+						<span class={eyebrow}>En qué consiste</span>
 					</div>
 					<h2 class="font-headline-lg text-headline-lg text-on-surface">
-						Un espacio neutral y cálido para poner palabras al agotamiento, la
-						culpa y reencontrar la calma en la crianza
+						Poner palabras al agotamiento y la culpa, y recuperar la calma en la crianza
 					</h2>
 					<p class="font-body-lg text-body-lg text-on-surface-variant">
 						Criar es una de las experiencias más transformadoras y a la vez más
-						exigentes a nivel emocional. En consulta no juzgamos estilos
-						educativos ni ofrecemos recetas mágicas; creamos un refugio seguro
-						donde validar tus emociones, desactivar la culpa y dotarte de
-						recursos prácticos para acompañar el desarrollo de tus hijos desde la
-						serenidad y la firmeza amorosa.
+						exigentes a nivel emocional. En consulta no juzgo estilos
+						educativos ni ofrezco recetas mágicas: te ayudo a entender lo que
+						sientes, a aliviar la culpa y a encontrar recursos prácticos para
+						acompañar a tus hijos con más calma y firmeza.
 					</p>
 				</div>
 				<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
@@ -264,7 +257,7 @@ const faqs = [
 							<p
 								class="font-label-sm text-label-sm text-slate-muted uppercase tracking-wider"
 							>
-								— Equipo Especializado en Crianza y Apego INALA
+								— María Sánchez
 							</p>
 						</div>
 					</div>
@@ -302,22 +295,22 @@ const faqs = [
 			<div class="w-full px-margin-mobile lg:px-margin flex flex-col gap-12">
 				<div class="flex flex-col gap-3 text-center max-w-3xl mx-auto">
 					<div>
-						<span class={eyebrow}>ACOMPAÑAMIENTO EN CADA ETAPA DE LA CRIANZA</span>
+						<span class={eyebrow}>Para quién</span>
 					</div>
 					<h2 class="font-headline-lg text-headline-lg text-on-surface">
 						¿Para quién es la psicología parental?
 					</h2>
 					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Acompañamos a madres, padres y figuras de apego en distintos momentos
-						y desafíos vitales:
+						Acompaño a madres, padres y cuidadores en distintos momentos de la
+						crianza:
 					</p>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
 					{
 						audiences.map((audience) => (
-							<div class="p-8 rounded-3xl bg-surface-container-low shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+							<div class="p-8 rounded-3xl bg-surface-container-low shadow-sm flex flex-col">
 								<div class="flex flex-col gap-4">
-									<div class="w-14 h-14 rounded-2xl bg-surface flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
+									<div class="w-14 h-14 rounded-2xl bg-surface flex items-center justify-center text-primary">
 										<span class="material-symbols-outlined text-[28px]">
 											{audience.icon}
 										</span>
@@ -329,20 +322,6 @@ const faqs = [
 										{audience.text}
 									</p>
 								</div>
-								<div class="pt-6">
-									<a
-										class="inline-flex items-center gap-1 font-label-lg text-label-lg text-primary hover:text-on-surface transition-colors"
-										href={contactHref}
-									>
-										{audience.cta}
-										<span
-											class="material-symbols-outlined text-[18px]"
-											aria-hidden="true"
-										>
-											arrow_forward
-										</span>
-									</a>
-								</div>
 							</div>
 						))
 					}
@@ -352,9 +331,8 @@ const faqs = [
 					class="p-5 rounded-2xl bg-surface-container text-center max-w-4xl mx-auto shadow-sm"
 				>
 					<p class="font-body-md text-body-md text-on-surface font-medium">
-						🌿 No necesitáis llegar al límite del agotamiento para consultar:
-						pedir apoyo a tiempo previene el desgaste crónico y fomenta un vínculo
-						seguro.
+						No hace falta llegar al límite para consultar: pedir apoyo a tiempo
+						evita mucho desgaste y cuida el vínculo con vuestros hijos.
 					</p>
 				</div>
 			</div>
@@ -365,14 +343,13 @@ const faqs = [
 			<div class="w-full px-margin-mobile lg:px-margin flex flex-col gap-12">
 				<div class="flex flex-col gap-3 text-center max-w-3xl mx-auto">
 					<div>
-						<span class={eyebrow}>¿QUÉ TRABAJAMOS EN CONSULTA?</span>
+						<span class={eyebrow}>Qué trabajo en consulta</span>
 					</div>
 					<h2 class="font-headline-lg text-headline-lg text-on-surface">
-						¿Qué dificultades abordamos en psicología parental?
+						¿Qué dificultades se trabajan en psicología parental?
 					</h2>
 					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Abordamos las inquietudes emocionales y los retos relacionales más
-						comunes en la experiencia de criar:
+						Estas son algunas de las dificultades más habituales en consulta:
 					</p>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
@@ -404,14 +381,14 @@ const faqs = [
 			>
 				<div class="flex flex-col gap-3 text-center">
 					<div>
-						<span class={eyebrow}>RESOLVEMOS VUESTRAS DUDAS</span>
+						<span class={eyebrow}>Preguntas frecuentes</span>
 					</div>
 					<h2 class="font-headline-lg text-headline-lg text-on-surface">
 						Preguntas frecuentes sobre la psicología parental
 					</h2>
 					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Es natural que surjan inquietudes antes de iniciar un acompañamiento.
-						Aquí resolvemos las más habituales:
+						Es normal tener dudas antes de empezar. Si la tuya no está aquí,
+						escríbeme.
 					</p>
 				</div>
 				<div class="flex flex-col gap-4" id="faq-accordion">
@@ -461,23 +438,22 @@ const faqs = [
 						<span
 							class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface/10 text-accent-glow font-label-sm text-label-sm uppercase tracking-wider backdrop-blur-sm"
 						>
-							EL BIENESTAR DE TUS HIJOS EMPIEZA EN EL TUYO
+							Primera cita
 						</span>
 					</div>
 					<h2 class="font-headline-lg text-headline-lg text-inverse-on-surface">
-						Cuidarte como madre o padre es el mayor regalo para tus hijos
+						Pedir ayuda en la crianza también es cuidar de tus hijos
 					</h2>
 					<p class="font-body-lg text-body-lg text-inverse-on-surface/80">
-						Agenda tu primera consulta de orientación parental o escríbenos para
-						una breve llamada informativa de 15 minutos sin compromiso. Te
-						escuchamos con calidez y cercanía.
+						Solicita tu primera cita o escríbeme si antes quieres resolver alguna
+						duda. [PENDIENTE: precio y duración de la sesión].
 					</p>
 					<div class="flex flex-wrap items-center justify-center gap-4 pt-2">
 						<a
 							class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-primary-container text-on-primary-container shadow-md hover:bg-surface hover:text-on-surface hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
 							href={contactHref}
 						>
-							Reservar primera cita parental
+							{ctaLabel}
 							<span class="material-symbols-outlined ml-2 text-[18px]"
 								>calendar_month</span
 							>
@@ -491,7 +467,7 @@ const faqs = [
 						</a>
 					</div>
 					<p class="font-body-sm text-body-sm text-inverse-on-surface/60 pt-2">
-						Garantía de respuesta en un plazo máximo de 24 horas laborables.
+						{ctaNote}
 					</p>
 				</div>
 			</div>

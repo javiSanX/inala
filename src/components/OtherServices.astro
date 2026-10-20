@@ -1,5 +1,5 @@
 ---
-import { servicesMenu } from "../data/site";
+import { serviceMenuLinks } from "../data/site";
 
 // Closing section for every service page: compact links to all services,
 // with the page being viewed marked as current.
@@ -21,7 +21,7 @@ const path = Astro.url.pathname.replace(/\/$/, "");
 		</h2>
 		<ul class="flex flex-wrap gap-2">
 			{
-				servicesMenu.map((service) => {
+				serviceMenuLinks.map((service) => {
 					const current = service.href === path;
 					return (
 						<li>

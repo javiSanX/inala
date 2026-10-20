@@ -1,18 +1,23 @@
 ---
 import OtherServices from "../../components/OtherServices.astro";
-import { contactHref, email } from "../../data/site";
+import {
+	contactHref,
+	ctaLabel,
+	ctaNote,
+	email,
+	licenseNumber,
+} from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
 const title =
-	"Terapia de Pareja | Recuperar la comunicación, la confianza y la intimidad";
+	"Terapia de pareja en Pamplona y online | Inala Psicoterapia";
 const description =
-	"Terapia de pareja en un espacio neutral y sin juicios: comunicación, distanciamiento emocional, infidelidad, crianza y separación consciente. Presencial y online.";
+	"Terapia de pareja en Pamplona y online, sin tomar partido: comunicación, distanciamiento, infidelidad, crianza y separación. Sesiones de 60 minutos con María Sánchez, psicóloga general sanitaria.";
 
 const filled = "font-variation-settings: 'FILL' 1;";
 
 const heroImage = "/terapia-pareja.jpg";
-const quoteImage =
-	"https://lh3.googleusercontent.com/aida/AEtjO1WEIeZr9wDuNAnjczv0AJLkYi3JG5wHf4HZg6Wv_4HylELYmmQQP-QVevDp6ktiw6klVYGiGIRYUk0tDtJ_k7_8p69tJfoQzfF6MGmGUb1sYXHA_iF5O4TLu9RuFI7wMHYNNmE7N4o5JRaTz0wewOaOoaD9M-PbAoeeaNA2y6D-u1raIghXbiAVCiMm66HWsgf6b-7f0-kSwghzUl4ushTOOWRuo98tZO5FqpW09a3R";
+const quoteImage = "/oficina.webp";
 
 const eyebrow =
 	"inline-flex items-center px-3.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider";
@@ -20,36 +25,36 @@ const sectionHeading = "font-headline-lg text-headline-lg text-on-surface";
 const sectionIntro = "font-body-lg text-body-lg text-on-surface-variant";
 
 const trustPills = [
-	{ icon: "shield", label: "Espacio 100% neutral y sin juicios" },
-	{ icon: "favorite", label: "Terapia focalizada en emociones y apego" },
-	{ icon: "location_on", label: "Presencial Pamplona y Online" },
+	{ icon: "schedule", label: "Sesiones de 60 minutos" },
+	{ icon: "location_on", label: "Pamplona y online" },
+	{ icon: "verified", label: `Nº col. ${licenseNumber}` },
 ];
 
 const sessionFeatures = [
 	{
 		icon: "hourglass_top",
-		title: "Sesiones de 75 a 90 minutos para ambos",
-		text: "Tiempo pausado y suficiente para que ambas partes tengan voz equitativa, sin prisas ni interrupciones apresuradas.",
+		title: "Sesiones de 60 minutos con los dos",
+		text: "Tiempo para que cada uno tenga su espacio para hablar y ser escuchado, sin prisas.",
 	},
 	{
 		icon: "balance",
-		title: "Espacio de neutralidad rigurosa",
-		text: "Una mirada profesional externa sin bandos ni sesgos, actuando como mediadora y facilitadora del vínculo afectivo.",
+		title: "Sin tomar partido",
+		text: "Una mirada profesional externa que no se pone del lado de nadie y os ayuda a entenderos.",
 	},
 	{
 		icon: "lock_reset",
-		title: "Desactivación del ciclo de discusión",
-		text: "Identificamos qué activa la escalada (retirada, ataque, frialdad) para intervenir en directo y desactivar el bucle reactivo.",
+		title: "Salir de las discusiones que se repiten",
+		text: "Vemos juntos qué hace que las discusiones escalen (retirarse, atacar, enfriarse) y cómo frenarlas en el momento.",
 	},
 	{
 		icon: "handshake",
-		title: "Herramientas de comunicación y acuerdos",
-		text: "Prácticas concretas de asertividad, resolución de desacuerdos cotidianos y pactos claros de convivencia y corresponsabilidad.",
+		title: "Herramientas para comunicaros y llegar a acuerdos",
+		text: "Formas concretas de decir lo que necesitáis, resolver desacuerdos del día a día y repartir responsabilidades.",
 	},
 	{
 		icon: "devices",
-		title: "Modalidad Presencial y Online flexible",
-		text: "En nuestra consulta de Pamplona o a través de videollamada cifrada con máxima privacidad y confort desde vuestro hogar.",
+		title: "En Pamplona o por videollamada",
+		text: "En mi consulta de Pamplona o desde casa, por videollamada segura.",
 	},
 ];
 
@@ -69,7 +74,7 @@ const audiences = [
 	{
 		icon: "call_split",
 		title: "Transiciones o separación consciente",
-		text: "Para parejas que afrontan la llegada del primer hijo, duelo compartido, infidelidades o la decisión madura de separarse cuidando el bienestar común y de los hijos sin resentimientos.",
+		text: "Para parejas que afrontan la llegada del primer hijo, duelo compartido, infidelidades o la decisión de separarse, intentando cuidar el bienestar de los dos y de los hijos durante el proceso.",
 		cta: "Cuidar la transición",
 	},
 ];
@@ -78,7 +83,7 @@ const problems = [
 	{
 		icon: "repeat",
 		title: "Crisis de comunicación y discusiones circulares",
-		text: "Ruptura de los bucles de reproche, interpretación errónea y reactividad para ejercitar la escucha sin defensas ni juicios automáticos.",
+		text: "Salir del bucle de reproches y malentendidos, y practicar una escucha sin ponerse a la defensiva.",
 	},
 	{
 		icon: "heart_broken",
@@ -88,12 +93,12 @@ const problems = [
 	{
 		icon: "healing",
 		title: "Heridas de apego, traiciones e infidelidad",
-		text: "Reparación sopesada del dolor relacional, gestión de la desconfianza y reconstrucción de la seguridad y el apego seguro conjunto.",
+		text: "Reparar el daño, trabajar la desconfianza y reconstruir la seguridad en la relación.",
 	},
 	{
 		icon: "escalator_warning",
 		title: "Conflictos en la crianza y familias de origen",
-		text: "Establecimiento de límites sanos con familias políticas y externas, sincronía en pautas parentales y protección de la conyugalidad.",
+		text: "Poner límites sanos con las familias de origen, ponerse de acuerdo en la crianza y cuidar el espacio de pareja.",
 	},
 	{
 		icon: "checklist_rtl",
@@ -103,7 +108,7 @@ const problems = [
 	{
 		icon: "door_open",
 		title: "Acompañamiento en la separación consciente",
-		text: "Gestión reflexiva y serena del fin de la relación de pareja, minimizando el impacto emocional y priorizando la salud compartida y filial.",
+		text: "Acompañamiento para cerrar la relación con el mayor cuidado posible, para los dos y para los hijos si los hay.",
 	},
 ];
 
@@ -112,22 +117,22 @@ const faqs = [
 		question:
 			"¿Qué pasa si una de las partes no está del todo convencida de venir?",
 		answer:
-			"Es una situación muy común en consulta. La terapia de pareja no busca forzar a nadie ni realizar juicios. En la primera sesión creamos un espacio amable y sin presiones donde ambas partes pueden compartir cómo se sienten, sus dudas e inquietudes. Con frecuencia, quien llega con reticencias descubre un entorno seguro donde también es escuchado y respetado.",
+			"Es algo muy habitual. La terapia de pareja no busca forzar a nadie ni juzgar. En la primera sesión los dos podéis contar cómo os sentís y qué dudas tenéis, sin presiones. A menudo, quien llega con reticencias descubre que también se le escucha y respeta.",
 	},
 	{
 		question: "¿La terapeuta se pondrá del lado de alguno de los dos?",
 		answer:
-			'Rotundamente no. En INALA mantenemos una neutralidad profesional estricta. Nuestro "paciente" no es uno de vosotros de forma individual, sino el vínculo que compartís. Nuestra función es actuar como una guía imparcial que ayuda a desentrañar los patrones relacionales sin tomar bandos ni determinar quién tiene la culpa.',
+			"No. Mi trabajo es mantener una posición neutral: el foco no está en uno de vosotros, sino en la relación que compartís. Os ayudo a entender cómo os relacionáis, sin tomar partido ni buscar culpables.",
 	},
 	{
 		question: "¿Cuánto duran y con qué frecuencia son las sesiones?",
 		answer:
-			"Las sesiones de pareja tienen una duración de 75 a 90 minutos para permitir un diálogo profundo y equilibrado. Habitualmente se pautan con periodicidad quincenal, lo que permite asimilar lo trabajado e integrar las herramientas y dinámicas en vuestro día a día entre sesión y sesión.",
+			"Cada sesión dura 60 minutos. Generalmente empezamos con sesiones semanales, que después se espacian según cómo evolucione la pareja.",
 	},
 	{
 		question: "¿Y si nuestro objetivo termina siendo separarnos?",
 		answer:
-			"El éxito de la terapia no se define únicamente por continuar juntos a toda costa, sino por alcanzar claridad, coherencia y paz. Si a lo largo del proceso descubrís que el camino más saludable es la separación, os acompañamos para que esta se desarrolle de manera consciente, respetuosa y cuidando el bienestar común y el de vuestros hijos si los hubiera.",
+			"El éxito de la terapia no se define únicamente por continuar juntos a toda costa, sino por alcanzar claridad, coherencia y paz. Si a lo largo del proceso descubrís que el camino más saludable es la separación, os acompaño para que se desarrolle de manera consciente, respetuosa y cuidando el bienestar común y el de vuestros hijos si los hubiera.",
 	},
 ];
 ---
@@ -166,20 +171,20 @@ const faqs = [
 						></span>
 						<span
 							class="font-label-sm text-label-sm tracking-wider uppercase text-primary font-semibold"
-							>Psicoterapia Vincular e Integrativa</span
+							>Terapia de pareja · Pamplona y online</span
 						>
 					</div>
 					<h1
 						class="font-display-xl text-display-xl-mobile lg:text-display-xl text-on-surface tracking-tight"
 					>
-						Terapia de Pareja: Un espacio seguro para <em
-							class="italic text-primary font-serif font-normal">reencontraros</em
-						>, comprender vuestros vínculos y sanar la relación
+						Terapia de pareja: volver a <em
+							class="italic text-primary font-serif font-normal">entenderos</em
+						>
 					</h1>
 					<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-						Un proceso terapéutico conjunto, guiado y neutral, donde desarticular
-						dinámicas dañinas, recuperar la comunicación sincera y reconstruir la
-						intimidad, la confianza y el proyecto en común.
+						Un proceso para los dos, guiado y sin tomar partido, donde salir de las
+						dinámicas que os hacen daño, recuperar una comunicación sincera y
+						reconstruir la confianza, la intimidad y el proyecto en común.
 					</p>
 					<!-- CTAs -->
 					<div class="flex flex-wrap items-center gap-4 pt-2">
@@ -190,13 +195,13 @@ const faqs = [
 							<span class="material-symbols-outlined text-[20px]"
 								>calendar_today</span
 							>
-							Reservar primera sesión en pareja
+							{ctaLabel}
 						</a>
 						<a
 							class="inline-flex items-center gap-2 font-label-lg text-label-lg px-6 py-3.5 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors"
 							href="#en-que-consiste"
 						>
-							<span>Conoce nuestro enfoque</span>
+							<span>Ver en qué consiste</span>
 							<span class="material-symbols-outlined text-[18px]"
 								>arrow_downward</span
 							>
@@ -248,10 +253,10 @@ const faqs = [
 							</div>
 							<div>
 								<p class="font-title-md text-title-md text-on-surface leading-tight">
-									Espacio seguro y neutral
+									Sin tomar partido
 								</p>
 								<p class="font-body-sm text-body-sm text-on-surface-variant">
-									100% a vuestro propio ritmo y sin etiquetas
+									A vuestro ritmo y sin etiquetas
 								</p>
 							</div>
 						</div>
@@ -269,15 +274,12 @@ const faqs = [
 				<div class="flex flex-col items-center text-center max-w-3xl mx-auto gap-3">
 					<div class={eyebrow}>¿En qué consiste la terapia de pareja?</div>
 					<h2 class={sectionHeading}>
-						Un espacio neutral para poner palabras a lo que duele y reconstruir el
-						puente entre ambos
+						Poner palabras a lo que duele y volver a encontraros
 					</h2>
 					<p class={sectionIntro}>
-						La terapia de pareja no busca juzgar ni buscar culpables sobre quién
-						tiene la razón; es un refugio guiado donde detener el ciclo de
-						reproches, identificar los patrones reactivos invisibles y aprender a
-						expresar las necesidades emocionales profundas con seguridad y escucha
-						activa.
+						La terapia de pareja no busca culpables ni decide quién tiene razón. Os
+						ayuda a frenar los reproches, ver los patrones que se repiten sin que
+						os deis cuenta y aprender a expresar lo que de verdad necesitáis.
 					</p>
 				</div>
 				<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -287,7 +289,7 @@ const faqs = [
 					>
 						<div class="relative w-full h-full min-h-[460px]">
 							<img
-								alt="Sala de consulta cálida con dos butacas enfrentadas"
+								alt="Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua y luz natural."
 								class="absolute inset-0 w-full h-full object-cover"
 								src={quoteImage}
 								loading="lazy"
@@ -313,7 +315,7 @@ const faqs = [
 								<p
 									class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed"
 								>
-									Equipo Terapéutico INALA
+									María Sánchez
 								</p>
 							</div>
 						</div>
@@ -351,8 +353,8 @@ const faqs = [
 					<div class={eyebrow}>Acompañamiento en cada etapa de la relación</div>
 					<h2 class={sectionHeading}>¿Para quién es la terapia de pareja?</h2>
 					<p class={sectionIntro}>
-						Acompañamos a parejas en distintos momentos y circunstancias vitales,
-						adaptando el proceso a vuestra realidad afectiva:
+						Acompaño a parejas en momentos muy distintos y adapto el proceso a
+						vuestra situación:
 					</p>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -396,8 +398,8 @@ const faqs = [
 						>spa</span
 					>
 					<span class="font-body-md text-body-md font-medium text-on-surface"
-						>No necesitáis estar al borde de la ruptura para acudir; prevenir el
-						desgaste es el mayor acto de cuidado mutuo.</span
+						>No hace falta estar al borde de la ruptura para venir: pedir ayuda a
+						tiempo evita mucho desgaste.</span
 					>
 				</div>
 			</div>
@@ -409,13 +411,12 @@ const faqs = [
 		>
 			<div class="max-w-[1240px] mx-auto flex flex-col gap-12">
 				<div class="flex flex-col items-center text-center max-w-3xl mx-auto gap-3">
-					<div class={eyebrow}>¿Qué trabajamos en consulta?</div>
+					<div class={eyebrow}>Qué trabajo en consulta</div>
 					<h2 class={sectionHeading}>
 						¿Qué problemas se trabajan en terapia de pareja?
 					</h2>
 					<p class={sectionIntro}>
-						Abordamos las dinámicas y dificultades más complejas de los vínculos
-						afectivos, guiándoos hacia el entendimiento mutuo:
+						Estas son algunas de las dificultades más habituales en consulta:
 					</p>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -444,13 +445,13 @@ const faqs = [
 		<section class="w-full px-margin-mobile lg:px-margin py-20 bg-surface">
 			<div class="max-w-[840px] mx-auto flex flex-col gap-10">
 				<div class="flex flex-col items-center text-center gap-3">
-					<div class={eyebrow}>Resolvemos vuestras dudas</div>
+					<div class={eyebrow}>Preguntas frecuentes</div>
 					<h2 class={sectionHeading}>
 						Preguntas frecuentes sobre la terapia de pareja
 					</h2>
 					<p class={sectionIntro}>
-						Es natural que surjan inquietudes antes de comenzar un proceso
-						conjunto. Aquí resolvemos las más habituales:
+						Es normal tener dudas antes de empezar. Si la vuestra no está aquí,
+						escribidme.
 					</p>
 				</div>
 				<div class="flex flex-col gap-4" id="faq-accordion">
@@ -503,18 +504,16 @@ const faqs = [
 						class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/20 text-primary-fixed w-fit font-label-sm text-label-sm uppercase tracking-wider"
 					>
 						<span class="material-symbols-outlined text-[16px]">favorite</span>
-						Vuestro bienestar relacional empieza hoy
+						Primera cita en pareja
 					</div>
 					<h2
 						class="font-headline-lg text-headline-lg text-surface-container-lowest"
 					>
-						Dar el paso juntos requiere valor, pero transformar vuestra relación
-						es posible
+						Dar el paso juntos requiere valor, y no tenéis que hacerlo solos
 					</h2>
 					<p class="font-body-lg text-body-lg text-surface-dim">
-						Agendad vuestra primera consulta o escribidnos para una breve llamada
-						informativa de 15 minutos sin compromiso. Os escuchamos con calidez y
-						neutralidad.
+						Solicitad vuestra primera cita o escribidme si antes queréis resolver
+						alguna duda. Sesión de 60 minutos · 75 €.
 					</p>
 					<div class="flex flex-wrap items-center gap-4 pt-2">
 						<a
@@ -524,7 +523,7 @@ const faqs = [
 							<span class="material-symbols-outlined text-[20px]"
 								>calendar_month</span
 							>
-							Reservar cita en pareja
+							{ctaLabel}
 						</a>
 						<a
 							class="inline-flex items-center gap-2 font-label-lg text-label-lg px-6 py-3.5 rounded-full bg-surface-container/10 text-surface-container-lowest hover:bg-surface-container/20 transition-colors"
@@ -537,8 +536,7 @@ const faqs = [
 					<p
 						class="font-body-sm text-body-sm text-surface-dim/80 flex items-center gap-2 pt-1"
 					>
-						<span class="material-symbols-outlined text-[16px]">schedule</span>
-						Respuesta garantizada en un plazo máximo de 24 horas laborables.
+						{ctaNote}
 					</p>
 				</div>
 			</div>

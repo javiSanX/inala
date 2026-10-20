@@ -1,11 +1,19 @@
 ---
-import { contactHref, email } from "../data/site";
+import {
+	address,
+	addressCenter,
+	addressCity,
+	contactHref,
+	ctaLabel,
+	ctaNote,
+	email,
+	licenseNumber,
+} from "../data/site";
 import Layout from "../layouts/Layout.astro";
 
-const title =
-	"Nuestro Método Terapéutico | Cómo Trabajamos y Beneficios de la Terapia en Pamplona y Online";
+const title = "Cómo trabajo: terapia integradora en Pamplona y online | Inala";
 const description =
-	"Descubre nuestro método de trabajo: un enfoque cercano, integrador y basado en la evidencia. Conoce cómo es la terapia, sus beneficios y en qué áreas puede ayudarte, tanto presencial en Pamplona como online.";
+	"Cómo trabajo en terapia: un enfoque cercano, integrador y basado en la evidencia. Qué esperar de la primera sesión, cómo avanza el proceso y las modalidades presencial en Pamplona y online.";
 
 const filled = "font-variation-settings: 'FILL' 1;";
 
@@ -36,14 +44,14 @@ const btnPrimary = `${btnBase} bg-primary-container text-on-primary-container sh
 const btnSecondary = `${btnBase} bg-linen-base/70 border border-border-soft text-on-surface hover:bg-tint-hover`;
 
 const heroStats = [
-	{ value: "100%", label: "Personalizado" },
-	{ value: "Apego", label: "& Neurociencia" },
-	{ value: "Seguro", label: "Espacio confidencial", wide: true },
+	{ value: "Pamplona", label: "y online" },
+	{ value: "60 min", label: "por sesión" },
+	{ value: licenseNumber, label: "Nº de colegiada", wide: true },
 ];
 
 const heroBadges = [
-	{ icon: "science", label: "Evidencia & Neurociencia" },
-	{ icon: "verified_user", label: "Espacio seguro y sin juicios" },
+	{ icon: "science", label: "Basado en la evidencia" },
+	{ icon: "verified_user", label: "Sin juicios" },
 ];
 
 const pillars = [
@@ -51,25 +59,25 @@ const pillars = [
 		icon: "psychology",
 		iconClass:
 			"bg-primary-container/20 group-hover:bg-primary-container group-hover:text-on-primary-container",
-		title: "Psicología Integradora y Basada en Evidencia",
-		text: "Integramos modelos validados científicamente (terapias de tercera generación, enfoque cognitivo, apego y somático) adaptados estrictamente a tu historia y necesidades.",
-		tag: "Rigor & Personalización",
+		title: "Enfoque integrador y basado en la evidencia",
+		text: "Combino distintos enfoques con respaldo científico y elijo en cada caso los que mejor encajan con tu historia y con lo que necesitas.",
+		tag: "Adaptado a ti",
 	},
 	{
 		icon: "favorite",
 		iconClass:
 			"bg-secondary-container/40 group-hover:bg-secondary-container group-hover:text-on-secondary-container",
-		title: "Vínculo Seguro y Calidez Humana",
-		text: "La relación terapéutica es el verdadero motor del cambio. Un entorno cálido, libre de juicios y confidencial donde puedes expresarte con autenticidad y confianza.",
-		tag: "Espacio Seguro & Sin Juicios",
+		title: "Una relación de confianza",
+		text: "La relación entre tú y yo es lo que hace posible el cambio. Aquí puedes hablar con libertad, sin juicios y con total confidencialidad.",
+		tag: "Sin juicios",
 	},
 	{
 		icon: "self_improvement",
 		iconClass:
 			"bg-tertiary-fixed/40 group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-container",
-		title: "Herramientas Prácticas y Autonomía",
-		text: "Te dotamos de recursos claros y aplicables desde las primeras sesiones para regular tus emociones, superar bloqueos y consolidar un bienestar duradero.",
-		tag: "Herramientas para el Día a Día",
+		title: "Herramientas prácticas",
+		text: "Desde las primeras sesiones te llevas recursos concretos para entender y manejar tus emociones en tu día a día.",
+		tag: "Para el día a día",
 	},
 ];
 
@@ -78,25 +86,25 @@ const steps = [
 		number: "01",
 		icon: "chat_bubble_outline",
 		title: "Primer contacto",
-		text: "No tienes que traer nada preparado ni preocuparte por decir lo correcto. No existen respuestas perfectas ni formas «ideales» de empezar: estamos aquí para construir juntos ese camino.",
+		text: "No tienes que traer nada preparado ni preocuparte por decir lo correcto. No existen respuestas perfectas ni formas «ideales» de empezar: ese camino lo construimos juntos.",
 	},
 	{
 		number: "02",
 		icon: "visibility",
-		title: "¿Qué puedes esperar?",
-		text: "En esta primera sesión, nuestro objetivo es conocerte. Nos enfocamos en comprender que es lo que te ha traído a consulta, con el objetivo de dar tus primeros pasos hacia el bienestar emocional.",
+		title: "Primera sesión",
+		text: "En la primera sesión mi objetivo es conocerte y entender qué te ha traído a consulta. Tú decides cuánto quieres contar.",
 	},
 	{
 		number: "03",
 		icon: "flag",
 		title: "Estableciendo objetivos",
-		text: "Te ayudamos a identificar tus necesidades y expectativas. Juntos definimos los primeros objetivos, para que el proceso terapéutico tenga un rumbo claro y adaptado a ti desde el inicio.",
+		text: "Te ayudo a poner en palabras lo que necesitas y lo que esperas de la terapia. Juntos definimos los primeros objetivos para que el proceso tenga un rumbo claro desde el inicio.",
 	},
 	{
 		number: "04",
 		icon: "shield_with_heart",
-		title: "Tu espacio seguro",
-		text: "Tú marcas el ritmo de cada encuentro. Te acompañamos, te guiamos y te cuidamos, ofreciéndote un espacio seguro donde puedes expresarte libremente y sentirte acogido/a.",
+		title: "A tu ritmo",
+		text: "Tú marcas el ritmo de cada sesión. Te acompaño, te guío y revisamos juntos cómo vas avanzando.",
 	},
 ];
 
@@ -106,28 +114,28 @@ const benefits = [
 		iconClass:
 			"bg-primary-container/20 group-hover:bg-primary-container group-hover:text-on-primary-container",
 		title: "Bienestar emocional",
-		text: "La terapia te ayuda a encontrar tu equilibrio interior, te permite comprender, aceptar y gestionar las emociones de forma saludable. Para que te sientas capaz de afrontar los retos de la vida con serenidad, flexibilidad y autocompasión.",
+		text: "Aprender a comprender, aceptar y gestionar tus emociones, para afrontar los retos del día a día con más serenidad y menos autoexigencia.",
 	},
 	{
 		icon: "psychology",
 		iconClass:
 			"bg-secondary-container/40 group-hover:bg-secondary-container group-hover:text-on-secondary-container",
 		title: "Autoconocimiento",
-		text: "La terapia te guía en la exploración y comprensión de tus emociones, pensamientos, necesidades y fortalezas. De esta manera, desarrollarás una mayor claridad interior, y podrás tomar decisiones más coherentes, mejorar las relaciones y vivir de una manera plena.",
+		text: "Entender mejor tus emociones, pensamientos, necesidades y fortalezas, para tomar decisiones más coherentes contigo y cuidar tus relaciones.",
 	},
 	{
 		icon: "handyman",
 		iconClass:
 			"bg-tertiary-fixed/40 group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-container",
 		title: "Herramientas",
-		text: "Aprenderás estrategias y recursos prácticos para enfrentar retos personales, superar obstáculos y resolver conflictos de manera efectiva en tu día a día.",
+		text: "Estrategias y recursos prácticos para afrontar dificultades y resolver conflictos en tu día a día.",
 	},
 	{
 		icon: "eco",
 		iconClass:
 			"bg-primary-fixed/40 group-hover:bg-primary-fixed group-hover:text-on-primary-fixed",
-		title: "Cambio duradero",
-		text: "La terapia te ayuda a lograr mejoras duraderas, consolidando hábitos y recursos que te permiten mantener tu bienestar emocional a largo plazo con autonomía y seguridad.",
+		title: "Autonomía",
+		text: "Consolidar lo aprendido para que puedas seguir cuidándote por tu cuenta cuando termine la terapia.",
 	},
 ];
 
@@ -140,54 +148,54 @@ const therapistHighlights = [
 	{
 		icon: "science",
 		iconClass: "bg-secondary-container/40",
-		label: "Modelos integradores basados en la evidencia",
+		label: "Enfoque integrador basado en la evidencia",
 	},
 	{
 		icon: "pace",
 		iconClass: "bg-tertiary-fixed/40",
-		label: "Atención 100% personalizada a tu ritmo",
+		label: "Atención personalizada, a tu ritmo",
 	},
 ];
 
 const modalities = [
 	{
-		badge: "Presencial • Pamplona",
+		badge: "Presencial · Pamplona",
 		image: "/oficina.webp",
 		imageAlt:
-			"María Sánchez en la consulta de Inala: escritorio blanco con dos sillas verde agua, armarios a juego y luz natural.",
-		title: "Santuario de Calma en Pamplona",
-		text: "Nuestra clínica en Pamplona está concebida como un refugio sensorial: luz natural, materiales orgánicos, acústica protegida y máxima discreción para que cada encuentro sea un paréntesis reparador en tu día a día.",
+			"Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua, armarios a juego y luz natural.",
+		title: "En mi consulta de Pamplona",
+		text: "Una consulta tranquila y con luz natural, dentro del Centro Yssana.",
 		features: [
 			{
 				icon: "location_on",
-				label: "C/ María Lacunza 6, portal 4, 31011 Pamplona, España",
+				label: `${address}, ${addressCity}`,
 			},
 			{
-				icon: "coffee",
-				label: "Ambiente acústicamente aislado, sereno y confortable",
+				icon: "apartment",
+				label: addressCenter,
 			},
 		],
-		cta: "Ver disponibilidad presencial",
+		cta: ctaLabel,
 		ctaClass: btnSecondary,
 	},
 	{
-		badge: "Online • Internacional",
-		visualTitle: "Terapia Online de Alta Cercanía",
-		visualText: "Conexión cifrada de extremo a extremo",
-		title: "Estés Donde Estés, con la Misma Calidad",
-		text: "Ideal si viajas con asiduidad, resides fuera de España o prefieres el confort e intimidad de tu propio hogar. Mantenemos el mismo estándar metodológico y calidez que en la consulta presencial.",
+		badge: "Online",
+		visualTitle: "Terapia online",
+		visualText: "Por videollamada",
+		title: "Por videollamada, desde donde estés",
+		text: "Útil si vives lejos de Pamplona, viajas a menudo o te resulta más cómodo desde casa. Trabajo igual que en la consulta presencial.",
 		features: [
 			{
 				icon: "lock",
-				label: "Plataforma de videoconsulta médica encriptada y segura",
+				label:
+					"Plataforma segura y cifrada que cumple la normativa de protección de datos",
 			},
 			{
-				icon: "schedule",
-				label:
-					"Flexibilidad horaria y compatibilidad con husos internacionales",
+				icon: "sync_alt",
+				label: "Puedes combinar sesiones online y presenciales",
 			},
 		],
-		cta: "Reservar sesión online",
+		cta: ctaLabel,
 		ctaClass: btnPrimary,
 	},
 ];
@@ -223,21 +231,21 @@ const modalities = [
 						aria-hidden="true">spa</span
 					>
 					<span class={eyebrowText}
-						>Enfoque Integrativo &amp; Basado en Evidencia</span
+						>Enfoque integrador y basado en la evidencia</span
 					>
 				</div>
 
 				<h1
 					class="font-display-xl text-display-xl-mobile md:text-display-xl text-on-surface text-balance"
 				>
-					Un método cercano y adaptado a{" "}
-					<span class="italic text-primary font-normal">tu propio ritmo</span>
+					Cómo trabajo: cercanía y{" "}
+					<span class="italic text-primary font-normal">a tu propio ritmo</span>
 				</h1>
 
 				<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-					En Inala combinamos la calidez humana y el vínculo terapéutico con
-					corrientes avaladas por la ciencia para acompañarte hacia una
-					transformación profunda, respetuosa y sostenible en el tiempo.
+					Combino una relación de confianza con enfoques respaldados por la
+					investigación. El objetivo: que entiendas lo que te pasa y tengas
+					herramientas para sentirte mejor, sin prisas.
 				</p>
 
 				<div class="flex flex-col sm:flex-row items-center gap-4 pt-2 w-full sm:w-auto">
@@ -245,10 +253,10 @@ const modalities = [
 						<span class="material-symbols-outlined text-[20px]" aria-hidden="true"
 							>calendar_today</span
 						>
-						<span>Reservar primera cita</span>
+						<span>{ctaLabel}</span>
 					</a>
 					<a href="#proceso" class:list={[btnSecondary, "w-full sm:w-auto px-6 py-3.5"]}>
-						<span>Explorar las fases</span>
+						<span>Ver cómo es el proceso</span>
 						<span class="material-symbols-outlined text-[18px]" aria-hidden="true"
 							>arrow_forward</span
 						>
@@ -259,14 +267,14 @@ const modalities = [
 					<figcaption class="flex items-center gap-2">
 						<span class="w-6 h-0.5 bg-primary" aria-hidden="true"></span>
 						<span class:list={[eyebrowText, "text-primary"]}
-							>Compromiso Terapéutico</span
+							>Mi compromiso</span
 						>
 					</figcaption>
 					<blockquote
 						class="font-headline-md text-headline-sm italic font-normal text-on-surface"
 					>
-						«No creemos en fórmulas estándar: adaptamos la terapia a ti, nunca a
-						la inversa.»
+						«No creo en fórmulas estándar: adapto la terapia a ti, nunca a la
+						inversa.»
 					</blockquote>
 					<dl
 						class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-border-subtle"
@@ -349,8 +357,8 @@ const modalities = [
 							</p>
 						</div>
 						<p class="font-body-sm text-body-sm text-on-surface-variant">
-							Un espacio cálido y respetuoso en el que desarmar defensas y
-							construir recursos psicológicos sólidos y duraderos.
+							La confianza entre tú y yo es la base para construir recursos
+							que te sirvan a largo plazo.
 						</p>
 					</div>
 				</div>
@@ -371,9 +379,9 @@ const modalities = [
 					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
 						>spa</span
 					>
-					<span class={eyebrowText}>Pilares del Método</span>
+					<span class={eyebrowText}>En qué me baso</span>
 				</div>
-				<h2 class={heading}>Los tres pilares de nuestro método</h2>
+				<h2 class={heading}>Tres principios de mi forma de trabajar</h2>
 			</div>
 			<ul class="grid grid-cols-1 md:grid-cols-3 gap-gutter lg:gap-space-lg">
 				{
@@ -414,9 +422,9 @@ const modalities = [
 					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
 						>psychology</span
 					>
-					<span class={eyebrowText}>Tu Proceso Paso a Paso</span>
+					<span class={eyebrowText}>Paso a paso</span>
 				</div>
-				<h2 class={heading}>Cómo Trabajamos</h2>
+				<h2 class={heading}>Cómo es el proceso</h2>
 			</div>
 
 			<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -425,7 +433,7 @@ const modalities = [
 						class="relative rounded-3xl overflow-hidden shadow-lift bg-surface-container-low group border border-border-subtle"
 					>
 						<img
-							alt="María Sánchez - Psicóloga de INALA Centro de Psicoterapia"
+							alt="María Sánchez, psicóloga de INALA, en su consulta."
 							class:list={[photo, "aspect-4/5 object-top"]}
 							src="/maria1.webp"
 							width="864"
@@ -462,11 +470,11 @@ const modalities = [
 							<div class="flex flex-wrap items-baseline justify-between gap-x-3 mb-1">
 								<span class="font-title-md text-title-md text-primary">María Sánchez</span>
 								<span class="font-label-sm text-label-sm text-slate-muted uppercase"
-									>Psicóloga Sanitaria</span
+									>Psicóloga general sanitaria</span
 								>
 							</div>
 							<p class="font-body-sm text-body-sm text-on-surface-variant italic">
-								«Te acompañamos con rigor y calidez para que encuentres un lugar
+								«Te acompaño con rigor y calidez para que encuentres un lugar
 								donde ser tú mismo/a»
 							</p>
 						</div>
@@ -521,12 +529,12 @@ const modalities = [
 					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
 						>spa</span
 					>
-					<span class={eyebrowText}>Transformación &amp; Bienestar</span>
+					<span class={eyebrowText}>Qué puedes trabajar</span>
 				</div>
-				<h2 class={heading}>Los beneficios de nuestro método</h2>
+				<h2 class={heading}>Lo que la terapia puede ayudarte a trabajar</h2>
 				<p class={bodyText}>
-					Descubre cómo otras personas han transformado su vida y bienestar
-					emocional gracias a nuestro acompañamiento profesional.
+					Estos son algunos de los cambios que se trabajan en terapia. Cada
+					proceso es distinto y avanza a su ritmo.
 				</p>
 			</div>
 			<ul class="grid grid-cols-1 md:grid-cols-2 gap-gutter lg:gap-space-lg">
@@ -560,10 +568,10 @@ const modalities = [
 					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
 						>psychology</span
 					>
-					<span class={eyebrowText}>Conoce a tu Terapeuta</span>
+					<span class={eyebrowText}>Quién te acompaña</span>
 				</div>
 				<h2 class={heading}>
-					Cercanía, rigor clínico y una mirada profundamente humana
+					Cercanía, rigor y una mirada humana
 				</h2>
 			</div>
 			<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -572,7 +580,7 @@ const modalities = [
 						class="relative rounded-3xl overflow-hidden shadow-lift bg-surface-container-low group border border-border-subtle"
 					>
 						<img
-							alt="María Sánchez - Psicóloga Sanitaria en INALA Centro de Psicoterapia"
+							alt="María Sánchez sonriendo, sentada en un sillón azul."
 							class:list={[photo, "h-[440px] sm:h-[480px] object-top"]}
 							src="/maria2.webp"
 							width="1200"
@@ -597,7 +605,7 @@ const modalities = [
 									style={filled}
 									aria-hidden="true">verified</span
 								>
-								Especialista en Terapia Familiar, Pareja y Salud Perinatal
+								Formación en terapia familiar y de pareja y en salud perinatal
 							</span>
 						</div>
 						<div
@@ -608,7 +616,7 @@ const modalities = [
 						>
 							<span class="font-title-md text-title-md text-primary">María Sánchez</span>
 							<span class="font-label-sm text-label-sm text-slate-muted uppercase"
-								>Psicóloga Sanitaria · Nº Colegiada 02300</span
+								>Psicóloga general sanitaria · Nº col. {licenseNumber}</span
 							>
 						</div>
 					</div>
@@ -620,18 +628,13 @@ const modalities = [
 				</div>
 				<div class="lg:col-span-7 flex flex-col gap-6">
 					<p class="font-body-lg text-body-lg text-on-surface max-w-prose">
-						Me llamo María y detrás de Inala encontrarás un espacio seguro y
-						comprometido con tu bienestar emocional. Mi propósito es acompañarte
-						con empatía, rigor y presencia constante en cada paso de tu proceso
-						personal.
+						Me llamo María y soy quien te atenderá en Inala. Mi propósito es
+						acompañarte con empatía, rigor y presencia en cada paso de tu
+						proceso.
 					</p>
 					<p class:list={[bodyText, "max-w-prose"]}>
-						Comencé mi andadura profesional en el entorno empresarial,
-						comprendiendo de primera mano cómo la presión y la autoexigencia
-						impactan en el cuerpo y las relaciones. Esa vivencia me impulsó hacia
-						mi verdadera vocación: la psicología clínica, la formación de
-						posgrado en Terapia Familiar y de Pareja, y la especialización en
-						Salud Mental Perinatal.
+						Antes de la psicología trabajé en la empresa, y eso me ayuda a
+						entender de cerca el estrés y la autoexigencia.
 					</p>
 					<ul class="flex flex-col gap-3 pt-2">
 						{
@@ -657,7 +660,7 @@ const modalities = [
 							class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-on-primary-container group transition-colors underline-offset-4 hover:underline"
 							href="/sobre-mi"
 						>
-							<span>Conoce más sobre mi trayectoria</span>
+							<span>Conocer mi trayectoria</span>
 							<span
 								class="material-symbols-outlined text-[18px] transition-transform duration-300 ease-exhale motion-safe:group-hover:translate-x-1"
 								aria-hidden="true">arrow_forward</span
@@ -677,12 +680,12 @@ const modalities = [
 					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
 						>location_on</span
 					>
-					<span class={eyebrowText}>Flexibilidad &amp; Accesibilidad</span>
+					<span class={eyebrowText}>Presencial u online</span>
 				</div>
-				<h2 class={heading}>Modalidades de Consulta</h2>
+				<h2 class={heading}>Dónde son las sesiones</h2>
 				<p class={bodyText}>
-					Elige la opción que mejor se adapte a tu estilo de vida, ubicación o
-					necesidades personales, siempre con la misma cercanía terapéutica.
+					Elige la opción que mejor encaje con tu vida. Las sesiones duran 60
+					minutos en ambos casos.
 				</p>
 			</div>
 
@@ -784,24 +787,23 @@ const modalities = [
 					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
 						>favorite</span
 					>
-					El primer paso hacia tu calma interior
+					Cuando lo sientas
 				</span>
 				<h2
 					class="font-display-xl text-headline-lg-mobile md:text-display-xl text-balance"
 				>
-					¿Sientes que es el momento de empezar a cuidarte?
+					¿Te gustaría empezar?
 				</h2>
 				<p class="font-body-lg text-body-lg text-inverse-on-surface max-w-2xl">
-					Da el primer paso hoy. Reserva una primera sesión para conocernos,
-					explorar tu momento vital y valorar juntos cómo podemos acompañarte en
-					tu camino de regreso a ti.
+					En la primera sesión nos conocemos, hablamos de tu momento y valoramos
+					juntos cómo puedo acompañarte. {ctaNote}
 				</p>
 				<div class="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full sm:w-auto">
 					<a class:list={[btnPrimary, "w-full sm:w-auto px-8 py-3.5"]} href={contactHref}>
 						<span class="material-symbols-outlined text-[20px]" aria-hidden="true"
 							>calendar_today</span
 						>
-						<span>Reserva tu primera cita</span>
+						<span>{ctaLabel}</span>
 					</a>
 					<a
 						class:list={[
@@ -813,7 +815,7 @@ const modalities = [
 						<span class="material-symbols-outlined text-[20px]" aria-hidden="true"
 							>mail</span
 						>
-						<span>Escríbenos a {email}</span>
+						<span>Escribirme a {email}</span>
 					</a>
 				</div>
 			</div>

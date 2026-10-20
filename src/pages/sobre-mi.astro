@@ -1,21 +1,28 @@
 ---
-import { contactHref, email, instagramUrl } from "../data/site";
+import {
+	addressCenter,
+	contactHref,
+	ctaLabel,
+	ctaNote,
+	email,
+	instagramUrl,
+	licenseNumber,
+} from "../data/site";
 import Layout from "../layouts/Layout.astro";
 
 const title =
-	"Sobre mí | María Sánchez, psicóloga sanitaria en Pamplona y online · Nº Colegiada NA-02300";
+	"Sobre mí | María Sánchez, psicóloga sanitaria en Pamplona y online · Nº col. NA-02300";
 const description =
-	"Conoce a María Sánchez, psicóloga sanitaria especializada en terapia familiar y de pareja y en salud mental perinatal. Un acompañamiento cercano, integrador y basado en la evidencia, en Pamplona y online.";
+	"Conoce a María Sánchez, psicóloga general sanitaria con formación en terapia familiar y de pareja y en salud mental perinatal. Un acompañamiento cercano e integrador, en Pamplona y online.";
 
-// Credentials and story come from the existing site content (src/pages1/sobre-mi.astro).
-const licenseNumber = "NA-02300";
+// Credentials and story come from the existing site content on main.
 
 const story = [
 	{
 		image: "/maria1.webp",
 		alt: "María sentada en su consulta junto a una planta y una mesa auxiliar con una taza.",
 		tagIcon: "psychology_alt",
-		tag: "Entornos de aprendizaje y origen",
+		tag: "Antes, en la empresa",
 		icon: "work",
 		iconClass: "bg-secondary-container text-on-secondary-container",
 		label: "01. Inicios",
@@ -26,7 +33,7 @@ const story = [
 		image: "/maria2.webp",
 		alt: "María sonriendo, sentada en un sillón azul con los brazos cruzados sobre las rodillas.",
 		tagIcon: "center_focus_strong",
-		tag: "Claridad y vínculo",
+		tag: "Psicología clínica y sanitaria",
 		icon: "psychology",
 		iconClass: "bg-primary-container text-on-primary-container",
 		label: "02. Vocación",
@@ -37,7 +44,7 @@ const story = [
 		image: "/maria1.webp",
 		alt: "María en su consulta, sonriendo, con una planta en primer plano.",
 		tagIcon: "volunteer_activism",
-		tag: "Sostén y presencia",
+		tag: "Familia, pareja e infancia",
 		icon: "favorite",
 		iconClass: "bg-tertiary-fixed text-on-tertiary-fixed-variant",
 		label: "03. Propósito",
@@ -61,7 +68,11 @@ const training = [
 	{
 		title: "Especialización en Terapia Familiar y de Pareja",
 		place: "[PENDIENTE: centro de formación]",
-		text: "Experiencia en el ámbito de la desprotección infantil, acompañando procesos de trauma complejo y duelo en la primera infancia.",
+		text: "Formación específica para acompañar a parejas y a familias.",
+	},
+	{
+		title: "Experiencia en desprotección infantil",
+		text: "Acompañamiento de procesos de trauma complejo y duelo en la primera infancia.",
 	},
 	{
 		title: "Formación en Salud Mental Perinatal",
@@ -71,29 +82,29 @@ const training = [
 ];
 
 const spaceFeatures = [
-	{ icon: "wb_sunny", label: "Luz natural y ambiente sereno" },
-	{ icon: "volume_off", label: "Máxima privacidad y silencio" },
-	{ icon: "chair", label: "Ergonomía y confort acogedor" },
-	{ icon: "lock", label: "Confidencialidad absoluta" },
+	{ icon: "wb_sunny", label: "Luz natural" },
+	{ icon: "chair", label: "Un espacio tranquilo y cómodo" },
+	{ icon: "lock", label: "Secreto profesional" },
+	{ icon: "location_on", label: `En el ${addressCenter}` },
 ];
 
 const sessionSteps = [
 	{
 		icon: "hearing",
 		title: "Escucha activa real",
-		text: "Sin prisas, interrupciones ni diagnósticos apresurados. Cada detalle de tu relato se atiende con respeto y reverencia hacia tu vivencia.",
-		tag: "Espacio 100% tuyo",
+		text: "Sin prisas, interrupciones ni diagnósticos apresurados. Escucho tu historia con atención y respeto.",
+		tag: "Un espacio para ti",
 	},
 	{
 		icon: "explore",
 		title: "Claridad y dirección",
-		text: "Sabrás siempre en qué etapa nos encontramos, qué hipótesis clínicas manejamos y qué rumbo toma nuestro plan terapéutico.",
+		text: "Te explicaré en qué punto estamos, qué estamos trabajando y hacia dónde vamos.",
 		tag: "Transparencia activa",
 	},
 	{
 		icon: "build_circle",
 		title: "Herramientas aplicables",
-		text: "No nos quedamos en la teoría: te llevarás ejercicios prácticos de autorregulación somática y conductual para tu vida diaria real.",
+		text: "No nos quedamos en la teoría: trabajaremos recursos prácticos que puedas usar en tu día a día.",
 		tag: "Autonomía vital",
 	},
 	{
@@ -135,16 +146,16 @@ const storyImage =
 							>
 								Hola, soy María.<br />
 								<span class="italic font-normal text-primary"
-									>Te acompaño a habitar tu historia</span
-								> con serenidad y amabilidad.
+									>Te acompaño a entender lo que te pasa</span
+								> con calma y sin juicios.
 							</h1>
 							<p
 								class="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed mt-1"
 							>
-								Psicóloga General Sanitaria y Psicoterapeuta Integradora. Creo en
-								una psicología viva, científica y profundamente humana, donde cada
-								persona encuentra un refugio seguro para sanar, comprenderse y
-								florecer a su propio ritmo.
+								Psicóloga general sanitaria, con consulta en Pamplona y online.
+								Trabajo con un enfoque integrador y basado en la evidencia, y
+								sobre todo cercano: para que puedas comprender lo que te pasa y
+								avanzar a tu ritmo.
 							</p>
 							<!-- Credential badge -->
 							<div class="flex flex-wrap gap-2.5 pt-2">
@@ -154,16 +165,16 @@ const storyImage =
 									<span class="material-symbols-outlined text-[17px] text-primary"
 										>verified</span
 									>
-									<span>Nº Colegiada {licenseNumber}</span>
+									<span>Nº col. {licenseNumber}</span>
 								</span>
 							</div>
 							<!-- Actions -->
 							<div class="flex flex-wrap items-center gap-space-sm pt-4">
 								<a
 									class="inline-flex items-center justify-center font-label-lg text-label-lg px-7 py-3.5 rounded-full bg-primary text-on-primary shadow-lg shadow-primary/20 hover:bg-primary/90 hover:-translate-y-0.5 transition-all duration-300"
-									href="#contacto"
+									href={contactHref}
 								>
-									<span>Reservar primera sesión</span>
+									<span>{ctaLabel}</span>
 									<span class="material-symbols-outlined ml-2 text-[18px]"
 										>arrow_forward</span
 									>
@@ -218,7 +229,7 @@ const storyImage =
 											<p
 												class="font-body-sm text-body-sm text-on-surface-variant truncate"
 											>
-												Psicóloga Sanitaria Colegiada &amp; Fundadora
+												Psicóloga general sanitaria · Fundadora
 											</p>
 										</div>
 									</div>
@@ -229,7 +240,7 @@ const storyImage =
 									<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
 									<span
 										class="font-label-sm text-label-sm text-primary tracking-wider uppercase font-bold"
-										>Pamplona &amp; Online</span
+										>Pamplona y online</span
 									>
 								</div>
 							</div>
@@ -256,9 +267,7 @@ const storyImage =
 						Mi camino hacia la psicología: vocación, experiencia y propósito
 					</h2>
 					<p class="font-body-md text-body-md text-on-surface-variant mt-3 leading-relaxed">
-						Detrás de INALA encontrarás una profesional comprometida con tu
-						bienestar emocional y una trayectoria guiada por la empatía, el rigor y
-						la experiencia real.
+						Así llegué a la psicología y esto es lo que traigo a cada sesión.
 					</p>
 				</div>
 				<div class="flex flex-col gap-6 lg:gap-8 mt-4">
@@ -438,18 +447,17 @@ const storyImage =
 			<div class="max-w-[1240px] mx-auto">
 				<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
 					<!-- Left: title & narrative -->
-					<div class="lg:col-span-4 flex flex-col gap-4 sticky top-28">
+					<div class="lg:col-span-4 flex flex-col gap-4 lg:sticky lg:top-28">
 						<span
 							class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold"
-							>Mi Trayectoria</span
+							>Mi trayectoria</span
 						>
 						<h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight">
-							Una vocación respaldada por el estudio continuo y la práctica diaria.
+							Mi formación
 						</h2>
 						<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-							Entiendo la psicoterapia como un compromiso ético de constante
-							actualización clínica. Cada paciente confía en mis manos lo más
-							preciado: su salud mental y su vulnerabilidad.
+							Entiendo la psicoterapia como un compromiso ético que exige seguir
+							formándose. Esta es la formación que respalda mi trabajo.
 						</p>
 						<div class="mt-4 p-5 rounded-2xl bg-surface-container-low flex flex-col gap-2">
 							<span
@@ -458,7 +466,7 @@ const storyImage =
 								<span class="material-symbols-outlined text-primary"
 									>local_hospital</span
 								>
-								Garantía Sanitaria
+								Registro de centro sanitario
 							</span>
 							<p class="font-body-sm text-body-sm text-slate-muted">
 								[PENDIENTE: datos de inscripción del centro en el registro de
@@ -479,13 +487,9 @@ const storyImage =
 										<span class="material-symbols-outlined text-[20px]">school</span>
 									</span>
 									<h3 class="font-headline-sm text-headline-sm text-on-surface">
-										Formación Especializada
+										Formación y experiencia
 									</h3>
 								</div>
-								<span
-									class="font-label-sm text-label-sm px-3 py-1 rounded-full bg-surface-container text-on-secondary-container"
-									>Acreditada</span
-								>
 							</div>
 							<div class="space-y-6">
 								{
@@ -496,9 +500,11 @@ const storyImage =
 												<h4 class="font-title-md text-title-md text-on-surface font-semibold">
 													{item.title}
 												</h4>
-												<p class="font-body-sm text-body-sm text-primary font-medium">
-													{item.place}
-												</p>
+												{item.place && (
+													<p class="font-body-sm text-body-sm text-primary font-medium">
+														{item.place}
+													</p>
+												)}
 												<p class="font-body-md text-body-md text-on-surface-variant mt-1">
 													{item.text}
 												</p>
@@ -551,17 +557,15 @@ const storyImage =
 								<span class="material-symbols-outlined text-[16px]"
 									>nature_people</span
 								>
-								<span>El Espacio Físico</span>
+								<span>El espacio</span>
 							</div>
 							<h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight">
-								Un refugio pensado para tu bienestar
+								La consulta
 							</h2>
 							<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-								El entorno donde nos abrimos importa tanto como las palabras que
-								compartimos. Mi consulta en Pamplona ha sido diseñada como un
-								santuario luminoso, silencioso y orgánico, donde los tonos marinos,
-								la madera natural y el aislamiento acústico te invitan a soltar la
-								prisa nada más cruzar la puerta.
+								Una consulta tranquila y con luz natural, en el {addressCenter}
+								(Pamplona). Si te resulta más cómodo, también podemos vernos por
+								videollamada.
 							</p>
 							<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
 								{
@@ -586,7 +590,7 @@ const storyImage =
 								<span
 									class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-label-sm uppercase tracking-wider font-semibold"
 								>
-									Atención Online Global
+									Online
 								</span>
 							</div>
 						</div>
@@ -607,8 +611,8 @@ const storyImage =
 						¿Qué puedes esperar en sesión conmigo?
 					</h2>
 					<p class="font-body-md text-body-md text-on-surface-variant mt-2">
-						La psicoterapia no es un monólogo ni un proceso misterioso. Es un
-						diálogo colaborativo con objetivos definidos y una brújula clara.
+						La psicoterapia no es un monólogo ni un proceso misterioso. Es una
+						conversación en la que trabajamos juntas o juntos, con objetivos claros.
 					</p>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
@@ -682,9 +686,12 @@ const storyImage =
 						<p
 							class="font-body-lg text-body-lg text-inverse-on-surface/90 leading-relaxed mt-1"
 						>
-							Si sientes que ha llegado el momento de cuidarte y desatar los nudos
-							que pesan, estaré encantada de acompañarte. Reserva tu primera cita o
-							escríbeme directamente si tienes cualquier duda previa.
+							Si sientes que ha llegado el momento de cuidarte, estaré encantada de
+							acompañarte. Solicita tu primera cita o escríbeme si tienes cualquier
+							duda antes de empezar.
+						</p>
+						<p class="font-body-sm text-body-sm text-inverse-on-surface/80">
+							{ctaNote}
 						</p>
 					</div>
 					<div
@@ -697,7 +704,7 @@ const storyImage =
 							<span class="material-symbols-outlined mr-2 text-[20px]"
 								>calendar_today</span
 							>
-							<span>Reservar cita con María Sánchez</span>
+							<span>{ctaLabel}</span>
 						</a>
 						<a
 							class="w-full sm:w-auto inline-flex items-center justify-center font-label-lg text-label-lg px-6 py-4 rounded-full bg-on-primary/15 hover:bg-on-primary/25 text-on-primary backdrop-blur-md transition-all duration-300"

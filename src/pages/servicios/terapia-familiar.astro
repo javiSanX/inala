@@ -1,12 +1,18 @@
 ---
 import OtherServices from "../../components/OtherServices.astro";
-import { contactHref, email } from "../../data/site";
+import {
+	contactHref,
+	ctaLabel,
+	ctaNote,
+	email,
+	licenseNumber,
+} from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
 const title =
-	"Terapia Familiar | Mejorar la convivencia y sanar los vínculos familiares";
+	"Terapia familiar en Pamplona y online | Inala Psicoterapia";
 const description =
-	"Terapia familiar sistémica: un espacio neutral para mejorar la comunicación, resolver conflictos de convivencia y acompañar transiciones, duelos y crisis. Presencial y online.";
+	"Terapia familiar en Pamplona y online: mejorar la comunicación, resolver conflictos de convivencia y acompañar cambios, duelos y crisis. Sesiones de 60 minutos con María Sánchez, psicóloga general sanitaria.";
 
 const filled = "font-variation-settings: 'FILL' 1;";
 
@@ -19,31 +25,31 @@ const sectionHeading =
 	"font-headline-lg text-headline-md lg:text-headline-lg text-on-surface font-medium leading-tight mb-4";
 
 const trustPills = [
-	{ icon: "verified_user", label: "Espacio seguro y sin juicios" },
-	{ icon: "hub", label: "Mirada sistémica e integradora" },
-	{ icon: "domain", label: "Presencial Pamplona y Online" },
+	{ icon: "schedule", label: "Sesiones de 60 minutos" },
+	{ icon: "domain", label: "Pamplona y online" },
+	{ icon: "verified", label: `Nº col. ${licenseNumber}` },
 ];
 
 const sessionSteps = [
 	{
-		title: "Sesiones pausadas de 75 a 90 minutos",
-		text: "Tiempo suficiente para que cada miembro participe sin prisas, sintiendo que su punto de vista recibe la atención debida.",
+		title: "Sesiones de 60 minutos",
+		text: "Tiempo para que cada miembro participe sin prisas y sienta que su punto de vista cuenta.",
 	},
 	{
 		title: "Neutralidad y validación de todas las voces",
-		text: "Una mirada profesional externa sin bandos ni alianzas que favorece la escucha genuina y desarticula las dinámicas de reproche.",
+		text: "Una mirada profesional externa que no se pone del lado de nadie, para que todos podáis escucharos sin reproches.",
 	},
 	{
 		title: "Identificación de patrones y dinámicas invisibles",
-		text: "Analizamos los círculos viciosos de comunicación y reactividad para desactivarlos en directo con intervenciones sistémicas.",
+		text: "Vemos juntos los círculos de discusión que se repiten y cómo frenarlos en el momento.",
 	},
 	{
 		title: "Acuerdos prácticos y pautas de convivencia",
-		text: "Herramientas claras de negociación, límites saludables y corresponsabilidad afectiva aplicables desde la primera semana en casa.",
+		text: "Acuerdos concretos sobre normas, límites y reparto de tareas, que podéis empezar a probar en casa entre sesiones.",
 	},
 	{
-		title: "Modalidad Presencial y Online flexible",
-		text: "En nuestra consulta en Pamplona o mediante plataforma cifrada segura para acomodar la logística laboral o escolar de toda la familia.",
+		title: "En Pamplona o por videollamada",
+		text: "En mi consulta de Pamplona o por videollamada segura, para encajar con los horarios de trabajo y colegio.",
 	},
 ];
 
@@ -52,19 +58,16 @@ const audiences = [
 		icon: "escalator_warning",
 		title: "Familias con hijos/as o adolescentes",
 		text: "Para hogares donde la convivencia se ha vuelto tensa por la rebeldía, el aislamiento adolescente, dificultades escolares o diferencias en estilos de crianza entre progenitores.",
-		cta: "Recuperar la conexión",
 	},
 	{
 		icon: "sync_alt",
 		title: "Familias en transición o cambio de ciclo",
 		text: "Acompañamiento en momentos clave: llegada de un nuevo miembro, familias reconstituidas (nuevas parejas e hijos), emancipación de los hijos o cuidado de familiares mayores.",
-		cta: "Armonizar la transición",
 	},
 	{
 		icon: "healing",
 		title: "Crisis familiares, duelos o pérdidas",
 		text: "Familias que atraviesan procesos de pérdida, separaciones, enfermedades imprevistas o conflictos enquistados entre hermanos o con la familia extensa.",
-		cta: "Sanar el sistema familiar",
 	},
 ];
 
@@ -87,7 +90,7 @@ const problems = [
 	{
 		icon: "family_restroom",
 		title: "Familias reconstituidas y segundas uniones",
-		text: "Adaptación a nuevas figuras parentales, celos o lealtades invisibles entre hermanos y encaje de diferentes ritmos y hábitos de vida.",
+		text: "Adaptación a nuevas figuras parentales, celos entre hermanos, conflictos de lealtad y encaje de diferentes ritmos y hábitos de vida.",
 	},
 	{
 		icon: "heart_broken",
@@ -107,24 +110,24 @@ const faqs = [
 		question:
 			"¿Tienen que venir todos los miembros de la familia a todas las sesiones?",
 		answer:
-			"No necesariamente. Aunque es ideal contar con la presencia de los miembros involucrados en el conflicto, el proceso se adapta con flexibilidad. En ocasiones realizamos sesiones con toda la familia, otras solo con los progenitores o individuales con alguno de los hijos según los objetivos acordados clínicamente.",
+			"No necesariamente. Aunque es ideal contar con la presencia de los miembros involucrados en el conflicto, el proceso se adapta con flexibilidad. A veces hacemos sesiones con toda la familia, otras solo con los progenitores o individuales con alguno de los hijos según los objetivos que acordemos.",
 	},
 	{
 		question:
 			"¿Qué pasa si alguno de los miembros (como un hijo o progenitor) no quiere venir?",
 		answer:
-			"Es una situación muy común. Nunca forzamos a nadie a participar. Podemos comenzar trabajando con los miembros que sí están motivados; introducir cambios en una parte del sistema familiar a menudo moviliza y genera cambios muy positivos en todo el entorno circundante.",
+			"Es una situación muy común. Nunca obligo a nadie a participar. Podemos comenzar trabajando con los miembros que sí están motivados; introducir cambios en una parte del sistema familiar a menudo también mueve al resto de la familia.",
 	},
 	{
 		question:
 			"¿Cuánto duran y con qué frecuencia son las sesiones familiares?",
 		answer:
-			"Las sesiones familiares suelen durar entre 75 y 90 minutos para dar tiempo suficiente a que todas las voces se expresen con tranquilidad. La frecuencia habitual al inicio suele ser quincenal para permitir poner en práctica y asentar las pautas entre sesión y sesión en el hogar.",
+			"Cada sesión dura 60 minutos. Generalmente empezamos con sesiones semanales, que después se espacian según cómo evolucione la familia.",
 	},
 	{
 		question: "¿La terapeuta juzgará cómo educamos a nuestros hijos?",
 		answer:
-			"Rotundamente no. La terapia no es un juicio moral ni busca etiquetar quién es «buen» o «mal» progenitor. Partimos del respeto profundo hacia vuestra historia familiar y trabajamos de manera colaborativa para identificar qué pautas están funcionando y cuáles necesitan ser renovadas.",
+			"No. La terapia no es un juicio moral ni busca etiquetar quién es «buen» o «mal» progenitor. Parto del respeto hacia vuestra historia familiar y trabajamos juntos para identificar qué pautas están funcionando y cuáles necesitan ser renovadas.",
 	},
 ];
 ---
@@ -170,22 +173,22 @@ const faqs = [
 							>
 							<span
 								class="font-label-sm text-label-sm uppercase tracking-wider text-primary"
-								>Psicoterapia Sistémica y Vincular</span
+								>Terapia familiar · Pamplona y online</span
 							>
 						</div>
 						<h1
 							class="font-display-xl text-headline-lg lg:text-display-xl text-on-surface mb-6 font-medium leading-[1.12]"
 						>
-							Terapia Familiar: <span class="italic font-normal text-primary"
-								>Un espacio seguro</span
-							> para reencontraros, mejorar la convivencia y sanar los vínculos
+							Terapia familiar: mejorar la convivencia y <span
+								class="italic font-normal text-primary">cuidar los vínculos</span
+							>
 						</h1>
 						<p
 							class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-8 leading-relaxed"
 						>
-							Un acompañamiento terapéutico respetuoso y neutral donde escuchar a
-							cada miembro de la familia, desenredar dinámicas de conflicto,
-							reconstruir la comunicación y fortalecer el bienestar del hogar.
+							Un acompañamiento respetuoso y sin tomar partido, donde cada miembro
+							de la familia tiene voz, se deshacen los nudos del conflicto y se
+							recupera la comunicación en casa.
 						</p>
 						<!-- CTAs -->
 						<div class="flex flex-wrap items-center gap-4 mb-10 w-full sm:w-auto">
@@ -196,13 +199,13 @@ const faqs = [
 								<span class="material-symbols-outlined text-[20px]" style={filled}
 									>calendar_today</span
 								>
-								<span>Reservar primera sesión familiar</span>
+								<span>{ctaLabel}</span>
 							</a>
 							<a
 								class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-lg text-label-lg transition-all duration-300 group"
 								href="#enfoque"
 							>
-								<span>Conoce nuestro enfoque</span>
+								<span>Ver en qué consiste</span>
 								<span
 									class="material-symbols-outlined text-[18px] group-hover:translate-y-0.5 transition-transform"
 									>arrow_downward</span
@@ -258,10 +261,10 @@ const faqs = [
 								</div>
 								<div class="min-w-0">
 									<p class="font-title-md text-title-md text-on-surface truncate">
-										Espacio seguro para todas las voces
+										Todas las voces cuentan
 									</p>
 									<p class="font-body-sm text-body-sm text-slate-muted">
-										100% adaptado a vuestro ritmo y necesidades
+										A vuestro ritmo y según vuestras necesidades
 									</p>
 								</div>
 							</div>
@@ -286,15 +289,14 @@ const faqs = [
 					<h2
 						class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface font-medium leading-tight mb-5"
 					>
-						Un espacio neutral para poner palabras a lo que duele y reconstruir
-						los puentes del hogar
+						Poner palabras a lo que duele y volver a entenderos en casa
 					</h2>
 					<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
 						La familia es un sistema vivo donde lo que le ocurre a uno afecta a
-						todos. En consulta no buscamos culpables ni juzgamos estilos
-						educativos: creamos un entorno seguro y mediado donde cada miembro
-						puede expresar sus vivencias, necesidades y temores, transformando
-						patrones reactivos en comprensión mutua y cooperación.
+						todos. En consulta no busco culpables ni juzgo estilos
+						educativos: guío la conversación para que cada miembro pueda contar
+						lo que vive, lo que necesita y lo que teme, y para que las
+						reacciones automáticas den paso a la comprensión y la cooperación.
 					</p>
 				</div>
 				<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -326,7 +328,7 @@ const faqs = [
 							<div class="flex items-center gap-3 pt-4 border-t border-border-subtle">
 								<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
 								<span class="font-label-lg text-label-lg text-slate-muted"
-									>Equipo Terapéutico INALA</span
+									>María Sánchez</span
 								>
 							</div>
 						</div>
@@ -376,14 +378,14 @@ const faqs = [
 					<span class={eyebrow}>Acompañamiento en cada etapa familiar</span>
 					<h2 class={sectionHeading}>¿Para quién es la terapia familiar?</h2>
 					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Acompañamos a familias en diferentes etapas del ciclo vital y
-						situaciones complejas, adaptando el proceso a vuestra realidad:
+						Acompaño a familias en etapas y situaciones muy distintas, y adapto el
+						proceso a vuestra realidad:
 					</p>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
 					{
 						audiences.map((audience) => (
-							<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0_4px_24px_rgba(36,51,48,0.04)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(116,182,166,0.18)]">
+							<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0_4px_24px_rgba(36,51,48,0.04)] flex flex-col">
 								<div>
 									<div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-primary mb-6 shadow-sm">
 										<span class="material-symbols-outlined text-[28px]">
@@ -393,22 +395,10 @@ const faqs = [
 									<h3 class="font-headline-md text-headline-sm text-on-surface mb-3 font-semibold">
 										{audience.title}
 									</h3>
-									<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">
+									<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
 										{audience.text}
 									</p>
 								</div>
-								<a
-									class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-on-primary-fixed-variant transition-colors group"
-									href={contactHref}
-								>
-									<span>{audience.cta}</span>
-									<span
-										class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform"
-										aria-hidden="true"
-									>
-										arrow_forward
-									</span>
-								</a>
 							</div>
 						))
 					}
@@ -418,10 +408,9 @@ const faqs = [
 					class="max-w-2xl mx-auto p-4 sm:p-5 rounded-2xl bg-surface-container-high/60 backdrop-blur-sm text-center"
 				>
 					<p class="font-body-md text-body-md text-on-surface-variant">
-						🌱 <span class="font-medium text-on-surface"
-							>No necesitáis estar al borde de una ruptura de la convivencia para
-							acudir:</span
-						> pedir ayuda a tiempo previene el desgaste crónico y protege a los más
+						<span class="font-medium text-on-surface"
+							>No hace falta llegar al límite para venir:</span
+						> pedir ayuda a tiempo evita mucho desgaste y protege a los más
 						jóvenes.
 					</p>
 				</div>
@@ -434,13 +423,12 @@ const faqs = [
 		>
 			<div class="max-w-[1240px] mx-auto">
 				<div class="text-center max-w-3xl mx-auto mb-14">
-					<span class={eyebrow}>¿Qué trabajamos en consulta?</span>
+					<span class={eyebrow}>Qué trabajo en consulta</span>
 					<h2 class={sectionHeading}>
 						¿Qué problemas se trabajan en terapia familiar?
 					</h2>
 					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Abordamos las dinámicas y dificultades relacionales más frecuentes en
-						el ámbito familiar:
+						Estas son algunas de las dificultades más habituales en consulta:
 					</p>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -471,13 +459,13 @@ const faqs = [
 		>
 			<div class="max-w-[880px] mx-auto">
 				<div class="text-center mb-12">
-					<span class={eyebrow}>Resolvemos vuestras dudas</span>
+					<span class={eyebrow}>Preguntas frecuentes</span>
 					<h2 class={sectionHeading}>
 						Preguntas frecuentes sobre la terapia familiar
 					</h2>
 					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Es natural que surjan inquietudes antes de iniciar un proceso
-						conjunto. Aquí resolvemos las más habituales:
+						Es normal tener dudas antes de empezar. Si la vuestra no está aquí,
+						escribidme.
 					</p>
 				</div>
 				<div class="flex flex-col gap-4" id="faq-accordion-group">
@@ -540,20 +528,19 @@ const faqs = [
 				>
 					<span class="material-symbols-outlined text-[16px]">wb_sunny</span>
 					<span class="font-label-sm text-label-sm uppercase tracking-wider"
-						>El bienestar familiar comienza hoy</span
+						>Primera cita familiar</span
 					>
 				</div>
 				<h2
 					class="font-headline-lg text-headline-md lg:text-headline-lg text-white font-medium mb-6 max-w-2xl leading-tight"
 				>
-					Cuidar de vuestra familia es proteger el refugio de todos
+					Cuidar de vuestra familia es cuidar de cada uno de vosotros
 				</h2>
 				<p
 					class="font-body-lg text-body-lg text-surface-dim max-w-2xl mb-10 leading-relaxed"
 				>
-					Agendad vuestra primera consulta familiar o escribidnos para una breve
-					llamada informativa de 15 minutos sin compromiso. Os escuchamos con
-					calidez, respeto y neutralidad.
+					Solicitad vuestra primera cita o escribidme si antes queréis resolver
+					alguna duda. Sesión de 60 minutos · 75 €.
 				</p>
 				<div class="flex flex-wrap items-center justify-center gap-4 mb-8">
 					<a
@@ -563,7 +550,7 @@ const faqs = [
 						<span class="material-symbols-outlined text-[20px]" style={filled}
 							>calendar_today</span
 						>
-						<span>Reservar cita familiar</span>
+						<span>{ctaLabel}</span>
 					</a>
 					<a
 						class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-transparent hover:bg-white/10 text-white font-label-lg text-label-lg transition-all duration-300"
@@ -576,10 +563,7 @@ const faqs = [
 				<div
 					class="flex items-center gap-2 text-surface-dim font-body-sm text-body-sm opacity-90"
 				>
-					<span class="material-symbols-outlined text-[18px] text-accent-glow"
-						>schedule</span
-					>
-					<span>Respuesta garantizada en un plazo máximo de 24 horas laborables.</span>
+					<span>{ctaNote}</span>
 				</div>
 			</div>
 		</section>

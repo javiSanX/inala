@@ -1,14 +1,13 @@
 ---
 title: El coraje de seguir adelante
 subtitle: >-
-  Ansiedad y Enfermedad: Manejando la Incertidumbre Médica y el Miedo a la
-  Espera
+  Ansiedad y enfermedad: cómo vivir la incertidumbre médica y el miedo a la
+  espera.
 pubDate: 2025-12-05
-author: Maria Sanchez
+author: María Sánchez
 description: >-
   ¿Sientes que el tiempo se detiene? La incertidumbre médica genera una profunda
-  ansiedad por enfermedad y miedo al diagnóstico. Aprende en nuestro blog de
-  psicoterapia cómo recuperar el control, gestionar el miedo a la espera y
+  ansiedad por enfermedad y miedo al diagnóstico. Aprende cómo recuperar el control, gestionar el miedo a la espera y
   encontrar apoyo emocional cuando el cuerpo dice "algo no está bien".
 ---
 Hoy necesito hablar de uno de esos momentos que pueden romperlo todo sin hacer ruido. Ese instante en el que la vida parece detenerse y deja a la vista nuestra fragilidad más profunda: la **incertidumbre** ante un problema serio de salud.
