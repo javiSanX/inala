@@ -1,0 +1,606 @@
+---
+import OtherServices from "../../components/OtherServices.astro";
+import { contactHref, email } from "../../data/site";
+import Layout from "../../layouts/Layout.astro";
+
+const title =
+	"Terapia Individual | Un espacio seguro para reencontrarte contigo mismo/a";
+const description =
+	"Terapia individual personalizada y confidencial para adultos, adolescentes, niños y niñas. Trabajamos ansiedad, estrés, autoestima, duelo y relaciones, de forma presencial u online.";
+
+const heroImage = "/terapia-individual.png";
+
+const trustBadges = [
+	{ icon: "favorite", label: "Atención 100% personalizada" },
+	{ icon: "psychology", label: "Basado en evidencia científica" },
+	{ icon: "pin_drop", label: "Presencial Pamplona y Online" },
+];
+
+const sessionFeatures = [
+	{
+		icon: "schedule",
+		title: "Un encuentro de 60 minutos dedicado exclusivamente a ti",
+		text: "Tiempo sereno y sin prisas en un entorno seguro donde expresarte libremente, sin el ruido ni las demandas de la rutina exterior.",
+	},
+	{
+		icon: "laptop_mac",
+		title: "Modalidad Presencial y Online flexible",
+		text: "En nuestra consulta en Pamplona o desde la intimidad y comodidad de tu hogar por videollamada cifrada y confidencial.",
+	},
+	{
+		icon: "lock",
+		title: "Confidencialidad absoluta y sin juicios",
+		text: "Espacio estrictamente protegido bajo secreto profesional, con una escucha activa, cálida y respetuosa hacia tu historia vital.",
+	},
+	{
+		icon: "spa",
+		title: "Herramientas prácticas e integradas",
+		text: "Recursos de regulación emocional, pautas somáticas y ejercicios reflexivos aplicables a tu vida cotidiana entre sesiones.",
+	},
+	{
+		icon: "tune",
+		title: "A tu propio ritmo y orientada a tus necesidades",
+		text: "Co-construcción de metas reales con un enfoque integrador que aúna cuerpo, mente, emociones y vínculos relacionales.",
+	},
+];
+
+const audiences = [
+	{
+		icon: "person",
+		title: "Adultos",
+		text: "Acompaño a personas adultas que desean comprender lo que sienten y adquirir herramientas para vivir de forma más consciente. Abordamos ansiedad, estrés laboral, rupturas de pareja, duelo, sobrecarga emocional, bloqueos vitales e inseguridades cotidianas.",
+	},
+	{
+		icon: "self_improvement",
+		title: "Adolescentes",
+		text: "Un entorno seguro y sin juicios donde expresar lo que viven en esta etapa de cambio: gestión de emociones intensas, presión social o académica, autodescubrimiento, dudas sobre la identidad y dificultades en la convivencia familiar o escolar.",
+	},
+	{
+		icon: "child_care",
+		title: "Niños y niñas",
+		text: "A través del juego reflexivo y la expresión plástica y emocional, trabajamos miedos infantiles, inseguridades, ansiedad, adaptación ante cambios familiares y habilidades para relacionarse de forma saludable con su entorno.",
+	},
+];
+
+const problems = [
+	{
+		icon: "air",
+		title: "Ansiedad, estrés y regulación somática",
+		text: "Sensación de agitación permanente, sobrepensamiento, tensión corporal, dificultad para regular el sistema nervioso y sobrecarga cotidiana.",
+	},
+	{
+		icon: "wb_twilight",
+		title: "Tristeza, desánimo y gestión emocional",
+		text: "Sensación de vacío o falta de energía, apatía, desbordamiento emocional y dificultad para reconectar con el disfrute y el sentido vital.",
+	},
+	{
+		icon: "self_improvement",
+		title: "Autoestima, autocrítica e identidad",
+		text: "Sensación de insuficiencia, síndrome del impostor, necesidad constante de complacer y autoexigencia severa que frena tu autenticidad.",
+	},
+	{
+		icon: "water_drop",
+		title: "Duelo, pérdidas y transiciones vitales",
+		text: "Acompañamiento ante el fallecimiento de personas queridas, rupturas de pareja, cambios de etapa y adaptación a nuevos ciclos vitales.",
+	},
+	{
+		icon: "diversity_1",
+		title: "Relaciones, apego y límites saludables",
+		text: "Patrones vinculares repetitivos, dependencia, dificultades para poner límites respetuosos sin culpa y resolución constructiva de conflictos.",
+	},
+	{
+		icon: "compass_calibration",
+		title: "Crecimiento personal y claridad vital",
+		text: "Bloqueos e indecisión vital, búsqueda de coherencia interior, mejora del autocuidado y alineamiento de tus decisiones con tus valores.",
+	},
+];
+
+// Answers contain <strong>, so they are rendered with set:html.
+const faqs = [
+	{
+		question: "¿Cuánto dura cada sesión?",
+		answer:
+			"Las sesiones de terapia individual tienen una duración estándar aproximada de <strong>50 a 60 minutos</strong>. Este tiempo permite profundizar con calma y cerrar adecuadamente cada encuentro sin sensación de prisa.",
+	},
+	{
+		question: "¿Con qué frecuencia se realizan las sesiones?",
+		answer:
+			"Al inicio del proceso solemos recomendar una periodicidad <strong>semanal</strong> para consolidar la alianza terapéutica y el alivio de la sintomatología. A medida que vayas integrando recursos y ganando autonomía, las sesiones se espacian a <strong>quincenales</strong> o mensuales.",
+	},
+	{
+		question: "¿Cómo sé si la terapia individual es para mí?",
+		answer:
+			"No es necesario encontrarse en una situación de crisis extrema para acudir. La terapia es idónea si sientes malestar persistente, si deseas comprenderte en mayor profundidad, gestionar transiciones complejas o simplemente aprender a relacionarte de una forma más amable contigo mismo/a.",
+	},
+	{
+		question: "¿Qué pasa si nunca he ido al psicólogo antes?",
+		answer:
+			"Es completamente natural sentir nervios o no saber bien por dónde empezar a contar tu historia. Nuestro papel consiste en guiar la conversación con suavidad, formular preguntas orientadoras y asegurar que marques el ritmo de apertura que te resulte cómodo.",
+	},
+];
+---
+
+<Layout title={title} description={description}>
+	<div class="flex flex-col w-full">
+		<!-- Top Ambient Glow -->
+		<div class="relative w-full overflow-hidden">
+			<div
+				class="absolute -top-40 left-1/2 -translate-x-1/2 w-[720px] h-[380px] bg-accent-glow/20 rounded-full blur-3xl pointer-events-none"
+			>
+			</div>
+			<!-- Section: Breadcrumbs -->
+			<div
+				class="w-full max-w-[1240px] mx-auto px-margin-mobile lg:px-margin pt-6 pb-2"
+			>
+				<nav
+					aria-label="Migas de pan"
+					class="flex items-center gap-2 text-slate-muted font-label-sm text-label-sm tracking-wider uppercase"
+				>
+					<a
+						class="hover:text-primary transition-colors flex items-center gap-1"
+						href="/"
+					>
+						<span class="material-symbols-outlined text-[14px]">home</span>
+						Inicio
+					</a>
+					<span class="text-outline-variant">/</span>
+					<a class="hover:text-primary transition-colors" href="/servicios"
+						>Servicios</a
+					>
+					<span class="text-outline-variant">/</span>
+					<span class="text-primary font-semibold" aria-current="page"
+						>Terapia Individual</span
+					>
+				</nav>
+			</div>
+			<!-- Section: Hero -->
+			<section
+				class="w-full max-w-[1240px] mx-auto px-margin-mobile lg:px-margin pt-4 pb-16 lg:pb-24"
+			>
+				<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+					<!-- Hero Text Left -->
+					<div class="lg:col-span-7 flex flex-col gap-6">
+						<h1
+							class="font-headline-lg text-headline-lg lg:text-[44px] lg:leading-[54px] text-on-surface tracking-tight"
+						>
+							Terapia Individual: Un espacio seguro para <span
+								class="italic font-normal text-primary">reencontrarte</span
+							> contigo mismo/a
+						</h1>
+						<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+							Un proceso terapéutico personalizado y confidencial, donde explorar
+							tus emociones, superar bloqueos y construir recursos propios para
+							vivir con mayor calma, coherencia y bienestar somático.
+						</p>
+						<!-- CTAs -->
+						<div
+							class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
+						>
+							<a
+								class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-primary text-on-primary shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 gap-2"
+								href="#contacto-reserva"
+							>
+								<span>Reservar primera sesión</span>
+								<span class="material-symbols-outlined text-[18px]"
+									>calendar_today</span
+								>
+							</a>
+						</div>
+						<!-- Trust Badges Bar -->
+						<div
+							class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-border-subtle"
+						>
+							{
+								trustBadges.map((badge) => (
+									<div class="flex items-center gap-2.5">
+										<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0">
+											<span class="material-symbols-outlined text-[17px]">
+												{badge.icon}
+											</span>
+										</div>
+										<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">
+											{badge.label}
+										</span>
+									</div>
+								))
+							}
+						</div>
+					</div>
+					<!-- Hero Visual Right -->
+					<div class="lg:col-span-5 relative">
+						<div
+							class="relative rounded-2xl overflow-hidden shadow-xl bg-surface-container-low aspect-[4/3] lg:aspect-[1.15/1]"
+						>
+							<img
+								alt="Sesión de psicoterapia individual en Inala"
+								class="w-full h-full object-cover"
+								src={heroImage}
+							/>
+							<div
+								class="absolute inset-0 bg-gradient-to-t from-inverse-surface/40 via-transparent to-transparent"
+							>
+							</div>
+							<!-- Floating Insight Card -->
+							<div
+								class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-surface-translucent backdrop-blur-md shadow-md"
+							>
+								<div class="flex items-center gap-3">
+									<div
+										class="w-10 h-10 rounded-full bg-primary-container/40 flex items-center justify-center text-primary shrink-0"
+									>
+										<span class="material-symbols-outlined text-[20px]">spa</span>
+									</div>
+									<div>
+										<p
+											class="font-body-sm text-body-sm text-on-surface font-medium leading-snug"
+										>
+											<span class="font-bold text-on-surface bg-sand-warm"
+												>Espacio seguro y confidencial</span
+											><span class="text-on-surface-variant bg-sand-warm"
+												>&nbsp;· 100% a tu propio ritmo.</span
+											>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<!-- Section: Enfoque / ¿Para qué la Terapia Individual? -->
+		<section class="w-full bg-surface-container-lowest py-16 lg:py-24">
+			<div
+				class="w-full max-w-[1240px] mx-auto px-margin-mobile lg:px-margin flex flex-col gap-12 lg:gap-16"
+			>
+				<div class="text-left max-w-3xl flex flex-col items-start gap-3">
+					<div
+						class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-container text-on-secondary-container"
+					>
+						<span class="material-symbols-outlined text-[16px] text-primary"
+							>psychology</span
+						>
+						<span
+							class="font-label-sm text-label-sm uppercase tracking-widest font-bold"
+							>¿EN QUÉ CONSISTE LA TERAPIA INDIVIDUAL?</span
+						>
+					</div>
+					<h2
+						class="font-headline-md text-headline-md lg:text-[34px] font-serif text-on-surface tracking-tight mt-1"
+					>
+						Un espacio seguro para poner palabras a lo que sientes y encontrar
+						claridad
+					</h2>
+					<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+						La terapia individual es un proceso cercano, estructurado y compasivo
+						donde detenernos a comprender tus emociones, desbloquear nudos
+						internos y dotarte de recursos duraderos para tu día a día.
+					</p>
+				</div>
+				<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+					<div class="lg:col-span-5 flex flex-col justify-between gap-6">
+						<div
+							class="relative rounded-3xl overflow-hidden shadow-xl bg-surface-container aspect-[4/3] lg:aspect-[4/4.5] border border-border-subtle group h-full"
+						>
+							<img
+								alt="Sesión de psicoterapia individual en Inala"
+								class="w-full h-full min-h-[420px] object-cover rounded-3xl group-hover:scale-105 transition-transform duration-300"
+								src={heroImage}
+								loading="lazy"
+							/>
+							<div
+								class="absolute inset-0 bg-gradient-to-t from-inverse-surface/40 via-transparent to-transparent"
+							>
+							</div>
+							<div
+								class="absolute bottom-4 left-4 right-4 bg-sand-warm/95 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-border-subtle flex items-center gap-3"
+							>
+								<div
+									class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0"
+								>
+									<span class="material-symbols-outlined text-[20px]"
+										>format_quote</span
+									>
+								</div>
+								<p
+									class="font-body-sm text-body-sm text-on-surface-variant leading-snug italic font-serif text-[14px]"
+								>
+									<span class="text-on-surface font-normal"
+										>«Cuidar de tu mente es el primer paso para habitar tu propia
+										vida con calma y presencia.»</span
+									>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="lg:col-span-7 flex flex-col justify-between gap-6">
+						<div
+							class="p-6 lg:p-8 rounded-3xl bg-surface-container-low/50 border border-border-subtle flex flex-col gap-5"
+						>
+							<div class="flex items-center gap-2">
+								<span class="material-symbols-outlined text-primary text-[20px]"
+									>psychology_alt</span
+								>
+								<h3 class="font-title-md text-title-md font-semibold text-on-surface">
+									¿Qué ocurre durante una sesión?
+								</h3>
+							</div>
+							<div class="flex flex-col gap-3.5">
+								{
+									sessionFeatures.map((feature) => (
+										<div class="flex items-start gap-3 p-3.5 rounded-xl bg-surface-container-lowest/80 border border-border-subtle">
+											<div class="w-8 h-8 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0 mt-0.5">
+												<span class="material-symbols-outlined text-[18px]">
+													{feature.icon}
+												</span>
+											</div>
+											<div>
+												<h4 class="font-body-md text-body-md font-semibold text-on-surface">
+													{feature.title}
+												</h4>
+												<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+													{feature.text}
+												</p>
+											</div>
+										</div>
+									))
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Section: ¿Para quién es la terapia individual? -->
+		<section
+			class="w-full bg-surface-container-low/60 py-16 lg:py-24 border-t border-border-subtle"
+		>
+			<div class="w-full max-w-[1240px] mx-auto px-margin-mobile lg:px-margin">
+				<div class="text-center max-w-3xl mx-auto mb-14">
+					<div
+						class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-container text-on-secondary-container mb-3"
+					>
+						<span class="material-symbols-outlined text-[16px] text-primary"
+							>diversity_3</span
+						>
+						<span
+							class="font-label-sm text-label-sm uppercase tracking-widest font-bold"
+							>ACOMPAÑAMIENTO EN CADA ETAPA VITAL</span
+						>
+					</div>
+					<h2
+						class="font-headline-md text-headline-md font-serif text-on-surface mt-2 mb-4 tracking-tight"
+					>
+						¿Para quién es la terapia individual?
+					</h2>
+					<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+						Acompañamos a personas en diferentes momentos y circunstancias de su
+						vida, adaptando el proceso y las herramientas a cada etapa vital:
+					</p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					{
+						audiences.map((audience) => (
+							<div class="p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between border border-border-subtle">
+								<div class="flex flex-col">
+									<div class="w-12 h-12 rounded-2xl bg-secondary-container/60 text-primary flex items-center justify-center mb-6">
+										<span class="material-symbols-outlined text-[26px]">
+											{audience.icon}
+										</span>
+									</div>
+									<h3 class="font-headline-sm text-headline-sm font-serif text-on-surface mb-3">
+										{audience.title}
+									</h3>
+									<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+										{audience.text}
+									</p>
+								</div>
+							</div>
+						))
+					}
+				</div>
+				<div class="mt-12 flex justify-center">
+					<div
+						class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-sand-warm text-on-surface text-center shadow-sm max-w-2xl border border-border-subtle"
+					>
+						<span class="material-symbols-outlined text-primary text-[20px] shrink-0"
+							>favorite</span
+						>
+						<span class="font-body-sm text-body-sm font-medium"
+							>Sea cual sea tu momento vital, la terapia se adapta a tu ritmo y a
+							lo que tú necesitas.</span
+						>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Section: ¿Qué problemas se trabajan? -->
+		<section
+			class="w-full bg-surface-container-low py-16 lg:py-24 border-t border-b border-border-subtle"
+		>
+			<div class="w-full max-w-[1240px] mx-auto px-margin-mobile lg:px-margin">
+				<div class="text-center max-w-3xl mx-auto mb-14">
+					<span
+						class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold"
+						>¿QUÉ TRABAJAMOS EN CONSULTA?</span
+					>
+					<h2
+						class="font-headline-md text-headline-md font-serif text-on-surface mt-2 mb-4 tracking-tight"
+					>
+						¿Qué problemas se trabajan?
+					</h2>
+					<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+						La terapia psicológica no es solo para crisis agudas; abordamos una
+						amplia variedad de dificultades emocionales, relacionales y vitales.
+						Si te reconoces en alguna de estas situaciones, podemos acompañarte a
+						encontrar claridad y alivio:
+					</p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{
+						problems.map((problem) => (
+							<div class="group p-8 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-start border border-border-subtle">
+								<div class="w-12 h-12 rounded-xl bg-secondary-container/60 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+									<span class="material-symbols-outlined text-[26px]">
+										{problem.icon}
+									</span>
+								</div>
+								<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 font-semibold">
+									{problem.title}
+								</h3>
+								<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+									{problem.text}
+								</p>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- Section: Preguntas Frecuentes (Acordeón interactivo) -->
+		<section class="w-full bg-surface py-16 lg:py-24">
+			<div class="w-full max-w-[860px] mx-auto px-margin-mobile lg:px-margin">
+				<div class="text-center mb-12">
+					<span
+						class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold"
+						>Resolvemos tus dudas</span
+					>
+					<h2 class="font-headline-md text-headline-md text-on-surface mt-2 mb-4">
+						Preguntas frecuentes sobre la terapia individual
+					</h2>
+					<p class="font-body-md text-body-md text-on-surface-variant">
+						Es completamente habitual que surjan preguntas antes de iniciar. Si
+						precisas aclarar cualquier detalle adicional, estamos a tu
+						disposición.
+					</p>
+				</div>
+				<div class="flex flex-col gap-4" id="faq-container">
+					{
+						faqs.map((faq, index) => (
+							<div class="faq-item rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden transition-all duration-300">
+								<button
+									aria-expanded="false"
+									aria-controls={`faq-content-${index}`}
+									class="faq-trigger w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
+									type="button"
+								>
+									<span class="font-title-md text-title-md text-on-surface font-semibold">
+										{faq.question}
+									</span>
+									<span
+										class="faq-icon material-symbols-outlined text-primary text-[22px] transition-transform duration-300"
+										aria-hidden="true"
+									>
+										add
+									</span>
+								</button>
+								<div
+									class="faq-content hidden px-6 pb-6 pt-0"
+									id={`faq-content-${index}`}
+								>
+									<p
+										class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
+										set:html={faq.answer}
+									/>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- Section: Banner Final -->
+		<section
+			class="w-full bg-inverse-surface py-20 lg:py-28 relative overflow-hidden"
+			id="contacto-reserva"
+		>
+			<div
+				class="absolute -bottom-24 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl pointer-events-none"
+			>
+			</div>
+			<div
+				class="absolute -top-24 -right-20 w-96 h-96 bg-accent-glow/10 rounded-full blur-3xl pointer-events-none"
+			>
+			</div>
+			<div
+				class="w-full max-w-[1000px] mx-auto px-margin-mobile lg:px-margin text-center relative z-10 flex flex-col items-center gap-8"
+			>
+				<div
+					class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/30 text-primary-fixed border-subtle"
+				>
+					<span class="material-symbols-outlined text-[16px]">psychology_alt</span>
+					<span
+						class="font-label-sm text-label-sm uppercase tracking-widest font-semibold"
+						>Tu bienestar empieza hoy</span
+					>
+				</div>
+				<h2
+					class="font-headline-lg text-headline-lg lg:text-[44px] lg:leading-[54px] text-inverse-on-surface font-serif max-w-3xl"
+				>
+					Dar el primer paso requiere valentía, pero no tienes que hacerlo solo/a.
+				</h2>
+				<p class="font-body-lg text-body-lg text-tertiary-fixed-dim max-w-2xl">
+					Agenda tu primera consulta o escríbenos para una breve llamada
+					orientativa de 15 minutos sin compromiso alguno. Te escuchamos y te
+					orientamos con cercanía.
+				</p>
+				<div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
+					<a
+						class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-4 rounded-full bg-primary-container text-on-primary-container shadow-lg hover:shadow-2xl hover:scale-105 active:scale-100 transition-all duration-300 font-semibold gap-2"
+						href={contactHref}
+					>
+						<span>Reserva tu cita ahora</span>
+						<span class="material-symbols-outlined text-[19px]"
+							>event_available</span
+						>
+					</a>
+					<a
+						class="inline-flex items-center justify-center font-label-lg text-label-lg px-6 py-4 rounded-full bg-surface-translucent/10 hover:bg-surface-translucent/20 text-inverse-on-surface transition-all duration-300 gap-2"
+						href={`mailto:${email}`}
+					>
+						<span class="material-symbols-outlined text-[18px]">mail</span>
+						<span>{email}</span>
+					</a>
+				</div>
+				<p
+					class="font-body-sm text-body-sm text-tertiary-fixed-dim/80 pt-2 flex items-center gap-2"
+				>
+					<span class="material-symbols-outlined text-[16px]">verified</span>
+					Respuesta garantizada en un plazo máximo de 24 horas laborales.
+				</p>
+			</div>
+		</section>
+		<OtherServices />
+	</div>
+</Layout>
+
+<script>
+	const faqTriggers =
+		document.querySelectorAll<HTMLButtonElement>(".faq-trigger");
+
+	const setOpen = (trigger: HTMLButtonElement, open: boolean) => {
+		trigger.setAttribute("aria-expanded", String(open));
+		trigger.nextElementSibling?.classList.toggle("hidden", !open);
+		const icon = trigger.querySelector(".faq-icon");
+		if (icon) {
+			icon.textContent = open ? "close" : "add";
+			icon.classList.toggle("rotate-45", open);
+		}
+	};
+
+	for (const trigger of faqTriggers) {
+		trigger.addEventListener("click", () => {
+			const expanded = trigger.getAttribute("aria-expanded") === "true";
+			// Close the other FAQs so only one stays open.
+			for (const other of faqTriggers) {
+				if (other !== trigger) setOpen(other, false);
+			}
+			setOpen(trigger, !expanded);
+		});
+	}
+</script>

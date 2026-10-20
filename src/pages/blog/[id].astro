@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("blog");
+	return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, subtitle, description, pubDate, author, image } = post.data;
+
+const date = pubDate.toLocaleDateString("es-ES", {
+	day: "numeric",
+	month: "long",
+	year: "numeric",
+});
+---
+
+<Layout title={`${title} | Blog Inala`} description={description}>
+	<article
+		class="w-full px-margin-mobile lg:px-margin pt-space-lg lg:pt-space-xl pb-space-xl"
+	>
+		<div class="max-w-[68ch] mx-auto">
+			<a
+				href="/blog"
+				class="inline-flex items-center gap-1 font-label-lg text-label-lg text-primary hover:text-on-primary-container transition-colors duration-200 mb-space-lg"
+			>
+				<span class="material-symbols-outlined text-[18px]" aria-hidden="true"
+					>arrow_back</span
+				>
+				Volver al blog
+			</a>
+			<header class="mb-space-lg">
+				<h1
+					class="font-headline-lg-mobile text-headline-lg-mobile lg:font-headline-lg lg:text-headline-lg text-on-surface mb-space-sm"
+				>
+					{title}
+				</h1>
+				{
+					subtitle && (
+						<p class="font-body-lg text-body-lg text-on-surface-variant mb-space-sm">
+							{subtitle}
+						</p>
+					)
+				}
+				<p class="font-body-sm text-body-sm text-slate-muted">
+					{author} · <time datetime={pubDate.toISOString()}>{date}</time>
+				</p>
+			</header>
+			{
+				image && (
+					<Image
+						src={image}
+						alt=""
+						widths={[680, 1360]}
+						sizes="(min-width: 768px) 680px, 100vw"
+						loading="eager"
+						class="aspect-[3/2] w-full rounded-xl object-cover mb-space-lg"
+					/>
+				)
+			}
+			<div class="prose-inala">
+				<Content />
+			</div>
+		</div>
+	</article>
+</Layout>

@@ -1,0 +1,880 @@
+---
+import {
+	address,
+	addressCity,
+	email,
+	legalLinks,
+	therapistName,
+	whatsappNumber,
+	whatsappUrl,
+} from "../data/site";
+import Layout from "../layouts/Layout.astro";
+
+const title =
+	"Contacto y Reserva de Cita | Psicóloga Sanitaria en Pamplona y Online";
+const description = `Contacta con ${therapistName}, psicóloga sanitaria en Pamplona. Reserva tu sesión presencial u online: respuesta rápida, trato cercano y confidencial.`;
+
+// Real contact data comes from the existing site content (src/pages1/contacto.astro).
+const licenseNumber = "NA-02300";
+const mapsUrl =
+	"https://www.google.com/maps/search/?api=1&query=Calle+Mar%C3%ADa+Lacunza+6+Pamplona";
+const whatsappTel = `tel:${whatsappNumber.replaceAll(" ", "")}`;
+const privacyHref =
+	legalLinks.find((link) => link.name === "Política de Privacidad")?.href ??
+	"/";
+
+const heroPills = [
+	{ icon: "schedule", text: "Respuesta en ", strong: "<24h" },
+	{ icon: "ring_volume", text: "Llamada orientativa ", strong: "15 min gratuita" },
+	{ icon: "verified_user", text: "100% Confidencial y Secreto Sanitario" },
+];
+
+const services = [
+	{ value: "individual", label: "Terapia Individual", checked: true },
+	{ value: "pareja", label: "Terapia de Pareja" },
+	{ value: "perinatal", label: "Psicología Perinatal" },
+	{ value: "familiar", label: "Terapia Familiar" },
+	{
+		value: "general",
+		label: "Consulta General / Información",
+		wide: true,
+	},
+];
+
+const modalities = [
+	{
+		value: "presencial",
+		icon: "location_on",
+		label: "Presencial Pamplona",
+		note: "(Centro Yssana)",
+		checked: true,
+	},
+	{
+		value: "online",
+		icon: "videocam",
+		label: "Online",
+		note: "(Videollamada segura)",
+	},
+	{
+		value: "indiferente",
+		icon: "tune",
+		label: "Indiferente",
+		note: "(Valorar juntos)",
+	},
+];
+
+const comfort = [
+	{ icon: "volume_off", title: "Insonorizado", note: "Privacidad total" },
+	{ icon: "wb_sunny", title: "Luz natural", note: "Ambiente cálido" },
+	{ icon: "thermostat", title: "Climatizado", note: "Confort permanente" },
+];
+
+const onlinePoints = [
+	{
+		icon: "security",
+		iconBg: "bg-primary-fixed",
+		strong: "Plataforma segura:",
+		text: "Videollamada cifrada de grado médico sin descargas complejas.",
+	},
+	{
+		icon: "sync_saved_locally",
+		iconBg: "bg-secondary-container",
+		strong: "Continuidad terapéutica:",
+		text: "Compatibilidad horaria adaptada a residentes en España y expatriados.",
+	},
+	{
+		icon: "home",
+		iconBg: "bg-sand-warm",
+		strong: "Tu espacio seguro:",
+		text: "Realiza tu sesión desde tu rincón favorito con auriculares.",
+	},
+];
+
+const faqs = [
+	{
+		question: "¿Tiene algún coste o compromiso la llamada previa de 15 min?",
+		answer:
+			"No, en absoluto. Es una toma de contacto completamente gratuita y sin compromiso. Nos sirve para escuchar qué necesitas, aclarar tus dudas respecto a la metodología y valorar si podemos ofrecerte la ayuda más conveniente.",
+		open: true,
+	},
+	{
+		question: "¿Cómo sé si me conviene la modalidad presencial u online?",
+		answer:
+			"Ambas modalidades han demostrado la misma eficacia clínica. Si valoras el ritual de acudir físicamente a un espacio neutro y acogedor, la consulta de Pamplona es idónea. Si tus horarios son ajustados o buscas optimizar traslados, la modalidad online te ofrecerá la misma cercanía y confort.",
+	},
+	{
+		question:
+			"¿Qué confidencialidad tienen los datos que envío por este formulario?",
+		answer:
+			"Tus datos están protegidos bajo estricto secreto profesional sanitario colegiado y el Reglamento General de Protección de Datos (RGPD). Nadie ajeno a la consulta sanitaria tiene acceso a la información compartida, que es tratada con rigor ético y custodia absoluta.",
+	},
+	{
+		question: "¿Cuánto tiempo tardáis en responder a un mensaje?",
+		answer:
+			"Respondemos a todas las solicitudes de manera individual y pausada en un plazo máximo de 24 horas laborables.",
+	},
+];
+
+const card =
+	"bg-surface-container-lowest rounded-2xl p-6 sm:p-7 shadow-[0_4px_24px_rgba(36,105,91,0.06)] border border-border-subtle";
+const fieldLabel =
+	"block font-label-lg text-xs sm:text-sm font-semibold text-on-surface";
+const groupLegend = "block font-label-lg text-sm font-semibold text-on-surface";
+const fieldInput =
+	"w-full px-4 py-3 rounded-xl bg-surface-container-low border border-transparent focus:border-primary focus:bg-surface-container-lowest text-on-surface placeholder:text-outline text-sm transition-all duration-200 focus:outline-none";
+// The radio is visually hidden, so its focus ring is drawn on the card.
+const choiceFocus =
+	"peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-primary";
+const serviceChoice = `p-3 text-center rounded-xl bg-surface-container-low text-on-surface-variant font-label-lg text-xs sm:text-sm border border-transparent peer-checked:border-primary peer-checked:bg-primary peer-checked:text-on-primary peer-checked:shadow-sm transition-all duration-200 hover:bg-surface-container ${choiceFocus}`;
+const modalityChoice = `p-3.5 text-center rounded-xl bg-surface-container-low text-on-surface-variant font-label-lg text-xs sm:text-sm border border-transparent peer-checked:border-secondary peer-checked:bg-secondary peer-checked:text-white peer-checked:shadow-sm transition-all duration-200 hover:bg-surface-container flex flex-col items-center justify-center gap-1 ${choiceFocus}`;
+---
+
+<Layout title={title} description={description}>
+	<div class="flex flex-col w-full">
+		<div class="relative w-full overflow-hidden">
+			<div
+				class="absolute -top-36 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-accent-glow/25 rounded-full blur-[110px] pointer-events-none"
+			>
+			</div>
+
+			<!-- 1. Hero -->
+			<section
+				class="relative z-10 w-full px-6 lg:px-margin pt-12 lg:pt-16 pb-10 text-center"
+			>
+				<div class="max-w-4xl mx-auto flex flex-col items-center">
+					<div
+						class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high border border-border-subtle mb-6"
+					>
+						<span class="w-2 h-2 rounded-full bg-primary motion-safe:animate-pulse"
+						></span>
+						<span
+							class="font-label-sm text-label-sm text-primary uppercase tracking-widest"
+							>Un espacio seguro para ti</span
+						>
+					</div>
+					<h1
+						class="font-display-xl text-3xl sm:text-4xl lg:text-display-xl text-primary font-medium tracking-tight leading-[1.15] mb-6"
+					>
+						Hablemos. Da el primer paso hacia tu bienestar con calma y cercanía.
+					</h1>
+					<p
+						class="font-body-lg text-base md:text-body-lg text-on-surface-variant max-w-2xl leading-relaxed mb-8"
+					>
+						Sabemos que decidir iniciar un proceso terapéutico es un acto de
+						valentía y profundo cuidado personal. Aquí encontrarás una escucha
+						humana, empática y libre de juicios para acompañarte a tu propio
+						ritmo.
+					</p>
+					<div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+						{
+							heroPills.map((pill) => (
+								<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-lowest shadow-sm border border-border-subtle text-on-surface">
+									<span class="material-symbols-outlined text-primary text-[20px]">
+										{pill.icon}
+									</span>
+									<span class="font-label-lg text-xs sm:text-label-lg text-slate-muted">
+										{pill.text}
+										{pill.strong && (
+											<strong class="text-on-surface">{pill.strong}</strong>
+										)}
+									</span>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			<!-- 2. Contact channels & form -->
+			<section class="w-full px-6 lg:px-margin py-8 lg:py-12 relative z-10" id="formulario">
+				<div
+					class="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
+				>
+					<!-- Left column: human contact & direct channels -->
+					<div class="lg:col-span-5 flex flex-col gap-6">
+						<div class:list={[card, "relative overflow-hidden"]}>
+							<div
+								class="absolute -right-8 -top-8 w-32 h-32 bg-secondary-container/40 rounded-full blur-2xl pointer-events-none"
+							>
+							</div>
+							<div class="flex items-center gap-5 mb-5">
+								<div
+									class="w-20 h-20 rounded-full overflow-hidden shrink-0 ring-4 ring-secondary-container/60 shadow-md"
+								>
+									<img
+										alt="María Sánchez, psicóloga general sanitaria"
+										class="w-full h-full object-cover object-top"
+										src="/maria2.webp"
+										width="1200"
+										height="1600"
+									/>
+								</div>
+								<div>
+									<span
+										class="font-label-sm text-[11px] uppercase tracking-wider text-primary font-semibold block mb-0.5"
+										>Atención Directa &amp; Cercana</span
+									>
+									<h2
+										class="font-headline-md text-xl md:text-2xl text-on-surface font-semibold leading-tight"
+									>
+										María Sánchez
+									</h2>
+									<p class="font-body-sm text-xs md:text-body-sm text-slate-muted">
+										Psicóloga General Sanitaria
+									</p>
+									<p class="font-label-sm text-[11px] text-primary mt-0.5">
+										Col. {licenseNumber}
+									</p>
+								</div>
+							</div>
+							<div class="bg-surface-container-low/70 rounded-xl p-4 border-l-4 border-primary">
+								<p
+									class="font-body-md text-sm sm:text-body-md text-on-surface-variant italic leading-relaxed"
+								>
+									«Mi compromiso es ofrecerte un refugio de calma y presencia
+									absoluta. Desde tu primer mensaje, recibirás una mirada
+									comprensiva y una respuesta cuidada al detalle.»
+								</p>
+							</div>
+						</div>
+
+						<!-- Direct channels -->
+						<div class:list={[card, "flex flex-col gap-4"]}>
+							<h2
+								class="font-title-md text-lg text-primary font-semibold flex items-center gap-2"
+							>
+								<span class="material-symbols-outlined text-[22px]"
+									>contact_support</span
+								>Canales de atención inmediata
+							</h2>
+							<div
+								class="flex items-center justify-between p-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors group"
+							>
+								<div class="flex items-center gap-3.5">
+									<div
+										class="w-11 h-11 rounded-xl bg-secondary-container flex items-center justify-center text-primary group-hover:scale-105 transition-transform"
+									>
+										<span class="material-symbols-outlined text-[22px]">mail</span>
+									</div>
+									<div>
+										<p
+											class="font-label-sm text-[11px] uppercase tracking-wider text-slate-muted"
+										>
+											Escríbenos por email
+										</p>
+										<a
+											class="font-title-md text-sm sm:text-base text-primary font-medium hover:underline block"
+											href={`mailto:${email}`}>{email}</a
+										>
+									</div>
+								</div>
+								<button
+									aria-label="Copiar email"
+									class="copy-email p-2 rounded-lg bg-surface-container-lowest text-slate-muted hover:text-primary shadow-sm hover:scale-105 transition-all"
+									data-email={email}
+									title="Copiar email"
+									type="button"
+								>
+									<span class="material-symbols-outlined text-[19px]" aria-hidden="true"
+										>content_copy</span
+									>
+								</button>
+							</div>
+							<div
+								class="flex items-center justify-between p-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors group"
+							>
+								<div class="flex items-center gap-3.5">
+									<div
+										class="w-11 h-11 rounded-xl bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-105 transition-transform"
+									>
+										<span class="material-symbols-outlined text-[22px]"
+											>phone_in_talk</span
+										>
+									</div>
+									<div>
+										<p
+											class="font-label-sm text-[11px] uppercase tracking-wider text-slate-muted"
+										>
+											Teléfono &amp; WhatsApp
+										</p>
+										<a
+											class="font-title-md text-sm sm:text-base text-primary font-medium hover:underline"
+											href={whatsappTel}>{whatsappNumber}</a
+										>
+									</div>
+								</div>
+								<a
+									aria-label="Abrir WhatsApp (se abre en una pestaña nueva)"
+									class="p-2 px-3 rounded-lg bg-primary text-on-primary font-label-sm text-xs hover:bg-on-primary-container transition-all flex items-center gap-1 shadow-sm"
+									href={whatsappUrl}
+									rel="noopener noreferrer"
+									target="_blank">Chat</a
+								>
+							</div>
+							<div
+								class="p-4 rounded-xl bg-sand-warm/75 border border-border-subtle flex items-start gap-3.5 text-on-surface"
+							>
+								<div
+									class="w-9 h-9 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shrink-0 mt-0.5 shadow-sm"
+								>
+									<span class="material-symbols-outlined text-[20px]">pace</span>
+								</div>
+								<div class="font-body-sm text-xs sm:text-body-sm">
+									<p class="font-label-lg text-primary font-semibold mb-0.5">
+										Horario de atención
+									</p>
+									<p class="text-on-surface-variant">
+										[PENDIENTE: días y horario de atención]
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- Free orientation call -->
+						<div
+							class="rounded-2xl p-6 bg-gradient-to-br from-secondary via-secondary to-primary text-on-secondary shadow-lg relative overflow-hidden"
+						>
+							<div
+								class="absolute -right-6 -bottom-6 w-32 h-32 bg-accent-glow/20 rounded-full blur-2xl"
+							>
+							</div>
+							<div
+								class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+							>
+								<div>
+									<div
+										class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-accent-glow backdrop-blur-sm mb-2"
+									>
+										<span class="material-symbols-outlined text-[16px]">verified</span>
+										<span
+											class="font-label-sm text-[11px] uppercase tracking-wider font-semibold"
+											>Sin compromiso</span
+										>
+									</div>
+									<h2 class="font-headline-sm text-xl text-white font-medium mb-1">
+										Llamada de orientación previa (15 min)
+									</h2>
+									<p class="font-body-sm text-xs sm:text-body-sm text-secondary-fixed">
+										Un primer contacto telefónico sin coste para escucharte, resolver
+										dudas y guiarte sobre el enfoque idóneo para ti.
+									</p>
+								</div>
+								<a
+									class="shrink-0 px-5 py-3 rounded-full bg-white text-primary font-label-lg text-sm font-semibold hover:bg-surface-container shadow-md hover:scale-105 transition-all inline-flex items-center gap-2"
+									href={whatsappTel}
+									><span class="material-symbols-outlined text-[18px]">call</span>Pedir
+									llamada</a
+								>
+							</div>
+						</div>
+					</div>
+
+					<!-- Right column: booking form -->
+					<div
+						class="lg:col-span-7 bg-surface-container-lowest rounded-2xl p-6 sm:p-9 shadow-[0_8px_32px_rgba(36,105,91,0.08)] border border-border-subtle"
+					>
+						<div class="mb-7 pb-5 border-b border-border-subtle">
+							<span
+								class="font-label-sm text-xs uppercase tracking-widest text-primary font-bold block mb-1"
+								>Reserva y Consultas</span
+							>
+							<h2
+								class="font-headline-md text-2xl sm:text-3xl text-primary font-medium tracking-tight"
+							>
+								Envíanos tu mensaje o solicita tu cita
+							</h2>
+							<p
+								class="font-body-md text-sm sm:text-body-md text-on-surface-variant mt-2 leading-relaxed"
+							>
+								Completa este breve formulario. Te responderemos personalmente en
+								menos de 24 horas laborables con la máxima delicadeza y
+								confidencialidad.
+							</p>
+						</div>
+						<form
+							class="space-y-6"
+							id="contact-booking-form"
+							data-email={email}
+						>
+							<fieldset class="space-y-2.5">
+								<legend class={groupLegend}>
+									1. ¿Cuál es tu motivo de consulta o interés principal? <span
+										class="text-primary"
+										aria-hidden="true">*</span
+									>
+								</legend>
+								<div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+									{
+										services.map((service) => (
+											<label
+												class:list={["cursor-pointer", { "sm:col-span-2": service.wide }]}
+											>
+												<input
+													checked={service.checked}
+													class="peer sr-only"
+													name="service_type"
+													type="radio"
+													value={service.label}
+												/>
+												<div class={serviceChoice}>{service.label}</div>
+											</label>
+										))
+									}
+								</div>
+							</fieldset>
+							<fieldset class="space-y-2.5">
+								<legend class={groupLegend}>
+									2. Modalidad de terapia preferida <span
+										class="text-primary"
+										aria-hidden="true">*</span
+									>
+								</legend>
+								<div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+									{
+										modalities.map((modality) => (
+											<label class="cursor-pointer">
+												<input
+													checked={modality.checked}
+													class="peer sr-only"
+													name="treatment_modality"
+													type="radio"
+													value={modality.label}
+												/>
+												<div class={modalityChoice}>
+													<span
+														class="material-symbols-outlined text-[20px]"
+														aria-hidden="true"
+													>
+														{modality.icon}
+													</span>
+													<span class="font-medium">{modality.label}</span>
+													<span class="text-[11px] opacity-80">{modality.note}</span>
+												</div>
+											</label>
+										))
+									}
+								</div>
+							</fieldset>
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+								<div class="space-y-1.5">
+									<label class={fieldLabel} for="form-name"
+										>Nombre y apellidos <span class="text-primary" aria-hidden="true"
+											>*</span
+										></label
+									>
+									<input
+										class={fieldInput}
+										id="form-name"
+										name="name"
+										autocomplete="name"
+										placeholder="Ej. Clara Santos Ruiz"
+										required
+										type="text"
+									/>
+								</div>
+								<div class="space-y-1.5">
+									<label class={fieldLabel} for="form-email"
+										>Correo electrónico <span class="text-primary" aria-hidden="true"
+											>*</span
+										></label
+									>
+									<input
+										class={fieldInput}
+										id="form-email"
+										name="email"
+										autocomplete="email"
+										placeholder="clara@ejemplo.com"
+										required
+										type="email"
+									/>
+								</div>
+							</div>
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+								<div class="space-y-1.5">
+									<label class={fieldLabel} for="form-phone"
+										>Teléfono de contacto <span
+											class="text-slate-muted text-xs font-normal">(recomendado)</span
+										></label
+									>
+									<input
+										class={fieldInput}
+										id="form-phone"
+										name="phone"
+										autocomplete="tel"
+										placeholder="+34 600 000 000"
+										type="tel"
+									/>
+								</div>
+								<div class="space-y-1.5">
+									<label class={fieldLabel} for="form-slot">Preferencia de horario</label>
+									<select class={fieldInput} id="form-slot" name="slot">
+										<option value="Flexible / Cualquier franja"
+											>Flexible / Cualquier franja</option
+										>
+										<option value="Mañanas">Mañanas</option>
+										<option value="Tardes">Tardes</option>
+									</select>
+								</div>
+							</div>
+							<div class="space-y-1.5">
+								<label class={fieldLabel} for="form-message"
+									>¿Qué te gustaría compartir o consultar con nosotros?</label
+								>
+								<textarea
+									class={`${fieldInput} py-3.5 resize-none leading-relaxed`}
+									id="form-message"
+									name="message"
+									placeholder="Cuéntanos brevemente tu situación, el momento vital que estás transitando o cualquier duda que tengas. Siéntete con total libertad y tranquilidad."
+									rows="4"></textarea>
+							</div>
+							<div class="flex items-start gap-3 p-3.5 rounded-xl bg-surface-container-low/60">
+								<input
+									class="mt-1 w-4 h-4 text-primary rounded border-outline focus:ring-primary cursor-pointer shrink-0"
+									id="form-rgpd"
+									required
+									type="checkbox"
+								/>
+								<label
+									class="font-body-sm text-xs text-on-surface-variant cursor-pointer leading-relaxed"
+									for="form-rgpd"
+									>He leído y acepto el tratamiento confidencial de mis datos con
+									arreglo a la <a
+										class="text-primary font-medium underline hover:text-on-primary-container"
+										href={privacyHref}>Política de Privacidad Sanitaria</a
+									> y el secreto profesional terapéutico (RGPD y LOPD-GDD 3/2018).</label
+								>
+							</div>
+							<!-- Shown after the visitor's mail app opens with the prepared message -->
+							<div
+								class="p-4 rounded-xl bg-primary-fixed text-on-primary-fixed text-sm flex items-start gap-3 border border-primary/20"
+								id="booking-confirmation-banner"
+								hidden
+								role="status"
+								tabindex="-1"
+							>
+								<span
+									class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5"
+									aria-hidden="true">mail</span
+								>
+								<div>
+									<p class="font-semibold text-primary">
+										Hemos preparado tu mensaje en tu aplicación de correo
+									</p>
+									<p class="text-xs sm:text-sm text-on-primary-fixed-variant mt-0.5">
+										Revísalo y pulsa enviar para que nos llegue. Si no se ha abierto,
+										escríbenos directamente a {email}.
+									</p>
+								</div>
+							</div>
+							<div class="pt-2 flex flex-col items-center gap-3">
+								<button
+									class="w-full inline-flex items-center justify-center gap-2 py-4 px-8 rounded-full bg-primary text-on-primary font-label-lg text-base shadow-[0_4px_18px_rgba(36,105,91,0.25)] hover:bg-on-primary-container hover:shadow-[0_6px_26px_rgba(36,105,91,0.35)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 font-semibold cursor-pointer"
+									type="submit"
+									><span class="material-symbols-outlined text-[20px]" aria-hidden="true"
+										>send</span
+									>Enviar mensaje y solicitar cita</button
+								>
+								<div class="flex items-center justify-center gap-4 text-xs text-slate-muted">
+									<span class="inline-flex items-center gap-1.5"
+										><span class="material-symbols-outlined text-[16px] text-primary"
+											>lock</span
+										>Conexión cifrada SSL</span
+									>
+									<span class="text-slate-muted/40" aria-hidden="true">•</span>
+									<span class="inline-flex items-center gap-1.5"
+										><span class="material-symbols-outlined text-[16px] text-primary"
+											>shield</span
+										>Estricto secreto profesional sanitario</span
+									>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</section>
+
+			<!-- 3. Office in Pamplona -->
+			<section class="w-full px-6 lg:px-margin py-12 lg:py-16 relative">
+				<div class="max-w-[1240px] mx-auto">
+					<div
+						class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_6px_36px_rgba(36,105,91,0.06)] border border-border-subtle grid grid-cols-1 lg:grid-cols-12 items-stretch"
+					>
+						<div class="lg:col-span-6 relative min-h-[340px] lg:min-h-[520px] overflow-hidden">
+							<img
+								alt="María Sánchez en su consulta de Pamplona, junto a una planta y una mesa auxiliar."
+								class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+								src="/maria1.webp"
+								loading="lazy"
+							/>
+							<div
+								class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent lg:hidden"
+							>
+							</div>
+							<div class="absolute bottom-4 left-4 right-4 lg:hidden text-white">
+								<span
+									class="font-label-sm text-xs uppercase tracking-widest text-accent-glow font-semibold block mb-1"
+									>La consulta de Pamplona</span
+								>
+								<p class="font-headline-sm text-xl font-medium">
+									Un santuario de calma y luz natural
+								</p>
+							</div>
+						</div>
+						<div class="lg:col-span-6 p-6 sm:p-10 lg:p-12 flex flex-col justify-between gap-6">
+							<div class="space-y-4">
+								<div>
+									<span
+										class="font-label-sm text-xs uppercase tracking-widest text-primary font-bold block mb-1.5"
+										>Santuario Presencial</span
+									>
+									<h2
+										class="font-headline-lg text-2xl sm:text-3xl text-primary font-medium tracking-tight"
+									>
+										Nuestro espacio en el centro Yssana, en Pamplona
+									</h2>
+								</div>
+								<p
+									class="font-body-md text-sm sm:text-body-md text-on-surface-variant leading-relaxed"
+								>
+									Diseñado meticulosamente para propiciar el sosiego, la intimidad y
+									la desconexión del ruido urbano. Un entorno cálido, bañado por luz
+									natural y con aislamiento acústico integral.
+								</p>
+								<div class="grid grid-cols-3 gap-3 pt-2">
+									{
+										comfort.map((item) => (
+											<div class="p-3 rounded-xl bg-surface-container-low text-center">
+												<span class="material-symbols-outlined text-primary text-[22px] mb-1 block">
+													{item.icon}
+												</span>
+												<span class="font-label-sm text-[11px] sm:text-xs text-on-surface font-semibold block">
+													{item.title}
+												</span>
+												<span class="text-[10px] text-slate-muted">{item.note}</span>
+											</div>
+										))
+									}
+								</div>
+								<div class="space-y-2.5 pt-2 border-t border-border-subtle">
+									<div class="flex items-start gap-3">
+										<span
+											class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5"
+											>location_on</span
+										>
+										<address class="text-sm not-italic">
+											<strong class="text-on-surface block font-medium">{address}</strong>
+											<span class="text-slate-muted">{addressCity} · Centro Yssana</span>
+										</address>
+									</div>
+									<div class="flex items-start gap-3">
+										<span
+											class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5"
+											>directions_bus</span
+										>
+										<div class="text-sm text-on-surface-variant">
+											<strong class="text-on-surface font-medium">Cómo llegar:</strong>
+											[PENDIENTE: transporte público y aparcamiento cercanos]
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="pt-2">
+								<a
+									class="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-secondary text-white font-label-lg text-sm font-semibold hover:bg-primary shadow-sm transition-all duration-200"
+									href={mapsUrl}
+									rel="noopener noreferrer"
+									target="_blank"
+									><span class="material-symbols-outlined text-[18px]">map</span>Abrir
+									ubicación en Google Maps</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 4. Online & FAQ -->
+			<section
+				class="w-full px-6 lg:px-margin py-10 lg:py-16 bg-surface-container-low/50 border-y border-border-subtle"
+				id="online"
+			>
+				<div
+					class="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start"
+				>
+					<div class="lg:col-span-5 space-y-6">
+						<div
+							class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-container/60 text-primary"
+						>
+							<span class="material-symbols-outlined text-[18px]">videocam</span>
+							<span class="font-label-sm text-xs uppercase tracking-wider font-semibold"
+								>Terapia Online Global</span
+							>
+						</div>
+						<h2
+							class="font-headline-lg text-2xl sm:text-3xl text-primary font-medium tracking-tight"
+						>
+							Atención psicológica estés donde estés, sin fronteras
+						</h2>
+						<p
+							class="font-body-md text-sm sm:text-body-md text-on-surface-variant leading-relaxed"
+						>
+							Si vives fuera de Pamplona, viajas con frecuencia o prefieres la
+							comodidad y la intimidad de tu propio hogar, nuestras sesiones online
+							mantienen idéntica eficacia terapéutica, rigor y calidez humana.
+						</p>
+						<div class="space-y-3.5">
+							{
+								onlinePoints.map((point) => (
+									<div class="flex items-center gap-3 p-3.5 rounded-xl bg-surface-container-lowest border border-border-subtle">
+										<div
+											class:list={[
+												"w-9 h-9 rounded-full flex items-center justify-center text-primary shrink-0",
+												point.iconBg,
+											]}
+										>
+											<span class="material-symbols-outlined text-[19px]">
+												{point.icon}
+											</span>
+										</div>
+										<p class="font-body-sm text-xs sm:text-sm text-on-surface-variant">
+											<strong class="text-on-surface">{point.strong}</strong>{" "}
+											{point.text}
+										</p>
+									</div>
+								))
+							}
+						</div>
+					</div>
+					<div class="lg:col-span-7 space-y-4">
+						<div>
+							<span
+								class="font-label-sm text-xs uppercase tracking-widest text-primary font-bold block mb-1"
+								>Claridad &amp; Transparencia</span
+							>
+							<h2
+								class="font-headline-md text-2xl sm:text-3xl text-on-surface font-medium tracking-tight"
+							>
+								Preguntas frecuentes sobre el primer contacto
+							</h2>
+						</div>
+						<div class="space-y-3 pt-2">
+							{
+								faqs.map((faq) => (
+									<details
+										class="group bg-surface-container-lowest rounded-2xl p-5 border border-border-subtle shadow-xs open:shadow-md transition-all"
+										open={faq.open}
+									>
+										<summary class="flex items-center justify-between cursor-pointer font-title-md text-base sm:text-lg text-primary font-medium list-none">
+											<span>{faq.question}</span>
+											<span
+												class="material-symbols-outlined text-primary transition-transform duration-300 group-open:rotate-180"
+												aria-hidden="true"
+											>
+												expand_more
+											</span>
+										</summary>
+										<p class="mt-3.5 text-sm sm:text-body-md text-on-surface-variant leading-relaxed">
+											{faq.answer}
+										</p>
+									</details>
+								))
+							}
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 5. Final CTA -->
+			<section
+				class="w-full bg-[#1b4e43] text-white py-14 lg:py-20 px-6 lg:px-margin relative overflow-hidden"
+			>
+				<div
+					class="absolute -right-20 -bottom-20 w-96 h-96 bg-accent-glow/15 rounded-full blur-3xl pointer-events-none"
+				>
+				</div>
+				<div
+					class="absolute -left-20 -top-20 w-80 h-80 bg-primary-container/20 rounded-full blur-3xl pointer-events-none"
+				>
+				</div>
+				<div class="max-w-4xl mx-auto text-center relative z-10 space-y-6">
+					<span
+						class="font-label-sm text-xs uppercase tracking-widest text-accent-glow font-semibold block"
+						>Tu bienestar emocional no tiene por qué esperar</span
+					>
+					<h2
+						class="font-display-xl text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight leading-tight"
+					>
+						Dar el primer paso es el acto de autocuidado más valiente.
+					</h2>
+					<p
+						class="font-body-lg text-base sm:text-body-lg text-secondary-fixed max-w-2xl mx-auto leading-relaxed"
+					>
+						Permítete un espacio donde respirar hondo, comprenderte y reencontrar
+						el equilibrio. Estamos al otro lado para acompañarte.
+					</p>
+					<div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3">
+						<a
+							class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-primary font-label-lg text-base font-semibold shadow-xl hover:bg-surface-container transition-all hover:scale-105"
+							href="#formulario"
+							><span class="material-symbols-outlined text-[20px]">calendar_month</span
+							>Solicitar cita ahora</a
+						>
+						<a
+							class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-label-lg text-base font-medium backdrop-blur-sm transition-all"
+							href={whatsappUrl}
+							rel="noopener noreferrer"
+							target="_blank"
+							><span class="material-symbols-outlined text-[20px]">chat</span>Escribir
+							por WhatsApp</a
+						>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	// There is no form backend yet (static site), so the form prepares an email
+	// in the visitor's mail app instead of pretending the request was sent.
+	const form = document.querySelector<HTMLFormElement>("#contact-booking-form");
+	const banner = document.querySelector<HTMLElement>(
+		"#booking-confirmation-banner",
+	);
+
+	form?.addEventListener("submit", (event) => {
+		event.preventDefault();
+		const data = new FormData(form);
+		const value = (key: string) => String(data.get(key) ?? "").trim();
+		const body = [
+			`Nombre: ${value("name")}`,
+			`Email: ${value("email")}`,
+			`Teléfono: ${value("phone") || "-"}`,
+			`Motivo: ${value("service_type")}`,
+			`Modalidad: ${value("treatment_modality")}`,
+			`Horario preferido: ${value("slot")}`,
+			"",
+			value("message"),
+		].join("\n");
+		const subject = `Solicitud de cita: ${value("service_type")}`;
+		window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+		if (banner) {
+			banner.hidden = false;
+			banner.focus();
+		}
+	});
+
+	for (const button of document.querySelectorAll<HTMLButtonElement>(
+		".copy-email",
+	)) {
+		button.addEventListener("click", async () => {
+			try {
+				await navigator.clipboard.writeText(button.dataset.email ?? "");
+				button.setAttribute("aria-label", "Email copiado");
+				button.title = "Email copiado";
+			} catch {
+				button.title = "No se ha podido copiar";
+			}
+		});
+	}
+</script>

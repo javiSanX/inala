@@ -180,6 +180,81 @@
 	}
 }
 
+/* Long-form Markdown (blog posts) */
+@layer components {
+	.prose-inala {
+		font-family: var(--font-body-lg);
+		font-size: var(--text-body-lg);
+		line-height: var(--text-body-lg--line-height);
+		color: var(--color-on-surface);
+
+		& > * + * {
+			margin-top: 1.25em;
+		}
+
+		& :where(h2, h3, h4) {
+			color: var(--color-on-surface);
+			margin-top: 2em;
+		}
+
+		& h2 {
+			font-family: var(--font-headline-md);
+			font-size: var(--text-headline-md);
+			line-height: var(--text-headline-md--line-height);
+			font-weight: 600;
+		}
+
+		& :where(h3, h4) {
+			font-family: var(--font-headline-sm);
+			font-size: var(--text-headline-sm);
+			line-height: var(--text-headline-sm--line-height);
+			font-weight: 600;
+		}
+
+		& strong {
+			font-weight: 600;
+		}
+
+		& a {
+			color: var(--color-primary);
+			text-decoration: underline;
+			text-underline-offset: 3px;
+		}
+
+		& :where(ul, ol) {
+			padding-left: 1.5em;
+		}
+
+		& ul {
+			list-style: disc;
+		}
+
+		& ol {
+			list-style: decimal;
+		}
+
+		& li + li {
+			margin-top: 0.5em;
+		}
+
+		& li::marker {
+			color: var(--color-primary);
+		}
+
+		& blockquote {
+			padding-inline: 1.5em;
+			font-family: var(--font-serif);
+			color: var(--color-on-surface-variant);
+			font-style: italic;
+		}
+
+		& hr {
+			border-color: var(--color-outline-variant);
+			margin-block: 2.5em;
+		}
+	}
+}
+
 ::-webkit-scrollbar {
 	display: none;
 }

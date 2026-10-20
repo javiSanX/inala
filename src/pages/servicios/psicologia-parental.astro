@@ -1,0 +1,521 @@
+---
+import OtherServices from "../../components/OtherServices.astro";
+import { contactHref, email } from "../../data/site";
+import Layout from "../../layouts/Layout.astro";
+
+const title =
+	"Psicología Parental | Acompañamiento en la crianza desde el apego seguro";
+const description =
+	"Acompañamiento psicológico para madres, padres y figuras de apego: culpa, cansancio, rabietas, límites y discrepancias de crianza. Presencial y online.";
+
+const heroImage = "/psicologia-parental.png";
+const heroImageAlt =
+	"Madre sosteniendo a su hijo en un cálido abrazo, psicología parental y apego seguro en INALA";
+
+const eyebrow =
+	"inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container/70 text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider";
+
+const sessionSteps = [
+	{
+		title: "Sesiones pausadas de 60 a 75 minutos",
+		text: "Tiempo suficiente para desahogarse, analizar dinámicas cotidianas y sentirse verdaderamente escuchado/a sin prisas ni reproches.",
+	},
+	{
+		title: "Validación emocional y desactivación de la culpa",
+		text: "Un espacio compasivo donde normalizar la ambivalencia, el cansancio y las dudas que a menudo se viven en soledad.",
+	},
+	{
+		title: "Comprensión del neurodesarrollo y del apego",
+		text: "Interpretamos el comportamiento, rabietas y necesidades reales de tus hijos a través de la neurociencia afectiva.",
+	},
+	{
+		title: "Herramientas prácticas y límites respetuosos",
+		text: "Estrategias de comunicación asertiva, gestión de desbordamientos emocionales y acuerdos de crianza aplicables en casa.",
+	},
+	{
+		title: "Modalidad Presencial y Online flexible",
+		text: "En nuestra consulta de Pamplona o por videollamada cifrada, adaptándonos al ritmo y la logística familiar.",
+	},
+];
+
+const audiences = [
+	{
+		icon: "child_care",
+		title: "Familias en primeros años y primera infancia",
+		text: "Para quienes transitan el posparto, la primera crianza, la adaptación al rol de madre/padre, el cansancio crónico, rabietas infantiles o dificultades con el sueño y el apego temprano.",
+		cta: "Acompañar la primera infancia",
+	},
+	{
+		icon: "self_improvement",
+		title: "Desbordamiento, culpa y autoexigencia parental",
+		text: 'Madres y padres que sienten agotamiento físico o mental ("burnout parental"), sensación de perder la paciencia con facilidad o una pesada culpa por no llegar a todo.',
+		cta: "Recuperar la serenidad",
+	},
+	{
+		icon: "diversity_1",
+		title: "Etapa escolar, preadolescencia y cambios de ciclo",
+		text: "Acompañamiento en el establecimiento de límites saludables, gestión de pantallas, dificultades escolares, celos entre hermanos o discrepancias de crianza en la pareja.",
+		cta: "Fortalecer la comunicación",
+	},
+];
+
+const problems = [
+	{
+		icon: "sentiment_very_dissatisfied",
+		title: "Gestión de rabietas y desbordes emocionales",
+		text: "Entender qué ocurre en el cerebro del niño, cómo regular su sistema nervioso y cómo responder sin gritos ni descontrol.",
+	},
+	{
+		icon: "battery_alert",
+		title: "Culpa, autoexigencia y burnout parental",
+		text: "Desactivar el perfeccionismo, el miedo a equivocarse y el agotamiento acumulado de la carga mental cotidiana.",
+	},
+	{
+		icon: "shield",
+		title: "Límites claros desde el respeto mutuo",
+		text: "Herramientas para sostener límites sin caer en el autoritarismo ni en la permisividad reactiva.",
+	},
+	{
+		icon: "favorite",
+		title: "Discrepancias de crianza en la pareja",
+		text: "Alinear criterios educativos, evitar triangulaciones y proteger el espacio conyugal frente a la vorágine de la crianza.",
+	},
+	{
+		icon: "volunteer_activism",
+		title: "Vínculo de apego seguro y regulación somática",
+		text: "Fortalecer la conexión afectiva, reparar momentos de desconexión y sanar heridas de la propia infancia que resuenan al criar.",
+	},
+	{
+		icon: "change_circle",
+		title: "Transiciones vitales y etapas críticas",
+		text: "Llegada de un nuevo hermano, separación parental respetuosa, inicio escolar o cambios imprevistos en la rutina familiar.",
+	},
+];
+
+const faqs = [
+	{
+		question:
+			"¿Tienen que venir los hijos a las sesiones de psicología parental?",
+		answer:
+			"Generalmente no. La psicología parental se centra en las figuras de referencia (madre, padre o cuidadores principales). Al dotaros a vosotros de herramientas de comprensión y regulación, el impacto positivo se transmite de forma directa y natural al bienestar de los niños sin necesidad de sobreexponerlos. En ocasiones puntuales se puede valorar alguna sesión de observación o vínculo.",
+	},
+	{
+		question:
+			"¿Puedo acudir de forma individual o es necesario que vengamos los dos progenitores?",
+		answer:
+			"Puedes acudir de manera individual si tu pareja no tiene disponibilidad o si sientes que necesitas un espacio propio para reflexionar sobre tu rol. No obstante, si ambos progenitores participan en la crianza, es muy enriquecedor y beneficioso trabajar juntos para coordinar pautas y apoyaros mutuamente.",
+	},
+	{
+		question: "¿Cuánto duran las sesiones y con qué frecuencia se realizan?",
+		answer:
+			"Las sesiones suelen tener una duración de 60 a 75 minutos. La frecuencia suele ser quincenal o mensual según el grado de urgencia y vuestras necesidades, adaptándonos con total flexibilidad a las rutinas familiares y escolares.",
+	},
+	{
+		question: "¿Nos diréis cómo tenemos que educar a nuestros hijos?",
+		answer:
+			"En absoluto. En INALA respetamos profundamente la singularidad y los valores de cada hogar. Nuestro objetivo es ofreceros una base sólida en neurodesarrollo y apego para que encontréis vuestro propio estilo educativo consciente, libre de juicios y enfocado en la conexión.",
+	},
+];
+---
+
+<Layout title={title} description={description}>
+	<div class="flex flex-col w-full">
+		<!-- Breadcrumb -->
+		<div class="w-full px-margin-mobile lg:px-margin pt-6 pb-4">
+			<nav
+				aria-label="Ruta de navegación"
+				class="flex items-center gap-2 font-label-sm text-label-sm text-slate-muted"
+			>
+				<a class="hover:text-primary transition-colors" href="/">Inicio</a>
+				<span class="material-symbols-outlined text-[14px]" aria-hidden="true"
+					>chevron_right</span
+				>
+				<a class="hover:text-primary transition-colors" href="/servicios"
+					>Servicios</a
+				>
+				<span class="material-symbols-outlined text-[14px]" aria-hidden="true"
+					>chevron_right</span
+				>
+				<span class="text-primary font-bold" aria-current="page"
+					>Psicología Parental</span
+				>
+			</nav>
+		</div>
+
+		<!-- 1. Hero -->
+		<section class="w-full px-margin-mobile lg:px-margin pt-6 pb-20 lg:pb-28">
+			<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+				<!-- Left Column: Copy & CTAs -->
+				<div class="lg:col-span-7 flex flex-col gap-6">
+					<div></div>
+					<h1 class="font-display-xl text-display-xl text-on-surface">
+						Psicología Parental: Un espacio seguro para <span
+							class="italic font-normal text-primary">acompañar tu materni</span
+						>
+					</h1>
+					<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+						Un proceso de acompañamiento psicológico cercano y especializado donde
+						abordar las dudas, el cansancio, la culpa y los desafíos de la
+						crianza. Construimos pautas conscientes desde el respeto y el apego
+						seguro, cuidando el bienestar emocional de los progenitores.
+					</p>
+					<!-- CTAs -->
+					<div class="flex flex-wrap items-center gap-4 pt-2">
+						<a
+							class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-primary-container text-on-primary-container shadow-md hover:bg-primary hover:text-on-primary hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+							href={contactHref}
+						>
+							Reservar primera sesión parental
+							<span class="material-symbols-outlined ml-2 text-[18px]"
+								>calendar_today</span
+							>
+						</a>
+					</div>
+				</div>
+				<!-- Right Column: Visual Card -->
+				<div class="lg:col-span-5 relative">
+					<div
+						class="relative rounded-3xl overflow-hidden shadow-xl bg-surface-container-low p-2"
+					>
+						<div class="relative w-full aspect-[4/5] rounded-[22px] overflow-hidden">
+							<img
+								alt={heroImageAlt}
+								class="w-full h-full object-cover"
+								src={heroImage}
+							/>
+							<div
+								class="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 via-transparent to-transparent"
+							>
+							</div>
+							<!-- Glass badge inside hero image -->
+							<div
+								class="absolute bottom-4 inset-x-4 p-4 rounded-2xl bg-surface/85 backdrop-blur-md shadow-sm flex items-center gap-3"
+							>
+								<span
+									class="w-10 h-10 rounded-full bg-primary-container/40 flex items-center justify-center text-primary flex-shrink-0"
+								>
+									<span class="material-symbols-outlined text-[22px]"
+										>nest_cam_stand</span
+									>
+								</span>
+								<p
+									class="font-body-sm text-body-sm text-on-surface font-medium leading-snug"
+								>
+									Espacio de sostén y escucha empática · 100% adaptado a vuestra
+									realidad familiar
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 2. ¿En qué consiste la psicología parental? -->
+		<section
+			class="w-full py-20 lg:py-28 bg-surface-container-lowest"
+			id="en-que-consiste"
+		>
+			<div class="w-full px-margin-mobile lg:px-margin flex flex-col gap-12">
+				<div class="flex flex-col gap-4 max-w-3xl">
+					<div>
+						<span class={eyebrow}>¿EN QUÉ CONSISTE EL ACOMPAÑAMIENTO PARENTAL?</span>
+					</div>
+					<h2 class="font-headline-lg text-headline-lg text-on-surface">
+						Un espacio neutral y cálido para poner palabras al agotamiento, la
+						culpa y reencontrar la calma en la crianza
+					</h2>
+					<p class="font-body-lg text-body-lg text-on-surface-variant">
+						Criar es una de las experiencias más transformadoras y a la vez más
+						exigentes a nivel emocional. En consulta no juzgamos estilos
+						educativos ni ofrecemos recetas mágicas; creamos un refugio seguro
+						donde validar tus emociones, desactivar la culpa y dotarte de
+						recursos prácticos para acompañar el desarrollo de tus hijos desde la
+						serenidad y la firmeza amorosa.
+					</p>
+				</div>
+				<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+					<!-- Left: Image & Editorial Quote Box -->
+					<div class="lg:col-span-5 flex flex-col gap-6">
+						<div class="rounded-3xl overflow-hidden shadow-md bg-surface p-2">
+							<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden">
+								<img
+									alt={heroImageAlt}
+									class="w-full h-full object-cover"
+									src={heroImage}
+									loading="lazy"
+								/>
+							</div>
+						</div>
+						<div
+							class="p-8 rounded-3xl bg-surface-container shadow-sm flex flex-col gap-4"
+						>
+							<span
+								class="material-symbols-outlined text-primary text-[36px]"
+								aria-hidden="true">format_quote</span
+							>
+							<blockquote
+								class="font-headline-md text-headline-md italic font-normal text-on-surface leading-snug"
+							>
+								«No se trata de ser madres o padres perfectos, sino conscientes,
+								presentes y en paz con nuestras propias sombras para poder cuidar
+								desde la calma.»
+							</blockquote>
+							<p
+								class="font-label-sm text-label-sm text-slate-muted uppercase tracking-wider"
+							>
+								— Equipo Especializado en Crianza y Apego INALA
+							</p>
+						</div>
+					</div>
+					<!-- Right: What happens in a session (01 to 05) -->
+					<div class="lg:col-span-7 flex flex-col gap-4">
+						<div class="mb-2">
+							<h3 class="font-headline-md text-headline-md text-on-surface">
+								¿Qué ocurre durante una sesión de psicología parental?
+							</h3>
+						</div>
+						{
+							sessionSteps.map((step, index) => (
+								<div class="p-6 rounded-2xl bg-surface shadow-sm hover:shadow-md transition-shadow duration-300 flex items-start gap-5">
+									<span class="font-display-xl-mobile text-display-xl-mobile text-primary font-medium select-none flex-shrink-0 leading-none">
+										{String(index + 1).padStart(2, "0")}
+									</span>
+									<div class="flex flex-col gap-1">
+										<h4 class="font-title-md text-title-md text-on-surface">
+											{step.title}
+										</h4>
+										<p class="font-body-md text-body-md text-on-surface-variant">
+											{step.text}
+										</p>
+									</div>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 3. ¿Para quién es la psicología parental? -->
+		<section class="w-full py-20 lg:py-28">
+			<div class="w-full px-margin-mobile lg:px-margin flex flex-col gap-12">
+				<div class="flex flex-col gap-3 text-center max-w-3xl mx-auto">
+					<div>
+						<span class={eyebrow}>ACOMPAÑAMIENTO EN CADA ETAPA DE LA CRIANZA</span>
+					</div>
+					<h2 class="font-headline-lg text-headline-lg text-on-surface">
+						¿Para quién es la psicología parental?
+					</h2>
+					<p class="font-body-lg text-body-lg text-on-surface-variant">
+						Acompañamos a madres, padres y figuras de apego en distintos momentos
+						y desafíos vitales:
+					</p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+					{
+						audiences.map((audience) => (
+							<div class="p-8 rounded-3xl bg-surface-container-low shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+								<div class="flex flex-col gap-4">
+									<div class="w-14 h-14 rounded-2xl bg-surface flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
+										<span class="material-symbols-outlined text-[28px]">
+											{audience.icon}
+										</span>
+									</div>
+									<h3 class="font-headline-sm text-headline-sm text-on-surface">
+										{audience.title}
+									</h3>
+									<p class="font-body-md text-body-md text-on-surface-variant">
+										{audience.text}
+									</p>
+								</div>
+								<div class="pt-6">
+									<a
+										class="inline-flex items-center gap-1 font-label-lg text-label-lg text-primary hover:text-on-surface transition-colors"
+										href={contactHref}
+									>
+										{audience.cta}
+										<span
+											class="material-symbols-outlined text-[18px]"
+											aria-hidden="true"
+										>
+											arrow_forward
+										</span>
+									</a>
+								</div>
+							</div>
+						))
+					}
+				</div>
+				<!-- Bottom Empathy Banner Pill -->
+				<div
+					class="p-5 rounded-2xl bg-surface-container text-center max-w-4xl mx-auto shadow-sm"
+				>
+					<p class="font-body-md text-body-md text-on-surface font-medium">
+						🌿 No necesitáis llegar al límite del agotamiento para consultar:
+						pedir apoyo a tiempo previene el desgaste crónico y fomenta un vínculo
+						seguro.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- 4. ¿Qué dificultades abordamos? -->
+		<section class="w-full bg-surface-container-low py-20 lg:py-28">
+			<div class="w-full px-margin-mobile lg:px-margin flex flex-col gap-12">
+				<div class="flex flex-col gap-3 text-center max-w-3xl mx-auto">
+					<div>
+						<span class={eyebrow}>¿QUÉ TRABAJAMOS EN CONSULTA?</span>
+					</div>
+					<h2 class="font-headline-lg text-headline-lg text-on-surface">
+						¿Qué dificultades abordamos en psicología parental?
+					</h2>
+					<p class="font-body-lg text-body-lg text-on-surface-variant">
+						Abordamos las inquietudes emocionales y los retos relacionales más
+						comunes en la experiencia de criar:
+					</p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+					{
+						problems.map((problem) => (
+							<div class="p-8 rounded-3xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col gap-4 bg-surface-container-lowest">
+								<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+									<span class="material-symbols-outlined text-[24px]">
+										{problem.icon}
+									</span>
+								</div>
+								<h3 class="font-title-md text-title-md text-on-surface">
+									{problem.title}
+								</h3>
+								<p class="font-body-md text-body-md text-on-surface-variant">
+									{problem.text}
+								</p>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- 5. Preguntas frecuentes -->
+		<section class="w-full py-20 lg:py-28">
+			<div
+				class="w-full px-margin-mobile lg:px-margin max-w-4xl mx-auto flex flex-col gap-12"
+			>
+				<div class="flex flex-col gap-3 text-center">
+					<div>
+						<span class={eyebrow}>RESOLVEMOS VUESTRAS DUDAS</span>
+					</div>
+					<h2 class="font-headline-lg text-headline-lg text-on-surface">
+						Preguntas frecuentes sobre la psicología parental
+					</h2>
+					<p class="font-body-lg text-body-lg text-on-surface-variant">
+						Es natural que surjan inquietudes antes de iniciar un acompañamiento.
+						Aquí resolvemos las más habituales:
+					</p>
+				</div>
+				<div class="flex flex-col gap-4" id="faq-accordion">
+					{
+						faqs.map((faq, index) => (
+							<div class="rounded-2xl bg-surface-container-low shadow-sm overflow-hidden transition-all duration-300 faq-item">
+								<button
+									class="faq-trigger w-full p-6 text-left flex items-center justify-between gap-4 font-title-md text-title-md text-on-surface hover:text-primary transition-colors focus:outline-none"
+									type="button"
+									aria-expanded="false"
+									aria-controls={`faq-content-${index}`}
+								>
+									<span>{faq.question}</span>
+									<span
+										class="material-symbols-outlined text-[24px] text-primary transition-transform duration-300 faq-chevron"
+										aria-hidden="true"
+									>
+										expand_more
+									</span>
+								</button>
+								<div
+									class="px-6 pb-6 pt-0 font-body-md text-body-md text-on-surface-variant hidden faq-content"
+									id={`faq-content-${index}`}
+								>
+									{faq.answer}
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- 6. Final CTA banner -->
+		<section class="w-full px-margin-mobile lg:px-margin pb-20">
+			<div
+				class="w-full rounded-3xl bg-inverse-surface text-inverse-on-surface p-10 lg:p-16 relative overflow-hidden shadow-xl"
+			>
+				<div
+					class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/20 blur-3xl pointer-events-none"
+				>
+				</div>
+				<div
+					class="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center gap-6"
+				>
+					<div>
+						<span
+							class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface/10 text-accent-glow font-label-sm text-label-sm uppercase tracking-wider backdrop-blur-sm"
+						>
+							EL BIENESTAR DE TUS HIJOS EMPIEZA EN EL TUYO
+						</span>
+					</div>
+					<h2 class="font-headline-lg text-headline-lg text-inverse-on-surface">
+						Cuidarte como madre o padre es el mayor regalo para tus hijos
+					</h2>
+					<p class="font-body-lg text-body-lg text-inverse-on-surface/80">
+						Agenda tu primera consulta de orientación parental o escríbenos para
+						una breve llamada informativa de 15 minutos sin compromiso. Te
+						escuchamos con calidez y cercanía.
+					</p>
+					<div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+						<a
+							class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-primary-container text-on-primary-container shadow-md hover:bg-surface hover:text-on-surface hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+							href={contactHref}
+						>
+							Reservar primera cita parental
+							<span class="material-symbols-outlined ml-2 text-[18px]"
+								>calendar_month</span
+							>
+						</a>
+						<a
+							class="inline-flex items-center justify-center font-label-lg text-label-lg px-7 py-3.5 rounded-full bg-surface/10 hover:bg-surface/20 text-inverse-on-surface transition-colors"
+							href={`mailto:${email}`}
+						>
+							<span class="material-symbols-outlined mr-2 text-[18px]">mail</span>
+							{email}
+						</a>
+					</div>
+					<p class="font-body-sm text-body-sm text-inverse-on-surface/60 pt-2">
+						Garantía de respuesta en un plazo máximo de 24 horas laborables.
+					</p>
+				</div>
+			</div>
+		</section>
+		<OtherServices />
+	</div>
+</Layout>
+
+<script>
+	const faqTriggers =
+		document.querySelectorAll<HTMLButtonElement>(".faq-trigger");
+
+	const setOpen = (trigger: HTMLButtonElement, open: boolean) => {
+		trigger.setAttribute("aria-expanded", String(open));
+		trigger.nextElementSibling?.classList.toggle("hidden", !open);
+		trigger.querySelector(".faq-chevron")?.classList.toggle("rotate-180", open);
+	};
+
+	for (const trigger of faqTriggers) {
+		trigger.addEventListener("click", () => {
+			const expanded = trigger.getAttribute("aria-expanded") === "true";
+			// Close all FAQs, then open the clicked one if it was closed.
+			for (const other of faqTriggers) setOpen(other, false);
+			if (!expanded) setOpen(trigger, true);
+		});
+	}
+</script>

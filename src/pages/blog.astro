@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+
+const title = "Blog de Psicología | Inala Psicoterapia";
+const description =
+	"Artículos sobre ansiedad, burnout, terapia de pareja y bienestar emocional, escritos desde la consulta de Inala Psicoterapia.";
+
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const formatDate = (date: Date) =>
+	date.toLocaleDateString("es-ES", {
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+	});
+---
+
+<Layout title={title} description={description}>
+	<section
+		class="w-full px-margin-mobile lg:px-margin pt-space-lg lg:pt-space-xl pb-space-xl"
+	>
+		<div class="max-w-content mx-auto">
+			<header class="max-w-2xl mb-space-xl">
+				<h1
+					class="font-headline-lg-mobile text-headline-lg-mobile lg:font-display-xl lg:text-display-xl text-on-surface mb-space-sm"
+				>
+					Blog
+				</h1>
+				<p class="font-body-lg text-body-lg text-on-surface-variant">
+					Reflexiones y recursos para entender lo que sientes y cuidar tu salud
+					emocional.
+				</p>
+			</header>
+
+			<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+				{
+					posts.map((post) => (
+						<li>
+							<article class="group relative flex h-full flex-col overflow-hidden rounded-xl bg-surface-container-lowest shadow-ethereal transition-shadow duration-300 hover:shadow-lift">
+								{post.data.image ? (
+									<Image
+										src={post.data.image}
+										alt=""
+										widths={[400, 800]}
+										sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+										class="aspect-[3/2] w-full object-cover"
+									/>
+								) : (
+									<div class="aspect-[3/2] w-full bg-surface-container" />
+								)}
+								<div class="flex flex-1 flex-col gap-space-sm p-space-md">
+									<time
+										datetime={post.data.pubDate.toISOString()}
+										class="font-label-sm text-label-sm uppercase text-slate-muted"
+									>
+										{formatDate(post.data.pubDate)}
+									</time>
+									<h2 class="font-headline-sm text-headline-sm text-on-surface">
+										<a
+											href={`/blog/${post.id}`}
+											class="after:absolute after:inset-0 group-hover:text-primary transition-colors duration-200"
+										>
+											{post.data.title}
+										</a>
+									</h2>
+									{post.data.subtitle && (
+										<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+											{post.data.subtitle}
+										</p>
+									)}
+								</div>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</Layout>

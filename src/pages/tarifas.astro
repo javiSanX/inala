@@ -1,0 +1,438 @@
+---
+import { contactHref, email } from "../data/site";
+import Layout from "../layouts/Layout.astro";
+
+const title =
+	"Tarifas de Terapia | Precios Psicóloga Sanitaria en Pamplona y Online";
+const description =
+	"Consulta las tarifas de terapia individual, de pareja, familiar y online. Precios claros, sin sorpresas y con opción de sesiones presenciales en Pamplona u online.";
+
+const filled = "font-variation-settings: 'FILL' 1;";
+
+// Prices come from the existing site content (src/pages1/tarifas.astro):
+// individual or online 65 €, couples or family 75 €. Anything else is pending.
+const plans = [
+	{
+		label: "Espacio Personal",
+		labelClass: "text-slate-muted",
+		title: "Terapia Individual",
+		summary: "Procesos de introspección, ansiedad, apego y cambio vital.",
+		price: "65€",
+		priceBlockClass: "bg-surface-container-low/40",
+		priceClass: "text-primary",
+		duration: "60 minutos",
+		modality: "Presencial (Pamplona) u Online",
+		bullets: [
+			"Acompañamiento clínico personalizado",
+			"Enfoque integrativo (ACT, Apego, Sistémica)",
+			"Ejercicios somáticos y recursos prácticos",
+			"Flexibilidad horaria y seguimiento continuo",
+		],
+		cta: "Reservar Terapia Individual",
+		ctaClass:
+			"bg-surface-container text-on-surface hover:bg-primary-container hover:text-on-primary-container transition-colors duration-200",
+		cardClass:
+			"flex flex-col justify-between rounded-xl bg-surface-container-lowest p-space-md lg:p-space-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300",
+	},
+	{
+		label: "Vínculo & Conexión",
+		labelClass: "text-primary font-bold",
+		title: "Terapia de Pareja",
+		summary: "Reconstrucción afectiva, crisis y patrones de comunicación.",
+		price: "75€",
+		priceBlockClass: "bg-secondary-container/40",
+		priceClass: "text-on-primary-container",
+		duration: "[PENDIENTE: duración]",
+		modality: "Presencial u Online",
+		bullets: [
+			"Espacio neutral seguro y sin toma de partido",
+			"Reparación de heridas y pautas de escucha",
+			"Desactivación de ciclos conflictivos cíclicos",
+			"Tiempos ampliados para profundizar",
+		],
+		cta: "Reservar Terapia de Pareja",
+		ctaClass:
+			"bg-primary-container text-on-primary-container shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200",
+		cardClass:
+			"relative flex flex-col justify-between rounded-xl bg-surface-container-lowest p-space-md lg:p-space-lg shadow-xl hover:-translate-y-1 transition-all duration-300",
+		ribbon: "Espacio de Encuentro",
+	},
+	{
+		label: "Crianza & Vínculos",
+		labelClass: "text-slate-muted",
+		title: "Perinatal y Familiar",
+		summary: "Maternidad, duelo gestacional y dinámicas familiares.",
+		price: "75€",
+		priceNote: "Terapia familiar. [PENDIENTE: precio de la sesión perinatal]",
+		priceBlockClass: "bg-surface-container-low/40",
+		priceClass: "text-primary",
+		duration: "60 minutos",
+		modality: "Presencial u Online",
+		bullets: [
+			"Acompañamiento en fertilidad y posparto",
+			"Duelo gestacional y reconfiguración vital",
+			"Abordaje de dinámicas familiares complejas",
+			"Entorno adaptado y contención somática",
+		],
+		cta: "Reservar Sesión Perinatal",
+		ctaClass:
+			"bg-surface-container text-on-surface hover:bg-primary-container hover:text-on-primary-container transition-colors duration-200",
+		cardClass:
+			"flex flex-col justify-between rounded-xl bg-surface-container-lowest p-space-md lg:p-space-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300",
+	},
+];
+
+const includes = [
+	{
+		icon: "hearing",
+		title: "Presencia y Escucha Plena",
+		text: "Sesiones de dedicación absoluta, sin prisas, en un espacio de aceptación incondicional.",
+	},
+	{
+		icon: "psychology",
+		title: "Supervisión Clínica Continua",
+		text: "Estudio inter-sesión de tu caso, formulación clínica rigurosa y actualización constante de objetivos.",
+	},
+	{
+		icon: "mark_chat_read",
+		title: "Soporte entre Sesiones",
+		text: "Resolución de dudas puntuales por correo o canal seguro cuando experimentes momentos agudos.",
+	},
+	{
+		icon: "menu_book",
+		title: "Material Terapéutico Personalizado",
+		text: "Hojas de autorregistro, audios de regulación somática guiada y lecturas clínicas adaptadas.",
+	},
+];
+
+const checkIcon =
+	"material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5";
+---
+
+<Layout title={title} description={description}>
+	<div class="flex flex-col w-full">
+		<div class="relative w-full overflow-hidden">
+			<div
+				class="absolute -top-32 left-1/2 -translate-x-1/2 w-[720px] h-[400px] bg-gradient-to-b from-primary-fixed/20 via-surface-container/30 to-transparent blur-3xl pointer-events-none -z-10"
+			>
+			</div>
+
+			<!-- Hero -->
+			<section
+				class="w-full px-margin-mobile lg:px-margin pt-space-lg lg:pt-space-xl pb-space-lg"
+			>
+				<div class="max-w-[1240px] mx-auto flex flex-col items-center text-center">
+					<div
+						class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant mb-space-sm shadow-sm backdrop-blur-sm"
+					>
+						<span
+							class="material-symbols-outlined text-[16px] text-primary"
+							style={filled}>balance</span
+						>
+						<span
+							class="font-label-sm text-label-sm uppercase tracking-wider text-primary"
+							>TRANSPARENCIA Y COMPROMISO ÉTICO</span
+						>
+					</div>
+					<h1
+						class="font-headline-lg lg:font-display-xl text-headline-lg lg:text-display-xl text-on-surface max-w-4xl tracking-tight mb-space-sm"
+					>
+						Invertir en tu bienestar emocional con total claridad
+					</h1>
+					<p
+						class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl font-light mb-space-md"
+					>
+						Creemos en una relación terapéutica honesta desde el primer contacto.
+						Sin cuotas ocultas ni permanencias: tarifas claras, sesiones adaptadas y
+						facilidades para que comiences a tu propio ritmo.
+					</p>
+				</div>
+			</section>
+
+			<!-- Free orientation call callout (empty in the original design) -->
+			<section class="w-full px-margin-mobile lg:px-margin mb-space-xl">
+				<div class="max-w-[1240px] mx-auto"></div>
+			</section>
+
+			<!-- Pricing cards -->
+			<section class="w-full px-margin-mobile lg:px-margin mb-space-xl">
+				<div class="max-w-[1240px] mx-auto">
+					<div
+						class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter items-stretch"
+					>
+						{
+							plans.map((plan) => (
+								<div class={plan.cardClass}>
+									{plan.ribbon && (
+										<div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+											<span class="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest shadow-md">
+												<span
+													class="material-symbols-outlined text-[14px]"
+													style={filled}
+												>
+													favorite
+												</span>
+												{plan.ribbon}
+											</span>
+										</div>
+									)}
+									<div>
+										<div class="h-6 mb-2">
+											<span
+												class:list={[
+													"inline-block font-label-sm text-label-sm uppercase tracking-wider",
+													plan.labelClass,
+												]}
+											>
+												{plan.label}
+											</span>
+										</div>
+										<h2 class="font-headline-md text-headline-md text-on-surface mb-1">
+											{plan.title}
+										</h2>
+										<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+											{plan.summary}
+										</p>
+										<div
+											class:list={[
+												"flex flex-col my-4 pb-4 rounded-lg p-3",
+												plan.priceBlockClass,
+											]}
+										>
+											<div class="flex items-baseline gap-1">
+												<span
+													class:list={[
+														"font-display-xl text-display-xl leading-none font-medium",
+														plan.priceClass,
+													]}
+												>
+													{plan.price}
+												</span>
+												<span class="font-body-sm text-body-sm text-slate-muted">
+													/ sesión
+												</span>
+											</div>
+											{plan.priceNote && (
+												<span class="font-label-sm text-label-sm text-primary mt-1 font-semibold">
+													{plan.priceNote}
+												</span>
+											)}
+										</div>
+										<div class="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant mb-6">
+											<div class="flex items-center gap-2">
+												<span class="material-symbols-outlined text-[18px] text-primary">
+													schedule
+												</span>
+												<span>
+													<strong>Duración:</strong> {plan.duration}
+												</span>
+											</div>
+											<div class="flex items-center gap-2">
+												<span class="material-symbols-outlined text-[18px] text-primary">
+													apartment
+												</span>
+												<span>{plan.modality}</span>
+											</div>
+										</div>
+										<ul class="space-y-3 pt-2">
+											{plan.bullets.map((bullet) => (
+												<li class="flex items-start gap-2.5">
+													<span class={checkIcon} aria-hidden="true">
+														check_circle
+													</span>
+													<span class="font-body-sm text-body-sm text-on-surface">
+														{bullet}
+													</span>
+												</li>
+											))}
+										</ul>
+									</div>
+									<div class="pt-8">
+										<a
+											class:list={[
+												"w-full inline-flex items-center justify-center font-label-lg text-label-lg px-5 py-3 rounded-full",
+												plan.ctaClass,
+											]}
+											href={contactHref}
+										>
+											{plan.cta}
+										</a>
+									</div>
+								</div>
+							))
+						}
+
+						<!-- Session pack: not in the existing content, all terms pending -->
+						<div
+							class="flex flex-col justify-between rounded-xl bg-surface-container-high/40 p-space-md lg:p-space-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+						>
+							<div>
+								<div class="h-6 mb-2">
+									<span
+										class="inline-block font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold"
+										>Ahorro &amp; Regularidad</span
+									>
+								</div>
+								<h2 class="font-headline-md text-headline-md text-on-surface mb-1">
+									Bono 5 Sesiones
+								</h2>
+								<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+									Recomendado para procesos activos y continuados.
+								</p>
+								<div
+									class="flex flex-col my-4 pb-4 bg-surface-container-lowest/80 rounded-lg p-3"
+								>
+									<span class="font-label-sm text-label-sm text-primary font-semibold"
+										>[PENDIENTE: precio del bono, si existe]</span
+									>
+								</div>
+								<div
+									class="flex flex-col gap-2 font-body-sm text-body-sm text-on-surface-variant mb-6"
+								>
+									<div class="flex items-center gap-2">
+										<span class="material-symbols-outlined text-[18px] text-primary"
+											>schedule</span
+										>
+										<span><strong>Formato:</strong> 5 sesiones</span>
+									</div>
+									<div class="flex items-center gap-2">
+										<span class="material-symbols-outlined text-[18px] text-primary"
+											>verified</span
+										>
+										<span>Presencial u Online intercambiable</span>
+									</div>
+								</div>
+								<ul class="space-y-3 pt-2">
+									<li class="flex items-start gap-2.5">
+										<span class={checkIcon} aria-hidden="true">check_circle</span>
+										<span class="font-body-sm text-body-sm text-on-surface"
+											>[PENDIENTE: condiciones del bono (ahorro, validez, forma de
+											pago)]</span
+										>
+									</li>
+								</ul>
+							</div>
+							<div class="pt-8">
+								<a
+									class="w-full inline-flex items-center justify-center font-label-lg text-label-lg px-5 py-3 rounded-full bg-primary text-on-primary shadow-sm hover:bg-on-primary-container transition-colors duration-200"
+									href={contactHref}
+								>
+									Adquirir Bono 5 Sesiones
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- What each session includes -->
+			<section class="w-full px-margin-mobile lg:px-margin mb-space-xl">
+				<div
+					class="max-w-[1240px] mx-auto rounded-xl bg-surface-container-low p-space-md lg:p-space-xl shadow-sm"
+				>
+					<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+						<div class="lg:col-span-5 flex flex-col gap-space-sm">
+							<span
+								class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold"
+								>Compromiso Integral</span
+							>
+							<h2 class="font-headline-lg text-headline-lg text-on-surface leading-snug">
+								¿Qué incluye cada sesión en INALA?
+							</h2>
+							<p class="font-body-md text-body-md text-on-surface-variant font-light">
+								La terapia no empieza ni termina en el tiempo de consulta. Nuestro
+								acompañamiento está diseñado para brindarte un sostén real,
+								supervisado y con herramientas aplicadas a tu día a día.
+							</p>
+							<div class="relative overflow-hidden rounded-xl shadow-md h-56 mt-2">
+								<img
+									class="w-full h-full object-cover"
+									alt="María, psicóloga de Inala, sentada en su consulta junto a una planta."
+									src="/maria1.webp"
+									loading="lazy"
+								/>
+								<div
+									class="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 via-transparent to-transparent flex items-end p-4"
+								>
+									<span
+										class="text-on-secondary font-label-sm text-label-sm flex items-center gap-1.5 backdrop-blur-md px-3 py-1 rounded-full bg-surface-translucent/30"
+									>
+										<span class="material-symbols-outlined text-[16px]">nature</span>
+										Consulta en Pamplona
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+							{
+								includes.map((item) => (
+									<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-2">
+										<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary mb-1">
+											<span class="material-symbols-outlined text-[20px]">
+												{item.icon}
+											</span>
+										</div>
+										<h3 class="font-title-md text-title-md text-on-surface">
+											{item.title}
+										</h3>
+										<p class="font-body-sm text-body-sm text-on-surface-variant">
+											{item.text}
+										</p>
+									</div>
+								))
+							}
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Policies (empty in the original design) -->
+			<section class="w-full px-margin-mobile lg:px-margin mb-space-xl"></section>
+
+			<!-- Bottom CTA -->
+			<section class="w-full px-margin-mobile lg:px-margin mb-space-xl">
+				<div
+					class="max-w-[1240px] mx-auto rounded-xl bg-primary text-on-primary p-space-lg lg:p-space-xl shadow-xl relative overflow-hidden"
+				>
+					<div
+						class="absolute -right-24 -bottom-24 w-96 h-96 rounded-full bg-primary-container/20 blur-2xl pointer-events-none"
+					>
+					</div>
+					<div class="max-w-2xl flex flex-col gap-space-sm relative z-10">
+						<span
+							class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed"
+							>Estamos a tu lado</span
+						>
+						<h2
+							class="font-headline-lg lg:font-display-xl text-headline-lg lg:text-display-xl leading-tight text-on-primary"
+						>
+							¿Hablamos y encontramos el formato que mejor encaja contigo?
+						</h2>
+						<p class="font-body-lg text-body-lg text-on-primary/90 font-light">
+							Dar el primer paso puede generar dudas. Escríbenos o reserva tu
+							primera cita para que resolvamos juntos cualquier inquietud sobre
+							horarios o tarifas.
+						</p>
+						<div
+							class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm pt-4"
+						>
+							<a
+								class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-on-primary text-primary shadow-lg hover:bg-surface-bright hover:-translate-y-0.5 transition-all duration-300"
+								href={contactHref}
+							>
+								Reservar primera sesión
+							</a>
+							<a
+								class="inline-flex items-center justify-center gap-2 font-label-lg text-label-lg px-6 py-3.5 rounded-full bg-primary-container/30 text-on-primary hover:bg-primary-container/40 transition-colors duration-200 backdrop-blur-sm"
+								href={`mailto:${email}`}
+							>
+								<span class="material-symbols-outlined text-[18px]">mail</span>
+								<span>Escríbenos a {email}</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</Layout>

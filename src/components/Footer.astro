@@ -1,5 +1,7 @@
 ---
 import {
+	address,
+	addressCity,
 	contactHref,
 	email,
 	instagramUrl,
@@ -95,7 +97,7 @@ const year = new Date().getFullYear();
 					<span class="material-symbols-outlined text-[18px] text-primary"
 						>location_on</span
 					>
-					<span>Calle Velázquez, Madrid &amp; Online</span>
+					<span>{address} · {addressCity} &amp; Online</span>
 				</p>
 				<div class="flex items-center gap-space-xs mt-3">
 					<a

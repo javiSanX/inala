@@ -1,0 +1,604 @@
+---
+import OtherServices from "../../components/OtherServices.astro";
+import { contactHref, email } from "../../data/site";
+import Layout from "../../layouts/Layout.astro";
+
+const title =
+	"Terapia Familiar | Mejorar la convivencia y sanar los vínculos familiares";
+const description =
+	"Terapia familiar sistémica: un espacio neutral para mejorar la comunicación, resolver conflictos de convivencia y acompañar transiciones, duelos y crisis. Presencial y online.";
+
+const filled = "font-variation-settings: 'FILL' 1;";
+
+const heroImage = "/terapia-familiar.png";
+const quoteImage = "/terapia-familiar2.png";
+
+const eyebrow =
+	"inline-block px-3.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-widest mb-3";
+const sectionHeading =
+	"font-headline-lg text-headline-md lg:text-headline-lg text-on-surface font-medium leading-tight mb-4";
+
+const trustPills = [
+	{ icon: "verified_user", label: "Espacio seguro y sin juicios" },
+	{ icon: "hub", label: "Mirada sistémica e integradora" },
+	{ icon: "domain", label: "Presencial Pamplona y Online" },
+];
+
+const sessionSteps = [
+	{
+		title: "Sesiones pausadas de 75 a 90 minutos",
+		text: "Tiempo suficiente para que cada miembro participe sin prisas, sintiendo que su punto de vista recibe la atención debida.",
+	},
+	{
+		title: "Neutralidad y validación de todas las voces",
+		text: "Una mirada profesional externa sin bandos ni alianzas que favorece la escucha genuina y desarticula las dinámicas de reproche.",
+	},
+	{
+		title: "Identificación de patrones y dinámicas invisibles",
+		text: "Analizamos los círculos viciosos de comunicación y reactividad para desactivarlos en directo con intervenciones sistémicas.",
+	},
+	{
+		title: "Acuerdos prácticos y pautas de convivencia",
+		text: "Herramientas claras de negociación, límites saludables y corresponsabilidad afectiva aplicables desde la primera semana en casa.",
+	},
+	{
+		title: "Modalidad Presencial y Online flexible",
+		text: "En nuestra consulta en Pamplona o mediante plataforma cifrada segura para acomodar la logística laboral o escolar de toda la familia.",
+	},
+];
+
+const audiences = [
+	{
+		icon: "escalator_warning",
+		title: "Familias con hijos/as o adolescentes",
+		text: "Para hogares donde la convivencia se ha vuelto tensa por la rebeldía, el aislamiento adolescente, dificultades escolares o diferencias en estilos de crianza entre progenitores.",
+		cta: "Recuperar la conexión",
+	},
+	{
+		icon: "sync_alt",
+		title: "Familias en transición o cambio de ciclo",
+		text: "Acompañamiento en momentos clave: llegada de un nuevo miembro, familias reconstituidas (nuevas parejas e hijos), emancipación de los hijos o cuidado de familiares mayores.",
+		cta: "Armonizar la transición",
+	},
+	{
+		icon: "healing",
+		title: "Crisis familiares, duelos o pérdidas",
+		text: "Familias que atraviesan procesos de pérdida, separaciones, enfermedades imprevistas o conflictos enquistados entre hermanos o con la familia extensa.",
+		cta: "Sanar el sistema familiar",
+	},
+];
+
+const problems = [
+	{
+		icon: "forum",
+		title: "Conflictos recurrentes y discusiones continuas",
+		text: "Discusiones que se repiten en bucle sin llegar a soluciones constructivas, generando tensión permanente y agotamiento emocional en todos.",
+	},
+	{
+		icon: "comments_disabled",
+		title: "Desconexión emocional y silencios defensivos",
+		text: "Sensación de vivir como extraños bajo el mismo techo, aislamiento de los hijos o frialdad afectiva por heridas no resueltas.",
+	},
+	{
+		icon: "rule",
+		title: "Límites, normas y dificultades de convivencia",
+		text: "Falta de acuerdos en normas del hogar, desautorización mutua entre figuras parentales o dificultad para poner límites claros con amor y firmeza.",
+	},
+	{
+		icon: "family_restroom",
+		title: "Familias reconstituidas y segundas uniones",
+		text: "Adaptación a nuevas figuras parentales, celos o lealtades invisibles entre hermanos y encaje de diferentes ritmos y hábitos de vida.",
+	},
+	{
+		icon: "heart_broken",
+		title: "Procesos de duelo, enfermedad y pérdidas",
+		text: "Apoyo ante fallecimientos, diagnósticos médicos crónicos o cambios imprevistos que alteran y desestabilizan el equilibrio y la calma familiar.",
+	},
+	{
+		icon: "share_location",
+		title: "Tensiones con la familia extensa o política",
+		text: "Injerencias de familiares externos, discrepancias en la crianza y la necesidad de proteger la intimidad y la autonomía del núcleo familiar.",
+	},
+];
+
+// The first FAQ starts open, as in the original design.
+const faqs = [
+	{
+		question:
+			"¿Tienen que venir todos los miembros de la familia a todas las sesiones?",
+		answer:
+			"No necesariamente. Aunque es ideal contar con la presencia de los miembros involucrados en el conflicto, el proceso se adapta con flexibilidad. En ocasiones realizamos sesiones con toda la familia, otras solo con los progenitores o individuales con alguno de los hijos según los objetivos acordados clínicamente.",
+	},
+	{
+		question:
+			"¿Qué pasa si alguno de los miembros (como un hijo o progenitor) no quiere venir?",
+		answer:
+			"Es una situación muy común. Nunca forzamos a nadie a participar. Podemos comenzar trabajando con los miembros que sí están motivados; introducir cambios en una parte del sistema familiar a menudo moviliza y genera cambios muy positivos en todo el entorno circundante.",
+	},
+	{
+		question:
+			"¿Cuánto duran y con qué frecuencia son las sesiones familiares?",
+		answer:
+			"Las sesiones familiares suelen durar entre 75 y 90 minutos para dar tiempo suficiente a que todas las voces se expresen con tranquilidad. La frecuencia habitual al inicio suele ser quincenal para permitir poner en práctica y asentar las pautas entre sesión y sesión en el hogar.",
+	},
+	{
+		question: "¿La terapeuta juzgará cómo educamos a nuestros hijos?",
+		answer:
+			"Rotundamente no. La terapia no es un juicio moral ni busca etiquetar quién es «buen» o «mal» progenitor. Partimos del respeto profundo hacia vuestra historia familiar y trabajamos de manera colaborativa para identificar qué pautas están funcionando y cuáles necesitan ser renovadas.",
+	},
+];
+---
+
+<Layout title={title} description={description}>
+	<div class="flex flex-col w-full">
+		<!-- Section 1: Hero & breadcrumbs -->
+		<section
+			class="relative w-full px-margin-mobile lg:px-margin pt-6 lg:pt-10 pb-16 lg:pb-24 overflow-hidden"
+		>
+			<div
+				class="absolute -top-32 right-1/4 w-96 h-96 rounded-full bg-primary-container/20 blur-3xl pointer-events-none"
+			>
+			</div>
+			<div
+				class="absolute top-1/2 -left-20 w-80 h-80 rounded-full bg-accent-glow/15 blur-3xl pointer-events-none"
+			>
+			</div>
+			<div class="max-w-[1240px] mx-auto w-full relative z-10">
+				<nav
+					aria-label="Ruta de navegación"
+					class="flex items-center gap-2 mb-6 text-body-sm font-body-sm text-slate-muted"
+				>
+					<a class="hover:text-primary transition-colors" href="/">Inicio</a>
+					<span class="text-outline-variant">/</span>
+					<a class="hover:text-primary transition-colors" href="/servicios"
+						>Servicios</a
+					>
+					<span class="text-outline-variant">/</span>
+					<span aria-current="page" class="text-primary font-medium"
+						>Terapia Familiar</span
+					>
+				</nav>
+				<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+					<!-- Narrative column (7 cols) -->
+					<div class="lg:col-span-7 flex flex-col items-start">
+						<div
+							class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-container text-on-secondary-container mb-6 shadow-sm"
+						>
+							<span
+								class="material-symbols-outlined text-[16px] text-primary"
+								style={filled}>diversity_1</span
+							>
+							<span
+								class="font-label-sm text-label-sm uppercase tracking-wider text-primary"
+								>Psicoterapia Sistémica y Vincular</span
+							>
+						</div>
+						<h1
+							class="font-display-xl text-headline-lg lg:text-display-xl text-on-surface mb-6 font-medium leading-[1.12]"
+						>
+							Terapia Familiar: <span class="italic font-normal text-primary"
+								>Un espacio seguro</span
+							> para reencontraros, mejorar la convivencia y sanar los vínculos
+						</h1>
+						<p
+							class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-8 leading-relaxed"
+						>
+							Un acompañamiento terapéutico respetuoso y neutral donde escuchar a
+							cada miembro de la familia, desenredar dinámicas de conflicto,
+							reconstruir la comunicación y fortalecer el bienestar del hogar.
+						</p>
+						<!-- CTAs -->
+						<div class="flex flex-wrap items-center gap-4 mb-10 w-full sm:w-auto">
+							<a
+								class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-[0_4px_20px_rgba(116,182,166,0.35)] hover:shadow-[0_8px_26px_rgba(116,182,166,0.5)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
+								href={contactHref}
+							>
+								<span class="material-symbols-outlined text-[20px]" style={filled}
+									>calendar_today</span
+								>
+								<span>Reservar primera sesión familiar</span>
+							</a>
+							<a
+								class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-lg text-label-lg transition-all duration-300 group"
+								href="#enfoque"
+							>
+								<span>Conoce nuestro enfoque</span>
+								<span
+									class="material-symbols-outlined text-[18px] group-hover:translate-y-0.5 transition-transform"
+									>arrow_downward</span
+								>
+							</a>
+						</div>
+						<!-- Trust pills -->
+						<div
+							class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full pt-4 border-t border-border-subtle"
+						>
+							{
+								trustPills.map((pill) => (
+									<div class="flex items-center gap-2.5 py-1">
+										<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-primary flex-shrink-0">
+											<span class="material-symbols-outlined text-[18px]">
+												{pill.icon}
+											</span>
+										</div>
+										<span class="font-label-sm text-label-sm text-slate-muted leading-tight">
+											{pill.label}
+										</span>
+									</div>
+								))
+							}
+						</div>
+					</div>
+					<!-- Visual column (5 cols) -->
+					<div class="lg:col-span-5 relative mt-4 lg:mt-0">
+						<div
+							class="relative rounded-3xl overflow-hidden shadow-[0_16px_40px_-10px_rgba(36,51,48,0.12)] bg-surface-container-low"
+						>
+							<img
+								class="w-full h-[460px] object-cover object-center"
+								alt="Una cálida sesión de psicoterapia familiar en un gabinete sereno y luminoso, con dos mujeres sentadas en sillones compartiendo una conversación honesta."
+								src={heroImage}
+							/>
+							<div
+								class="absolute inset-0 bg-gradient-to-t from-on-background/40 via-transparent to-transparent"
+							>
+							</div>
+							<!-- Floating glass badge -->
+							<div
+								class="absolute bottom-5 inset-x-5 p-4 rounded-2xl bg-surface-translucent backdrop-blur-md shadow-lg flex items-center gap-3.5"
+							>
+								<div
+									class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center flex-shrink-0 shadow-sm"
+								>
+									<span
+										class="material-symbols-outlined text-[22px]"
+										style={filled}
+										aria-hidden="true">chevron_left</span
+									>
+								</div>
+								<div class="min-w-0">
+									<p class="font-title-md text-title-md text-on-surface truncate">
+										Espacio seguro para todas las voces
+									</p>
+									<p class="font-body-sm text-body-sm text-slate-muted">
+										100% adaptado a vuestro ritmo y necesidades
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Section 2: ¿En qué consiste la terapia familiar? -->
+		<section
+			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-24 bg-surface-container-lowest relative"
+			id="enfoque"
+		>
+			<div class="max-w-[1240px] mx-auto">
+				<div class="text-center max-w-3xl mx-auto mb-14">
+					<span
+						class="inline-block px-3.5 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm uppercase tracking-widest mb-3"
+					>
+						¿En qué consiste la terapia familiar?
+					</span>
+					<h2
+						class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface font-medium leading-tight mb-5"
+					>
+						Un espacio neutral para poner palabras a lo que duele y reconstruir
+						los puentes del hogar
+					</h2>
+					<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+						La familia es un sistema vivo donde lo que le ocurre a uno afecta a
+						todos. En consulta no buscamos culpables ni juzgamos estilos
+						educativos: creamos un entorno seguro y mediado donde cada miembro
+						puede expresar sus vivencias, necesidades y temores, transformando
+						patrones reactivos en comprensión mutua y cooperación.
+					</p>
+				</div>
+				<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+					<!-- Left: editorial quote card -->
+					<div
+						class="lg:col-span-5 flex flex-col rounded-3xl overflow-hidden bg-linen-base shadow-sm"
+					>
+						<div class="relative h-64 sm:h-72 w-full overflow-hidden">
+							<img
+								class="w-full h-full object-cover object-center"
+								alt="Dos manos entrelazadas sobre una mesa de madera junto a una taza de té y una libreta, transmitiendo conexión familiar y contención afectiva."
+								src={quoteImage}
+								loading="lazy"
+							/>
+						</div>
+						<div
+							class="p-8 flex flex-col justify-between flex-grow bg-surface-container-low/60"
+						>
+							<span
+								class="material-symbols-outlined text-primary text-[36px] opacity-40 mb-2"
+								aria-hidden="true">format_quote</span
+							>
+							<blockquote
+								class="font-headline-md text-headline-sm lg:text-headline-md text-on-surface italic font-medium leading-snug mb-6"
+							>
+								«En una familia no se trata de quién tiene la razón, sino de cómo
+								cuidar el vínculo que os une para que todos puedan florecer.»
+							</blockquote>
+							<div class="flex items-center gap-3 pt-4 border-t border-border-subtle">
+								<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+								<span class="font-label-lg text-label-lg text-slate-muted"
+									>Equipo Terapéutico INALA</span
+								>
+							</div>
+						</div>
+					</div>
+					<!-- Right: 5-step session card -->
+					<div
+						class="lg:col-span-7 bg-surface p-8 lg:p-10 rounded-3xl shadow-sm flex flex-col justify-center"
+					>
+						<div class="flex items-center gap-3 mb-6">
+							<span class="material-symbols-outlined text-primary text-[28px]"
+								>clinical_notes</span
+							>
+							<h3 class="font-title-md text-headline-sm text-on-surface">
+								¿Qué ocurre durante una sesión familiar?
+							</h3>
+						</div>
+						<div class="flex flex-col gap-5">
+							{
+								sessionSteps.map((step, index) => (
+									<div class="flex items-start gap-4 p-4 rounded-2xl bg-surface-container-low/70 transition-all hover:bg-surface-container">
+										<div class="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center font-headline-md text-label-lg flex-shrink-0 mt-0.5">
+											{String(index + 1).padStart(2, "0")}
+										</div>
+										<div class="flex flex-col">
+											<h4 class="font-title-md text-title-md text-on-surface font-semibold">
+												{step.title}
+											</h4>
+											<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+												{step.text}
+											</p>
+										</div>
+									</div>
+								))
+							}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Section 3: ¿Para quién es la terapia familiar? -->
+		<section
+			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-24 bg-surface relative"
+		>
+			<div class="max-w-[1240px] mx-auto">
+				<div class="text-center max-w-3xl mx-auto mb-14">
+					<span class={eyebrow}>Acompañamiento en cada etapa familiar</span>
+					<h2 class={sectionHeading}>¿Para quién es la terapia familiar?</h2>
+					<p class="font-body-lg text-body-lg text-on-surface-variant">
+						Acompañamos a familias en diferentes etapas del ciclo vital y
+						situaciones complejas, adaptando el proceso a vuestra realidad:
+					</p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+					{
+						audiences.map((audience) => (
+							<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0_4px_24px_rgba(36,51,48,0.04)] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(116,182,166,0.18)]">
+								<div>
+									<div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-primary mb-6 shadow-sm">
+										<span class="material-symbols-outlined text-[28px]">
+											{audience.icon}
+										</span>
+									</div>
+									<h3 class="font-headline-md text-headline-sm text-on-surface mb-3 font-semibold">
+										{audience.title}
+									</h3>
+									<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">
+										{audience.text}
+									</p>
+								</div>
+								<a
+									class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-on-primary-fixed-variant transition-colors group"
+									href={contactHref}
+								>
+									<span>{audience.cta}</span>
+									<span
+										class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform"
+										aria-hidden="true"
+									>
+										arrow_forward
+									</span>
+								</a>
+							</div>
+						))
+					}
+				</div>
+				<!-- Empathy pill -->
+				<div
+					class="max-w-2xl mx-auto p-4 sm:p-5 rounded-2xl bg-surface-container-high/60 backdrop-blur-sm text-center"
+				>
+					<p class="font-body-md text-body-md text-on-surface-variant">
+						🌱 <span class="font-medium text-on-surface"
+							>No necesitáis estar al borde de una ruptura de la convivencia para
+							acudir:</span
+						> pedir ayuda a tiempo previene el desgaste crónico y protege a los más
+						jóvenes.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Section 4: ¿Qué problemas se trabajan? -->
+		<section
+			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-24 bg-surface-container-low relative"
+		>
+			<div class="max-w-[1240px] mx-auto">
+				<div class="text-center max-w-3xl mx-auto mb-14">
+					<span class={eyebrow}>¿Qué trabajamos en consulta?</span>
+					<h2 class={sectionHeading}>
+						¿Qué problemas se trabajan en terapia familiar?
+					</h2>
+					<p class="font-body-lg text-body-lg text-on-surface-variant">
+						Abordamos las dinámicas y dificultades relacionales más frecuentes en
+						el ámbito familiar:
+					</p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{
+						problems.map((problem) => (
+							<div class="bg-surface-container-lowest p-7 rounded-3xl shadow-sm flex flex-col transition-all hover:shadow-md">
+								<div class="w-12 h-12 rounded-xl bg-surface-container text-primary flex items-center justify-center mb-5">
+									<span class="material-symbols-outlined text-[24px]">
+										{problem.icon}
+									</span>
+								</div>
+								<h3 class="font-title-md text-title-md text-on-surface font-semibold mb-2">
+									{problem.title}
+								</h3>
+								<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+									{problem.text}
+								</p>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- Section 5: Preguntas frecuentes -->
+		<section
+			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-24 bg-surface-container-lowest relative"
+		>
+			<div class="max-w-[880px] mx-auto">
+				<div class="text-center mb-12">
+					<span class={eyebrow}>Resolvemos vuestras dudas</span>
+					<h2 class={sectionHeading}>
+						Preguntas frecuentes sobre la terapia familiar
+					</h2>
+					<p class="font-body-lg text-body-lg text-on-surface-variant">
+						Es natural que surjan inquietudes antes de iniciar un proceso
+						conjunto. Aquí resolvemos las más habituales:
+					</p>
+				</div>
+				<div class="flex flex-col gap-4" id="faq-accordion-group">
+					{
+						faqs.map((faq, index) => {
+							const open = index === 0;
+							return (
+								<div class="rounded-2xl bg-surface-container-low transition-colors duration-200 overflow-hidden">
+									<button
+										aria-expanded={open ? "true" : "false"}
+										aria-controls={`faq-content-${index}`}
+										class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
+										type="button"
+									>
+										<span class="font-title-md text-title-md text-on-surface font-medium">
+											{faq.question}
+										</span>
+										<span
+											class:list={[
+												"material-symbols-outlined text-primary text-[24px] transform transition-transform duration-200 faq-icon",
+												{ "rotate-45": open },
+											]}
+											aria-hidden="true"
+										>
+											add
+										</span>
+									</button>
+									<div
+										class:list={[
+											"faq-content px-6 pb-6 pt-0",
+											open ? "block" : "hidden",
+										]}
+										id={`faq-content-${index}`}
+									>
+										<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+											{faq.answer}
+										</p>
+									</div>
+								</div>
+							);
+						})
+					}
+				</div>
+			</div>
+		</section>
+
+		<!-- Section 6: Final CTA banner -->
+		<section
+			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-24 bg-inverse-surface text-inverse-on-surface relative overflow-hidden"
+		>
+			<div
+				class="absolute -bottom-20 -right-20 w-96 h-96 rounded-full bg-primary/20 blur-3xl pointer-events-none"
+			>
+			</div>
+			<div
+				class="max-w-[1000px] mx-auto text-center relative z-10 flex flex-col items-center"
+			>
+				<div
+					class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/20 text-accent-glow mb-6"
+				>
+					<span class="material-symbols-outlined text-[16px]">wb_sunny</span>
+					<span class="font-label-sm text-label-sm uppercase tracking-wider"
+						>El bienestar familiar comienza hoy</span
+					>
+				</div>
+				<h2
+					class="font-headline-lg text-headline-md lg:text-headline-lg text-white font-medium mb-6 max-w-2xl leading-tight"
+				>
+					Cuidar de vuestra familia es proteger el refugio de todos
+				</h2>
+				<p
+					class="font-body-lg text-body-lg text-surface-dim max-w-2xl mb-10 leading-relaxed"
+				>
+					Agendad vuestra primera consulta familiar o escribidnos para una breve
+					llamada informativa de 15 minutos sin compromiso. Os escuchamos con
+					calidez, respeto y neutralidad.
+				</p>
+				<div class="flex flex-wrap items-center justify-center gap-4 mb-8">
+					<a
+						class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-[0_4px_24px_rgba(116,182,166,0.4)] hover:shadow-[0_8px_32px_rgba(116,182,166,0.6)] hover:-translate-y-0.5 transition-all duration-300"
+						href={contactHref}
+					>
+						<span class="material-symbols-outlined text-[20px]" style={filled}
+							>calendar_today</span
+						>
+						<span>Reservar cita familiar</span>
+					</a>
+					<a
+						class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-transparent hover:bg-white/10 text-white font-label-lg text-label-lg transition-all duration-300"
+						href={`mailto:${email}`}
+					>
+						<span class="material-symbols-outlined text-[20px]">mail</span>
+						<span>{email}</span>
+					</a>
+				</div>
+				<div
+					class="flex items-center gap-2 text-surface-dim font-body-sm text-body-sm opacity-90"
+				>
+					<span class="material-symbols-outlined text-[18px] text-accent-glow"
+						>schedule</span
+					>
+					<span>Respuesta garantizada en un plazo máximo de 24 horas laborables.</span>
+				</div>
+			</div>
+		</section>
+		<OtherServices />
+	</div>
+</Layout>
+
+<script>
+	// Each FAQ toggles independently; several can be open at once.
+	for (const toggle of document.querySelectorAll<HTMLButtonElement>(
+		".faq-toggle",
+	)) {
+		toggle.addEventListener("click", () => {
+			const open = toggle.getAttribute("aria-expanded") !== "true";
+			toggle.setAttribute("aria-expanded", String(open));
+			const content = toggle.nextElementSibling;
+			content?.classList.toggle("hidden", !open);
+			content?.classList.toggle("block", open);
+			toggle.querySelector(".faq-icon")?.classList.toggle("rotate-45", open);
+		});
+	}
+</script>

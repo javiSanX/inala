@@ -1,8 +1,10 @@
 ---
-import { contactHref, logoSrc, navLinks } from "../data/site";
+import { contactHref, logoSrc, navLinks, servicesMenu } from "../data/site";
 
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const current = (href: string) => (path === href ? "page" : undefined);
+const servicesHref = "/servicios";
+const inServices = path.startsWith(servicesHref);
 ---
 
 <header
@@ -32,20 +34,64 @@ const current = (href: string) => (path === href ? "page" : undefined);
 		</a>
 		<nav class="hidden xl:flex items-center gap-8" aria-label="Principal">
 			{
-				navLinks.map((link) => (
-					<a
-						class:list={[
-							"font-title-md text-body-md transition-colors py-2",
-							current(link.href)
-								? "text-primary"
-								: "text-on-surface-variant hover:text-primary",
-						]}
-						aria-current={current(link.href)}
-						href={link.href}
-					>
-						{link.name}
-					</a>
-				))
+				navLinks.map((link) =>
+					link.href === servicesHref ? (
+						<div class="services-menu group relative">
+							<a
+								class:list={[
+									"font-title-md text-body-md transition-colors py-2 inline-flex items-center gap-1",
+									inServices
+										? "text-primary"
+										: "text-on-surface-variant hover:text-primary",
+								]}
+								aria-current={current(link.href)}
+								aria-haspopup="true"
+								href={link.href}
+							>
+								{link.name}
+								<span
+									class="material-symbols-outlined text-[18px] transition-transform duration-300 ease-exhale group-hover:rotate-180 group-focus-within:rotate-180 group-data-closed:rotate-0"
+									aria-hidden="true"
+								>
+									expand_more
+								</span>
+							</a>
+							<div class="absolute left-1/2 top-full -translate-x-1/2 pt-3 invisible opacity-0 motion-safe:translate-y-1 transition-[opacity,translate,visibility] duration-300 ease-exhale group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 group-data-closed:invisible group-data-closed:opacity-0">
+								<ul class="min-w-64 rounded-2xl bg-surface-container-lowest border border-border-subtle shadow-ethereal p-2">
+									{servicesMenu.map((service) => (
+										<li>
+											<a
+												class:list={[
+													"block rounded-xl px-4 py-2.5 font-body-md text-body-md transition-colors hover:bg-tint-hover hover:text-primary",
+													current(service.href)
+														? "text-primary"
+														: "text-on-surface-variant",
+												]}
+												aria-current={current(service.href)}
+												href={service.href}
+											>
+												{service.name}
+											</a>
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
+					) : (
+						<a
+							class:list={[
+								"font-title-md text-body-md transition-colors py-2",
+								current(link.href)
+									? "text-primary"
+									: "text-on-surface-variant hover:text-primary",
+							]}
+							aria-current={current(link.href)}
+							href={link.href}
+						>
+							{link.name}
+						</a>
+					),
+				)
 			}
 		</nav>
 		<div class="flex items-center gap-space-sm">
@@ -61,3 +107,22 @@ const current = (href: string) => (path === href ? "page" : undefined);
 		</div>
 	</div>
 </header>
+
+<script>
+	// Escape dismisses the hover/focus dropdown (WCAG 1.4.13); it reopens on the next hover or focus.
+	for (const menu of document.querySelectorAll<HTMLElement>(".services-menu")) {
+		const reopen = () => delete menu.dataset.closed;
+		menu.addEventListener("keydown", (event) => {
+			if (event.key === "Escape") menu.dataset.closed = "";
+		});
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && menu.matches(":hover")) {
+				menu.dataset.closed = "";
+			}
+		});
+		menu.addEventListener("mouseleave", reopen);
+		menu.addEventListener("focusout", (event) => {
+			if (!menu.contains(event.relatedTarget as Node | null)) reopen();
+		});
+	}
+</script>
