@@ -242,6 +242,68 @@
 				transform 800ms var(--ease-out);
 			transition-delay: calc(var(--reveal, 0) * 70ms);
 		}
+
+		/* Bento cards start scrambled, overlapping one another, and glide into place (src/scripts/bento.ts). */
+		[data-bento="pending"] > li {
+			--bento-k: 0.35;
+			transform: translate(
+					calc(var(--bento-x) * var(--bento-k)),
+					calc(var(--bento-y) * var(--bento-k))
+				)
+				rotate(var(--bento-r));
+		}
+
+		@media (min-width: 48rem) {
+			[data-bento="pending"] > li {
+				--bento-k: 0.7;
+			}
+		}
+
+		@media (min-width: 64rem) {
+			[data-bento="pending"] > li {
+				--bento-k: 1;
+			}
+		}
+
+		[data-bento="shown"] > li {
+			transition: transform 900ms var(--ease-out);
+		}
+
+		[data-bento="pending"] > :nth-child(1) {
+			--bento-x: 220px;
+			--bento-y: 260px;
+			--bento-r: -8deg;
+		}
+
+		[data-bento="pending"] > :nth-child(2) {
+			--bento-x: -420px;
+			--bento-y: 300px;
+			--bento-r: 7deg;
+		}
+
+		[data-bento="pending"] > :nth-child(3) {
+			--bento-x: 300px;
+			--bento-y: -140px;
+			--bento-r: 6deg;
+		}
+
+		[data-bento="pending"] > :nth-child(4) {
+			--bento-x: -260px;
+			--bento-y: -200px;
+			--bento-r: -6deg;
+		}
+
+		[data-bento="pending"] > :nth-child(5) {
+			--bento-x: 380px;
+			--bento-y: -260px;
+			--bento-r: 8deg;
+		}
+
+		[data-bento="pending"] > :nth-child(6) {
+			--bento-x: -380px;
+			--bento-y: -300px;
+			--bento-r: -7deg;
+		}
 	}
 
 	/* Reduced motion keeps a short fade and drops all movement. */
@@ -255,6 +317,10 @@
 	@media print {
 		[data-reveal="pending"] {
 			opacity: 1;
+			transform: none;
+		}
+
+		[data-bento="pending"] > li {
 			transform: none;
 		}
 	}

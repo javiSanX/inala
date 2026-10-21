@@ -7,6 +7,7 @@ import CtaBand from "../components/ui/CtaBand.astro";
 import FactList from "../components/ui/FactList.astro";
 import Figure from "../components/ui/Figure.astro";
 import Icon from "../components/ui/Icon.astro";
+import type { IconName } from "../components/ui/icons";
 import Section from "../components/ui/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 import TopicList from "../components/ui/TopicList.astro";
@@ -63,16 +64,16 @@ const steps = [
 	{
 		icon: "handshake",
 		title: "Primera sesión para conocernos",
-		text: "Hablamos de lo que te ha traído hasta aquí y definimos juntos los primeros objetivos.",
+		text: "Hablamos de lo que te ha traído hasta aquí y de lo que te gustaría cambiar, y definimos juntos los primeros objetivos.",
 	},
 	{
 		icon: "spa",
 		title: "Sesiones a tu ritmo",
-		text: "Trabajamos con herramientas prácticas y revisamos cómo te sientes. Tú marcas el ritmo.",
+		text: "Trabajamos con herramientas prácticas y revisamos juntos cómo te sientes en cada etapa. Tú marcas el ritmo, sin prisas.",
 	},
 ];
 
-const areas = [
+const areas: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "favorite",
 		title: "Gestión emocional y autoestima",
@@ -104,6 +105,16 @@ const areas = [
 		text: "Conocer tu historia, tus valores y lo que quieres, para vivir de forma más coherente contigo.",
 	},
 ];
+
+// Bento layout for the six topics: rows of 4+2, 2+4 and 3+3 columns on large screens.
+const bentoCards = [
+	{ span: "lg:col-span-4", surface: "bg-mist", featured: true },
+	{ span: "lg:col-span-2", surface: "bg-paper", featured: false },
+	{ span: "lg:col-span-2", surface: "bg-paper", featured: false },
+	{ span: "lg:col-span-4", surface: "bg-mist", featured: true },
+	{ span: "lg:col-span-3", surface: "bg-paper", featured: false },
+	{ span: "lg:col-span-3", surface: "bg-paper", featured: false },
+] as const;
 
 const textLink =
 	"group inline-flex min-h-11 items-center gap-2 text-small font-semibold text-teal underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-teal-strong hover:decoration-current";
@@ -218,14 +229,56 @@ const arrow =
 	</Section>
 
 	<!-- Motivos de consulta -->
-	<Section tone="white">
+	<Section tone="white" class="overflow-x-clip">
 		<SectionHeader title="Motivos por los que la gente viene a consulta">
-			<p>
-				No hace falta estar en una crisis para pedir ayuda. Estos son algunos de
-				los temas que trabajo con más frecuencia.
+			<p
+				class="flex items-start gap-3 rounded-field border border-teal/25 bg-mist p-5 text-body text-teal-strong"
+			>
+				<Icon name="info" class="mt-0.5 text-xl" />
+				<span>
+					No hace falta estar en una crisis para pedir ayuda. Estos son algunos
+					de los temas que trabajo con más frecuencia.
+				</span>
 			</p>
 		</SectionHeader>
-		<TopicList items={areas} columns={3} class="mt-14" />
+		<ul
+			data-bento
+			class="relative mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-6 lg:gap-5"
+		>
+			{
+				areas.map((area, index) => (
+					<li
+						class:list={[
+							"flex flex-col gap-5 rounded-frame border border-line p-7 lg:p-8",
+							bentoCards[index].span,
+							bentoCards[index].surface,
+						]}
+					>
+						<div class="flex items-center gap-4">
+							<span
+								class:list={[
+									"grid size-12 shrink-0 place-items-center rounded-full text-2xl text-teal",
+									bentoCards[index].featured ? "bg-white" : "bg-mist",
+								]}
+							>
+								<Icon name={area.icon} />
+							</span>
+							<h3
+								class:list={[
+									"text-ink",
+									bentoCards[index].featured
+										? "font-display text-subheading font-normal"
+										: "text-lead font-semibold",
+								]}
+							>
+								{area.title}
+							</h3>
+						</div>
+						<p class="text-body text-ink-muted">{area.text}</p>
+					</li>
+				))
+			}
+		</ul>
 	</Section>
 
 	<!-- Cómo empezar -->
@@ -309,3 +362,7 @@ const arrow =
 		</Fragment>
 	</CtaBand>
 </Layout>
+
+<script>
+	import "../scripts/bento";
+</script>
