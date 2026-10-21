@@ -1,5 +1,5 @@
 ---
-import heroImage from "../assets/images/inicio-hero.jpg";
+import heroImage from "../assets/images/hero_image5.jpeg";
 import mariaImage from "../assets/images/maria1.webp";
 import PageHero from "../components/PageHero.astro";
 import Button from "../components/ui/Button.astro";
@@ -115,16 +115,18 @@ const arrow =
 	<PageHero
 		size="display"
 		accent
-		image={heroImage}
-		imageAlt=""
-		imageRatio="portrait"
+		backgroundImage={heroImage}
 	>
-		<Fragment slot="title">
-			Terapia psicológica para adultos, <span>parejas y familias</span>
-		</Fragment>
-		<p class="font-display text-subheading text-ink-muted">
+		<p
+			slot="eyebrow"
+			class="inline-flex items-center gap-2 rounded-field border border-teal/25 bg-mist px-4 py-2 text-small font-medium text-teal-strong"
+		>
+			<Icon name="info" />
 			Psicoterapia en Pamplona y online
 		</p>
+		<Fragment slot="title">
+			Terapia psicológica <span>adaptada a cada situación</span>
+		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
 			Soy {therapistName}, psicóloga general sanitaria (Nº col. {licenseNumber}).
 			Acompaño a niños, adolescentes y adultos, a parejas, a familias y a madres y
@@ -141,10 +143,7 @@ const arrow =
 	<!-- Servicios -->
 	<Section tone="white" aria-labelledby="servicios-titulo">
 		<SectionHeader title="¿En qué te puedo acompañar?" id="servicios-titulo">
-			<p>
-				Todas las sesiones pueden ser en mi consulta de Pamplona o por
-				videollamada.
-			</p>
+
 		</SectionHeader>
 		<ul class="mt-14 grid gap-x-10 md:grid-cols-2 xl:grid-cols-4">
 			{
@@ -158,9 +157,7 @@ const arrow =
 								{service.name}
 							</h3>
 							<p class="flex-1 text-body text-ink-muted">{service.summary}</p>
-							<p class="text-label font-semibold text-ink tabular-nums">
-								{service.duration} · {service.price}
-							</p>
+
 							<span class="inline-flex items-center gap-2 text-small font-semibold text-teal">
 								Saber más
 								<Icon name="arrow_forward" class={arrow} />
@@ -234,9 +231,7 @@ const arrow =
 	<!-- Cómo empezar -->
 	<Section id="proceso">
 		<SectionHeader title="Cómo empezar">
-			<p class="tabular-nums">
-				Primera sesión: 60 minutos · 65 € (pareja o familia: 75 €).
-			</p>
+			
 		</SectionHeader>
 		<TopicList items={steps} columns={3} numbered numerals="display" class="mt-14" />
 		<a class:list={[textLink, "mt-6"]} href="/nuestro-metodo">
@@ -281,14 +276,7 @@ const arrow =
 					destino al que llegar.”
 				</p>
 			</blockquote>
-			<figcaption class="flex flex-col items-center gap-1">
-				<cite class="text-small font-semibold not-italic text-teal">
-					{therapistName}
-				</cite>
-				<span class="text-label text-ink-muted">
-					Psicóloga general sanitaria y fundadora de Inala
-				</span>
-			</figcaption>
+
 		</figure>
 	</Section>
 

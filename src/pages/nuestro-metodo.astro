@@ -1,7 +1,7 @@
 ---
 import processImage from "../assets/images/maria3.webp";
 import therapistImage from "../assets/images/maria4.webp";
-import heroImage from "../assets/images/metodo1.png";
+import heroImage from "../assets/images/nuestro_metodo.jpeg";
 import officeImage from "../assets/images/oficina.webp";
 import PageHero from "../components/PageHero.astro";
 import Button from "../components/ui/Button.astro";
@@ -154,8 +154,7 @@ const modalities = [
 		features: [
 			{
 				icon: "lock",
-				label:
-					"Plataforma segura y cifrada que cumple la normativa de protección de datos",
+				label: "Plataforma segura y cifrada que cumple la normativa de protección de datos",
 			},
 			{
 				icon: "sync_alt",
@@ -168,7 +167,10 @@ const modalities = [
 ---
 
 <Layout title={title} description={description}>
-	<PageHero label="Enfoque integrador y basado en la evidencia">
+	<PageHero
+		backgroundImage={heroImage}
+		label="Enfoque integrador y basado en la evidencia"
+	>
 		<Fragment slot="title">
 			Cómo trabajo: cercanía y{" "}
 			<span>a tu propio ritmo</span>
@@ -191,7 +193,8 @@ const modalities = [
 				<span>Mi compromiso</span>
 			</figcaption>
 			<blockquote class="font-display text-subheading font-normal text-ink">
-				«No creo en fórmulas estándar: adapto la terapia a ti, nunca a la inversa.»
+				«No creo en fórmulas estándar: adapto la terapia a ti, nunca a la
+				inversa.»
 			</blockquote>
 			<dl class="flex flex-wrap gap-x-10 gap-y-4">
 				{
@@ -207,13 +210,6 @@ const modalities = [
 			</dl>
 		</figure>
 		<div slot="media" class="flex flex-col gap-6">
-			<Figure
-				src={heroImage}
-				alt="Ilustración de una mujer meditando, con el cerebro iluminado y rodeada de plantas y flores"
-				ratio="landscape"
-				priority
-				sizes="(min-width: 1024px) 34vw, 100vw"
-			/>
 			<ul class="flex flex-wrap gap-2">
 				{
 					heroBadges.map((badge) => (
@@ -225,10 +221,12 @@ const modalities = [
 				}
 			</ul>
 			<div class="flex flex-col gap-2 border-t border-line pt-5">
-				<p class="text-small font-semibold text-ink">El vínculo como motor de cambio</p>
+				<p class="text-small font-semibold text-ink">
+					El vínculo como motor de cambio
+				</p>
 				<p class="text-body text-ink-muted">
-					La confianza entre tú y yo es la base para construir recursos que te
-					sirvan a largo plazo.
+					La confianza entre tú y yo es la base para construir recursos que
+					te sirvan a largo plazo.
 				</p>
 			</div>
 		</div>
@@ -236,7 +234,10 @@ const modalities = [
 
 	<!-- Pilares del método -->
 	<Section tone="white">
-		<SectionHeader title="Tres principios de mi forma de trabajar" label="En qué me baso" />
+		<SectionHeader
+			title="Tres principios de mi forma de trabajar"
+			label="En qué me baso"
+		/>
 		<TopicList
 			items={pillars.map((pillar) => ({ ...pillar, note: pillar.tag }))}
 			columns={3}
@@ -259,12 +260,16 @@ const modalities = [
 				</Figure>
 				<div class="flex flex-col gap-3 border-t border-line pt-5">
 					<p class="flex flex-col">
-						<span class="font-display text-subheading text-ink">María Sánchez</span>
-						<span class="text-label text-ink-muted">Psicóloga general sanitaria</span>
+						<span class="font-display text-subheading text-ink"
+							>María Sánchez</span
+						>
+						<span class="text-label text-ink-muted"
+							>Psicóloga general sanitaria</span
+						>
 					</p>
 					<p class="font-display text-lead text-teal">
-						«Te acompaño con rigor y calidez para que encuentres un lugar donde ser
-						tú mismo/a»
+						«Te acompaño con rigor y calidez para que encuentres un lugar
+						donde ser tú mismo/a»
 					</p>
 				</div>
 			</div>
@@ -276,7 +281,9 @@ const modalities = [
 								{step.number}
 							</span>
 							<div class="flex flex-col gap-2.5">
-								<h3 class="text-lead font-semibold text-ink">{step.title}</h3>
+								<h3 class="text-lead font-semibold text-ink">
+									{step.title}
+								</h3>
 								<p class="text-body text-ink-muted">{step.text}</p>
 							</div>
 						</li>
@@ -293,8 +300,8 @@ const modalities = [
 			label="Qué puedes trabajar"
 		>
 			<p>
-				Estos son algunos de los cambios que se trabajan en terapia. Cada proceso
-				es distinto y avanza a su ritmo.
+				Estos son algunos de los cambios que se trabajan en terapia. Cada
+				proceso es distinto y avanza a su ritmo.
 			</p>
 		</SectionHeader>
 		<TopicList items={benefits} columns={2} class="mt-14 lg:grid-cols-4" />
@@ -310,12 +317,13 @@ const modalities = [
 					layout="stack"
 				>
 					<p>
-						Me llamo María y soy quien te atenderá en Inala. Mi propósito es
-						acompañarte con empatía, rigor y presencia en cada paso de tu proceso.
+						Me llamo María y soy quien te atenderá en Inala. Mi propósito
+						es acompañarte con empatía, rigor y presencia en cada paso de
+						tu proceso.
 					</p>
 					<p class="mt-4">
-						Antes de la psicología trabajé en la empresa, y eso me ayuda a entender
-						de cerca el estrés y la autoexigencia.
+						Antes de la psicología trabajé en la empresa, y eso me ayuda a
+						entender de cerca el estrés y la autoexigencia.
 					</p>
 				</SectionHeader>
 				<ul class="flex flex-col gap-3">
@@ -351,7 +359,9 @@ const modalities = [
 						Formación en terapia familiar y de pareja y en salud perinatal
 					</span>
 					<span class="block font-semibold text-ink">María Sánchez</span>
-					<span class="block">Psicóloga general sanitaria · Nº col. {licenseNumber}</span>
+					<span class="block"
+						>Psicóloga general sanitaria · Nº col. {licenseNumber}</span
+					>
 				</span>
 			</Figure>
 		</div>
@@ -361,8 +371,8 @@ const modalities = [
 	<Section tone="white">
 		<SectionHeader title="Dónde son las sesiones" label="Presencial u online">
 			<p>
-				Elige la opción que mejor encaje con tu vida. Las sesiones duran 60 minutos
-				en ambos casos.
+				Elige la opción que mejor encaje con tu vida. Las sesiones duran 60
+				minutos en ambos casos.
 			</p>
 		</SectionHeader>
 		<ul class="mt-14 grid gap-x-12 gap-y-14 md:grid-cols-2">
@@ -377,20 +387,26 @@ const modalities = [
 								sizes="(min-width: 768px) 45vw, 100vw"
 							>
 								<Icon name="location_on" class="text-teal" />
-								<span class="font-semibold text-ink">{modality.badge}</span>
+								<span class="font-semibold text-ink">
+									{modality.badge}
+								</span>
 							</Figure>
 						) : (
 							<div class="flex flex-col gap-3">
 								<div class="flex aspect-16/10 flex-col items-start justify-end gap-2 rounded-frame bg-cypress p-8 text-on-dark">
 									<Icon name="videocam" class="size-10 text-seafoam" />
-									<span class="font-display text-heading">{modality.visualTitle}</span>
+									<span class="font-display text-heading">
+										{modality.visualTitle}
+									</span>
 									<span class="text-small text-on-dark-muted">
 										{modality.visualText}
 									</span>
 								</div>
 								<p class="flex items-center gap-2 text-label">
 									<Icon name="videocam" class="text-teal" />
-									<span class="font-semibold text-ink">{modality.badge}</span>
+									<span class="font-semibold text-ink">
+										{modality.badge}
+									</span>
 								</p>
 							</div>
 						)}

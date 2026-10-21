@@ -1,5 +1,5 @@
 ---
-import heroImage from "../../assets/images/terapia-individual.png";
+import heroImage from "../../assets/images/terapia_individual.jpeg";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
 import Button from "../../components/ui/Button.astro";
@@ -22,8 +22,7 @@ import {
 } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
-const title =
-	"Terapia individual en Pamplona y online | Inala Psicoterapia";
+const title = "Terapia individual en Pamplona y online | Inala Psicoterapia";
 
 const description =
 	"Terapia individual para adultos, adolescentes y niños en Pamplona y online: ansiedad, estrés, autoestima, duelo y relaciones. Sesiones de 60 minutos con María Sánchez, psicóloga general sanitaria.";
@@ -133,7 +132,7 @@ const faqs = [
 	{
 		question: "¿Qué pasa si nunca he ido al psicólogo antes?",
 		answer:
-						"Es normal sentir nervios o no saber por dónde empezar. Yo guío la conversación con suavidad, te hago preguntas que ayudan a ordenar lo que sientes y tú marcas el ritmo con el que quieres contar tu historia.",
+			"Es normal sentir nervios o no saber por dónde empezar. Yo guío la conversación con suavidad, te hago preguntas que ayudan a ordenar lo que sientes y tú marcas el ritmo con el que quieres contar tu historia.",
 	},
 	{
 		question: "¿Atiendes a niños y adolescentes?",
@@ -144,24 +143,16 @@ const faqs = [
 ---
 
 <Layout title={title} description={description}>
-	<PageHero
-		breadcrumbs={[
-			{ name: "Inicio", href: "/" },
-			{ name: "Servicios", href: "/servicios" },
-			{ name: "Terapia Individual" },
-		]}
-		image={heroImage}
-		imageAlt="Sesión de psicoterapia individual en Inala"
-	>
+	<PageHero backgroundImage={heroImage}>
 		<Fragment slot="title">
 			Terapia individual: entender lo que te pasa y encontrar tus <span
 				>propios recursos</span
 			>
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
-			Sesiones de 60 minutos, en Pamplona u online, para ordenar lo que sientes,
-			salir de los bloqueos y aprender a cuidarte con más calma. Para adultos,
-			adolescentes y niños.
+			Sesiones de 60 minutos, en Pamplona u online, para ordenar lo que
+			sientes, salir de los bloqueos y aprender a cuidarte con más calma.
+			Para adultos, adolescentes y niños.
 		</p>
 		<div class="flex flex-wrap gap-3 pt-2">
 			<Button href={contactHref} icon="calendar_today">
@@ -169,14 +160,19 @@ const faqs = [
 			</Button>
 		</div>
 		<FactList
-			facts={trustBadges.map((badge) => ({ title: badge.label, icon: badge.icon }))}
+			facts={trustBadges.map((badge) => ({
+				title: badge.label,
+				icon: badge.icon,
+			}))}
 			class="mt-4"
 		/>
 		<Fragment slot="caption">
 			<Icon name="lock" class="text-teal" />
-			<span><span class="font-semibold text-ink">Confidencial</span><span
+			<span
+				><span class="font-semibold text-ink">Confidencial</span><span
 					>&nbsp;· a tu ritmo.</span
-				></span>
+				></span
+			>
 		</Fragment>
 	</PageHero>
 
@@ -196,15 +192,20 @@ const faqs = [
 			<div class="flex flex-col gap-10 lg:col-span-5">
 				<Figure src={heroImage} alt="" ratio="landscape" />
 				<Quote>
-					«Cuidar de tu mente es el primer paso para habitar tu propia vida con
-					calma y presencia.»
+					«Cuidar de tu mente es el primer paso para habitar tu propia vida
+					con calma y presencia.»
 				</Quote>
 			</div>
 			<div class="lg:col-span-7">
 				<h3 class="font-display text-subheading font-normal text-ink">
 					¿Qué ocurre durante una sesión?
 				</h3>
-				<TopicList items={sessionFeatures} columns={1} level={4} class="mt-6" />
+				<TopicList
+					items={sessionFeatures}
+					columns={1}
+					level={4}
+					class="mt-6"
+				/>
 			</div>
 		</div>
 	</Section>
@@ -216,14 +217,14 @@ const faqs = [
 			label="ACOMPAÑAMIENTO EN CADA ETAPA VITAL"
 		>
 			<p>
-				Acompaño a personas en distintos momentos de su vida y adapto el proceso
-				y las herramientas a cada etapa:
+				Acompaño a personas en distintos momentos de su vida y adapto el
+				proceso y las herramientas a cada etapa:
 			</p>
 		</SectionHeader>
 		<TopicList items={audiences} columns={3} class="mt-14" />
 		<Note class="mt-6">
-			Sea cual sea tu momento vital, la terapia se adapta a tu ritmo y a lo que
-			tú necesitas.
+			Sea cual sea tu momento vital, la terapia se adapta a tu ritmo y a lo
+			que tú necesitas.
 		</Note>
 	</Section>
 
@@ -234,8 +235,9 @@ const faqs = [
 			label="¿QUÉ TRABAJAMOS EN CONSULTA?"
 		>
 			<p>
-				La terapia no es solo para momentos de crisis. Si te reconoces en alguna
-				de estas situaciones, puedo ayudarte a encontrar claridad y alivio:
+				La terapia no es solo para momentos de crisis. Si te reconoces en
+				alguna de estas situaciones, puedo ayudarte a encontrar claridad y
+				alivio:
 			</p>
 		</SectionHeader>
 		<TopicList items={problems} layout="rows" class="mt-14" />
@@ -265,8 +267,8 @@ const faqs = [
 		title="Dar el primer paso requiere valentía, pero no tienes que hacerlo solo/a."
 	>
 		<p class="tabular-nums">
-			Solicita tu primera cita o escríbeme si antes quieres resolver alguna duda.
-			Sesión de 60 minutos · 65 €.
+			Solicita tu primera cita o escríbeme si antes quieres resolver alguna
+			duda. Sesión de 60 minutos · 65 €.
 		</p>
 		<Fragment slot="actions">
 			<Button href={contactHref} variant="inverse" arrow>

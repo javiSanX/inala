@@ -18,7 +18,10 @@ const navLink =
 	"relative inline-flex min-h-11 items-center gap-1 text-small font-medium transition-[color] duration-200 after:absolute after:inset-x-0 after:bottom-1.5 after:h-0.5 after:rounded-full after:transition-[opacity] after:duration-200";
 ---
 
-<header class="sticky top-0 z-50 border-b border-line bg-paper">
+<header
+	class="sticky top-0 z-50 border-b border-transparent bg-transparent transition-[background-color,border-color] duration-200 data-scrolled:border-line data-scrolled:bg-paper motion-reduce:transition-none"
+	data-site-header
+>
 	<div
 		class="mx-auto flex h-18 max-w-content items-center justify-between gap-3 px-5 sm:gap-6 sm:px-8 lg:px-10"
 	>
@@ -170,6 +173,14 @@ const navLink =
 </header>
 
 <script>
+	// The bar is transparent over the hero and gets its background and border once the page scrolls.
+	const header = document.querySelector<HTMLElement>("[data-site-header]");
+	const syncHeader = () => {
+		header?.toggleAttribute("data-scrolled", window.scrollY > 0);
+	};
+	syncHeader();
+	window.addEventListener("scroll", syncHeader, { passive: true });
+
 	// Escape closes the mobile menu and returns focus to its toggle.
 	for (const menu of document.querySelectorAll<HTMLDetailsElement>(".mobile-menu")) {
 		menu.addEventListener("keydown", (event) => {

@@ -1,5 +1,5 @@
 ---
-import heroImage from "../../assets/images/terapia-familiar.png";
+import heroImage from "../../assets/images/terapia_familiar.jpeg";
 import quoteImage from "../../assets/images/terapia-familiar2.png";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
@@ -138,14 +138,8 @@ const faqs = [
 
 <Layout title={title} description={description}>
 	<PageHero
-		breadcrumbs={[
-			{ name: "Inicio", href: "/" },
-			{ name: "Servicios", href: "/servicios" },
-			{ name: "Terapia Familiar" },
-		]}
-		breadcrumbsLabel="Ruta de navegación"
 		label="Terapia familiar · Pamplona y online"
-		image={heroImage}
+		backgroundImage={heroImage}
 		imageAlt="Una cálida sesión de psicoterapia familiar en un gabinete sereno y luminoso, con dos mujeres sentadas en sillones compartiendo una conversación honesta."
 	>
 		<Fragment slot="title">

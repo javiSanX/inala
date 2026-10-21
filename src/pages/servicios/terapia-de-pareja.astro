@@ -1,6 +1,6 @@
 ---
 import quoteImage from "../../assets/images/oficina.webp";
-import heroImage from "../../assets/images/terapia-pareja.jpg";
+import heroImage from "../../assets/images/terapia_de_pareja.jpeg";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
 import Button from "../../components/ui/Button.astro";
@@ -143,15 +143,11 @@ const faqs = [
 
 <Layout title={title} description={description}>
 	<PageHero
-		breadcrumbs={[
-			{ name: "Inicio", href: "/" },
-			{ name: "Servicios", href: "/servicios" },
-			{ name: "Terapia de Pareja" },
-		]}
 		label="Terapia de pareja · Pamplona y online"
-		image={heroImage}
+
 		imageAlt="Dos miembros de una pareja se cogen de las manos sobre un mantel de lino con luz natural de mañana, en un ambiente cálido de consulta."
-	>
+backgroundImage={heroImage}
+		>
 		<Fragment slot="title">
 			Terapia de pareja: volver a <em>entenderos</em>
 		</Fragment>

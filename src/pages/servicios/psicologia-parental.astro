@@ -1,5 +1,5 @@
 ---
-import heroImage from "../../assets/images/psicologia-parental.png";
+import heroImage from "../../assets/images/psicologia_perinatal.jpeg";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
 import Button from "../../components/ui/Button.astro";
@@ -130,13 +130,7 @@ const faqs = [
 
 <Layout title={title} description={description}>
 	<PageHero
-		breadcrumbs={[
-			{ name: "Inicio", href: "/" },
-			{ name: "Servicios", href: "/servicios" },
-			{ name: "Psicología Parental" },
-		]}
-		breadcrumbsLabel="Ruta de navegación"
-		image={heroImage}
+		backgroundImage={heroImage}
 		imageAlt={heroImageAlt}
 	>
 		<Fragment slot="title">

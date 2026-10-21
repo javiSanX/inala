@@ -1,7 +1,7 @@
 ---
 import therapistImage from "../../assets/images/maria5.webp";
 import officeImage from "../../assets/images/oficina.webp";
-import heroImage from "../../assets/images/terapia-online.jpg";
+import heroImage from "../../assets/images/terapia_online.jpeg";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
 import Button from "../../components/ui/Button.astro";
@@ -150,12 +150,8 @@ const faqs = [
 
 <Layout title={title} description={description}>
 	<PageHero
-		breadcrumbs={[
-			{ name: "Inicio", href: "/" },
-			{ name: "Servicios", href: "/servicios" },
-			{ name: "Terapia Online" },
-		]}
 		label="Terapia online · 60 minutos"
+			backgroundImage={heroImage}
 	>
 		<Fragment slot="title">
 			Terapia online: la misma cercanía, <span>estés donde estés</span>
@@ -190,22 +186,7 @@ const faqs = [
 			<span>Confidencial y protegido por el secreto profesional.</span>
 		</p>
 		<div slot="media" class="flex flex-col gap-6">
-			<Figure
-				src={heroImage}
-				alt="Mujer joven sentada en un sillón de lino en una estancia luminosa con plantas, con una taza en la mano, durante una sesión de videoconsulta psicológica en su portátil."
-				ratio="portrait"
-				priority
-				sizes="(min-width: 1024px) 34vw, 100vw"
-			>
-				<Icon name="lock" class="text-teal" />
-				<span class="font-semibold text-ink">Confidencial</span>
-				<span aria-hidden="true">·</span>
-				<Icon name="videocam" class="text-teal" />
-				<span>
-					<span class="font-semibold text-ink">Videollamada segura</span>
-					<span>Sin instalaciones complicadas</span>
-				</span>
-			</Figure>
+
 			<Quote author="María Sánchez">
 				«La presencia terapéutica no depende de los metros de distancia, sino de
 				la calidad de la escucha y la resonancia emocional.»
