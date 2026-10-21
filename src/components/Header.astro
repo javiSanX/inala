@@ -1,77 +1,79 @@
 ---
+import { Image } from "astro:assets";
 import {
 	contactHref,
 	ctaLabel,
-	logoSrc,
+	logo,
 	navLinks,
 	serviceMenuLinks,
 } from "../data/site";
+import { buttonClass } from "./ui/button";
+import Icon from "./ui/Icon.astro";
 
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const current = (href: string) => (path === href ? "page" : undefined);
 const servicesHref = "/servicios";
 const inServices = path.startsWith(servicesHref);
+const navLink =
+	"relative inline-flex min-h-11 items-center gap-1 text-small font-medium transition-[color] duration-200 after:absolute after:inset-x-0 after:bottom-1.5 after:h-0.5 after:rounded-full after:transition-[opacity] after:duration-200";
 ---
 
-<header
-	class="fixed top-0 inset-x-0 z-50 bg-surface/75 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
->
+<header class="sticky top-0 z-50 border-b border-line bg-paper">
 	<div
-		class="max-w-content mx-auto px-margin-mobile lg:px-margin h-20 flex items-center justify-between"
+		class="mx-auto flex h-18 max-w-content items-center justify-between gap-3 px-5 sm:gap-6 sm:px-8 lg:px-10"
 	>
-		<a class="flex items-center gap-3 group" href="/">
-			<img
+		<a class="flex shrink-0 items-center gap-3" href="/">
+			<Image
+				src={logo}
 				alt="Inala Centro de Psicoterapia"
-				class="h-10 w-10 md:h-11 md:w-11 object-contain shrink-0"
-				src={logoSrc}
-				width="500"
-				height="500"
+				width={44}
+				height={44}
+				densities={[1, 2]}
+				class="size-10 md:size-11"
+				loading="eager"
 			/>
-			<div class="flex flex-col text-left">
-				<span
-					class="font-headline-md text-headline-sm text-primary tracking-tight font-medium leading-none"
+			<span class="flex flex-col leading-none">
+				<span class="font-display text-2xl font-medium tracking-wide text-ink"
 					>INALA</span
 				>
 				<span
-					class="font-label-sm text-label-sm text-slate-muted uppercase tracking-widest mt-0.5"
+					class="mt-1 text-xs font-semibold uppercase tracking-wide text-ink-muted sm:tracking-widest"
 					>Centro de Psicoterapia</span
 				>
-			</div>
+			</span>
 		</a>
-		<nav class="hidden xl:flex items-center gap-8" aria-label="Principal">
+		<nav class="hidden items-center gap-8 lg:flex" aria-label="Principal">
 			{
 				navLinks.map((link) =>
 					link.href === servicesHref ? (
 						<div class="services-menu group relative">
 							<a
 								class:list={[
-									"font-title-md text-body-md transition-colors py-2 inline-flex items-center gap-1",
+									navLink,
+									"after:bg-seafoam",
 									inServices
-										? "text-primary"
-										: "text-on-surface-variant hover:text-primary",
+										? "text-ink after:opacity-100"
+										: "text-ink-muted after:opacity-0 hover:text-ink",
 								]}
 								aria-current={current(link.href)}
-								aria-haspopup="true"
 								href={link.href}
 							>
 								{link.name}
-								<span
-									class="material-symbols-outlined text-[18px] transition-transform duration-300 ease-exhale group-hover:rotate-180 group-focus-within:rotate-180 group-data-closed:rotate-0"
-									aria-hidden="true"
-								>
-									expand_more
-								</span>
+								<Icon
+									name="expand_more"
+									class="transition-[rotate] duration-200 ease-out group-hover:rotate-180 group-focus-within:rotate-180 group-data-closed:rotate-0 motion-reduce:transition-none"
+								/>
 							</a>
-							<div class="absolute left-1/2 top-full -translate-x-1/2 pt-3 invisible opacity-0 motion-safe:translate-y-1 transition-[opacity,translate,visibility] duration-300 ease-exhale group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 group-data-closed:invisible group-data-closed:opacity-0">
-								<ul class="min-w-64 rounded-2xl bg-surface-container-lowest border border-border-subtle shadow-ethereal p-2">
+							<div class="invisible absolute left-1/2 top-full -translate-x-1/2 pt-2 opacity-0 transition-[opacity,visibility] duration-200 ease-out group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 group-data-closed:invisible group-data-closed:opacity-0">
+								<ul class="min-w-64 origin-top scale-97 rounded-frame bg-white p-2 shadow-float transition-[scale] duration-200 ease-out group-hover:scale-100 group-focus-within:scale-100 motion-reduce:scale-100">
 									{serviceMenuLinks.map((service) => (
 										<li>
 											<a
 												class:list={[
-													"block rounded-xl px-4 py-2.5 font-body-md text-body-md transition-colors hover:bg-tint-hover hover:text-primary",
+													"flex min-h-11 items-center gap-3 rounded-field px-3 text-small transition-[background-color,color] duration-200 hover:bg-mist hover:text-ink",
 													current(service.href)
-														? "text-primary"
-														: "text-on-surface-variant",
+														? "font-semibold text-ink"
+														: "text-ink-muted",
 												]}
 												aria-current={current(service.href)}
 												href={service.href}
@@ -86,10 +88,11 @@ const inServices = path.startsWith(servicesHref);
 					) : (
 						<a
 							class:list={[
-								"font-title-md text-body-md transition-colors py-2",
+								navLink,
+								"after:bg-seafoam",
 								current(link.href)
-									? "text-primary"
-									: "text-on-surface-variant hover:text-primary",
+									? "text-ink after:opacity-100"
+									: "text-ink-muted after:opacity-0 hover:text-ink",
 							]}
 							aria-current={current(link.href)}
 							href={link.href}
@@ -100,38 +103,33 @@ const inServices = path.startsWith(servicesHref);
 				)
 			}
 		</nav>
-		<div class="flex items-center gap-space-sm">
-			<a
-				class="hidden sm:inline-flex items-center justify-center font-label-lg text-label-lg px-6 py-2.5 rounded-full bg-primary text-on-primary shadow-xs hover:opacity-90 motion-safe:hover:-translate-y-0.5 active:translate-y-0 transition-[opacity,translate] duration-300"
-				href={contactHref}
-			>
-				<span class="material-symbols-outlined text-[18px] mr-1.5" aria-hidden="true"
-					>calendar_today</span
-				>Solicitar cita
+		<div class="flex items-center gap-3">
+			<a class:list={[buttonClass(), "min-h-11 px-5 max-sm:hidden"]} href={contactHref}>
+				<Icon name="calendar_today" />
+				Solicitar cita
 			</a>
-			<details class="mobile-menu xl:hidden">
+			<details class="mobile-menu group/menu lg:hidden">
 				<summary
-					class="list-none [&::-webkit-details-marker]:hidden cursor-pointer inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 font-label-lg text-label-lg text-on-surface border border-border-soft hover:bg-tint-hover transition-colors duration-200"
+					class="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-line-strong bg-white px-4 text-small font-semibold text-ink transition-[border-color,color] duration-200 hover:border-teal hover:text-teal [&::-webkit-details-marker]:hidden"
 				>
-					<span class="material-symbols-outlined text-[20px]" aria-hidden="true"
-						>menu</span
-					>
-					Menú
+					<Icon name="menu" class="group-open/menu:hidden" />
+					<Icon name="close" class="hidden group-open/menu:block" />
+					<span class="max-xs:sr-only">Menú</span>
 				</summary>
 				<nav
-					class="fixed inset-x-0 top-20 max-h-[calc(100dvh-5rem)] overflow-y-auto bg-surface-container-lowest border-t border-border-subtle shadow-ethereal px-margin-mobile py-space-md"
+					class="fixed inset-x-0 top-18 max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-b border-line bg-paper px-5 pb-8 pt-2 shadow-float transition-[opacity,translate] duration-250 ease-out sm:px-8 starting:-translate-y-2 starting:opacity-0 motion-reduce:starting:translate-y-0"
 					aria-label="Principal (móvil)"
 				>
 					<ul class="flex flex-col">
 						{
 							navLinks.map((link) => (
-								<li>
+								<li class="border-b border-line">
 									<a
 										class:list={[
-											"block py-3 font-title-md text-title-md border-b border-border-subtle",
+											"flex min-h-14 items-center font-display text-subheading",
 											current(link.href)
-												? "text-primary"
-												: "text-on-surface hover:text-primary",
+												? "text-teal"
+												: "text-ink hover:text-teal",
 										]}
 										aria-current={current(link.href)}
 										href={link.href}
@@ -139,15 +137,15 @@ const inServices = path.startsWith(servicesHref);
 										{link.name}
 									</a>
 									{link.href === servicesHref && (
-										<ul class="py-2 pl-4 border-b border-border-subtle">
+										<ul class="grid gap-x-6 pb-4 sm:grid-cols-2">
 											{serviceMenuLinks.map((service) => (
 												<li>
 													<a
 														class:list={[
-															"block py-2 font-body-md text-body-md",
+															"flex min-h-11 items-center text-body",
 															current(service.href)
-																? "text-primary"
-																: "text-on-surface-variant hover:text-primary",
+																? "font-semibold text-teal"
+																: "text-ink-muted hover:text-teal",
 														]}
 														aria-current={current(service.href)}
 														href={service.href}
@@ -162,10 +160,7 @@ const inServices = path.startsWith(servicesHref);
 							))
 						}
 					</ul>
-					<a
-						class="mt-space-md flex w-full items-center justify-center rounded-full px-6 py-3 font-label-lg text-label-lg bg-primary text-on-primary hover:opacity-90 transition-opacity duration-200"
-						href={contactHref}
-					>
+					<a class:list={[buttonClass(), "mt-6 w-full"]} href={contactHref}>
 						{ctaLabel}
 					</a>
 				</nav>

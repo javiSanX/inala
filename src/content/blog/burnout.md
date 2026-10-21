@@ -13,7 +13,7 @@ En nuestra sociedad actual, la presión por rendir y la constante conectividad h
 
 Desde mi experiencia como **psicóloga en Inala Psicoterapia**, veo el burnout como una señal de alarma de que nuestro sistema ha llegado al límite. Es una llamada de atención que nos impulsa a reevaluar nuestra relación con el trabajo y el autocuidado.
 
-#### ¿Cómo reconocer el burnout? Los signos clave
+### ¿Cómo reconocer el burnout? Los signos clave
 
 Identificar el **burnout** es el primer paso para superarlo. Sus manifestaciones pueden ser sutiles al principio, pero se intensifican con el tiempo, afectando seriamente nuestra **salud mental** y física. Los tres pilares de este síndrome son:
 
@@ -27,7 +27,7 @@ Si te reconoces en estos síntomas, es fundamental detenerse y buscar apoyo.
 
 La recuperación del **burnout** no sucede de la noche a la mañana, pero es completamente posible. Se trata de un proceso holístico que aborda tanto los factores externos como los internos que contribuyen al agotamiento.
 
-#### Reconstruyendo tus límites y el autocuidado
+### Reconstruyendo tus límites y el autocuidado
 
 Un paso crucial en la **terapia para el burnout** es aprender a establecer y mantener límites saludables. Esto implica:
 
@@ -35,7 +35,7 @@ Un paso crucial en la **terapia para el burnout** es aprender a establecer y man
 - **Priorizar el autocuidado:** No como un extra, sino como una parte no negociable de tu rutina. Esto incluye descanso adecuado, alimentación consciente, ejercicio físico y actividades que te recarguen.
 - **Aprender a desconectar:** La tecnología nos mantiene siempre "disponibles", pero para sanar del **estrés crónico**, es vital crear espacios de desconexión real.
 
-#### El rol de la terapia psicológica en el burnout
+### El rol de la terapia psicológica en el burnout
 
 La **terapia psicológica** juega un papel fundamental en la superación del **síndrome de quemarse**. Como **psicóloga especializada en el manejo del estrés** en **Inala**, puedo ayudarte a:
 

@@ -1,0 +1,55 @@
+---
+import Icon from "./Icon.astro";
+import { type IconName, icons } from "./icons";
+
+interface Fact {
+	title: string;
+	subtitle?: string;
+	/** Material Symbols name; names outside the site's set fall back to a close one. */
+	icon?: string;
+}
+
+interface Props {
+	facts: readonly Fact[];
+	class?: string;
+}
+
+const { facts, class: className } = Astro.props;
+
+const aliases: Record<string, IconName> = {
+	pin_drop: "location_on",
+	domain: "location_on",
+	timer: "schedule",
+};
+const iconFor = (name?: string): IconName | undefined => {
+	if (!name) return undefined;
+	if (name in icons) return name as IconName;
+	return aliases[name];
+};
+---
+
+<ul
+	class:list={[
+		"flex flex-wrap gap-x-8 gap-y-4 border-t border-line pt-5",
+		className,
+	]}
+>
+	{
+		facts.map((fact) => {
+			const icon = iconFor(fact.icon);
+			return (
+				<li class="flex items-start gap-2.5">
+					{icon && <Icon name={icon} class="mt-0.5 text-teal" />}
+					<span class="flex flex-col">
+						<span class="text-small font-semibold text-ink tabular-nums">
+							{fact.title}
+						</span>
+						{fact.subtitle && (
+							<span class="text-label text-ink-muted">{fact.subtitle}</span>
+						)}
+					</span>
+				</li>
+			);
+		})
+	}
+</ul>

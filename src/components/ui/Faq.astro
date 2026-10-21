@@ -1,0 +1,36 @@
+---
+import Icon from "./Icon.astro";
+
+interface Item {
+	question: string;
+	/** May contain inline markup such as <strong>; rendered as HTML. */
+	answer: string;
+	open?: boolean;
+}
+
+interface Props {
+	items: Item[];
+	class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<!-- Native <details>: every answer is in the HTML and readable without JavaScript. -->
+<div class:list={["border-b border-line", className]}>
+	{
+		items.map((item) => (
+			<details class="faq group/faq border-t border-line" open={item.open}>
+				<summary class="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-5 text-lead font-semibold text-ink transition-[color] duration-200 hover:text-teal [&::-webkit-details-marker]:hidden">
+					<span>{item.question}</span>
+					<span class="grid size-10 shrink-0 place-items-center rounded-full border border-line-strong text-teal transition-[rotate,background-color] duration-200 ease-out group-open/faq:rotate-45 group-open/faq:bg-mist motion-reduce:transition-none">
+						<Icon name="add" />
+					</span>
+				</summary>
+				<div class="pb-7 pr-6 text-body text-ink-muted sm:pr-16">
+					<p set:html={item.answer} />
+				</div>
+			</details>
+		))
+	}
+</div>

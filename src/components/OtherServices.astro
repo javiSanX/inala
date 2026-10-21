@@ -2,21 +2,19 @@
 import { serviceMenuLinks } from "../data/site";
 
 // Closing section for every service page: compact links to all services,
-// with the page being viewed marked as current.
+// with the page being viewed marked as current. It sits on the cypress field
+// between the closing call to action and the footer.
 const path = Astro.url.pathname.replace(/\/$/, "");
 ---
 
 <section
-	class="w-full px-margin-mobile lg:px-margin py-10 bg-surface-container-lowest border-t border-border-subtle"
+	class="on-dark border-t border-cypress-line bg-cypress text-on-dark"
 	aria-labelledby="otros-servicios"
 >
 	<div
-		class="max-w-content mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5"
+		class="mx-auto flex max-w-content flex-col gap-6 px-5 py-12 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10"
 	>
-		<h2
-			id="otros-servicios"
-			class="font-title-md text-title-md text-on-surface shrink-0"
-		>
+		<h2 id="otros-servicios" class="font-display text-subheading font-normal">
 			Otros servicios
 		</h2>
 		<ul class="flex flex-wrap gap-2">
@@ -29,18 +27,12 @@ const path = Astro.url.pathname.replace(/\/$/, "");
 								href={service.href}
 								aria-current={current ? "page" : undefined}
 								class:list={[
-									"inline-flex items-center gap-1.5 px-4 py-2 rounded-full border font-label-lg text-label-lg transition-colors duration-200",
+									"inline-flex min-h-11 items-center rounded-full border px-5 text-small font-semibold transition-[background-color,border-color,color] duration-200",
 									current
-										? "bg-secondary-container text-primary border-transparent"
-										: "border-border-soft text-on-surface-variant hover:bg-tint-hover hover:text-primary",
+										? "border-seafoam bg-seafoam text-cypress"
+										: "border-cypress-line text-on-dark hover:border-seafoam hover:text-seafoam-soft",
 								]}
 							>
-								<span
-									class="material-symbols-outlined text-[18px]"
-									aria-hidden="true"
-								>
-									{service.icon}
-								</span>
 								{service.name}
 							</a>
 						</li>

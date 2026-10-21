@@ -1,0 +1,74 @@
+---
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+type Ratio = "portrait" | "tall" | "landscape" | "wide" | "square";
+
+interface Props {
+	src: ImageMetadata;
+	alt: string;
+	ratio?: Ratio;
+	sizes?: string;
+	/** The page's main image: loaded eagerly with high priority, never revealed. */
+	priority?: boolean;
+	/** Reveal once when scrolled into view (ignored for priority images). */
+	reveal?: boolean;
+	/** Stagger index when several figures enter together. */
+	revealIndex?: number;
+	class?: string;
+	imgClass?: string;
+}
+
+const {
+	src,
+	alt,
+	ratio = "portrait",
+	sizes = "(min-width: 1024px) 40vw, 100vw",
+	priority = false,
+	reveal = true,
+	revealIndex,
+	class: className,
+	imgClass,
+} = Astro.props;
+
+const aspect: Record<Ratio, string> = {
+	portrait: "aspect-4/5",
+	tall: "aspect-3/4",
+	landscape: "aspect-4/3",
+	wide: "aspect-16/10",
+	square: "aspect-square",
+};
+
+// Responsive widths up to the source's own width, never upscaled.
+const widths = [480, 720, 960, 1280]
+	.filter((width) => width < src.width)
+	.concat(Math.min(src.width, 1600));
+const hasCaption = Astro.slots.has("default");
+const shouldReveal = reveal && !priority;
+---
+
+<figure
+	class:list={["flex flex-col gap-3", className]}
+	data-reveal={shouldReveal ? "" : undefined}
+	style={revealIndex === undefined ? undefined : `--reveal: ${revealIndex}`}
+>
+	<div class:list={["overflow-hidden rounded-frame bg-mist", aspect[ratio]]}>
+		<Picture
+			src={src}
+			alt={alt}
+			formats={["avif", "webp"]}
+			widths={widths}
+			sizes={sizes}
+			loading={priority ? "eager" : "lazy"}
+			fetchpriority={priority ? "high" : undefined}
+			class:list={["size-full object-cover", imgClass]}
+		/>
+	</div>
+	{
+		hasCaption && (
+			<figcaption class="flex items-center gap-2 text-label text-ink-muted">
+				<slot />
+			</figcaption>
+		)
+	}
+</figure>

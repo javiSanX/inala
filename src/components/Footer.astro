@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import {
 	address,
 	addressCenter,
@@ -8,134 +9,116 @@ import {
 	email,
 	instagramUrl,
 	legalLinks,
-	logoSrc,
+	logo,
 	navLinks,
 	serviceMenuLinks,
 } from "../data/site";
+import Icon from "./ui/Icon.astro";
 
 const footerNav = navLinks.filter((link) => link.href !== "/servicios");
 const year = new Date().getFullYear();
+const link =
+	"inline-flex min-h-10 items-center text-small text-on-dark-muted transition-[color] duration-200 hover:text-white";
+const heading = "mb-3 text-label font-semibold text-seafoam";
+const iconLink =
+	"grid size-11 place-items-center rounded-full border border-cypress-line text-on-dark transition-[border-color,color] duration-200 hover:border-seafoam hover:text-seafoam";
 ---
 
-<footer
-	class="w-full bg-surface-container-low shadow-[0_-1px_8px_rgba(0,0,0,0.02)] pt-space-xl pb-space-lg"
->
-	<div class="w-full px-margin-mobile lg:px-margin">
-		<div
-			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter mb-space-xl"
-		>
-			<div class="lg:col-span-4 flex flex-col gap-space-sm">
+<footer class="on-dark border-t border-cypress-line bg-cypress text-on-dark">
+	<div class="mx-auto max-w-content px-5 pb-10 pt-16 sm:px-8 lg:px-10 lg:pt-20">
+		<div class="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-12">
+			<div class="flex flex-col gap-4 lg:col-span-4">
 				<div class="flex items-center gap-3">
-					<img
+					<Image
+						src={logo}
 						alt=""
-						class="h-8 w-auto object-contain"
-						src={logoSrc}
-						width="500"
-						height="500"
+						width={36}
+						height={36}
+						densities={[1, 2]}
+						class="size-9"
 					/>
-					<span class="font-headline-md text-headline-sm text-primary font-medium"
-						>INALA</span
-					>
+					<span class="font-display text-2xl font-medium tracking-wide">INALA</span>
 				</div>
-				<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+				<p class="max-w-sm text-small text-on-dark-muted">
 					Psicoterapia para adultos, parejas y familias en Pamplona y online, con
 					María Sánchez, psicóloga general sanitaria.
 				</p>
-				<div
-					class="inline-flex items-center gap-2 mt-2 px-space-sm py-1.5 rounded-full bg-surface-container text-on-surface-variant w-fit"
-				>
-					<span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true"
-						>verified_user</span
-					>
-					<span class="font-label-sm text-label-sm"
-						>Espacio seguro y confidencial</span
-					>
-				</div>
+				<p class="inline-flex w-fit items-center gap-2 text-label font-semibold text-seafoam">
+					<Icon name="verified" />
+					<span>Espacio seguro y confidencial</span>
+				</p>
 			</div>
-			<nav class="lg:col-span-2 flex flex-col gap-space-xs" aria-label="Navegación">
-				<h2 class="font-title-md text-title-md text-on-surface mb-2">Navegación</h2>
-				{
-					footerNav.map((link) => (
-						<a
-							class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
-							href={link.href}
-						>
-							{link.name}
-						</a>
-					))
-				}
+			<nav class="lg:col-span-2" aria-label="Navegación">
+				<h2 class={heading}>Navegación</h2>
+				<ul>
+					{
+						footerNav.map((item) => (
+							<li>
+								<a class={link} href={item.href}>
+									{item.name}
+								</a>
+							</li>
+						))
+					}
+				</ul>
 			</nav>
-			<nav
-				class="lg:col-span-3 flex flex-col gap-space-xs"
-				aria-label="Servicios"
-			>
-				<h2 class="font-title-md text-title-md text-on-surface mb-2">
-					Servicios
-				</h2>
-				{
-					serviceMenuLinks.map((service) => (
-						<a
-							class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors"
-							href={service.href}
-						>
-							{service.name}
-						</a>
-					))
-				}
+			<nav class="lg:col-span-3" aria-label="Servicios">
+				<h2 class={heading}>Servicios</h2>
+				<ul>
+					{
+						serviceMenuLinks.map((service) => (
+							<li>
+								<a class={link} href={service.href}>
+									{service.name}
+								</a>
+							</li>
+						))
+					}
+				</ul>
 			</nav>
-			<div class="lg:col-span-3 flex flex-col gap-space-xs">
-				<h2 class="font-title-md text-title-md text-on-surface mb-2">Contacto</h2>
-				<p
-					class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2"
-				>
-					<span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">mail</span>
-					<a class="hover:text-primary transition-colors" href={`mailto:${email}`}
+			<div class="flex flex-col gap-3 lg:col-span-3">
+				<h2 class={heading}>Contacto</h2>
+				<p class="flex items-start gap-2.5 text-small text-on-dark-muted">
+					<Icon name="mail" class="mt-0.5 text-seafoam" />
+					<a class="transition-[color] duration-200 hover:text-white" href={`mailto:${email}`}
 						>{email}</a
 					>
 				</p>
-				<p
-					class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2"
-				>
-					<span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true"
-						>location_on</span
-					>
+				<p class="flex items-start gap-2.5 text-small text-on-dark-muted">
+					<Icon name="location_on" class="mt-0.5 text-seafoam" />
 					<span>{address} ({addressCenter}) · {addressCity} · y online</span>
 				</p>
-				<div class="flex items-center gap-space-xs mt-3">
-					<a
-						class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container transition-colors"
-						href={instagramUrl}
-						target="_blank"
-						rel="noopener"
-					>
-						<span class="material-symbols-outlined text-[20px]" aria-hidden="true">photo_camera</span>
+				<div class="mt-2 flex items-center gap-2">
+					<a class={iconLink} href={instagramUrl} target="_blank" rel="noopener">
+						<Icon name="photo_camera" />
 						<span class="sr-only">Instagram de Inala (se abre en una pestaña nueva)</span>
 					</a>
-					<a
-						class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container transition-colors"
-						href={contactHref}
-					>
-						<span class="material-symbols-outlined text-[20px]" aria-hidden="true">calendar_month</span>
+					<a class={iconLink} href={contactHref}>
+						<Icon name="calendar_today" />
 						<span class="sr-only">Solicitar primera cita</span>
 					</a>
 				</div>
 			</div>
 		</div>
-		<p
-			class="max-w-content font-body-sm text-body-sm text-on-surface-variant border-t border-border-subtle pt-space-md"
+		<div
+			class="mt-14 flex items-start gap-3 border-t border-cypress-line pt-6 text-small text-on-dark"
 			role="note"
 		>
-			{crisisNotice}
-		</p>
+			<Icon name="info" class="mt-0.5 text-seafoam" />
+			<p>{crisisNotice}</p>
+		</div>
 		<div
-			class="pt-space-md mt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm"
+			class="mt-10 flex flex-col gap-4 border-t border-cypress-line pt-6 text-label text-on-dark-muted md:flex-row md:items-center md:justify-between"
 		>
 			<p>© {year} INALA Centro de Psicoterapia. Todos los derechos reservados.</p>
-			<div class="flex items-center gap-space-md">
+			<div class="flex flex-wrap items-center gap-x-6">
 				{
-					legalLinks.map((link) => (
-						<a class="hover:text-primary transition-colors" href={link.href}>
-							{link.name}
+					legalLinks.map((item) => (
+						<a
+							class="inline-flex min-h-10 items-center transition-[color] duration-200 hover:text-white"
+							href={item.href}
+						>
+							{item.name}
 						</a>
 					))
 				}

@@ -1,4 +1,17 @@
 ---
+import consultaImage from "../assets/images/maria1.webp";
+import portraitImage from "../assets/images/maria2.webp";
+import purposeImage from "../assets/images/maria3.webp";
+import vocationImage from "../assets/images/maria4.webp";
+import beginningsImage from "../assets/images/maria5.webp";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/ui/Button.astro";
+import CtaBand from "../components/ui/CtaBand.astro";
+import Figure from "../components/ui/Figure.astro";
+import Icon from "../components/ui/Icon.astro";
+import Section from "../components/ui/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import TopicList from "../components/ui/TopicList.astro";
 import {
 	addressCenter,
 	contactHref,
@@ -12,6 +25,7 @@ import Layout from "../layouts/Layout.astro";
 
 const title =
 	"Sobre mí | María Sánchez, psicóloga sanitaria en Pamplona y online · Nº col. NA-02300";
+
 const description =
 	"Conoce a María Sánchez, psicóloga general sanitaria con formación en terapia familiar y de pareja y en salud mental perinatal. Un acompañamiento cercano e integrador, en Pamplona y online.";
 
@@ -19,34 +33,31 @@ const description =
 
 const story = [
 	{
-		image: "/maria1.webp",
-		alt: "María sentada en su consulta junto a una planta y una mesa auxiliar con una taza.",
+		image: beginningsImage,
+		alt: "María Sánchez sonriendo, de pie, con chaqueta azul marino y blusa blanca.",
 		tagIcon: "psychology_alt",
 		tag: "Antes, en la empresa",
 		icon: "work",
-		iconClass: "bg-secondary-container text-on-secondary-container",
 		label: "01. Inicios",
 		title: "Mis inicios",
 		text: "Mi camino profesional comenzó en el mundo empresarial, donde aprendí a trabajar bajo presión y en entornos competitivos. Esa experiencia me permitió comprender cómo el estrés y la autoexigencia afectan tanto al rendimiento laboral como al bienestar personal y a las relaciones. Hoy, esa vivencia enriquece mi manera de acompañar, aportando una mirada más amplia, empática y real sobre los desafíos que enfrentan muchas personas en su día a día.",
 	},
 	{
-		image: "/maria2.webp",
-		alt: "María sonriendo, sentada en un sillón azul con los brazos cruzados sobre las rodillas.",
+		image: vocationImage,
+		alt: "María Sánchez sonriendo, de pie, con traje verde salvia y camiseta gris.",
 		tagIcon: "center_focus_strong",
 		tag: "Psicología clínica y sanitaria",
 		icon: "psychology",
-		iconClass: "bg-primary-container text-on-primary-container",
 		label: "02. Vocación",
 		title: "Mi vocación",
 		text: "Pronto descubrí que mi verdadero interés estaba en las emociones, las relaciones y la forma en que nos vinculamos con los demás, lo que me llevó a estudiar Psicología, graduarme con mención en clínica y realizar el Máster General Sanitario. Acompañar a personas en su salud mental me ha enseñado el valor de comprender los procesos de enfermedad, duelo y la influencia que tiene todo ello en el entorno más cercano de la persona que lo padece.",
 	},
 	{
-		image: "/maria1.webp",
-		alt: "María en su consulta, sonriendo, con una planta en primer plano.",
+		image: purposeImage,
+		alt: "María Sánchez sonriendo, de pie ante una pared blanca, con chaleco negro y blusa blanca.",
 		tagIcon: "volunteer_activism",
 		tag: "Familia, pareja e infancia",
 		icon: "favorite",
-		iconClass: "bg-tertiary-fixed text-on-tertiary-fixed-variant",
 		label: "03. Propósito",
 		title: "Mi propósito",
 		text: "Mi propio proceso personal me permitió ver con claridad cómo la familia y el entorno en el que crecemos influyen profundamente en nuestro desarrollo y manera de relacionarnos. Esta comprensión me llevó a especializarme en terapia familiar y de pareja, y a trabajar en el ámbito de la desprotección infantil, acompañando procesos de trauma complejo y duelo en la primera infancia, reforzando mi compromiso con un acompañamiento respetuoso y humano.",
@@ -114,608 +125,235 @@ const sessionSteps = [
 		tag: "Seguridad primero",
 	},
 ];
-
-const storyCard =
-	"group p-8 lg:p-10 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between border border-border-subtle";
-const storyImage =
-	"relative rounded-3xl overflow-hidden shadow-sm group min-h-[260px] md:min-h-full aspect-[4/3] md:aspect-auto";
 ---
 
 <Layout title={title} description={description}>
-	<div class="flex flex-col w-full">
-		<!-- Top ambient glows -->
-		<div class="relative w-full overflow-hidden">
-			<div
-				class="absolute -top-32 left-1/4 w-96 h-96 bg-primary-container/20 rounded-full blur-3xl pointer-events-none -z-10"
+	<PageHero>
+		<Fragment slot="title">
+			Hola, soy María.<br />
+			<span>Te acompaño a entender lo que te pasa</span> con calma y sin juicios.
+		</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Psicóloga general sanitaria, con consulta en Pamplona y online. Trabajo con
+			un enfoque integrador y basado en la evidencia, y sobre todo cercano: para
+			que puedas comprender lo que te pasa y avanzar a tu ritmo.
+		</p>
+		<div>
+			<span
+				class="inline-flex min-h-9 items-center gap-2 rounded-full border border-line-strong px-4 text-label font-semibold text-ink tabular-nums"
 			>
-			</div>
-			<div
-				class="absolute top-1/3 -right-24 w-80 h-80 bg-accent-glow/20 rounded-full blur-3xl pointer-events-none -z-10"
-			>
-			</div>
-			<!-- Section 1: Hero -->
-			<section
-				class="w-full px-margin-mobile lg:px-margin pt-space-md lg:pt-space-lg pb-space-xl"
-			>
-				<div class="max-w-[1240px] mx-auto">
-					<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center mt-2">
-						<!-- Left column: copy & badges -->
-						<div class="lg:col-span-7 flex flex-col gap-space-sm pr-0 lg:pr-8">
-							<h1
-								class="font-headline-lg text-headline-lg lg:text-display-xl text-on-surface tracking-tight text-balance leading-tight"
-							>
-								Hola, soy María.<br />
-								<span class="italic font-normal text-primary"
-									>Te acompaño a entender lo que te pasa</span
-								> con calma y sin juicios.
-							</h1>
-							<p
-								class="font-body-lg text-body-lg text-on-surface-variant max-w-xl leading-relaxed mt-1"
-							>
-								Psicóloga general sanitaria, con consulta en Pamplona y online.
-								Trabajo con un enfoque integrador y basado en la evidencia, y
-								sobre todo cercano: para que puedas comprender lo que te pasa y
-								avanzar a tu ritmo.
-							</p>
-							<!-- Credential badge -->
-							<div class="flex flex-wrap gap-2.5 pt-2">
-								<span
-									class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-high text-on-surface text-body-sm shadow-sm"
-								>
-									<span class="material-symbols-outlined text-[17px] text-primary"
-										>verified</span
-									>
-									<span>Nº col. {licenseNumber}</span>
-								</span>
-							</div>
-							<!-- Actions -->
-							<div class="flex flex-wrap items-center gap-space-sm pt-4">
-								<a
-									class="inline-flex items-center justify-center font-label-lg text-label-lg px-7 py-3.5 rounded-full bg-primary text-on-primary shadow-lg shadow-primary/20 hover:bg-primary/90 hover:-translate-y-0.5 transition-all duration-300"
-									href={contactHref}
-								>
-									<span>{ctaLabel}</span>
-									<span class="material-symbols-outlined ml-2 text-[18px]"
-										>arrow_forward</span
-									>
-								</a>
-								<a
-									href={instagramUrl}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="inline-flex items-center justify-center gap-2 font-label-lg text-label-lg px-4 py-3.5 rounded-full bg-surface-container text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all duration-300"
-									aria-label="Instagram de Inala Psicoterapia (se abre en una pestaña nueva)"
-									><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true"
-										><path
-											d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
-										></path></svg
-									><span class="font-medium">@inala_psicoterapia</span></a
-								>
-							</div>
-						</div>
-						<!-- Right column: portrait -->
-						<div class="lg:col-span-5 relative flex justify-center mt-6 lg:mt-0">
-							<div class="relative w-full max-w-[420px]">
-								<div
-									class="absolute inset-0 bg-gradient-to-tr from-primary-container/30 to-secondary-container/40 rounded-[2.5rem] rotate-3 scale-95 blur-sm -z-10"
-								>
-								</div>
-								<div
-									class="relative overflow-hidden rounded-[2.2rem] shadow-2xl bg-surface-container-high aspect-[3/4] flex items-center justify-center"
-								>
-									<img
-										alt="María Sánchez, psicóloga sanitaria y fundadora de Inala, sentada en un sillón azul."
-										class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
-										src="/maria2.webp"
-										width="1200"
-										height="1600"
-									/>
-									<div
-										class="absolute bottom-5 inset-x-5 p-4 rounded-2xl bg-surface-translucent backdrop-blur-md shadow-lg flex items-center gap-3"
-									>
-										<div
-											class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary shrink-0 shadow-sm"
-										>
-											<span class="material-symbols-outlined text-[20px]"
-												>psychology</span
-											>
-										</div>
-										<div class="min-w-0">
-											<p
-												class="font-title-md text-title-md text-on-surface leading-tight truncate"
-											>
-												María Sánchez
-											</p>
-											<p
-												class="font-body-sm text-body-sm text-on-surface-variant truncate"
-											>
-												Psicóloga general sanitaria · Fundadora
-											</p>
-										</div>
-									</div>
-								</div>
-								<div
-									class="absolute -top-3 -right-3 hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface shadow-md"
-								>
-									<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
-									<span
-										class="font-label-sm text-label-sm text-primary tracking-wider uppercase font-bold"
-										>Pamplona y online</span
-									>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+				<Icon name="verified" class="text-teal" />
+				<span>Nº col. {licenseNumber}</span>
+			</span>
 		</div>
+		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+			<Button href={contactHref} arrow>
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button
+				href={instagramUrl}
+				variant="secondary"
+				icon="photo_camera"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Instagram de Inala Psicoterapia (se abre en una pestaña nueva)"
+			>
+				<span>@inala_psicoterapia</span>
+			</Button>
+		</div>
+		<div slot="media">
+			<Figure
+				src={portraitImage}
+				alt="María Sánchez, psicóloga sanitaria y fundadora de Inala, sentada en un sillón azul."
+				ratio="portrait"
+				priority
+				sizes="(min-width: 1024px) 34vw, 100vw"
+			>
+				<span class="flex flex-1 flex-wrap items-center justify-between gap-x-4 gap-y-1">
+					<span>
+						<span class="block font-semibold text-ink">María Sánchez</span>
+						<span class="block">Psicóloga general sanitaria · Fundadora</span>
+					</span>
+					<span class="inline-flex items-center gap-1.5 font-semibold text-teal">
+						<Icon name="location_on" />
+						<span>Pamplona y online</span>
+					</span>
+				</span>
+			</Figure>
+		</div>
+	</PageHero>
 
-		<!-- Section 2: Story -->
-		<section
-			class="w-full bg-surface-container-low/50 py-space-xl px-margin-mobile lg:px-margin"
-			id="historia-y-recorrido"
+	<!-- Historia -->
+	<Section tone="white" id="historia-y-recorrido">
+		<SectionHeader
+			title="Mi camino hacia la psicología: vocación, experiencia y propósito"
+			label="Conoce mi historia"
 		>
-			<div class="max-w-[1240px] mx-auto flex flex-col gap-space-lg">
-				<div class="text-center max-w-3xl mx-auto">
-					<span
-						class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold"
-						>Conoce mi historia</span
-					>
-					<h2
-						class="font-headline-lg text-headline-lg lg:text-[36px] text-on-surface tracking-tight mt-2 leading-tight font-medium"
-					>
-						Mi camino hacia la psicología: vocación, experiencia y propósito
-					</h2>
-					<p class="font-body-md text-body-md text-on-surface-variant mt-3 leading-relaxed">
-						Así llegué a la psicología y esto es lo que traigo a cada sesión.
-					</p>
-				</div>
-				<div class="flex flex-col gap-6 lg:gap-8 mt-4">
-					<!-- Row 1: image, then box 01 -->
-					<div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-						<div class={storyImage}>
-							<img
-								src={story[0].image}
-								alt={story[0].alt}
-								class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-								loading="lazy"
-							/>
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-inverse-surface/40 via-transparent to-transparent"
-							>
-							</div>
-							<div
-								class="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-translucent backdrop-blur-md shadow-sm"
-							>
-								<span class="material-symbols-outlined text-[16px] text-primary"
-									>{story[0].tagIcon}</span
-								>
-								<span class="font-label-sm text-label-sm font-semibold text-on-surface"
-									>{story[0].tag}</span
-								>
-							</div>
-						</div>
-						<div class={storyCard}>
-							<div class="flex flex-col">
-								<div class="flex items-center justify-between mb-6">
-									<div
-										class:list={[
-											"w-12 h-12 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform",
-											story[0].iconClass,
-										]}
-									>
-										<span class="material-symbols-outlined text-[24px]"
-											>{story[0].icon}</span
-										>
-									</div>
-									<span
-										class="font-label-sm text-label-sm px-3 py-1 rounded-full bg-surface-container text-primary font-bold tracking-wider uppercase"
-										>{story[0].label}</span
-									>
-								</div>
-								<h3
-									class="font-headline-sm text-headline-sm text-on-surface mb-3 font-semibold"
-								>
-									{story[0].title}
-								</h3>
-								<p
-									class="font-body-md text-body-lg text-on-surface-variant leading-relaxed"
-								>
-									{story[0].text}
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<!-- Row 2: box 02 in column 2, image in column 3 -->
-					<div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-						<div class:list={["md:col-start-2", storyCard]}>
-							<div class="flex flex-col">
-								<div class="flex items-center justify-between mb-6">
-									<div
-										class:list={[
-											"w-12 h-12 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform",
-											story[1].iconClass,
-										]}
-									>
-										<span class="material-symbols-outlined text-[24px]"
-											>{story[1].icon}</span
-										>
-									</div>
-									<span
-										class="font-label-sm text-label-sm px-3 py-1 rounded-full bg-surface-container text-primary font-bold tracking-wider uppercase"
-										>{story[1].label}</span
-									>
-								</div>
-								<h3
-									class="font-headline-sm text-headline-sm text-on-surface mb-3 font-semibold"
-								>
-									{story[1].title}
-								</h3>
-								<p
-									class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
-								>
-									{story[1].text}
-								</p>
-							</div>
-						</div>
-						<div class={storyImage}>
-							<img
-								src={story[1].image}
-								alt={story[1].alt}
-								class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-								loading="lazy"
-							/>
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-inverse-surface/40 via-transparent to-transparent"
-							>
-							</div>
-							<div
-								class="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-translucent backdrop-blur-md shadow-sm"
-							>
-								<span class="material-symbols-outlined text-[16px] text-primary"
-									>{story[1].tagIcon}</span
-								>
-								<span class="font-label-sm text-label-sm font-semibold text-on-surface"
-									>{story[1].tag}</span
-								>
-							</div>
-						</div>
-					</div>
-
-					<!-- Row 3: image, then box 03 spanning two columns -->
-					<div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-						<div class={storyImage}>
-							<img
-								src={story[2].image}
-								alt={story[2].alt}
-								class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-								loading="lazy"
-							/>
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-inverse-surface/40 via-transparent to-transparent"
-							>
-							</div>
-							<div
-								class="absolute bottom-4 left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-translucent backdrop-blur-md shadow-sm"
-							>
-								<span class="material-symbols-outlined text-[16px] text-primary"
-									>{story[2].tagIcon}</span
-								>
-								<span class="font-label-sm text-label-sm font-semibold text-on-surface"
-									>{story[2].tag}</span
-								>
-							</div>
-						</div>
-						<div class:list={["md:col-span-2", storyCard]}>
-							<div class="flex flex-col">
-								<div class="flex items-center justify-between mb-6">
-									<div
-										class:list={[
-											"w-12 h-12 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform",
-											story[2].iconClass,
-										]}
-									>
-										<span class="material-symbols-outlined text-[24px]"
-											>{story[2].icon}</span
-										>
-									</div>
-									<span
-										class="font-label-sm text-label-sm px-3 py-1 rounded-full bg-surface-container text-primary font-bold tracking-wider uppercase"
-										>{story[2].label}</span
-									>
-								</div>
-								<h3
-									class="font-headline-sm text-headline-sm text-on-surface mb-3 font-semibold"
-								>
-									{story[2].title}
-								</h3>
-								<p
-									class="font-body-md text-body-lg text-on-surface-variant leading-relaxed"
-								>
-									{story[2].text}
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Section 3: Training -->
-		<section class="w-full py-space-xl px-margin-mobile lg:px-margin">
-			<div class="max-w-[1240px] mx-auto">
-				<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
-					<!-- Left: title & narrative -->
-					<div class="lg:col-span-4 flex flex-col gap-4 lg:sticky lg:top-28">
-						<span
-							class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold"
-							>Mi trayectoria</span
+			<p>Así llegué a la psicología y esto es lo que traigo a cada sesión.</p>
+		</SectionHeader>
+		<ol class="mt-16 flex flex-col gap-20 lg:gap-28">
+			{
+				story.map((chapter, index) => (
+					<li class="grid gap-x-16 gap-y-8 lg:grid-cols-12 lg:items-center">
+						<Figure
+							src={chapter.image}
+							alt={chapter.alt}
+							ratio="tall"
+							sizes="(min-width: 1024px) 34vw, 100vw"
+							class:list={[
+								"lg:col-span-4",
+								index % 2 === 1 && "lg:order-2 lg:col-start-9",
+							]}
 						>
-						<h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight">
-							Mi formación
-						</h2>
-						<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-							Entiendo la psicoterapia como un compromiso ético que exige seguir
-							formándose. Esta es la formación que respalda mi trabajo.
-						</p>
-						<div class="mt-4 p-5 rounded-2xl bg-surface-container-low flex flex-col gap-2">
-							<span
-								class="font-title-md text-title-md text-on-surface font-semibold flex items-center gap-2"
-							>
-								<span class="material-symbols-outlined text-primary"
-									>local_hospital</span
-								>
-								Registro de centro sanitario
-							</span>
-							<p class="font-body-sm text-body-sm text-slate-muted">
-								[PENDIENTE: datos de inscripción del centro en el registro de
-								centros sanitarios]
-							</p>
-						</div>
-					</div>
-					<!-- Right: training card -->
-					<div class="lg:col-span-8 flex flex-col gap-space-lg">
-						<div class="p-8 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col gap-6">
-							<div
-								class="flex items-center justify-between pb-3 border-b border-border-subtle"
-							>
-								<div class="flex items-center gap-3">
-									<span
-										class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
-									>
-										<span class="material-symbols-outlined text-[20px]">school</span>
-									</span>
-									<h3 class="font-headline-sm text-headline-sm text-on-surface">
-										Formación y experiencia
+							<span class="font-semibold text-ink">{chapter.tag}</span>
+						</Figure>
+						<div
+							class:list={[
+								"flex flex-col gap-4",
+								index % 2 === 1
+									? "lg:order-1 lg:col-span-8 lg:col-start-1"
+									: "lg:col-span-8 lg:col-start-5",
+							]}
+						>
+							<div class="flex flex-col gap-3 sm:flex-row sm:gap-8">
+								<span class="shrink-0 whitespace-nowrap font-display text-lead text-teal sm:w-36 sm:pt-3">
+									{chapter.label}
+								</span>
+								<div class="flex flex-col gap-4">
+									<h3 class="font-display text-heading font-normal text-ink">
+										{chapter.title}
 									</h3>
+									<p class="text-lead text-ink-muted">{chapter.text}</p>
 								</div>
 							</div>
-							<div class="space-y-6">
-								{
-									training.map((item) => (
-										<div class="flex gap-4 items-start">
-											<div class="w-3 h-3 rounded-full bg-primary mt-2 shrink-0" />
-											<div>
-												<h4 class="font-title-md text-title-md text-on-surface font-semibold">
-													{item.title}
-												</h4>
-												{item.place && (
-													<p class="font-body-sm text-body-sm text-primary font-medium">
-														{item.place}
-													</p>
-												)}
-												<p class="font-body-md text-body-md text-on-surface-variant mt-1">
-													{item.text}
-												</p>
-											</div>
-										</div>
-									))
-								}
-							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+					</li>
+				))
+			}
+		</ol>
+	</Section>
 
-		<!-- Section 4: The space -->
-		<section
-			class="w-full bg-surface-container-low/50 py-space-xl px-margin-mobile lg:px-margin"
-		>
-			<div class="max-w-[1240px] mx-auto">
-				<div class="p-8 md:p-12 lg:p-16 rounded-[2.5rem] bg-surface-container-lowest shadow-sm">
-					<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
-						<div class="lg:col-span-6 relative">
-							<div class="relative overflow-hidden rounded-3xl shadow-lg aspect-[4/3] group">
-								<img
-									alt="María en su consulta de Inala, sentada en un sillón azul."
-									class="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700"
-									src="/maria2.webp"
-									loading="lazy"
-								/>
-								<div
-									class="absolute inset-0 bg-gradient-to-t from-inverse-surface/30 via-transparent to-transparent"
-								>
-								</div>
-								<div
-									class="absolute bottom-4 left-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface-translucent backdrop-blur-md shadow-md"
-								>
-									<span class="material-symbols-outlined text-[18px] text-primary"
-										>location_on</span
-									>
-									<span class="font-label-sm text-label-sm font-semibold text-on-surface"
-										>C/ María Lacunza 6, portal 4, Pamplona</span
-									>
-								</div>
-							</div>
-						</div>
-						<div class="lg:col-span-6 flex flex-col gap-space-sm pl-0 lg:pl-6">
-							<div
-								class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-primary font-label-sm uppercase tracking-wider font-bold w-fit"
-							>
-								<span class="material-symbols-outlined text-[16px]"
-									>nature_people</span
-								>
-								<span>El espacio</span>
-							</div>
-							<h2 class="font-headline-lg text-headline-lg text-on-surface leading-tight">
-								La consulta
-							</h2>
-							<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-								Una consulta tranquila y con luz natural, en el {addressCenter}
-								(Pamplona). Si te resulta más cómodo, también podemos vernos por
-								videollamada.
-							</p>
-							<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-								{
-									spaceFeatures.map((feature) => (
-										<div class="flex items-center gap-2.5 text-on-surface">
-											<span class="w-6 h-6 rounded-full bg-secondary-container text-primary flex items-center justify-center text-[14px]">
-												<span class="material-symbols-outlined text-[14px]">
-													{feature.icon}
-												</span>
-											</span>
-											<span class="font-body-sm text-body-sm">{feature.label}</span>
-										</div>
-									))
-								}
-							</div>
-							<div class="flex flex-wrap gap-2 pt-4">
-								<span
-									class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-label-sm uppercase tracking-wider font-semibold"
-								>
-									Presencial en Pamplona
-								</span>
-								<span
-									class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface text-label-sm uppercase tracking-wider font-semibold"
-								>
-									Online
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Section 5: What to expect -->
-		<section class="w-full py-space-xl px-margin-mobile lg:px-margin">
-			<div class="max-w-[1240px] mx-auto">
-				<div class="text-center max-w-2xl mx-auto mb-space-lg">
-					<span
-						class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold"
-						>Cómo trabajamos juntos</span
-					>
-					<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">
-						¿Qué puedes esperar en sesión conmigo?
-					</h2>
-					<p class="font-body-md text-body-md text-on-surface-variant mt-2">
-						La psicoterapia no es un monólogo ni un proceso misterioso. Es una
-						conversación en la que trabajamos juntas o juntos, con objetivos claros.
+	<!-- Formación -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12">
+			<div class="flex flex-col gap-8 lg:col-span-5">
+				<SectionHeader title="Mi formación" label="Mi trayectoria" layout="stack">
+					<p>
+						Entiendo la psicoterapia como un compromiso ético que exige seguir
+						formándose. Esta es la formación que respalda mi trabajo.
+					</p>
+				</SectionHeader>
+				<div class="flex flex-col gap-2 border-t border-line pt-6">
+					<span class="inline-flex items-center gap-2 text-small font-semibold text-ink">
+						<Icon name="info" class="text-teal" />
+						Registro de centro sanitario
+					</span>
+					<p class="text-small text-ink-muted">
+						[PENDIENTE: datos de inscripción del centro en el registro de centros
+						sanitarios]
 					</p>
 				</div>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+			</div>
+			<div class="lg:col-span-7">
+				<h3 class="font-display text-subheading font-normal text-ink">
+					Formación y experiencia
+				</h3>
+				<ul class="mt-6">
 					{
-						sessionSteps.map((step, index) => (
-							<div class="p-7 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
-								<div
-									class="absolute top-4 right-4 text-surface-container-highest font-display-xl font-bold opacity-30 select-none"
-									aria-hidden="true"
-								>
-									{String(index + 1).padStart(2, "0")}
-								</div>
-								<div>
-									<div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-5 font-bold">
-										<span class="material-symbols-outlined text-[20px]">
-											{step.icon}
-										</span>
-									</div>
-									<h3 class="font-title-md text-title-md text-on-surface mb-2 font-semibold">
-										{step.title}
-									</h3>
-									<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-										{step.text}
-									</p>
-								</div>
-								<div class="mt-6 pt-4 border-t border-border-subtle">
-									<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">
-										{step.tag}
-									</span>
-								</div>
-							</div>
+						training.map((item) => (
+							<li class="flex flex-col gap-1.5 border-t border-line py-6">
+								<h4 class="text-lead font-semibold text-ink">{item.title}</h4>
+								{item.place && (
+									<p class="text-label font-semibold text-ink-soft">{item.place}</p>
+								)}
+								<p class="text-body text-ink-muted">{item.text}</p>
+							</li>
 						))
 					}
-				</div>
+				</ul>
 			</div>
-		</section>
+		</div>
+	</Section>
 
-		<!-- Section 7: Final CTA -->
-		<section
-			class="w-full py-space-xl px-margin-mobile lg:px-margin mb-space-md"
-			id="contacto"
-		>
-			<div class="max-w-[1240px] mx-auto">
-				<div
-					class="relative overflow-hidden rounded-[2.8rem] bg-gradient-to-br from-primary to-inverse-surface text-on-primary p-8 md:p-14 lg:p-16 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-space-lg"
-				>
-					<div
-						class="absolute -right-20 -bottom-20 w-80 h-80 bg-accent-glow/20 rounded-full blur-3xl pointer-events-none"
+	<!-- La consulta -->
+	<Section tone="mist">
+		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:items-center">
+			<Figure
+				src={consultaImage}
+				alt="María sentada en su consulta junto a una planta y una mesa auxiliar con una taza."
+				ratio="landscape"
+				sizes="(min-width: 1024px) 45vw, 100vw"
+				class="lg:col-span-6"
+			>
+				<Icon name="location_on" class="text-teal" />
+				<span>C/ María Lacunza 6, portal 4, Pamplona</span>
+			</Figure>
+			<div class="flex flex-col gap-6 lg:col-span-6">
+				<SectionHeader title="La consulta" label="El espacio" layout="stack">
+					<p>
+						Una consulta tranquila y con luz natural, en el {addressCenter}
+						(Pamplona). Si te resulta más cómodo, también podemos vernos por
+						videollamada.
+					</p>
+				</SectionHeader>
+				<ul class="grid gap-x-6 gap-y-3 sm:grid-cols-2">
+					{
+						spaceFeatures.map((feature) => (
+							<li class="flex items-center gap-3 text-body text-ink">
+								<Icon name="check" class="text-teal" />
+								<span>{feature.label}</span>
+							</li>
+						))
+					}
+				</ul>
+				<div class="flex flex-wrap gap-2">
+					<span
+						class="inline-flex min-h-9 items-center rounded-full bg-white px-4 text-label font-semibold text-ink"
 					>
-					</div>
-					<div
-						class="absolute -left-20 -top-20 w-80 h-80 bg-primary-container/20 rounded-full blur-3xl pointer-events-none"
+						Presencial en Pamplona
+					</span>
+					<span
+						class="inline-flex min-h-9 items-center rounded-full bg-white px-4 text-label font-semibold text-ink"
 					>
-					</div>
-					<div
-						class="relative z-10 max-w-xl text-center md:text-left flex flex-col gap-space-xs"
-					>
-						<div
-							class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-on-primary/10 backdrop-blur-md text-on-primary text-label-sm uppercase tracking-widest font-semibold w-fit mx-auto md:mx-0"
-						>
-							<span class="material-symbols-outlined text-[16px] text-accent-glow"
-								>eco</span
-							>
-							<span>Comienza hoy tu cuidado</span>
-						</div>
-						<h2
-							class="font-headline-lg text-headline-lg lg:text-display-xl text-on-primary tracking-tight font-medium leading-tight mt-2"
-						>
-							¿Damos el primer paso juntos?
-						</h2>
-						<p
-							class="font-body-lg text-body-lg text-inverse-on-surface/90 leading-relaxed mt-1"
-						>
-							Si sientes que ha llegado el momento de cuidarte, estaré encantada de
-							acompañarte. Solicita tu primera cita o escríbeme si tienes cualquier
-							duda antes de empezar.
-						</p>
-						<p class="font-body-sm text-body-sm text-inverse-on-surface/80">
-							{ctaNote}
-						</p>
-					</div>
-					<div
-						class="relative z-10 flex flex-col sm:flex-row md:flex-col lg:flex-row items-center gap-4 w-full md:w-auto shrink-0"
-					>
-						<a
-							class="w-full sm:w-auto inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-4 rounded-full bg-primary-container text-on-primary-container font-bold shadow-lg hover:shadow-xl hover:bg-accent-glow transition-all duration-300"
-							href={contactHref}
-						>
-							<span class="material-symbols-outlined mr-2 text-[20px]"
-								>calendar_today</span
-							>
-							<span>{ctaLabel}</span>
-						</a>
-						<a
-							class="w-full sm:w-auto inline-flex items-center justify-center font-label-lg text-label-lg px-6 py-4 rounded-full bg-on-primary/15 hover:bg-on-primary/25 text-on-primary backdrop-blur-md transition-all duration-300"
-							href={`mailto:${email}`}
-						>
-							<span class="material-symbols-outlined mr-2 text-[20px]">mail</span>
-							<span>Escríbeme a {email}</span>
-						</a>
-					</div>
+						Online
+					</span>
 				</div>
 			</div>
-		</section>
-	</div>
+		</div>
+	</Section>
+
+	<!-- Qué esperar -->
+	<Section tone="white">
+		<SectionHeader
+			title="¿Qué puedes esperar en sesión conmigo?"
+			label="Cómo trabajamos juntos"
+		>
+			<p>
+				La psicoterapia no es un monólogo ni un proceso misterioso. Es una
+				conversación en la que trabajamos juntas o juntos, con objetivos claros.
+			</p>
+		</SectionHeader>
+		<TopicList
+			items={sessionSteps.map((step) => ({ ...step, note: step.tag }))}
+			columns={2}
+			class="mt-14 lg:grid-cols-4"
+		/>
+	</Section>
+
+	<CtaBand id="contacto" label="Comienza hoy tu cuidado" title="¿Damos el primer paso juntos?">
+		<p>
+			Si sientes que ha llegado el momento de cuidarte, estaré encantada de
+			acompañarte. Solicita tu primera cita o escríbeme si tienes cualquier duda
+			antes de empezar.
+		</p>
+		<p class="text-small">{ctaNote}</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>Escríbeme a {email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
 </Layout>

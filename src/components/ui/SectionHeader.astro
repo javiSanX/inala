@@ -1,0 +1,72 @@
+---
+interface Props {
+	/** Heading text; use the "title" slot instead when it carries markup. */
+	title?: string;
+	id?: string;
+	/** Short line kept from the content, set as a subtitle under the heading. */
+	label?: string;
+	level?: 2 | 3;
+	/** "split": heading left, intro right. "stack": one column. */
+	layout?: "split" | "stack";
+	class?: string;
+}
+
+const {
+	title,
+	id,
+	label,
+	level = 2,
+	layout = "split",
+	class: className,
+} = Astro.props;
+
+const Heading = `h${level}` as "h2" | "h3";
+const hasIntro = Astro.slots.has("default");
+// Without an intro there is nothing to set beside the heading: one column.
+const split = layout === "split" && hasIntro;
+// Labels typed in capitals in the content stay in capitals, one step smaller.
+const allCaps = Boolean(
+	label && /\p{Lu}/u.test(label) && label === label.toUpperCase(),
+);
+// A label the heading already contains ("Preguntas frecuentes") reads as a caption.
+const echo = Boolean(
+	label && title?.toLowerCase().includes(label.toLowerCase()),
+);
+---
+
+<header
+	class:list={[
+		"grid gap-x-12 gap-y-5",
+		split ? "lg:grid-cols-12 lg:items-end" : "max-w-3xl",
+		className,
+	]}
+>
+	<div class:list={["flex flex-col gap-3", split && "lg:col-span-7"]}>
+		<Heading id={id} class="font-display text-heading font-normal text-ink">
+			{title}<slot name="title" />
+		</Heading>
+		{
+			label && (
+				<p
+					class:list={[
+						echo
+							? "text-body text-ink-soft"
+							: "font-display font-normal text-ink-muted",
+						!echo && (allCaps ? "text-lead" : "text-subheading"),
+					]}
+				>
+					{label}
+				</p>
+			)
+		}
+	</div>
+	{
+		hasIntro && (
+			<div
+				class:list={["text-lead text-ink-muted", split && "lg:col-span-5 lg:pb-1"]}
+			>
+				<slot />
+			</div>
+		)
+	}
+</header>

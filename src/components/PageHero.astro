@@ -1,0 +1,104 @@
+---
+import type { ImageMetadata } from "astro";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import Figure from "./ui/Figure.astro";
+
+interface Crumb {
+	name: string;
+	href?: string;
+}
+
+interface Props {
+	/** Plain h1 text; use the "title" slot instead when it carries markup. */
+	title?: string;
+	breadcrumbs?: Crumb[];
+	breadcrumbsLabel?: string;
+	/** Page label kept from the content, set as a subtitle under the h1. */
+	label?: string;
+	image?: ImageMetadata;
+	imageAlt?: string;
+	imageRatio?: "portrait" | "tall" | "landscape" | "square";
+	/** Narrow pages without an image use a single centred-left column. */
+	size?: "display" | "title";
+	/** Colour the emphasised run of the h1 (home only, where it marks the audiences). */
+	accent?: boolean;
+}
+
+const {
+	title,
+	breadcrumbs,
+	breadcrumbsLabel,
+	label,
+	image,
+	imageAlt = "",
+	imageRatio = "portrait",
+	size = "title",
+	accent = false,
+} = Astro.props;
+
+const hasMedia = Boolean(image) || Astro.slots.has("media");
+const hasCaption = Astro.slots.has("caption");
+---
+
+<section class="bg-paper pb-16 pt-8 lg:pb-24 lg:pt-10">
+	<div class="mx-auto max-w-content px-5 sm:px-8 lg:px-10">
+		{
+			breadcrumbs && (
+				<div class="mb-10 lg:mb-14">
+					<Breadcrumbs items={breadcrumbs} label={breadcrumbsLabel} />
+				</div>
+			)
+		}
+		<div
+			class:list={[
+				"grid gap-x-16 gap-y-12",
+				hasMedia ? "lg:grid-cols-12 lg:items-center" : "max-w-3xl",
+			]}
+		>
+			<div class:list={["hero-copy flex flex-col gap-6", hasMedia && "lg:col-span-7"]}>
+				<h1
+					class:list={[
+						"font-display font-normal text-ink [&_em]:not-italic",
+						accent && "[&_span]:text-teal",
+						size === "display" ? "text-display" : "text-title",
+					]}
+				>
+					{title}<slot name="title" />
+				</h1>
+				{
+					label && (
+						<p class="font-display text-subheading text-ink-muted">{label}</p>
+					)
+				}
+				<slot />
+			</div>
+			{
+				hasMedia && (
+					<div class="hero-media lg:col-span-5">
+						{image && hasCaption && (
+							<Figure
+								src={image}
+								alt={imageAlt}
+								ratio={imageRatio}
+								priority
+								sizes="(min-width: 1024px) 34vw, 100vw"
+							>
+								<slot name="caption" />
+							</Figure>
+						)}
+						{image && !hasCaption && (
+							<Figure
+								src={image}
+								alt={imageAlt}
+								ratio={imageRatio}
+								priority
+								sizes="(min-width: 1024px) 34vw, 100vw"
+							/>
+						)}
+						{!image && <slot name="media" />}
+					</div>
+				)
+			}
+		</div>
+	</div>
+</section>

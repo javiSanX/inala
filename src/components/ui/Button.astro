@@ -1,0 +1,37 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { type ButtonVariant, buttonClass } from "./button";
+import Icon from "./Icon.astro";
+import type { IconName } from "./icons";
+
+interface Props extends HTMLAttributes<"a"> {
+	href: string;
+	variant?: ButtonVariant;
+	/** Leading icon, for channels (mail, chat, map). */
+	icon?: IconName;
+	/** Trailing arrow that nudges forward on hover. */
+	arrow?: boolean;
+}
+
+const {
+	href,
+	variant = "primary",
+	icon,
+	arrow = false,
+	class: className,
+	...attrs
+} = Astro.props;
+---
+
+<a href={href} class:list={[buttonClass(variant), className]} {...attrs}>
+	{icon && <Icon name={icon} />}
+	<slot />
+	{
+		arrow && (
+			<Icon
+				name="arrow_forward"
+				class="transition-[translate] duration-200 ease-out motion-safe:group-hover-fine:translate-x-0.5"
+			/>
+		)
+	}
+</a>

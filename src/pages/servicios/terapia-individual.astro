@@ -1,5 +1,18 @@
 ---
+import heroImage from "../../assets/images/terapia-individual.png";
 import OtherServices from "../../components/OtherServices.astro";
+import PageHero from "../../components/PageHero.astro";
+import Button from "../../components/ui/Button.astro";
+import CtaBand from "../../components/ui/CtaBand.astro";
+import FactList from "../../components/ui/FactList.astro";
+import Faq from "../../components/ui/Faq.astro";
+import Figure from "../../components/ui/Figure.astro";
+import Icon from "../../components/ui/Icon.astro";
+import Note from "../../components/ui/Note.astro";
+import Quote from "../../components/ui/Quote.astro";
+import Section from "../../components/ui/Section.astro";
+import SectionHeader from "../../components/ui/SectionHeader.astro";
+import TopicList from "../../components/ui/TopicList.astro";
 import {
 	contactHref,
 	ctaLabel,
@@ -11,10 +24,9 @@ import Layout from "../../layouts/Layout.astro";
 
 const title =
 	"Terapia individual en Pamplona y online | Inala Psicoterapia";
+
 const description =
 	"Terapia individual para adultos, adolescentes y niños en Pamplona y online: ansiedad, estrés, autoestima, duelo y relaciones. Sesiones de 60 minutos con María Sánchez, psicóloga general sanitaria.";
-
-const heroImage = "/terapia-individual.png";
 
 const trustBadges = [
 	{ icon: "schedule", label: "Sesiones de 60 minutos" },
@@ -132,481 +144,139 @@ const faqs = [
 ---
 
 <Layout title={title} description={description}>
-	<div class="flex flex-col w-full">
-		<!-- Top Ambient Glow -->
-		<div class="relative w-full overflow-hidden">
-			<div
-				class="absolute -top-40 left-1/2 -translate-x-1/2 w-[720px] h-[380px] bg-accent-glow/20 rounded-full blur-3xl pointer-events-none"
+	<PageHero
+		breadcrumbs={[
+			{ name: "Inicio", href: "/" },
+			{ name: "Servicios", href: "/servicios" },
+			{ name: "Terapia Individual" },
+		]}
+		image={heroImage}
+		imageAlt="Sesión de psicoterapia individual en Inala"
+	>
+		<Fragment slot="title">
+			Terapia individual: entender lo que te pasa y encontrar tus <span
+				>propios recursos</span
 			>
-			</div>
-			<!-- Section: Breadcrumbs -->
-			<div
-				class="w-full max-w-[1240px] mx-auto px-margin-mobile lg:px-margin pt-6 pb-2"
-			>
-				<nav
-					aria-label="Migas de pan"
-					class="flex items-center gap-2 text-slate-muted font-label-sm text-label-sm tracking-wider uppercase"
-				>
-					<a
-						class="hover:text-primary transition-colors flex items-center gap-1"
-						href="/"
-					>
-						<span class="material-symbols-outlined text-[14px]">home</span>
-						Inicio
-					</a>
-					<span class="text-outline-variant">/</span>
-					<a class="hover:text-primary transition-colors" href="/servicios"
-						>Servicios</a
-					>
-					<span class="text-outline-variant">/</span>
-					<span class="text-primary font-semibold" aria-current="page"
-						>Terapia Individual</span
-					>
-				</nav>
-			</div>
-			<!-- Section: Hero -->
-			<section
-				class="w-full max-w-[1240px] mx-auto px-margin-mobile lg:px-margin pt-4 pb-16 lg:pb-24"
-			>
-				<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
-					<!-- Hero Text Left -->
-					<div class="lg:col-span-7 flex flex-col gap-6">
-						<h1
-							class="font-headline-lg text-headline-lg lg:text-[44px] lg:leading-[54px] text-on-surface tracking-tight"
-						>
-							Terapia individual: entender lo que te pasa y encontrar tus <span
-								class="italic font-normal text-primary">propios recursos</span
-							>
-						</h1>
-						<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-							Sesiones de 60 minutos, en Pamplona u online, para ordenar lo que
-							sientes, salir de los bloqueos y aprender a cuidarte con más calma.
-							Para adultos, adolescentes y niños.
-						</p>
-						<!-- CTAs -->
-						<div
-							class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2"
-						>
-							<a
-								class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-primary text-on-primary shadow-md hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 gap-2"
-								href={contactHref}
-							>
-								<span>{ctaLabel}</span>
-								<span class="material-symbols-outlined text-[18px]"
-									>calendar_today</span
-								>
-							</a>
-						</div>
-						<!-- Trust Badges Bar -->
-						<div
-							class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-border-subtle"
-						>
-							{
-								trustBadges.map((badge) => (
-									<div class="flex items-center gap-2.5">
-										<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0">
-											<span class="material-symbols-outlined text-[17px]">
-												{badge.icon}
-											</span>
-										</div>
-										<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">
-											{badge.label}
-										</span>
-									</div>
-								))
-							}
-						</div>
-					</div>
-					<!-- Hero Visual Right -->
-					<div class="lg:col-span-5 relative">
-						<div
-							class="relative rounded-2xl overflow-hidden shadow-xl bg-surface-container-low aspect-[4/3] lg:aspect-[1.15/1]"
-						>
-							<img
-								alt="Sesión de psicoterapia individual en Inala"
-								class="w-full h-full object-cover"
-								src={heroImage}
-							/>
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-inverse-surface/40 via-transparent to-transparent"
-							>
-							</div>
-							<!-- Floating Insight Card -->
-							<div
-								class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-surface-translucent backdrop-blur-md shadow-md"
-							>
-								<div class="flex items-center gap-3">
-									<div
-										class="w-10 h-10 rounded-full bg-primary-container/40 flex items-center justify-center text-primary shrink-0"
-									>
-										<span class="material-symbols-outlined text-[20px]">spa</span>
-									</div>
-									<div>
-										<p
-											class="font-body-sm text-body-sm text-on-surface font-medium leading-snug"
-										>
-											<span class="font-bold text-on-surface bg-sand-warm"
-												>Confidencial</span
-											><span class="text-on-surface-variant bg-sand-warm"
-												>&nbsp;· a tu ritmo.</span
-											>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+		</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Sesiones de 60 minutos, en Pamplona u online, para ordenar lo que sientes,
+			salir de los bloqueos y aprender a cuidarte con más calma. Para adultos,
+			adolescentes y niños.
+		</p>
+		<div class="flex flex-wrap gap-3 pt-2">
+			<Button href={contactHref} icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
 		</div>
+		<FactList
+			facts={trustBadges.map((badge) => ({ title: badge.label, icon: badge.icon }))}
+			class="mt-4"
+		/>
+		<Fragment slot="caption">
+			<Icon name="lock" class="text-teal" />
+			<span><span class="font-semibold text-ink">Confidencial</span><span
+					>&nbsp;· a tu ritmo.</span
+				></span>
+		</Fragment>
+	</PageHero>
 
-		<!-- Section: Enfoque / ¿Para qué la Terapia Individual? -->
-		<section class="w-full bg-surface-container-lowest py-16 lg:py-24">
-			<div
-				class="w-full max-w-[1240px] mx-auto px-margin-mobile lg:px-margin flex flex-col gap-12 lg:gap-16"
-			>
-				<div class="text-left max-w-3xl flex flex-col items-start gap-3">
-					<div
-						class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-container text-on-secondary-container"
-					>
-						<span class="material-symbols-outlined text-[16px] text-primary"
-							>psychology</span
-						>
-						<span
-							class="font-label-sm text-label-sm uppercase tracking-widest font-bold"
-							>¿EN QUÉ CONSISTE LA TERAPIA INDIVIDUAL?</span
-						>
-					</div>
-					<h2
-						class="font-headline-md text-headline-md lg:text-[34px] font-serif text-on-surface tracking-tight mt-1"
-					>
-						Poner palabras a lo que sientes para ver con más claridad
-					</h2>
-					<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-						La terapia individual es un proceso cercano y con estructura: nos
-						detenemos a comprender tus emociones, deshacer lo que te bloquea y
-						construir recursos que te sirvan en tu día a día.
-					</p>
-				</div>
-				<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
-					<div class="lg:col-span-5 flex flex-col justify-between gap-6">
-						<div
-							class="relative rounded-3xl overflow-hidden shadow-xl bg-surface-container aspect-[4/3] lg:aspect-[4/4.5] border border-border-subtle group h-full"
-						>
-							<img
-								alt=""
-								class="w-full h-full min-h-[420px] object-cover rounded-3xl group-hover:scale-105 transition-transform duration-300"
-								src={heroImage}
-								loading="lazy"
-							/>
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-inverse-surface/40 via-transparent to-transparent"
-							>
-							</div>
-							<div
-								class="absolute bottom-4 left-4 right-4 bg-sand-warm/95 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-border-subtle flex items-center gap-3"
-							>
-								<div
-									class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0"
-								>
-									<span class="material-symbols-outlined text-[20px]"
-										>format_quote</span
-									>
-								</div>
-								<p
-									class="font-body-sm text-body-sm text-on-surface-variant leading-snug italic font-serif text-[14px]"
-								>
-									<span class="text-on-surface font-normal"
-										>«Cuidar de tu mente es el primer paso para habitar tu propia
-										vida con calma y presencia.»</span
-									>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="lg:col-span-7 flex flex-col justify-between gap-6">
-						<div
-							class="p-6 lg:p-8 rounded-3xl bg-surface-container-low/50 border border-border-subtle flex flex-col gap-5"
-						>
-							<div class="flex items-center gap-2">
-								<span class="material-symbols-outlined text-primary text-[20px]"
-									>psychology_alt</span
-								>
-								<h3 class="font-title-md text-title-md font-semibold text-on-surface">
-									¿Qué ocurre durante una sesión?
-								</h3>
-							</div>
-							<div class="flex flex-col gap-3.5">
-								{
-									sessionFeatures.map((feature) => (
-										<div class="flex items-start gap-3 p-3.5 rounded-xl bg-surface-container-lowest/80 border border-border-subtle">
-											<div class="w-8 h-8 rounded-full bg-secondary-container text-primary flex items-center justify-center shrink-0 mt-0.5">
-												<span class="material-symbols-outlined text-[18px]">
-													{feature.icon}
-												</span>
-											</div>
-											<div>
-												<h4 class="font-body-md text-body-md font-semibold text-on-surface">
-													{feature.title}
-												</h4>
-												<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
-													{feature.text}
-												</p>
-											</div>
-										</div>
-									))
-								}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Section: ¿Para quién es la terapia individual? -->
-		<section
-			class="w-full bg-surface-container-low/60 py-16 lg:py-24 border-t border-border-subtle"
+	<!-- ¿En qué consiste? -->
+	<Section tone="white">
+		<SectionHeader
+			title="Poner palabras a lo que sientes para ver con más claridad"
+			label="¿EN QUÉ CONSISTE LA TERAPIA INDIVIDUAL?"
 		>
-			<div class="w-full max-w-[1240px] mx-auto px-margin-mobile lg:px-margin">
-				<div class="text-center max-w-3xl mx-auto mb-14">
-					<div
-						class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-container text-on-secondary-container mb-3"
-					>
-						<span class="material-symbols-outlined text-[16px] text-primary"
-							>diversity_3</span
-						>
-						<span
-							class="font-label-sm text-label-sm uppercase tracking-widest font-bold"
-							>ACOMPAÑAMIENTO EN CADA ETAPA VITAL</span
-						>
-					</div>
-					<h2
-						class="font-headline-md text-headline-md font-serif text-on-surface mt-2 mb-4 tracking-tight"
-					>
-						¿Para quién es la terapia individual?
-					</h2>
-					<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-						Acompaño a personas en distintos momentos de su vida y adapto el
-						proceso y las herramientas a cada etapa:
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					{
-						audiences.map((audience) => (
-							<div class="p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between border border-border-subtle">
-								<div class="flex flex-col">
-									<div class="w-12 h-12 rounded-2xl bg-secondary-container/60 text-primary flex items-center justify-center mb-6">
-										<span class="material-symbols-outlined text-[26px]">
-											{audience.icon}
-										</span>
-									</div>
-									<h3 class="font-headline-sm text-headline-sm font-serif text-on-surface mb-3">
-										{audience.title}
-									</h3>
-									<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-										{audience.text}
-									</p>
-								</div>
-							</div>
-						))
-					}
-				</div>
-				<div class="mt-12 flex justify-center">
-					<div
-						class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-sand-warm text-on-surface text-center shadow-sm max-w-2xl border border-border-subtle"
-					>
-						<span class="material-symbols-outlined text-primary text-[20px] shrink-0"
-							>favorite</span
-						>
-						<span class="font-body-sm text-body-sm font-medium"
-							>Sea cual sea tu momento vital, la terapia se adapta a tu ritmo y a
-							lo que tú necesitas.</span
-						>
-					</div>
-				</div>
+			<p>
+				La terapia individual es un proceso cercano y con estructura: nos
+				detenemos a comprender tus emociones, deshacer lo que te bloquea y
+				construir recursos que te sirvan en tu día a día.
+			</p>
+		</SectionHeader>
+		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12">
+			<div class="flex flex-col gap-10 lg:col-span-5">
+				<Figure src={heroImage} alt="" ratio="landscape" />
+				<Quote>
+					«Cuidar de tu mente es el primer paso para habitar tu propia vida con
+					calma y presencia.»
+				</Quote>
 			</div>
-		</section>
+			<div class="lg:col-span-7">
+				<h3 class="font-display text-subheading font-normal text-ink">
+					¿Qué ocurre durante una sesión?
+				</h3>
+				<TopicList items={sessionFeatures} columns={1} level={4} class="mt-6" />
+			</div>
+		</div>
+	</Section>
 
-		<!-- Section: ¿Qué problemas se trabajan? -->
-		<section
-			class="w-full bg-surface-container-low py-16 lg:py-24 border-t border-b border-border-subtle"
+	<!-- ¿Para quién? -->
+	<Section>
+		<SectionHeader
+			title="¿Para quién es la terapia individual?"
+			label="ACOMPAÑAMIENTO EN CADA ETAPA VITAL"
 		>
-			<div class="w-full max-w-[1240px] mx-auto px-margin-mobile lg:px-margin">
-				<div class="text-center max-w-3xl mx-auto mb-14">
-					<span
-						class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold"
-						>¿QUÉ TRABAJAMOS EN CONSULTA?</span
-					>
-					<h2
-						class="font-headline-md text-headline-md font-serif text-on-surface mt-2 mb-4 tracking-tight"
-					>
-						¿Qué problemas se trabajan?
-					</h2>
-					<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-						La terapia no es solo para momentos de crisis. Si te reconoces en
-						alguna de estas situaciones, puedo ayudarte a encontrar claridad y
-						alivio:
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{
-						problems.map((problem) => (
-							<div class="group p-8 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-start border border-border-subtle">
-								<div class="w-12 h-12 rounded-xl bg-secondary-container/60 text-primary flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-									<span class="material-symbols-outlined text-[26px]">
-										{problem.icon}
-									</span>
-								</div>
-								<h3 class="font-headline-sm text-headline-sm text-on-surface mb-3 font-semibold">
-									{problem.title}
-								</h3>
-								<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-									{problem.text}
-								</p>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
+			<p>
+				Acompaño a personas en distintos momentos de su vida y adapto el proceso
+				y las herramientas a cada etapa:
+			</p>
+		</SectionHeader>
+		<TopicList items={audiences} columns={3} class="mt-14" />
+		<Note class="mt-6">
+			Sea cual sea tu momento vital, la terapia se adapta a tu ritmo y a lo que
+			tú necesitas.
+		</Note>
+	</Section>
 
-		<!-- Section: Preguntas Frecuentes (Acordeón interactivo) -->
-		<section class="w-full bg-surface py-16 lg:py-24">
-			<div class="w-full max-w-[860px] mx-auto px-margin-mobile lg:px-margin">
-				<div class="text-center mb-12">
-					<span
-						class="font-label-sm text-label-sm text-primary uppercase tracking-widest font-bold"
-						>Preguntas frecuentes</span
-					>
-					<h2 class="font-headline-md text-headline-md text-on-surface mt-2 mb-4">
-						Preguntas frecuentes sobre la terapia individual
-					</h2>
-					<p class="font-body-md text-body-md text-on-surface-variant">
-						Es normal tener dudas antes de empezar. Si la tuya no está aquí,
-						escríbeme y te respondo.
-					</p>
-				</div>
-				<div class="flex flex-col gap-4" id="faq-container">
-					{
-						faqs.map((faq, index) => (
-							<div class="faq-item rounded-2xl bg-surface-container-lowest shadow-sm overflow-hidden transition-all duration-300">
-								<button
-									aria-expanded="false"
-									aria-controls={`faq-content-${index}`}
-									class="faq-trigger w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
-									type="button"
-								>
-									<span class="font-title-md text-title-md text-on-surface font-semibold">
-										{faq.question}
-									</span>
-									<span
-										class="faq-icon material-symbols-outlined text-primary text-[22px] transition-transform duration-300"
-										aria-hidden="true"
-									>
-										add
-									</span>
-								</button>
-								<div
-									class="faq-content hidden px-6 pb-6 pt-0"
-									id={`faq-content-${index}`}
-								>
-									<p
-										class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
-										set:html={faq.answer}
-									/>
-								</div>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
-
-		<!-- Section: Banner Final -->
-		<section
-			class="w-full bg-inverse-surface py-20 lg:py-28 relative overflow-hidden"
-			id="contacto-reserva"
+	<!-- ¿Qué problemas se trabajan? -->
+	<Section tone="white">
+		<SectionHeader
+			title="¿Qué problemas se trabajan?"
+			label="¿QUÉ TRABAJAMOS EN CONSULTA?"
 		>
-			<div
-				class="absolute -bottom-24 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl pointer-events-none"
+			<p>
+				La terapia no es solo para momentos de crisis. Si te reconoces en alguna
+				de estas situaciones, puedo ayudarte a encontrar claridad y alivio:
+			</p>
+		</SectionHeader>
+		<TopicList items={problems} layout="rows" class="mt-14" />
+	</Section>
+
+	<!-- Preguntas frecuentes -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Preguntas frecuentes sobre la terapia individual"
+				label="Preguntas frecuentes"
+				layout="stack"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
 			>
-			</div>
-			<div
-				class="absolute -top-24 -right-20 w-96 h-96 bg-accent-glow/10 rounded-full blur-3xl pointer-events-none"
-			>
-			</div>
-			<div
-				class="w-full max-w-[1000px] mx-auto px-margin-mobile lg:px-margin text-center relative z-10 flex flex-col items-center gap-8"
-			>
-				<div
-					class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/30 text-primary-fixed border-subtle"
-				>
-					<span class="material-symbols-outlined text-[16px]">psychology_alt</span>
-					<span
-						class="font-label-sm text-label-sm uppercase tracking-widest font-semibold"
-						>Tu bienestar empieza hoy</span
-					>
-				</div>
-				<h2
-					class="font-headline-lg text-headline-lg lg:text-[44px] lg:leading-[54px] text-inverse-on-surface font-serif max-w-3xl"
-				>
-					Dar el primer paso requiere valentía, pero no tienes que hacerlo solo/a.
-				</h2>
-				<p class="font-body-lg text-body-lg text-tertiary-fixed-dim max-w-2xl">
-					Solicita tu primera cita o escríbeme si antes quieres resolver alguna
-					duda. Sesión de 60 minutos · 65 €.
+				<p>
+					Es normal tener dudas antes de empezar. Si la tuya no está aquí,
+					escríbeme y te respondo.
 				</p>
-				<div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
-					<a
-						class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-4 rounded-full bg-primary-container text-on-primary-container shadow-lg hover:shadow-2xl hover:scale-105 active:scale-100 transition-all duration-300 font-semibold gap-2"
-						href={contactHref}
-					>
-						<span>{ctaLabel}</span>
-						<span class="material-symbols-outlined text-[19px]"
-							>event_available</span
-						>
-					</a>
-					<a
-						class="inline-flex items-center justify-center font-label-lg text-label-lg px-6 py-4 rounded-full bg-surface-translucent/10 hover:bg-surface-translucent/20 text-inverse-on-surface transition-all duration-300 gap-2"
-						href={`mailto:${email}`}
-					>
-						<span class="material-symbols-outlined text-[18px]">mail</span>
-						<span>{email}</span>
-					</a>
-				</div>
-				<p
-					class="font-body-sm text-body-sm text-tertiary-fixed-dim/80 pt-2 flex items-center gap-2"
-				>
-					{ctaNote}
-				</p>
-			</div>
-		</section>
-		<OtherServices />
-	</div>
+			</SectionHeader>
+			<Faq items={faqs} class="lg:col-span-7" />
+		</div>
+	</Section>
+
+	<CtaBand
+		id="contacto-reserva"
+		label="Tu bienestar empieza hoy"
+		title="Dar el primer paso requiere valentía, pero no tienes que hacerlo solo/a."
+	>
+		<p class="tabular-nums">
+			Solicita tu primera cita o escríbeme si antes quieres resolver alguna duda.
+			Sesión de 60 minutos · 65 €.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" arrow>
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>{email}</span>
+			</Button>
+		</Fragment>
+		<p slot="note">{ctaNote}</p>
+	</CtaBand>
+	<OtherServices />
 </Layout>
-
-<script>
-	const faqTriggers =
-		document.querySelectorAll<HTMLButtonElement>(".faq-trigger");
-
-	const setOpen = (trigger: HTMLButtonElement, open: boolean) => {
-		trigger.setAttribute("aria-expanded", String(open));
-		trigger.nextElementSibling?.classList.toggle("hidden", !open);
-		const icon = trigger.querySelector(".faq-icon");
-		if (icon) {
-			icon.textContent = open ? "close" : "add";
-			icon.classList.toggle("rotate-45", open);
-		}
-	};
-
-	for (const trigger of faqTriggers) {
-		trigger.addEventListener("click", () => {
-			const expanded = trigger.getAttribute("aria-expanded") === "true";
-			// Close the other FAQs so only one stays open.
-			for (const other of faqTriggers) {
-				if (other !== trigger) setOpen(other, false);
-			}
-			setOpen(trigger, !expanded);
-		});
-	}
-</script>

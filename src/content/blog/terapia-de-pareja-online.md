@@ -13,7 +13,7 @@ En el mundo actual, las relaciones enfrentan desafíos únicos: distancias geogr
 
 Como **psicóloga general sanitaria con formación en terapia familiar y de pareja**, entiendo que buscar ayuda es un acto de amor hacia la relación. Para muchas parejas, la **terapia virtual** puede ser tan útil como las sesiones presenciales, adaptándose a tu ritmo de vida y permitiendo que ambos miembros de la pareja participen cómodamente desde cualquier lugar.
 
-#### ¿Cuándo considerar la terapia de pareja online?
+### ¿Cuándo considerar la terapia de pareja online?
 
 Identificar el momento adecuado para buscar **ayuda profesional para tu relación** es crucial. No hay que esperar a que los problemas se vuelvan insostenibles. Considera la **terapia de pareja online** si experimentas:
 
@@ -27,19 +27,19 @@ Identificar el momento adecuado para buscar **ayuda profesional para tu relació
 
 La **terapia de pareja online** no solo es una alternativa conveniente, sino que ofrece ventajas significativas que potencian el proceso terapéutico:
 
-#### 1. Flexibilidad y accesibilidad total
+### 1. Flexibilidad y accesibilidad total
 
 La principal ventaja es la **comodidad**. Puedes acceder a un **psicólogo de pareja online** desde tu hogar, oficina o cualquier lugar con conexión a internet. Esto elimina las barreras geográficas y de tiempo, facilitando la asistencia regular incluso con agendas complicadas.
 
-#### 2. Mayor comodidad y seguridad en el entorno familiar
+### 2. Mayor comodidad y seguridad en el entorno familiar
 
 Muchas parejas se sienten más relajadas y abiertas para discutir temas delicados en su propio entorno, lo que puede fomentar una mayor honestidad y vulnerabilidad. Esto es especialmente útil en la **terapia para problemas de pareja** delicados.
 
-#### 3. Consistencia en el proceso terapéutico
+### 3. Consistencia en el proceso terapéutico
 
 La facilidad de acceso de la **terapia virtual** reduce las excusas para faltar a sesiones, lo que es vital para la progresión y el éxito del tratamiento. La continuidad es clave para un cambio duradero en la **comunicación en pareja**.
 
-#### 4. Elegir profesional sin restricciones geográficas
+### 4. Elegir profesional sin restricciones geográficas
 
 Si buscas un **psicólogo de pareja** con una formación concreta, la opción online te permite elegir al profesional que encaja con vosotros, sin importar dónde viváis.
 

@@ -1,6 +1,8 @@
 ---
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
+import Button from "../../components/ui/Button.astro";
+import Icon from "../../components/ui/Icon.astro";
 import { contactHref, ctaLabel, ctaNote } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
@@ -18,81 +20,88 @@ const date = pubDate.toLocaleDateString("es-ES", {
 	month: "long",
 	year: "numeric",
 });
+
+// Article data for search engines, taken from the post itself.
+const site = Astro.site ?? Astro.url;
+const home = new URL("/", site).href;
+const schemaImage = image
+	? new URL((await getImage({ src: image, width: 1200 })).src, site).href
+	: undefined;
+const schema = [
+	{
+		"@type": "BlogPosting",
+		headline: title,
+		description,
+		datePublished: pubDate.toISOString(),
+		inLanguage: "es-ES",
+		author: { "@type": "Person", name: author, url: new URL("/sobre-mi/", site).href },
+		publisher: { "@id": `${home}#consulta` },
+		mainEntityOfPage: new URL(Astro.url.pathname, site).href,
+		...(schemaImage && { image: schemaImage }),
+	},
+];
 ---
 
-<Layout title={`${title} | Blog Inala`} description={description}>
-	<article
-		class="w-full px-margin-mobile lg:px-margin pt-space-lg lg:pt-space-xl pb-space-xl"
-	>
-		<div class="max-w-[68ch] mx-auto">
-			<a
-				href="/blog"
-				class="inline-flex items-center gap-1 font-label-lg text-label-lg text-primary hover:text-on-primary-container transition-colors duration-200 mb-space-lg"
-			>
-				<span class="material-symbols-outlined text-[18px]" aria-hidden="true"
-					>arrow_back</span
+<Layout
+	title={`${title} | Blog Inala`}
+	description={description}
+	image={image}
+	type="article"
+	schema={schema}
+>
+	<article class="bg-paper pb-20 pt-8 lg:pb-28 lg:pt-10">
+		<div class="mx-auto max-w-content px-5 sm:px-8 lg:px-10">
+			<div class="mx-auto max-w-reading">
+				<a
+					href="/blog"
+					class="group inline-flex min-h-11 items-center gap-2 text-small font-semibold text-teal transition-[color] duration-200 hover:text-teal-strong"
 				>
-				Volver al blog
-			</a>
-			<header class="mb-space-lg">
-				<h1
-					class="font-headline-lg-mobile text-headline-lg-mobile lg:font-headline-lg lg:text-headline-lg text-on-surface mb-space-sm"
-				>
-					{title}
-				</h1>
-				{
-					subtitle && (
-						<p class="font-body-lg text-body-lg text-on-surface-variant mb-space-sm">
-							{subtitle}
-						</p>
-					)
-				}
-				<p class="font-body-sm text-body-sm text-slate-muted">
-					{author} · <time datetime={pubDate.toISOString()}>{date}</time>
-				</p>
-			</header>
+					<Icon
+						name="arrow_back"
+						class="transition-[translate] duration-200 ease-out motion-safe:group-hover-fine:-translate-x-0.5"
+					/>
+					Volver al blog
+				</a>
+				<header class="hero-copy mt-8 flex flex-col gap-5">
+					<h1 class="font-display text-title font-normal text-ink">{title}</h1>
+					{subtitle && <p class="text-lead text-ink-muted">{subtitle}</p>}
+					<p class="text-label font-semibold text-ink-muted">
+						{author} · <time datetime={pubDate.toISOString()}>{date}</time>
+					</p>
+				</header>
+			</div>
 			{
 				image && (
-					<Image
-						src={image}
-						alt=""
-						widths={[680, 1360]}
-						sizes="(min-width: 768px) 680px, 100vw"
-						loading="eager"
-						class="aspect-[3/2] w-full rounded-xl object-cover mb-space-lg"
-					/>
+					<div class="hero-media mx-auto mt-12 max-w-narrow">
+						<Image
+							src={image}
+							alt=""
+							widths={[680, 1360]}
+							sizes="(min-width: 768px) 768px, 100vw"
+							loading="eager"
+							fetchpriority="high"
+							class="aspect-3/2 w-full rounded-frame object-cover"
+						/>
+					</div>
 				)
 			}
-			<div class="prose-inala">
+			<div class="prose-inala mx-auto mt-12 max-w-reading">
 				<Content />
 			</div>
 			<aside
-				class="mt-space-xl border-t border-border-subtle pt-space-lg flex flex-col gap-space-sm"
+				class="mx-auto mt-20 flex max-w-reading flex-col gap-5 border-t border-line pt-10"
 				aria-labelledby="post-cta"
 			>
-				<h2
-					id="post-cta"
-					class="font-headline-sm text-headline-sm text-on-surface"
-				>
+				<h2 id="post-cta" class="font-display text-subheading font-normal text-ink">
 					¿Te has reconocido en este artículo?
 				</h2>
-				<p class="font-body-md text-body-md text-on-surface-variant">
+				<p class="text-body text-ink-muted">
 					Si quieres hablarlo con calma, puedo acompañarte en mi consulta de
 					Pamplona o por videollamada. {ctaNote}
 				</p>
-				<div class="flex flex-wrap items-center gap-x-space-md gap-y-space-sm">
-					<a
-						href={contactHref}
-						class="inline-flex items-center justify-center rounded-full px-6 py-2.5 font-label-lg text-label-lg bg-primary-container text-on-primary-container shadow-cta hover:bg-primary-container-hover hover:shadow-cta-hover transition-[background-color,box-shadow] duration-300"
-					>
-						{ctaLabel}
-					</a>
-					<a
-						href="/servicios"
-						class="font-label-lg text-label-lg text-primary underline underline-offset-4 hover:text-on-primary-container transition-colors duration-200"
-					>
-						Ver servicios y tarifas
-					</a>
+				<div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+					<Button href={contactHref} arrow>{ctaLabel}</Button>
+					<Button href="/servicios" variant="secondary">Ver servicios y tarifas</Button>
 				</div>
 			</aside>
 		</div>

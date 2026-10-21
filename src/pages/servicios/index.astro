@@ -1,4 +1,8 @@
 ---
+import PageHero from "../../components/PageHero.astro";
+import Button from "../../components/ui/Button.astro";
+import Icon from "../../components/ui/Icon.astro";
+import Section from "../../components/ui/Section.astro";
 import {
 	address,
 	addressCenter,
@@ -16,78 +20,56 @@ const description =
 ---
 
 <Layout title={title} description={description}>
-	<section
-		class="w-full px-margin-mobile lg:px-margin pt-space-lg lg:pt-space-xl pb-space-xl"
-	>
-		<div class="max-w-content mx-auto">
-			<header class="max-w-2xl mb-space-xl">
-				<h1
-					class="font-headline-lg-mobile text-headline-lg-mobile lg:font-display-xl lg:text-display-xl text-on-surface mb-space-sm text-balance"
-				>
-					Servicios
-				</h1>
-				<p class="font-body-lg text-body-lg text-on-surface-variant">
-					Elige el tipo de acompañamiento que encaja con lo que estás viviendo:
-					individual si es algo que te pasa a ti; de pareja si el malestar está
-					en la relación; familiar si afecta a la convivencia de toda la casa; y
-					psicología parental si buscas apoyo como madre o padre. Si no lo tienes
-					claro, escríbeme y lo vemos juntos.
-				</p>
-			</header>
+	<PageHero title="Servicios">
+		<p class="max-w-2xl text-lead text-ink-muted">
+			Elige el tipo de acompañamiento que encaja con lo que estás viviendo:
+			individual si es algo que te pasa a ti; de pareja si el malestar está en la
+			relación; familiar si afecta a la convivencia de toda la casa; y psicología
+			parental si buscas apoyo como madre o padre. Si no lo tienes claro,
+			escríbeme y lo vemos juntos.
+		</p>
+	</PageHero>
 
-			<ul class="border-t border-border-subtle">
-				{
-					services.map((service) => (
-						<li class="group relative border-b border-border-subtle py-space-md lg:py-space-lg grid gap-space-xs lg:grid-cols-12 lg:gap-gutter lg:items-baseline">
-							<h2 class="lg:col-span-4 font-headline-md text-headline-sm lg:text-headline-md text-on-surface">
-								<a
-									href={service.href}
-									class="after:absolute after:inset-0 group-hover:text-primary transition-colors duration-200"
-								>
-									{service.name}
-								</a>
-							</h2>
-							<p class="lg:col-span-5 font-body-md text-body-md text-on-surface-variant max-w-prose">
-								{service.summary}
-							</p>
-							<p class="lg:col-span-3 lg:text-right font-label-lg text-label-lg text-on-surface">
-								{service.duration} · {service.price}
-								<span
-									class="material-symbols-outlined text-[18px] align-middle ml-1 text-primary transition-transform duration-200 motion-safe:group-hover:translate-x-1"
-									aria-hidden="true"
-								>
-									arrow_forward
-								</span>
-							</p>
-						</li>
-					))
-				}
-			</ul>
-
-			<div
-				class="mt-space-xl flex flex-col md:flex-row md:items-center md:justify-between gap-space-md"
-			>
-				<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
-					Todas las sesiones pueden ser presenciales en {address} ({addressCenter},
-					Pamplona) u online por videollamada.
-					<a
-						href={onlineLink.href}
-						class="text-primary underline underline-offset-4 hover:no-underline"
-						>Cómo funciona la terapia online</a
-					>.
-				</p>
-				<div class="flex flex-col items-start md:items-end gap-2">
-					<a
-						href={contactHref}
-						class="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 font-label-lg text-label-lg bg-primary-container text-on-primary-container shadow-cta hover:bg-primary-container-hover hover:shadow-cta-hover transition-[background-color,box-shadow] duration-300"
-					>
-						{ctaLabel}
-					</a>
-					<p class="font-body-sm text-body-sm text-on-surface-variant">
-						{ctaNote}
-					</p>
-				</div>
+	<Section tone="white" class="pt-4 lg:pt-6">
+		<ul class="grid gap-x-12 border-b border-line md:grid-cols-2">
+			{
+				services.map((service) => (
+					<li class="group relative flex flex-col gap-4 border-t border-line py-10 transition-[border-color] duration-200 hover:border-teal">
+						<h2 class="font-display text-heading font-normal text-ink">
+							<a
+								href={service.href}
+								class="transition-[color] duration-200 after:absolute after:inset-0 group-hover:text-teal"
+							>
+								{service.name}
+							</a>
+						</h2>
+						<p class="max-w-md text-lead text-ink-muted">{service.summary}</p>
+						<p class="mt-auto flex items-center gap-2 text-small font-semibold text-teal tabular-nums">
+							{service.duration} · {service.price}
+							<Icon
+								name="arrow_forward"
+								class="transition-[translate] duration-200 ease-out motion-safe:group-hover-fine:translate-x-1"
+							/>
+						</p>
+					</li>
+				))
+			}
+		</ul>
+		<div
+			class="mt-14 grid gap-x-12 gap-y-8 lg:grid-cols-12 lg:items-center"
+		>
+			<p class="text-lead text-ink-muted lg:col-span-7">
+				Todas las sesiones pueden ser presenciales en {address} ({addressCenter},
+				Pamplona) u online por videollamada.{" "}
+				<a
+					class="font-semibold text-teal underline underline-offset-4 transition-[color] duration-200 hover:text-teal-strong"
+					href={onlineLink.href}>Cómo funciona la terapia online</a
+				>.
+			</p>
+			<div class="flex flex-col items-start gap-3 lg:col-span-5 lg:items-end">
+				<Button href={contactHref} arrow>{ctaLabel}</Button>
+				<p class="text-small text-ink-muted">{ctaNote}</p>
 			</div>
 		</div>
-	</section>
+	</Section>
 </Layout>

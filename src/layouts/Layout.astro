@@ -1,17 +1,89 @@
 ---
+import { Font, getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import practiceImage from "../assets/images/oficina.webp";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import {
+	email,
+	instagramUrl,
+	logoUrl,
+	postalAddress,
+	siteName,
+	therapistName,
+	whatsappNumber,
+} from "../data/site";
 import "../styles/global.css";
 
 interface Props {
 	title: string;
 	description: string;
 	noindex?: boolean;
+	/** Image for link previews; defaults to the photo of the practice. */
+	image?: ImageMetadata;
+	type?: "website" | "article";
+	/** Extra JSON-LD nodes for this page, such as a blog post. */
+	schema?: Record<string, unknown>[];
 }
 
-const { title, description, noindex = false } = Astro.props;
+const {
+	title,
+	description,
+	noindex = false,
+	image = practiceImage,
+	type = "website",
+	schema = [],
+} = Astro.props;
 
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+const site = Astro.site ?? Astro.url;
+const canonicalUrl = new URL(Astro.url.pathname, site).href;
+const home = new URL("/", site).href;
+
+const previewOptions = {
+	width: 1200,
+	height: 630,
+	fit: "cover",
+	format: "jpg",
+} as const;
+const preview = await getImage({ src: image, ...previewOptions });
+const previewUrl = new URL(preview.src, site).href;
+const practicePreview = await getImage({ src: practiceImage, ...previewOptions });
+
+// Only facts that the site states elsewhere: name, address, contact, licence holder.
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebSite",
+			"@id": `${home}#web`,
+			url: home,
+			name: siteName,
+			inLanguage: "es-ES",
+		},
+		{
+			"@type": "MedicalBusiness",
+			"@id": `${home}#consulta`,
+			name: siteName,
+			url: home,
+			logo: new URL(logoUrl, site).href,
+			image: new URL(practicePreview.src, site).href,
+			email,
+			telephone: whatsappNumber.replaceAll(" ", ""),
+			address: { "@type": "PostalAddress", ...postalAddress },
+			sameAs: [instagramUrl],
+			founder: { "@id": `${home}#maria` },
+		},
+		{
+			"@type": "Person",
+			"@id": `${home}#maria`,
+			name: therapistName,
+			jobTitle: "Psicóloga general sanitaria",
+			url: new URL("/sobre-mi/", site).href,
+			worksFor: { "@id": `${home}#consulta` },
+		},
+		...schema,
+	],
+};
 ---
 
 <!doctype html>
@@ -23,39 +95,54 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonicalUrl} />
 		{noindex && <meta name="robots" content="noindex,nofollow" />}
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={type} />
+		<meta property="og:locale" content="es_ES" />
+		<meta property="og:site_name" content={siteName} />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
+		<meta property="og:image" content={previewUrl} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={previewUrl} />
 		<meta
 			name="google-site-verification"
 			content="tPXeMdX0nIDCBwsNwGIKYV56PGlxsBqEMzj2aU3zFXg"
 		/>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<meta name="theme-color" content="#f6f9f8" />
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
-		/>
+		<Font cssVariable="--font-gambetta" preload={[{ style: "normal" }]} />
+		<Font cssVariable="--font-synonym" preload />
 		<meta name="generator" content={Astro.generator} />
+		{
+			!noindex && (
+				<script
+					type="application/ld+json"
+					is:inline
+					set:html={JSON.stringify(structuredData)}
+				/>
+			)
+		}
 	</head>
-	<body
-		class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container"
-	>
+	<body class="min-h-dvh bg-paper text-ink">
+		<a
+			href="#contenido"
+			class="fixed left-4 top-3 z-60 -translate-y-20 rounded-full bg-teal px-5 py-3 text-small font-semibold text-white focus:translate-y-0"
+		>
+			Saltar al contenido
+		</a>
 		<Header />
-		<main class="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
+		<main id="contenido" tabindex="-1" class="outline-none">
 			<slot />
 		</main>
 		<Footer />
+		<script>
+			import "../scripts/reveal";
+		</script>
 	</body>
 </html>

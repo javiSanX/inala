@@ -1,0 +1,52 @@
+---
+interface Crumb {
+	name: string;
+	href?: string;
+}
+
+interface Props {
+	items: Crumb[];
+	/** Accessible name of the landmark, kept as each page had it. */
+	label?: string;
+}
+
+const { items, label = "Migas de pan" } = Astro.props;
+const site = Astro.site ?? Astro.url;
+const current = new URL(Astro.url.pathname, site).href;
+
+const schema = {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	itemListElement: items.map((item, index) => ({
+		"@type": "ListItem",
+		position: index + 1,
+		name: item.name,
+		item: item.href ? new URL(item.href, site).href : current,
+	})),
+};
+---
+
+<nav aria-label={label}>
+	<ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-label text-ink-muted">
+		{
+			items.map((item, index) => (
+				<li class="flex items-center gap-2">
+					{index > 0 && <span class="text-ink-soft">/</span>}
+					{item.href ? (
+						<a
+							href={item.href}
+							class="inline-flex min-h-6 items-center underline decoration-transparent transition-[color,text-decoration-color] duration-200 hover:text-teal hover:decoration-current"
+						>
+							{item.name}
+						</a>
+					) : (
+						<span aria-current="page" class="font-semibold text-ink">
+							{item.name}
+						</span>
+					)}
+				</li>
+			))
+		}
+	</ol>
+</nav>
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />

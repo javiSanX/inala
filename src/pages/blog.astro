@@ -1,6 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/ui/Icon.astro";
+import Section from "../components/ui/Section.astro";
+import { logo } from "../data/site";
 import Layout from "../layouts/Layout.astro";
 
 const title = "Blog de Psicología | Inala Psicoterapia";
@@ -17,67 +21,98 @@ const formatDate = (date: Date) =>
 		month: "long",
 		year: "numeric",
 	});
+
+const [featured, ...rest] = posts;
+const titleLink =
+	"transition-[color] duration-200 after:absolute after:inset-0 group-hover:text-teal";
 ---
 
 <Layout title={title} description={description}>
-	<section
-		class="w-full px-margin-mobile lg:px-margin pt-space-lg lg:pt-space-xl pb-space-xl"
-	>
-		<div class="max-w-content mx-auto">
-			<header class="max-w-2xl mb-space-xl">
-				<h1
-					class="font-headline-lg-mobile text-headline-lg-mobile lg:font-display-xl lg:text-display-xl text-on-surface mb-space-sm"
-				>
-					Blog
-				</h1>
-				<p class="font-body-lg text-body-lg text-on-surface-variant">
-					Reflexiones y recursos para entender lo que sientes y cuidar tu salud
-					emocional.
-				</p>
-			</header>
+	<PageHero title="Blog">
+		<p class="max-w-2xl text-lead text-ink-muted">
+			Reflexiones y recursos para entender lo que sientes y cuidar tu salud
+			emocional.
+		</p>
+	</PageHero>
 
-			<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-				{
-					posts.map((post) => (
-						<li>
-							<article class="group relative flex h-full flex-col overflow-hidden rounded-xl bg-surface-container-lowest shadow-ethereal transition-shadow duration-300 hover:shadow-lift">
-								{post.data.image ? (
-									<Image
-										src={post.data.image}
-										alt=""
-										widths={[400, 800]}
-										sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
-										class="aspect-[3/2] w-full object-cover"
-									/>
-								) : (
-									<div class="aspect-[3/2] w-full bg-surface-container" />
-								)}
-								<div class="flex flex-1 flex-col gap-space-sm p-space-md">
-									<time
-										datetime={post.data.pubDate.toISOString()}
-										class="font-label-sm text-label-sm uppercase text-slate-muted"
-									>
-										{formatDate(post.data.pubDate)}
-									</time>
-									<h2 class="font-headline-sm text-headline-sm text-on-surface">
-										<a
-											href={`/blog/${post.id}`}
-											class="after:absolute after:inset-0 group-hover:text-primary transition-colors duration-200"
-										>
-											{post.data.title}
-										</a>
-									</h2>
-									{post.data.subtitle && (
-										<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
-											{post.data.subtitle}
-										</p>
-									)}
+	<Section tone="white" class="pt-4 lg:pt-6">
+		<ul class="grid gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+			{
+				featured && (
+					<li class="md:col-span-2 lg:col-span-3">
+						<article class="group relative grid gap-x-12 gap-y-6 border-b border-line pb-16 lg:grid-cols-12 lg:items-center">
+							{featured.data.image ? (
+								<Image
+									src={featured.data.image}
+									alt=""
+									widths={[640, 960, 1280]}
+									sizes="(min-width: 1024px) 56vw, 100vw"
+									class="aspect-3/2 w-full rounded-frame object-cover lg:col-span-7"
+								/>
+							) : (
+								<div class="grid aspect-3/2 w-full place-items-center rounded-frame bg-mist lg:col-span-7">
+									<Image src={logo} alt="" width={160} height={160} class="w-1/5" />
 								</div>
-							</article>
-						</li>
-					))
-				}
-			</ul>
-		</div>
-	</section>
+							)}
+							<div class="flex flex-col gap-4 lg:col-span-5">
+								<time
+									datetime={featured.data.pubDate.toISOString()}
+									class="text-label font-semibold text-teal"
+								>
+									{formatDate(featured.data.pubDate)}
+								</time>
+								<h2 class="font-display text-heading font-normal text-ink">
+									<a href={`/blog/${featured.id}`} class={titleLink}>
+										{featured.data.title}
+									</a>
+								</h2>
+								{featured.data.subtitle && (
+									<p class="text-lead text-ink-muted">{featured.data.subtitle}</p>
+								)}
+								<Icon
+									name="arrow_forward"
+									class="size-6 text-teal transition-[translate] duration-200 ease-out motion-safe:group-hover-fine:translate-x-1"
+								/>
+							</div>
+						</article>
+					</li>
+				)
+			}
+			{
+				rest.map((post) => (
+					<li>
+						<article class="group relative flex h-full flex-col gap-4">
+							{post.data.image ? (
+								<Image
+									src={post.data.image}
+									alt=""
+									widths={[400, 800]}
+									sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+									class="aspect-3/2 w-full rounded-frame object-cover"
+								/>
+							) : (
+								<div class="grid aspect-3/2 w-full place-items-center rounded-frame bg-mist">
+									<Image src={logo} alt="" width={120} height={120} class="w-1/4" />
+								</div>
+							)}
+							<time
+								datetime={post.data.pubDate.toISOString()}
+								class="mt-2 text-label font-semibold text-teal"
+							>
+								{formatDate(post.data.pubDate)}
+							</time>
+							<h2 class="font-display text-subheading font-normal text-ink">
+								<a href={`/blog/${post.id}`} class={titleLink}>
+									{post.data.title}
+								</a>
+							</h2>
+							{post.data.subtitle && (
+								<p class="line-clamp-3 text-body text-ink-muted">{post.data.subtitle}</p>
+							)}
+						</article>
+					</li>
+				))
+			}
+		</ul>
+	</Section>
 </Layout>

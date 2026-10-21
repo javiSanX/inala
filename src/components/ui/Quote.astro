@@ -1,0 +1,31 @@
+---
+interface Props {
+	/** Who said it; rendered as the citation. */
+	author?: string;
+	size?: "regular" | "large";
+	class?: string;
+}
+
+const { author, size = "regular", class: className } = Astro.props;
+// Some citations already carry their own dash in the content.
+const ownDash = author?.startsWith("—") ?? false;
+---
+
+<figure class:list={["flex flex-col gap-4", className]}>
+	<blockquote
+		class:list={[
+			"font-display font-normal text-ink",
+			size === "large" ? "text-heading" : "text-subheading",
+		]}
+	>
+		<slot />
+	</blockquote>
+	{
+		author && (
+			<figcaption class="flex items-center gap-3 text-small font-semibold text-teal">
+				{!ownDash && <span class="h-px w-8 bg-seafoam" aria-hidden="true" />}
+				<cite class="not-italic">{author}</cite>
+			</figcaption>
+		)
+	}
+</figure>

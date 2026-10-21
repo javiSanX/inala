@@ -1,19 +1,32 @@
 ---
+import heroImage from "../../assets/images/psicologia-parental.png";
 import OtherServices from "../../components/OtherServices.astro";
-import { contactHref, ctaLabel, ctaNote, email } from "../../data/site";
+import PageHero from "../../components/PageHero.astro";
+import Button from "../../components/ui/Button.astro";
+import CtaBand from "../../components/ui/CtaBand.astro";
+import Faq from "../../components/ui/Faq.astro";
+import Figure from "../../components/ui/Figure.astro";
+import Note from "../../components/ui/Note.astro";
+import Quote from "../../components/ui/Quote.astro";
+import Section from "../../components/ui/Section.astro";
+import SectionHeader from "../../components/ui/SectionHeader.astro";
+import TopicList from "../../components/ui/TopicList.astro";
+import {
+	contactHref,
+	ctaLabel,
+	ctaNote,
+	email,
+} from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
 const title =
 	"Psicología parental en Pamplona y online | Inala Psicoterapia";
+
 const description =
 	"Apoyo psicológico para madres, padres y cuidadores en Pamplona y online: cansancio, culpa, rabietas, límites y desacuerdos de crianza. Con María Sánchez, psicóloga general sanitaria.";
 
-const heroImage = "/psicologia-parental.png";
 const heroImageAlt =
 	"Madre abrazando a su hijo pequeño.";
-
-const eyebrow =
-	"inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container/70 text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider";
 
 const sessionSteps = [
 	{
@@ -116,382 +129,129 @@ const faqs = [
 ---
 
 <Layout title={title} description={description}>
-	<div class="flex flex-col w-full">
-		<!-- Breadcrumb -->
-		<div class="w-full px-margin-mobile lg:px-margin pt-6 pb-4">
-			<nav
-				aria-label="Ruta de navegación"
-				class="flex items-center gap-2 font-label-sm text-label-sm text-slate-muted"
-			>
-				<a class="hover:text-primary transition-colors" href="/">Inicio</a>
-				<span class="material-symbols-outlined text-[14px]" aria-hidden="true"
-					>chevron_right</span
-				>
-				<a class="hover:text-primary transition-colors" href="/servicios"
-					>Servicios</a
-				>
-				<span class="material-symbols-outlined text-[14px]" aria-hidden="true"
-					>chevron_right</span
-				>
-				<span class="text-primary font-bold" aria-current="page"
-					>Psicología Parental</span
-				>
-			</nav>
+	<PageHero
+		breadcrumbs={[
+			{ name: "Inicio", href: "/" },
+			{ name: "Servicios", href: "/servicios" },
+			{ name: "Psicología Parental" },
+		]}
+		breadcrumbsLabel="Ruta de navegación"
+		image={heroImage}
+		imageAlt={heroImageAlt}
+	>
+		<Fragment slot="title">
+			Psicología parental: apoyo para madres y padres en la <span>crianza</span>
+		</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Un acompañamiento cercano para hablar de las dudas, el cansancio y la culpa
+			que trae la crianza, y para encontrar pautas que funcionen en vuestra casa,
+			desde el respeto y el vínculo con vuestros hijos.
+		</p>
+		<div class="flex flex-wrap gap-3 pt-2">
+			<Button href={contactHref} arrow>{ctaLabel}</Button>
 		</div>
+		<Fragment slot="caption">
+			<span class="font-semibold text-ink">Sin juicios · adaptado a vuestra familia</span>
+		</Fragment>
+	</PageHero>
 
-		<!-- 1. Hero -->
-		<section class="w-full px-margin-mobile lg:px-margin pt-6 pb-20 lg:pb-28">
-			<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
-				<!-- Left Column: Copy & CTAs -->
-				<div class="lg:col-span-7 flex flex-col gap-6">
-					<div></div>
-					<h1 class="font-display-xl text-display-xl text-on-surface">
-						Psicología parental: apoyo para madres y padres en la <span
-							class="italic font-normal text-primary">crianza</span
-						>
-					</h1>
-					<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-						Un acompañamiento cercano para hablar de las dudas, el cansancio y la
-						culpa que trae la crianza, y para encontrar pautas que funcionen en
-						vuestra casa, desde el respeto y el vínculo con vuestros hijos.
-					</p>
-					<!-- CTAs -->
-					<div class="flex flex-wrap items-center gap-4 pt-2">
-						<a
-							class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-primary-container text-on-primary-container shadow-md hover:bg-primary hover:text-on-primary hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-							href={contactHref}
-						>
-							{ctaLabel}
-							<span class="material-symbols-outlined ml-2 text-[18px]"
-								>calendar_today</span
-							>
-						</a>
-					</div>
-				</div>
-				<!-- Right Column: Visual Card -->
-				<div class="lg:col-span-5 relative">
-					<div
-						class="relative rounded-3xl overflow-hidden shadow-xl bg-surface-container-low p-2"
-					>
-						<div class="relative w-full aspect-[4/5] rounded-[22px] overflow-hidden">
-							<img
-								alt={heroImageAlt}
-								class="w-full h-full object-cover"
-								src={heroImage}
-							/>
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 via-transparent to-transparent"
-							>
-							</div>
-							<!-- Glass badge inside hero image -->
-							<div
-								class="absolute bottom-4 inset-x-4 p-4 rounded-2xl bg-surface/85 backdrop-blur-md shadow-sm flex items-center gap-3"
-							>
-								<span
-									class="w-10 h-10 rounded-full bg-primary-container/40 flex items-center justify-center text-primary flex-shrink-0"
-								>
-									<span class="material-symbols-outlined text-[22px]"
-										>nest_cam_stand</span
-									>
-								</span>
-								<p
-									class="font-body-sm text-body-sm text-on-surface font-medium leading-snug"
-								>
-									Sin juicios · adaptado a vuestra familia
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- 2. ¿En qué consiste la psicología parental? -->
-		<section
-			class="w-full py-20 lg:py-28 bg-surface-container-lowest"
-			id="en-que-consiste"
+	<!-- ¿En qué consiste? -->
+	<Section tone="white" id="en-que-consiste">
+		<SectionHeader
+			title="Poner palabras al agotamiento y la culpa, y recuperar la calma en la crianza"
+			label="En qué consiste"
 		>
-			<div class="w-full px-margin-mobile lg:px-margin flex flex-col gap-12">
-				<div class="flex flex-col gap-4 max-w-3xl">
-					<div>
-						<span class={eyebrow}>En qué consiste</span>
-					</div>
-					<h2 class="font-headline-lg text-headline-lg text-on-surface">
-						Poner palabras al agotamiento y la culpa, y recuperar la calma en la crianza
-					</h2>
-					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Criar es una de las experiencias más transformadoras y a la vez más
-						exigentes a nivel emocional. En consulta no juzgo estilos
-						educativos ni ofrezco recetas mágicas: te ayudo a entender lo que
-						sientes, a aliviar la culpa y a encontrar recursos prácticos para
-						acompañar a tus hijos con más calma y firmeza.
-					</p>
-				</div>
-				<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
-					<!-- Left: Image & Editorial Quote Box -->
-					<div class="lg:col-span-5 flex flex-col gap-6">
-						<div class="rounded-3xl overflow-hidden shadow-md bg-surface p-2">
-							<div class="w-full aspect-[4/3] rounded-2xl overflow-hidden">
-								<img
-									alt={heroImageAlt}
-									class="w-full h-full object-cover"
-									src={heroImage}
-									loading="lazy"
-								/>
-							</div>
-						</div>
-						<div
-							class="p-8 rounded-3xl bg-surface-container shadow-sm flex flex-col gap-4"
-						>
-							<span
-								class="material-symbols-outlined text-primary text-[36px]"
-								aria-hidden="true">format_quote</span
-							>
-							<blockquote
-								class="font-headline-md text-headline-md italic font-normal text-on-surface leading-snug"
-							>
-								«No se trata de ser madres o padres perfectos, sino conscientes,
-								presentes y en paz con nuestras propias sombras para poder cuidar
-								desde la calma.»
-							</blockquote>
-							<p
-								class="font-label-sm text-label-sm text-slate-muted uppercase tracking-wider"
-							>
-								— María Sánchez
-							</p>
-						</div>
-					</div>
-					<!-- Right: What happens in a session (01 to 05) -->
-					<div class="lg:col-span-7 flex flex-col gap-4">
-						<div class="mb-2">
-							<h3 class="font-headline-md text-headline-md text-on-surface">
-								¿Qué ocurre durante una sesión de psicología parental?
-							</h3>
-						</div>
-						{
-							sessionSteps.map((step, index) => (
-								<div class="p-6 rounded-2xl bg-surface shadow-sm hover:shadow-md transition-shadow duration-300 flex items-start gap-5">
-									<span class="font-display-xl-mobile text-display-xl-mobile text-primary font-medium select-none flex-shrink-0 leading-none">
-										{String(index + 1).padStart(2, "0")}
-									</span>
-									<div class="flex flex-col gap-1">
-										<h4 class="font-title-md text-title-md text-on-surface">
-											{step.title}
-										</h4>
-										<p class="font-body-md text-body-md text-on-surface-variant">
-											{step.text}
-										</p>
-									</div>
-								</div>
-							))
-						}
-					</div>
-				</div>
+			<p>
+				Criar es una de las experiencias más transformadoras y a la vez más
+				exigentes a nivel emocional. En consulta no juzgo estilos educativos ni
+				ofrezco recetas mágicas: te ayudo a entender lo que sientes, a aliviar la
+				culpa y a encontrar recursos prácticos para acompañar a tus hijos con más
+				calma y firmeza.
+			</p>
+		</SectionHeader>
+		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12">
+			<div class="flex flex-col gap-10 lg:col-span-5">
+				<Figure src={heroImage} alt={heroImageAlt} ratio="landscape" />
+				<Quote author="— María Sánchez">
+					«No se trata de ser madres o padres perfectos, sino conscientes,
+					presentes y en paz con nuestras propias sombras para poder cuidar desde la
+					calma.»
+				</Quote>
 			</div>
-		</section>
-
-		<!-- 3. ¿Para quién es la psicología parental? -->
-		<section class="w-full py-20 lg:py-28">
-			<div class="w-full px-margin-mobile lg:px-margin flex flex-col gap-12">
-				<div class="flex flex-col gap-3 text-center max-w-3xl mx-auto">
-					<div>
-						<span class={eyebrow}>Para quién</span>
-					</div>
-					<h2 class="font-headline-lg text-headline-lg text-on-surface">
-						¿Para quién es la psicología parental?
-					</h2>
-					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Acompaño a madres, padres y cuidadores en distintos momentos de la
-						crianza:
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-					{
-						audiences.map((audience) => (
-							<div class="p-8 rounded-3xl bg-surface-container-low shadow-sm flex flex-col">
-								<div class="flex flex-col gap-4">
-									<div class="w-14 h-14 rounded-2xl bg-surface flex items-center justify-center text-primary">
-										<span class="material-symbols-outlined text-[28px]">
-											{audience.icon}
-										</span>
-									</div>
-									<h3 class="font-headline-sm text-headline-sm text-on-surface">
-										{audience.title}
-									</h3>
-									<p class="font-body-md text-body-md text-on-surface-variant">
-										{audience.text}
-									</p>
-								</div>
-							</div>
-						))
-					}
-				</div>
-				<!-- Bottom Empathy Banner Pill -->
-				<div
-					class="p-5 rounded-2xl bg-surface-container text-center max-w-4xl mx-auto shadow-sm"
-				>
-					<p class="font-body-md text-body-md text-on-surface font-medium">
-						No hace falta llegar al límite para consultar: pedir apoyo a tiempo
-						evita mucho desgaste y cuida el vínculo con vuestros hijos.
-					</p>
-				</div>
+			<div class="lg:col-span-7">
+				<h3 class="font-display text-subheading font-normal text-ink">
+					¿Qué ocurre durante una sesión de psicología parental?
+				</h3>
+				<TopicList
+					items={sessionSteps}
+					columns={1}
+					level={4}
+					numbered
+					class="mt-6"
+				/>
 			</div>
-		</section>
+		</div>
+	</Section>
 
-		<!-- 4. ¿Qué dificultades abordamos? -->
-		<section class="w-full bg-surface-container-low py-20 lg:py-28">
-			<div class="w-full px-margin-mobile lg:px-margin flex flex-col gap-12">
-				<div class="flex flex-col gap-3 text-center max-w-3xl mx-auto">
-					<div>
-						<span class={eyebrow}>Qué trabajo en consulta</span>
-					</div>
-					<h2 class="font-headline-lg text-headline-lg text-on-surface">
-						¿Qué dificultades se trabajan en psicología parental?
-					</h2>
-					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Estas son algunas de las dificultades más habituales en consulta:
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-					{
-						problems.map((problem) => (
-							<div class="p-8 rounded-3xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col gap-4 bg-surface-container-lowest">
-								<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary">
-									<span class="material-symbols-outlined text-[24px]">
-										{problem.icon}
-									</span>
-								</div>
-								<h3 class="font-title-md text-title-md text-on-surface">
-									{problem.title}
-								</h3>
-								<p class="font-body-md text-body-md text-on-surface-variant">
-									{problem.text}
-								</p>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
+	<!-- ¿Para quién? -->
+	<Section>
+		<SectionHeader title="¿Para quién es la psicología parental?" label="Para quién">
+			<p>
+				Acompaño a madres, padres y cuidadores en distintos momentos de la
+				crianza:
+			</p>
+		</SectionHeader>
+		<TopicList items={audiences} columns={3} class="mt-14" />
+		<Note class="mt-6">
+			No hace falta llegar al límite para consultar: pedir apoyo a tiempo evita
+			mucho desgaste y cuida el vínculo con vuestros hijos.
+		</Note>
+	</Section>
 
-		<!-- 5. Preguntas frecuentes -->
-		<section class="w-full py-20 lg:py-28">
-			<div
-				class="w-full px-margin-mobile lg:px-margin max-w-4xl mx-auto flex flex-col gap-12"
+	<!-- ¿Qué dificultades se trabajan? -->
+	<Section tone="white">
+		<SectionHeader
+			title="¿Qué dificultades se trabajan en psicología parental?"
+			label="Qué trabajo en consulta"
+		>
+			<p>Estas son algunas de las dificultades más habituales en consulta:</p>
+		</SectionHeader>
+		<TopicList items={problems} layout="rows" class="mt-14" />
+	</Section>
+
+	<!-- Preguntas frecuentes -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Preguntas frecuentes sobre la psicología parental"
+				label="Preguntas frecuentes"
+				layout="stack"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
 			>
-				<div class="flex flex-col gap-3 text-center">
-					<div>
-						<span class={eyebrow}>Preguntas frecuentes</span>
-					</div>
-					<h2 class="font-headline-lg text-headline-lg text-on-surface">
-						Preguntas frecuentes sobre la psicología parental
-					</h2>
-					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Es normal tener dudas antes de empezar. Si la tuya no está aquí,
-						escríbeme.
-					</p>
-				</div>
-				<div class="flex flex-col gap-4" id="faq-accordion">
-					{
-						faqs.map((faq, index) => (
-							<div class="rounded-2xl bg-surface-container-low shadow-sm overflow-hidden transition-all duration-300 faq-item">
-								<button
-									class="faq-trigger w-full p-6 text-left flex items-center justify-between gap-4 font-title-md text-title-md text-on-surface hover:text-primary transition-colors focus:outline-none"
-									type="button"
-									aria-expanded="false"
-									aria-controls={`faq-content-${index}`}
-								>
-									<span>{faq.question}</span>
-									<span
-										class="material-symbols-outlined text-[24px] text-primary transition-transform duration-300 faq-chevron"
-										aria-hidden="true"
-									>
-										expand_more
-									</span>
-								</button>
-								<div
-									class="px-6 pb-6 pt-0 font-body-md text-body-md text-on-surface-variant hidden faq-content"
-									id={`faq-content-${index}`}
-								>
-									{faq.answer}
-								</div>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
+				<p>
+					Es normal tener dudas antes de empezar. Si la tuya no está aquí,
+					escríbeme.
+				</p>
+			</SectionHeader>
+			<Faq items={faqs} class="lg:col-span-7" />
+		</div>
+	</Section>
 
-		<!-- 6. Final CTA banner -->
-		<section class="w-full px-margin-mobile lg:px-margin pb-20">
-			<div
-				class="w-full rounded-3xl bg-inverse-surface text-inverse-on-surface p-10 lg:p-16 relative overflow-hidden shadow-xl"
-			>
-				<div
-					class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/20 blur-3xl pointer-events-none"
-				>
-				</div>
-				<div
-					class="relative z-10 max-w-3xl mx-auto flex flex-col items-center text-center gap-6"
-				>
-					<div>
-						<span
-							class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface/10 text-accent-glow font-label-sm text-label-sm uppercase tracking-wider backdrop-blur-sm"
-						>
-							Primera cita
-						</span>
-					</div>
-					<h2 class="font-headline-lg text-headline-lg text-inverse-on-surface">
-						Pedir ayuda en la crianza también es cuidar de tus hijos
-					</h2>
-					<p class="font-body-lg text-body-lg text-inverse-on-surface/80">
-						Solicita tu primera cita o escríbeme si antes quieres resolver alguna
-						duda. [PENDIENTE: precio y duración de la sesión].
-					</p>
-					<div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-						<a
-							class="inline-flex items-center justify-center font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-primary-container text-on-primary-container shadow-md hover:bg-surface hover:text-on-surface hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-							href={contactHref}
-						>
-							{ctaLabel}
-							<span class="material-symbols-outlined ml-2 text-[18px]"
-								>calendar_month</span
-							>
-						</a>
-						<a
-							class="inline-flex items-center justify-center font-label-lg text-label-lg px-7 py-3.5 rounded-full bg-surface/10 hover:bg-surface/20 text-inverse-on-surface transition-colors"
-							href={`mailto:${email}`}
-						>
-							<span class="material-symbols-outlined mr-2 text-[18px]">mail</span>
-							{email}
-						</a>
-					</div>
-					<p class="font-body-sm text-body-sm text-inverse-on-surface/60 pt-2">
-						{ctaNote}
-					</p>
-				</div>
-			</div>
-		</section>
-		<OtherServices />
-	</div>
+	<CtaBand
+		label="Primera cita"
+		title="Pedir ayuda en la crianza también es cuidar de tus hijos"
+	>
+		<p>
+			Solicita tu primera cita o escríbeme si antes quieres resolver alguna duda.
+			[PENDIENTE: precio y duración de la sesión].
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" arrow>{ctaLabel}</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				{email}
+			</Button>
+		</Fragment>
+		<p slot="note">{ctaNote}</p>
+	</CtaBand>
+	<OtherServices />
 </Layout>
-
-<script>
-	const faqTriggers =
-		document.querySelectorAll<HTMLButtonElement>(".faq-trigger");
-
-	const setOpen = (trigger: HTMLButtonElement, open: boolean) => {
-		trigger.setAttribute("aria-expanded", String(open));
-		trigger.nextElementSibling?.classList.toggle("hidden", !open);
-		trigger.querySelector(".faq-chevron")?.classList.toggle("rotate-180", open);
-	};
-
-	for (const trigger of faqTriggers) {
-		trigger.addEventListener("click", () => {
-			const expanded = trigger.getAttribute("aria-expanded") === "true";
-			// Close all FAQs, then open the clicked one if it was closed.
-			for (const other of faqTriggers) setOpen(other, false);
-			if (!expanded) setOpen(trigger, true);
-		});
-	}
-</script>

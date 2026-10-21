@@ -17,20 +17,20 @@ Si sientes que el corazón se te acelera antes de una reunión de trabajo, o evi
 
 La terapia cognitivo-conductual (TCC) y otras **técnicas de psicología** han demostrado ser muy efectivas. Aplicar estas técnicas te ayudará a desafiar tus patrones de pensamiento y a reducir tu **miedo social**.
 
-#### 1. Identifica y desafía tus pensamientos automáticos (TCC)
+### 1. Identifica y desafía tus pensamientos automáticos (TCC)
 
 La ansiedad social se alimenta de pensamientos irracionales ("Voy a decir algo estúpido", "Todos me están mirando").
 
 * **Pregúntate:** ¿Qué evidencia tengo de que esto es verdad? ¿Cuál es la peor y la mejor cosa que podría pasar?
 * **Reemplaza:** Cambia el pensamiento catastrófico por uno más realista: "Es normal sentirse nervioso, pero puedo manejar esta conversación."
 
-#### 2. La técnica del "foco exterior"
+### 2. La técnica del "foco exterior"
 
 Cuando la ansiedad es alta, tendemos a centrarnos en nuestras sensaciones físicas (manos sudorosas, voz temblorosa), lo que solo intensifica el problema.
 
 * **Acción:** Traslada intencionalmente tu atención hacia el entorno: escucha activamente a la otra persona, observa el color de la pared, concéntrate en la tarea que estás realizando. Esto interrumpe el ciclo de preocupación interna.
 
-#### 3. Exposición gradual y planificada
+### 3. Exposición gradual y planificada
 
 Evitar las situaciones sociales refuerza el miedo. La exposición gradual es la base de la **terapia para la ansiedad social**.
 
@@ -42,13 +42,13 @@ Evitar las situaciones sociales refuerza el miedo. La exposición gradual es la 
 
 Comienza por las situaciones que te generan poca **ansiedad** y avanza lentamente.
 
-#### 4. Practica el *mindfulness* (atención plena)
+### 4. Practica el *mindfulness* (atención plena)
 
 El *mindfulness* te ayuda a anclarte en el momento presente, reduciendo la preocupación por juicios pasados o futuros.
 
 * **Ejercicio:** Dedica 5 minutos al día a observar tu respiración. Cuando la ansiedad aparezca en una situación social, haz una pausa de un segundo para notar tus pies en el suelo.
 
-#### 5. La autocompasión: trátate con amabilidad
+### 5. La autocompasión: trátate con amabilidad
 
 Las personas con **ansiedad social** suelen ser sus peores críticas.
 

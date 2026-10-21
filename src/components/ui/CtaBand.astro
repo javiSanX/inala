@@ -1,0 +1,51 @@
+---
+// Closing call to action of a page: the deep cypress field that the footer continues.
+interface Props {
+	/** Plain heading text; use the "title" slot instead when it carries markup. */
+	title?: string;
+	id?: string;
+	/** Short line kept from the content, set as a subtitle under the heading. */
+	label?: string;
+	headingId?: string;
+}
+
+const { title, id, label, headingId = "cierre" } = Astro.props;
+---
+
+<section
+	id={id}
+	class="on-dark bg-cypress text-on-dark"
+	aria-labelledby={headingId}
+>
+	<div
+		class="mx-auto grid max-w-content gap-x-16 gap-y-8 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:px-10 lg:py-28"
+	>
+		<div class="flex flex-col gap-4 lg:col-span-6">
+			<h2 id={headingId} class="font-display text-heading font-normal text-on-dark">
+				{title}<slot name="title" />
+			</h2>
+			{
+				label && (
+					<p class="font-display text-subheading font-normal text-seafoam">
+						{label}
+					</p>
+				)
+			}
+		</div>
+		<div class="flex flex-col gap-6 lg:col-span-6 lg:pt-2">
+			<div class="flex flex-col gap-4 text-lead text-on-dark-muted">
+				<slot />
+			</div>
+			<div class="flex flex-wrap items-center gap-3">
+				<slot name="actions" />
+			</div>
+			{
+				Astro.slots.has("note") && (
+					<div class="text-small text-on-dark-muted">
+						<slot name="note" />
+					</div>
+				)
+			}
+		</div>
+	</div>
+</section>

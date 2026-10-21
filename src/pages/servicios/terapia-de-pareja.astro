@@ -1,5 +1,18 @@
 ---
+import quoteImage from "../../assets/images/oficina.webp";
+import heroImage from "../../assets/images/terapia-pareja.jpg";
 import OtherServices from "../../components/OtherServices.astro";
+import PageHero from "../../components/PageHero.astro";
+import Button from "../../components/ui/Button.astro";
+import CtaBand from "../../components/ui/CtaBand.astro";
+import FactList from "../../components/ui/FactList.astro";
+import Faq from "../../components/ui/Faq.astro";
+import Figure from "../../components/ui/Figure.astro";
+import Note from "../../components/ui/Note.astro";
+import Quote from "../../components/ui/Quote.astro";
+import Section from "../../components/ui/Section.astro";
+import SectionHeader from "../../components/ui/SectionHeader.astro";
+import TopicList from "../../components/ui/TopicList.astro";
 import {
 	contactHref,
 	ctaLabel,
@@ -11,18 +24,9 @@ import Layout from "../../layouts/Layout.astro";
 
 const title =
 	"Terapia de pareja en Pamplona y online | Inala Psicoterapia";
+
 const description =
 	"Terapia de pareja en Pamplona y online, sin tomar partido: comunicación, distanciamiento, infidelidad, crianza y separación. Sesiones de 60 minutos con María Sánchez, psicóloga general sanitaria.";
-
-const filled = "font-variation-settings: 'FILL' 1;";
-
-const heroImage = "/terapia-pareja.jpg";
-const quoteImage = "/oficina.webp";
-
-const eyebrow =
-	"inline-flex items-center px-3.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider";
-const sectionHeading = "font-headline-lg text-headline-lg text-on-surface";
-const sectionIntro = "font-body-lg text-body-lg text-on-surface-variant";
 
 const trustPills = [
 	{ icon: "schedule", label: "Sesiones de 60 minutos" },
@@ -138,450 +142,138 @@ const faqs = [
 ---
 
 <Layout title={title} description={description}>
-	<div class="flex flex-col w-full">
-		<!-- Breadcrumbs -->
-		<section class="w-full px-margin-mobile lg:px-margin pt-6 pb-4">
-			<nav
-				aria-label="Migas de pan"
-				class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm"
-			>
-				<a class="hover:text-primary transition-colors" href="/">Inicio</a>
-				<span class="text-outline-variant">/</span>
-				<a class="hover:text-primary transition-colors" href="/servicios"
-					>Servicios</a
-				>
-				<span class="text-outline-variant">/</span>
-				<span class="text-primary font-semibold" aria-current="page"
-					>Terapia de Pareja</span
-				>
-			</nav>
-		</section>
+	<PageHero
+		breadcrumbs={[
+			{ name: "Inicio", href: "/" },
+			{ name: "Servicios", href: "/servicios" },
+			{ name: "Terapia de Pareja" },
+		]}
+		label="Terapia de pareja · Pamplona y online"
+		image={heroImage}
+		imageAlt="Dos miembros de una pareja se cogen de las manos sobre un mantel de lino con luz natural de mañana, en un ambiente cálido de consulta."
+	>
+		<Fragment slot="title">
+			Terapia de pareja: volver a <em>entenderos</em>
+		</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Un proceso para los dos, guiado y sin tomar partido, donde salir de las
+			dinámicas que os hacen daño, recuperar una comunicación sincera y
+			reconstruir la confianza, la intimidad y el proyecto en común.
+		</p>
+		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+			<Button href={contactHref} icon="calendar_today">{ctaLabel}</Button>
+			<Button href="#en-que-consiste" variant="secondary">
+				<span>Ver en qué consiste</span>
+			</Button>
+		</div>
+		<FactList
+			facts={trustPills.map((pill) => ({ title: pill.label, icon: pill.icon }))}
+			class="mt-4"
+		/>
+		<Fragment slot="caption">
+			<span>
+				<span class="block font-semibold text-ink">Sin tomar partido</span>
+				<span class="block">A vuestro ritmo y sin etiquetas</span>
+			</span>
+		</Fragment>
+	</PageHero>
 
-		<!-- Hero -->
-		<section class="w-full px-margin-mobile lg:px-margin py-8 lg:py-14">
-			<div
-				class="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
-			>
-				<!-- Left column: copy & CTAs -->
-				<div class="lg:col-span-7 flex flex-col items-start gap-6">
-					<div
-						class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface-variant"
-					>
-						<span class="w-2 h-2 rounded-full bg-primary motion-safe:animate-pulse"
-						></span>
-						<span
-							class="font-label-sm text-label-sm tracking-wider uppercase text-primary font-semibold"
-							>Terapia de pareja · Pamplona y online</span
-						>
-					</div>
-					<h1
-						class="font-display-xl text-display-xl-mobile lg:text-display-xl text-on-surface tracking-tight"
-					>
-						Terapia de pareja: volver a <em
-							class="italic text-primary font-serif font-normal">entenderos</em
-						>
-					</h1>
-					<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-						Un proceso para los dos, guiado y sin tomar partido, donde salir de las
-						dinámicas que os hacen daño, recuperar una comunicación sincera y
-						reconstruir la confianza, la intimidad y el proyecto en común.
-					</p>
-					<!-- CTAs -->
-					<div class="flex flex-wrap items-center gap-4 pt-2">
-						<a
-							class="inline-flex items-center gap-2 font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-primary-container text-on-primary-container shadow-md hover:bg-primary hover:text-on-primary transition-all duration-300 transform hover:-translate-y-0.5"
-							href={contactHref}
-						>
-							<span class="material-symbols-outlined text-[20px]"
-								>calendar_today</span
-							>
-							{ctaLabel}
-						</a>
-						<a
-							class="inline-flex items-center gap-2 font-label-lg text-label-lg px-6 py-3.5 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors"
-							href="#en-que-consiste"
-						>
-							<span>Ver en qué consiste</span>
-							<span class="material-symbols-outlined text-[18px]"
-								>arrow_downward</span
-							>
-						</a>
-					</div>
-					<!-- Trust indicators -->
-					<div class="flex flex-wrap gap-2.5 pt-4">
-						{
-							trustPills.map((pill) => (
-								<div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-low text-slate-muted font-body-sm text-body-sm shadow-sm">
-									<span
-										class="material-symbols-outlined text-[16px] text-primary"
-										style={filled}
-									>
-										{pill.icon}
-									</span>
-									<span>{pill.label}</span>
-								</div>
-							))
-						}
-					</div>
-				</div>
-				<!-- Right column: editorial visual card -->
-				<div class="lg:col-span-5 relative">
-					<div
-						class="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-xl bg-surface-container"
-					>
-						<img
-							class="w-full h-full object-cover"
-							alt="Dos miembros de una pareja se cogen de las manos sobre un mantel de lino con luz natural de mañana, en un ambiente cálido de consulta."
-							src={heroImage}
-						/>
-						<div
-							class="absolute inset-0 bg-gradient-to-t from-on-background/70 via-transparent to-transparent"
-						>
-						</div>
-						<!-- Floating badge -->
-						<div
-							class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-surface-translucent backdrop-blur-md shadow-lg flex items-center gap-3"
-						>
-							<div
-								class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0"
-							>
-								<span
-									class="material-symbols-outlined text-[20px]"
-									style={filled}
-									aria-hidden="true">sync_alt</span
-								>
-							</div>
-							<div>
-								<p class="font-title-md text-title-md text-on-surface leading-tight">
-									Sin tomar partido
-								</p>
-								<p class="font-body-sm text-body-sm text-on-surface-variant">
-									A vuestro ritmo y sin etiquetas
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Section 2: ¿En qué consiste la terapia de pareja? -->
-		<section
-			class="w-full px-margin-mobile lg:px-margin py-16 bg-surface-container-low"
-			id="en-que-consiste"
+	<!-- ¿En qué consiste? -->
+	<Section tone="white" id="en-que-consiste">
+		<SectionHeader
+			title="Poner palabras a lo que duele y volver a encontraros"
+			label="¿En qué consiste la terapia de pareja?"
 		>
-			<div class="max-w-[1240px] mx-auto flex flex-col gap-12">
-				<div class="flex flex-col items-center text-center max-w-3xl mx-auto gap-3">
-					<div class={eyebrow}>¿En qué consiste la terapia de pareja?</div>
-					<h2 class={sectionHeading}>
-						Poner palabras a lo que duele y volver a encontraros
-					</h2>
-					<p class={sectionIntro}>
-						La terapia de pareja no busca culpables ni decide quién tiene razón. Os
-						ayuda a frenar los reproches, ver los patrones que se repiten sin que
-						os deis cuenta y aprender a expresar lo que de verdad necesitáis.
-					</p>
-				</div>
-				<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-					<!-- Left: photo card with quote -->
-					<div
-						class="lg:col-span-5 relative flex flex-col rounded-3xl overflow-hidden shadow-md bg-surface"
-					>
-						<div class="relative w-full h-full min-h-[460px]">
-							<img
-								alt="Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua y luz natural."
-								class="absolute inset-0 w-full h-full object-cover"
-								src={quoteImage}
-								loading="lazy"
-							/>
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-inverse-surface/85 via-inverse-surface/30 to-transparent"
-							>
-							</div>
-							<div
-								class="absolute bottom-0 inset-x-0 p-8 flex flex-col gap-3 text-inverse-on-surface"
-							>
-								<span
-									class="material-symbols-outlined text-primary-fixed text-[36px]"
-									aria-hidden="true">format_quote</span
-								>
-								<p
-									class="font-headline-md text-headline-sm italic leading-relaxed text-surface-container-lowest"
-								>
-									«El amor no es solo sentirlo, sino saber cuidarlo y habitar un
-									espacio donde ambos os sintáis vistos, seguros y valorados.»
-								</p>
-								<div class="h-0.5 w-12 bg-primary-fixed-dim mt-1"></div>
-								<p
-									class="font-label-sm text-label-sm uppercase tracking-widest text-primary-fixed"
-								>
-									María Sánchez
-								</p>
-							</div>
-						</div>
-					</div>
-					<!-- Right: feature cards -->
-					<div class="lg:col-span-7 flex flex-col justify-between gap-3.5">
-						{
-							sessionFeatures.map((feature) => (
-								<div class="p-5 rounded-2xl bg-surface hover:bg-surface-bright transition-all shadow-sm flex items-start gap-4">
-									<div class="w-11 h-11 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
-										<span class="material-symbols-outlined text-[24px]">
-											{feature.icon}
-										</span>
-									</div>
-									<div>
-										<h3 class="font-title-md text-title-md text-on-surface">
-											{feature.title}
-										</h3>
-										<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
-											{feature.text}
-										</p>
-									</div>
-								</div>
-							))
-						}
-					</div>
-				</div>
+			<p>
+				La terapia de pareja no busca culpables ni decide quién tiene razón. Os
+				ayuda a frenar los reproches, ver los patrones que se repiten sin que os
+				deis cuenta y aprender a expresar lo que de verdad necesitáis.
+			</p>
+		</SectionHeader>
+		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12">
+			<div class="flex flex-col gap-10 lg:col-span-5">
+				<Figure
+					src={quoteImage}
+					alt="Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua y luz natural."
+					ratio="landscape"
+				/>
+				<Quote author="María Sánchez">
+					«El amor no es solo sentirlo, sino saber cuidarlo y habitar un espacio
+					donde ambos os sintáis vistos, seguros y valorados.»
+				</Quote>
 			</div>
-		</section>
-
-		<!-- Section 3: ¿Para quién es la terapia de pareja? -->
-		<section class="w-full px-margin-mobile lg:px-margin py-20 bg-surface">
-			<div class="max-w-[1240px] mx-auto flex flex-col gap-12">
-				<div class="flex flex-col items-center text-center max-w-2xl mx-auto gap-3">
-					<div class={eyebrow}>Acompañamiento en cada etapa de la relación</div>
-					<h2 class={sectionHeading}>¿Para quién es la terapia de pareja?</h2>
-					<p class={sectionIntro}>
-						Acompaño a parejas en momentos muy distintos y adapto el proceso a
-						vuestra situación:
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					{
-						audiences.map((audience) => (
-							<div class="p-8 rounded-3xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 shadow-sm flex flex-col justify-between gap-6 group hover:-translate-y-1">
-								<div class="flex flex-col gap-4">
-									<div class="w-14 h-14 rounded-2xl bg-primary-container text-on-primary-container flex items-center justify-center shadow-sm">
-										<span
-											class="material-symbols-outlined text-[28px]"
-											style={filled}
-										>
-											{audience.icon}
-										</span>
-									</div>
-									<h3 class="font-headline-md text-headline-sm text-on-surface">
-										{audience.title}
-									</h3>
-									<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-										{audience.text}
-									</p>
-								</div>
-								<div class="pt-4 flex items-center gap-2 text-primary font-label-lg text-label-lg group-hover:translate-x-1 transition-transform">
-									<span>{audience.cta}</span>
-									<span
-										class="material-symbols-outlined text-[18px]"
-										aria-hidden="true"
-									>
-										arrow_forward
-									</span>
-								</div>
-							</div>
-						))
-					}
-				</div>
-				<!-- Bottom note pill -->
-				<div
-					class="mx-auto inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-surface-container text-on-surface-variant text-center shadow-sm"
-				>
-					<span class="material-symbols-outlined text-primary text-[20px]"
-						>spa</span
-					>
-					<span class="font-body-md text-body-md font-medium text-on-surface"
-						>No hace falta estar al borde de la ruptura para venir: pedir ayuda a
-						tiempo evita mucho desgaste.</span
-					>
-				</div>
+			<div class="lg:col-span-7">
+				<TopicList items={sessionFeatures} columns={1} />
 			</div>
-		</section>
+		</div>
+	</Section>
 
-		<!-- Section 4: ¿Qué problemas se trabajan? -->
-		<section
-			class="w-full px-margin-mobile lg:px-margin py-20 bg-surface-container-low"
+	<!-- ¿Para quién? -->
+	<Section>
+		<SectionHeader
+			title="¿Para quién es la terapia de pareja?"
+			label="Acompañamiento en cada etapa de la relación"
 		>
-			<div class="max-w-[1240px] mx-auto flex flex-col gap-12">
-				<div class="flex flex-col items-center text-center max-w-3xl mx-auto gap-3">
-					<div class={eyebrow}>Qué trabajo en consulta</div>
-					<h2 class={sectionHeading}>
-						¿Qué problemas se trabajan en terapia de pareja?
-					</h2>
-					<p class={sectionIntro}>
-						Estas son algunas de las dificultades más habituales en consulta:
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{
-						problems.map((problem) => (
-							<div class="p-7 rounded-3xl bg-surface hover:bg-surface-bright transition-all duration-300 shadow-sm flex flex-col gap-4 border-subtle">
-								<div class="w-12 h-12 rounded-xl bg-secondary-container text-primary flex items-center justify-center">
-									<span class="material-symbols-outlined text-[26px]">
-										{problem.icon}
-									</span>
-								</div>
-								<h3 class="font-title-md text-title-md text-on-surface">
-									{problem.title}
-								</h3>
-								<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-									{problem.text}
-								</p>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
+			<p>
+				Acompaño a parejas en momentos muy distintos y adapto el proceso a
+				vuestra situación:
+			</p>
+		</SectionHeader>
+		<TopicList
+			items={audiences.map((audience) => ({ ...audience, note: audience.cta }))}
+			columns={3}
+			class="mt-14"
+		/>
+		<Note class="mt-6">
+			No hace falta estar al borde de la ruptura para venir: pedir ayuda a tiempo
+			evita mucho desgaste.
+		</Note>
+	</Section>
 
-		<!-- Section 5: Preguntas frecuentes -->
-		<section class="w-full px-margin-mobile lg:px-margin py-20 bg-surface">
-			<div class="max-w-[840px] mx-auto flex flex-col gap-10">
-				<div class="flex flex-col items-center text-center gap-3">
-					<div class={eyebrow}>Preguntas frecuentes</div>
-					<h2 class={sectionHeading}>
-						Preguntas frecuentes sobre la terapia de pareja
-					</h2>
-					<p class={sectionIntro}>
-						Es normal tener dudas antes de empezar. Si la vuestra no está aquí,
-						escribidme.
-					</p>
-				</div>
-				<div class="flex flex-col gap-4" id="faq-accordion">
-					{
-						faqs.map((faq, index) => (
-							<div class="rounded-2xl bg-surface-container-low transition-all overflow-hidden shadow-sm">
-								<button
-									class="faq-toggle w-full px-6 py-5 flex items-center justify-between text-left gap-4"
-									type="button"
-									aria-expanded="false"
-									aria-controls={`faq-content-${index}`}
-								>
-									<span class="font-title-md text-title-md text-on-surface">
-										{faq.question}
-									</span>
-									<span
-										class="material-symbols-outlined text-primary text-[24px] transform transition-transform duration-300 faq-icon"
-										aria-hidden="true"
-									>
-										expand_more
-									</span>
-								</button>
-								<div
-									class="faq-content max-h-0 overflow-hidden transition-all duration-300 px-6"
-									id={`faq-content-${index}`}
-									hidden
-								>
-									<p class="font-body-md text-body-md text-on-surface-variant pb-6">
-										{faq.answer}
-									</p>
-								</div>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
+	<!-- ¿Qué problemas se trabajan? -->
+	<Section tone="white">
+		<SectionHeader
+			title="¿Qué problemas se trabajan en terapia de pareja?"
+			label="Qué trabajo en consulta"
+		>
+			<p>Estas son algunas de las dificultades más habituales en consulta:</p>
+		</SectionHeader>
+		<TopicList items={problems} layout="rows" class="mt-14" />
+	</Section>
 
-		<!-- Section 6: CTA banner -->
-		<section class="w-full px-margin-mobile lg:px-margin py-16">
-			<div
-				class="max-w-[1240px] mx-auto rounded-3xl bg-inverse-surface text-inverse-on-surface px-8 py-14 lg:p-16 relative overflow-hidden shadow-xl"
+	<!-- Preguntas frecuentes -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Preguntas frecuentes sobre la terapia de pareja"
+				label="Preguntas frecuentes"
+				layout="stack"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
 			>
-				<div
-					class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-primary/20 blur-3xl pointer-events-none"
-				>
-				</div>
-				<div class="relative z-10 max-w-3xl flex flex-col gap-6">
-					<div
-						class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/20 text-primary-fixed w-fit font-label-sm text-label-sm uppercase tracking-wider"
-					>
-						<span class="material-symbols-outlined text-[16px]">favorite</span>
-						Primera cita en pareja
-					</div>
-					<h2
-						class="font-headline-lg text-headline-lg text-surface-container-lowest"
-					>
-						Dar el paso juntos requiere valor, y no tenéis que hacerlo solos
-					</h2>
-					<p class="font-body-lg text-body-lg text-surface-dim">
-						Solicitad vuestra primera cita o escribidme si antes queréis resolver
-						alguna duda. Sesión de 60 minutos · 75 €.
-					</p>
-					<div class="flex flex-wrap items-center gap-4 pt-2">
-						<a
-							class="inline-flex items-center gap-2 font-label-lg text-label-lg px-8 py-3.5 rounded-full bg-primary-container text-on-primary-container hover:bg-primary-fixed transition-all duration-300 shadow-md"
-							href={contactHref}
-						>
-							<span class="material-symbols-outlined text-[20px]"
-								>calendar_month</span
-							>
-							{ctaLabel}
-						</a>
-						<a
-							class="inline-flex items-center gap-2 font-label-lg text-label-lg px-6 py-3.5 rounded-full bg-surface-container/10 text-surface-container-lowest hover:bg-surface-container/20 transition-colors"
-							href={`mailto:${email}`}
-						>
-							<span class="material-symbols-outlined text-[18px]">mail</span>
-							{email}
-						</a>
-					</div>
-					<p
-						class="font-body-sm text-body-sm text-surface-dim/80 flex items-center gap-2 pt-1"
-					>
-						{ctaNote}
-					</p>
-				</div>
-			</div>
-		</section>
-		<OtherServices />
-	</div>
+				<p>
+					Es normal tener dudas antes de empezar. Si la vuestra no está aquí,
+					escribidme.
+				</p>
+			</SectionHeader>
+			<Faq items={faqs} class="lg:col-span-7" />
+		</div>
+	</Section>
+
+	<CtaBand
+		label="Primera cita en pareja"
+		title="Dar el paso juntos requiere valor, y no tenéis que hacerlo solos"
+	>
+		<p class="tabular-nums">
+			Solicitad vuestra primera cita o escribidme si antes queréis resolver
+			alguna duda. Sesión de 60 minutos · 75 €.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" arrow>{ctaLabel}</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				{email}
+			</Button>
+		</Fragment>
+		<p slot="note">{ctaNote}</p>
+	</CtaBand>
+	<OtherServices />
 </Layout>
-
-<script>
-	const toggles = document.querySelectorAll<HTMLButtonElement>(
-		"#faq-accordion .faq-toggle",
-	);
-
-	const setOpen = (toggle: HTMLButtonElement, open: boolean) => {
-		const content = toggle.nextElementSibling as HTMLElement | null;
-		const icon = toggle.querySelector<HTMLElement>(".faq-icon");
-		toggle.setAttribute("aria-expanded", String(open));
-		if (content) {
-			if (open) {
-				content.hidden = false;
-				content.style.maxHeight = `${content.scrollHeight}px`;
-			} else {
-				content.style.maxHeight = "0px";
-			}
-		}
-		if (icon) icon.style.transform = open ? "rotate(180deg)" : "rotate(0deg)";
-	};
-
-	// Hide collapsed panels from assistive tech once the height animation ends.
-	for (const content of document.querySelectorAll<HTMLElement>(
-		"#faq-accordion .faq-content",
-	)) {
-		content.addEventListener("transitionend", () => {
-			if (content.style.maxHeight === "0px") content.hidden = true;
-		});
-	}
-
-	for (const toggle of toggles) {
-		toggle.addEventListener("click", () => {
-			const expanded = toggle.getAttribute("aria-expanded") === "true";
-			// Only one answer stays open at a time.
-			for (const other of toggles) {
-				if (other !== toggle) setOpen(other, false);
-			}
-			setOpen(toggle, !expanded);
-		});
-	}
-</script>

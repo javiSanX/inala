@@ -1,5 +1,18 @@
 ---
+import heroImage from "../../assets/images/terapia-familiar.png";
+import quoteImage from "../../assets/images/terapia-familiar2.png";
 import OtherServices from "../../components/OtherServices.astro";
+import PageHero from "../../components/PageHero.astro";
+import Button from "../../components/ui/Button.astro";
+import CtaBand from "../../components/ui/CtaBand.astro";
+import FactList from "../../components/ui/FactList.astro";
+import Faq from "../../components/ui/Faq.astro";
+import Figure from "../../components/ui/Figure.astro";
+import Note from "../../components/ui/Note.astro";
+import Quote from "../../components/ui/Quote.astro";
+import Section from "../../components/ui/Section.astro";
+import SectionHeader from "../../components/ui/SectionHeader.astro";
+import TopicList from "../../components/ui/TopicList.astro";
 import {
 	contactHref,
 	ctaLabel,
@@ -11,18 +24,9 @@ import Layout from "../../layouts/Layout.astro";
 
 const title =
 	"Terapia familiar en Pamplona y online | Inala Psicoterapia";
+
 const description =
 	"Terapia familiar en Pamplona y online: mejorar la comunicación, resolver conflictos de convivencia y acompañar cambios, duelos y crisis. Sesiones de 60 minutos con María Sánchez, psicóloga general sanitaria.";
-
-const filled = "font-variation-settings: 'FILL' 1;";
-
-const heroImage = "/terapia-familiar.png";
-const quoteImage = "/terapia-familiar2.png";
-
-const eyebrow =
-	"inline-block px-3.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-widest mb-3";
-const sectionHeading =
-	"font-headline-lg text-headline-md lg:text-headline-lg text-on-surface font-medium leading-tight mb-4";
 
 const trustPills = [
 	{ icon: "schedule", label: "Sesiones de 60 minutos" },
@@ -133,456 +137,153 @@ const faqs = [
 ---
 
 <Layout title={title} description={description}>
-	<div class="flex flex-col w-full">
-		<!-- Section 1: Hero & breadcrumbs -->
-		<section
-			class="relative w-full px-margin-mobile lg:px-margin pt-6 lg:pt-10 pb-16 lg:pb-24 overflow-hidden"
+	<PageHero
+		breadcrumbs={[
+			{ name: "Inicio", href: "/" },
+			{ name: "Servicios", href: "/servicios" },
+			{ name: "Terapia Familiar" },
+		]}
+		breadcrumbsLabel="Ruta de navegación"
+		label="Terapia familiar · Pamplona y online"
+		image={heroImage}
+		imageAlt="Una cálida sesión de psicoterapia familiar en un gabinete sereno y luminoso, con dos mujeres sentadas en sillones compartiendo una conversación honesta."
+	>
+		<Fragment slot="title">
+			Terapia familiar: mejorar la convivencia y <span>cuidar los vínculos</span>
+		</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Un acompañamiento respetuoso y sin tomar partido, donde cada miembro de la
+			familia tiene voz, se deshacen los nudos del conflicto y se recupera la
+			comunicación en casa.
+		</p>
+		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+			<Button href={contactHref} icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href="#enfoque" variant="secondary">
+				<span>Ver en qué consiste</span>
+			</Button>
+		</div>
+		<FactList
+			facts={trustPills.map((pill) => ({ title: pill.label, icon: pill.icon }))}
+			class="mt-4"
+		/>
+		<Fragment slot="caption">
+			<span>
+				<span class="block font-semibold text-ink">Todas las voces cuentan</span>
+				<span class="block">A vuestro ritmo y según vuestras necesidades</span>
+			</span>
+		</Fragment>
+	</PageHero>
+
+	<!-- ¿En qué consiste? -->
+	<Section tone="white" id="enfoque">
+		<SectionHeader
+			title="Poner palabras a lo que duele y volver a entenderos en casa"
+			label="¿En qué consiste la terapia familiar?"
 		>
-			<div
-				class="absolute -top-32 right-1/4 w-96 h-96 rounded-full bg-primary-container/20 blur-3xl pointer-events-none"
+			<p>
+				La familia es un sistema vivo donde lo que le ocurre a uno afecta a todos.
+				En consulta no busco culpables ni juzgo estilos educativos: guío la
+				conversación para que cada miembro pueda contar lo que vive, lo que
+				necesita y lo que teme, y para que las reacciones automáticas den paso a
+				la comprensión y la cooperación.
+			</p>
+		</SectionHeader>
+		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12">
+			<div class="flex flex-col gap-10 lg:col-span-5">
+				<Figure
+					src={quoteImage}
+					alt="Dos manos entrelazadas sobre una mesa de madera junto a una taza de té y una libreta, transmitiendo conexión familiar y contención afectiva."
+					ratio="landscape"
+				/>
+				<Quote author="María Sánchez">
+					«En una familia no se trata de quién tiene la razón, sino de cómo cuidar
+					el vínculo que os une para que todos puedan florecer.»
+				</Quote>
+			</div>
+			<div class="lg:col-span-7">
+				<h3 class="font-display text-subheading font-normal text-ink">
+					¿Qué ocurre durante una sesión familiar?
+				</h3>
+				<TopicList
+					items={sessionSteps}
+					columns={1}
+					level={4}
+					numbered
+					class="mt-6"
+				/>
+			</div>
+		</div>
+	</Section>
+
+	<!-- ¿Para quién? -->
+	<Section>
+		<SectionHeader
+			title="¿Para quién es la terapia familiar?"
+			label="Acompañamiento en cada etapa familiar"
+		>
+			<p>
+				Acompaño a familias en etapas y situaciones muy distintas, y adapto el
+				proceso a vuestra realidad:
+			</p>
+		</SectionHeader>
+		<TopicList items={audiences} columns={3} class="mt-14" />
+		<Note class="mt-6">
+			<span class="text-teal">No hace falta llegar al límite para venir:</span> pedir
+			ayuda a tiempo evita mucho desgaste y protege a los más jóvenes.
+		</Note>
+	</Section>
+
+	<!-- ¿Qué problemas se trabajan? -->
+	<Section tone="white">
+		<SectionHeader
+			title="¿Qué problemas se trabajan en terapia familiar?"
+			label="Qué trabajo en consulta"
+		>
+			<p>Estas son algunas de las dificultades más habituales en consulta:</p>
+		</SectionHeader>
+		<TopicList items={problems} layout="rows" class="mt-14" />
+	</Section>
+
+	<!-- Preguntas frecuentes -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Preguntas frecuentes sobre la terapia familiar"
+				label="Preguntas frecuentes"
+				layout="stack"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
 			>
-			</div>
-			<div
-				class="absolute top-1/2 -left-20 w-80 h-80 rounded-full bg-accent-glow/15 blur-3xl pointer-events-none"
-			>
-			</div>
-			<div class="max-w-[1240px] mx-auto w-full relative z-10">
-				<nav
-					aria-label="Ruta de navegación"
-					class="flex items-center gap-2 mb-6 text-body-sm font-body-sm text-slate-muted"
-				>
-					<a class="hover:text-primary transition-colors" href="/">Inicio</a>
-					<span class="text-outline-variant">/</span>
-					<a class="hover:text-primary transition-colors" href="/servicios"
-						>Servicios</a
-					>
-					<span class="text-outline-variant">/</span>
-					<span aria-current="page" class="text-primary font-medium"
-						>Terapia Familiar</span
-					>
-				</nav>
-				<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-					<!-- Narrative column (7 cols) -->
-					<div class="lg:col-span-7 flex flex-col items-start">
-						<div
-							class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary-container text-on-secondary-container mb-6 shadow-sm"
-						>
-							<span
-								class="material-symbols-outlined text-[16px] text-primary"
-								style={filled}>diversity_1</span
-							>
-							<span
-								class="font-label-sm text-label-sm uppercase tracking-wider text-primary"
-								>Terapia familiar · Pamplona y online</span
-							>
-						</div>
-						<h1
-							class="font-display-xl text-headline-lg lg:text-display-xl text-on-surface mb-6 font-medium leading-[1.12]"
-						>
-							Terapia familiar: mejorar la convivencia y <span
-								class="italic font-normal text-primary">cuidar los vínculos</span
-							>
-						</h1>
-						<p
-							class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-8 leading-relaxed"
-						>
-							Un acompañamiento respetuoso y sin tomar partido, donde cada miembro
-							de la familia tiene voz, se deshacen los nudos del conflicto y se
-							recupera la comunicación en casa.
-						</p>
-						<!-- CTAs -->
-						<div class="flex flex-wrap items-center gap-4 mb-10 w-full sm:w-auto">
-							<a
-								class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-[0_4px_20px_rgba(116,182,166,0.35)] hover:shadow-[0_8px_26px_rgba(116,182,166,0.5)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-								href={contactHref}
-							>
-								<span class="material-symbols-outlined text-[20px]" style={filled}
-									>calendar_today</span
-								>
-								<span>{ctaLabel}</span>
-							</a>
-							<a
-								class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-lg text-label-lg transition-all duration-300 group"
-								href="#enfoque"
-							>
-								<span>Ver en qué consiste</span>
-								<span
-									class="material-symbols-outlined text-[18px] group-hover:translate-y-0.5 transition-transform"
-									>arrow_downward</span
-								>
-							</a>
-						</div>
-						<!-- Trust pills -->
-						<div
-							class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full pt-4 border-t border-border-subtle"
-						>
-							{
-								trustPills.map((pill) => (
-									<div class="flex items-center gap-2.5 py-1">
-										<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-primary flex-shrink-0">
-											<span class="material-symbols-outlined text-[18px]">
-												{pill.icon}
-											</span>
-										</div>
-										<span class="font-label-sm text-label-sm text-slate-muted leading-tight">
-											{pill.label}
-										</span>
-									</div>
-								))
-							}
-						</div>
-					</div>
-					<!-- Visual column (5 cols) -->
-					<div class="lg:col-span-5 relative mt-4 lg:mt-0">
-						<div
-							class="relative rounded-3xl overflow-hidden shadow-[0_16px_40px_-10px_rgba(36,51,48,0.12)] bg-surface-container-low"
-						>
-							<img
-								class="w-full h-[460px] object-cover object-center"
-								alt="Una cálida sesión de psicoterapia familiar en un gabinete sereno y luminoso, con dos mujeres sentadas en sillones compartiendo una conversación honesta."
-								src={heroImage}
-							/>
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-on-background/40 via-transparent to-transparent"
-							>
-							</div>
-							<!-- Floating glass badge -->
-							<div
-								class="absolute bottom-5 inset-x-5 p-4 rounded-2xl bg-surface-translucent backdrop-blur-md shadow-lg flex items-center gap-3.5"
-							>
-								<div
-									class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center flex-shrink-0 shadow-sm"
-								>
-									<span
-										class="material-symbols-outlined text-[22px]"
-										style={filled}
-										aria-hidden="true">chevron_left</span
-									>
-								</div>
-								<div class="min-w-0">
-									<p class="font-title-md text-title-md text-on-surface truncate">
-										Todas las voces cuentan
-									</p>
-									<p class="font-body-sm text-body-sm text-slate-muted">
-										A vuestro ritmo y según vuestras necesidades
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Section 2: ¿En qué consiste la terapia familiar? -->
-		<section
-			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-24 bg-surface-container-lowest relative"
-			id="enfoque"
-		>
-			<div class="max-w-[1240px] mx-auto">
-				<div class="text-center max-w-3xl mx-auto mb-14">
-					<span
-						class="inline-block px-3.5 py-1 rounded-full bg-surface-container text-primary font-label-sm text-label-sm uppercase tracking-widest mb-3"
-					>
-						¿En qué consiste la terapia familiar?
-					</span>
-					<h2
-						class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface font-medium leading-tight mb-5"
-					>
-						Poner palabras a lo que duele y volver a entenderos en casa
-					</h2>
-					<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-						La familia es un sistema vivo donde lo que le ocurre a uno afecta a
-						todos. En consulta no busco culpables ni juzgo estilos
-						educativos: guío la conversación para que cada miembro pueda contar
-						lo que vive, lo que necesita y lo que teme, y para que las
-						reacciones automáticas den paso a la comprensión y la cooperación.
-					</p>
-				</div>
-				<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-					<!-- Left: editorial quote card -->
-					<div
-						class="lg:col-span-5 flex flex-col rounded-3xl overflow-hidden bg-linen-base shadow-sm"
-					>
-						<div class="relative h-64 sm:h-72 w-full overflow-hidden">
-							<img
-								class="w-full h-full object-cover object-center"
-								alt="Dos manos entrelazadas sobre una mesa de madera junto a una taza de té y una libreta, transmitiendo conexión familiar y contención afectiva."
-								src={quoteImage}
-								loading="lazy"
-							/>
-						</div>
-						<div
-							class="p-8 flex flex-col justify-between flex-grow bg-surface-container-low/60"
-						>
-							<span
-								class="material-symbols-outlined text-primary text-[36px] opacity-40 mb-2"
-								aria-hidden="true">format_quote</span
-							>
-							<blockquote
-								class="font-headline-md text-headline-sm lg:text-headline-md text-on-surface italic font-medium leading-snug mb-6"
-							>
-								«En una familia no se trata de quién tiene la razón, sino de cómo
-								cuidar el vínculo que os une para que todos puedan florecer.»
-							</blockquote>
-							<div class="flex items-center gap-3 pt-4 border-t border-border-subtle">
-								<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
-								<span class="font-label-lg text-label-lg text-slate-muted"
-									>María Sánchez</span
-								>
-							</div>
-						</div>
-					</div>
-					<!-- Right: 5-step session card -->
-					<div
-						class="lg:col-span-7 bg-surface p-8 lg:p-10 rounded-3xl shadow-sm flex flex-col justify-center"
-					>
-						<div class="flex items-center gap-3 mb-6">
-							<span class="material-symbols-outlined text-primary text-[28px]"
-								>clinical_notes</span
-							>
-							<h3 class="font-title-md text-headline-sm text-on-surface">
-								¿Qué ocurre durante una sesión familiar?
-							</h3>
-						</div>
-						<div class="flex flex-col gap-5">
-							{
-								sessionSteps.map((step, index) => (
-									<div class="flex items-start gap-4 p-4 rounded-2xl bg-surface-container-low/70 transition-all hover:bg-surface-container">
-										<div class="w-10 h-10 rounded-xl bg-secondary-container text-primary flex items-center justify-center font-headline-md text-label-lg flex-shrink-0 mt-0.5">
-											{String(index + 1).padStart(2, "0")}
-										</div>
-										<div class="flex flex-col">
-											<h4 class="font-title-md text-title-md text-on-surface font-semibold">
-												{step.title}
-											</h4>
-											<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
-												{step.text}
-											</p>
-										</div>
-									</div>
-								))
-							}
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Section 3: ¿Para quién es la terapia familiar? -->
-		<section
-			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-24 bg-surface relative"
-		>
-			<div class="max-w-[1240px] mx-auto">
-				<div class="text-center max-w-3xl mx-auto mb-14">
-					<span class={eyebrow}>Acompañamiento en cada etapa familiar</span>
-					<h2 class={sectionHeading}>¿Para quién es la terapia familiar?</h2>
-					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Acompaño a familias en etapas y situaciones muy distintas, y adapto el
-						proceso a vuestra realidad:
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
-					{
-						audiences.map((audience) => (
-							<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-[0_4px_24px_rgba(36,51,48,0.04)] flex flex-col">
-								<div>
-									<div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-primary mb-6 shadow-sm">
-										<span class="material-symbols-outlined text-[28px]">
-											{audience.icon}
-										</span>
-									</div>
-									<h3 class="font-headline-md text-headline-sm text-on-surface mb-3 font-semibold">
-										{audience.title}
-									</h3>
-									<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-										{audience.text}
-									</p>
-								</div>
-							</div>
-						))
-					}
-				</div>
-				<!-- Empathy pill -->
-				<div
-					class="max-w-2xl mx-auto p-4 sm:p-5 rounded-2xl bg-surface-container-high/60 backdrop-blur-sm text-center"
-				>
-					<p class="font-body-md text-body-md text-on-surface-variant">
-						<span class="font-medium text-on-surface"
-							>No hace falta llegar al límite para venir:</span
-						> pedir ayuda a tiempo evita mucho desgaste y protege a los más
-						jóvenes.
-					</p>
-				</div>
-			</div>
-		</section>
-
-		<!-- Section 4: ¿Qué problemas se trabajan? -->
-		<section
-			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-24 bg-surface-container-low relative"
-		>
-			<div class="max-w-[1240px] mx-auto">
-				<div class="text-center max-w-3xl mx-auto mb-14">
-					<span class={eyebrow}>Qué trabajo en consulta</span>
-					<h2 class={sectionHeading}>
-						¿Qué problemas se trabajan en terapia familiar?
-					</h2>
-					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Estas son algunas de las dificultades más habituales en consulta:
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{
-						problems.map((problem) => (
-							<div class="bg-surface-container-lowest p-7 rounded-3xl shadow-sm flex flex-col transition-all hover:shadow-md">
-								<div class="w-12 h-12 rounded-xl bg-surface-container text-primary flex items-center justify-center mb-5">
-									<span class="material-symbols-outlined text-[24px]">
-										{problem.icon}
-									</span>
-								</div>
-								<h3 class="font-title-md text-title-md text-on-surface font-semibold mb-2">
-									{problem.title}
-								</h3>
-								<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-									{problem.text}
-								</p>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
-
-		<!-- Section 5: Preguntas frecuentes -->
-		<section
-			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-24 bg-surface-container-lowest relative"
-		>
-			<div class="max-w-[880px] mx-auto">
-				<div class="text-center mb-12">
-					<span class={eyebrow}>Preguntas frecuentes</span>
-					<h2 class={sectionHeading}>
-						Preguntas frecuentes sobre la terapia familiar
-					</h2>
-					<p class="font-body-lg text-body-lg text-on-surface-variant">
-						Es normal tener dudas antes de empezar. Si la vuestra no está aquí,
-						escribidme.
-					</p>
-				</div>
-				<div class="flex flex-col gap-4" id="faq-accordion-group">
-					{
-						faqs.map((faq, index) => {
-							const open = index === 0;
-							return (
-								<div class="rounded-2xl bg-surface-container-low transition-colors duration-200 overflow-hidden">
-									<button
-										aria-expanded={open ? "true" : "false"}
-										aria-controls={`faq-content-${index}`}
-										class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
-										type="button"
-									>
-										<span class="font-title-md text-title-md text-on-surface font-medium">
-											{faq.question}
-										</span>
-										<span
-											class:list={[
-												"material-symbols-outlined text-primary text-[24px] transform transition-transform duration-200 faq-icon",
-												{ "rotate-45": open },
-											]}
-											aria-hidden="true"
-										>
-											add
-										</span>
-									</button>
-									<div
-										class:list={[
-											"faq-content px-6 pb-6 pt-0",
-											open ? "block" : "hidden",
-										]}
-										id={`faq-content-${index}`}
-									>
-										<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-											{faq.answer}
-										</p>
-									</div>
-								</div>
-							);
-						})
-					}
-				</div>
-			</div>
-		</section>
-
-		<!-- Section 6: Final CTA banner -->
-		<section
-			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-24 bg-inverse-surface text-inverse-on-surface relative overflow-hidden"
-		>
-			<div
-				class="absolute -bottom-20 -right-20 w-96 h-96 rounded-full bg-primary/20 blur-3xl pointer-events-none"
-			>
-			</div>
-			<div
-				class="max-w-[1000px] mx-auto text-center relative z-10 flex flex-col items-center"
-			>
-				<div
-					class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/20 text-accent-glow mb-6"
-				>
-					<span class="material-symbols-outlined text-[16px]">wb_sunny</span>
-					<span class="font-label-sm text-label-sm uppercase tracking-wider"
-						>Primera cita familiar</span
-					>
-				</div>
-				<h2
-					class="font-headline-lg text-headline-md lg:text-headline-lg text-white font-medium mb-6 max-w-2xl leading-tight"
-				>
-					Cuidar de vuestra familia es cuidar de cada uno de vosotros
-				</h2>
-				<p
-					class="font-body-lg text-body-lg text-surface-dim max-w-2xl mb-10 leading-relaxed"
-				>
-					Solicitad vuestra primera cita o escribidme si antes queréis resolver
-					alguna duda. Sesión de 60 minutos · 75 €.
+				<p>
+					Es normal tener dudas antes de empezar. Si la vuestra no está aquí,
+					escribidme.
 				</p>
-				<div class="flex flex-wrap items-center justify-center gap-4 mb-8">
-					<a
-						class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-[0_4px_24px_rgba(116,182,166,0.4)] hover:shadow-[0_8px_32px_rgba(116,182,166,0.6)] hover:-translate-y-0.5 transition-all duration-300"
-						href={contactHref}
-					>
-						<span class="material-symbols-outlined text-[20px]" style={filled}
-							>calendar_today</span
-						>
-						<span>{ctaLabel}</span>
-					</a>
-					<a
-						class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-transparent hover:bg-white/10 text-white font-label-lg text-label-lg transition-all duration-300"
-						href={`mailto:${email}`}
-					>
-						<span class="material-symbols-outlined text-[20px]">mail</span>
-						<span>{email}</span>
-					</a>
-				</div>
-				<div
-					class="flex items-center gap-2 text-surface-dim font-body-sm text-body-sm opacity-90"
-				>
-					<span>{ctaNote}</span>
-				</div>
-			</div>
-		</section>
-		<OtherServices />
-	</div>
-</Layout>
+			</SectionHeader>
+			<Faq
+				items={faqs.map((faq, index) => ({ ...faq, open: index === 0 }))}
+				class="lg:col-span-7"
+			/>
+		</div>
+	</Section>
 
-<script>
-	// Each FAQ toggles independently; several can be open at once.
-	for (const toggle of document.querySelectorAll<HTMLButtonElement>(
-		".faq-toggle",
-	)) {
-		toggle.addEventListener("click", () => {
-			const open = toggle.getAttribute("aria-expanded") !== "true";
-			toggle.setAttribute("aria-expanded", String(open));
-			const content = toggle.nextElementSibling;
-			content?.classList.toggle("hidden", !open);
-			content?.classList.toggle("block", open);
-			toggle.querySelector(".faq-icon")?.classList.toggle("rotate-45", open);
-		});
-	}
-</script>
+	<CtaBand
+		label="Primera cita familiar"
+		title="Cuidar de vuestra familia es cuidar de cada uno de vosotros"
+	>
+		<p class="tabular-nums">
+			Solicitad vuestra primera cita o escribidme si antes queréis resolver
+			alguna duda. Sesión de 60 minutos · 75 €.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" arrow>
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>{email}</span>
+			</Button>
+		</Fragment>
+		<span slot="note">{ctaNote}</span>
+	</CtaBand>
+	<OtherServices />
+</Layout>

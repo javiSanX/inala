@@ -1,5 +1,19 @@
 ---
+import therapistImage from "../../assets/images/maria5.webp";
+import officeImage from "../../assets/images/oficina.webp";
+import heroImage from "../../assets/images/terapia-online.jpg";
 import OtherServices from "../../components/OtherServices.astro";
+import PageHero from "../../components/PageHero.astro";
+import Button from "../../components/ui/Button.astro";
+import CtaBand from "../../components/ui/CtaBand.astro";
+import FactList from "../../components/ui/FactList.astro";
+import Faq from "../../components/ui/Faq.astro";
+import Figure from "../../components/ui/Figure.astro";
+import Icon from "../../components/ui/Icon.astro";
+import Quote from "../../components/ui/Quote.astro";
+import Section from "../../components/ui/Section.astro";
+import SectionHeader from "../../components/ui/SectionHeader.astro";
+import TopicList from "../../components/ui/TopicList.astro";
 import {
 	contactHref,
 	ctaLabel,
@@ -12,15 +26,9 @@ import {
 import Layout from "../../layouts/Layout.astro";
 
 const title = "Terapia online por videollamada | Inala Psicoterapia";
+
 const description =
 	"Terapia psicológica online por videollamada segura con María Sánchez, psicóloga general sanitaria. Terapia individual, de pareja, familiar y psicología parental, combinable con la consulta presencial en Pamplona.";
-
-const heroImage = "/terapia-online.jpg";
-const officeImage = "/oficina.webp";
-
-const eyebrow =
-	"font-label-sm text-label-sm text-primary uppercase tracking-widest font-semibold";
-const sectionHeading = "font-headline-lg text-headline-lg text-on-surface";
 
 const heroPills = [
 	{ icon: "timer", label: "Sesiones de 60 min" },
@@ -141,511 +149,235 @@ const faqs = [
 ---
 
 <Layout title={title} description={description}>
-	<div class="flex flex-col w-full">
-		<!-- Breadcrumb & top indicator -->
-		<section class="w-full px-margin-mobile lg:px-margin pt-6 pb-4">
-			<div
-				class="max-w-[1240px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4"
+	<PageHero
+		breadcrumbs={[
+			{ name: "Inicio", href: "/" },
+			{ name: "Servicios", href: "/servicios" },
+			{ name: "Terapia Online" },
+		]}
+		label="Terapia online · 60 minutos"
+	>
+		<Fragment slot="title">
+			Terapia online: la misma cercanía, <span>estés donde estés</span>
+		</Fragment>
+		<p class="font-display text-subheading text-ink-muted">Terapia por videollamada</p>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Sesiones por videollamada segura, con el mismo enfoque que en mi consulta
+			de Pamplona: terapia individual, de pareja, familiar o psicología parental.
+			Una buena opción si vives lejos, viajas a menudo o te cuesta encajar los
+			desplazamientos en tu semana.
+		</p>
+		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+			<Button href={contactHref} arrow>
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button
+				href={whatsappUrl}
+				variant="secondary"
+				icon="chat"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)"
 			>
-				<nav
-					aria-label="Migas de pan"
-					class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm"
-				>
-					<a
-						class="hover:text-primary transition-colors flex items-center gap-1"
-						href="/"
-					>
-						<span class="material-symbols-outlined text-[16px]">home</span>
-						Inicio
-					</a>
-					<span class="text-outline-variant">/</span>
-					<a class="hover:text-primary transition-colors" href="/servicios"
-						>Servicios</a
-					>
-					<span class="text-outline-variant">/</span>
-					<span class="text-primary font-semibold" aria-current="page"
-						>Terapia Online</span
-					>
-				</nav>
-				<div
-					class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-primary-container shadow-sm w-fit"
-				>
-					<span class="w-2 h-2 rounded-full bg-primary motion-safe:animate-pulse"
-					></span>
-					<span
-						class="font-label-sm text-label-sm uppercase tracking-wider font-semibold"
-						>Terapia online · 60 minutos</span
-					>
-				</div>
-			</div>
-		</section>
+				<span>Escribir por WhatsApp</span>
+			</Button>
+		</div>
+		<FactList
+			facts={heroPills.map((pill) => ({ title: pill.label, icon: pill.icon }))}
+		/>
+		<p class="flex items-center gap-2 text-small text-ink-muted">
+			<Icon name="verified" class="text-teal" />
+			<span>Confidencial y protegido por el secreto profesional.</span>
+		</p>
+		<div slot="media" class="flex flex-col gap-6">
+			<Figure
+				src={heroImage}
+				alt="Mujer joven sentada en un sillón de lino en una estancia luminosa con plantas, con una taza en la mano, durante una sesión de videoconsulta psicológica en su portátil."
+				ratio="portrait"
+				priority
+				sizes="(min-width: 1024px) 34vw, 100vw"
+			>
+				<Icon name="lock" class="text-teal" />
+				<span class="font-semibold text-ink">Confidencial</span>
+				<span aria-hidden="true">·</span>
+				<Icon name="videocam" class="text-teal" />
+				<span>
+					<span class="font-semibold text-ink">Videollamada segura</span>
+					<span>Sin instalaciones complicadas</span>
+				</span>
+			</Figure>
+			<Quote author="María Sánchez">
+				«La presencia terapéutica no depende de los metros de distancia, sino de
+				la calidad de la escucha y la resonancia emocional.»
+			</Quote>
+		</div>
+	</PageHero>
 
-		<!-- Hero -->
-		<section
-			class="w-full px-margin-mobile lg:px-margin py-8 lg:py-14 relative overflow-hidden"
+	<!-- Para quién -->
+	<Section tone="white">
+		<SectionHeader
+			title="¿Para quién y en qué momentos está pensada la terapia online?"
+			label="Para quién"
 		>
-			<div
-				class="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
-			>
-				<!-- Text column (7 cols) -->
-				<div class="lg:col-span-7 flex flex-col gap-5">
-					<div
-						class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container/60 text-secondary w-fit"
-					>
-						<span class="material-symbols-outlined text-[18px]"
-							>wifi_tethering</span
-						>
-						<span class="font-label-lg text-label-lg"
-							>Terapia por videollamada</span
-						>
-					</div>
-					<h1
-						class="font-headline-lg text-headline-lg lg:text-[44px] lg:leading-[54px] text-on-surface text-balance"
-					>
-						Terapia online: la misma cercanía, <span
-							class="text-primary italic">estés donde estés</span
-						>
-					</h1>
-					<p class="font-body-lg text-body-lg text-on-surface-variant text-balance">
-						Sesiones por videollamada segura, con el mismo enfoque que en mi
-						consulta de Pamplona: terapia individual, de pareja, familiar o
-						psicología parental. Una buena opción si vives lejos, viajas a menudo
-						o te cuesta encajar los desplazamientos en tu semana.
-					</p>
-					<!-- Pills grid -->
-					<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
-						{
-							heroPills.map((pill) => (
-								<div class="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-surface-container-low text-on-surface">
-									<span class="material-symbols-outlined text-primary text-[20px]">
-										{pill.icon}
-									</span>
-									<span class="font-body-sm text-body-sm font-medium">
-										{pill.label}
-									</span>
-								</div>
-							))
-						}
-					</div>
-					<!-- CTAs -->
-					<div
-						class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-4"
-					>
-						<a
-							class="inline-flex items-center justify-center gap-2 font-label-lg text-label-lg px-7 py-3.5 rounded-full bg-primary text-on-primary shadow-[0_8px_24px_rgba(36,105,91,0.25)] hover:shadow-[0_12px_28px_rgba(36,105,91,0.35)] hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300"
-							href={contactHref}
-						>
-							<span>{ctaLabel}</span>
-							<span class="material-symbols-outlined text-[18px]"
-								>calendar_today</span
-							>
-						</a>
-						<a
-							class="inline-flex items-center justify-center gap-2 font-label-lg text-label-lg px-6 py-3.5 rounded-full bg-surface-container text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container transition-all duration-300"
-							href={whatsappUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)"
-						>
-							<span class="material-symbols-outlined text-[18px] text-primary"
-								>chat</span
-							>
-							<span>Escribir por WhatsApp</span>
-						</a>
-					</div>
-					<!-- Trust note -->
-					<div
-						class="flex items-center gap-2 text-slate-muted font-body-sm text-body-sm pt-1"
-					>
-						<span class="material-symbols-outlined text-[17px] text-primary"
-							>shield</span
-						>
-						<span
-							>Confidencial y protegido por el secreto profesional.</span
-						>
-					</div>
-				</div>
-				<!-- Visual card column (5 cols) -->
-				<div class="lg:col-span-5 relative">
-					<div
-						class="relative rounded-2xl overflow-hidden shadow-[0_20px_45px_rgba(36,51,48,0.12)] bg-surface-container-lowest"
-					>
-						<img
-							class="w-full h-[430px] object-cover"
-							alt="Mujer joven sentada en un sillón de lino en una estancia luminosa con plantas, con una taza en la mano, durante una sesión de videoconsulta psicológica en su portátil."
-							src={heroImage}
-						/>
-						<div
-							class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent"
-						>
-						</div>
-						<div
-							class="absolute top-4 right-4 bg-surface-translucent backdrop-blur-md px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm"
-						>
-							<span class="material-symbols-outlined text-primary text-[17px]"
-								>lock</span
-							>
-							<span class="font-label-sm text-label-sm font-semibold text-primary"
-								>Confidencial</span
-							>
-						</div>
-						<div
-							class="absolute bottom-4 inset-x-4 p-4 rounded-xl bg-surface-translucent backdrop-blur-md shadow-lg"
-						>
-							<p class="font-headline-md text-body-sm italic text-inverse-surface">
-								«La presencia terapéutica no depende de los metros de distancia,
-								sino de la calidad de la escucha y la resonancia emocional.»
-							</p>
-							<span
-								class="block mt-1 font-label-sm text-label-sm text-primary font-semibold tracking-wide uppercase"
-								>María Sánchez</span
-							>
-						</div>
-					</div>
-					<!-- Decorative floating element -->
-					<div
-						class="absolute -bottom-5 -left-5 bg-sand-warm p-4 rounded-xl shadow-md hidden sm:flex items-center gap-3"
-					>
-						<div
-							class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold"
-						>
-							<span class="material-symbols-outlined text-[20px]">videocam</span>
-						</div>
-						<div>
-							<p class="font-title-md text-title-md text-on-surface leading-tight">
-								Videollamada segura
-							</p>
-							<p class="font-body-sm text-body-sm text-slate-muted">
-								Sin instalaciones complicadas
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+			<p>
+				Para que cuidar de tu salud mental no dependa de la distancia o de tus
+				horarios.
+			</p>
+		</SectionHeader>
+		<TopicList items={situations} layout="rows" class="mt-14" />
+	</Section>
 
-		<!-- Situations -->
-		<section class="w-full px-margin-mobile lg:px-margin py-14 bg-surface-container-low">
-			<div class="max-w-[1240px] mx-auto flex flex-col gap-10">
-				<div class="text-center max-w-2xl mx-auto flex flex-col gap-3">
-					<span class={eyebrow}>Para quién</span>
-					<h2 class={sectionHeading}>
-						¿Para quién y en qué momentos está pensada la terapia online?
-					</h2>
-					<p class="font-body-md text-body-md text-on-surface-variant">
-						Para que cuidar de tu salud mental no dependa de la distancia o de tus
-						horarios.
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{
-						situations.map((situation) => (
-							<div class="p-6 rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3.5">
-								<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary">
-									<span class="material-symbols-outlined text-[24px]">
-										{situation.icon}
-									</span>
-								</div>
-								<h3 class="font-title-md text-title-md text-on-surface">
-									{situation.title}
-								</h3>
-								<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-									{situation.text}
-								</p>
+	<!-- ¿Funciona igual? -->
+	<Section>
+		<SectionHeader title="¿Funciona igual la terapia online?" label="Dudas habituales">
+			<p>
+				Cada persona es distinta. Por eso, antes de empezar, valoramos juntos si
+				el formato online es el adecuado para ti.
+			</p>
+		</SectionHeader>
+		<TopicList
+			items={pillars.map((pillar) => ({ ...pillar, note: pillar.tag }))}
+			columns={3}
+			class="mt-14"
+		/>
+	</Section>
+
+	<!-- Paso a paso -->
+	<Section tone="white">
+		<SectionHeader title="¿Cómo funciona la terapia online?" label="Cómo empezar">
+			<p>Cuatro pasos sencillos desde que me escribes.</p>
+		</SectionHeader>
+		<TopicList
+			items={steps}
+			columns={2}
+			numbered
+			pad={false}
+			class="mt-14 lg:grid-cols-4"
+		/>
+	</Section>
+
+	<!-- Mitos y realidad -->
+	<Section>
+		<SectionHeader
+			title="Lo que se suele pensar de la terapia online"
+			label="Mitos y realidad"
+		/>
+		<ul class="mt-14 grid gap-x-10 lg:grid-cols-3">
+			{
+				myths.map((item) => (
+					<li class="flex flex-col gap-4 border-t border-line py-8">
+						<span class="text-label font-semibold text-ink-muted">Mito frecuente</span>
+						<p class="font-display text-subheading font-normal text-ink">{item.myth}</p>
+						<div class="mt-2 flex items-start gap-3">
+							<Icon name="check" class="mt-0.5 text-teal" />
+							<div class="flex flex-col gap-1">
+								<span class="text-label font-semibold text-teal">La realidad</span>
+								<p class="text-body text-ink-muted">{item.reality}</p>
 							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
-
-		<!-- Clinical pillars -->
-		<section class="w-full px-margin-mobile lg:px-margin py-16">
-			<div class="max-w-[1240px] mx-auto flex flex-col gap-12">
-				<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-					<div class="max-w-2xl flex flex-col gap-2">
-						<span class={eyebrow}>Dudas habituales</span>
-						<h2 class={sectionHeading}>
-							¿Funciona igual la terapia online?
-						</h2>
-					</div>
-					<p class="font-body-md text-body-md text-slate-muted max-w-sm">
-						Cada persona es distinta. Por eso, antes de empezar, valoramos juntos
-						si el formato online es el adecuado para ti.
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					{
-						pillars.map((pillar, index) => (
-							<div class="p-8 rounded-2xl bg-surface-container flex flex-col gap-4 relative overflow-hidden">
-								<span
-									class="font-headline-lg text-[64px] text-primary/20 font-bold leading-none select-none"
-									aria-hidden="true"
-								>
-									{String(index + 1).padStart(2, "0")}
-								</span>
-								<div class="flex flex-col gap-2">
-									<h3 class="font-title-md text-title-md text-on-surface">
-										{pillar.title}
-									</h3>
-									<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-										{pillar.text}
-									</p>
-								</div>
-								<div class="mt-auto pt-4 flex items-center gap-2 text-primary font-label-sm text-label-sm">
-									<span class="material-symbols-outlined text-[18px]">
-										{pillar.icon}
-									</span>
-									<span>{pillar.tag}</span>
-								</div>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
-
-		<!-- Step by step -->
-		<section class="w-full px-margin-mobile lg:px-margin py-16 bg-surface-container-low">
-			<div class="max-w-[1240px] mx-auto flex flex-col gap-12">
-				<div class="text-center max-w-xl mx-auto flex flex-col gap-3">
-					<span class={eyebrow}>Cómo empezar</span>
-					<h2 class={sectionHeading}>
-						¿Cómo funciona la terapia online?
-					</h2>
-					<p class="font-body-md text-body-md text-on-surface-variant">
-						Cuatro pasos sencillos desde que me escribes.
-					</p>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-					{
-						steps.map((step, index) => (
-							<div class="p-6 rounded-2xl bg-surface-container-lowest flex flex-col gap-4 relative">
-								<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">
-									{index + 1}
-								</div>
-								<h3 class="font-title-md text-title-md text-on-surface">
-									{step.title}
-								</h3>
-								<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-									{step.text}
-								</p>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
-
-		<!-- Myths vs reality -->
-		<section class="w-full px-margin-mobile lg:px-margin py-16">
-			<div class="max-w-[1240px] mx-auto flex flex-col gap-10">
-				<div class="max-w-xl flex flex-col gap-2">
-					<span class={eyebrow}>Mitos y realidad</span>
-					<h2 class={sectionHeading}>Lo que se suele pensar de la terapia online</h2>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-					{
-						myths.map((item) => (
-							<div class="p-6 rounded-2xl bg-surface-container flex flex-col gap-4">
-								<div class="flex items-center gap-2 text-error">
-									<span
-										class="material-symbols-outlined text-[20px]"
-										aria-hidden="true"
-									>
-										cancel
-									</span>
-									<span class="font-label-sm text-label-sm uppercase font-semibold">
-										Mito frecuente
-									</span>
-								</div>
-								<p class="font-title-md text-title-md text-on-surface">{item.myth}</p>
-								<div class="pt-2 flex items-start gap-2.5">
-									<span
-										class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5"
-										aria-hidden="true"
-									>
-										check_circle
-									</span>
-									<div>
-										<span class="font-label-sm text-label-sm text-primary font-semibold uppercase block mb-1">
-											La realidad
-										</span>
-										<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-											{item.reality}
-										</p>
-									</div>
-								</div>
-							</div>
-						))
-					}
-				</div>
-			</div>
-		</section>
-
-		<!-- Therapist & hybrid format -->
-		<section class="w-full px-margin-mobile lg:px-margin py-16 bg-surface-container-low">
-			<div
-				class="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
-			>
-				<!-- Therapist column (5 cols) -->
-				<div class="lg:col-span-5 flex flex-col gap-4">
-					<div
-						class="rounded-2xl overflow-hidden shadow-md bg-surface-container-lowest relative aspect-[3/4]"
-					>
-						<img
-							class="w-full h-full object-cover"
-							alt="María Sánchez, psicóloga de Inala, sentada en su consulta junto a una planta y una mesa auxiliar."
-							src="/maria1.webp"
-							width="864"
-							height="1184"
-							loading="lazy"
-						/>
-						<div
-							class="absolute bottom-4 inset-x-4 p-4 rounded-xl bg-surface-translucent backdrop-blur-md"
-						>
-							<h3 class="font-title-md text-title-md text-on-surface">
-								{therapistName}
-							</h3>
-							<p class="font-body-sm text-body-sm text-slate-muted">
-								Psicóloga general sanitaria · Nº col. {licenseNumber}
-							</p>
 						</div>
-					</div>
-				</div>
-				<!-- Text & physical office (7 cols) -->
-				<div class="lg:col-span-7 flex flex-col gap-6">
-					<div class="flex flex-col gap-2">
-						<span class={eyebrow}>Quién te atiende</span>
-						<h2 class={sectionHeading}>
-							Un rostro humano y cercano al otro lado de la pantalla
-						</h2>
-						<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-							«Mi objetivo es que la sesión online no se sienta como hablar con una
-							pantalla, sino como un rato para detenerte y mirarte con amabilidad.
-							Trabajo con rigor y respetando tu ritmo.»
+					</li>
+				))
+			}
+		</ul>
+	</Section>
+
+	<!-- Quién te atiende y formato mixto -->
+	<Section tone="white">
+		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:items-start">
+			<div class="flex flex-col gap-10 lg:order-2 lg:col-span-7">
+				<SectionHeader
+					title="Un rostro humano y cercano al otro lado de la pantalla"
+					label="Quién te atiende"
+					layout="stack"
+				>
+					<p>
+						«Mi objetivo es que la sesión online no se sienta como hablar con una
+						pantalla, sino como un rato para detenerte y mirarte con amabilidad.
+						Trabajo con rigor y respetando tu ritmo.»
+					</p>
+				</SectionHeader>
+				<div class="grid gap-6 border-t border-line pt-8 sm:grid-cols-2 sm:items-center">
+					<Figure
+						src={officeImage}
+						alt="Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua y luz natural."
+						ratio="landscape"
+						sizes="(min-width: 1024px) 24vw, (min-width: 640px) 45vw, 100vw"
+					/>
+					<div class="flex flex-col gap-3">
+						<p class="flex items-center gap-2 text-label font-semibold text-teal">
+							<Icon name="location_on" />
+							<span>Online y presencial</span>
+						</p>
+						<h3 class="font-display text-subheading font-normal text-ink">
+							Consulta presencial en Pamplona
+						</h3>
+						<p class="text-body text-ink-muted">
+							Si vienes a Pamplona, puedes combinar las sesiones online con
+							sesiones en mi consulta de la C/ María Lacunza 6, portal 4.
 						</p>
 					</div>
-					<!-- Hybrid option with physical office -->
-					<div
-						class="p-6 rounded-2xl bg-surface-container-lowest shadow-sm flex flex-col sm:flex-row gap-5 items-center"
-					>
-						<div class="w-full sm:w-44 h-32 rounded-xl overflow-hidden shrink-0">
-							<img
-								alt="Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua y luz natural."
-								class="w-full h-full object-cover"
-								src={officeImage}
-								loading="lazy"
-							/>
-						</div>
-						<div class="flex flex-col gap-2">
-							<div
-								class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container w-fit text-xs font-semibold"
-							>
-								<span class="material-symbols-outlined text-[14px]">pin_drop</span>
-								<span>Online y presencial</span>
-							</div>
-							<h3 class="font-title-md text-title-md text-on-surface">
-								Consulta presencial en Pamplona
-							</h3>
-							<p class="font-body-sm text-body-sm text-on-surface-variant">
-								Si vienes a Pamplona, puedes combinar las sesiones online con
-								sesiones en mi consulta de la C/ María Lacunza 6, portal 4.
-							</p>
-						</div>
-					</div>
 				</div>
 			</div>
-		</section>
+			<Figure
+				src={therapistImage}
+				alt="María Sánchez sonriendo, de pie, con chaqueta azul marino y blusa blanca."
+				ratio="portrait"
+				class="lg:order-1 lg:col-span-5"
+			>
+				<span>
+					<span class="block font-display text-subheading text-ink">
+						{therapistName}
+					</span>
+					<span class="block">
+						Psicóloga general sanitaria · Nº col. {licenseNumber}
+					</span>
+				</span>
+			</Figure>
+		</div>
+	</Section>
 
-		<!-- FAQ (native <details>, no JS) -->
-		<section class="w-full px-margin-mobile lg:px-margin py-16 bg-surface-container-low">
-			<div class="max-w-[900px] mx-auto flex flex-col gap-10">
-				<div class="text-center flex flex-col gap-2">
-					<span class={eyebrow}>Preguntas frecuentes</span>
-					<h2 class={sectionHeading}>Preguntas frecuentes sobre la terapia online</h2>
-				</div>
-				<div class="flex flex-col gap-4">
-					{
-						faqs.map((faq) => (
-							<details
-								class="group p-5 rounded-2xl bg-surface-container-lowest transition-all [&_summary::-webkit-details-marker]:hidden cursor-pointer"
-								open={faq.open}
-							>
-								<summary class="flex items-center justify-between font-title-md text-title-md text-on-surface font-medium">
-									<span>{faq.question}</span>
-									<span
-										class="material-symbols-outlined text-primary group-open:rotate-180 transition-transform"
-										aria-hidden="true"
-									>
-										expand_more
-									</span>
-								</summary>
-								<div class="mt-4 pt-3 text-on-surface-variant font-body-sm text-body-sm leading-relaxed">
-									{faq.answer}
-								</div>
-							</details>
-						))
-					}
-				</div>
-			</div>
-		</section>
+	<!-- Preguntas frecuentes -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Preguntas frecuentes sobre la terapia online"
+				label="Preguntas frecuentes"
+				layout="stack"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
+			/>
+			<Faq items={faqs} class="lg:col-span-7" />
+		</div>
+	</Section>
 
-		<!-- Final CTA banner -->
-		<section
-			class="w-full px-margin-mobile lg:px-margin py-16 lg:py-20 bg-inverse-surface text-on-primary"
-		>
-			<div class="max-w-[1000px] mx-auto text-center flex flex-col items-center gap-6">
-				<div
-					class="w-14 h-14 rounded-full bg-primary/30 flex items-center justify-center text-primary-fixed"
-				>
-					<span class="material-symbols-outlined text-[28px]">spa</span>
-				</div>
-				<h2
-					class="font-headline-lg text-headline-lg lg:text-[44px] leading-tight text-white max-w-2xl text-balance"
-				>
-					¿Sientes que es el momento de cuidarte, estés donde estés?
-				</h2>
-				<p
-					class="font-body-lg text-body-lg text-inverse-on-surface/85 max-w-xl text-balance"
-				>
-					Solicita tu primera cita o escríbeme si antes quieres resolver alguna
-					duda. Sesión online de 60 minutos: 65 € individual; 75 € en pareja o familia.
-				</p>
-				<div class="flex flex-col sm:flex-row items-center gap-4 pt-3">
-					<a
-						class="inline-flex items-center justify-center gap-2 font-label-lg text-label-lg px-8 py-4 rounded-full bg-primary-container text-on-primary-container shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
-						href={contactHref}
-					>
-						<span>{ctaLabel}</span>
-						<span class="material-symbols-outlined text-[18px]"
-							>calendar_today</span
-						>
-					</a>
-					<a
-						class="inline-flex items-center justify-center gap-2 font-label-lg text-label-lg px-6 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-						href={whatsappUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)"
-					>
-						<span class="material-symbols-outlined text-[18px]">chat</span>
-						<span>Escribir por WhatsApp</span>
-					</a>
-				</div>
-				<div
-					class="flex items-center gap-2 text-inverse-on-surface/70 font-body-sm text-body-sm pt-2"
-				>
-					<span class="material-symbols-outlined text-[16px]">mail</span>
-					<span
-						>{ctaNote} También puedes escribirme a <a
-							class="underline hover:text-white transition-colors"
-							href={`mailto:${email}`}>{email}</a
-						>.</span
-					>
-				</div>
-			</div>
-		</section>
-		<OtherServices />
-	</div>
+	<CtaBand title="¿Sientes que es el momento de cuidarte, estés donde estés?">
+		<p class="tabular-nums">
+			Solicita tu primera cita o escríbeme si antes quieres resolver alguna duda.
+			Sesión online de 60 minutos: 65 € individual; 75 € en pareja o familia.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" arrow>
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button
+				href={whatsappUrl}
+				variant="inverse-outline"
+				icon="chat"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)"
+			>
+				<span>Escribir por WhatsApp</span>
+			</Button>
+		</Fragment>
+		<p slot="note" class="flex items-start gap-2">
+			<Icon name="mail" class="mt-0.5 text-seafoam" />
+			<span
+				>{ctaNote} También puedes escribirme a <a
+					class="text-seafoam underline underline-offset-4 transition-[color] duration-200 hover:text-white"
+					href={`mailto:${email}`}>{email}</a
+				>.</span
+			>
+		</p>
+	</CtaBand>
+	<OtherServices />
 </Layout>

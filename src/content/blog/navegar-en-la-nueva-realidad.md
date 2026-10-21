@@ -15,7 +15,7 @@ Uno avanza por el mar de la existencia creyendo que aún queda mucho recorrido. 
 
 El barco (nuestra mente y cuerpo) sufre. El timón se detiene. Las palabras, exactas y a veces frías, asustan: ¿funciona todavía el motor secreto que impulsa nuestra vida?
 
-#### El impacto inicial: shock y **manejo del dolor emocional**
+### El impacto inicial: shock y **manejo del dolor emocional**
 
 La marea interna se levanta igual que la externa. El **shock ante un diagnóstico** es una sacudida profunda. Cada persona encuentra su propio modo de capear esta primera reacción:
 
@@ -30,7 +30,7 @@ Y de nuevo aparece el miedo, ese viejo lobo de mar que se acerca sin avisar. Nos
 
 Para no hundirte, a veces necesitas **desconectar del dolor emocional**. Alejas la mirada del abismo y pones foco en la tarea de cómo seguir a flote, en que un poco de esperanza puede sostener un día más.
 
-#### Las fases del duelo ante un diagnóstico
+### Las fases del duelo ante un diagnóstico
 
 Tu mente, casi sin darte cuenta, va procesando la tormenta a través de las conocidas **fases del duelo** que acompañan a cualquier pérdida o cambio vital importante:
 
@@ -39,7 +39,7 @@ Tu mente, casi sin darte cuenta, va procesando la tormenta a través de las cono
 3. **Negociación:** Empiezas a ofrecer pactos a la vida: promesas, renuncias, cambios profundos. Deseas **recuperar el control** que parece escurrirse entre los dedos. _Si cambio el rumbo, ¿quizá se arregle?_
 4. **Depresión/Tristeza:** El casco cruje y no puedes detenerlo. El dolor cala hasta los huesos. Ya no luchas contra el oleaje, simplemente lo sientes. Es la noche más larga en la cubierta.
 
-#### La **aceptación** como puerto seguro
+### La **aceptación** como puerto seguro
 
 Y un día, sin que el mar esté en calma del todo, ocurre algo distinto. No es que el barco mejore, ni que el pronóstico cambie. Lo que cambia... **eres tú**.
 
@@ -51,6 +51,6 @@ Y aunque duele reconocerlo, también nace un respeto profundo: el barco ha lleva
 
 Con la **aceptación de la enfermedad** o el **trastorno**, también puedes seguir navegando. Porque este es tu barco, esta es tu travesía, y seguirás avanzando mientras haya mar.
 
-#### **¿Necesitas ayuda para procesar un diagnóstico?**
+### **¿Necesitas ayuda para procesar un diagnóstico?**
 
 En terapia puedo acompañarte en el camino hacia la **aceptación** y ayudarte a **gestionar la ansiedad y la tristeza** que acompañan a los **diagnósticos difíciles**.

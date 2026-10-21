@@ -1,4 +1,16 @@
 ---
+import processImage from "../assets/images/maria3.webp";
+import therapistImage from "../assets/images/maria4.webp";
+import heroImage from "../assets/images/metodo1.png";
+import officeImage from "../assets/images/oficina.webp";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/ui/Button.astro";
+import CtaBand from "../components/ui/CtaBand.astro";
+import Figure from "../components/ui/Figure.astro";
+import Icon from "../components/ui/Icon.astro";
+import Section from "../components/ui/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import TopicList from "../components/ui/TopicList.astro";
 import {
 	address,
 	addressCenter,
@@ -12,36 +24,9 @@ import {
 import Layout from "../layouts/Layout.astro";
 
 const title = "Cómo trabajo: terapia integradora en Pamplona y online | Inala";
+
 const description =
 	"Cómo trabajo en terapia: un enfoque cercano, integrador y basado en la evidencia. Qué esperar de la primera sesión, cómo avanza el proceso y las modalidades presencial en Pamplona y online.";
-
-const filled = "font-variation-settings: 'FILL' 1;";
-
-// Shared style recipes, derived from DESIGN.md (Cards & Glass Panels, Buttons, Elevation).
-const section = "w-full px-margin-mobile lg:px-margin py-16 lg:py-24";
-const container = "max-w-content mx-auto";
-const sectionIntro =
-	"flex flex-col items-center text-center max-w-2xl mx-auto gap-space-sm";
-const eyebrow =
-	"inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container text-primary";
-const eyebrowText = "font-label-sm text-label-sm uppercase";
-const heading =
-	"font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface text-balance";
-const cardTitle =
-	"font-headline-sm text-headline-sm text-on-surface text-balance";
-const bodyText = "font-body-md text-body-md text-on-surface-variant";
-const card =
-	"rounded-3xl bg-surface-container-lowest border border-border-subtle shadow-ethereal";
-const cardLift =
-	"transition-[translate,box-shadow] duration-300 ease-exhale hover:shadow-lift motion-safe:hover:-translate-y-1";
-const glass =
-	"bg-surface-translucent backdrop-blur-lg border border-border-glass shadow-ethereal";
-const photo =
-	"w-full object-cover transition-transform duration-700 ease-exhale motion-safe:group-hover:scale-105";
-const btnBase =
-	"inline-flex items-center justify-center gap-2 rounded-full font-label-lg text-label-lg transition-[translate,box-shadow,background-color,color] duration-300 ease-exhale";
-const btnPrimary = `${btnBase} bg-primary-container text-on-primary-container shadow-cta hover:bg-primary-container-hover hover:text-on-primary-fixed hover:shadow-cta-hover motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0`;
-const btnSecondary = `${btnBase} bg-linen-base/70 border border-border-soft text-on-surface hover:bg-tint-hover`;
 
 const heroStats = [
 	{ value: "Pamplona", label: "y online" },
@@ -57,24 +42,18 @@ const heroBadges = [
 const pillars = [
 	{
 		icon: "psychology",
-		iconClass:
-			"bg-primary-container/20 group-hover:bg-primary-container group-hover:text-on-primary-container",
 		title: "Enfoque integrador y basado en la evidencia",
 		text: "Combino distintos enfoques con respaldo científico y elijo en cada caso los que mejor encajan con tu historia y con lo que necesitas.",
 		tag: "Adaptado a ti",
 	},
 	{
 		icon: "favorite",
-		iconClass:
-			"bg-secondary-container/40 group-hover:bg-secondary-container group-hover:text-on-secondary-container",
 		title: "Una relación de confianza",
 		text: "La relación entre tú y yo es lo que hace posible el cambio. Aquí puedes hablar con libertad, sin juicios y con total confidencialidad.",
 		tag: "Sin juicios",
 	},
 	{
 		icon: "self_improvement",
-		iconClass:
-			"bg-tertiary-fixed/40 group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-container",
 		title: "Herramientas prácticas",
 		text: "Desde las primeras sesiones te llevas recursos concretos para entender y manejar tus emociones en tu día a día.",
 		tag: "Para el día a día",
@@ -111,29 +90,21 @@ const steps = [
 const benefits = [
 	{
 		icon: "favorite",
-		iconClass:
-			"bg-primary-container/20 group-hover:bg-primary-container group-hover:text-on-primary-container",
 		title: "Bienestar emocional",
 		text: "Aprender a comprender, aceptar y gestionar tus emociones, para afrontar los retos del día a día con más serenidad y menos autoexigencia.",
 	},
 	{
 		icon: "psychology",
-		iconClass:
-			"bg-secondary-container/40 group-hover:bg-secondary-container group-hover:text-on-secondary-container",
 		title: "Autoconocimiento",
 		text: "Entender mejor tus emociones, pensamientos, necesidades y fortalezas, para tomar decisiones más coherentes contigo y cuidar tus relaciones.",
 	},
 	{
 		icon: "handyman",
-		iconClass:
-			"bg-tertiary-fixed/40 group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-container",
 		title: "Herramientas",
 		text: "Estrategias y recursos prácticos para afrontar dificultades y resolver conflictos en tu día a día.",
 	},
 	{
 		icon: "eco",
-		iconClass:
-			"bg-primary-fixed/40 group-hover:bg-primary-fixed group-hover:text-on-primary-fixed",
 		title: "Autonomía",
 		text: "Consolidar lo aprendido para que puedas seguir cuidándote por tu cuenta cuando termine la terapia.",
 	},
@@ -142,17 +113,14 @@ const benefits = [
 const therapistHighlights = [
 	{
 		icon: "favorite",
-		iconClass: "bg-primary-container/20",
 		label: "Acompañamiento respetuoso y sin juicios",
 	},
 	{
 		icon: "science",
-		iconClass: "bg-secondary-container/40",
 		label: "Enfoque integrador basado en la evidencia",
 	},
 	{
 		icon: "pace",
-		iconClass: "bg-tertiary-fixed/40",
 		label: "Atención personalizada, a tu ritmo",
 	},
 ];
@@ -160,7 +128,7 @@ const therapistHighlights = [
 const modalities = [
 	{
 		badge: "Presencial · Pamplona",
-		image: "/oficina.webp",
+		image: officeImage,
 		imageAlt:
 			"Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua, armarios a juego y luz natural.",
 		title: "En mi consulta de Pamplona",
@@ -176,7 +144,6 @@ const modalities = [
 			},
 		],
 		cta: ctaLabel,
-		ctaClass: btnSecondary,
 	},
 	{
 		badge: "Online",
@@ -196,629 +163,278 @@ const modalities = [
 			},
 		],
 		cta: ctaLabel,
-		ctaClass: btnPrimary,
 	},
 ];
 ---
 
 <Layout title={title} description={description}>
-	<!-- Hero -->
-	<section
-		class="relative w-full px-margin-mobile lg:px-margin pt-10 pb-16 lg:pb-24 overflow-hidden"
-	>
-		<div
-			class="absolute -top-24 -left-20 w-96 h-96 rounded-full bg-accent-glow/20 blur-3xl pointer-events-none"
-			aria-hidden="true"
-		>
+	<PageHero label="Enfoque integrador y basado en la evidencia">
+		<Fragment slot="title">
+			Cómo trabajo: cercanía y{" "}
+			<span>a tu propio ritmo</span>
+		</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Combino una relación de confianza con enfoques respaldados por la
+			investigación. El objetivo: que entiendas lo que te pasa y tengas
+			herramientas para sentirte mejor, sin prisas.
+		</p>
+		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+			<Button href={contactHref} icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href="#proceso" variant="secondary" arrow>
+				<span>Ver cómo es el proceso</span>
+			</Button>
 		</div>
-		<div
-			class="absolute top-1/2 -right-32 w-80 h-80 rounded-full bg-primary-fixed/25 blur-3xl pointer-events-none"
-			aria-hidden="true"
-		>
-		</div>
-
-		<div
-			class:list={[
-				container,
-				"relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-4 lg:pt-8",
-			]}
-		>
-			<div class="lg:col-span-7 flex flex-col items-start gap-6">
-				<div class:list={[eyebrow, "border border-border-subtle"]}>
-					<span
-						class="material-symbols-outlined text-[16px]"
-						style={filled}
-						aria-hidden="true">spa</span
-					>
-					<span class={eyebrowText}
-						>Enfoque integrador y basado en la evidencia</span
-					>
-				</div>
-
-				<h1
-					class="font-display-xl text-display-xl-mobile md:text-display-xl text-on-surface text-balance"
-				>
-					Cómo trabajo: cercanía y{" "}
-					<span class="italic text-primary font-normal">a tu propio ritmo</span>
-				</h1>
-
-				<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-					Combino una relación de confianza con enfoques respaldados por la
-					investigación. El objetivo: que entiendas lo que te pasa y tengas
-					herramientas para sentirte mejor, sin prisas.
-				</p>
-
-				<div class="flex flex-col sm:flex-row items-center gap-4 pt-2 w-full sm:w-auto">
-					<a href={contactHref} class:list={[btnPrimary, "w-full sm:w-auto px-7 py-3.5"]}>
-						<span class="material-symbols-outlined text-[20px]" aria-hidden="true"
-							>calendar_today</span
-						>
-						<span>{ctaLabel}</span>
-					</a>
-					<a href="#proceso" class:list={[btnSecondary, "w-full sm:w-auto px-6 py-3.5"]}>
-						<span>Ver cómo es el proceso</span>
-						<span class="material-symbols-outlined text-[18px]" aria-hidden="true"
-							>arrow_forward</span
-						>
-					</a>
-				</div>
-
-				<figure class:list={[card, "mt-4 w-full p-6 flex flex-col gap-4"]}>
-					<figcaption class="flex items-center gap-2">
-						<span class="w-6 h-0.5 bg-primary" aria-hidden="true"></span>
-						<span class:list={[eyebrowText, "text-primary"]}
-							>Mi compromiso</span
-						>
-					</figcaption>
-					<blockquote
-						class="font-headline-md text-headline-sm italic font-normal text-on-surface"
-					>
-						«No creo en fórmulas estándar: adapto la terapia a ti, nunca a la
-						inversa.»
-					</blockquote>
-					<dl
-						class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-border-subtle"
-					>
-						{
-							heroStats.map((stat) => (
-								<div
-									class:list={[
-										"flex flex-col-reverse",
-										stat.wide && "col-span-2 sm:col-span-1",
-									]}
-								>
-									<dt class="font-body-sm text-body-sm text-slate-muted">
-										{stat.label}
-									</dt>
-									<dd class="font-headline-md text-headline-sm font-medium text-primary">
-										{stat.value}
-									</dd>
-								</div>
-							))
-						}
-					</dl>
-				</figure>
-			</div>
-
-			<div class="lg:col-span-5 relative">
-				<div
-					class="relative rounded-3xl overflow-hidden shadow-lift bg-surface-container-low group border border-border-subtle"
-				>
-					<img
-						src="/metodo1.png"
-						width="1200"
-						height="896"
-						alt="Ilustración de una mujer meditando, con el cerebro iluminado y rodeada de plantas y flores"
-						class:list={[photo, "h-[440px] sm:h-[520px]"]}
-						fetchpriority="high"
-					/>
-					<div
-						class="absolute inset-0 bg-linear-to-t from-inverse-surface/70 via-transparent to-transparent"
-						aria-hidden="true"
-					>
-					</div>
-
-					<ul class="absolute top-5 right-5 flex flex-col gap-2.5 items-end">
-						{
-							heroBadges.map((badge) => (
-								<li
-									class:list={[
-										glass,
-										"inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-label-sm text-label-sm text-on-primary-container",
-									]}
-								>
-									<span
-										class="material-symbols-outlined text-[15px] text-primary"
-										style={filled}
-										aria-hidden="true"
-									>
-										{badge.icon}
-									</span>
-									{badge.label}
-								</li>
-							))
-						}
-					</ul>
-
-					<div
-						class:list={[
-							glass,
-							"absolute bottom-6 inset-x-6 p-5 rounded-2xl text-on-surface",
-						]}
-					>
-						<div class="flex items-center gap-2 mb-1">
-							<span
-								class="material-symbols-outlined text-[18px] text-primary"
-								style={filled}
-								aria-hidden="true">favorite</span
-							>
-							<p class="font-title-md text-title-md text-primary">
-								El vínculo como motor de cambio
-							</p>
-						</div>
-						<p class="font-body-sm text-body-sm text-on-surface-variant">
-							La confianza entre tú y yo es la base para construir recursos
-							que te sirvan a largo plazo.
-						</p>
-					</div>
-				</div>
-				<div
-					class="absolute -bottom-4 -left-4 -z-10 w-full h-full rounded-3xl bg-secondary-container/40"
-					aria-hidden="true"
-				>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Pilares del método -->
-	<section class:list={[section, "bg-surface-container-low"]}>
-		<div class:list={[container, "flex flex-col gap-12"]}>
-			<div class={sectionIntro}>
-				<div class={eyebrow}>
-					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
-						>spa</span
-					>
-					<span class={eyebrowText}>En qué me baso</span>
-				</div>
-				<h2 class={heading}>Tres principios de mi forma de trabajar</h2>
-			</div>
-			<ul class="grid grid-cols-1 md:grid-cols-3 gap-gutter lg:gap-space-lg">
+		<figure class="mt-4 flex flex-col gap-5 border-t border-line pt-6">
+			<figcaption class="text-label font-semibold text-teal">
+				<span>Mi compromiso</span>
+			</figcaption>
+			<blockquote class="font-display text-subheading font-normal text-ink">
+				«No creo en fórmulas estándar: adapto la terapia a ti, nunca a la inversa.»
+			</blockquote>
+			<dl class="flex flex-wrap gap-x-10 gap-y-4">
 				{
-					pillars.map((pillar) => (
-						<li class:list={[card, cardLift, "p-8 flex flex-col justify-between group"]}>
-							<div class="flex flex-col gap-4">
-								<div
-									class:list={[
-										"w-12 h-12 rounded-2xl flex items-center justify-center text-primary transition-colors duration-300",
-										pillar.iconClass,
-									]}
-								>
-									<span class="material-symbols-outlined text-[26px]" aria-hidden="true">
-										{pillar.icon}
-									</span>
-								</div>
-								<h3 class={cardTitle}>{pillar.title}</h3>
-								<p class={bodyText}>{pillar.text}</p>
-							</div>
-							<div class="pt-6 mt-6 border-t border-border-subtle">
-								<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-primary-container font-label-sm text-label-sm">
-									<span class="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" />
-									{pillar.tag}
-								</span>
-							</div>
+					heroStats.map((stat) => (
+						<div class="flex flex-col-reverse">
+							<dt class="text-label text-ink-muted">{stat.label}</dt>
+							<dd class="text-small font-semibold text-ink tabular-nums">
+								{stat.value}
+							</dd>
+						</div>
+					))
+				}
+			</dl>
+		</figure>
+		<div slot="media" class="flex flex-col gap-6">
+			<Figure
+				src={heroImage}
+				alt="Ilustración de una mujer meditando, con el cerebro iluminado y rodeada de plantas y flores"
+				ratio="landscape"
+				priority
+				sizes="(min-width: 1024px) 34vw, 100vw"
+			/>
+			<ul class="flex flex-wrap gap-2">
+				{
+					heroBadges.map((badge) => (
+						<li class="inline-flex min-h-9 items-center gap-2 rounded-full border border-line-strong px-4 text-label font-semibold text-ink">
+							<Icon name="check" class="text-teal" />
+							{badge.label}
 						</li>
 					))
 				}
 			</ul>
-		</div>
-	</section>
-
-	<!-- Cómo trabajamos -->
-	<section id="proceso" class:list={[section, "scroll-mt-20"]}>
-		<div class:list={[container, "flex flex-col gap-12"]}>
-			<div class={sectionIntro}>
-				<div class={eyebrow}>
-					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
-						>psychology</span
-					>
-					<span class={eyebrowText}>Paso a paso</span>
-				</div>
-				<h2 class={heading}>Cómo es el proceso</h2>
+			<div class="flex flex-col gap-2 border-t border-line pt-5">
+				<p class="text-small font-semibold text-ink">El vínculo como motor de cambio</p>
+				<p class="text-body text-ink-muted">
+					La confianza entre tú y yo es la base para construir recursos que te
+					sirvan a largo plazo.
+				</p>
 			</div>
+		</div>
+	</PageHero>
 
-			<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-				<div class="lg:col-span-5 lg:sticky lg:top-28 relative">
-					<div
-						class="relative rounded-3xl overflow-hidden shadow-lift bg-surface-container-low group border border-border-subtle"
-					>
-						<img
-							alt="María Sánchez, psicóloga de INALA, en su consulta."
-							class:list={[photo, "aspect-4/5 object-top"]}
-							src="/maria1.webp"
-							width="864"
-							height="1184"
-							loading="lazy"
-							decoding="async"
-						/>
-						<div
-							class="absolute inset-0 bg-linear-to-t from-inverse-surface/80 via-transparent to-transparent"
-							aria-hidden="true"
-						>
-						</div>
-						<div class="absolute top-5 left-5">
-							<span
-								class:list={[
-									glass,
-									"inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-label-sm text-label-sm text-on-primary-container",
-								]}
-							>
-								<span
-									class="material-symbols-outlined text-[15px] text-primary"
-									style={filled}
-									aria-hidden="true">verified</span
-								>
-								Acompañamiento cercano y personalizado
-							</span>
-						</div>
-						<div
-							class:list={[
-								glass,
-								"absolute bottom-6 inset-x-6 p-5 rounded-2xl text-on-surface",
-							]}
-						>
-							<div class="flex flex-wrap items-baseline justify-between gap-x-3 mb-1">
-								<span class="font-title-md text-title-md text-primary">María Sánchez</span>
-								<span class="font-label-sm text-label-sm text-slate-muted uppercase"
-									>Psicóloga general sanitaria</span
-								>
-							</div>
-							<p class="font-body-sm text-body-sm text-on-surface-variant italic">
-								«Te acompaño con rigor y calidez para que encuentres un lugar
-								donde ser tú mismo/a»
-							</p>
-						</div>
-					</div>
-					<div
-						class="absolute -bottom-4 -left-4 -z-10 w-full h-full rounded-3xl bg-secondary-container/40"
-						aria-hidden="true"
-					>
-					</div>
+	<!-- Pilares del método -->
+	<Section tone="white">
+		<SectionHeader title="Tres principios de mi forma de trabajar" label="En qué me baso" />
+		<TopicList
+			items={pillars.map((pillar) => ({ ...pillar, note: pillar.tag }))}
+			columns={3}
+			class="mt-14"
+		/>
+	</Section>
+
+	<!-- Cómo es el proceso -->
+	<Section id="proceso">
+		<SectionHeader title="Cómo es el proceso" label="Paso a paso" />
+		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:items-start">
+			<div class="flex flex-col gap-6 lg:col-span-5">
+				<Figure
+					src={processImage}
+					alt="María Sánchez sonriendo, de pie ante una pared blanca, con chaleco negro y blusa blanca."
+					ratio="portrait"
+				>
+					<Icon name="verified" class="text-teal" />
+					<span>Acompañamiento cercano y personalizado</span>
+				</Figure>
+				<div class="flex flex-col gap-3 border-t border-line pt-5">
+					<p class="flex flex-col">
+						<span class="font-display text-subheading text-ink">María Sánchez</span>
+						<span class="text-label text-ink-muted">Psicóloga general sanitaria</span>
+					</p>
+					<p class="font-display text-lead text-teal">
+						«Te acompaño con rigor y calidez para que encuentres un lugar donde ser
+						tú mismo/a»
+					</p>
 				</div>
+			</div>
+			<ol class="lg:col-span-7">
+				{
+					steps.map((step) => (
+						<li class="flex gap-6 border-t border-line py-8 first:border-t-0 first:pt-0">
+							<span class="w-10 shrink-0 font-display text-heading leading-none text-teal tabular-nums">
+								{step.number}
+							</span>
+							<div class="flex flex-col gap-2.5">
+								<h3 class="text-lead font-semibold text-ink">{step.title}</h3>
+								<p class="text-body text-ink-muted">{step.text}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</Section>
 
-				<ol class="lg:col-span-7 flex flex-col gap-space-lg">
+	<!-- Beneficios -->
+	<Section tone="white">
+		<SectionHeader
+			title="Lo que la terapia puede ayudarte a trabajar"
+			label="Qué puedes trabajar"
+		>
+			<p>
+				Estos son algunos de los cambios que se trabajan en terapia. Cada proceso
+				es distinto y avanza a su ritmo.
+			</p>
+		</SectionHeader>
+		<TopicList items={benefits} columns={2} class="mt-14 lg:grid-cols-4" />
+	</Section>
+
+	<!-- Conoce a tu terapeuta -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:items-center">
+			<div class="flex flex-col gap-6 lg:order-2 lg:col-span-7">
+				<SectionHeader
+					title="Cercanía, rigor y una mirada humana"
+					label="Quién te acompaña"
+					layout="stack"
+				>
+					<p>
+						Me llamo María y soy quien te atenderá en Inala. Mi propósito es
+						acompañarte con empatía, rigor y presencia en cada paso de tu proceso.
+					</p>
+					<p class="mt-4">
+						Antes de la psicología trabajé en la empresa, y eso me ayuda a entender
+						de cerca el estrés y la autoexigencia.
+					</p>
+				</SectionHeader>
+				<ul class="flex flex-col gap-3">
 					{
-						steps.map((step, index) => (
-							<li class="relative grid grid-cols-[3rem_1fr] gap-x-4 sm:gap-x-6">
-								{index < steps.length - 1 && (
-									<span
-										class="absolute left-6 top-12 -bottom-8 w-px -translate-x-1/2 bg-linear-to-b from-primary-container/70 to-primary-container/15"
-										aria-hidden="true"
-									/>
-								)}
-								<span class="relative z-10 w-12 h-12 rounded-full bg-tertiary-fixed text-on-primary-container font-headline-md text-headline-sm font-medium flex items-center justify-center ring-4 ring-surface shadow-ethereal">
-									{step.number}
-								</span>
-								<div class:list={[card, cardLift, "p-6 lg:p-7 flex flex-col gap-3 group"]}>
-									<div class="flex items-start justify-between gap-4">
-										<h3 class:list={[cardTitle, "group-hover:text-primary transition-colors"]}>
-											{step.title}
-										</h3>
-										<span
-											class="material-symbols-outlined text-primary text-[22px] mt-1"
-											aria-hidden="true"
-										>
-											{step.icon}
-										</span>
-									</div>
-									<p class={bodyText}>{step.text}</p>
-								</div>
+						therapistHighlights.map((item) => (
+							<li class="flex items-start gap-3 text-body text-ink">
+								<Icon name="check" class="mt-0.5 text-teal" />
+								<span>{item.label}</span>
 							</li>
 						))
 					}
-				</ol>
+				</ul>
+				<a
+					href="/sobre-mi"
+					class="group inline-flex min-h-11 items-center gap-2 self-start text-small font-semibold text-teal underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-teal-strong hover:decoration-current"
+				>
+					<span>Conocer mi trayectoria</span>
+					<Icon
+						name="arrow_forward"
+						class="transition-[translate] duration-200 ease-out motion-safe:group-hover-fine:translate-x-0.5"
+					/>
+				</a>
 			</div>
+			<Figure
+				src={therapistImage}
+				alt="María Sánchez sonriendo, de pie, con traje verde salvia y camiseta gris."
+				ratio="portrait"
+				class="lg:order-1 lg:col-span-5"
+			>
+				<Icon name="verified" class="text-teal" />
+				<span>
+					<span class="block">
+						Formación en terapia familiar y de pareja y en salud perinatal
+					</span>
+					<span class="block font-semibold text-ink">María Sánchez</span>
+					<span class="block">Psicóloga general sanitaria · Nº col. {licenseNumber}</span>
+				</span>
+			</Figure>
 		</div>
-	</section>
-
-	<!-- Beneficios -->
-	<section class:list={[section, "bg-surface-container-low"]}>
-		<div class:list={[container, "flex flex-col gap-12"]}>
-			<div class={sectionIntro}>
-				<div class={eyebrow}>
-					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
-						>spa</span
-					>
-					<span class={eyebrowText}>Qué puedes trabajar</span>
-				</div>
-				<h2 class={heading}>Lo que la terapia puede ayudarte a trabajar</h2>
-				<p class={bodyText}>
-					Estos son algunos de los cambios que se trabajan en terapia. Cada
-					proceso es distinto y avanza a su ritmo.
-				</p>
-			</div>
-			<ul class="grid grid-cols-1 md:grid-cols-2 gap-gutter lg:gap-space-lg">
-				{
-					benefits.map((benefit) => (
-						<li class:list={[card, cardLift, "p-8 flex flex-col gap-4 group"]}>
-							<div
-								class:list={[
-									"w-12 h-12 rounded-2xl flex items-center justify-center text-primary transition-colors duration-300",
-									benefit.iconClass,
-								]}
-							>
-								<span class="material-symbols-outlined text-[26px]" aria-hidden="true">
-									{benefit.icon}
-								</span>
-							</div>
-							<h3 class={cardTitle}>{benefit.title}</h3>
-							<p class={bodyText}>{benefit.text}</p>
-						</li>
-					))
-				}
-			</ul>
-		</div>
-	</section>
-
-	<!-- Conoce a tu terapeuta -->
-	<section class:list={[section, "relative overflow-hidden"]}>
-		<div class:list={[container, "flex flex-col gap-12"]}>
-			<div class={sectionIntro}>
-				<div class={eyebrow}>
-					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
-						>psychology</span
-					>
-					<span class={eyebrowText}>Quién te acompaña</span>
-				</div>
-				<h2 class={heading}>
-					Cercanía, rigor y una mirada humana
-				</h2>
-			</div>
-			<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-				<div class="lg:col-span-5 relative">
-					<div
-						class="relative rounded-3xl overflow-hidden shadow-lift bg-surface-container-low group border border-border-subtle"
-					>
-						<img
-							alt="María Sánchez sonriendo, sentada en un sillón azul."
-							class:list={[photo, "h-[440px] sm:h-[480px] object-top"]}
-							src="/maria2.webp"
-							width="1200"
-							height="1600"
-							loading="lazy"
-							decoding="async"
-						/>
-						<div
-							class="absolute inset-0 bg-linear-to-t from-inverse-surface/80 via-transparent to-transparent"
-							aria-hidden="true"
-						>
-						</div>
-						<div class="absolute top-5 inset-x-5">
-							<span
-								class:list={[
-									glass,
-									"inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-label-sm text-label-sm text-on-primary-container",
-								]}
-							>
-								<span
-									class="material-symbols-outlined text-[15px] text-primary"
-									style={filled}
-									aria-hidden="true">verified</span
-								>
-								Formación en terapia familiar y de pareja y en salud perinatal
-							</span>
-						</div>
-						<div
-							class:list={[
-								glass,
-								"absolute bottom-6 inset-x-6 p-5 rounded-2xl text-on-surface flex flex-col",
-							]}
-						>
-							<span class="font-title-md text-title-md text-primary">María Sánchez</span>
-							<span class="font-label-sm text-label-sm text-slate-muted uppercase"
-								>Psicóloga general sanitaria · Nº col. {licenseNumber}</span
-							>
-						</div>
-					</div>
-					<div
-						class="absolute -bottom-4 -left-4 -z-10 w-full h-full rounded-3xl bg-secondary-container/40"
-						aria-hidden="true"
-					>
-					</div>
-				</div>
-				<div class="lg:col-span-7 flex flex-col gap-6">
-					<p class="font-body-lg text-body-lg text-on-surface max-w-prose">
-						Me llamo María y soy quien te atenderá en Inala. Mi propósito es
-						acompañarte con empatía, rigor y presencia en cada paso de tu
-						proceso.
-					</p>
-					<p class:list={[bodyText, "max-w-prose"]}>
-						Antes de la psicología trabajé en la empresa, y eso me ayuda a
-						entender de cerca el estrés y la autoexigencia.
-					</p>
-					<ul class="flex flex-col gap-3 pt-2">
-						{
-							therapistHighlights.map((item) => (
-								<li class:list={[card, "flex items-center gap-3 p-3 rounded-2xl"]}>
-									<div
-										class:list={[
-											"w-8 h-8 shrink-0 rounded-xl flex items-center justify-center text-primary",
-											item.iconClass,
-										]}
-									>
-										<span class="material-symbols-outlined text-[18px]" aria-hidden="true">
-											{item.icon}
-										</span>
-									</div>
-									<span class="font-label-lg text-label-lg text-on-surface">{item.label}</span>
-								</li>
-							))
-						}
-					</ul>
-					<div class="pt-2">
-						<a
-							class="inline-flex items-center gap-2 font-label-lg text-label-lg text-primary hover:text-on-primary-container group transition-colors underline-offset-4 hover:underline"
-							href="/sobre-mi"
-						>
-							<span>Conocer mi trayectoria</span>
-							<span
-								class="material-symbols-outlined text-[18px] transition-transform duration-300 ease-exhale motion-safe:group-hover:translate-x-1"
-								aria-hidden="true">arrow_forward</span
-							>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	</Section>
 
 	<!-- Modalidades de consulta -->
-	<section class:list={[section, "bg-surface-container-low"]}>
-		<div class:list={[container, "flex flex-col gap-12"]}>
-			<div class={sectionIntro}>
-				<div class={eyebrow}>
-					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
-						>location_on</span
-					>
-					<span class={eyebrowText}>Presencial u online</span>
-				</div>
-				<h2 class={heading}>Dónde son las sesiones</h2>
-				<p class={bodyText}>
-					Elige la opción que mejor encaje con tu vida. Las sesiones duran 60
-					minutos en ambos casos.
-				</p>
-			</div>
-
-			<ul class="grid grid-cols-1 lg:grid-cols-2 gap-gutter lg:gap-space-lg items-stretch">
-				{
-					modalities.map((modality) => (
-						<li class="rounded-3xl bg-surface-container-lowest border border-outline-variant/60 shadow-ethereal overflow-hidden flex flex-col justify-between group">
-							<div>
-								{modality.image ? (
-									<div class="h-64 overflow-hidden relative">
-										<img
-											alt={modality.imageAlt}
-											class:list={[photo, "h-full"]}
-											src={modality.image}
-											loading="lazy"
-											decoding="async"
-										/>
-										<span
-											class:list={[
-												glass,
-												"absolute top-4 left-4 px-3.5 py-1.5 rounded-full font-label-sm text-label-sm text-on-primary-container",
-											]}
-										>
-											{modality.badge}
-										</span>
-									</div>
-								) : (
-									<div class="h-64 bg-surface-container flex flex-col items-center justify-center relative p-8 text-center overflow-hidden">
-										<div
-											class="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-primary-container/20 blur-xl"
-											aria-hidden="true"
-										/>
-										<div class="w-16 h-16 rounded-2xl bg-surface-container-lowest shadow-ethereal flex items-center justify-center text-primary mb-3">
-											<span class="material-symbols-outlined text-[32px]" aria-hidden="true">
-												videocam
-											</span>
-										</div>
-										<span class={cardTitle}>{modality.visualTitle}</span>
-										<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">
-											{modality.visualText}
-										</span>
-										<span
-											class:list={[
-												glass,
-												"absolute top-4 left-4 px-3.5 py-1.5 rounded-full font-label-sm text-label-sm text-on-primary-container",
-											]}
-										>
-											{modality.badge}
-										</span>
-									</div>
-								)}
-								<div class="p-8 flex flex-col gap-4">
-									<h3 class={cardTitle}>{modality.title}</h3>
-									<p class={bodyText}>{modality.text}</p>
-									<ul class="flex flex-col gap-2 pt-2 text-on-surface-variant font-body-sm text-body-sm">
-										{modality.features.map((feature) => (
-											<li class="flex items-start gap-2">
-												<span
-													class="material-symbols-outlined text-[18px] text-primary"
-													aria-hidden="true"
-												>
-													{feature.icon}
-												</span>
-												<span>{feature.label}</span>
-											</li>
-										))}
-									</ul>
-								</div>
-							</div>
-							<div class="p-8 pt-0">
-								<a class:list={[modality.ctaClass, "w-full py-3"]} href={contactHref}>
-									<span>{modality.cta}</span>
-									<span class="material-symbols-outlined text-[18px]" aria-hidden="true">
-										arrow_forward
+	<Section tone="white">
+		<SectionHeader title="Dónde son las sesiones" label="Presencial u online">
+			<p>
+				Elige la opción que mejor encaje con tu vida. Las sesiones duran 60 minutos
+				en ambos casos.
+			</p>
+		</SectionHeader>
+		<ul class="mt-14 grid gap-x-12 gap-y-14 md:grid-cols-2">
+			{
+				modalities.map((modality, index) => (
+					<li class="flex flex-col gap-6">
+						{modality.image ? (
+							<Figure
+								src={modality.image}
+								alt={modality.imageAlt ?? ""}
+								ratio="wide"
+								sizes="(min-width: 768px) 45vw, 100vw"
+							>
+								<Icon name="location_on" class="text-teal" />
+								<span class="font-semibold text-ink">{modality.badge}</span>
+							</Figure>
+						) : (
+							<div class="flex flex-col gap-3">
+								<div class="flex aspect-16/10 flex-col items-start justify-end gap-2 rounded-frame bg-cypress p-8 text-on-dark">
+									<Icon name="videocam" class="size-10 text-seafoam" />
+									<span class="font-display text-heading">{modality.visualTitle}</span>
+									<span class="text-small text-on-dark-muted">
+										{modality.visualText}
 									</span>
-								</a>
+								</div>
+								<p class="flex items-center gap-2 text-label">
+									<Icon name="videocam" class="text-teal" />
+									<span class="font-semibold text-ink">{modality.badge}</span>
+								</p>
 							</div>
-						</li>
-					))
-				}
-			</ul>
-		</div>
-	</section>
+						)}
+						<div class="flex flex-1 flex-col gap-3">
+							<h3 class="font-display text-subheading font-normal text-ink">
+								{modality.title}
+							</h3>
+							<p class="text-body text-ink-muted">{modality.text}</p>
+							<ul class="mt-2 flex flex-col gap-2 border-t border-line pt-4">
+								{modality.features.map((feature) => (
+									<li class="flex items-start gap-3 text-small text-ink">
+										<Icon name="check" class="mt-0.5 text-teal" />
+										<span>{feature.label}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+						<div>
+							<Button
+								href={contactHref}
+								variant={index === 0 ? "secondary" : "primary"}
+								arrow
+							>
+								<span>{modality.cta}</span>
+							</Button>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</Section>
 
-	<!-- CTA final -->
-	<section class:list={[section, "relative"]}>
-		<div
-			class="max-w-5xl mx-auto rounded-3xl bg-linear-to-br from-primary to-inverse-surface p-8 sm:p-12 lg:p-16 text-on-primary shadow-lift relative overflow-hidden"
-		>
-			<div
-				class="absolute top-0 right-0 w-80 h-80 rounded-full bg-accent-glow/15 blur-3xl pointer-events-none"
-				aria-hidden="true"
-			>
-			</div>
-			<div class="relative z-10 flex flex-col items-center text-center gap-6 max-w-3xl mx-auto">
-				<span
-					class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-translucent text-primary font-label-sm text-label-sm"
-				>
-					<span class="material-symbols-outlined text-[16px]" aria-hidden="true"
-						>favorite</span
-					>
-					Cuando lo sientas
-				</span>
-				<h2
-					class="font-display-xl text-headline-lg-mobile md:text-display-xl text-balance"
-				>
-					¿Te gustaría empezar?
-				</h2>
-				<p class="font-body-lg text-body-lg text-inverse-on-surface max-w-2xl">
-					En la primera sesión nos conocemos, hablamos de tu momento y valoramos
-					juntos cómo puedo acompañarte. {ctaNote}
-				</p>
-				<div class="flex flex-col sm:flex-row items-center gap-4 mt-4 w-full sm:w-auto">
-					<a class:list={[btnPrimary, "w-full sm:w-auto px-8 py-3.5"]} href={contactHref}>
-						<span class="material-symbols-outlined text-[20px]" aria-hidden="true"
-							>calendar_today</span
-						>
-						<span>{ctaLabel}</span>
-					</a>
-					<a
-						class:list={[
-							btnBase,
-							"w-full sm:w-auto px-8 py-3.5 bg-surface-translucent text-on-surface hover:bg-surface-container-lowest",
-						]}
-						href={`mailto:${email}`}
-					>
-						<span class="material-symbols-outlined text-[20px]" aria-hidden="true"
-							>mail</span
-						>
-						<span>Escribirme a {email}</span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
+	<CtaBand label="Cuando lo sientas" title="¿Te gustaría empezar?">
+		<p>
+			En la primera sesión nos conocemos, hablamos de tu momento y valoramos
+			juntos cómo puedo acompañarte. {ctaNote}
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>Escribirme a {email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
 </Layout>

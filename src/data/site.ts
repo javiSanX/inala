@@ -1,4 +1,9 @@
-export const logoSrc = "/logo-light.webp";
+import logoImage from "../assets/brand/logo.webp";
+
+export const logo = logoImage;
+// Stable public URL of the same logo, for structured data.
+export const logoUrl = "/logo-light.webp";
+export const siteName = "INALA Centro de Psicoterapia";
 
 export const contactHref = "/contacto";
 export const email = "hola@inala.es";
@@ -11,6 +16,13 @@ export const addressCenter = "Centro Yssana";
 export const whatsappNumber = "+34 623 050 773";
 export const whatsappUrl = "https://wa.me/34623050773";
 export const phoneHref = `tel:${whatsappNumber.replaceAll(" ", "")}`;
+// The same address split into fields, for structured data.
+export const postalAddress = {
+	streetAddress: `${address} (${addressCenter})`,
+	postalCode: "31011",
+	addressLocality: "Pamplona",
+	addressCountry: "ES",
+};
 
 // One label for the primary action everywhere: the contact form sends a
 // request, it does not book a slot.

@@ -1,214 +1,293 @@
 @import "tailwindcss";
 
+/* Hover motion only for real pointers: touch fires a false hover on tap. */
+@custom-variant hover-fine {
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			@slot;
+		}
+	}
+}
+
+@custom-variant group-hover-fine {
+	@media (hover: hover) and (pointer: fine) {
+		&:is(:where(.group):hover *) {
+			@slot;
+		}
+	}
+}
+
 @theme {
-	/* Colores */
-	--color-primary: #24695b;
-	--color-on-primary: #ffffff;
-	--color-primary-container: #74b6a6;
-	--color-primary-container-hover: #62a494;
-	--color-on-primary-container: #00473c;
-	--color-primary-fixed: #acf0de;
-	--color-primary-fixed-dim: #91d3c3;
-	--color-on-primary-fixed: #00201a;
-	--color-on-primary-fixed-variant: #005144;
-	--color-inverse-primary: #91d3c3;
+	/* Colours. The default palette is cleared so only these tokens exist. */
+	--color-*: initial;
+	--color-white: #ffffff;
+	--color-paper: #f6f9f8;
+	--color-mist: #e9f4f1;
+	--color-line: #d9e4e1;
+	--color-line-strong: #b5c8c3;
+	--color-ink: #15211f;
+	--color-ink-muted: #3e4b49;
+	--color-ink-soft: #5a6764;
+	/* Brand: the logo's seafoam, used for fills and accents, never as text on light grounds. */
+	--color-seafoam: #7cc6c4;
+	--color-seafoam-soft: #cdebe4;
+	/* Every action. White on teal is 6.5:1. */
+	--color-teal: #24695b;
+	--color-teal-strong: #1b5248;
+	/* The field that closes each page. White on cypress is 11.6:1, seafoam 5.9:1. */
+	--color-cypress: #173f3a;
+	--color-cypress-line: #2f5a54;
+	--color-on-dark: #ffffff;
+	--color-on-dark-muted: #c6dcd7;
+	--color-error: #b3261e;
+	--color-error-soft: #fbeceb;
 
-	--color-secondary: #446461;
-	--color-on-secondary: #ffffff;
-	--color-secondary-container: #c6eae5;
-	--color-on-secondary-container: #4a6a67;
-	--color-secondary-fixed: #c6eae5;
-	--color-secondary-fixed-dim: #abcdc9;
-	--color-on-secondary-fixed: #00201e;
-	--color-on-secondary-fixed-variant: #2c4c49;
+	/* Families come from Astro's font API (astro.config.mjs), self-hosted with fallbacks. */
+	--font-display: var(--font-gambetta);
+	--font-sans: var(--font-synonym);
 
-	--color-tertiary: #50625e;
-	--color-on-tertiary: #ffffff;
-	--color-tertiary-container: #9aaea9;
-	--color-on-tertiary-container: #30423f;
-	--color-tertiary-fixed: #d3e7e2;
-	--color-tertiary-fixed-dim: #b7cbc6;
-	--color-on-tertiary-fixed: #0d1f1c;
-	--color-on-tertiary-fixed-variant: #384a47;
+	/* Type scale */
+	--text-display: clamp(2.5rem, 1.55rem + 3.4vw, 4.25rem);
+	--text-display--line-height: 1.04;
+	--text-display--letter-spacing: -0.02em;
+	--text-title: clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem);
+	--text-title--line-height: 1.08;
+	--text-title--letter-spacing: -0.018em;
+	--text-heading: clamp(1.875rem, 1.45rem + 1.6vw, 2.75rem);
+	--text-heading--line-height: 1.12;
+	--text-heading--letter-spacing: -0.012em;
+	--text-subheading: clamp(1.375rem, 1.22rem + 0.6vw, 1.75rem);
+	--text-subheading--line-height: 1.3;
+	--text-subheading--letter-spacing: -0.005em;
+	--text-lead: clamp(1.125rem, 1.06rem + 0.3vw, 1.25rem);
+	--text-lead--line-height: 1.6;
+	--text-body: 1.0625rem;
+	--text-body--line-height: 1.65;
+	--text-small: 0.9375rem;
+	--text-small--line-height: 1.55;
+	--text-label: 0.8125rem;
+	--text-label--line-height: 1.4;
+	--text-label--letter-spacing: 0.01em;
 
-	--color-error: #ba1a1a;
-	--color-on-error: #ffffff;
-	--color-error-container: #ffdad6;
-	--color-on-error-container: #93000a;
+	/* Widths. "xs" covers the narrowest phones (WCAG reflow at 320px). */
+	--breakpoint-xs: 22.5rem;
+	--container-content: 75rem;
+	--container-narrow: 48rem;
+	--container-reading: 35rem;
 
-	--color-background: #ecfdf8;
-	--color-on-background: #0f1e1c;
-	--color-surface: #ecfdf8;
-	--color-on-surface: #0f1e1c;
-	--color-surface-variant: #d5e6e1;
-	--color-on-surface-variant: #3f4946;
-	--color-surface-dim: #cdded9;
-	--color-surface-bright: #ecfdf8;
-	--color-surface-tint: #24695b;
-	--color-surface-container-lowest: #ffffff;
-	--color-surface-container-low: #e6f7f2;
-	--color-surface-container: #e0f2ed;
-	--color-surface-container-high: #dbece7;
-	--color-surface-container-highest: #d5e6e1;
-	--color-surface-translucent: rgba(255, 255, 255, 0.72);
-	--color-surface-tinted: rgba(209, 229, 224, 0.28);
-	--color-inverse-surface: #243330;
-	--color-inverse-on-surface: #e3f4f0;
+	/* Shapes */
+	--radius-field: 0.75rem;
+	--radius-frame: 1.25rem;
 
-	--color-outline: #6f7976;
-	--color-outline-variant: #bfc9c4;
-	--color-border-subtle: rgba(43, 75, 72, 0.08);
-	--color-border-glass: rgba(255, 255, 255, 0.55);
-	--color-border-soft: rgba(43, 75, 72, 0.15);
-	--color-tint-hover: rgba(209, 229, 224, 0.35);
+	/* Depth: one soft, offset shadow for floating panels. */
+	--shadow-float:
+		0 1px 2px rgb(21 33 31 / 0.05), 0 12px 32px -12px rgb(21 33 31 / 0.18);
 
-	--color-accent-glow: #96d0c2;
-	--color-sand-warm: #f3efea;
-	--color-linen-base: #faf8f5;
-	--color-slate-muted: #607471;
+	/* Motion (animate skill): strong ease-out for entrances, ease-in-out for on-screen movement. */
+	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+	--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+	--default-transition-timing-function: ease;
 
-	/* Elevación (DESIGN.md: Ethereal Shadows / Interactive Depth Lift) */
-	--shadow-ethereal:
-		0 14px 34px -4px rgba(36, 51, 48, 0.04),
-		0 8px 18px -2px rgba(116, 182, 166, 0.08);
-	--shadow-lift:
-		0 20px 40px rgba(116, 182, 166, 0.16),
-		0 14px 34px -4px rgba(36, 51, 48, 0.06);
-	--shadow-cta: 0 4px 16px rgba(116, 182, 166, 0.2);
-	--shadow-cta-hover: 0 6px 22px rgba(116, 182, 166, 0.35);
+	--animate-rise: rise 700ms var(--ease-out) both;
+	--animate-fade: fade 200ms ease both;
 
-	/* Movimiento */
-	--ease-exhale: cubic-bezier(0.16, 1, 0.3, 1);
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
 
-	/* Anchura de contenido */
-	--container-content: 1240px;
-
-	/* Espaciado */
-	--spacing-space-xs: 0.375rem;
-	--spacing-space-sm: 0.75rem;
-	--spacing-space-md: 1.25rem;
-	--spacing-space-lg: 2rem;
-	--spacing-space-xl: 3.5rem;
-	--spacing-gutter: 1.5rem;
-	--spacing-gutter-mobile: 1rem;
-	--spacing-margin: 3.5rem;
-	--spacing-margin-mobile: 1.25rem;
-
-	/* Familias tipográficas */
-	--font-serif: "Playfair Display", ui-serif, Georgia, serif;
-	--font-display-xl: "Playfair Display", serif;
-	--font-display-xl-mobile: "Playfair Display", serif;
-	--font-headline-lg: "Playfair Display", serif;
-	--font-headline-lg-mobile: "Playfair Display", serif;
-	--font-headline-md: "Playfair Display", serif;
-	--font-headline-sm: "Plus Jakarta Sans", sans-serif;
-	--font-title-md: "Plus Jakarta Sans", sans-serif;
-	--font-body-lg: "Plus Jakarta Sans", sans-serif;
-	--font-body-md: "Plus Jakarta Sans", sans-serif;
-	--font-body-sm: "Plus Jakarta Sans", sans-serif;
-	--font-label-lg: "Plus Jakarta Sans", sans-serif;
-	--font-label-sm: "Plus Jakarta Sans", sans-serif;
-
-	/* Tamaños tipográficos */
-	--text-display-xl: 56px;
-	--text-display-xl--line-height: 68px;
-	--text-display-xl--letter-spacing: -0.02em;
-	--text-display-xl--font-weight: 500;
-	--text-display-xl-mobile: 36px;
-	--text-display-xl-mobile--line-height: 46px;
-	--text-display-xl-mobile--letter-spacing: -0.01em;
-	--text-display-xl-mobile--font-weight: 500;
-	--text-headline-lg: 40px;
-	--text-headline-lg--line-height: 52px;
-	--text-headline-lg--letter-spacing: -0.015em;
-	--text-headline-lg--font-weight: 500;
-	--text-headline-lg-mobile: 28px;
-	--text-headline-lg-mobile--line-height: 38px;
-	--text-headline-lg-mobile--letter-spacing: -0.01em;
-	--text-headline-lg-mobile--font-weight: 500;
-	--text-headline-md: 28px;
-	--text-headline-md--line-height: 38px;
-	--text-headline-md--font-weight: 600;
-	--text-headline-sm: 20px;
-	--text-headline-sm--line-height: 30px;
-	--text-headline-sm--letter-spacing: -0.01em;
-	--text-headline-sm--font-weight: 600;
-	--text-title-md: 17px;
-	--text-title-md--line-height: 26px;
-	--text-title-md--font-weight: 600;
-	--text-body-lg: 18px;
-	--text-body-lg--line-height: 30px;
-	--text-body-lg--font-weight: 400;
-	--text-body-md: 15px;
-	--text-body-md--line-height: 24px;
-	--text-body-md--font-weight: 400;
-	--text-body-sm: 13px;
-	--text-body-sm--line-height: 20px;
-	--text-body-sm--font-weight: 400;
-	--text-label-lg: 14px;
-	--text-label-lg--line-height: 20px;
-	--text-label-lg--letter-spacing: 0.03em;
-	--text-label-lg--font-weight: 600;
-	--text-label-sm: 11px;
-	--text-label-sm--line-height: 16px;
-	--text-label-sm--letter-spacing: 0.08em;
-	--text-label-sm--font-weight: 700;
+	@keyframes fade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
 }
 
 @layer base {
-	html,
-	body {
-		margin: 0;
-		padding: 0;
+	html {
+		/* Keeps focused elements and anchor targets clear of the sticky header (WCAG 2.4.11). */
+		scroll-padding-top: 6rem;
+		scrollbar-color: var(--color-line-strong) var(--color-paper);
+		-webkit-text-size-adjust: 100%;
 	}
 
 	body {
-		overscroll-behavior: none;
+		background-color: var(--color-paper);
+		color: var(--color-ink);
+		font-family: var(--font-sans);
+		font-size: var(--text-body);
+		line-height: var(--text-body--line-height);
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	::selection {
+		background-color: var(--color-seafoam-soft);
+		color: var(--color-ink);
+	}
+
+	:where(input, textarea, select) {
+		caret-color: var(--color-teal);
 	}
 
 	:focus-visible {
-		outline: 2px solid var(--color-primary);
+		outline: 2px solid var(--color-teal);
 		outline-offset: 3px;
+		border-radius: 0.25rem;
 	}
 
-	main > :first-child {
-		margin-top: 0 !important;
+	/* On the dark cypress field the ring switches to seafoam (5.9:1). */
+	.on-dark :focus-visible {
+		outline-color: var(--color-seafoam);
 	}
 
-	main > :last-child {
-		margin-bottom: 0 !important;
+	:where(h1, h2, h3, h4) {
+		text-wrap: balance;
+	}
+
+	:where(p, li, dd, blockquote) {
+		text-wrap: pretty;
+	}
+
+	a {
+		text-underline-offset: 0.22em;
+		text-decoration-thickness: 1px;
+	}
+
+	:where(table) {
+		font-variant-numeric: tabular-nums;
 	}
 }
 
-/* Long-form Markdown (blog posts) */
+/* Hero entrance: the one authored moment. Elements are visible by default;
+   the animation only plays when motion is welcome. Copy rises line by line,
+   80ms apart; the image settles in alongside. */
 @layer components {
+	@media (prefers-reduced-motion: no-preference) {
+		.hero-copy > * {
+			animation: var(--animate-rise);
+		}
+
+		.hero-copy > :nth-child(2) {
+			animation-delay: 80ms;
+		}
+
+		.hero-copy > :nth-child(3) {
+			animation-delay: 160ms;
+		}
+
+		.hero-copy > :nth-child(4) {
+			animation-delay: 240ms;
+		}
+
+		.hero-copy > :nth-child(5) {
+			animation-delay: 320ms;
+		}
+
+		.hero-copy > :nth-child(n + 6) {
+			animation-delay: 400ms;
+		}
+
+		.hero-media {
+			animation: settle 900ms var(--ease-out) 120ms both;
+		}
+
+		@keyframes settle {
+			from {
+				opacity: 0;
+				transform: translateY(18px) scale(0.985);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		/* Native <details>: answers open with a short height transition where supported. */
+		:root {
+			interpolate-size: allow-keywords;
+		}
+
+		.faq::details-content {
+			block-size: 0;
+			overflow: clip;
+			transition:
+				block-size 200ms var(--ease-out),
+				content-visibility 200ms allow-discrete;
+		}
+
+		.faq[open]::details-content {
+			block-size: auto;
+		}
+
+		/* Images below the fold, revealed once by src/scripts/reveal.ts. */
+		[data-reveal="pending"] {
+			opacity: 0;
+			transform: translateY(18px);
+		}
+
+		[data-reveal="shown"] {
+			transition:
+				opacity 800ms var(--ease-out),
+				transform 800ms var(--ease-out);
+			transition-delay: calc(var(--reveal, 0) * 70ms);
+		}
+	}
+
+	/* Reduced motion keeps a short fade and drops all movement. */
+	@media (prefers-reduced-motion: reduce) {
+		.hero-copy > *,
+		.hero-media {
+			animation: var(--animate-fade);
+		}
+	}
+
+	@media print {
+		[data-reveal="pending"] {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	/* Long-form Markdown: blog posts and legal pages. */
 	.prose-inala {
-		font-family: var(--font-body-lg);
-		font-size: var(--text-body-lg);
-		line-height: var(--text-body-lg--line-height);
-		color: var(--color-on-surface);
+		font-size: 1.125rem;
+		line-height: 1.75;
+		color: var(--color-ink);
 
 		& > * + * {
 			margin-top: 1.25em;
 		}
 
 		& :where(h2, h3, h4) {
-			color: var(--color-on-surface);
-			margin-top: 2em;
+			color: var(--color-ink);
+			font-family: var(--font-display);
+			font-weight: 500;
+			margin-top: 2.2em;
+			scroll-margin-top: 6rem;
+		}
+
+		& :where(h2, h3, h4) + * {
+			margin-top: 0.75em;
 		}
 
 		& h2 {
-			font-family: var(--font-headline-md);
-			font-size: var(--text-headline-md);
-			line-height: var(--text-headline-md--line-height);
-			font-weight: 600;
+			font-size: var(--text-subheading);
+			line-height: var(--text-subheading--line-height);
 		}
 
 		& :where(h3, h4) {
-			font-family: var(--font-headline-sm);
-			font-size: var(--text-headline-sm);
-			line-height: var(--text-headline-sm--line-height);
-			font-weight: 600;
+			font-size: 1.3125rem;
+			line-height: 1.3;
 		}
 
 		& strong {
@@ -216,13 +295,17 @@
 		}
 
 		& a {
-			color: var(--color-primary);
-			text-decoration: underline;
-			text-underline-offset: 3px;
+			color: var(--color-teal);
+			text-decoration-line: underline;
+
+			&:hover {
+				color: var(--color-teal-strong);
+				text-decoration-thickness: 2px;
+			}
 		}
 
 		& :where(ul, ol) {
-			padding-left: 1.5em;
+			padding-left: 1.4em;
 		}
 
 		& ul {
@@ -238,23 +321,47 @@
 		}
 
 		& li::marker {
-			color: var(--color-primary);
+			color: var(--color-teal);
 		}
 
 		& blockquote {
-			padding-inline: 1.5em;
-			font-family: var(--font-serif);
-			color: var(--color-on-surface-variant);
+			font-family: var(--font-display);
+			font-size: 1.375rem;
+			line-height: 1.45;
 			font-style: italic;
+			color: var(--color-ink-muted);
+			padding-left: 1.25em;
+			border-left: 1px solid var(--color-line-strong);
 		}
 
 		& hr {
-			border-color: var(--color-outline-variant);
-			margin-block: 2.5em;
+			border-color: var(--color-line);
+			margin-block: 3em;
+		}
+
+		& table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: var(--text-small);
+		}
+
+		& :where(th, td) {
+			border: 1px solid var(--color-line);
+			padding: 0.6em 0.8em;
+			text-align: left;
+			vertical-align: top;
+			/* Long URLs may still break, but words keep their columns' minimum width. */
+			overflow-wrap: break-word;
+			hyphens: auto;
+
+			@media (width < 40rem) {
+				padding: 0.5em 0.45em;
+			}
+		}
+
+		& th {
+			background-color: var(--color-mist);
+			font-weight: 600;
 		}
 	}
-}
-
-::-webkit-scrollbar {
-	display: none;
 }

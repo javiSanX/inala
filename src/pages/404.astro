@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/ui/Button.astro";
+import { logo, navLinks } from "../data/site";
+import Layout from "../layouts/Layout.astro";
+
+// Copy from main's 404 page, with the accent and opening mark corrected.
+const title = "Página no encontrada | Inala Psicoterapia";
+const description =
+	"La página que buscas no existe o ha cambiado de dirección. Puedes volver al inicio o visitar nuestras páginas principales.";
+---
+
+<Layout title={title} description={description} noindex>
+	<PageHero>
+		<Fragment slot="title">¡Ups!<br />Esta página no existe</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Parece que nos hemos perdido en el camino y no hemos encontrado la página que
+			buscabas. ¡No te preocupes! Vamos a volver al sendero principal juntos.
+		</p>
+		<div class="flex flex-wrap gap-3 pt-2">
+			<Button href="/" arrow>Volver al inicio</Button>
+		</div>
+		<nav aria-label="Páginas principales" class="border-t border-line pt-5">
+			<ul class="flex flex-wrap gap-x-6 gap-y-1">
+				{
+					navLinks.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								class="inline-flex min-h-11 items-center text-small font-semibold text-teal underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-200 hover:decoration-current"
+							>
+								{link.name}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+		<div slot="media" class="grid aspect-square place-items-center rounded-frame bg-mist">
+			<Image src={logo} alt="" width={320} height={320} class="w-1/2" />
+		</div>
+	</PageHero>
+</Layout>

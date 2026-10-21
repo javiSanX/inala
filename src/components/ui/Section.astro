@@ -1,0 +1,45 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Tone = "paper" | "white" | "mist";
+
+interface Props extends HTMLAttributes<"section"> {
+	tone?: Tone;
+	/** Inner width: the full grid, or a narrower reading column. */
+	width?: "content" | "narrow";
+	/** Vertical rhythm: regular sections, or a tighter band. */
+	space?: "regular" | "tight";
+}
+
+const {
+	tone = "paper",
+	width = "content",
+	space = "regular",
+	class: className,
+	...attrs
+} = Astro.props;
+
+const tones: Record<Tone, string> = {
+	paper: "bg-paper",
+	white: "bg-white",
+	mist: "bg-mist",
+};
+---
+
+<section
+	class:list={[
+		tones[tone],
+		space === "regular" ? "py-20 lg:py-28" : "py-12 lg:py-16",
+		className,
+	]}
+	{...attrs}
+>
+	<div
+		class:list={[
+			"mx-auto px-5 sm:px-8 lg:px-10",
+			width === "content" ? "max-w-content" : "max-w-narrow",
+		]}
+	>
+		<slot />
+	</div>
+</section>
