@@ -1,5 +1,6 @@
 ---
-// Closing call to action of a page: the deep cypress field that the footer continues.
+// Closing call to action of a page: by default the deep cypress field that the
+// footer continues; "light" sets it on white.
 interface Props {
 	/** Plain heading text; use the "title" slot instead when it carries markup. */
 	title?: string;
@@ -7,33 +8,51 @@ interface Props {
 	/** Short line kept from the content, set as a subtitle under the heading. */
 	label?: string;
 	headingId?: string;
+	tone?: "dark" | "light";
 }
 
-const { title, id, label, headingId = "cierre" } = Astro.props;
+const { title, id, label, headingId = "cierre", tone = "dark" } = Astro.props;
+const dark = tone === "dark";
 ---
 
 <section
 	id={id}
-	class="on-dark bg-cypress text-on-dark"
+	class:list={[dark ? "on-dark bg-cypress text-on-dark" : "bg-white text-ink"]}
 	aria-labelledby={headingId}
 >
 	<div
 		class="mx-auto grid max-w-content gap-x-16 gap-y-8 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:px-10 lg:py-28"
 	>
 		<div class="flex flex-col gap-4 lg:col-span-6">
-			<h2 id={headingId} class="font-display text-heading font-normal text-on-dark">
+			<h2
+				id={headingId}
+				class:list={[
+					"font-display text-heading font-normal",
+					dark ? "text-on-dark" : "text-ink",
+				]}
+			>
 				{title}<slot name="title" />
 			</h2>
 			{
 				label && (
-					<p class="font-display text-subheading font-normal text-seafoam">
+					<p
+						class:list={[
+							"font-display text-subheading font-normal",
+							dark ? "text-seafoam" : "text-teal",
+						]}
+					>
 						{label}
 					</p>
 				)
 			}
 		</div>
 		<div class="flex flex-col gap-6 lg:col-span-6 lg:pt-2">
-			<div class="flex flex-col gap-4 text-lead text-on-dark-muted">
+			<div
+				class:list={[
+					"flex flex-col gap-4 text-lead",
+					dark ? "text-on-dark-muted" : "text-ink-muted",
+				]}
+			>
 				<slot />
 			</div>
 			<div class="flex flex-wrap items-center gap-3">
@@ -41,11 +60,30 @@ const { title, id, label, headingId = "cierre" } = Astro.props;
 			</div>
 			{
 				Astro.slots.has("note") && (
-					<div class="text-small text-on-dark-muted">
+					<div
+						class:list={[
+							"text-small",
+							dark ? "text-on-dark-muted" : "text-ink-muted",
+						]}
+					>
 						<slot name="note" />
 					</div>
 				)
 			}
 		</div>
+		{
+			Astro.slots.has("quote") && (
+				<div
+					class:list={[
+						"mt-8 border-t pt-16 lg:col-span-12 lg:mt-12 lg:pt-20",
+						dark ? "border-cypress-line" : "border-line",
+					]}
+				>
+					<div class="mx-auto max-w-narrow">
+						<slot name="quote" />
+					</div>
+				</div>
+			)
+		}
 	</div>
 </section>

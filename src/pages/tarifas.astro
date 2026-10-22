@@ -34,7 +34,7 @@ const couple = serviceByName("Terapia de Pareja");
 
 const family = serviceByName("Terapia Familiar");
 
-const parental = serviceByName("Psicología Parental");
+const perinatal = serviceByName("Psicología Perinatal");
 
 // Prices and durations come from `services` (site.ts), which mirrors main.
 const plans = [
@@ -78,17 +78,17 @@ const plans = [
 		href: family.href,
 	},
 	{
-		title: parental.name,
-		summary: parental.summary,
-		price: parental.price,
-		duration: parental.duration,
+		title: perinatal.name,
+		summary: perinatal.summary,
+		price: perinatal.price,
+		duration: perinatal.duration,
 		modality: "Presencial en Pamplona u online",
 		bullets: [
 			"Cansancio, culpa y autoexigencia",
 			"Límites, rabietas y etapas de cambio",
 			"Desacuerdos de crianza en la pareja",
 		],
-		href: parental.href,
+		href: perinatal.href,
 	},
 ];
 

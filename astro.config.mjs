@@ -17,7 +17,7 @@ export default defineConfig({
 	// URLs that exist on main (the live site) but not on this build. In static
 	// output Astro writes each one as a meta-refresh page with a canonical link.
 	redirects: {
-		"/servicios/psicologia-perinatal": "/servicios/psicologia-parental/",
+		"/servicios/psicologia-parental": "/servicios/psicologia-perinatal/",
 		"/blog/2": "/blog/",
 		"/blog/author": "/blog/",
 		"/blog/author/maria-sanchez": "/blog/",

@@ -1,4 +1,5 @@
 import logoImage from "../assets/brand/logo.webp";
+import type { IconName } from "../components/ui/icons";
 
 export const logo = logoImage;
 // Stable public URL of the same logo, for structured data.
@@ -44,7 +45,16 @@ export const navLinks = [
 // form. Prices and durations come from main (60 min; 65 € individual,
 // 75 € couple/family). Online is a modality available for every service, so
 // it is not listed here; see `onlineLink`.
-export const services = [
+interface Service {
+	name: string;
+	href: string;
+	icon: IconName;
+	summary: string;
+	price: string;
+	duration: string;
+}
+
+export const services: Service[] = [
 	{
 		name: "Terapia Individual",
 		href: "/servicios/terapia-individual",
@@ -73,8 +83,8 @@ export const services = [
 		duration: "60 minutos",
 	},
 	{
-		name: "Psicología Parental",
-		href: "/servicios/psicologia-parental",
+		name: "Psicología Perinatal",
+		href: "/servicios/psicologia-perinatal",
 		icon: "child_care",
 		summary:
 			"Para madres y padres que buscan apoyo en la crianza: cansancio, culpa, límites o desacuerdos educativos.",

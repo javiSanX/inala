@@ -243,6 +243,95 @@
 			transition-delay: calc(var(--reveal, 0) * 70ms);
 		}
 
+		/* Portrait variant: instead of rising, the frame unveils upward while the
+		   photo settles from a slight zoom; the caption follows once it is open. */
+		.reveal-unveil[data-reveal] {
+			opacity: 1;
+			transform: none;
+		}
+
+		.reveal-unveil[data-reveal] > div {
+			clip-path: inset(0 0 0 0 round var(--radius-frame));
+		}
+
+		.reveal-unveil[data-reveal="pending"] > div {
+			clip-path: inset(100% 0 0 0 round var(--radius-frame));
+		}
+
+		.reveal-unveil[data-reveal="pending"] img {
+			transform: scale(1.08);
+		}
+
+		.reveal-unveil[data-reveal="pending"] > figcaption {
+			opacity: 0;
+			transform: translateY(8px);
+		}
+
+		.reveal-unveil[data-reveal="shown"] > div {
+			transition: clip-path 1000ms var(--ease-in-out);
+		}
+
+		.reveal-unveil[data-reveal="shown"] img {
+			transition: transform 1400ms var(--ease-out);
+		}
+
+		.reveal-unveil[data-reveal="shown"] > figcaption {
+			transition:
+				opacity 600ms var(--ease-out) 700ms,
+				transform 600ms var(--ease-out) 700ms;
+		}
+
+		/* Typewriter variant: the line keeps its final layout and each character
+		   appears at its own --at, with a caret resting on the latest one. After
+		   the last character the caret blinks twice and goes. */
+		.typewriter[data-reveal] {
+			opacity: 1;
+			transform: none;
+		}
+
+		.typewriter[data-reveal="pending"] .typewriter-char {
+			opacity: 0;
+		}
+
+		.typewriter[data-reveal="shown"] .typewriter-char {
+			position: relative;
+			transition: opacity 80ms var(--ease-out) var(--at);
+		}
+
+		.typewriter[data-reveal="shown"] .typewriter-char::after {
+			content: "";
+			position: absolute;
+			inset-block: 0.15em;
+			right: -0.08em;
+			width: 2px;
+			background-color: var(--color-teal);
+			opacity: 0;
+			animation: caret-rest var(--hold) step-end var(--at);
+		}
+
+		.typewriter[data-reveal="shown"]
+			:last-child
+			> .typewriter-char:last-child::after {
+			animation: caret-blink 1000ms step-end var(--at) 2;
+		}
+
+		@keyframes caret-rest {
+			from,
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes caret-blink {
+			0% {
+				opacity: 1;
+			}
+			50%,
+			100% {
+				opacity: 0;
+			}
+		}
+
 		/* Bento cards start scrambled, overlapping one another, and glide into place (src/scripts/bento.ts). */
 		[data-bento="pending"] > li {
 			--bento-k: 0.35;
@@ -322,6 +411,19 @@
 
 		[data-bento="pending"] > li {
 			transform: none;
+		}
+
+		.reveal-unveil[data-reveal="pending"] > div {
+			clip-path: none;
+		}
+
+		.reveal-unveil[data-reveal="pending"] :is(img, figcaption) {
+			opacity: 1;
+			transform: none;
+		}
+
+		.typewriter[data-reveal="pending"] .typewriter-char {
+			opacity: 1;
 		}
 	}
 

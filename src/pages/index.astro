@@ -10,7 +10,6 @@ import Icon from "../components/ui/Icon.astro";
 import type { IconName } from "../components/ui/icons";
 import Section from "../components/ui/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
-import TopicList from "../components/ui/TopicList.astro";
 import {
 	address,
 	addressCenter,
@@ -55,21 +54,29 @@ const differentiators = [
 	},
 ];
 
-const steps = [
+const steps: {
+	icon?: string;
+	title: string;
+	text: string;
+	keywords: string[];
+}[] = [
 	{
 		icon: "chat",
 		title: "Me escribes o me llamas",
 		text: "Por el formulario, por WhatsApp o por correo. No hace falta que me cuentes mucho: con lo que te apetezca compartir es suficiente.",
+		keywords: ["formulario", "WhatsApp", "correo", "suficiente"],
 	},
 	{
 		icon: "handshake",
 		title: "Primera sesión para conocernos",
 		text: "Hablamos de lo que te ha traído hasta aquí y de lo que te gustaría cambiar, y definimos juntos los primeros objetivos.",
+		keywords: ["lo que te ha traído hasta aquí", "primeros objetivos"],
 	},
 	{
 		icon: "spa",
 		title: "Sesiones a tu ritmo",
 		text: "Trabajamos con herramientas prácticas y revisamos juntos cómo te sientes en cada etapa. Tú marcas el ritmo, sin prisas.",
+		keywords: ["herramientas prácticas", "Tú marcas el ritmo"],
 	},
 ];
 
@@ -116,6 +123,49 @@ const bentoCards = [
 	{ span: "lg:col-span-3", surface: "bg-paper", featured: false },
 ] as const;
 
+// Splits a paragraph so its keywords can be highlighted without changing the text.
+const withKeywords = (text: string, keywords: string[]) => {
+	const pattern = new RegExp(`(${keywords.join("|")})`);
+	return text
+		.split(pattern)
+		.filter(Boolean)
+		.map((part) => ({ part, match: keywords.includes(part) }));
+};
+
+// Steps climb a staircase on large screens: row:column 1:1 and 1:2, 2:2 and 2:3, 3:3 and 3:4; all texts span two columns except the last.
+const stepGrid = [
+	{
+		number: "lg:col-start-1 lg:row-start-1",
+		text: "lg:col-span-2 lg:col-start-2 lg:row-start-1",
+	},
+	{
+		number: "lg:col-start-2 lg:row-start-2",
+		text: "lg:col-span-2 lg:col-start-3 lg:row-start-2",
+	},
+	{
+		number: "lg:col-start-3 lg:row-start-3",
+		text: "lg:col-start-4 lg:row-start-3",
+	},
+] as const;
+
+// Closing quote, typed character by character: each one appears at `at` and the
+// caret rests on it for `hold`, with a short pause after punctuation.
+const quote =
+	"“La salud mental es un viaje de crecimiento y descubrimiento, no un destino al que llegar.”";
+const typeStep = 36;
+const typePause = 280;
+let typedAt = 0;
+const quoteWords = quote.split(" ").map((word) =>
+	[...word].map((char, index) => {
+		const hold =
+			(/[,.:;]/.test(char) ? typePause : typeStep) +
+			(index === word.length - 1 ? typeStep : 0);
+		const typed = { char, at: typedAt, hold };
+		typedAt += hold;
+		return typed;
+	}),
+);
+
 const textLink =
 	"group inline-flex min-h-11 items-center gap-2 text-small font-semibold text-teal underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-teal-strong hover:decoration-current";
 const arrow =
@@ -123,11 +173,7 @@ const arrow =
 ---
 
 <Layout title={title} description={description}>
-	<PageHero
-		size="display"
-		accent
-		backgroundImage={heroImage}
-	>
+	<PageHero size="display" accent backgroundImage={heroImage}>
 		<p
 			slot="eyebrow"
 			class="inline-flex items-center gap-2 rounded-field border border-teal/25 bg-mist px-4 py-2 text-small font-medium text-teal-strong"
@@ -139,23 +185,27 @@ const arrow =
 			Terapia psicológica <span>adaptada a cada situación</span>
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
-			Soy {therapistName}, psicóloga general sanitaria (Nº col. {licenseNumber}).
-			Acompaño a niños, adolescentes y adultos, a parejas, a familias y a madres y
-			padres en la crianza, para entender lo que está pasando y encontrar
-			herramientas para sentirse mejor, sin prisas.
+			Soy {therapistName}, psicóloga general sanitaria (Nº col. {
+				licenseNumber
+			}). Acompaño a niños, adolescentes y adultos, a parejas, a familias y a
+			madres y padres en la crianza, para entender lo que está pasando y
+			encontrar herramientas para sentirse mejor, sin prisas.
 		</p>
 		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
 			<Button href={contactHref} arrow>{ctaLabel}</Button>
-			<Button href="/servicios" variant="secondary">Ver servicios y tarifas</Button>
+			<Button href="/servicios" variant="secondary"
+				>Ver servicios y tarifas</Button
+			>
 		</div>
 		<FactList facts={[...heroFacts]} class="mt-4" />
 	</PageHero>
 
 	<!-- Servicios -->
 	<Section tone="white" aria-labelledby="servicios-titulo">
-		<SectionHeader title="¿En qué te puedo acompañar?" id="servicios-titulo">
-
-		</SectionHeader>
+		<SectionHeader
+			title="¿En qué te puedo acompañar?"
+			id="servicios-titulo"
+		/>
 		<ul class="mt-14 grid gap-x-10 md:grid-cols-2 xl:grid-cols-4">
 			{
 				services.map((service) => (
@@ -164,10 +214,15 @@ const arrow =
 							href={service.href}
 							class="group flex h-full flex-col gap-4 border-t border-line py-8 transition-[border-color] duration-200 hover:border-teal"
 						>
+							<span class="grid size-12 shrink-0 place-items-center rounded-full bg-mist text-2xl text-teal">
+								<Icon name={service.icon} />
+							</span>
 							<h3 class="font-display text-subheading font-normal text-ink transition-[color] duration-200 group-hover:text-teal">
 								{service.name}
 							</h3>
-							<p class="flex-1 text-body text-ink-muted">{service.summary}</p>
+							<p class="flex-1 text-body text-ink-muted">
+								{service.summary}
+							</p>
 
 							<span class="inline-flex items-center gap-2 text-small font-semibold text-teal">
 								Saber más
@@ -187,40 +242,58 @@ const arrow =
 				src={mariaImage}
 				alt="María Sánchez, psicóloga y fundadora de INALA, en su consulta de Pamplona."
 				ratio="portrait"
-				class="lg:col-span-5"
+				class="reveal-unveil lg:col-span-5"
 			>
 				<Icon name="verified" class="text-teal" />
 				<span>
-					<span class="font-semibold text-ink">Psicóloga general sanitaria</span>
+					<span class="font-semibold text-ink"
+						>Psicóloga general sanitaria</span
+					>
 					<span class="block">Nº col. {licenseNumber}</span>
 				</span>
 			</Figure>
+			<!-- Text blocks rise one after another, starting just after the portrait unveils. -->
 			<div class="flex flex-col gap-6 lg:col-span-7">
-				<h2 class="font-display text-heading font-normal text-ink">
+				<h2
+					data-reveal
+					style="--reveal: 2"
+					class="font-display text-heading font-normal text-ink"
+				>
 					Hola, soy María
 				</h2>
-				<p class="text-lead text-ink-muted">
+				<p data-reveal style="--reveal: 3" class="text-lead text-ink-muted">
 					Fundé Inala para acompañar a personas, parejas y familias en los
-					momentos complicados de la vida. Mi trabajo es crear un espacio en el
-					que puedas hablar con libertad, sin sentirte juzgado/a.
+					momentos complicados de la vida. Mi trabajo es crear un espacio
+					en el que puedas hablar con libertad, sin sentirte juzgado/a.
 				</p>
 				<blockquote
+					data-reveal
+					style="--reveal: 4"
 					class="border-l border-seafoam pl-6 font-display text-subheading font-normal text-teal"
 				>
-					“Para mí, la terapia es mucho más que técnicas: es empatía, dedicación y
-					presencia.”
+					“Para mí, la terapia es mucho más que técnicas: es empatía,
+					dedicación y presencia.”
 				</blockquote>
 				<ul class="flex flex-col gap-3">
 					{
-						differentiators.map((item) => (
-							<li class="flex items-start gap-3 text-body text-ink">
+						differentiators.map((item, index) => (
+							<li
+								data-reveal
+								style={`--reveal: ${index + 5}`}
+								class="flex items-start gap-3 text-body text-ink"
+							>
 								<Icon name="check" class="mt-0.5 text-teal" />
 								<span>{item.text}</span>
 							</li>
 						))
 					}
 				</ul>
-				<a class={textLink} href="/sobre-mi">
+				<a
+					data-reveal
+					style={`--reveal: ${differentiators.length + 5}`}
+					class={textLink}
+					href="/sobre-mi"
+				>
 					<span>Conocer mi trayectoria</span>
 					<Icon name="arrow_forward" class={arrow} />
 				</a>
@@ -236,8 +309,8 @@ const arrow =
 			>
 				<Icon name="info" class="mt-0.5 text-xl" />
 				<span>
-					No hace falta estar en una crisis para pedir ayuda. Estos son algunos
-					de los temas que trabajo con más frecuencia.
+					No hace falta estar en una crisis para pedir ayuda. Estos son
+					algunos de los temas que trabajo con más frecuencia.
 				</span>
 			</p>
 		</SectionHeader>
@@ -283,10 +356,52 @@ const arrow =
 
 	<!-- Cómo empezar -->
 	<Section id="proceso">
-		<SectionHeader title="Cómo empezar">
-			
-		</SectionHeader>
-		<TopicList items={steps} columns={3} numbered numerals="display" class="mt-14" />
+		<SectionHeader title="Cómo empezar" />
+		<ol
+			class="mt-14 flex flex-col gap-10 lg:grid lg:grid-cols-4 lg:grid-rows-3 lg:gap-x-10 lg:gap-y-0"
+		>
+			{
+				steps.map((step, index) => (
+					<li class="flex gap-6 border-t border-line pt-6 lg:contents">
+						<span
+							data-reveal
+							style={`--reveal: ${index * 2}`}
+							class:list={[
+								"font-display text-display leading-none text-teal tabular-nums lg:border-t lg:border-line lg:pt-6",
+								stepGrid[index].number,
+							]}
+							aria-hidden="true"
+						>
+							{String(index + 1).padStart(2, "0")}
+						</span>
+						<div
+							data-reveal
+							style={`--reveal: ${index * 2 + 1}`}
+							class:list={[
+								"flex flex-col gap-2.5 lg:border-t lg:border-line lg:pt-6",
+								stepGrid[index].text,
+							]}
+						>
+							<h3 class="text-lead font-semibold text-ink">
+								{step.title}
+							</h3>
+							<p class="text-body text-ink-muted">
+								{withKeywords(step.text, step.keywords).map(
+									({ part, match }) =>
+										match ? (
+											<span class="font-semibold text-teal">
+												{part}
+											</span>
+										) : (
+											part
+										),
+								)}
+							</p>
+						</div>
+					</li>
+				))
+			}
+		</ol>
 		<a class:list={[textLink, "mt-6"]} href="/nuestro-metodo">
 			<span>Conocer cómo trabajo</span>
 			<Icon name="arrow_forward" class={arrow} />
@@ -295,22 +410,28 @@ const arrow =
 
 	<!-- Presencial y online -->
 	<Section tone="mist" space="tight">
-		<div class="grid gap-y-10 md:grid-cols-2 md:divide-x md:divide-line-strong">
+		<div
+			class="grid gap-y-10 md:grid-cols-2 md:divide-x md:divide-line-strong"
+		>
 			<div class="flex flex-col gap-3 md:pr-12">
 				<Icon name="location_on" class="size-7 text-teal" />
-				<h2 class="font-display text-subheading font-normal text-ink">En Pamplona</h2>
+				<h2 class="font-display text-subheading font-normal text-ink">
+					En Pamplona
+				</h2>
 				<p class="text-body text-ink-muted">
-					{address}, {addressCity}. Dentro del {addressCenter}, en una consulta
-					tranquila y con luz natural.
+					{address}, {addressCity}. Dentro del {addressCenter}, en una
+					consulta tranquila y con luz natural.
 				</p>
 			</div>
 			<div class="flex flex-col gap-3 md:pl-12">
 				<Icon name="videocam" class="size-7 text-teal" />
-				<h2 class="font-display text-subheading font-normal text-ink">Online</h2>
+				<h2 class="font-display text-subheading font-normal text-ink">
+					Online
+				</h2>
 				<p class="text-body text-ink-muted">
-					Por videollamada, a través de una plataforma segura y cifrada que cumple
-					la normativa de protección de datos. Puedes combinarla con sesiones
-					presenciales.
+					Por videollamada, a través de una plataforma segura y cifrada que
+					cumple la normativa de protección de datos. Puedes combinarla con
+					sesiones presenciales.
 				</p>
 				<a class={textLink} href="/servicios/terapia-online">
 					<span>Saber más sobre la terapia online</span>
@@ -320,29 +441,16 @@ const arrow =
 		</div>
 	</Section>
 
-	<!-- Cita -->
-	<Section width="narrow">
-		<figure class="flex flex-col items-center gap-8 text-center">
-			<blockquote>
-				<p class="font-display text-heading leading-snug font-normal text-ink">
-					“La salud mental es un viaje de crecimiento y descubrimiento, no un
-					destino al que llegar.”
-				</p>
-			</blockquote>
-
-		</figure>
-	</Section>
-
-	<CtaBand title="Cuando sientas que es el momento, aquí estoy">
+	<CtaBand tone="light" title="Cuando sientas que es el momento, aquí estoy">
 		<p>
-			Cuéntame brevemente qué buscas y te propongo una primera cita, en Pamplona
-			u online.
+			Cuéntame brevemente qué buscas y te propongo una primera cita, en
+			Pamplona u online.
 		</p>
 		<Fragment slot="actions">
-			<Button href={contactHref} variant="inverse">{ctaLabel}</Button>
+			<Button href={contactHref}>{ctaLabel}</Button>
 			<Button
 				href={whatsappUrl}
-				variant="inverse-outline"
+				variant="secondary"
 				icon="chat"
 				target="_blank"
 				rel="noopener noreferrer"
@@ -353,12 +461,39 @@ const arrow =
 		</Fragment>
 		<Fragment slot="note">
 			<p>{ctaNote}</p>
-			<a
-				class="mt-2 inline-flex min-h-11 items-center text-seafoam underline underline-offset-4 transition-[color] duration-200 hover:text-white"
-				href={`mailto:${email}`}
-			>
-				Escribirme a {email}
-			</a>
+			
+		</Fragment>
+		<!-- Cita: closes the band, typed in when it scrolls into view. -->
+		<Fragment slot="quote">
+			<figure class="flex flex-col items-center gap-8 text-center">
+				<blockquote>
+					<p
+						data-reveal
+						class="typewriter font-display text-heading leading-snug font-normal text-ink"
+					>
+						<span class="sr-only">{quote}</span>
+						<span aria-hidden="true">
+							{
+								quoteWords.map((word, index) => (
+									<>
+										{index > 0 && " "}
+										<span class="whitespace-nowrap">
+											{word.map(({ char, at, hold }) => (
+												<span
+													class="typewriter-char"
+													style={`--at: ${at}ms; --hold: ${hold}ms`}
+												>
+													{char}
+												</span>
+											))}
+										</span>
+									</>
+								))
+							}
+						</span>
+					</p>
+				</blockquote>
+			</figure>
 		</Fragment>
 	</CtaBand>
 </Layout>

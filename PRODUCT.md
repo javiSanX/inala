@@ -37,11 +37,11 @@ Approach: integrative and evidence-based, with a trusting, non-judgemental relat
 
 ## Capabilities and Constraints
 
-- Services: Terapia Individual (65 €, 60 min), Terapia de Pareja (75 €, 60 min), Terapia Familiar (75 €, 60 min), Psicología Parental (price and duration undecided: `[PENDIENTE]`). The single source is `src/data/site.ts`.
+- Services: Terapia Individual (65 €, 60 min), Terapia de Pareja (75 €, 60 min), Terapia Familiar (75 €, 60 min), Psicología Perinatal (price and duration undecided: `[PENDIENTE]`). The single source is `src/data/site.ts`.
 - No booking system, payments or patient area. The form only prepares an email.
 - The practice does not handle emergencies. The crisis notice (024 / 112) has to stay visible wherever it matters.
 - Mental-health domain: never invent claims, credentials, results, statistics, testimonials or prices. Mark any gap as `[PENDIENTE: ...]`.
-- Undecided: the universities and centres of her training, the usual reply time, the price and duration of Psicología Parental.
+- Undecided: the universities and centres of her training, the usual reply time, the price and duration of Psicología Perinatal.
 - All user-facing copy is in Spanish (es-ES), including slugs, titles and alt text.
 
 ## Brand Commitments
