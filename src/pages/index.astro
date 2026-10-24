@@ -1,5 +1,5 @@
 ---
-import heroImage from "../assets/images/hero_image5.jpeg";
+import heroAnimation from "../assets/images/hero_index.webp";
 import mariaImage from "../assets/images/maria1.webp";
 import PageHero from "../components/PageHero.astro";
 import Button from "../components/ui/Button.astro";
@@ -173,7 +173,7 @@ const arrow =
 ---
 
 <Layout title={title} description={description}>
-	<PageHero size="display" accent backgroundImage={heroImage}>
+	<PageHero size="display" accent backgroundAnimation={heroAnimation}>
 		<p
 			slot="eyebrow"
 			class="inline-flex items-center gap-2 rounded-field border border-teal/25 bg-mist px-4 py-2 text-small font-medium text-teal-strong"
@@ -185,11 +185,9 @@ const arrow =
 			Terapia psicológica <span>adaptada a cada situación</span>
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
-			Soy {therapistName}, psicóloga general sanitaria (Nº col. {
-				licenseNumber
-			}). Acompaño a niños, adolescentes y adultos, a parejas, a familias y a
-			madres y padres en la crianza, para entender lo que está pasando y
-			encontrar herramientas para sentirse mejor, sin prisas.
+			Soy {therapistName}, psicóloga general sanitaria en Pamplona. Terapia
+			presencial y online para niños, adolescentes, adultos, parejas y
+			familias, y orientación en la crianza. Sin prisas.
 		</p>
 		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
 			<Button href={contactHref} arrow>{ctaLabel}</Button>
@@ -461,7 +459,7 @@ const arrow =
 		</Fragment>
 		<Fragment slot="note">
 			<p>{ctaNote}</p>
-			
+
 		</Fragment>
 		<!-- Cita: closes the band, typed in when it scrolls into view. -->
 		<Fragment slot="quote">

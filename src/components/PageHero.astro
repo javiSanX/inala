@@ -17,6 +17,9 @@ interface Props {
 	accent?: boolean;
 	/** Decorative full-bleed background; the hero is at least as tall as the image at full width. */
 	backgroundImage?: ImageMetadata;
+	/** Animated WebP shown instead of the still. With prefers-reduced-motion it falls back to
+	 * backgroundImage, or is hidden when there is none (a WebP cannot be paused). */
+	backgroundAnimation?: ImageMetadata;
 }
 
 const {
@@ -28,7 +31,10 @@ const {
 	size = "title",
 	accent = false,
 	backgroundImage,
+	backgroundAnimation,
 } = Astro.props;
+const backgroundSize = backgroundAnimation ?? backgroundImage;
+const hasBackground = Boolean(backgroundSize);
 
 const hasMedia = Boolean(image) || Astro.slots.has("media");
 const hasCaption = Astro.slots.has("caption");
@@ -38,29 +44,55 @@ const hasCaption = Astro.slots.has("caption");
 	class:list={[
 		"bg-paper pb-24 lg:pb-24",
 		// The background hero slides under the transparent header: -mt-18 and +4.5rem of top padding.
-		backgroundImage
+		hasBackground
 			? "relative isolate -mt-18 overflow-hidden pt-42 lg:pt-42"
 			: "pt-24 lg:pt-24",
 	]}
-	style={backgroundImage &&
-		`min-height: calc(100vw * ${backgroundImage.height} / ${backgroundImage.width})`}
+	style={hasBackground &&
+		`min-height: calc(100vw * ${backgroundSize?.height} / ${backgroundSize?.width})`}
 >
 	{
-		backgroundImage && (
-			<Picture
-				src={backgroundImage}
-				alt=""
-				formats={["avif", "webp"]}
-				widths={[640, 960, 1376]}
-				sizes="100vw"
-				loading="eager"
-				fetchpriority="high"
-				class="absolute inset-0 -z-10 size-full object-cover object-left-top"
-			/>
+		hasBackground && (
+			<>
+			{backgroundAnimation ? (
+				<picture>
+					{backgroundImage && (
+						<source
+							media="(prefers-reduced-motion: reduce)"
+							srcset={backgroundImage.src}
+						/>
+					)}
+					<img
+						src={backgroundAnimation.src}
+						alt=""
+						width={backgroundAnimation.width}
+						height={backgroundAnimation.height}
+						loading="eager"
+						fetchpriority="high"
+						decoding="async"
+						class:list={[
+							"absolute inset-0 -z-10 size-full object-cover object-left-top",
+							!backgroundImage && "motion-reduce:hidden",
+						]}
+					/>
+				</picture>
+			) : backgroundImage ? (
+				<Picture
+					src={backgroundImage}
+					alt=""
+					formats={["avif", "webp"]}
+					widths={[640, 960, 1376]}
+					sizes="100vw"
+					loading="eager"
+					fetchpriority="high"
+					class="absolute inset-0 -z-10 size-full object-cover object-left-top"
+				/>
+			) : null}
 			<div
 				aria-hidden="true"
 				class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/4 bg-linear-to-b from-transparent to-white"
 			/>
+			</>
 		)
 	}
 	<div class="mx-auto max-w-content px-5 sm:px-8 lg:px-10">
@@ -78,8 +110,10 @@ const hasCaption = Astro.slots.has("caption");
 				)}
 				<h1
 					class:list={[
-						"font-display font-normal text-ink [&_em]:not-italic",
-						accent && "[&_span]:text-teal",
+						"text-ink [&_em]:not-italic",
+						accent
+							? "font-hero font-medium tracking-[-0.02em] [&_span]:font-normal [&_span]:text-teal [&_span]:italic"
+							: "font-display font-normal",
 						size === "display" ? "text-display" : "text-title",
 					]}
 				>
@@ -92,7 +126,7 @@ const hasCaption = Astro.slots.has("caption");
 				}
 				<slot />
 				{
-					backgroundImage && hasCaption && (
+					hasBackground && hasCaption && (
 						<p class="flex items-center gap-2 text-label text-ink-muted">
 							<slot name="caption" />
 						</p>

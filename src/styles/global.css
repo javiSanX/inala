@@ -45,6 +45,7 @@
 	/* Families come from Astro's font API (astro.config.mjs), self-hosted with fallbacks. */
 	--font-display: var(--font-gambetta);
 	--font-sans: var(--font-synonym);
+	--font-hero: var(--font-cormorant);
 
 	/* Type scale */
 	--text-display: clamp(2.5rem, 1.55rem + 3.4vw, 4.25rem);
@@ -88,13 +89,13 @@
 	--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 	--default-transition-timing-function: ease;
 
-	--animate-rise: rise 700ms var(--ease-out) both;
+	--animate-rise: rise 900ms var(--ease-out) both;
 	--animate-fade: fade 200ms ease both;
 
 	@keyframes rise {
 		from {
 			opacity: 0;
-			transform: translateY(14px);
+			transform: translateY(32px);
 		}
 		to {
 			opacity: 1;
@@ -175,31 +176,31 @@
 	@media (prefers-reduced-motion: no-preference) {
 		.hero-copy > * {
 			animation: var(--animate-rise);
-			animation-delay: 2000ms;
+			animation-delay: 1000ms;
 		}
 
 		.hero-copy > :nth-child(2) {
-			animation-delay: 2080ms;
+			animation-delay: 1080ms;
 		}
 
 		.hero-copy > :nth-child(3) {
-			animation-delay: 2160ms;
+			animation-delay: 1160ms;
 		}
 
 		.hero-copy > :nth-child(4) {
-			animation-delay: 2240ms;
+			animation-delay: 1240ms;
 		}
 
 		.hero-copy > :nth-child(5) {
-			animation-delay: 2320ms;
+			animation-delay: 1320ms;
 		}
 
 		.hero-copy > :nth-child(n + 6) {
-			animation-delay: 2400ms;
+			animation-delay: 1400ms;
 		}
 
 		.hero-media {
-			animation: settle 900ms var(--ease-out) 2120ms both;
+			animation: settle 900ms var(--ease-out) 1120ms both;
 		}
 
 		@keyframes settle {

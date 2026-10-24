@@ -53,6 +53,17 @@ export default defineConfig({
 				],
 			},
 		},
+		// Home h1 only: Cormorant Garamond is downloaded at build time and self-hosted.
+		{
+			provider: fontProviders.google(),
+			name: "Cormorant Garamond",
+			cssVariable: "--font-cormorant",
+			fallbacks: ["Georgia", "serif"],
+			display: "swap",
+			weights: ["400", "500"],
+			styles: ["normal", "italic"],
+			subsets: ["latin"],
+		},
 		{
 			provider: fontProviders.local(),
 			name: "Synonym",
