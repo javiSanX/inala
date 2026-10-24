@@ -1,0 +1,44 @@
+---
+/** Full-screen intro shown before the home hero, once per session. Decorative:
+ * the h1 below carries the same message, so the layer is hidden from assistive tech.
+ * Place it right before <PageHero>; the hero's entrance waits for it (global.css). */
+import { Image } from "astro:assets";
+import { logo } from "../data/site";
+---
+
+<script is:inline>
+	try {
+		if (sessionStorage.getItem("inala-intro")) {
+			document.documentElement.dataset.intro = "seen";
+		} else {
+			sessionStorage.setItem("inala-intro", "1");
+		}
+	} catch {}
+</script>
+<div
+	aria-hidden="true"
+	class="hero-intro pointer-events-none fixed inset-0 z-70 place-items-center bg-white"
+>
+	<div class="hero-intro-circle absolute inset-0 bg-seafoam-soft"></div>
+	{/* The header logo and wordmark (Header.astro), scaled up. */}
+	<div class="hero-intro-title relative flex items-center gap-4 sm:gap-5">
+		<Image
+			src={logo}
+			alt=""
+			width={96}
+			height={96}
+			densities={[1, 2]}
+			loading="eager"
+			class="size-16 sm:size-20 lg:size-24"
+		/>
+		<p class="flex flex-col leading-none">
+			<span class="font-display text-display font-medium tracking-wide text-ink"
+				>INALA</span
+			>
+			<span
+				class="mt-3 text-label font-semibold uppercase tracking-widest text-ink-muted sm:text-small"
+				>Centro de Psicoterapia</span
+			>
+		</p>
+	</div>
+</div>

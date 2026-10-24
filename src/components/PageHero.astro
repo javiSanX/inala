@@ -17,9 +17,9 @@ interface Props {
 	accent?: boolean;
 	/** Decorative full-bleed background; the hero is at least as tall as the image at full width. */
 	backgroundImage?: ImageMetadata;
-	/** Animated WebP shown instead of the still. With prefers-reduced-motion it falls back to
-	 * backgroundImage, or is hidden when there is none (a WebP cannot be paused). */
-	backgroundAnimation?: ImageMetadata;
+	/** Video played once over backgroundImage, which is its poster (the first frame).
+	 * Sources in order of preference; `media` serves a lighter file to small screens. */
+	backgroundVideo?: { src: string; type: string; media?: string }[];
 }
 
 const {
@@ -31,10 +31,9 @@ const {
 	size = "title",
 	accent = false,
 	backgroundImage,
-	backgroundAnimation,
+	backgroundVideo,
 } = Astro.props;
-const backgroundSize = backgroundAnimation ?? backgroundImage;
-const hasBackground = Boolean(backgroundSize);
+const hasBackground = Boolean(backgroundImage);
 
 const hasMedia = Boolean(image) || Astro.slots.has("media");
 const hasCaption = Astro.slots.has("caption");
@@ -49,33 +48,28 @@ const hasCaption = Astro.slots.has("caption");
 			: "pt-24 lg:pt-24",
 	]}
 	style={hasBackground &&
-		`min-height: calc(100vw * ${backgroundSize?.height} / ${backgroundSize?.width})`}
+		`min-height: calc(100vw * ${backgroundImage?.height} / ${backgroundImage?.width})`}
 >
 	{
 		hasBackground && (
 			<>
-			{backgroundAnimation ? (
-				<picture>
-					{backgroundImage && (
-						<source
-							media="(prefers-reduced-motion: reduce)"
-							srcset={backgroundImage.src}
-						/>
-					)}
-					<img
-						src={backgroundAnimation.src}
-						alt=""
-						width={backgroundAnimation.width}
-						height={backgroundAnimation.height}
-						loading="eager"
-						fetchpriority="high"
-						decoding="async"
-						class:list={[
-							"absolute inset-0 -z-10 size-full object-cover object-left-top",
-							!backgroundImage && "motion-reduce:hidden",
-						]}
-					/>
-				</picture>
+			{backgroundVideo && backgroundImage ? (
+				<div aria-hidden="true" class="absolute inset-0 -z-10">
+					<video
+						muted
+						playsinline
+						preload="none"
+						poster={backgroundImage.src}
+						width={backgroundImage.width}
+						height={backgroundImage.height}
+						data-hero-video
+						class="size-full object-cover object-left-top"
+					>
+						{backgroundVideo.map((source) => (
+							<source src={source.src} type={source.type} media={source.media} />
+						))}
+					</video>
+				</div>
 			) : backgroundImage ? (
 				<Picture
 					src={backgroundImage}
@@ -163,3 +157,7 @@ const hasCaption = Astro.slots.has("caption");
 		</div>
 	</div>
 </section>
+
+<script>
+	import "../scripts/hero-video";
+</script>

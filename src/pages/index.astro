@@ -1,6 +1,11 @@
 ---
-import heroAnimation from "../assets/images/hero_index_animation.webp";
+import heroPoster from "../assets/images/hero_index_poster.webp";
 import mariaImage from "../assets/images/maria1.webp";
+import heroVideo1280 from "../assets/videos/hero_index_1280.mp4";
+import heroAv11280 from "../assets/videos/hero_index_1280.webm";
+import heroVideo1920 from "../assets/videos/hero_index_1920.mp4";
+import heroAv11920 from "../assets/videos/hero_index_1920.webm";
+import HeroIntro from "../components/HeroIntro.astro";
 import PageHero from "../components/PageHero.astro";
 import Button from "../components/ui/Button.astro";
 import CtaBand from "../components/ui/CtaBand.astro";
@@ -16,7 +21,6 @@ import {
 	addressCity,
 	contactHref,
 	ctaLabel,
-	ctaNote,
 	email,
 	licenseNumber,
 	services,
@@ -28,6 +32,19 @@ import Layout from "../layouts/Layout.astro";
 const title = "Psicóloga en Pamplona y online | INALA Centro de Psicoterapia";
 const description =
 	"Terapia psicológica para adultos, parejas y familias en Pamplona y online, con María Sánchez, psicóloga general sanitaria (Nº col. NA-02300). Sesiones de 60 minutos.";
+
+// AV1 first (about half the size), H.264 for the rest; phones get the 1280px cut.
+const phone = "(max-width: 47.99rem)";
+const heroVideo = [
+	{
+		src: heroAv11280,
+		type: 'video/webm; codecs="av01.0.05M.08"',
+		media: phone,
+	},
+	{ src: heroVideo1280, type: "video/mp4", media: phone },
+	{ src: heroAv11920, type: 'video/webm; codecs="av01.0.08M.08"' },
+	{ src: heroVideo1920, type: "video/mp4" },
+];
 
 const heroFacts = [
 	{ icon: "location_on", title: "Pamplona y online", subtitle: "Tú eliges" },
@@ -173,7 +190,13 @@ const arrow =
 ---
 
 <Layout title={title} description={description}>
-	<PageHero size="display" accent backgroundAnimation={heroAnimation}>
+	<HeroIntro />
+	<PageHero
+		size="display"
+		accent
+		backgroundImage={heroPoster}
+		backgroundVideo={heroVideo}
+	>
 		<p
 			slot="eyebrow"
 			class="inline-flex items-center gap-2 rounded-field border border-teal/25 bg-mist px-4 py-2 text-small font-medium text-teal-strong"
@@ -184,12 +207,15 @@ const arrow =
 		<Fragment slot="title">
 			Terapia psicológica <span>adaptada a cada situación</span>
 		</Fragment>
-		<p class="max-w-xl text-lead text-ink-muted">
+		<p class="max-w-xl text-lead text-ink-muted" data-enter="left">
 			Soy {therapistName}, psicóloga general sanitaria en Pamplona. Terapia
 			presencial y online para niños, adolescentes, adultos, parejas y
 			familias, y orientación en la crianza. Sin prisas.
 		</p>
-		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+		<div
+			class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap"
+			data-enter="right"
+		>
 			<Button href={contactHref} arrow>{ctaLabel}</Button>
 			<Button href="/servicios" variant="secondary"
 				>Ver servicios y tarifas</Button
@@ -206,23 +232,23 @@ const arrow =
 		/>
 		<ul class="mt-14 grid gap-x-10 md:grid-cols-2 xl:grid-cols-4">
 			{
-				services.map((service) => (
-					<li>
+				services.map((service, index) => (
+					<li class="reveal-pop" data-reveal style={`--reveal: ${index}`}>
 						<a
 							href={service.href}
-							class="group flex h-full flex-col gap-4 border-t border-line py-8 transition-[border-color] duration-200 hover:border-teal"
+							class="pop-line group relative flex h-full flex-col gap-4 border-t border-line py-8 transition-[border-color] duration-200 hover:border-teal"
 						>
-							<span class="grid size-12 shrink-0 place-items-center rounded-full bg-mist text-2xl text-teal">
+							<span class="pop-icon grid size-12 shrink-0 place-items-center rounded-full bg-mist text-2xl text-teal">
 								<Icon name={service.icon} />
 							</span>
-							<h3 class="font-display text-subheading font-normal text-ink transition-[color] duration-200 group-hover:text-teal">
+							<h3 class="pop-title font-display text-subheading font-normal text-ink transition-[color] duration-200 group-hover:text-teal">
 								{service.name}
 							</h3>
-							<p class="flex-1 text-body text-ink-muted">
+							<p class="pop-text flex-1 text-body text-ink-muted">
 								{service.summary}
 							</p>
 
-							<span class="inline-flex items-center gap-2 text-small font-semibold text-teal">
+							<span class="pop-cta inline-flex items-center gap-2 text-small font-semibold text-teal">
 								Saber más
 								<Icon name="arrow_forward" class={arrow} />
 							</span>
@@ -457,10 +483,7 @@ const arrow =
 				<span>Escribir por WhatsApp</span>
 			</Button>
 		</Fragment>
-		<Fragment slot="note">
-			<p>{ctaNote}</p>
 
-		</Fragment>
 		<!-- Cita: closes the band, typed in when it scrolls into view. -->
 		<Fragment slot="quote">
 			<figure class="flex flex-col items-center gap-8 text-center">

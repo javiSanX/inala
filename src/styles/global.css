@@ -173,34 +173,139 @@
    the animation only plays when motion is welcome. Copy rises line by line,
    80ms apart; the image settles in alongside. */
 @layer components {
+	/* Display lives here, not in a utility class: utilities would beat the
+	   components layer and keep the intro hidden. */
+	.hero-intro {
+		display: none;
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
+		:root {
+			--hero-start: 1000ms;
+		}
+
+		/* Layout.astro marks a reload: the copy still animates, without waiting. */
+		:root[data-reload] {
+			--hero-start: 0ms;
+		}
+
 		.hero-copy > * {
 			animation: var(--animate-rise);
-			animation-delay: 1000ms;
+			animation-delay: var(--hero-start);
 		}
 
 		.hero-copy > :nth-child(2) {
-			animation-delay: 1080ms;
+			animation-delay: calc(var(--hero-start) + 80ms);
 		}
 
 		.hero-copy > :nth-child(3) {
-			animation-delay: 1160ms;
+			animation-delay: calc(var(--hero-start) + 160ms);
 		}
 
 		.hero-copy > :nth-child(4) {
-			animation-delay: 1240ms;
+			animation-delay: calc(var(--hero-start) + 240ms);
 		}
 
 		.hero-copy > :nth-child(5) {
-			animation-delay: 1320ms;
+			animation-delay: calc(var(--hero-start) + 320ms);
 		}
 
 		.hero-copy > :nth-child(n + 6) {
-			animation-delay: 1400ms;
+			animation-delay: calc(var(--hero-start) + 400ms);
 		}
 
 		.hero-media {
-			animation: settle 900ms var(--ease-out) 1120ms both;
+			animation: settle 900ms var(--ease-out) calc(var(--hero-start) + 120ms)
+				both;
+		}
+
+		/* Home intro (HeroIntro.astro), after upscayl.org: the name rises out of a
+		   blur on white, a seafoam circle opens from the centre and swallows it,
+		   then the layer fades onto the hero. Once per session; the hero's copy
+		   waits for it, and children marked data-enter come in from that side. */
+		:root:has(.hero-intro):not([data-intro="seen"]) {
+			--hero-start: 2300ms;
+			/* The background animation starts with the copy and plays in full (PageHero.astro). */
+			--hero-video-start: var(--hero-start);
+		}
+
+		:root:not([data-intro="seen"]) .hero-intro {
+			display: grid;
+			animation: intro-out 600ms var(--ease-out) 2200ms forwards;
+		}
+
+		.hero-intro-title {
+			animation:
+				intro-title-in 1100ms var(--ease-out) 100ms both,
+				intro-title-out 500ms var(--ease-out) 1500ms forwards;
+		}
+
+		.hero-intro-circle {
+			animation: intro-circle 1000ms var(--ease-in-out) 1400ms both;
+		}
+
+		.hero-copy > [data-enter="left"] {
+			animation-name: slide-from-left;
+		}
+
+		.hero-copy > [data-enter="right"] {
+			animation-name: slide-from-right;
+		}
+
+		@keyframes intro-title-in {
+			from {
+				opacity: 0;
+				transform: translateY(60px);
+				filter: blur(10px);
+			}
+		}
+
+		@keyframes intro-title-out {
+			to {
+				opacity: 0;
+				transform: scale(0.96);
+				filter: blur(6px);
+			}
+		}
+
+		@keyframes intro-circle {
+			from {
+				clip-path: circle(4% at 50% 50%);
+				opacity: 0;
+			}
+			to {
+				clip-path: circle(72% at 50% 50%);
+				opacity: 1;
+			}
+		}
+
+		@keyframes intro-out {
+			to {
+				opacity: 0;
+				visibility: hidden;
+			}
+		}
+
+		@keyframes slide-from-left {
+			from {
+				opacity: 0;
+				transform: translateX(-40px);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		@keyframes slide-from-right {
+			from {
+				opacity: 0;
+				transform: translateX(40px);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
 		}
 
 		@keyframes settle {
@@ -280,6 +385,107 @@
 			transition:
 				opacity 600ms var(--ease-out) 700ms,
 				transform 600ms var(--ease-out) 700ms;
+		}
+
+		/* Pop variant (home services): each card rises with a slight tilt, a teal
+		   line draws across its top rule and fades back into it, the icon spins in
+		   and settles, then title, text and link follow. Cards are
+		   --reveal (their index) x 120ms apart. */
+		.reveal-pop {
+			--pop-at: calc(var(--reveal, 0) * 120ms);
+		}
+
+		.reveal-pop[data-reveal="shown"] {
+			transition: none;
+			animation: pop-rise 900ms var(--ease-out) var(--pop-at) both;
+		}
+
+		.reveal-pop[data-reveal="shown"] .pop-line::before {
+			content: "";
+			position: absolute;
+			inset-inline: 0;
+			top: -1px;
+			height: 2px;
+			background-color: var(--color-teal);
+			transform-origin: left;
+			animation: pop-line 1400ms var(--ease-in-out) calc(var(--pop-at) + 150ms)
+				both;
+		}
+
+		.reveal-pop[data-reveal="shown"] .pop-icon {
+			animation: pop-icon 800ms var(--ease-out) calc(var(--pop-at) + 200ms) both;
+		}
+
+		.reveal-pop[data-reveal="shown"] .pop-title {
+			animation: pop-up 700ms var(--ease-out) calc(var(--pop-at) + 300ms) both;
+		}
+
+		.reveal-pop[data-reveal="shown"] .pop-text {
+			animation: pop-up 700ms var(--ease-out) calc(var(--pop-at) + 380ms) both;
+		}
+
+		.reveal-pop[data-reveal="shown"] .pop-cta {
+			animation: pop-slide 700ms var(--ease-out) calc(var(--pop-at) + 520ms)
+				both;
+		}
+
+		@keyframes pop-rise {
+			from {
+				opacity: 0;
+				transform: translateY(56px) rotate(-2deg);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		@keyframes pop-line {
+			0% {
+				opacity: 1;
+				transform: scaleX(0);
+			}
+			50% {
+				opacity: 1;
+				transform: scaleX(1);
+			}
+			100% {
+				opacity: 0;
+				transform: scaleX(1);
+			}
+		}
+
+		@keyframes pop-icon {
+			from {
+				opacity: 0;
+				transform: scale(0.5) rotate(-60deg);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		@keyframes pop-up {
+			from {
+				opacity: 0;
+				transform: translateY(16px);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		@keyframes pop-slide {
+			from {
+				opacity: 0;
+				transform: translateX(-16px);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
 		}
 
 		/* Typewriter variant: the line keeps its final layout and each character
