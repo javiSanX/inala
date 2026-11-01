@@ -253,11 +253,11 @@ const arrow =
 		>
 			<!-- Decorative waterfall behind the left column: the whole video, scaled to the section's height. -->
 			<div
-				class="pointer-events-none absolute inset-y-0 left-1/2 hidden w-full max-w-content -translate-x-1/2 px-10 lg:block"
+				class="pointer-events-none absolute inset-y-0 right-0 w-1/2 lg:left-1/2 lg:right-auto lg:w-full lg:max-w-content lg:-translate-x-1/2 lg:px-10"
 				aria-hidden="true"
 			>
-				<div class="flex h-full w-5/12 justify-center">
-					<div class="relative h-full">
+				<div class="flex h-full w-full justify-center lg:w-5/12">
+					<div class="relative size-full lg:w-auto">
 						<video
 							muted
 							loop
@@ -267,7 +267,7 @@ const arrow =
 							width={720}
 							height={1280}
 							data-waterfall-video
-							class="waterfall block h-full w-auto max-w-none"
+							class="waterfall block size-full max-w-none object-cover opacity-60 lg:w-auto lg:opacity-100"
 						>
 							<source src={waterfallWebm} type="video/webm; codecs=av01.0.05M.08" />
 							<source src={waterfallMp4} type="video/mp4" />
@@ -286,6 +286,7 @@ const arrow =
 						<SectionHeader
 							title="¿En qué te puedo acompañar?"
 							id="servicios-titulo"
+							class="max-lg:[&_h2]:text-section"
 						/>
 					</div>
 					<ul class="mt-10 flex flex-col">
@@ -298,18 +299,19 @@ const arrow =
 								>
 									<a
 										href={service.href}
-										class="pop-line group relative grid grid-cols-[auto_1fr] gap-x-5 gap-y-2 border-t border-line py-6 transition-[border-color] duration-200 hover:border-teal"
+										class="pop-line group relative grid grid-cols-[auto_auto_1fr] items-center gap-x-5 lg:grid-cols-[auto_1fr] lg:items-start gap-y-2 py-6 transition-[border-color] duration-200 lg:border-t lg:border-line lg:hover:border-teal"
 									>
-										<span class="pop-icon row-span-3 grid size-12 shrink-0 place-items-center rounded-full bg-mist text-2xl text-teal">
+										<span class="pop-icon row-start-1 grid lg:row-span-3 size-9 shrink-0 place-items-center rounded-full bg-mist text-lg text-teal lg:size-12 lg:text-2xl">
 											<Icon name={service.icon} />
 										</span>
-										<h3 class="pop-title font-display text-subheading font-normal text-ink transition-[color,translate] duration-500 ease-out group-hover:text-teal motion-safe:group-hover-fine:translate-x-2">
+										<span class="col-start-3 row-start-1 h-px bg-line lg:hidden" aria-hidden="true"></span>
+										<h3 class="pop-title col-start-2 row-start-1 font-display text-subheading font-medium lg:font-light text-ink transition-[color,translate] duration-500 ease-out group-hover:text-teal motion-safe:group-hover-fine:translate-x-2">
 											{service.name}
 										</h3>
-										<p class="pop-text text-body text-ink-muted transition-[color] duration-500 ease-out group-hover:text-ink">
+										<p class="pop-text col-span-full text-body lg:col-span-1 text-ink-muted transition-[color] duration-500 ease-out group-hover:text-ink">
 											{service.summary}
 										</p>
-										<span class="pop-cta inline-flex items-center gap-2 text-small font-semibold text-teal">
+										<span class="pop-cta col-span-full inline-flex lg:col-span-1 items-center gap-2 text-small font-semibold text-teal">
 											Saber más
 											<Icon name="arrow_forward" class={arrow} />
 										</span>
@@ -389,7 +391,7 @@ const arrow =
 		</Section>
 
 		<!-- Motivos de consulta -->
-	<Section tone="white">
+	<Section tone="white" class="relative isolate overflow-hidden">
 		<div class="grid gap-x-10 gap-y-14 lg:grid-cols-3">
 			<div class="flex flex-col gap-5 lg:col-span-2">
 				<div class="reveal-title" data-reveal>
@@ -431,7 +433,7 @@ const arrow =
 				}
 			</ol>
 			<div
-				class="relative hidden lg:col-start-3 lg:row-span-2 lg:row-start-1 lg:-my-28 lg:block"
+				class="absolute inset-y-0 right-0 -z-10 w-1/2 lg:relative lg:inset-auto lg:z-auto lg:col-start-3 lg:row-span-2 lg:row-start-1 lg:-my-28 lg:w-auto"
 				aria-hidden="true"
 			>
 				<video

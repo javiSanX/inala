@@ -433,17 +433,19 @@
 			animation: pop-rise 700ms var(--ease-out) var(--pop-at) both;
 		}
 
-		.reveal-pop[data-reveal="shown"] .pop-line::before {
-			content: "";
-			position: absolute;
-			inset-inline-start: var(--pop-line-start, 0);
-			inset-inline-end: 0;
-			top: -1px;
-			height: 2px;
-			background-color: var(--color-teal);
-			transform-origin: left;
-			animation: pop-line 1000ms var(--ease-in-out) calc(var(--pop-at) + 60ms)
-				both;
+		@media (width >= 64rem) {
+			.reveal-pop[data-reveal="shown"] .pop-line::before {
+				content: "";
+				position: absolute;
+				inset-inline-start: var(--pop-line-start, 0);
+				inset-inline-end: 0;
+				top: -1px;
+				height: 2px;
+				background-color: var(--color-teal);
+				transform-origin: left;
+				animation: pop-line 1000ms var(--ease-in-out) calc(var(--pop-at) + 60ms)
+					both;
+			}
 		}
 
 		.reveal-pop[data-reveal="shown"] .pop-icon {
