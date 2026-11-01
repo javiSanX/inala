@@ -14,16 +14,28 @@ if (targets.length > 0 && motionOk && "IntersectionObserver" in window) {
 	);
 	for (const element of below) element.dataset.reveal = "pending";
 
-	const observer = new IntersectionObserver(
-		(entries) => {
-			for (const entry of entries) {
-				if (!entry.isIntersecting) continue;
-				const element = entry.target as HTMLElement;
-				element.dataset.reveal = "shown";
-				observer.unobserve(element);
-			}
-		},
-		{ rootMargin: "0px 0px -12% 0px" },
-	);
-	for (const element of below) observer.observe(element);
+	// Elements reveal once they are 12% into the viewport, or as far in as
+	// their data-reveal-at (a percentage) asks: one observer per distance.
+	const observers = new Map<string, IntersectionObserver>();
+	const observerFor = (at: string) => {
+		let observer = observers.get(at);
+		if (!observer) {
+			observer = new IntersectionObserver(
+				(entries) => {
+					for (const entry of entries) {
+						if (!entry.isIntersecting) continue;
+						const element = entry.target as HTMLElement;
+						element.dataset.reveal = "shown";
+						observer?.unobserve(element);
+					}
+				},
+				{ rootMargin: `0px 0px -${at}% 0px` },
+			);
+			observers.set(at, observer);
+		}
+		return observer;
+	};
+	for (const element of below) {
+		observerFor(element.dataset.revealAt ?? "12").observe(element);
+	}
 }

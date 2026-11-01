@@ -51,9 +51,17 @@
 	--text-display: clamp(2.5rem, 1.55rem + 3.4vw, 4.25rem);
 	--text-display--line-height: 1.04;
 	--text-display--letter-spacing: -0.02em;
+	/* Home h1 on phones: each run fills the line (about 7.4 and 9.3 widths per unit of
+	   font size, over a column of 100vw minus the 1.25rem gutters), capped for tablets. */
+	--text-hero-lead: min(calc((100vw - 2rem)), 4rem);
+	--text-hero-lead--line-height: 1.04;
+	--text-hero-run: min(calc((100vw - 2.5rem) / 9.3), 2.75rem);
+	--text-hero-run--line-height: 1.1;
 	--text-title: clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem);
 	--text-title--line-height: 1.08;
 	--text-title--letter-spacing: -0.018em;
+	--text-section: clamp(2.75rem, 1.6875rem + 4.53vw, 5.3125rem);
+	--text-section--line-height: 1.04;
 	--text-heading: clamp(1.875rem, 1.45rem + 1.6vw, 2.75rem);
 	--text-heading--line-height: 1.12;
 	--text-heading--letter-spacing: -0.012em;
@@ -181,12 +189,7 @@
 
 	@media (prefers-reduced-motion: no-preference) {
 		:root {
-			--hero-start: 1000ms;
-		}
-
-		/* Layout.astro marks a reload: the copy still animates, without waiting. */
-		:root[data-reload] {
-			--hero-start: 0ms;
+			--hero-start: 600ms;
 		}
 
 		.hero-copy > * {
@@ -336,6 +339,25 @@
 			block-size: auto;
 		}
 
+		/* Home services waterfall: a white-backed cutout laid over the section.
+		   Multiply drops its white onto whatever is behind. The mask feathers the
+		   sides and the bottom, where the splash reaches the edge of the frame, so
+		   no cut line shows; the top stays open for the stream to come out of. */
+		.waterfall {
+			mix-blend-mode: multiply;
+			mask-image:
+				linear-gradient(
+					to right,
+					transparent 0,
+					black 16%,
+					black 84%,
+					transparent 100%
+				),
+				linear-gradient(to bottom, black 0, black 76%, transparent 98%);
+			mask-composite: intersect;
+			-webkit-mask-composite: source-in;
+		}
+
 		/* Images below the fold, revealed once by src/scripts/reveal.ts. */
 		[data-reveal="pending"] {
 			opacity: 0;
@@ -347,6 +369,17 @@
 				opacity 800ms var(--ease-out),
 				transform 800ms var(--ease-out);
 			transition-delay: calc(var(--reveal, 0) * 70ms);
+		}
+
+		/* Section title: waits a beat before moving, then travels further and more slowly. */
+		.reveal-title[data-reveal="pending"] {
+			transform: translateY(48px);
+		}
+
+		.reveal-title[data-reveal="shown"] {
+			transition:
+				opacity 1200ms var(--ease-out) 250ms,
+				transform 1400ms var(--ease-out) 250ms;
 		}
 
 		/* Portrait variant: instead of rising, the frame unveils upward while the
@@ -390,42 +423,43 @@
 		/* Pop variant (home services): each card rises with a slight tilt, a teal
 		   line draws across its top rule and fades back into it, the icon spins in
 		   and settles, then title, text and link follow. Cards are
-		   --reveal (their index) x 120ms apart. */
+		   --reveal (their index) x 80ms apart. */
 		.reveal-pop {
-			--pop-at: calc(var(--reveal, 0) * 120ms);
+			--pop-at: calc(var(--reveal, 0) * 80ms);
 		}
 
 		.reveal-pop[data-reveal="shown"] {
 			transition: none;
-			animation: pop-rise 900ms var(--ease-out) var(--pop-at) both;
+			animation: pop-rise 700ms var(--ease-out) var(--pop-at) both;
 		}
 
 		.reveal-pop[data-reveal="shown"] .pop-line::before {
 			content: "";
 			position: absolute;
-			inset-inline: 0;
+			inset-inline-start: var(--pop-line-start, 0);
+			inset-inline-end: 0;
 			top: -1px;
 			height: 2px;
 			background-color: var(--color-teal);
 			transform-origin: left;
-			animation: pop-line 1400ms var(--ease-in-out) calc(var(--pop-at) + 150ms)
+			animation: pop-line 1000ms var(--ease-in-out) calc(var(--pop-at) + 60ms)
 				both;
 		}
 
 		.reveal-pop[data-reveal="shown"] .pop-icon {
-			animation: pop-icon 800ms var(--ease-out) calc(var(--pop-at) + 200ms) both;
+			animation: pop-icon 600ms var(--ease-out) calc(var(--pop-at) + 100ms) both;
 		}
 
 		.reveal-pop[data-reveal="shown"] .pop-title {
-			animation: pop-up 700ms var(--ease-out) calc(var(--pop-at) + 300ms) both;
+			animation: pop-up 550ms var(--ease-out) calc(var(--pop-at) + 160ms) both;
 		}
 
 		.reveal-pop[data-reveal="shown"] .pop-text {
-			animation: pop-up 700ms var(--ease-out) calc(var(--pop-at) + 380ms) both;
+			animation: pop-up 550ms var(--ease-out) calc(var(--pop-at) + 220ms) both;
 		}
 
 		.reveal-pop[data-reveal="shown"] .pop-cta {
-			animation: pop-slide 700ms var(--ease-out) calc(var(--pop-at) + 520ms)
+			animation: pop-slide 550ms var(--ease-out) calc(var(--pop-at) + 300ms)
 				both;
 		}
 
@@ -539,66 +573,38 @@
 			}
 		}
 
-		/* Bento cards start scrambled, overlapping one another, and glide into place (src/scripts/bento.ts). */
-		[data-bento="pending"] > li {
-			--bento-k: 0.35;
-			transform: translate(
-					calc(var(--bento-x) * var(--bento-k)),
-					calc(var(--bento-y) * var(--bento-k))
-				)
-				rotate(var(--bento-r));
+		/* Blur variant (home topics): the element settles from 1.5rem below, a
+		   touch too tall and blurred, over 1s; --reveal staggers the title and its
+		   card by 75ms. */
+		.reveal-blur[data-reveal="pending"] {
+			opacity: 0;
+			transform: translateY(1.5rem) scaleY(1.1);
+			filter: blur(0.5rem);
 		}
 
-		@media (min-width: 48rem) {
-			[data-bento="pending"] > li {
-				--bento-k: 0.7;
+		.reveal-blur[data-reveal="shown"] {
+			transition-property: opacity, transform, filter;
+			transition-duration: 1s;
+			transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+			transition-delay: calc(var(--reveal, 0) * 75ms);
+		}
+	}
+
+	/* Pinned hero: the content scrolling over it darkens it, and lifts again on the way back up.
+	   Tied to the scroll position, so it reverses by itself; opacity only. */
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: scroll()) {
+			.hero-shade {
+				animation: hero-shade linear both;
+				animation-timeline: scroll(root block);
+				animation-range: 0 100svh;
 			}
-		}
 
-		@media (min-width: 64rem) {
-			[data-bento="pending"] > li {
-				--bento-k: 1;
+			@keyframes hero-shade {
+				to {
+					opacity: 0.5;
+				}
 			}
-		}
-
-		[data-bento="shown"] > li {
-			transition: transform 900ms var(--ease-out);
-		}
-
-		[data-bento="pending"] > :nth-child(1) {
-			--bento-x: 220px;
-			--bento-y: 260px;
-			--bento-r: -8deg;
-		}
-
-		[data-bento="pending"] > :nth-child(2) {
-			--bento-x: -420px;
-			--bento-y: 300px;
-			--bento-r: 7deg;
-		}
-
-		[data-bento="pending"] > :nth-child(3) {
-			--bento-x: 300px;
-			--bento-y: -140px;
-			--bento-r: 6deg;
-		}
-
-		[data-bento="pending"] > :nth-child(4) {
-			--bento-x: -260px;
-			--bento-y: -200px;
-			--bento-r: -6deg;
-		}
-
-		[data-bento="pending"] > :nth-child(5) {
-			--bento-x: 380px;
-			--bento-y: -260px;
-			--bento-r: 8deg;
-		}
-
-		[data-bento="pending"] > :nth-child(6) {
-			--bento-x: -380px;
-			--bento-y: -300px;
-			--bento-r: -7deg;
 		}
 	}
 
@@ -614,10 +620,7 @@
 		[data-reveal="pending"] {
 			opacity: 1;
 			transform: none;
-		}
-
-		[data-bento="pending"] > li {
-			transform: none;
+			filter: none;
 		}
 
 		.reveal-unveil[data-reveal="pending"] > div {

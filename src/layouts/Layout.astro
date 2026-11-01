@@ -120,12 +120,6 @@ const structuredData = {
 		<Font cssVariable="--font-cormorant" preload={[{ style: "normal" }]} />
 		<Font cssVariable="--font-synonym" preload />
 		<meta name="generator" content={Astro.generator} />
-		<script is:inline>
-			// On a reload the hero copy enters without its delay (global.css).
-			if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
-				document.documentElement.dataset.reload = "";
-			}
-		</script>
 		{
 			!noindex && (
 				<script

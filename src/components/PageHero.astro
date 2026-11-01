@@ -20,6 +20,8 @@ interface Props {
 	/** Video played once over backgroundImage, which is its poster (the first frame).
 	 * Sources in order of preference; `media` serves a lighter file to small screens. */
 	backgroundVideo?: { src: string; type: string; media?: string }[];
+	/** Keep the hero pinned while the next sections scroll over it (they need `relative z-10`). */
+	pinned?: boolean;
 }
 
 const {
@@ -32,6 +34,7 @@ const {
 	accent = false,
 	backgroundImage,
 	backgroundVideo,
+	pinned = false,
 } = Astro.props;
 const hasBackground = Boolean(backgroundImage);
 
@@ -44,11 +47,22 @@ const hasCaption = Astro.slots.has("caption");
 		"bg-paper pb-24 lg:pb-24",
 		// The background hero slides under the transparent header: -mt-18 and +4.5rem of top padding.
 		hasBackground
-			? "relative isolate -mt-18 overflow-hidden pt-42 lg:pt-42"
+			? "relative isolate -mt-18 overflow-hidden pt-28 lg:pt-42"
 			: "pt-24 lg:pt-24",
+		// Pinned until its bottom edge reaches the bottom of the viewport, so a hero taller
+		// than the screen is never cut off while it waits for the content to cover it.
+		pinned &&
+			"sticky top-[min(0px,calc(100svh-var(--hero-bg-h)))] max-lg:top-0",
+		hasBackground &&
+			(backgroundVideo
+				? // Below lg the hero fills the visible viewport, so the video it holds
+					// always sits at the very bottom of the screen; from lg it keeps the
+					// background image's own ratio instead.
+					"max-lg:min-h-[100svh] lg:min-h-(--hero-bg-h)"
+				: "min-h-(--hero-bg-h)"),
 	]}
 	style={hasBackground &&
-		`min-height: calc(100vw * ${backgroundImage?.height} / ${backgroundImage?.width})`}
+		`--hero-bg-h: calc(100vw * ${backgroundImage?.height} / ${backgroundImage?.width})`}
 >
 	{
 		hasBackground && (
@@ -63,7 +77,13 @@ const hasCaption = Astro.slots.has("caption");
 						width={backgroundImage.width}
 						height={backgroundImage.height}
 						data-hero-video
-						class="size-full object-cover object-left-top"
+						class:list={[
+							"size-full object-cover object-left-top",
+							// Below lg the frame is anchored to the bottom right, wide enough that its
+							// subject (in the right third of the frame) lands in that corner; the top
+							// edge fades into the page.
+							"max-lg:absolute max-lg:right-[-20%] max-lg:bottom-0 max-lg:h-auto max-lg:w-[180%] max-lg:max-w-none max-lg:mask-t-from-60%",
+						]}
 					>
 						{backgroundVideo.map((source) => (
 							<source src={source.src} type={source.type} media={source.media} />
@@ -84,7 +104,10 @@ const hasCaption = Astro.slots.has("caption");
 			) : null}
 			<div
 				aria-hidden="true"
-				class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/4 bg-linear-to-b from-transparent to-white"
+				class:list={[
+					"pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/4 bg-linear-to-b from-transparent to-white",
+					backgroundVideo && "max-lg:h-16",
+				]}
 			/>
 			</>
 		)
@@ -106,7 +129,7 @@ const hasCaption = Astro.slots.has("caption");
 					class:list={[
 						"text-ink [&_em]:not-italic",
 						accent
-							? "font-hero font-medium tracking-[-0.02em] [&_span]:font-normal [&_span]:text-teal [&_span]:italic"
+							? "font-hero font-medium tracking-[-0.02em] [&_.hero-accent]:font-normal [&_.hero-accent]:text-teal [&_.hero-accent]:italic"
 							: "font-display font-normal",
 						size === "display" ? "text-display" : "text-title",
 					]}
@@ -156,6 +179,14 @@ const hasCaption = Astro.slots.has("caption");
 			}
 		</div>
 	</div>
+	{
+		pinned && (
+			<div
+				aria-hidden="true"
+				class="hero-shade pointer-events-none absolute inset-0 z-10 bg-ink opacity-0"
+			/>
+		)
+	}
 </section>
 
 <script>
