@@ -3,7 +3,7 @@ import { getImage, Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import Button from "../../components/ui/Button.astro";
 import Icon from "../../components/ui/Icon.astro";
-import { contactHref, ctaLabel, ctaNote } from "../../data/site";
+import { contactHref, ctaLabel } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -97,7 +97,7 @@ const schema = [
 				</h2>
 				<p class="text-body text-ink-muted">
 					Si quieres hablarlo con calma, puedo acompañarte en mi consulta de
-					Pamplona o por videollamada. {ctaNote}
+					Pamplona o por videollamada.
 				</p>
 				<div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
 					<Button href={contactHref} arrow>{ctaLabel}</Button>

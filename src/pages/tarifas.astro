@@ -11,7 +11,6 @@ import TopicList from "../components/ui/TopicList.astro";
 import {
 	contactHref,
 	ctaLabel,
-	ctaNote,
 	email,
 	services,
 } from "../data/site";
@@ -226,6 +225,5 @@ const isPending = (value: string) => value.startsWith("[PENDIENTE");
 				<span>Escribirme a {email}</span>
 			</Button>
 		</Fragment>
-		<p slot="note">{ctaNote}</p>
 	</CtaBand>
 </Layout>

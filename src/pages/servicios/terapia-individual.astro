@@ -13,13 +13,7 @@ import Quote from "../../components/ui/Quote.astro";
 import Section from "../../components/ui/Section.astro";
 import SectionHeader from "../../components/ui/SectionHeader.astro";
 import TopicList from "../../components/ui/TopicList.astro";
-import {
-	contactHref,
-	ctaLabel,
-	ctaNote,
-	email,
-	licenseNumber,
-} from "../../data/site";
+import { contactHref, ctaLabel, email, licenseNumber } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
 const title = "Terapia individual en Pamplona y online | Inala Psicoterapia";
@@ -278,7 +272,6 @@ const faqs = [
 				<span>{email}</span>
 			</Button>
 		</Fragment>
-		<p slot="note">{ctaNote}</p>
 	</CtaBand>
 	<OtherServices />
 </Layout>

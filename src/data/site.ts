@@ -28,7 +28,6 @@ export const postalAddress = {
 // One label for the primary action everywhere: the contact form sends a
 // request, it does not book a slot.
 export const ctaLabel = "Solicitar primera cita";
-export const ctaNote = "Te respondo para acordar día, hora y modalidad.";
 
 export const crisisNotice =
 	"Esta consulta no atiende urgencias. Si estás en crisis o piensas en hacerte daño, llama al 024 (gratuito, 24 horas) o al 112.";
