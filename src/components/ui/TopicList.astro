@@ -1,9 +1,15 @@
 ---
 // Editorial list for topics, audiences and features: hairline rules and type,
 // not a grid of icon cards.
+
+import Icon from "./Icon.astro";
+import type { IconName } from "./icons";
+
 interface Topic {
 	title: string;
 	text: string;
+	/** Icon name, shown only with the `icons` prop. */
+	icon?: string;
 	/** Small trailing line kept from the content (a tag or a short call). */
 	note?: string;
 }
@@ -20,6 +26,8 @@ interface Props {
 	pad?: boolean;
 	/** "display" sets the numerals at display size above each step. */
 	numerals?: "inline" | "display";
+	/** Set each item's icon in a circle before its text ("grid" layout, not numbered). */
+	icons?: boolean;
 	class?: string;
 }
 
@@ -31,6 +39,7 @@ const {
 	numbered = false,
 	pad = true,
 	numerals = "inline",
+	icons = false,
 	class: className,
 } = Astro.props;
 
@@ -65,6 +74,11 @@ const number = (index: number) =>
 							: "flex gap-5 py-7",
 				]}
 			>
+				{icons && !numbered && !rows && item.icon && (
+					<span class="grid size-10 shrink-0 place-items-center rounded-full bg-seafoam-soft text-xl text-teal">
+						<Icon name={item.icon as IconName} />
+					</span>
+				)}
 				{numbered && (
 					<span
 						class:list={[
