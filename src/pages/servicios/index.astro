@@ -34,6 +34,9 @@ const description =
 			{
 				services.map((service) => (
 					<li class="group relative flex flex-col gap-4 border-t border-line py-10 transition-[border-color] duration-200 hover:border-teal">
+						<span class="absolute top-0 left-0 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-mist text-2xl text-teal ring-8 ring-white">
+							<Icon name={service.icon} />
+						</span>
 						<h2 class="font-display text-heading font-normal text-ink">
 							<a
 								href={service.href}
