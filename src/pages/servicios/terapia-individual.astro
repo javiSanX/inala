@@ -8,6 +8,7 @@ import FactList from "../../components/ui/FactList.astro";
 import Faq from "../../components/ui/Faq.astro";
 import Figure from "../../components/ui/Figure.astro";
 import Icon from "../../components/ui/Icon.astro";
+import type { IconName } from "../../components/ui/icons";
 import Note from "../../components/ui/Note.astro";
 import Quote from "../../components/ui/Quote.astro";
 import Section from "../../components/ui/Section.astro";
@@ -24,17 +25,16 @@ const description =
 const trustBadges = [
 	{ icon: "schedule", label: "Sesiones de 60 minutos" },
 	{ icon: "pin_drop", label: "Pamplona y online" },
-	{ icon: "verified", label: `Nº col. ${licenseNumber}` },
 ];
 
-const sessionFeatures = [
+const sessionFeatures: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "schedule",
 		title: "60 minutos dedicados a ti",
 		text: "Tiempo sin prisas para contar lo que te pasa a tu manera, sin tener que traer nada preparado.",
 	},
 	{
-		icon: "laptop_mac",
+		icon: "videocam",
 		title: "En Pamplona o por videollamada",
 		text: "En mi consulta de Pamplona o desde casa, por videollamada segura. Puedes combinar ambas modalidades.",
 	},
@@ -44,25 +44,25 @@ const sessionFeatures = [
 		text: "Lo que hablamos queda protegido por el secreto profesional. Te escucho con respeto hacia tu historia.",
 	},
 	{
-		icon: "spa",
+		icon: "healing",
 		title: "Herramientas para tu día a día",
 		text: "Recursos sencillos para entender y regular tus emociones, que puedes poner en práctica entre sesiones.",
 	},
 	{
-		icon: "tune",
+		icon: "chat",
 		title: "A tu ritmo y con objetivos compartidos",
 		text: "Definimos juntos qué quieres conseguir, con un enfoque integrador que tiene en cuenta emociones, pensamientos, cuerpo y relaciones.",
 	},
 ];
 
-const audiences = [
+const audiences: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "person",
 		title: "Adultos",
 		text: "Acompaño a personas adultas que desean comprender lo que sienten y adquirir herramientas para vivir de forma más consciente. Trabajo ansiedad, estrés laboral, rupturas de pareja, duelo, sobrecarga emocional, bloqueos vitales e inseguridades cotidianas.",
 	},
 	{
-		icon: "self_improvement",
+		icon: "chat",
 		title: "Adolescentes",
 		text: "Un lugar sin juicios donde expresar lo que viven en esta etapa de cambio: gestión de emociones intensas, presión social o académica, autodescubrimiento, dudas sobre la identidad y dificultades en la convivencia familiar o escolar.",
 	},
@@ -73,24 +73,24 @@ const audiences = [
 	},
 ];
 
-const problems = [
+const problems: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "air",
 		title: "Ansiedad y estrés",
 		text: "Sensación de agitación permanente, pensar demasiado, tensión en el cuerpo, dificultad para calmarte y sobrecarga en el día a día.",
 	},
 	{
-		icon: "wb_twilight",
+		icon: "light_mode",
 		title: "Tristeza, desánimo y gestión emocional",
 		text: "Sensación de vacío o falta de energía, apatía, desbordamiento emocional y dificultad para reconectar con el disfrute y el sentido vital.",
 	},
 	{
-		icon: "self_improvement",
+		icon: "person",
 		title: "Autoestima, autocrítica e identidad",
 		text: "Sensación de insuficiencia, síndrome del impostor, necesidad constante de complacer y autoexigencia severa que frena tu autenticidad.",
 	},
 	{
-		icon: "water_drop",
+		icon: "healing",
 		title: "Duelo, pérdidas y transiciones vitales",
 		text: "Acompañamiento ante el fallecimiento de personas queridas, rupturas de pareja, cambios de etapa y adaptación a nuevos ciclos vitales.",
 	},
@@ -100,7 +100,7 @@ const problems = [
 		text: "Patrones vinculares repetitivos, dependencia, dificultades para poner límites respetuosos sin culpa y resolución constructiva de conflictos.",
 	},
 	{
-		icon: "compass_calibration",
+		icon: "psychology",
 		title: "Crecimiento personal y claridad vital",
 		text: "Bloqueos e indecisión vital, búsqueda de coherencia interior, mejora del autocuidado y alineamiento de tus decisiones con tus valores.",
 	},
@@ -137,10 +137,17 @@ const faqs = [
 ---
 
 <Layout title={title} description={description}>
-	<PageHero backgroundImage={heroImage}>
+	<PageHero accent backgroundImage={heroImage}>
 		<Fragment slot="title">
-			Terapia individual: entender lo que te pasa y encontrar tus <span
-				>propios recursos</span
+			{
+				/* Below lg each run is its own line, sized from the viewport width so
+			  "Terapia psicológica" is the larger and both always fit on one line. */
+			}
+			<span class="max-lg:block max-lg:text-hero-lead"
+				>Terapia individual</span
+			><br />
+			<span class="hero-accent max-lg:block max-lg:text-hero-run"
+				>entender lo que te pasa y encontrar tus propios recursos</span
 			>
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
@@ -148,6 +155,7 @@ const faqs = [
 			sientes, salir de los bloqueos y aprender a cuidarte con más calma.
 			Para adultos, adolescentes y niños.
 		</p>
+		
 		<div class="flex flex-wrap gap-3 pt-2">
 			<Button href={contactHref} icon="calendar_today">
 				<span>{ctaLabel}</span>
@@ -172,30 +180,21 @@ const faqs = [
 
 	<!-- ¿En qué consiste? -->
 	<Section tone="white">
-		<SectionHeader
-			title="Poner palabras a lo que sientes para ver con más claridad"
-			label="¿EN QUÉ CONSISTE LA TERAPIA INDIVIDUAL?"
-		>
-			<p>
-				La terapia individual es un proceso cercano y con estructura: nos
-				detenemos a comprender tus emociones, deshacer lo que te bloquea y
-				construir recursos que te sirvan en tu día a día.
-			</p>
+		<SectionHeader title="¿Qué ocurre durante una sesión?">
+
 		</SectionHeader>
 		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12">
 			<div class="flex flex-col gap-10 lg:col-span-5">
 				<Figure src={heroImage} alt="" ratio="landscape" />
-				<Quote>
+				<Quote class="italic">
 					«Cuidar de tu mente es el primer paso para habitar tu propia vida
 					con calma y presencia.»
 				</Quote>
 			</div>
 			<div class="lg:col-span-7">
-				<h3 class="font-display text-subheading font-normal text-ink">
-					¿Qué ocurre durante una sesión?
-				</h3>
 				<TopicList
 					items={sessionFeatures}
+					icons
 					columns={1}
 					level={4}
 					class="mt-6"
@@ -205,18 +204,33 @@ const faqs = [
 	</Section>
 
 	<!-- ¿Para quién? -->
-	<Section>
-		<SectionHeader
-			title="¿Para quién es la terapia individual?"
-			label="ACOMPAÑAMIENTO EN CADA ETAPA VITAL"
-		>
-			<p>
-				Acompaño a personas en distintos momentos de su vida y adapto el
-				proceso y las herramientas a cada etapa:
-			</p>
+	<Section tone="mist">
+		<SectionHeader>
+			<Fragment slot="title">
+				¿Para quién es la <span class="text-teal">terapia individual</span>?
+			</Fragment>
+
 		</SectionHeader>
-		<TopicList items={audiences} columns={3} class="mt-14" />
-		<Note class="mt-6">
+		<ul class="mt-24 grid gap-x-12 gap-y-20 lg:grid-cols-3">
+			{
+				audiences.map((audience, index) => (
+					<li
+						class="reveal-blur relative border-t border-seafoam pt-16"
+						data-reveal
+						style={`--reveal: ${index}`}
+					>
+						<span class="absolute top-0 left-0 grid size-16 -translate-y-1/2 place-items-center rounded-full bg-white text-3xl text-teal ring-8 ring-mist">
+							<Icon name={audience.icon} />
+						</span>
+						<h3 class="font-display text-heading font-normal text-ink">
+							{audience.title}
+						</h3>
+						<p class="mt-4 text-body text-ink-muted">{audience.text}</p>
+					</li>
+				))
+			}
+		</ul>
+		<Note class="mt-16">
 			Sea cual sea tu momento vital, la terapia se adapta a tu ritmo y a lo
 			que tú necesitas.
 		</Note>
@@ -224,35 +238,34 @@ const faqs = [
 
 	<!-- ¿Qué problemas se trabajan? -->
 	<Section tone="white">
-		<SectionHeader
-			title="¿Qué problemas se trabajan?"
-			label="¿QUÉ TRABAJAMOS EN CONSULTA?"
-		>
-			<p>
-				La terapia no es solo para momentos de crisis. Si te reconoces en
-				alguna de estas situaciones, puedo ayudarte a encontrar claridad y
-				alivio:
-			</p>
-		</SectionHeader>
-		<TopicList items={problems} layout="rows" class="mt-14" />
-	</Section>
+		<SectionHeader>
+			<Fragment slot="title">
+				¿Qué <span class="text-teal">problemas se trabajan</span>?
+			</Fragment>
 
-	<!-- Preguntas frecuentes -->
-	<Section>
-		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
-			<SectionHeader
-				title="Preguntas frecuentes sobre la terapia individual"
-				label="Preguntas frecuentes"
-				layout="stack"
-				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
-			>
-				<p>
-					Es normal tener dudas antes de empezar. Si la tuya no está aquí,
-					escríbeme y te respondo.
-				</p>
-			</SectionHeader>
-			<Faq items={faqs} class="lg:col-span-7" />
-		</div>
+		</SectionHeader>
+		<ul class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				problems.map((problem, index) => (
+					<li
+						class="reveal-blur flex flex-col gap-3"
+						data-reveal
+						style={`--reveal: ${index}`}
+					>
+						<div class="flex items-center gap-4">
+							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-seafoam-soft text-xl text-teal">
+								<Icon name={problem.icon} />
+							</span>
+							<span class="h-px flex-1 bg-line" aria-hidden="true" />
+						</div>
+						<h3 class="font-display text-lead font-normal text-ink">
+							{problem.title}
+						</h3>
+						<p class="text-body text-ink-muted">{problem.text}</p>
+					</li>
+				))
+			}
+		</ul>
 	</Section>
 
 	<CtaBand
@@ -273,5 +286,22 @@ const faqs = [
 			</Button>
 		</Fragment>
 	</CtaBand>
+	<!-- Preguntas frecuentes -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Preguntas frecuentes sobre la terapia individual"
+				layout="stack"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
+			>
+				<p>
+					Es normal tener dudas antes de empezar. Si la tuya no está aquí,
+					escríbeme y te respondo.
+				</p>
+			</SectionHeader>
+			<Faq items={faqs} class="lg:col-span-7" />
+		</div>
+	</Section>
+
 	<OtherServices />
 </Layout>
