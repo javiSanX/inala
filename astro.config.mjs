@@ -8,6 +8,9 @@ import { defineConfig, fontProviders } from "astro/config";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://inala.es",
+	server: {
+		host: true,
+	},
 	integrations: [
 		sitemap({
 			// Pages marked noindex stay out of the sitemap.
