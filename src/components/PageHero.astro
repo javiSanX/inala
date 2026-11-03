@@ -20,6 +20,9 @@ interface Props {
 	/** Video played once over backgroundImage, which is its poster (the first frame).
 	 * Sources in order of preference; `media` serves a lighter file to small screens. */
 	backgroundVideo?: { src: string; type: string; media?: string }[];
+	/** Below lg, where the image's subject sits: "crop" fills the hero from the top left (so a
+	 * subject on the right is cut off); "corner" anchors a wide copy to the bottom right. */
+	mobileBackground?: "crop" | "corner";
 	/** Keep the hero pinned while the next sections scroll over it (they need `relative z-10`). */
 	pinned?: boolean;
 }
@@ -34,9 +37,11 @@ const {
 	accent = false,
 	backgroundImage,
 	backgroundVideo,
+	mobileBackground = "crop",
 	pinned = false,
 } = Astro.props;
 const hasBackground = Boolean(backgroundImage);
+const corner = mobileBackground === "corner" && !backgroundVideo;
 
 const hasMedia = Boolean(image) || Astro.slots.has("media");
 const hasCaption = Astro.slots.has("caption");
@@ -54,7 +59,7 @@ const hasCaption = Astro.slots.has("caption");
 		pinned &&
 			"sticky top-[min(0px,calc(100svh-var(--hero-bg-h)))] max-lg:top-0",
 		hasBackground &&
-			(backgroundVideo
+			(backgroundVideo || corner
 				? // Below lg the hero fills the visible viewport, so the video it holds
 					// always sits at the very bottom of the screen; from lg it keeps the
 					// background image's own ratio instead.
@@ -96,17 +101,24 @@ const hasCaption = Astro.slots.has("caption");
 					alt=""
 					formats={["avif", "webp"]}
 					widths={[640, 960, 1376]}
-					sizes="100vw"
+					sizes={corner ? "(min-width: 1024px) 100vw, 180vw" : "100vw"}
 					loading="eager"
 					fetchpriority="high"
-					class="absolute inset-0 -z-10 size-full object-cover object-left-top"
+					class:list={[
+						"absolute -z-10 object-cover object-left-top",
+						corner
+							? // Same placement as the home video: wide enough that the subject lands
+								// in the bottom right corner, with the top edge fading into the page.
+								"max-lg:right-[-20%] max-lg:bottom-0 max-lg:h-auto max-lg:w-[180%] max-lg:max-w-none max-lg:mask-t-from-60% lg:inset-0 lg:size-full"
+							: "inset-0 size-full",
+					]}
 				/>
 			) : null}
 			<div
 				aria-hidden="true"
 				class:list={[
 					"pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/4 bg-linear-to-b from-transparent to-white",
-					backgroundVideo && "max-lg:h-16",
+					(backgroundVideo || corner) && "max-lg:h-16",
 				]}
 			/>
 			</>

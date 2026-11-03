@@ -2,18 +2,17 @@
 import heroImage from "../../assets/images/terapia_individual.jpeg";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
+import SessionHour from "../../components/SessionHour.astro";
 import Button from "../../components/ui/Button.astro";
 import CtaBand from "../../components/ui/CtaBand.astro";
 import FactList from "../../components/ui/FactList.astro";
 import Faq from "../../components/ui/Faq.astro";
-import Figure from "../../components/ui/Figure.astro";
 import Icon from "../../components/ui/Icon.astro";
 import type { IconName } from "../../components/ui/icons";
 import Note from "../../components/ui/Note.astro";
 import Quote from "../../components/ui/Quote.astro";
 import Section from "../../components/ui/Section.astro";
 import SectionHeader from "../../components/ui/SectionHeader.astro";
-import TopicList from "../../components/ui/TopicList.astro";
 import { contactHref, ctaLabel, email, licenseNumber } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
@@ -27,32 +26,12 @@ const trustBadges = [
 	{ icon: "pin_drop", label: "Pamplona y online" },
 ];
 
-const sessionFeatures: { icon: IconName; title: string; text: string }[] = [
-	{
-		icon: "schedule",
-		title: "60 minutos dedicados a ti",
-		text: "Tiempo sin prisas para contar lo que te pasa a tu manera, sin tener que traer nada preparado.",
-	},
-	{
-		icon: "videocam",
-		title: "En Pamplona o por videollamada",
-		text: "En mi consulta de Pamplona o desde casa, por videollamada segura. Puedes combinar ambas modalidades.",
-	},
-	{
-		icon: "lock",
-		title: "Confidencial y sin juicios",
-		text: "Lo que hablamos queda protegido por el secreto profesional. Te escucho con respeto hacia tu historia.",
-	},
-	{
-		icon: "healing",
-		title: "Herramientas para tu día a día",
-		text: "Recursos sencillos para entender y regular tus emociones, que puedes poner en práctica entre sesiones.",
-	},
-	{
-		icon: "chat",
-		title: "A tu ritmo y con objetivos compartidos",
-		text: "Definimos juntos qué quieres conseguir, con un enfoque integrador que tiene en cuenta emociones, pensamientos, cuerpo y relaciones.",
-	},
+const sessionFeatures = [
+	"60 minutos dedicados a ti.",
+	"En mi consulta o por videollamada. Puedes combinar ambas modalidades.",
+	"Confidencial y sin juicios. Lo que hablamos queda protegido por el secreto profesional.",
+	"Recursos sencillos para entender y regular tus emociones, que puedes poner en práctica.",
+	"Definimos juntos qué quieres conseguir, con un enfoque integrador que tiene en cuenta emociones, pensamientos, cuerpo y relaciones.",
 ];
 
 const audiences: { icon: IconName; title: string; text: string }[] = [
@@ -137,7 +116,12 @@ const faqs = [
 ---
 
 <Layout title={title} description={description}>
-	<PageHero accent backgroundImage={heroImage}>
+	<PageHero
+		size="display"
+		accent
+		backgroundImage={heroImage}
+		mobileBackground="corner"
+	>
 		<Fragment slot="title">
 			{
 				/* Below lg each run is its own line, sized from the viewport width so
@@ -145,9 +129,9 @@ const faqs = [
 			}
 			<span class="max-lg:block max-lg:text-hero-lead"
 				>Terapia individual</span
-			><br />
+			>{" "}
 			<span class="hero-accent max-lg:block max-lg:text-hero-run"
-				>entender lo que te pasa y encontrar tus propios recursos</span
+				>entender lo que te pasa</span
 			>
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
@@ -155,59 +139,36 @@ const faqs = [
 			sientes, salir de los bloqueos y aprender a cuidarte con más calma.
 			Para adultos, adolescentes y niños.
 		</p>
-		
+
 		<div class="flex flex-wrap gap-3 pt-2">
 			<Button href={contactHref} icon="calendar_today">
 				<span>{ctaLabel}</span>
 			</Button>
 		</div>
-		<FactList
-			facts={trustBadges.map((badge) => ({
-				title: badge.label,
-				icon: badge.icon,
-			}))}
-			class="mt-4"
-		/>
-		<Fragment slot="caption">
-			<Icon name="lock" class="text-teal" />
-			<span
-				><span class="font-semibold text-ink">Confidencial</span><span
-					>&nbsp;· a tu ritmo.</span
-				></span
-			>
-		</Fragment>
+
+
 	</PageHero>
 
 	<!-- ¿En qué consiste? -->
-	<Section tone="white">
-		<SectionHeader title="¿Qué ocurre durante una sesión?">
-
-		</SectionHeader>
-		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12">
-			<div class="flex flex-col gap-10 lg:col-span-5">
-				<Figure src={heroImage} alt="" ratio="landscape" />
-				<Quote class="italic">
-					«Cuidar de tu mente es el primer paso para habitar tu propia vida
-					con calma y presencia.»
-				</Quote>
-			</div>
-			<div class="lg:col-span-7">
-				<TopicList
-					items={sessionFeatures}
-					icons
-					columns={1}
-					level={4}
-					class="mt-6"
-				/>
-			</div>
-		</div>
+	<Section tone="white" class="max-lg:pt-10">
+		<SessionHour items={sessionFeatures} image={heroImage}>
+			<SectionHeader
+				slot="header"
+				title="¿Qué ocurre durante una sesión?"
+				size="large"
+			/>
+			<Quote class="italic">
+				«Cuidar de tu mente es el primer paso para habitar tu propia vida con
+				calma y presencia.»
+			</Quote>
+		</SessionHour>
 	</Section>
 
 	<!-- ¿Para quién? -->
 	<Section tone="mist">
-		<SectionHeader>
+		<SectionHeader size="large">
 			<Fragment slot="title">
-				¿Para quién es la <span class="text-teal">terapia individual</span>?
+				¿Para quién es la terapia individual?
 			</Fragment>
 
 		</SectionHeader>
@@ -238,9 +199,9 @@ const faqs = [
 
 	<!-- ¿Qué problemas se trabajan? -->
 	<Section tone="white">
-		<SectionHeader>
+		<SectionHeader size="large">
 			<Fragment slot="title">
-				¿Qué <span class="text-teal">problemas se trabajan</span>?
+				¿Qué problemas se trabajan?
 			</Fragment>
 
 		</SectionHeader>
@@ -292,6 +253,7 @@ const faqs = [
 			<SectionHeader
 				title="Preguntas frecuentes sobre la terapia individual"
 				layout="stack"
+				size="large"
 				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
 			>
 				<p>

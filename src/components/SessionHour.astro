@@ -1,0 +1,170 @@
+---
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+	/** What the hour holds, one entry per arc of the ring. */
+	items: string[];
+	/** Shown inside the ring; its subject should sit on the right. */
+	image: ImageMetadata;
+	class?: string;
+}
+
+const { items, image, class: className } = Astro.props;
+
+// The ring is drawn in a 200 x 200 box: the hour as one arc per item, a
+// marker where each arc starts and a tick for every minute inside it.
+const radius = 94;
+const share = 100 / items.length;
+const gap = 1.5;
+const markers = items.map((_, index) => {
+	const angle = (index / items.length) * 2 * Math.PI;
+	return {
+		x: 100 + radius * Math.sin(angle),
+		y: 100 - radius * Math.cos(angle),
+	};
+});
+const ticks = Array.from({ length: 60 }, (_, minute) => {
+	const angle = (minute / 60) * 2 * Math.PI;
+	const inner = minute % 5 === 0 ? 80 : 83;
+	return {
+		x1: 100 + inner * Math.sin(angle),
+		y1: 100 - inner * Math.cos(angle),
+		x2: 100 + 86 * Math.sin(angle),
+		y2: 100 - 86 * Math.cos(angle),
+	};
+});
+// With scroll-driven animations the block becomes a tall track and the stage
+// stays pinned while it scrolls: one item at a time, each with its arc of the
+// hour (global.css). Otherwise it is the plain list beside a full ring.
+// The stage pins the section title (the "header" slot) with the clock below
+// the site header (pt-18): centred in the screen on lg, from the top on phones
+// (pt-22, a beat below the header), where little room is left over. The
+// track's negative margin takes that padding back so the title starts where
+// the section does. A
+// spacer after the stage gives each item 40svh of scroll.
+---
+
+<div
+	class:list={["session-hour", className, "max-lg:scroll-driven:-mt-22 lg:scroll-driven:-mt-18"]}
+	style={`--session-step: 40svh; --session-scroll: calc(${items.length} * 40svh)`}
+>
+	<div
+		class="scroll-driven:sticky scroll-driven:top-0 scroll-driven:flex scroll-driven:h-svh scroll-driven:flex-col lg:scroll-driven:justify-center max-lg:scroll-driven:pt-22 lg:scroll-driven:pt-18"
+	>
+		<slot name="header" />
+		<div
+			class="mt-14 grid gap-x-16 gap-y-10 lg:grid-cols-12 max-lg:scroll-driven:mt-8 scroll-driven:gap-y-4 lg:scroll-driven:items-center"
+		>
+		<div class="flex flex-col gap-10 max-lg:contents lg:col-span-5">
+			<div
+				class="relative mx-auto grid aspect-square w-full max-w-xs place-items-center max-lg:scroll-driven:max-w-clock lg:max-w-sm lg:scroll-driven:max-w-clock-wide"
+			>
+				<div class="size-3/4 overflow-hidden rounded-full bg-mist">
+					<Picture
+						src={image}
+						alt=""
+						formats={["avif", "webp"]}
+						widths={[400, 640, 800]}
+						sizes="(min-width: 1024px) 18rem, 15rem"
+						loading="lazy"
+						class="size-full object-cover object-right"
+					/>
+				</div>
+				<svg
+					viewBox="0 0 200 200"
+					class="absolute inset-0 size-full overflow-visible"
+					aria-hidden="true"
+				>
+					<g
+						class="stroke-line-strong"
+						stroke-width="0.6"
+						stroke-linecap="round"
+					>
+						{ticks.map((tick) => <line {...tick} />)}
+					</g>
+					<circle
+						cx="100"
+						cy="100"
+						r={radius}
+						fill="none"
+						class="stroke-line"
+						stroke-width="1"
+					/>
+					<g
+						transform="rotate(-90 100 100)"
+						fill="none"
+						class="stroke-teal"
+						stroke-width="3"
+						stroke-linecap="round"
+					>
+						{
+							items.map((_, index) => (
+								<circle
+									class="session-arc"
+									style={`--i: ${index}`}
+									cx="100"
+									cy="100"
+									r={radius}
+									pathLength="100"
+									stroke-dasharray={`${share - 2 * gap} ${100 - share + 2 * gap}`}
+									stroke-dashoffset={-(index * share + gap)}
+								/>
+							))
+						}
+					</g>
+					{
+						markers.map((marker, index) => (
+							<g>
+								<circle
+									cx={marker.x}
+									cy={marker.y}
+									r="5"
+									class="fill-white stroke-line-strong"
+									stroke-width="1"
+								/>
+								<circle
+									class="session-mark fill-teal"
+									style={`--i: ${index}`}
+									cx={marker.x}
+									cy={marker.y}
+									r="5"
+								/>
+							</g>
+						))
+					}
+				</svg>
+			</div>
+			<div class="max-lg:order-last max-lg:scroll-driven:mt-4">
+				<slot />
+			</div>
+		</div>
+
+		<ul
+			class="flex flex-col gap-10 lg:col-span-7 lg:gap-16 scroll-driven:grid scroll-driven:gap-0"
+		>
+			{
+				items.map((text, index) => (
+					<li
+						class="session-step flex gap-5 text-lead text-ink scroll-driven:self-start scroll-driven:font-display scroll-driven:text-subheading"
+						style={`--i: ${index}`}
+					>
+						<span
+							class="mt-2 grid size-4 shrink-0 place-items-center rounded-full border border-line-strong bg-white scroll-driven:hidden"
+							aria-hidden="true"
+						>
+							<span class="size-2 rounded-full bg-teal" />
+						</span>
+						<span
+							class="hidden w-1 shrink-0 rounded-full bg-teal scroll-driven:block"
+							aria-hidden="true"
+						/>
+						<p class="max-w-reading">{text}</p>
+					</li>
+				))
+			}
+		</ul>
+		</div>
+	</div>
+	<div class="hidden scroll-driven:block scroll-driven:h-(--session-scroll)"></div>
+</div>

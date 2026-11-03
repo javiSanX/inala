@@ -9,6 +9,16 @@
 	}
 }
 
+/* Layouts that only make sense when a scroll timeline drives them (SessionHour.astro).
+   Short viewports keep the static layout: the pinned stage would not fit. */
+@custom-variant scroll-driven {
+	@media (prefers-reduced-motion: no-preference) and (height >= 40rem) {
+		@supports (animation-timeline: view()) {
+			@slot;
+		}
+	}
+}
+
 @custom-variant group-hover-fine {
 	@media (hover: hover) and (pointer: fine) {
 		&:is(:where(.group):hover *) {
@@ -83,6 +93,12 @@
 	--container-content: 75rem;
 	--container-narrow: 48rem;
 	--container-reading: 35rem;
+	/* Pinned session clock (SessionHour.astro), on phones and from lg: shrinks on
+	   short screens so the title, clock, current item and quote fit one screen.
+	   The rem subtracted is what the site header and the rest of the stage take
+	   with the longest item. */
+	--container-clock: min(20rem, 35svh, 100svh - 30rem);
+	--container-clock-wide: min(24rem, 100svh - 28rem);
 
 	/* Shapes */
 	--radius-field: 0.75rem;
@@ -605,6 +621,118 @@
 			@keyframes hero-shade {
 				to {
 					opacity: 0.5;
+				}
+			}
+		}
+	}
+
+	/* Session hour (SessionHour.astro): the ring is the hour, one arc per item.
+	   While the stage is pinned, the track's scroll is split into one slice of
+	   --session-step per item (--i): in its slice the item's text rises in,
+	   its arc draws round the ring, and the text leaves upward as the next
+	   marker fills. The first item is already there on arrival and the last
+	   one stays. Tied to the scroll position, so it reverses by itself. Same
+	   conditions as the scroll-driven variant, which pins the stage. */
+	@media (prefers-reduced-motion: no-preference) and (height >= 40rem) {
+		@supports (animation-timeline: view()) {
+			.session-hour {
+				view-timeline-name: --session-hour;
+			}
+
+			.session-step,
+			.session-arc,
+			.session-mark {
+				animation-timeline: --session-hour;
+				animation-range: contain calc(var(--i) * var(--session-step)) contain
+					calc((var(--i) + 1) * var(--session-step));
+			}
+
+			.session-step {
+				grid-area: 1 / 1;
+				animation-name: session-step;
+				animation-timing-function: linear;
+				animation-fill-mode: both;
+			}
+
+			.session-step:first-child {
+				animation-name: session-step-first;
+			}
+
+			.session-step:last-child {
+				animation-name: session-step-last;
+			}
+
+			.session-mark {
+				transform-box: fill-box;
+				transform-origin: center;
+				animation-name: session-mark;
+				animation-timing-function: linear;
+				animation-fill-mode: both;
+			}
+
+			.session-arc {
+				animation-name: session-arc;
+				animation-timing-function: linear;
+				animation-fill-mode: both;
+			}
+
+			@keyframes session-step {
+				0% {
+					opacity: 0;
+					transform: translateY(1.5rem);
+				}
+				15%,
+				85% {
+					opacity: 1;
+					transform: none;
+				}
+				100% {
+					opacity: 0;
+					transform: translateY(-1.5rem);
+				}
+			}
+
+			@keyframes session-step-first {
+				85% {
+					opacity: 1;
+					transform: none;
+				}
+				100% {
+					opacity: 0;
+					transform: translateY(-1.5rem);
+				}
+			}
+
+			@keyframes session-step-last {
+				0% {
+					opacity: 0;
+					transform: translateY(1.5rem);
+				}
+				15% {
+					opacity: 1;
+					transform: none;
+				}
+			}
+
+			@keyframes session-mark {
+				0% {
+					opacity: 0;
+					transform: scale(0.4);
+				}
+				10% {
+					opacity: 1;
+					transform: none;
+				}
+			}
+
+			/* At zero length the round cap would still draw a dot: hide it until the arc starts. */
+			@keyframes session-arc {
+				0% {
+					stroke-dasharray: 0 100;
+					opacity: 0;
+				}
+				2% {
+					opacity: 1;
 				}
 			}
 		}
