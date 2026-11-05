@@ -1,88 +1,67 @@
 ---
-import quoteImage from "../../assets/images/oficina.webp";
 import heroImage from "../../assets/images/terapia_de_pareja.jpeg";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
+import SessionHour from "../../components/SessionHour.astro";
 import Button from "../../components/ui/Button.astro";
 import CtaBand from "../../components/ui/CtaBand.astro";
-import FactList from "../../components/ui/FactList.astro";
 import Faq from "../../components/ui/Faq.astro";
-import Figure from "../../components/ui/Figure.astro";
+import Icon from "../../components/ui/Icon.astro";
+import type { IconName } from "../../components/ui/icons";
 import Note from "../../components/ui/Note.astro";
 import Quote from "../../components/ui/Quote.astro";
 import Section from "../../components/ui/Section.astro";
 import SectionHeader from "../../components/ui/SectionHeader.astro";
-import TopicList from "../../components/ui/TopicList.astro";
-import {
-	contactHref,
-	ctaLabel,
-	email,
-	licenseNumber,
-} from "../../data/site";
+import { contactHref, ctaLabel, email } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
-const title =
-	"Terapia de pareja en Pamplona y online | Inala Psicoterapia";
+const title = "Terapia de pareja en Pamplona y online | Inala Psicoterapia";
 
 const description =
 	"Terapia de pareja en Pamplona y online, sin tomar partido: comunicación, distanciamiento, infidelidad, crianza y separación. Sesiones de 60 minutos con María Sánchez, psicóloga general sanitaria.";
 
-const trustPills = [
-	{ icon: "schedule", label: "Sesiones de 60 minutos" },
-	{ icon: "location_on", label: "Pamplona y online" },
-	{ icon: "verified", label: `Nº col. ${licenseNumber}` },
-];
-
 const sessionFeatures = [
 	{
-		icon: "hourglass_top",
 		title: "Sesiones de 60 minutos con los dos",
 		text: "Tiempo para que cada uno tenga su espacio para hablar y ser escuchado, sin prisas.",
 	},
 	{
-		icon: "balance",
 		title: "Sin tomar partido",
 		text: "Una mirada profesional externa que no se pone del lado de nadie y os ayuda a entenderos.",
 	},
 	{
-		icon: "lock_reset",
 		title: "Salir de las discusiones que se repiten",
 		text: "Vemos juntos qué hace que las discusiones escalen (retirarse, atacar, enfriarse) y cómo frenarlas en el momento.",
 	},
 	{
-		icon: "handshake",
 		title: "Herramientas para comunicaros y llegar a acuerdos",
 		text: "Formas concretas de decir lo que necesitáis, resolver desacuerdos del día a día y repartir responsabilidades.",
 	},
 	{
-		icon: "devices",
 		title: "En Pamplona o por videollamada",
 		text: "En mi consulta de Pamplona o desde casa, por videollamada segura.",
 	},
 ];
 
-const audiences = [
+const audiences: { icon: IconName; title: string; text: string }[] = [
 	{
-		icon: "favorite_border",
+		icon: "favorite",
 		title: "Parejas en crisis o distanciamiento",
 		text: "Para parejas que sienten que conviven como extraños o meros compañeros de piso, con falta de afecto, desconexión física y emocional, o pérdida paulatina de la complicidad y la intimidad.",
-		cta: "Reactivar el vínculo",
 	},
 	{
 		icon: "forum",
 		title: "Dificultades de comunicación",
 		text: "Para quienes sienten que cualquier conversación termina en discusiones estériles, malentendidos recurrentes, reproches acumulados o dinámicas desgastantes de ataque y silencio defensivo.",
-		cta: "Aprender a dialogar",
 	},
 	{
 		icon: "call_split",
 		title: "Transiciones o separación consciente",
 		text: "Para parejas que afrontan la llegada del primer hijo, duelo compartido, infidelidades o la decisión de separarse, intentando cuidar el bienestar de los dos y de los hijos durante el proceso.",
-		cta: "Cuidar la transición",
 	},
 ];
 
-const problems = [
+const problems: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "repeat",
 		title: "Crisis de comunicación y discusiones circulares",
@@ -142,84 +121,78 @@ const faqs = [
 
 <Layout title={title} description={description}>
 	<PageHero
-		label="Terapia de pareja · Pamplona y online"
-
-		imageAlt="Dos miembros de una pareja se cogen de las manos sobre un mantel de lino con luz natural de mañana, en un ambiente cálido de consulta."
-backgroundImage={heroImage}
-		>
+		size="display"
+		accent
+		backgroundImage={heroImage}
+		mobileBackground="corner"
+	>
 		<Fragment slot="title">
-			Terapia de pareja: volver a <em>entenderos</em>
+			{
+				/* Below lg each run is its own line, sized from the viewport width so
+			  the lead is the larger and both always fit on one line. */
+			}
+			<span class="max-lg:block max-lg:text-hero-lead">Terapia de pareja</span
+			>{" "}
+			<span class="hero-accent max-lg:block max-lg:text-hero-run"
+				>volver a entenderos</span
+			>
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
 			Un proceso para los dos, guiado y sin tomar partido, donde salir de las
 			dinámicas que os hacen daño, recuperar una comunicación sincera y
 			reconstruir la confianza, la intimidad y el proyecto en común.
 		</p>
-		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
-			<Button href={contactHref} icon="calendar_today">{ctaLabel}</Button>
-			<Button href="#en-que-consiste" variant="secondary">
-				<span>Ver en qué consiste</span>
+
+		<div class="flex flex-wrap gap-3 pt-2">
+			<Button href={contactHref} icon="calendar_today">
+				<span>{ctaLabel}</span>
 			</Button>
 		</div>
-		<FactList
-			facts={trustPills.map((pill) => ({ title: pill.label, icon: pill.icon }))}
-			class="mt-4"
-		/>
-		<Fragment slot="caption">
-			<span>
-				<span class="block font-semibold text-ink">Sin tomar partido</span>
-				<span class="block">A vuestro ritmo y sin etiquetas</span>
-			</span>
-		</Fragment>
 	</PageHero>
 
 	<!-- ¿En qué consiste? -->
-	<Section tone="white" id="en-que-consiste">
-		<SectionHeader
-			title="Poner palabras a lo que duele y volver a encontraros"
-			label="¿En qué consiste la terapia de pareja?"
+	<Section tone="white" class="max-lg:pt-10">
+		<SessionHour
+			items={sessionFeatures.map((feature) => `${feature.title}. ${feature.text}`)}
+			image={heroImage}
 		>
-			<p>
-				La terapia de pareja no busca culpables ni decide quién tiene razón. Os
-				ayuda a frenar los reproches, ver los patrones que se repiten sin que os
-				deis cuenta y aprender a expresar lo que de verdad necesitáis.
-			</p>
-		</SectionHeader>
-		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12">
-			<div class="flex flex-col gap-10 lg:col-span-5">
-				<Figure
-					src={quoteImage}
-					alt="Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua y luz natural."
-					ratio="landscape"
-				/>
-				<Quote author="María Sánchez">
-					«El amor no es solo sentirlo, sino saber cuidarlo y habitar un espacio
-					donde ambos os sintáis vistos, seguros y valorados.»
-				</Quote>
-			</div>
-			<div class="lg:col-span-7">
-				<TopicList items={sessionFeatures} columns={1} />
-			</div>
-		</div>
+			<SectionHeader
+				slot="header"
+				title="Poner palabras a lo que duele y volver a encontraros"
+				size="large"
+			/>
+			<Quote class="italic">
+				«El amor no es solo sentirlo, sino saber cuidarlo y habitar un espacio
+				donde ambos os sintáis vistos, seguros y valorados.»
+			</Quote>
+		</SessionHour>
 	</Section>
 
 	<!-- ¿Para quién? -->
-	<Section>
-		<SectionHeader
-			title="¿Para quién es la terapia de pareja?"
-			label="Acompañamiento en cada etapa de la relación"
-		>
-			<p>
-				Acompaño a parejas en momentos muy distintos y adapto el proceso a
-				vuestra situación:
-			</p>
+	<Section tone="mist">
+		<SectionHeader size="large">
+			<Fragment slot="title">¿Para quién es la terapia de pareja?</Fragment>
 		</SectionHeader>
-		<TopicList
-			items={audiences.map((audience) => ({ ...audience, note: audience.cta }))}
-			columns={3}
-			class="mt-14"
-		/>
-		<Note class="mt-6">
+		<ul class="mt-24 grid gap-x-12 gap-y-20 lg:grid-cols-3">
+			{
+				audiences.map((audience, index) => (
+					<li
+						class="reveal-blur relative border-t border-seafoam pt-16"
+						data-reveal
+						style={`--reveal: ${index}`}
+					>
+						<span class="absolute top-0 left-0 grid size-16 -translate-y-1/2 place-items-center rounded-full bg-white text-3xl text-teal ring-8 ring-mist">
+							<Icon name={audience.icon} />
+						</span>
+						<h3 class="font-display text-heading font-normal text-ink">
+							{audience.title}
+						</h3>
+						<p class="mt-4 text-body text-ink-muted">{audience.text}</p>
+					</li>
+				))
+			}
+		</ul>
+		<Note class="mt-16">
 			No hace falta estar al borde de la ruptura para venir: pedir ayuda a tiempo
 			evita mucho desgaste.
 		</Note>
@@ -227,22 +200,60 @@ backgroundImage={heroImage}
 
 	<!-- ¿Qué problemas se trabajan? -->
 	<Section tone="white">
-		<SectionHeader
-			title="¿Qué problemas se trabajan en terapia de pareja?"
-			label="Qué trabajo en consulta"
-		>
-			<p>Estas son algunas de las dificultades más habituales en consulta:</p>
+		<SectionHeader size="large">
+			<Fragment slot="title">
+				¿Qué problemas se trabajan en terapia de pareja?
+			</Fragment>
 		</SectionHeader>
-		<TopicList items={problems} layout="rows" class="mt-14" />
+		<ul class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				problems.map((problem, index) => (
+					<li
+						class="reveal-blur flex flex-col gap-3"
+						data-reveal
+						style={`--reveal: ${index}`}
+					>
+						<div class="flex items-center gap-4">
+							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-seafoam-soft text-xl text-teal">
+								<Icon name={problem.icon} />
+							</span>
+							<span class="h-px flex-1 bg-line" aria-hidden="true" />
+						</div>
+						<h3 class="font-display text-lead font-normal text-ink">
+							{problem.title}
+						</h3>
+						<p class="text-body text-ink-muted">{problem.text}</p>
+					</li>
+				))
+			}
+		</ul>
 	</Section>
 
+	<CtaBand
+		id="contacto-reserva"
+		label="Primera cita en pareja"
+		title="Dar el paso juntos requiere valor, y no tenéis que hacerlo solos"
+	>
+		<p class="tabular-nums">
+			Solicitad vuestra primera cita o escribidme si antes queréis resolver
+			alguna duda. Sesión de 60 minutos · 75 €.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" arrow>
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>{email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
 	<!-- Preguntas frecuentes -->
 	<Section>
 		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
 			<SectionHeader
 				title="Preguntas frecuentes sobre la terapia de pareja"
-				label="Preguntas frecuentes"
 				layout="stack"
+				size="large"
 				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
 			>
 				<p>
@@ -254,20 +265,5 @@ backgroundImage={heroImage}
 		</div>
 	</Section>
 
-	<CtaBand
-		label="Primera cita en pareja"
-		title="Dar el paso juntos requiere valor, y no tenéis que hacerlo solos"
-	>
-		<p class="tabular-nums">
-			Solicitad vuestra primera cita o escribidme si antes queréis resolver
-			alguna duda. Sesión de 60 minutos · 75 €.
-		</p>
-		<Fragment slot="actions">
-			<Button href={contactHref} variant="inverse" arrow>{ctaLabel}</Button>
-			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
-				{email}
-			</Button>
-		</Fragment>
-	</CtaBand>
 	<OtherServices />
 </Layout>

@@ -2,30 +2,23 @@
 import heroImage from "../../assets/images/psicologia_perinatal.jpeg";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
+import SessionHour from "../../components/SessionHour.astro";
 import Button from "../../components/ui/Button.astro";
 import CtaBand from "../../components/ui/CtaBand.astro";
 import Faq from "../../components/ui/Faq.astro";
-import Figure from "../../components/ui/Figure.astro";
+import Icon from "../../components/ui/Icon.astro";
+import type { IconName } from "../../components/ui/icons";
 import Note from "../../components/ui/Note.astro";
 import Quote from "../../components/ui/Quote.astro";
 import Section from "../../components/ui/Section.astro";
 import SectionHeader from "../../components/ui/SectionHeader.astro";
-import TopicList from "../../components/ui/TopicList.astro";
-import {
-	contactHref,
-	ctaLabel,
-	email,
-} from "../../data/site";
+import { contactHref, ctaLabel, email } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
-const title =
-	"Psicología perinatal en Pamplona y online | Inala Psicoterapia";
+const title = "Psicología perinatal en Pamplona y online | Inala Psicoterapia";
 
 const description =
 	"Apoyo psicológico para madres, padres y cuidadores en Pamplona y online: cansancio, culpa, rabietas, límites y desacuerdos de crianza. Con María Sánchez, psicóloga general sanitaria.";
-
-const heroImageAlt =
-	"Madre abrazando a su hijo pequeño.";
 
 const sessionSteps = [
 	{
@@ -50,7 +43,7 @@ const sessionSteps = [
 	},
 ];
 
-const audiences = [
+const audiences: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "child_care",
 		title: "Familias en primeros años y primera infancia",
@@ -68,7 +61,7 @@ const audiences = [
 	},
 ];
 
-const problems = [
+const problems: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "sentiment_very_dissatisfied",
 		title: "Gestión de rabietas y desbordes emocionales",
@@ -129,73 +122,79 @@ const faqs = [
 
 <Layout title={title} description={description}>
 	<PageHero
+		size="display"
+		accent
 		backgroundImage={heroImage}
-		imageAlt={heroImageAlt}
+		mobileBackground="corner"
 	>
 		<Fragment slot="title">
-			Psicología perinatal: apoyo para madres y padres en la <span>crianza</span>
+			{
+				/* Below lg each run is its own line, sized from the viewport width so
+			  the lead is the larger and both always fit on one line. */
+			}
+			<span class="max-lg:block max-lg:text-hero-lead">Psicología perinatal</span
+			>{" "}
+			<span class="hero-accent max-lg:block max-lg:text-hero-run"
+				>apoyo para madres y padres en la crianza</span
+			>
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
 			Un acompañamiento cercano para hablar de las dudas, el cansancio y la culpa
 			que trae la crianza, y para encontrar pautas que funcionen en vuestra casa,
 			desde el respeto y el vínculo con vuestros hijos.
 		</p>
+
 		<div class="flex flex-wrap gap-3 pt-2">
-			<Button href={contactHref} arrow>{ctaLabel}</Button>
+			<Button href={contactHref} icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
 		</div>
-		<Fragment slot="caption">
-			<span class="font-semibold text-ink">Sin juicios · adaptado a vuestra familia</span>
-		</Fragment>
 	</PageHero>
 
 	<!-- ¿En qué consiste? -->
-	<Section tone="white" id="en-que-consiste">
-		<SectionHeader
-			title="Poner palabras al agotamiento y la culpa, y recuperar la calma en la crianza"
-			label="En qué consiste"
+	<Section tone="white" class="max-lg:pt-10">
+		<SessionHour
+			items={sessionSteps.map((step) => `${step.title}. ${step.text}`)}
+			image={heroImage}
 		>
-			<p>
-				Criar es una de las experiencias más transformadoras y a la vez más
-				exigentes a nivel emocional. En consulta no juzgo estilos educativos ni
-				ofrezco recetas mágicas: te ayudo a entender lo que sientes, a aliviar la
-				culpa y a encontrar recursos prácticos para acompañar a tus hijos con más
-				calma y firmeza.
-			</p>
-		</SectionHeader>
-		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12">
-			<div class="flex flex-col gap-10 lg:col-span-5">
-				<Figure src={heroImage} alt={heroImageAlt} ratio="landscape" />
-				<Quote author="— María Sánchez">
-					«No se trata de ser madres o padres perfectos, sino conscientes,
-					presentes y en paz con nuestras propias sombras para poder cuidar desde la
-					calma.»
-				</Quote>
-			</div>
-			<div class="lg:col-span-7">
-				<h3 class="font-display text-subheading font-normal text-ink">
-					¿Qué ocurre durante una sesión de psicología perinatal?
-				</h3>
-				<TopicList
-					items={sessionSteps}
-					columns={1}
-					level={4}
-					numbered
-					class="mt-6"
-				/>
-			</div>
-		</div>
+			<SectionHeader
+				slot="header"
+				title="¿Qué ocurre durante una sesión de psicología perinatal?"
+				size="large"
+			/>
+			<Quote class="italic">
+				«No se trata de ser madres o padres perfectos, sino conscientes,
+				presentes y en paz con nuestras propias sombras para poder cuidar desde
+				la calma.»
+			</Quote>
+		</SessionHour>
 	</Section>
 
 	<!-- ¿Para quién? -->
-	<Section>
-		<SectionHeader title="¿Para quién es la psicología perinatal?" label="Para quién">
-			<p>
-				Acompaño a madres, padres y cuidadores en distintos momentos de la
-				crianza:
-			</p>
+	<Section tone="mist">
+		<SectionHeader size="large">
+			<Fragment slot="title">¿Para quién es la psicología perinatal?</Fragment>
 		</SectionHeader>
-		<TopicList items={audiences} columns={3} class="mt-14" />
-		<Note class="mt-6">
+		<ul class="mt-24 grid gap-x-12 gap-y-20 lg:grid-cols-3">
+			{
+				audiences.map((audience, index) => (
+					<li
+						class="reveal-blur relative border-t border-seafoam pt-16"
+						data-reveal
+						style={`--reveal: ${index}`}
+					>
+						<span class="absolute top-0 left-0 grid size-16 -translate-y-1/2 place-items-center rounded-full bg-white text-3xl text-teal ring-8 ring-mist">
+							<Icon name={audience.icon} />
+						</span>
+						<h3 class="font-display text-heading font-normal text-ink">
+							{audience.title}
+						</h3>
+						<p class="mt-4 text-body text-ink-muted">{audience.text}</p>
+					</li>
+				))
+			}
+		</ul>
+		<Note class="mt-16">
 			No hace falta llegar al límite para consultar: pedir apoyo a tiempo evita
 			mucho desgaste y cuida el vínculo con vuestros hijos.
 		</Note>
@@ -203,22 +202,60 @@ const faqs = [
 
 	<!-- ¿Qué dificultades se trabajan? -->
 	<Section tone="white">
-		<SectionHeader
-			title="¿Qué dificultades se trabajan en psicología perinatal?"
-			label="Qué trabajo en consulta"
-		>
-			<p>Estas son algunas de las dificultades más habituales en consulta:</p>
+		<SectionHeader size="large">
+			<Fragment slot="title">
+				¿Qué dificultades se trabajan en psicología perinatal?
+			</Fragment>
 		</SectionHeader>
-		<TopicList items={problems} layout="rows" class="mt-14" />
+		<ul class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				problems.map((problem, index) => (
+					<li
+						class="reveal-blur flex flex-col gap-3"
+						data-reveal
+						style={`--reveal: ${index}`}
+					>
+						<div class="flex items-center gap-4">
+							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-seafoam-soft text-xl text-teal">
+								<Icon name={problem.icon} />
+							</span>
+							<span class="h-px flex-1 bg-line" aria-hidden="true" />
+						</div>
+						<h3 class="font-display text-lead font-normal text-ink">
+							{problem.title}
+						</h3>
+						<p class="text-body text-ink-muted">{problem.text}</p>
+					</li>
+				))
+			}
+		</ul>
 	</Section>
 
+	<CtaBand
+		id="contacto-reserva"
+		label="Primera cita"
+		title="Pedir ayuda en la crianza también es cuidar de tus hijos"
+	>
+		<p>
+			Solicita tu primera cita o escríbeme si antes quieres resolver alguna duda.
+			[PENDIENTE: precio y duración de la sesión].
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" arrow>
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>{email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
 	<!-- Preguntas frecuentes -->
 	<Section>
 		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
 			<SectionHeader
 				title="Preguntas frecuentes sobre la psicología perinatal"
-				label="Preguntas frecuentes"
 				layout="stack"
+				size="large"
 				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
 			>
 				<p>
@@ -230,20 +267,5 @@ const faqs = [
 		</div>
 	</Section>
 
-	<CtaBand
-		label="Primera cita"
-		title="Pedir ayuda en la crianza también es cuidar de tus hijos"
-	>
-		<p>
-			Solicita tu primera cita o escríbeme si antes quieres resolver alguna duda.
-			[PENDIENTE: precio y duración de la sesión].
-		</p>
-		<Fragment slot="actions">
-			<Button href={contactHref} variant="inverse" arrow>{ctaLabel}</Button>
-			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
-				{email}
-			</Button>
-		</Fragment>
-	</CtaBand>
 	<OtherServices />
 </Layout>

@@ -1,37 +1,24 @@
 ---
 import heroImage from "../../assets/images/terapia_familiar.jpeg";
-import quoteImage from "../../assets/images/terapia-familiar2.png";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
+import SessionHour from "../../components/SessionHour.astro";
 import Button from "../../components/ui/Button.astro";
 import CtaBand from "../../components/ui/CtaBand.astro";
-import FactList from "../../components/ui/FactList.astro";
 import Faq from "../../components/ui/Faq.astro";
-import Figure from "../../components/ui/Figure.astro";
+import Icon from "../../components/ui/Icon.astro";
+import type { IconName } from "../../components/ui/icons";
 import Note from "../../components/ui/Note.astro";
 import Quote from "../../components/ui/Quote.astro";
 import Section from "../../components/ui/Section.astro";
 import SectionHeader from "../../components/ui/SectionHeader.astro";
-import TopicList from "../../components/ui/TopicList.astro";
-import {
-	contactHref,
-	ctaLabel,
-	email,
-	licenseNumber,
-} from "../../data/site";
+import { contactHref, ctaLabel, email } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
-const title =
-	"Terapia familiar en Pamplona y online | Inala Psicoterapia";
+const title = "Terapia familiar en Pamplona y online | Inala Psicoterapia";
 
 const description =
 	"Terapia familiar en Pamplona y online: mejorar la comunicación, resolver conflictos de convivencia y acompañar cambios, duelos y crisis. Sesiones de 60 minutos con María Sánchez, psicóloga general sanitaria.";
-
-const trustPills = [
-	{ icon: "schedule", label: "Sesiones de 60 minutos" },
-	{ icon: "domain", label: "Pamplona y online" },
-	{ icon: "verified", label: `Nº col. ${licenseNumber}` },
-];
 
 const sessionSteps = [
 	{
@@ -56,7 +43,7 @@ const sessionSteps = [
 	},
 ];
 
-const audiences = [
+const audiences: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "escalator_warning",
 		title: "Familias con hijos/as o adolescentes",
@@ -74,7 +61,7 @@ const audiences = [
 	},
 ];
 
-const problems = [
+const problems: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "forum",
 		title: "Conflictos recurrentes y discusiones continuas",
@@ -107,7 +94,6 @@ const problems = [
 	},
 ];
 
-// The first FAQ starts open, as in the original design.
 const faqs = [
 	{
 		question:
@@ -137,130 +123,116 @@ const faqs = [
 
 <Layout title={title} description={description}>
 	<PageHero
-		label="Terapia familiar · Pamplona y online"
+		size="display"
+		accent
 		backgroundImage={heroImage}
-		imageAlt="Una cálida sesión de psicoterapia familiar en un gabinete sereno y luminoso, con dos mujeres sentadas en sillones compartiendo una conversación honesta."
+		mobileBackground="corner"
 	>
 		<Fragment slot="title">
-			Terapia familiar: mejorar la convivencia y <span>cuidar los vínculos</span>
+			{
+				/* Below lg each run is its own line, sized from the viewport width so
+			  the lead is the larger and both always fit on one line. */
+			}
+			<span class="max-lg:block max-lg:text-hero-lead">Terapia familiar</span
+			>{" "}
+			<span class="hero-accent max-lg:block max-lg:text-hero-run"
+				>mejorar la convivencia y cuidar los vínculos</span
+			>
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
 			Un acompañamiento respetuoso y sin tomar partido, donde cada miembro de la
 			familia tiene voz, se deshacen los nudos del conflicto y se recupera la
 			comunicación en casa.
 		</p>
-		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+
+		<div class="flex flex-wrap gap-3 pt-2">
 			<Button href={contactHref} icon="calendar_today">
 				<span>{ctaLabel}</span>
 			</Button>
-			<Button href="#enfoque" variant="secondary">
-				<span>Ver en qué consiste</span>
-			</Button>
 		</div>
-		<FactList
-			facts={trustPills.map((pill) => ({ title: pill.label, icon: pill.icon }))}
-			class="mt-4"
-		/>
-		<Fragment slot="caption">
-			<span>
-				<span class="block font-semibold text-ink">Todas las voces cuentan</span>
-				<span class="block">A vuestro ritmo y según vuestras necesidades</span>
-			</span>
-		</Fragment>
 	</PageHero>
 
 	<!-- ¿En qué consiste? -->
-	<Section tone="white" id="enfoque">
-		<SectionHeader
-			title="Poner palabras a lo que duele y volver a entenderos en casa"
-			label="¿En qué consiste la terapia familiar?"
+	<Section tone="white" class="max-lg:pt-10">
+		<SessionHour
+			items={sessionSteps.map((step) => `${step.title}. ${step.text}`)}
+			image={heroImage}
 		>
-			<p>
-				La familia es un sistema vivo donde lo que le ocurre a uno afecta a todos.
-				En consulta no busco culpables ni juzgo estilos educativos: guío la
-				conversación para que cada miembro pueda contar lo que vive, lo que
-				necesita y lo que teme, y para que las reacciones automáticas den paso a
-				la comprensión y la cooperación.
-			</p>
-		</SectionHeader>
-		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12">
-			<div class="flex flex-col gap-10 lg:col-span-5">
-				<Figure
-					src={quoteImage}
-					alt="Dos manos entrelazadas sobre una mesa de madera junto a una taza de té y una libreta, transmitiendo conexión familiar y contención afectiva."
-					ratio="landscape"
-				/>
-				<Quote author="María Sánchez">
-					«En una familia no se trata de quién tiene la razón, sino de cómo cuidar
-					el vínculo que os une para que todos puedan florecer.»
-				</Quote>
-			</div>
-			<div class="lg:col-span-7">
-				<h3 class="font-display text-subheading font-normal text-ink">
-					¿Qué ocurre durante una sesión familiar?
-				</h3>
-				<TopicList
-					items={sessionSteps}
-					columns={1}
-					level={4}
-					numbered
-					class="mt-6"
-				/>
-			</div>
-		</div>
+			<SectionHeader
+				slot="header"
+				title="¿Qué ocurre durante una sesión familiar?"
+				size="large"
+			/>
+			<Quote class="italic">
+				«En una familia no se trata de quién tiene la razón, sino de cómo cuidar
+				el vínculo que os une para que todos puedan florecer.»
+			</Quote>
+		</SessionHour>
 	</Section>
 
 	<!-- ¿Para quién? -->
-	<Section>
-		<SectionHeader
-			title="¿Para quién es la terapia familiar?"
-			label="Acompañamiento en cada etapa familiar"
-		>
-			<p>
-				Acompaño a familias en etapas y situaciones muy distintas, y adapto el
-				proceso a vuestra realidad:
-			</p>
+	<Section tone="mist">
+		<SectionHeader size="large">
+			<Fragment slot="title">¿Para quién es la terapia familiar?</Fragment>
 		</SectionHeader>
-		<TopicList items={audiences} columns={3} class="mt-14" />
-		<Note class="mt-6">
-			<span class="text-teal">No hace falta llegar al límite para venir:</span> pedir
-			ayuda a tiempo evita mucho desgaste y protege a los más jóvenes.
+		<ul class="mt-24 grid gap-x-12 gap-y-20 lg:grid-cols-3">
+			{
+				audiences.map((audience, index) => (
+					<li
+						class="reveal-blur relative border-t border-seafoam pt-16"
+						data-reveal
+						style={`--reveal: ${index}`}
+					>
+						<span class="absolute top-0 left-0 grid size-16 -translate-y-1/2 place-items-center rounded-full bg-white text-3xl text-teal ring-8 ring-mist">
+							<Icon name={audience.icon} />
+						</span>
+						<h3 class="font-display text-heading font-normal text-ink">
+							{audience.title}
+						</h3>
+						<p class="mt-4 text-body text-ink-muted">{audience.text}</p>
+					</li>
+				))
+			}
+		</ul>
+		<Note class="mt-16">
+			No hace falta llegar al límite para venir: pedir ayuda a tiempo evita
+			mucho desgaste y protege a los más jóvenes.
 		</Note>
 	</Section>
 
 	<!-- ¿Qué problemas se trabajan? -->
 	<Section tone="white">
-		<SectionHeader
-			title="¿Qué problemas se trabajan en terapia familiar?"
-			label="Qué trabajo en consulta"
-		>
-			<p>Estas son algunas de las dificultades más habituales en consulta:</p>
+		<SectionHeader size="large">
+			<Fragment slot="title">
+				¿Qué problemas se trabajan en terapia familiar?
+			</Fragment>
 		</SectionHeader>
-		<TopicList items={problems} layout="rows" class="mt-14" />
-	</Section>
-
-	<!-- Preguntas frecuentes -->
-	<Section>
-		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
-			<SectionHeader
-				title="Preguntas frecuentes sobre la terapia familiar"
-				label="Preguntas frecuentes"
-				layout="stack"
-				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
-			>
-				<p>
-					Es normal tener dudas antes de empezar. Si la vuestra no está aquí,
-					escribidme.
-				</p>
-			</SectionHeader>
-			<Faq
-				items={faqs.map((faq, index) => ({ ...faq, open: index === 0 }))}
-				class="lg:col-span-7"
-			/>
-		</div>
+		<ul class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				problems.map((problem, index) => (
+					<li
+						class="reveal-blur flex flex-col gap-3"
+						data-reveal
+						style={`--reveal: ${index}`}
+					>
+						<div class="flex items-center gap-4">
+							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-seafoam-soft text-xl text-teal">
+								<Icon name={problem.icon} />
+							</span>
+							<span class="h-px flex-1 bg-line" aria-hidden="true" />
+						</div>
+						<h3 class="font-display text-lead font-normal text-ink">
+							{problem.title}
+						</h3>
+						<p class="text-body text-ink-muted">{problem.text}</p>
+					</li>
+				))
+			}
+		</ul>
 	</Section>
 
 	<CtaBand
+		id="contacto-reserva"
 		label="Primera cita familiar"
 		title="Cuidar de vuestra familia es cuidar de cada uno de vosotros"
 	>
@@ -277,5 +249,23 @@ const faqs = [
 			</Button>
 		</Fragment>
 	</CtaBand>
+	<!-- Preguntas frecuentes -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Preguntas frecuentes sobre la terapia familiar"
+				layout="stack"
+				size="large"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
+			>
+				<p>
+					Es normal tener dudas antes de empezar. Si la vuestra no está aquí,
+					escribidme.
+				</p>
+			</SectionHeader>
+			<Faq items={faqs} class="lg:col-span-7" />
+		</div>
+	</Section>
+
 	<OtherServices />
 </Layout>
