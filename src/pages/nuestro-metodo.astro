@@ -27,17 +27,6 @@ const title = "Cómo trabajo: terapia integradora en Pamplona y online | Inala";
 const description =
 	"Cómo trabajo en terapia: un enfoque cercano, integrador y basado en la evidencia. Qué esperar de la primera sesión, cómo avanza el proceso y las modalidades presencial en Pamplona y online.";
 
-const heroStats = [
-	{ value: "Pamplona", label: "y online" },
-	{ value: "60 min", label: "por sesión" },
-	{ value: licenseNumber, label: "Nº de colegiada", wide: true },
-];
-
-const heroBadges = [
-	{ icon: "science", label: "Basado en la evidencia" },
-	{ icon: "verified_user", label: "Sin juicios" },
-];
-
 const pillars = [
 	{
 		icon: "psychology",
@@ -167,67 +156,32 @@ const modalities = [
 
 <Layout title={title} description={description}>
 	<PageHero
+		size="display"
+		accent
 		backgroundImage={heroImage}
-		label="Enfoque integrador y basado en la evidencia"
+		mobileBackground="corner"
 	>
 		<Fragment slot="title">
-			Cómo trabajo: cercanía y{" "}
-			<span>a tu propio ritmo</span>
+			{
+				/* Below lg each run is its own line, sized from the viewport width so
+			  the lead is the larger and both always fit on one line. */
+			}
+			<span class="max-lg:block max-lg:text-hero-lead">Cómo trabajo:</span
+			>{" "}
+			<span class="hero-accent max-lg:block max-lg:text-hero-run"
+				>cercanía y a tu propio ritmo</span
+			>
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
 			Combino una relación de confianza con enfoques respaldados por la
 			investigación. El objetivo: que entiendas lo que te pasa y tengas
 			herramientas para sentirte mejor, sin prisas.
 		</p>
-		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+
+		<div class="flex flex-wrap gap-3 pt-2">
 			<Button href={contactHref} icon="calendar_today">
 				<span>{ctaLabel}</span>
 			</Button>
-			<Button href="#proceso" variant="secondary" arrow>
-				<span>Ver cómo es el proceso</span>
-			</Button>
-		</div>
-		<figure class="mt-4 flex flex-col gap-5 border-t border-line pt-6">
-			<figcaption class="text-label font-semibold text-teal">
-				<span>Mi compromiso</span>
-			</figcaption>
-			<blockquote class="font-display text-subheading font-normal text-ink">
-				«No creo en fórmulas estándar: adapto la terapia a ti, nunca a la
-				inversa.»
-			</blockquote>
-			<dl class="flex flex-wrap gap-x-10 gap-y-4">
-				{
-					heroStats.map((stat) => (
-						<div class="flex flex-col-reverse">
-							<dt class="text-label text-ink-muted">{stat.label}</dt>
-							<dd class="text-small font-semibold text-ink tabular-nums">
-								{stat.value}
-							</dd>
-						</div>
-					))
-				}
-			</dl>
-		</figure>
-		<div slot="media" class="flex flex-col gap-6">
-			<ul class="flex flex-wrap gap-2">
-				{
-					heroBadges.map((badge) => (
-						<li class="inline-flex min-h-9 items-center gap-2 rounded-full border border-line-strong px-4 text-label font-semibold text-ink">
-							<Icon name="check" class="text-teal" />
-							{badge.label}
-						</li>
-					))
-				}
-			</ul>
-			<div class="flex flex-col gap-2 border-t border-line pt-5">
-				<p class="text-small font-semibold text-ink">
-					El vínculo como motor de cambio
-				</p>
-				<p class="text-body text-ink-muted">
-					La confianza entre tú y yo es la base para construir recursos que
-					te sirvan a largo plazo.
-				</p>
-			</div>
 		</div>
 	</PageHero>
 

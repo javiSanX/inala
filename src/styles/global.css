@@ -738,6 +738,67 @@
 		}
 	}
 
+	/* Online situations (OnlineSituations.astro): once the script has made them
+	   tabs, the panels share one cell so the card keeps the tallest height, and
+	   the selected one crossfades in while the photo glides to its framing. */
+	@media (min-width: 64rem) {
+		.online-situations[data-ready] {
+			.situations-panel {
+				opacity: 0;
+				visibility: hidden;
+				transition:
+					opacity 200ms var(--ease-out),
+					visibility 0s linear 200ms;
+			}
+
+			.situations-panel[data-active] {
+				opacity: 1;
+				visibility: visible;
+				transition:
+					opacity 400ms var(--ease-out) 120ms,
+					transform 400ms var(--ease-out) 120ms;
+			}
+		}
+	}
+
+	.online-situations [data-track] {
+		scrollbar-width: none;
+	}
+
+	@media (prefers-reduced-motion: no-preference) and (min-width: 64rem) {
+		.online-situations[data-ready] {
+			.situations-panel {
+				transform: translateY(0.5rem);
+			}
+
+			.situations-panel[data-active] {
+				transform: none;
+			}
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.situations-photo {
+			transition: transform 900ms var(--ease-in-out);
+		}
+
+		.situations-live {
+			animation: situations-live 2.4s var(--ease-out) infinite;
+		}
+
+		@keyframes situations-live {
+			0% {
+				opacity: 0.8;
+				transform: scale(1);
+			}
+			70%,
+			100% {
+				opacity: 0;
+				transform: scale(2.6);
+			}
+		}
+	}
+
 	/* Reduced motion keeps a short fade and drops all movement. */
 	@media (prefers-reduced-motion: reduce) {
 		.hero-copy > *,
