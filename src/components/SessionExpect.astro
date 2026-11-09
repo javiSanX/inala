@@ -1,0 +1,102 @@
+---
+// What a session with María is like, as slides. Where scroll timelines are
+// supported (the scroll-driven variant), the stage (header slot, slides and
+// progress bar) pins and the page's own scroll carries the slides across from
+// right to left; the one in focus grows, gains a teal outline and lights its
+// icon. Elsewhere, and with reduced motion, the slides are a plain grid.
+
+import Icon from "./ui/Icon.astro";
+import type { IconName } from "./ui/icons";
+
+interface Item {
+	icon: IconName;
+	title: string;
+	text: string;
+	tag: string;
+}
+
+interface Props {
+	items: Item[];
+	class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<div
+	class:list={["session-expect", className]}
+	style={`--n: ${items.length}`}
+>
+	<div class="expect-stage">
+		<slot name="header" />
+		<ul
+			class="expect-track mt-10 grid gap-5 sm:grid-cols-2 scroll-driven:mt-8 scroll-driven:flex scroll-driven:w-max scroll-driven:gap-6 max-lg:scroll-driven:mt-6"
+		>
+			{
+				items.map((item, index) => (
+					<li
+						class="expect-slide relative isolate flex flex-col items-start gap-4 overflow-hidden rounded-frame bg-white p-7 scroll-driven:w-(--slide-w) lg:p-9"
+						style={`--i: ${index}`}
+					>
+						<span
+							class="expect-outline pointer-events-none absolute inset-0 rounded-frame border-2 border-teal opacity-0"
+							aria-hidden="true"
+						/>
+						<span
+							class="expect-watermark absolute -right-10 -bottom-12 -z-10 text-mist"
+							aria-hidden="true"
+						>
+							<Icon name={item.icon} />
+						</span>
+						<div class="flex w-full items-center justify-between gap-4">
+							<span class="relative grid size-16 shrink-0 place-items-center text-teal">
+								<svg
+									class="expect-ring absolute inset-0 size-full text-seafoam"
+									viewBox="0 0 100 100"
+									fill="none"
+									aria-hidden="true"
+								>
+									<circle
+										cx="50"
+										cy="50"
+										r="48"
+										stroke="currentColor"
+										stroke-width="1.5"
+										stroke-dasharray="3 7"
+										stroke-linecap="round"
+									/>
+								</svg>
+								<span class="absolute inset-2 grid place-items-center overflow-hidden rounded-full bg-seafoam-soft text-2xl">
+									<span class="expect-disc-fill absolute inset-0 rounded-full bg-teal opacity-0" />
+									<Icon name={item.icon} class="expect-icon relative" />
+								</span>
+							</span>
+							<span class="rounded-full bg-mist px-3 py-1.5 text-label font-semibold text-teal">
+								{item.tag}
+							</span>
+						</div>
+						<h3 class="mt-2 font-display text-subheading font-normal text-ink">
+							{item.title}
+						</h3>
+						<p class="max-w-md text-body text-ink-muted">{item.text}</p>
+					</li>
+				))
+			}
+		</ul>
+		<div
+			class="expect-progress mt-6 hidden gap-2 scroll-driven:flex"
+			aria-hidden="true"
+		>
+			{
+				items.map((_, index) => (
+					<span
+						class="relative h-0.5 flex-1 overflow-hidden rounded-full bg-line-strong"
+						style={`--i: ${index}`}
+					>
+						<span class="expect-progress-fill absolute inset-0 origin-left bg-teal" />
+					</span>
+				))
+			}
+		</div>
+	</div>
+</div>

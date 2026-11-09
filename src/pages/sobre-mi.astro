@@ -11,7 +11,6 @@ import Figure from "../components/ui/Figure.astro";
 import Icon from "../components/ui/Icon.astro";
 import Section from "../components/ui/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
-import TopicList from "../components/ui/TopicList.astro";
 import {
 	addressCenter,
 	contactHref,
@@ -97,33 +96,6 @@ const spaceFeatures = [
 	{ icon: "lock", label: "Secreto profesional" },
 	{ icon: "location_on", label: `En el ${addressCenter}` },
 ];
-
-const sessionSteps = [
-	{
-		icon: "hearing",
-		title: "Escucha activa real",
-		text: "Sin prisas, interrupciones ni diagnósticos apresurados. Escucho tu historia con atención y respeto.",
-		tag: "Un espacio para ti",
-	},
-	{
-		icon: "explore",
-		title: "Claridad y dirección",
-		text: "Te explicaré en qué punto estamos, qué estamos trabajando y hacia dónde vamos.",
-		tag: "Transparencia activa",
-	},
-	{
-		icon: "build_circle",
-		title: "Herramientas aplicables",
-		text: "No nos quedamos en la teoría: trabajaremos recursos prácticos que puedas usar en tu día a día.",
-		tag: "Autonomía vital",
-	},
-	{
-		icon: "hourglass_empty",
-		title: "Respeto a tus tiempos",
-		text: "Jamás te forzaré a abrir recuerdos o heridas para los que tu sistema nervioso aún no esté preparado. Caminamos a tu velocidad.",
-		tag: "Seguridad primero",
-	},
-];
 ---
 
 <Layout title={title} description={description}>
@@ -133,9 +105,10 @@ const sessionSteps = [
 			<span>Te acompaño a entender lo que te pasa</span> con calma y sin juicios.
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
-			Psicóloga general sanitaria, con consulta en Pamplona y online. Trabajo con
-			un enfoque integrador y basado en la evidencia, y sobre todo cercano: para
-			que puedas comprender lo que te pasa y avanzar a tu ritmo.
+			Psicóloga general sanitaria, con consulta en Pamplona y online. Trabajo
+			con un enfoque integrador y basado en la evidencia, y sobre todo
+			cercano: para que puedas comprender lo que te pasa y avanzar a tu
+			ritmo.
 		</p>
 		<div>
 			<span
@@ -168,12 +141,19 @@ const sessionSteps = [
 				priority
 				sizes="(min-width: 1024px) 34vw, 100vw"
 			>
-				<span class="flex flex-1 flex-wrap items-center justify-between gap-x-4 gap-y-1">
+				<span
+					class="flex flex-1 flex-wrap items-center justify-between gap-x-4 gap-y-1"
+				>
 					<span>
-						<span class="block font-semibold text-ink">María Sánchez</span>
-						<span class="block">Psicóloga general sanitaria · Fundadora</span>
+						<span class="block font-semibold text-ink">María Sánchez</span
+						>
+						<span class="block"
+							>Psicóloga general sanitaria · Fundadora</span
+						>
 					</span>
-					<span class="inline-flex items-center gap-1.5 font-semibold text-teal">
+					<span
+						class="inline-flex items-center gap-1.5 font-semibold text-teal"
+					>
 						<Icon name="location_on" />
 						<span>Pamplona y online</span>
 					</span>
@@ -182,25 +162,29 @@ const sessionSteps = [
 		</div>
 	</PageHero>
 
-	<!-- Historia -->
+	<!-- Historia: each chapter's photo unveils from its side and the copy follows, on scroll (global.css, .story-chapter). -->
 	<Section tone="white" id="historia-y-recorrido">
 		<SectionHeader
 			title="Mi camino hacia la psicología: vocación, experiencia y propósito"
-			label="Conoce mi historia"
+	
 		>
-			<p>Así llegué a la psicología y esto es lo que traigo a cada sesión.</p>
+			<p>
+				Así llegué a la psicología y esto es lo que traigo a cada sesión.
+			</p>
 		</SectionHeader>
 		<ol class="mt-16 flex flex-col gap-20 lg:gap-28">
 			{
 				story.map((chapter, index) => (
-					<li class="grid gap-x-16 gap-y-8 lg:grid-cols-12 lg:items-center">
+					<li class="story-chapter grid gap-x-16 gap-y-8 lg:grid-cols-12 lg:items-center">
 						<Figure
 							src={chapter.image}
 							alt={chapter.alt}
 							ratio="tall"
 							sizes="(min-width: 1024px) 34vw, 100vw"
+							reveal={false}
+							imgClass="story-photo"
 							class:list={[
-								"lg:col-span-4",
+								"story-figure lg:col-span-4",
 								index % 2 === 1 && "lg:order-2 lg:col-start-9",
 							]}
 						>
@@ -215,14 +199,16 @@ const sessionSteps = [
 							]}
 						>
 							<div class="flex flex-col gap-3 sm:flex-row sm:gap-8">
-								<span class="shrink-0 whitespace-nowrap font-display text-lead text-teal sm:w-36 sm:pt-3">
+								<span class="story-label shrink-0 whitespace-nowrap font-display text-lead text-teal sm:w-36 sm:pt-3">
 									{chapter.label}
 								</span>
 								<div class="flex flex-col gap-4">
-									<h3 class="font-display text-heading font-normal text-ink">
+									<h3 class="story-title font-display text-heading font-normal text-ink">
 										{chapter.title}
 									</h3>
-									<p class="text-lead text-ink-muted">{chapter.text}</p>
+									<p class="story-text text-lead text-ink-muted">
+										{chapter.text}
+									</p>
 								</div>
 							</div>
 						</div>
@@ -232,24 +218,51 @@ const sessionSteps = [
 		</ol>
 	</Section>
 
+	<CtaBand
+		id="contacto"
+		label="Comienza hoy tu cuidado"
+		title="¿Damos el primer paso juntos?"
+	>
+		<p>
+			Si sientes que ha llegado el momento de cuidarte, estaré encantada de
+			acompañarte. Solicita tu primera cita o escríbeme si tienes cualquier
+			duda antes de empezar.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>Escríbeme a {email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
+
 	<!-- Formación -->
 	<Section>
 		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12">
 			<div class="flex flex-col gap-8 lg:col-span-5">
-				<SectionHeader title="Mi formación" label="Mi trayectoria" layout="stack">
+				<SectionHeader
+					title="Mi formación"
+					label="Mi trayectoria"
+					layout="stack"
+				>
 					<p>
-						Entiendo la psicoterapia como un compromiso ético que exige seguir
-						formándose. Esta es la formación que respalda mi trabajo.
+						Entiendo la psicoterapia como un compromiso ético que exige
+						seguir formándose. Esta es la formación que respalda mi
+						trabajo.
 					</p>
 				</SectionHeader>
 				<div class="flex flex-col gap-2 border-t border-line pt-6">
-					<span class="inline-flex items-center gap-2 text-small font-semibold text-ink">
+					<span
+						class="inline-flex items-center gap-2 text-small font-semibold text-ink"
+					>
 						<Icon name="info" class="text-teal" />
 						Registro de centro sanitario
 					</span>
 					<p class="text-small text-ink-muted">
-						[PENDIENTE: datos de inscripción del centro en el registro de centros
-						sanitarios]
+						[PENDIENTE: datos de inscripción del centro en el registro de
+						centros sanitarios]
 					</p>
 				</div>
 			</div>
@@ -261,9 +274,13 @@ const sessionSteps = [
 					{
 						training.map((item) => (
 							<li class="flex flex-col gap-1.5 border-t border-line py-6">
-								<h4 class="text-lead font-semibold text-ink">{item.title}</h4>
+								<h4 class="text-lead font-semibold text-ink">
+									{item.title}
+								</h4>
 								{item.place && (
-									<p class="text-label font-semibold text-ink-soft">{item.place}</p>
+									<p class="text-label font-semibold text-ink-soft">
+										{item.place}
+									</p>
 								)}
 								<p class="text-body text-ink-muted">{item.text}</p>
 							</li>
@@ -288,9 +305,15 @@ const sessionSteps = [
 				<span>C/ María Lacunza 6, portal 4, Pamplona</span>
 			</Figure>
 			<div class="flex flex-col gap-6 lg:col-span-6">
-				<SectionHeader title="La consulta" label="El espacio" layout="stack">
+				<SectionHeader
+					title="La consulta"
+					label="El espacio"
+					layout="stack"
+				>
 					<p>
-						Una consulta tranquila y con luz natural, en el {addressCenter}
+						Una consulta tranquila y con luz natural, en el {
+							addressCenter
+						}
 						(Pamplona). Si te resulta más cómodo, también podemos vernos por
 						videollamada.
 					</p>
@@ -320,38 +343,4 @@ const sessionSteps = [
 			</div>
 		</div>
 	</Section>
-
-	<!-- Qué esperar -->
-	<Section tone="white">
-		<SectionHeader
-			title="¿Qué puedes esperar en sesión conmigo?"
-			label="Cómo trabajamos juntos"
-		>
-			<p>
-				La psicoterapia no es un monólogo ni un proceso misterioso. Es una
-				conversación en la que trabajamos juntas o juntos, con objetivos claros.
-			</p>
-		</SectionHeader>
-		<TopicList
-			items={sessionSteps.map((step) => ({ ...step, note: step.tag }))}
-			columns={2}
-			class="mt-14 lg:grid-cols-4"
-		/>
-	</Section>
-
-	<CtaBand id="contacto" label="Comienza hoy tu cuidado" title="¿Damos el primer paso juntos?">
-		<p>
-			Si sientes que ha llegado el momento de cuidarte, estaré encantada de
-			acompañarte. Solicita tu primera cita o escríbeme si tienes cualquier duda
-			antes de empezar.
-		</p>
-		<Fragment slot="actions">
-			<Button href={contactHref} variant="inverse" icon="calendar_today">
-				<span>{ctaLabel}</span>
-			</Button>
-			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
-				<span>Escríbeme a {email}</span>
-			</Button>
-		</Fragment>
-	</CtaBand>
 </Layout>

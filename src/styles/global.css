@@ -738,6 +738,844 @@
 		}
 	}
 
+	/* Method pillars (nuestro-metodo.astro): each principle sits on a seafoam
+	   disc, and a 2px seafoam thread runs from one disc to the next: down the
+	   left on phones, across from lg. --disc and --gap mirror the disc size
+	   and the list gap (size-16 / gap-12, lg:size-24 / lg:gap-x-10). */
+	.pillars {
+		--disc: 4rem;
+		--gap: 3rem;
+	}
+
+	.pillar-disc::before {
+		content: "";
+		position: absolute;
+		inset: -0.5rem;
+		border: 1px solid var(--color-seafoam);
+		border-radius: 9999px;
+	}
+
+	.pillar:not(:last-child)::after {
+		content: "";
+		position: absolute;
+		left: calc(var(--disc) / 2 - 1px);
+		top: calc(var(--disc) + 0.875rem);
+		bottom: calc(0.875rem - var(--gap));
+		width: 2px;
+		border-radius: 9999px;
+		background-color: var(--color-seafoam);
+		transform-origin: top;
+	}
+
+	@media (width >= 64rem) {
+		.pillars {
+			--disc: 6rem;
+			--gap: 2.5rem;
+		}
+
+		.pillar:not(:last-child)::after {
+			top: calc(var(--disc) / 2 - 1px);
+			bottom: auto;
+			left: calc(var(--disc) + 0.875rem);
+			right: calc(0.875rem - var(--gap));
+			width: auto;
+			height: 2px;
+			transform-origin: left;
+		}
+	}
+
+	/* Tied to each pillar's own view timeline, so it reverses on the way back
+	   up: the disc and its ring open, the icon turns in, the copy rises, then
+	   the thread draws towards the next disc. From lg the three share one row,
+	   so --shift staggers them left to right, each disc arriving as the thread
+	   reaches it. */
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			.pillar {
+				--shift: 0%;
+				view-timeline-name: --pillar;
+			}
+
+			@media (width >= 64rem) {
+				.pillar {
+					--shift: calc(var(--i) * 12%);
+				}
+			}
+
+			.pillar-disc,
+			.pillar-disc::before,
+			.pillar-icon,
+			.pillar-copy,
+			.pillar::after {
+				animation-timeline: --pillar;
+				animation-fill-mode: both;
+				animation-timing-function: var(--ease-out);
+			}
+
+			.pillar-disc {
+				animation-name: pillar-disc;
+				animation-range: cover calc(4% + var(--shift)) cover
+					calc(18% + var(--shift));
+			}
+
+			.pillar-disc::before {
+				animation-name: pillar-ring;
+				animation-range: cover calc(8% + var(--shift)) cover
+					calc(24% + var(--shift));
+			}
+
+			.pillar-icon {
+				animation-name: pillar-icon;
+				animation-range: cover calc(6% + var(--shift)) cover
+					calc(20% + var(--shift));
+			}
+
+			.pillar-copy {
+				animation-name: pillar-copy;
+				animation-range: cover calc(8% + var(--shift)) cover
+					calc(26% + var(--shift));
+			}
+
+			.pillar::after {
+				animation-name: pillar-thread-y;
+				animation-timing-function: linear;
+				animation-range: cover 18% cover 42%;
+			}
+
+			@media (width >= 64rem) {
+				.pillar::after {
+					animation-name: pillar-thread-x;
+					animation-range: cover calc(10% + var(--shift)) cover
+						calc(18% + var(--shift));
+				}
+			}
+
+			@keyframes pillar-disc {
+				from {
+					opacity: 0;
+					transform: scale(0.8);
+				}
+			}
+
+			@keyframes pillar-ring {
+				from {
+					opacity: 0;
+					transform: scale(0.7);
+				}
+			}
+
+			@keyframes pillar-icon {
+				from {
+					opacity: 0;
+					transform: rotate(-30deg) scale(0.85);
+				}
+			}
+
+			@keyframes pillar-copy {
+				from {
+					opacity: 0;
+					transform: translateY(1.5rem);
+				}
+			}
+
+			@keyframes pillar-thread-y {
+				from {
+					transform: scaleY(0);
+				}
+			}
+
+			@keyframes pillar-thread-x {
+				from {
+					transform: scaleX(0);
+				}
+			}
+		}
+	}
+
+	/* Reduced motion: the pillars only fade in, nothing moves. */
+	@media (prefers-reduced-motion: reduce) {
+		@supports (animation-timeline: view()) {
+			.pillar-disc,
+			.pillar-copy {
+				animation: fade linear both;
+				animation-timeline: view();
+				animation-range: cover 4% cover 20%;
+			}
+		}
+	}
+
+	/* Process steps (nuestro-metodo.astro): a rail runs through a node beside
+	   each step. Every step draws its own stretch, from its node down to the
+	   next one: a 2px hairline track with the teal fill on top. --node-y is
+	   the node's centre from the top of the step (py-8 + mt-1 / lg:mt-2.5 +
+	   half of size-6); the stretch spans the same distance past the bottom,
+	   where the next node sits. Without scroll timelines the rail is teal and
+	   every node is lit. */
+	.process {
+		--node-y: 3rem;
+	}
+
+	@media (width >= 64rem) {
+		.process {
+			--node-y: 3.375rem;
+		}
+	}
+
+	.process-step:not(:last-child)::before,
+	.process-step:not(:last-child)::after {
+		content: "";
+		position: absolute;
+		left: calc(0.75rem - 1px);
+		top: var(--node-y);
+		bottom: calc(-1 * var(--node-y));
+		width: 2px;
+		transform-origin: top;
+	}
+
+	.process-step::before {
+		background-color: var(--color-line);
+	}
+
+	.process-step::after {
+		background-color: var(--color-teal);
+	}
+
+	.process-node::after {
+		content: "";
+		position: absolute;
+		inset: 0.3125rem;
+		border-radius: 9999px;
+		background-color: var(--color-teal);
+	}
+
+	/* The reading line is the middle of the viewport: an inset of 50% on both
+	   ends collapses each step's view timeline onto it. A step's stretch fills
+	   while the step crosses that line, so the tip of the rail keeps pace with
+	   the reader, and the next node lights as the step after it arrives. Tied
+	   to the scroll position, so it empties again on the way back up. */
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			.process-step {
+				view-timeline: --process-step block;
+				view-timeline-inset: 50%;
+			}
+
+			.process-step::after,
+			.process-node,
+			.process-node::after {
+				animation-timeline: --process-step;
+				animation-fill-mode: both;
+			}
+
+			.process-step::after {
+				animation-name: process-rail;
+				animation-timing-function: linear;
+				animation-range: cover 0% cover 100%;
+			}
+
+			.process-node {
+				animation-name: process-node;
+				animation-timing-function: var(--ease-out);
+				animation-range: cover 0% cover 10%;
+			}
+
+			.process-node::after {
+				animation-name: process-dot;
+				animation-timing-function: var(--ease-out);
+				animation-range: cover 0% cover 8%;
+			}
+
+			@keyframes process-rail {
+				from {
+					transform: scaleY(0);
+				}
+			}
+
+			@keyframes process-node {
+				from {
+					transform: scale(0.85);
+				}
+				50% {
+					transform: scale(1.15);
+				}
+			}
+
+			@keyframes process-dot {
+				from {
+					opacity: 0;
+					transform: scale(0.4);
+				}
+			}
+		}
+	}
+
+	/* Reduced motion: no growing rail or pulsing node; each dot just fades on
+	   as its step reaches the middle of the screen. */
+	@media (prefers-reduced-motion: reduce) {
+		@supports (animation-timeline: view()) {
+			.process-step {
+				view-timeline: --process-step block;
+				view-timeline-inset: 50%;
+			}
+
+			.process-node::after {
+				animation: fade linear both;
+				animation-timeline: --process-step;
+				animation-range: cover 0% cover 8%;
+			}
+		}
+	}
+
+	/* Benefits (nuestro-metodo.astro): four panels, each opened by an icon
+	   disc. A teal fill sits under the icon (::before) and only shows when a
+	   panel is lit: on hover with a fine pointer, or, on phones, while its
+	   card is the one centred in the swipeable row. */
+	.benefits {
+		scrollbar-width: none;
+	}
+
+	.benefit-disc::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: 9999px;
+		background-color: var(--color-teal);
+		opacity: 0;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.benefit {
+			transition: transform 300ms var(--ease-out);
+		}
+
+		.benefit-disc::before {
+			transform: scale(0.6);
+			transition:
+				opacity 250ms var(--ease-out),
+				transform 250ms var(--ease-out);
+		}
+
+		.benefit-icon {
+			transition:
+				color 200ms ease,
+				transform 300ms var(--ease-out);
+		}
+
+		.benefit:hover .benefit-disc::before {
+			opacity: 1;
+			transform: none;
+		}
+
+		.benefit:hover .benefit-icon {
+			color: var(--color-white);
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			.benefit:hover {
+				transform: translateY(-0.25rem);
+			}
+
+			.benefit:hover .benefit-icon {
+				transform: rotate(-8deg) scale(1.08);
+			}
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			/* Phones: the row's own scroll drives each card. The centred one is
+			   full size with its disc lit; its neighbours sit back slightly. */
+			@media (width < 40rem) {
+				/* Named on the card so the disc and icon follow the card's position, not their own. */
+				.benefit {
+					view-timeline: --benefit inline;
+				}
+
+				.benefit,
+				.benefit-disc::before,
+				.benefit-icon {
+					animation-timeline: --benefit;
+					animation-range: cover 0% cover 100%;
+					animation-fill-mode: both;
+					animation-timing-function: linear;
+				}
+
+				.benefit {
+					animation-name: benefit-focus;
+				}
+
+				.benefit-disc::before {
+					animation-name: benefit-lit;
+				}
+
+				.benefit-icon {
+					animation-name: benefit-lit-icon;
+				}
+			}
+
+			/* From sm: each panel unfolds upward out of its own rounded frame as
+			   it comes into view, the disc turning in just behind it. Across a
+			   row, --shift staggers them left to right. */
+			@media (width >= 40rem) {
+				.benefit {
+					--shift: calc(mod(var(--i), 2) * 6%);
+					animation: benefit-unfold var(--ease-out) both;
+					animation-timeline: view();
+					animation-range: entry calc(10% + var(--shift)) cover
+						calc(35% + var(--shift));
+				}
+
+				.benefit-disc {
+					animation: benefit-disc var(--ease-out) both;
+					animation-timeline: view();
+					animation-range: entry calc(40% + var(--shift)) cover
+						calc(40% + var(--shift));
+				}
+			}
+
+			@media (width >= 64rem) {
+				.benefit {
+					--shift: calc(var(--i) * 6%);
+				}
+			}
+
+			@keyframes benefit-focus {
+				0%,
+				100% {
+					transform: scale(0.92);
+				}
+				40%,
+				60% {
+					transform: none;
+				}
+			}
+
+			@keyframes benefit-lit {
+				0%,
+				25%,
+				75%,
+				100% {
+					opacity: 0;
+					transform: scale(0.6);
+				}
+				42%,
+				58% {
+					opacity: 1;
+					transform: none;
+				}
+			}
+
+			@keyframes benefit-lit-icon {
+				0%,
+				30%,
+				70%,
+				100% {
+					color: var(--color-teal);
+				}
+				42%,
+				58% {
+					color: var(--color-white);
+				}
+			}
+
+			@keyframes benefit-unfold {
+				from {
+					clip-path: inset(100% 0 0 0 round var(--radius-frame));
+				}
+				to {
+					clip-path: inset(0 0 0 0 round var(--radius-frame));
+				}
+			}
+
+			@keyframes benefit-disc {
+				from {
+					opacity: 0;
+					transform: scale(0.8) rotate(-45deg);
+				}
+			}
+		}
+	}
+
+	/* Therapist (nuestro-metodo.astro). The portrait drifts inside its frame
+	   against the scroll, enlarged just enough (1.12 for a ±5% travel) that
+	   its edges never show. The highlights tick in one after another as the
+	   list comes up: each disc turns in, its check pops, and the line slides
+	   in behind it. Tied to the scroll position, so it reverses by itself. */
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			.therapist-photo {
+				animation: therapist-drift linear both;
+				animation-timeline: view();
+			}
+
+			.highlights {
+				view-timeline: --highlights block;
+			}
+
+			.highlight-tick,
+			.highlight-check,
+			.highlight-label {
+				animation-timeline: --highlights;
+				animation-fill-mode: both;
+				animation-timing-function: var(--ease-out);
+			}
+
+			.highlight-tick {
+				animation-name: highlight-tick;
+				animation-range: cover calc(6% + var(--i) * 6%) cover
+					calc(16% + var(--i) * 6%);
+			}
+
+			.highlight-check {
+				animation-name: highlight-check;
+				animation-range: cover calc(9% + var(--i) * 6%) cover
+					calc(19% + var(--i) * 6%);
+			}
+
+			.highlight-label {
+				animation-name: highlight-label;
+				animation-range: cover calc(8% + var(--i) * 6%) cover
+					calc(20% + var(--i) * 6%);
+			}
+
+			/* The rest of the copy (heading, subtitle, intro, link) slides in the
+			   same way, each line on its own view timeline, so they follow one
+			   another down the column as it scrolls up. */
+			.therapist-copy header > div > *,
+			.therapist-copy > a {
+				animation: highlight-label var(--ease-out) both;
+				animation-timeline: view();
+				animation-range: cover 4% cover 18%;
+			}
+
+			@keyframes therapist-drift {
+				from {
+					transform: translateY(-5%) scale(1.12);
+				}
+				to {
+					transform: translateY(5%) scale(1.12);
+				}
+			}
+
+			@keyframes highlight-tick {
+				from {
+					opacity: 0;
+					transform: scale(0.6) rotate(-90deg);
+				}
+			}
+
+			@keyframes highlight-check {
+				from {
+					opacity: 0;
+					transform: scale(0.4);
+				}
+				60% {
+					opacity: 1;
+					transform: scale(1.2);
+				}
+			}
+
+			@keyframes highlight-label {
+				from {
+					opacity: 0;
+					transform: translateX(-0.75rem);
+				}
+			}
+		}
+	}
+
+	/* Watermark: the slide's icon, large and faint, tucked into its corner. */
+	.expect-watermark {
+		font-size: 9rem;
+		line-height: 1;
+	}
+
+	/* Story chapters (sobre-mi.astro). Each chapter is its own view timeline.
+	   The photo's frame opens like a curtain from the side the photo sits on,
+	   while the photo inside eases from a slight zoom into its framing and
+	   then drifts gently against the scroll. The copy follows from the photo's
+	   side: the label slides across, the title and text rise after it. Tied to
+	   the scroll position, so it reverses on the way up. The photo keeps a
+	   1.08 scale at rest so the ±3% drift never shows its edges. */
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			.story-chapter {
+				--from: -1.5rem;
+				view-timeline: --chapter block;
+			}
+
+			.story-chapter:nth-child(even) {
+				--from: 1.5rem;
+			}
+
+			.story-figure > div,
+			.story-photo,
+			.story-figure > figcaption,
+			.story-label,
+			.story-title,
+			.story-text {
+				animation-timeline: --chapter;
+				animation-fill-mode: both;
+				animation-timing-function: var(--ease-out);
+			}
+
+			.story-figure > div {
+				animation-name: story-unveil-left;
+				animation-range: cover 20% cover 45%;
+			}
+
+			.story-chapter:nth-child(even) .story-figure > div {
+				animation-name: story-unveil-right;
+			}
+
+			.story-photo {
+				animation-name: story-photo;
+				animation-timing-function: linear;
+				animation-range: cover 0% cover 100%;
+			}
+
+			.story-figure > figcaption {
+				animation-name: fade;
+				animation-range: cover 40% cover 50%;
+			}
+
+			.story-label {
+				animation-name: story-slide;
+				animation-range: cover 25% cover 40%;
+			}
+
+			.story-title {
+				animation-name: story-rise;
+				animation-range: cover 28% cover 44%;
+			}
+
+			.story-text {
+				animation-name: story-rise;
+				animation-range: cover 31% cover 48%;
+			}
+
+			@keyframes story-unveil-left {
+				from {
+					clip-path: inset(0 100% 0 0 round var(--radius-frame));
+				}
+				to {
+					clip-path: inset(0 0 0 0 round var(--radius-frame));
+				}
+			}
+
+			@keyframes story-unveil-right {
+				from {
+					clip-path: inset(0 0 0 100% round var(--radius-frame));
+				}
+				to {
+					clip-path: inset(0 0 0 0 round var(--radius-frame));
+				}
+			}
+
+			@keyframes story-photo {
+				0%,
+				20% {
+					transform: translateY(-3%) scale(1.25);
+				}
+				45% {
+					transform: translateY(-1%) scale(1.08);
+				}
+				100% {
+					transform: translateY(3%) scale(1.08);
+				}
+			}
+
+			@keyframes story-slide {
+				from {
+					opacity: 0;
+					transform: translateX(var(--from));
+				}
+			}
+
+			@keyframes story-rise {
+				from {
+					opacity: 0;
+					transform: translateY(1.5rem);
+				}
+			}
+		}
+	}
+
+	/* Session expectations (SessionExpect.astro): a pinned horizontal slider.
+	   The wrapper is as tall as the stage plus 70svh of scroll per slide; while
+	   it covers the viewport the stage stays pinned and the track slides from
+	   its first panel at the left gutter to its last at the right one. Each
+	   slide grows and lights its icon around the moment it crosses the middle,
+	   and the bar below fills one part per slide. Same conditions as the
+	   scroll-driven variant, which turns the grid into the track. Tied to the
+	   scroll position, so it all runs backwards on the way up. */
+	@media (prefers-reduced-motion: no-preference) and (height >= 40rem) {
+		@supports (animation-timeline: view()) {
+			.session-expect {
+				--gutter: 1.25rem;
+				--slide-w: min(82vw, 24rem);
+				/* The content column the track ends flush with (max-w-content minus the gutters). */
+				--stage-w: calc(
+					min(100vw, var(--container-content)) -
+					2 *
+					var(--gutter)
+				);
+				height: calc(var(--n) * 70svh + 100svh);
+				view-timeline: --expect block;
+			}
+
+			@media (width >= 40rem) {
+				.session-expect {
+					--gutter: 2rem;
+				}
+			}
+
+			@media (width >= 64rem) {
+				.session-expect {
+					--gutter: 2.5rem;
+					--slide-w: 27rem;
+				}
+			}
+
+			/* As tall as its content, pinned under the 72px site header. The
+			   track's run ends when the wrapper's bottom meets the screen's, a
+			   little before the pin lets go, so the last slide holds a moment
+			   and then the next section follows straight after it. */
+			.expect-stage {
+				position: sticky;
+				top: 0;
+				display: flex;
+				flex-direction: column;
+				padding-top: calc(4.5rem + 2.5rem);
+				padding-bottom: 4rem;
+			}
+
+			.expect-track,
+			.expect-slide,
+			.expect-outline,
+			.expect-watermark,
+			.expect-disc-fill,
+			.expect-icon,
+			.expect-progress-fill {
+				animation-timeline: --expect;
+				animation-fill-mode: both;
+				animation-timing-function: linear;
+			}
+
+			.expect-track {
+				animation-name: expect-track;
+				animation-range: contain 0% contain 100%;
+			}
+
+			/* Slide i peaks at i / (n - 1) of the way through. */
+			.expect-slide,
+			.expect-outline,
+			.expect-watermark,
+			.expect-disc-fill,
+			.expect-icon {
+				animation-range: contain calc((var(--i) - 1) / (var(--n) - 1) * 100%)
+					contain calc((var(--i) + 1) / (var(--n) - 1) * 100%);
+			}
+
+			.expect-slide {
+				animation-name: expect-focus;
+			}
+
+			.expect-outline,
+			.expect-disc-fill {
+				animation-name: expect-lit;
+			}
+
+			.expect-watermark {
+				animation-name: expect-watermark;
+			}
+
+			.expect-icon {
+				animation-name: expect-lit-icon;
+			}
+
+			.expect-progress-fill {
+				animation-name: expect-progress;
+				animation-range: contain calc(var(--i) / var(--n) * 100%) contain
+					calc((var(--i) + 1) / var(--n) * 100%);
+			}
+
+			.expect-ring {
+				animation: expect-ring linear both;
+				animation-timeline: --expect;
+				animation-range: contain 0% contain 100%;
+			}
+
+			@keyframes expect-track {
+				to {
+					transform: translateX(calc(-100% + var(--stage-w)));
+				}
+			}
+
+			@keyframes expect-focus {
+				0%,
+				100% {
+					transform: scale(0.94);
+				}
+				40%,
+				60% {
+					transform: none;
+				}
+			}
+
+			@keyframes expect-lit {
+				0%,
+				30%,
+				70%,
+				100% {
+					opacity: 0;
+				}
+				45%,
+				55% {
+					opacity: 1;
+				}
+			}
+
+			@keyframes expect-lit-icon {
+				0%,
+				30%,
+				70%,
+				100% {
+					color: var(--color-teal);
+				}
+				45%,
+				55% {
+					color: var(--color-white);
+				}
+			}
+
+			/* The big icon behind the card turns and drifts the other way. */
+			@keyframes expect-watermark {
+				from {
+					transform: translateX(2rem) rotate(-12deg);
+				}
+				to {
+					transform: translateX(-2rem) rotate(12deg);
+				}
+			}
+
+			@keyframes expect-progress {
+				from {
+					transform: scaleX(0);
+				}
+			}
+
+			@keyframes expect-ring {
+				from {
+					transform: rotate(-180deg);
+				}
+				to {
+					transform: rotate(180deg);
+				}
+			}
+		}
+	}
+
 	/* Online situations (OnlineSituations.astro): once the script has made them
 	   tabs, the panels share one cell so the card keeps the tallest height, and
 	   the selected one crossfades in while the photo glides to its framing. */
@@ -932,6 +1770,50 @@
 		& th {
 			background-color: var(--color-mist);
 			font-weight: 600;
+		}
+	}
+}
+
+/* Session expectations, pinned on phones (SessionExpect.astro). Unlayered on
+   purpose: these trim utilities the header and slides already carry, which a
+   rule inside a layer could not override. The pinned header gives up a little
+   height to the slides; on short screens the decorative progress bar goes and
+   the slides tighten, so the whole stage still fits one screen. */
+@media (prefers-reduced-motion: no-preference) and (height >= 40rem) and (
+		width < 64rem
+	) {
+	@supports (animation-timeline: view()) {
+		.expect-stage {
+			padding-top: calc(4.5rem + 1.5rem);
+			padding-bottom: 3rem;
+		}
+
+		.expect-stage header {
+			row-gap: 0.75rem;
+		}
+
+		.expect-stage header > div:last-child {
+			font-size: var(--text-body);
+			line-height: var(--text-body--line-height);
+		}
+
+		@media (height < 46rem) {
+			.expect-stage {
+				padding-top: calc(4.5rem + 0.75rem);
+			}
+
+			.expect-progress {
+				display: none;
+			}
+
+			.expect-track {
+				margin-top: 1rem;
+			}
+
+			.expect-slide {
+				gap: 0.75rem;
+				padding: 1.5rem;
+			}
 		}
 	}
 }

@@ -1,16 +1,16 @@
 ---
 import processImage from "../assets/images/maria3.webp";
-import therapistImage from "../assets/images/maria4.webp";
 import heroImage from "../assets/images/nuestro_metodo.jpeg";
 import officeImage from "../assets/images/oficina.webp";
 import PageHero from "../components/PageHero.astro";
+import SessionExpect from "../components/SessionExpect.astro";
 import Button from "../components/ui/Button.astro";
 import CtaBand from "../components/ui/CtaBand.astro";
 import Figure from "../components/ui/Figure.astro";
 import Icon from "../components/ui/Icon.astro";
+import type { IconName } from "../components/ui/icons";
 import Section from "../components/ui/Section.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
-import TopicList from "../components/ui/TopicList.astro";
 import {
 	address,
 	addressCenter,
@@ -27,7 +27,7 @@ const title = "Cómo trabajo: terapia integradora en Pamplona y online | Inala";
 const description =
 	"Cómo trabajo en terapia: un enfoque cercano, integrador y basado en la evidencia. Qué esperar de la primera sesión, cómo avanza el proceso y las modalidades presencial en Pamplona y online.";
 
-const pillars = [
+const pillars: { icon: IconName; title: string; text: string; tag: string }[] = [
 	{
 		icon: "psychology",
 		title: "Enfoque integrador y basado en la evidencia",
@@ -75,7 +75,39 @@ const steps = [
 	},
 ];
 
-const benefits = [
+const sessionSteps: {
+	icon: IconName;
+	title: string;
+	text: string;
+	tag: string;
+}[] = [
+	{
+		icon: "hearing",
+		title: "Escucha activa real",
+		text: "Sin prisas, interrupciones ni diagnósticos apresurados. Escucho tu historia con atención y respeto.",
+		tag: "Un espacio para ti",
+	},
+	{
+		icon: "explore",
+		title: "Claridad y dirección",
+		text: "Te explicaré en qué punto estamos, qué estamos trabajando y hacia dónde vamos.",
+		tag: "Transparencia activa",
+	},
+	{
+		icon: "build_circle",
+		title: "Herramientas aplicables",
+		text: "No nos quedamos en la teoría: trabajaremos recursos prácticos que puedas usar en tu día a día.",
+		tag: "Autonomía vital",
+	},
+	{
+		icon: "hourglass_empty",
+		title: "Respeto a tus tiempos",
+		text: "Jamás te forzaré a abrir recuerdos o heridas para los que tu sistema nervioso aún no esté preparado. Caminamos a tu velocidad.",
+		tag: "Seguridad primero",
+	},
+];
+
+const benefits: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "favorite",
 		title: "Bienestar emocional",
@@ -185,29 +217,38 @@ const modalities = [
 		</div>
 	</PageHero>
 
-	<!-- Pilares del método -->
+	<!-- Pilares del método: three discs joined by a thread that draws on scroll (global.css, .pillars). -->
 	<Section tone="white">
-		<SectionHeader
-			title="Tres principios de mi forma de trabajar"
-			label="En qué me baso"
-		/>
-		<TopicList
-			items={pillars.map((pillar) => ({ ...pillar, note: pillar.tag }))}
-			columns={3}
-			class="mt-14"
-		/>
+		<SectionHeader title="Tres principios de mi forma de trabajar" />
+		<ul class="pillars mt-14 grid gap-12 lg:grid-cols-3 lg:gap-x-10">
+			{
+				pillars.map((pillar, index) => (
+					<li class="pillar relative flex gap-6 lg:flex-col lg:gap-8" style={`--i: ${index}`}>
+						<span class="pillar-disc relative z-10 grid size-16 shrink-0 place-items-center rounded-full bg-seafoam-soft text-heading text-teal lg:size-24">
+							<Icon name={pillar.icon} class="pillar-icon" />
+						</span>
+						<div class="pillar-copy flex flex-col gap-3 pt-3 lg:pt-0 lg:pr-4">
+							<h3 class="font-display text-subheading font-normal text-ink">
+								{pillar.title}
+							</h3>
+							<p class="text-body text-ink-muted">{pillar.text}</p>
+							<p class="mt-1 flex items-center gap-3 text-small font-semibold text-teal">
+								<span class="h-px w-8 bg-seafoam" aria-hidden="true" />
+								<span>{pillar.tag}</span>
+							</p>
+						</div>
+					</li>
+				))
+			}
+		</ul>
 	</Section>
 
-	<!-- Cómo es el proceso -->
+	<!-- Cómo es el proceso: a rail that fills to the reading line, lighting each step (global.css, .process). -->
 	<Section id="proceso">
-		<SectionHeader title="Cómo es el proceso" label="Paso a paso" />
+		<SectionHeader title="Cómo es el proceso" />
 		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:items-start">
 			<div class="flex flex-col gap-6 lg:col-span-5">
-				<Figure
-					src={processImage}
-					alt="María Sánchez sonriendo, de pie ante una pared blanca, con chaleco negro y blusa blanca."
-					ratio="portrait"
-				>
+				<Figure src={heroImage} alt="" ratio="portrait">
 					<Icon name="verified" class="text-teal" />
 					<span>Acompañamiento cercano y personalizado</span>
 				</Figure>
@@ -226,17 +267,23 @@ const modalities = [
 					</p>
 				</div>
 			</div>
-			<ol class="lg:col-span-7">
+			<ol class="process -mt-8 lg:col-span-7">
 				{
 					steps.map((step) => (
-						<li class="flex gap-6 border-t border-line py-8 first:border-t-0 first:pt-0">
-							<span class="w-10 shrink-0 font-display text-heading leading-none text-teal tabular-nums">
-								{step.number}
-							</span>
-							<div class="flex flex-col gap-2.5">
-								<h3 class="text-lead font-semibold text-ink">
-									{step.title}
-								</h3>
+						<li class="process-step relative flex gap-5 py-8 lg:gap-8">
+							<span
+								class="process-node relative z-10 mt-1 size-6 shrink-0 rounded-full border border-line-strong bg-paper lg:mt-2.5"
+								aria-hidden="true"
+							/>
+							<div class="flex flex-col gap-3">
+								<div class="flex items-baseline gap-4">
+									<span class="font-display text-heading leading-none text-teal tabular-nums">
+										{step.number}
+									</span>
+									<h3 class="font-display text-subheading font-normal text-ink">
+										{step.title}
+									</h3>
+								</div>
 								<p class="text-body text-ink-muted">{step.text}</p>
 							</div>
 						</li>
@@ -246,7 +293,23 @@ const modalities = [
 		</div>
 	</Section>
 
-	<!-- Beneficios -->
+	<!-- Qué esperar en sesión: a pinned slider the scroll carries across (SessionExpect.astro, global.css). -->
+	<Section tone="mist" class="overflow-x-clip scroll-driven:py-0">
+		<SessionExpect items={sessionSteps}>
+			<SectionHeader
+				slot="header"
+				title="¿Qué puedes esperar en sesión conmigo?"
+			
+			>
+				<p>
+					La psicoterapia no es un monólogo ni un proceso misterioso. Es una
+					conversación en la que trabajamos juntas o juntos, con objetivos claros.
+				</p>
+			</SectionHeader>
+		</SessionExpect>
+	</Section>
+
+	<!-- Beneficios: swipeable on phones, panels unfold on scroll, discs light on hover (global.css, .benefits). -->
 	<Section tone="white">
 		<SectionHeader
 			title="Lo que la terapia puede ayudarte a trabajar"
@@ -257,13 +320,34 @@ const modalities = [
 				proceso es distinto y avanza a su ritmo.
 			</p>
 		</SectionHeader>
-		<TopicList items={benefits} columns={2} class="mt-14 lg:grid-cols-4" />
+		<ul
+			class="benefits -mx-5 mt-14 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4"
+		>
+			{
+				benefits.map((benefit, index) => (
+					<li
+						class="benefit group flex shrink-0 basis-4/5 snap-center flex-col gap-5 rounded-frame bg-paper p-7 sm:basis-auto"
+						style={`--i: ${index}`}
+					>
+						<span class="benefit-disc relative grid size-16 place-items-center rounded-full bg-seafoam-soft text-heading text-teal">
+							<Icon name={benefit.icon} class="benefit-icon relative" />
+						</span>
+						<div class="flex flex-col gap-2.5">
+							<h3 class="font-display text-subheading font-normal text-ink hyphens-auto">
+								{benefit.title}
+							</h3>
+							<p class="text-body text-ink-muted">{benefit.text}</p>
+						</div>
+					</li>
+				))
+			}
+		</ul>
 	</Section>
 
-	<!-- Conoce a tu terapeuta -->
+	<!-- Conoce a tu terapeuta: the photo drifts in its frame, the highlights tick in on scroll (global.css). -->
 	<Section>
 		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:items-center">
-			<div class="flex flex-col gap-6 lg:order-2 lg:col-span-7">
+			<div class="therapist-copy flex flex-col gap-6 lg:order-2 lg:col-span-7">
 				<SectionHeader
 					title="Cercanía, rigor y una mirada humana"
 					label="Quién te acompaña"
@@ -279,12 +363,14 @@ const modalities = [
 						entender de cerca el estrés y la autoexigencia.
 					</p>
 				</SectionHeader>
-				<ul class="flex flex-col gap-3">
+				<ul class="highlights flex flex-col gap-3">
 					{
-						therapistHighlights.map((item) => (
-							<li class="flex items-start gap-3 text-body text-ink">
-								<Icon name="check" class="mt-0.5 text-teal" />
-								<span>{item.label}</span>
+						therapistHighlights.map((item, index) => (
+							<li class="flex items-start gap-3 text-body text-ink" style={`--i: ${index}`}>
+								<span class="highlight-tick grid size-7 shrink-0 place-items-center rounded-full bg-seafoam-soft text-teal">
+									<Icon name="check" class="highlight-check" />
+								</span>
+								<span class="highlight-label pt-0.5">{item.label}</span>
 							</li>
 						))
 					}
@@ -301,10 +387,11 @@ const modalities = [
 				</a>
 			</div>
 			<Figure
-				src={therapistImage}
+				src={processImage}
 				alt="María Sánchez sonriendo, de pie, con traje verde salvia y camiseta gris."
 				ratio="portrait"
 				class="lg:order-1 lg:col-span-5"
+				imgClass="therapist-photo"
 			>
 				<Icon name="verified" class="text-teal" />
 				<span>
@@ -319,6 +406,20 @@ const modalities = [
 			</Figure>
 		</div>
 	</Section>
+<CtaBand label="Cuando lo sientas" title="¿Te gustaría empezar?">
+		<p>
+			En la primera sesión nos conocemos, hablamos de tu momento y valoramos
+			juntos cómo puedo acompañarte.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>Escribirme a {email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
 
 	<!-- Modalidades de consulta -->
 	<Section tone="white">
@@ -392,18 +493,5 @@ const modalities = [
 		</ul>
 	</Section>
 
-	<CtaBand label="Cuando lo sientas" title="¿Te gustaría empezar?">
-		<p>
-			En la primera sesión nos conocemos, hablamos de tu momento y valoramos
-			juntos cómo puedo acompañarte.
-		</p>
-		<Fragment slot="actions">
-			<Button href={contactHref} variant="inverse" icon="calendar_today">
-				<span>{ctaLabel}</span>
-			</Button>
-			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
-				<span>Escribirme a {email}</span>
-			</Button>
-		</Fragment>
-	</CtaBand>
+
 </Layout>
