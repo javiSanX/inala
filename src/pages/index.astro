@@ -6,7 +6,8 @@ import heroPoster from "../assets/images/hero_index_poster.webp";
 import mariaImage from "../assets/images/maria1.webp";
 import waterfallMp4 from "../assets/videos/cascada_720.mp4";
 import waterfallWebm from "../assets/videos/cascada_720.webm";
-import dripMp4 from "../assets/videos/goteo.mp4";
+import dripMp4 from "../assets/videos/goteo_720.mp4";
+import dripWebm from "../assets/videos/goteo_720.webm";
 import heroVideo1280 from "../assets/videos/hero_index_1280.mp4";
 import heroAv11280 from "../assets/videos/hero_index_1280.webm";
 import heroVideo1920 from "../assets/videos/hero_index_1920.mp4";
@@ -199,7 +200,7 @@ const arrow =
 	"transition-[translate] duration-200 ease-out motion-safe:group-hover-fine:translate-x-0.5";
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} heroFont>
 	<HeroIntro />
 	<PageHero
 		size="display"
@@ -442,11 +443,12 @@ const arrow =
 					playsinline
 					preload="none"
 					poster={dripPoster.src}
-					width={1080}
-					height={1920}
+					width={720}
+					height={1280}
 					data-waterfall-video
 					class="waterfall absolute inset-0 size-full object-cover object-center"
 				>
+					<source src={dripWebm} type="video/webm; codecs=av01.0.05M.08" />
 					<source src={dripMp4} type="video/mp4" />
 				</video>
 				<!-- Same top rule as the waterfall video in the services section. -->
