@@ -1,5 +1,6 @@
 ---
 import heroImage from "../../assets/images/psicologia_perinatal.jpeg";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
 import SessionHour from "../../components/SessionHour.astro";
@@ -15,10 +16,10 @@ import SectionHeader from "../../components/ui/SectionHeader.astro";
 import { contactHref, ctaLabel, email } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
-const title = "Psicología perinatal en Pamplona y online | Inala Psicoterapia";
+const title = "Psicología perinatal y crianza en Pamplona | Inala Psicoterapia";
 
 const description =
-	"Apoyo psicológico para madres, padres y cuidadores en Pamplona y online: cansancio, culpa, rabietas, límites y desacuerdos de crianza. Con María Sánchez, psicóloga general sanitaria.";
+	"Apoyo psicológico para madres, padres y cuidadores en Pamplona y online: cansancio, culpa, rabietas, límites y desacuerdos de crianza.";
 
 const sessionSteps = [
 	{
@@ -127,15 +128,23 @@ const faqs = [
 		backgroundImage={heroImage}
 		mobileBackground="corner"
 	>
+		<Breadcrumbs
+			slot="breadcrumbs"
+			items={[
+				{ name: "Inicio", href: "/" },
+				{ name: "Servicios", href: "/servicios" },
+				{ name: "Psicología Perinatal y Crianza" },
+			]}
+		/>
 		<Fragment slot="title">
 			{
 				/* Below lg each run is its own line, sized from the viewport width so
 			  the lead is the larger and both always fit on one line. */
 			}
-			<span class="max-lg:block max-lg:text-hero-lead">Psicología perinatal</span
+			<span class="max-lg:block max-lg:text-hero-lead">Psicología perinatal y crianza</span
 			>{" "}
 			<span class="hero-accent max-lg:block max-lg:text-hero-run"
-				>apoyo para madres y padres en la crianza</span
+				>apoyo para madres y padres</span
 			>
 		</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">

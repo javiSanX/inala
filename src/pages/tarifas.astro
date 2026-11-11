@@ -16,10 +16,10 @@ import {
 } from "../data/site";
 import Layout from "../layouts/Layout.astro";
 
-const title = "Tarifas | Terapia psicológica en Pamplona y online · Inala";
+const title = "Tarifas de psicoterapia en Pamplona y online | Inala Psicoterapia";
 
 const description =
-	"Tarifas y duración de las sesiones: terapia individual 65 €, de pareja o familiar 75 €. Sesiones de 60 minutos en Pamplona u online por videollamada, sin cuotas ni permanencias.";
+	"Terapia individual 65 €, de pareja o familiar 75 €. Sesiones de 60 minutos en Pamplona u online por videollamada, sin cuotas ni permanencias.";
 
 const serviceByName = (name: string) => {
 	const service = services.find((item) => item.name === name);
@@ -33,7 +33,7 @@ const couple = serviceByName("Terapia de Pareja");
 
 const family = serviceByName("Terapia Familiar");
 
-const perinatal = serviceByName("Psicología Perinatal");
+const perinatal = serviceByName("Psicología Perinatal y Crianza");
 
 // Prices and durations come from `services` (site.ts), which mirrors main.
 const plans = [

@@ -5,10 +5,11 @@ subtitle: >-
   espera.
 pubDate: 2025-12-05
 author: María Sánchez
-description: >-
-  ¿Sientes que el tiempo se detiene? La incertidumbre médica genera una profunda
-  ansiedad por enfermedad y miedo al diagnóstico. Aprende cómo recuperar el control, gestionar el miedo a la espera y
-  encontrar apoyo emocional cuando el cuerpo dice "algo no está bien".
+description: 'La incertidumbre médica genera ansiedad por enfermedad y miedo al diagnóstico. Cómo recuperar el control, gestionar la espera y encontrar apoyo emocional.'
+services:
+  - /servicios/terapia-individual
+related:
+  - como-superar-la-ansiedad-diagnostico
 ---
 Hoy necesito hablar de uno de esos momentos que pueden romperlo todo sin hacer ruido. Ese instante en el que la vida parece detenerse y deja a la vista nuestra fragilidad más profunda: la **incertidumbre** ante un problema serio de salud.
 

@@ -3,8 +3,11 @@ title: 'Terapia de pareja online'
 subtitle: 'Descubre cómo la terapia de pareja virtual puede transformar tu relación y superar desafíos desde la comodidad de tu hogar.'
 pubDate: 2025-11-01T10:30:00.000Z
 author: María Sánchez
-description: 'La terapia de pareja online ofrece un espacio accesible y flexible para resolver conflictos, mejorar la comunicación y reconstruir la intimidad. Descubre sus beneficios, cómo funciona y cuándo puede ser el momento adecuado para pedir ayuda profesional.'
+description: 'La terapia de pareja online ofrece un espacio accesible y flexible para resolver conflictos y mejorar la comunicación. Sus beneficios y cómo funciona.'
 image: ../../assets/blog/terapia-de-pareja-online.webp
+services:
+  - /servicios/terapia-de-pareja
+  - /servicios/terapia-online
 ---
 
 ## Terapia de pareja online: un puente hacia la conexión y la comprensión

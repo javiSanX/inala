@@ -132,6 +132,7 @@ const hasCaption = Astro.slots.has("caption");
 			]}
 		>
 			<div class:list={["hero-copy flex flex-col gap-6", hasMedia && "lg:col-span-7"]}>
+				<slot name="breadcrumbs" />
 				{Astro.slots.has("eyebrow") && (
 					<div class="self-start">
 						<slot name="eyebrow" />

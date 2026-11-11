@@ -1,5 +1,6 @@
 ---
 import heroImage from "../../assets/images/terapia_de_pareja.jpeg";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
 import SessionHour from "../../components/SessionHour.astro";
@@ -18,7 +19,7 @@ import Layout from "../../layouts/Layout.astro";
 const title = "Terapia de pareja en Pamplona y online | Inala Psicoterapia";
 
 const description =
-	"Terapia de pareja en Pamplona y online, sin tomar partido: comunicación, distanciamiento, infidelidad, crianza y separación. Sesiones de 60 minutos con María Sánchez, psicóloga general sanitaria.";
+	"Terapia de pareja en Pamplona y online, sin tomar partido: comunicación, distanciamiento, infidelidad, crianza y separación. Sesiones de 60 minutos.";
 
 const sessionFeatures = [
 	{
@@ -126,6 +127,14 @@ const faqs = [
 		backgroundImage={heroImage}
 		mobileBackground="corner"
 	>
+		<Breadcrumbs
+			slot="breadcrumbs"
+			items={[
+				{ name: "Inicio", href: "/" },
+				{ name: "Servicios", href: "/servicios" },
+				{ name: "Terapia de Pareja" },
+			]}
+		/>
 		<Fragment slot="title">
 			{
 				/* Below lg each run is its own line, sized from the viewport width so

@@ -38,7 +38,7 @@ import Layout from "../layouts/Layout.astro";
 
 const title = "Psicóloga en Pamplona y online | INALA Centro de Psicoterapia";
 const description =
-	"Terapia psicológica para adultos, parejas y familias en Pamplona y online, con María Sánchez, psicóloga general sanitaria (Nº col. NA-02300). Sesiones de 60 minutos.";
+	"Terapia psicológica para adultos, parejas y familias en Pamplona y online, con María Sánchez, psicóloga general sanitaria (Nº col. NA-02300).";
 
 // AV1 first (about half the size), H.264 for the rest; phones get the 1280px cut.
 const phone = "(max-width: 47.99rem)";
@@ -218,10 +218,10 @@ const arrow =
 		</p>
 		<Fragment slot="title">
 			{/* Below lg each run is its own line, sized from the viewport width so
-			  "Terapia psicológica" is the larger and both always fit on one line. */}
-			<span class="max-lg:block max-lg:text-hero-lead">Terapia psicológica</span>{" "}
+			  the lead is the larger. */}
+			<span class="max-lg:block max-lg:text-hero-lead">Psicóloga en Pamplona,</span>{" "}
 			<span class="hero-accent max-lg:block max-lg:text-hero-run"
-				>adaptada a cada situación</span
+				>terapia adaptada a cada situación</span
 			>
 		</Fragment>
 		<p

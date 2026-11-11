@@ -1,0 +1,50 @@
+{
+	"$schema": "https://openapi.vercel.sh/vercel.json",
+	"redirects": [
+		{
+			"source": "/servicios/psicologia-parental",
+			"destination": "/servicios/psicologia-perinatal/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/2",
+			"destination": "/blog/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/author",
+			"destination": "/blog/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/author/maria-sanchez",
+			"destination": "/blog/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/author/Maria%20Sanchez",
+			"destination": "/blog/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/El_coraje_de_seguir_adelante",
+			"destination": "/blog/el-coraje-de-seguir-adelante/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/Guia_de_supervivencia_navideña",
+			"destination": "/blog/guia-de-supervivencia-navidena/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/como_superar_la_andiedad",
+			"destination": "/blog/como-superar-la-ansiedad-diagnostico/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/navegar_en_la_nueva_realidad",
+			"destination": "/blog/navegar-en-la-nueva-realidad/",
+			"statusCode": 301
+		}
+	]
+}

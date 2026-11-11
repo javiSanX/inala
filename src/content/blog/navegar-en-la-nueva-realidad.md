@@ -3,8 +3,10 @@ title: 'Navegar en la nueva realidad'
 subtitle: 'El duelo que llega con un diagnóstico psicológico, sus fases y el lugar que ocupa la aceptación.'
 pubDate: 2025-12-05T11:00:00.000Z
 author: María Sánchez
-description: 'Asumir un diagnóstico psicológico es difícil. Explora las fases del duelo (negación, ira, negociación) y descubre cómo la aceptación te ayuda a gestionar el dolor emocional y seguir navegando.'
+description: 'Asumir un diagnóstico psicológico es difícil. Las fases del duelo y cómo la aceptación te ayuda a gestionar el dolor emocional y seguir navegando.'
 image: ../../assets/blog/navegar-en-la-nueva-realidad.webp
+services:
+  - /servicios/terapia-individual
 ---
 
 ## De la tormenta a la calma interior (la clave de la aceptación)

@@ -1,5 +1,6 @@
 ---
 import heroImage from "../../assets/images/terapia_individual.jpeg";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
 import SessionHour from "../../components/SessionHour.astro";
@@ -19,7 +20,7 @@ import Layout from "../../layouts/Layout.astro";
 const title = "Terapia individual en Pamplona y online | Inala Psicoterapia";
 
 const description =
-	"Terapia individual para adultos, adolescentes y niños en Pamplona y online: ansiedad, estrés, autoestima, duelo y relaciones. Sesiones de 60 minutos con María Sánchez, psicóloga general sanitaria.";
+	"Terapia individual para adultos, adolescentes y niños en Pamplona y online: ansiedad, estrés, autoestima, duelo y relaciones. Sesiones de 60 minutos.";
 
 const trustBadges = [
 	{ icon: "schedule", label: "Sesiones de 60 minutos" },
@@ -122,6 +123,14 @@ const faqs = [
 		backgroundImage={heroImage}
 		mobileBackground="corner"
 	>
+		<Breadcrumbs
+			slot="breadcrumbs"
+			items={[
+				{ name: "Inicio", href: "/" },
+				{ name: "Servicios", href: "/servicios" },
+				{ name: "Terapia Individual" },
+			]}
+		/>
 		<Fragment slot="title">
 			{
 				/* Below lg each run is its own line, sized from the viewport width so

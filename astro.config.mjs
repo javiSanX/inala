@@ -18,7 +18,8 @@ export default defineConfig({
 		}),
 	],
 	// URLs that exist on main (the live site) but not on this build. In static
-	// output Astro writes each one as a meta-refresh page with a canonical link.
+	// output Astro writes each one as a meta-refresh page with a canonical link;
+	// vercel.json serves the same list as real 301s. Keep both in sync.
 	redirects: {
 		"/servicios/psicologia-parental": "/servicios/psicologia-perinatal/",
 		"/blog/2": "/blog/",

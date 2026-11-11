@@ -1,9 +1,15 @@
 ---
 import { getImage, Image } from "astro:assets";
-import { getCollection, render } from "astro:content";
+import { getCollection, getEntries, render } from "astro:content";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Button from "../../components/ui/Button.astro";
 import Icon from "../../components/ui/Icon.astro";
-import { contactHref, ctaLabel } from "../../data/site";
+import {
+	contactHref,
+	ctaLabel,
+	serviceMenuLinks,
+	therapistName,
+} from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -14,6 +20,21 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const { title, subtitle, description, pubDate, author, image } = post.data;
+
+// Related links shown after the post: services by their current name, then posts on the same topic.
+const relatedLinks = [
+	...post.data.services.map((href) => {
+		const service = serviceMenuLinks.find((item) => item.href === href);
+		if (!service) throw new Error(`Unknown service "${href}" in post "${post.id}"`);
+		return { name: service.name, href: service.href };
+	}),
+	...(await getEntries(post.data.related)).map((entry) => ({
+		name: entry.data.title,
+		href: `/blog/${entry.id}`,
+	})),
+];
+const textLink =
+	"group inline-flex min-h-11 items-center gap-2 text-small font-semibold text-teal underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-teal-strong hover:decoration-current";
 
 const date = pubDate.toLocaleDateString("es-ES", {
 	day: "numeric",
@@ -34,7 +55,11 @@ const schema = [
 		description,
 		datePublished: pubDate.toISOString(),
 		inLanguage: "es-ES",
-		author: { "@type": "Person", name: author, url: new URL("/sobre-mi/", site).href },
+		// The therapist already has a Person node in the layout's graph.
+		author:
+			author === therapistName
+				? { "@id": `${home}#maria` }
+				: { "@type": "Person", name: author },
 		publisher: { "@id": `${home}#consulta` },
 		mainEntityOfPage: new URL(Astro.url.pathname, site).href,
 		...(schemaImage && { image: schemaImage }),
@@ -63,6 +88,9 @@ const schema = [
 					Volver al blog
 				</a>
 				<header class="hero-copy mt-8 flex flex-col gap-5">
+					<Breadcrumbs
+						items={[{ name: "Inicio", href: "/" }, { name: "Blog", href: "/blog" }, { name: title }]}
+					/>
 					<h1 class="font-display text-title font-normal text-ink">{title}</h1>
 					{subtitle && <p class="text-lead text-ink-muted">{subtitle}</p>}
 					<p class="text-label font-semibold text-ink-muted">
@@ -103,6 +131,25 @@ const schema = [
 					<Button href={contactHref} arrow>{ctaLabel}</Button>
 					<Button href="/servicios" variant="secondary">Ver servicios y tarifas</Button>
 				</div>
+				{
+					relatedLinks.length > 0 && (
+						<nav aria-label="Contenido relacionado">
+							<ul class="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:gap-x-8">
+								{relatedLinks.map((link) => (
+									<li>
+										<a class={textLink} href={link.href}>
+											<span>{link.name}</span>
+											<Icon
+												name="arrow_forward"
+												class="transition-[translate] duration-200 ease-out motion-safe:group-hover-fine:translate-x-0.5"
+											/>
+										</a>
+									</li>
+								))}
+							</ul>
+						</nav>
+					)
+				}
 			</aside>
 		</div>
 	</article>

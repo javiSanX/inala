@@ -5,23 +5,11 @@ subtitle: >-
   tu salud mental en las reuniones familiares.
 pubDate: 2025-12-20
 author: María Sánchez
-description: >-
-  La llegada de las fiestas navideñas suele idealizarse como una época de paz,
-  pero para muchas personas, la realidad es muy distinta: el estrés en Navidad y
-  familia se convierte en un desafío psicológico agotador. Las reuniones
-  familiares, aunque nacen de la tradición, pueden actuar como detonantes de
-  ansiedad debido a dinámicas tóxicas, la falta de límites personales o el
-  enfrentamiento a preguntas incómodas sobre la vida privada.  En este artículo,
-  desde INALA, exploramos estrategias de psicoterapia práctica para que puedas
-  sobrevivir emocionalmente a los encuentros navideños. Aprenderás a identificar
-  roles familiares conflictivos, a practicar la regulación emocional en momentos
-  de tensión y a priorizar tu salud mental por encima de las expectativas
-  ajenas. Poner límites no es un acto de egoísmo, sino una herramienta de
-  autocuidado esencial para evitar el agotamiento emocional. Si buscas
-  herramientas para gestionar la ansiedad en las fiestas y transformar tu
-  experiencia este año, esta guía de supervivencia emocional te ofrece el paso a
-  paso para proteger tu bienestar.
+description: 'Estrategias de psicoterapia para el estrés de las reuniones familiares en Navidad: límites sanos, regulación emocional y autocuidado para proteger tu bienestar.'
 image: ../../assets/blog/guia-de-supervivencia-navidena.webp
+services:
+  - /servicios/terapia-familiar
+  - /servicios/terapia-individual
 ---
 ## Estrés en Navidad y familia: guía de supervivencia emocional para tus reuniones
 

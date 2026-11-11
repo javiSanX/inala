@@ -3,6 +3,7 @@ import therapistImage from "../../assets/images/maria5.webp";
 import officeImage from "../../assets/images/oficina.webp";
 import heroImage from "../../assets/images/terapia_online.jpeg";
 import situationsImage from "../../assets/images/terapia-online.jpg";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import OnlineSituations from "../../components/OnlineSituations.astro";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
@@ -27,7 +28,7 @@ import Layout from "../../layouts/Layout.astro";
 const title = "Terapia online por videollamada | Inala Psicoterapia";
 
 const description =
-	"Terapia psicológica online por videollamada segura con María Sánchez, psicóloga general sanitaria. Terapia individual, de pareja, familiar y psicología perinatal, combinable con la consulta presencial en Pamplona.";
+	"Terapia psicológica online por videollamada segura con María Sánchez, psicóloga general sanitaria. Combinable con la consulta presencial en Pamplona.";
 
 // Each frame glides the photo towards the part of the scene it speaks to
 // (scale, then a translate kept within the scaled margin).
@@ -159,6 +160,14 @@ const faqs = [
 		backgroundImage={heroImage}
 		mobileBackground="corner"
 	>
+		<Breadcrumbs
+			slot="breadcrumbs"
+			items={[
+				{ name: "Inicio", href: "/" },
+				{ name: "Servicios", href: "/servicios" },
+				{ name: "Terapia online" },
+			]}
+		/>
 		<Fragment slot="title">
 			{
 				/* Below lg each run is its own line, sized from the viewport width so

@@ -7,8 +7,10 @@ import Header from "../components/Header.astro";
 import {
 	email,
 	instagramUrl,
+	licenseNumber,
 	logoUrl,
 	postalAddress,
+	services,
 	siteName,
 	therapistName,
 	whatsappNumber,
@@ -52,6 +54,21 @@ const preview = await getImage({ src: image, ...previewOptions });
 const previewUrl = new URL(preview.src, site).href;
 const practicePreview = await getImage({ src: practiceImage, ...previewOptions });
 
+// Services with a confirmed price ("65 €"); pending ones are listed without a price.
+const offers = services.map((service) => {
+	const price = service.price.match(/^(\d+) €$/)?.[1];
+	return {
+		"@type": "Offer",
+		itemOffered: {
+			"@type": "Service",
+			name: service.name,
+			url: new URL(`${service.href}/`, site).href,
+		},
+		...(price && { price, priceCurrency: "EUR" }),
+	};
+});
+const prices = offers.flatMap((offer) => (offer.price ? [Number(offer.price)] : []));
+
 // Only facts that the site states elsewhere: name, address, contact, licence holder.
 const structuredData = {
 	"@context": "https://schema.org",
@@ -75,12 +92,29 @@ const structuredData = {
 			address: { "@type": "PostalAddress", ...postalAddress },
 			sameAs: [instagramUrl],
 			founder: { "@id": `${home}#maria` },
+			areaServed: { "@type": "City", name: postalAddress.addressLocality },
+			priceRange: `${Math.min(...prices)} €–${Math.max(...prices)} €`,
+			hasOfferCatalog: {
+				"@type": "OfferCatalog",
+				name: "Servicios",
+				itemListElement: offers,
+			},
 		},
 		{
 			"@type": "Person",
 			"@id": `${home}#maria`,
 			name: therapistName,
 			jobTitle: "Psicóloga general sanitaria",
+			identifier: {
+				"@type": "PropertyValue",
+				propertyID: "Nº de colegiada",
+				value: licenseNumber,
+			},
+			knowsAbout: [
+				"Terapia familiar",
+				"Terapia de pareja",
+				"Salud mental perinatal",
+			],
 			url: new URL("/sobre-mi/", site).href,
 			worksFor: { "@id": `${home}#consulta` },
 		},

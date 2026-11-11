@@ -3,8 +3,10 @@ title: 'Cómo superar la ansiedad social: 5 técnicas prácticas'
 subtitle: 'Más allá de la timidez: guía profesional para gestionar el miedo al juicio social y recuperar tu vida.'
 pubDate: 2025-11-24T09:00:00.000Z
 author: María Sánchez
-description: 'La ansiedad social es un miedo intenso a ser observado y juzgado que impacta negativamente tu vida diaria. Descubre 5 técnicas basadas en la terapia cognitivo-conductual (TCC) y el mindfulness para desafiar tus pensamientos automáticos y comenzar un proceso de exposición gradual. Aprende a gestionar el miedo social y a dar el primer paso hacia una vida más plena.'
+description: 'La ansiedad social es un miedo intenso a ser observado y juzgado. 5 técnicas basadas en la TCC y el mindfulness para gestionar el miedo social.'
 image: ../../assets/blog/como-superar-la-ansiedad.webp
+services:
+  - /servicios/terapia-individual
 ---
 
 ## ¿Qué es la ansiedad social y por qué me afecta?

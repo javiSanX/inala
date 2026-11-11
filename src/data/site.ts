@@ -82,7 +82,7 @@ export const services: Service[] = [
 		duration: "60 minutos",
 	},
 	{
-		name: "Psicología Perinatal",
+		name: "Psicología Perinatal y Crianza",
 		href: "/servicios/psicologia-perinatal",
 		icon: "child_care",
 		summary:

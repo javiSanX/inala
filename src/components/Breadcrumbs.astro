@@ -31,7 +31,11 @@ const schema = {
 		{
 			items.map((item, index) => (
 				<li class="flex items-center gap-2">
-					{index > 0 && <span class="text-ink-soft">/</span>}
+					{index > 0 && (
+						<span aria-hidden="true" class="text-ink-soft">
+							/
+						</span>
+					)}
 					{item.href ? (
 						<a
 							href={item.href}
