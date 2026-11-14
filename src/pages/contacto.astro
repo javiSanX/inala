@@ -17,6 +17,7 @@ import {
 	addressCity,
 	crisisNotice,
 	email,
+	googleBusinessUrl,
 	legalLinks,
 	licenseNumber,
 	openingHours,
@@ -49,8 +50,6 @@ const title =
 
 const description = `Contacta con ${therapistName}, psicóloga general sanitaria en Pamplona. Solicita tu primera cita, presencial u online, por formulario, email o WhatsApp.`;
 
-const mapsUrl =
-	"https://www.google.com/maps/search/?api=1&query=Calle+Mar%C3%ADa+Lacunza+6+Pamplona";
 
 const privacyHref =
 	legalLinks.find((link) => link.name === "Política de privacidad")?.href ??
@@ -444,7 +443,7 @@ const faqs = [
 				</div>
 				<div>
 					<Button
-						href={mapsUrl}
+						href={googleBusinessUrl}
 						variant="secondary"
 						icon="map"
 						rel="noopener noreferrer"

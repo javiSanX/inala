@@ -12,6 +12,8 @@ import {
 } from "../data/analytics";
 import {
 	email,
+	geo,
+	googleBusinessUrl,
 	instagramUrl,
 	licenseNumber,
 	logoUrl,
@@ -97,7 +99,9 @@ const structuredData = {
 			email,
 			telephone: whatsappNumber.replaceAll(" ", ""),
 			address: { "@type": "PostalAddress", ...postalAddress },
-			sameAs: [instagramUrl],
+			geo: { "@type": "GeoCoordinates", ...geo },
+			hasMap: googleBusinessUrl,
+			sameAs: [instagramUrl, googleBusinessUrl],
 			founder: { "@id": `${home}#maria` },
 			areaServed: { "@type": "City", name: postalAddress.addressLocality },
 			priceRange: `${Math.min(...prices)} €–${Math.max(...prices)} €`,

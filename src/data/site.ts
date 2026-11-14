@@ -9,23 +9,30 @@ export const siteName = "INALA Centro de Psicoterapia";
 export const contactHref = "/contacto";
 export const email = "hola@inala.es";
 export const instagramUrl = "https://www.instagram.com/inala_psicoterapia/";
+// Google Business Profile of the practice (stable CID link): map link and
+// schema `sameAs`/`hasMap`. Address, hours and coordinates match this listing.
+export const googleBusinessUrl =
+	"https://maps.google.com/?cid=8408552270441370446";
 export const therapistName = "María Sánchez";
 export const licenseNumber = "NA-02300";
-export const address = "C/ María Lacunza 6, portal 4";
-export const addressCity = "31011 Pamplona, España";
+export const address = "Calle Dra. Ariz, frente al portal 13";
+export const addressCity = "31006 Pamplona, España";
 export const addressCenter = "Centro Yssana";
 export const whatsappNumber = "+34 623 050 773";
 export const whatsappUrl = "https://wa.me/34623050773";
 export const phoneHref = `tel:${whatsappNumber.replaceAll(" ", "")}`;
-// The same address split into fields, for structured data.
+// The same address split into fields, for structured data. The street stays
+// plain (no centre name) so it matches the Google Business Profile.
 export const postalAddress = {
-	streetAddress: `${address} (${addressCenter})`,
-	postalCode: "31011",
+	streetAddress: address,
+	postalCode: "31006",
 	addressLocality: "Pamplona",
 	addressCountry: "ES",
 };
+// Coordinates of the Google Business Profile pin.
+export const geo = { latitude: 42.8069008, longitude: -1.6253869 };
 
-// Opening hours, as the owner sent them. `spec` feeds the structured data.
+// Opening hours, as listed on the Google Business Profile. `spec` feeds the structured data.
 interface OpeningHours {
 	days: string;
 	hours: string;
@@ -34,24 +41,15 @@ interface OpeningHours {
 
 export const openingHours: OpeningHours[] = [
 	{
-		days: "Lunes y martes",
-		hours: "de 15:00 a 19:00 h",
+		days: "Lunes a viernes",
+		hours: "de 10:00 a 19:00 h",
 		spec: [
-			{ dayOfWeek: ["Monday", "Tuesday"], opens: "15:00", closes: "19:00" },
+			{
+				dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+				opens: "10:00",
+				closes: "19:00",
+			},
 		],
-	},
-	{
-		days: "Miércoles y jueves",
-		hours: "de 9:00 a 13:00 h y de 16:00 a 18:00 h",
-		spec: [
-			{ dayOfWeek: ["Wednesday", "Thursday"], opens: "09:00", closes: "13:00" },
-			{ dayOfWeek: ["Wednesday", "Thursday"], opens: "16:00", closes: "18:00" },
-		],
-	},
-	{
-		days: "Viernes",
-		hours: "de 9:00 a 13:00 h",
-		spec: [{ dayOfWeek: ["Friday"], opens: "09:00", closes: "13:00" }],
 	},
 	{ days: "Sábados y domingos", hours: "cerrado", spec: [] },
 ];
