@@ -9,6 +9,7 @@ import {
 	instagramUrl,
 	licenseNumber,
 	logoUrl,
+	openingHours,
 	postalAddress,
 	services,
 	siteName,
@@ -94,6 +95,9 @@ const structuredData = {
 			founder: { "@id": `${home}#maria` },
 			areaServed: { "@type": "City", name: postalAddress.addressLocality },
 			priceRange: `${Math.min(...prices)} €–${Math.max(...prices)} €`,
+			openingHoursSpecification: openingHours.flatMap((item) =>
+				item.spec.map((slot) => ({ "@type": "OpeningHoursSpecification", ...slot })),
+			),
 			hasOfferCatalog: {
 				"@type": "OfferCatalog",
 				name: "Servicios",

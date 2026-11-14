@@ -1,5 +1,5 @@
 ---
-title: El coraje de seguir adelante
+title: 'El coraje de seguir adelante: ansiedad ante la incertidumbre médica'
 subtitle: >-
   Ansiedad y enfermedad: cómo vivir la incertidumbre médica y el miedo a la
   espera.

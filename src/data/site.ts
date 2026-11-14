@@ -25,6 +25,39 @@ export const postalAddress = {
 	addressCountry: "ES",
 };
 
+// Opening hours, as the owner sent them. `spec` feeds the structured data.
+interface OpeningHours {
+	days: string;
+	hours: string;
+	spec: { dayOfWeek: string[]; opens: string; closes: string }[];
+}
+
+export const openingHours: OpeningHours[] = [
+	{
+		days: "Lunes y martes",
+		hours: "de 15:00 a 19:00 h",
+		spec: [
+			{ dayOfWeek: ["Monday", "Tuesday"], opens: "15:00", closes: "19:00" },
+		],
+	},
+	{
+		days: "Miércoles y jueves",
+		hours: "de 9:00 a 13:00 h y de 16:00 a 18:00 h",
+		spec: [
+			{ dayOfWeek: ["Wednesday", "Thursday"], opens: "09:00", closes: "13:00" },
+			{ dayOfWeek: ["Wednesday", "Thursday"], opens: "16:00", closes: "18:00" },
+		],
+	},
+	{
+		days: "Viernes",
+		hours: "de 9:00 a 13:00 h",
+		spec: [{ dayOfWeek: ["Friday"], opens: "09:00", closes: "13:00" }],
+	},
+	{ days: "Sábados y domingos", hours: "cerrado", spec: [] },
+];
+
+export const replyTime = "de 24 a 48 horas laborables";
+
 // One label for the primary action everywhere: the contact form sends a
 // request, it does not book a slot.
 export const ctaLabel = "Solicitar primera cita";
@@ -87,8 +120,8 @@ export const services: Service[] = [
 		icon: "child_care",
 		summary:
 			"Para madres y padres que buscan apoyo en la crianza: cansancio, culpa, límites o desacuerdos educativos.",
-		price: "[PENDIENTE: precio]",
-		duration: "[PENDIENTE: duración]",
+		price: "65 €",
+		duration: "60 minutos",
 	},
 ];
 

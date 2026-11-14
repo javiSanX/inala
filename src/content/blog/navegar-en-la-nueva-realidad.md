@@ -1,5 +1,5 @@
 ---
-title: 'Navegar en la nueva realidad'
+title: 'Navegar en la nueva realidad: el duelo ante un diagnóstico'
 subtitle: 'El duelo que llega con un diagnóstico psicológico, sus fases y el lugar que ocupa la aceptación.'
 pubDate: 2025-12-05T11:00:00.000Z
 author: María Sánchez
