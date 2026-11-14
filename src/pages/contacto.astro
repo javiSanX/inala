@@ -506,6 +506,8 @@ const faqs = [
 </Layout>
 
 <script>
+	import { track } from "../scripts/track";
+
 	// There is no form backend yet (static site), so the form prepares an email
 	// in the visitor's mail app instead of pretending the request was sent.
 	const form = document.querySelector<HTMLFormElement>("#contact-booking-form");
@@ -527,6 +529,7 @@ const faqs = [
 			value("message"),
 		].join("\n");
 		const subject = `Solicitud de cita: ${value("service_type")}`;
+		track("contact_form_submit");
 		window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 		if (banner) {
 			banner.hidden = false;
