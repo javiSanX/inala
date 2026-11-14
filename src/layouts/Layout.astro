@@ -2,8 +2,14 @@
 import { Font, getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import practiceImage from "../assets/images/oficina.webp";
+import CookieBanner from "../components/CookieBanner.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import {
+	googleAnalyticsMeasurementID,
+	googleSiteVerification,
+	googleTagManagerID,
+} from "../data/analytics";
 import {
 	email,
 	instagramUrl,
@@ -132,6 +138,59 @@ const structuredData = {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Google Consent Mode: everything denied until the cookie banner records a choice. -->
+		<script is:inline define:vars={{ measurementId: googleAnalyticsMeasurementID ?? null }}>
+			window.dataLayer = window.dataLayer || [];
+			window.gtag = function () {
+				// biome-ignore lint/complexity/noArguments: gtag.js only reads Arguments objects from the dataLayer.
+				window.dataLayer.push(arguments);
+			};
+			gtag("consent", "default", {
+				analytics_storage: "denied",
+				ad_storage: "denied",
+				ad_user_data: "denied",
+				ad_personalization: "denied",
+				wait_for_update: 500,
+			});
+			try {
+				const match = document.cookie.match(/(?:^|; )inala_cookie_consent=([^;]*)/);
+				if (match) {
+					const consent = JSON.parse(decodeURIComponent(match[1]));
+					const state = (granted) => (granted ? "granted" : "denied");
+					gtag("consent", "update", {
+						analytics_storage: state(consent.analytics),
+						ad_storage: state(consent.marketing),
+						ad_user_data: state(consent.marketing),
+						ad_personalization: state(consent.marketing),
+					});
+				}
+			} catch {}
+			if (measurementId) {
+				gtag("js", new Date());
+				gtag("config", measurementId, {
+					anonymize_ip: true,
+					allow_google_signals: false,
+					allow_ad_personalization_signals: false,
+				});
+			}
+		</script>
+		{
+			googleAnalyticsMeasurementID && (
+				<script
+					is:inline
+					async
+					src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsMeasurementID}`}
+				/>
+			)
+		}
+		<!-- Google Tag Manager -->
+		<script is:inline define:vars={{ gtmId: googleTagManagerID }}>
+			window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+			const gtm = document.createElement("script");
+			gtm.async = true;
+			gtm.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
+			document.head.appendChild(gtm);
+		</script>
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonicalUrl} />
@@ -151,7 +210,7 @@ const structuredData = {
 		<meta name="twitter:image" content={previewUrl} />
 		<meta
 			name="google-site-verification"
-			content="tPXeMdX0nIDCBwsNwGIKYV56PGlxsBqEMzj2aU3zFXg"
+			content={googleSiteVerification}
 		/>
 		<meta name="theme-color" content="#f6f9f8" />
 		<link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -175,6 +234,14 @@ const structuredData = {
 		}
 	</head>
 	<body class="min-h-dvh bg-paper text-ink">
+		<noscript
+			><iframe
+				src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerID}`}
+				title="Google Tag Manager"
+				height="0"
+				width="0"
+				style="display:none;visibility:hidden"></iframe></noscript
+		>
 		<a
 			href="#contenido"
 			class="fixed left-4 top-3 z-60 -translate-y-20 rounded-full bg-teal px-5 py-3 text-small font-semibold text-white focus:translate-y-0"
@@ -186,6 +253,7 @@ const structuredData = {
 			<slot />
 		</main>
 		<Footer />
+		<CookieBanner />
 		<script>
 			import "../scripts/reveal";
 		</script>
