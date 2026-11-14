@@ -191,6 +191,17 @@ const isPending = (value: string) => value.startsWith("[PENDIENTE");
 		</p>
 	</Section>
 
+
+	<CtaBand title="¿Tienes dudas sobre el formato o las tarifas?">
+		<p>Escríbeme y lo vemos. Si ya lo tienes claro, solicita tu primera cita.</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse">{ctaLabel}</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>Escribirme a {email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
+
 	<!-- Qué incluye cada sesión -->
 	<Section>
 		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12">
@@ -217,13 +228,4 @@ const isPending = (value: string) => value.startsWith("[PENDIENTE");
 		</div>
 	</Section>
 
-	<CtaBand title="¿Tienes dudas sobre el formato o las tarifas?">
-		<p>Escríbeme y lo vemos. Si ya lo tienes claro, solicita tu primera cita.</p>
-		<Fragment slot="actions">
-			<Button href={contactHref} variant="inverse">{ctaLabel}</Button>
-			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
-				<span>Escribirme a {email}</span>
-			</Button>
-		</Fragment>
-	</CtaBand>
 </Layout>
