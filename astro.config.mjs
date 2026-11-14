@@ -2,6 +2,7 @@
 
 import { readdirSync, readFileSync } from "node:fs";
 import sitemap from "@astrojs/sitemap";
+import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { defineConfig, fontProviders } from "astro/config";
@@ -40,9 +41,9 @@ export default defineConfig({
 			},
 		}),
 	],
-	// URLs that exist on main (the live site) but not on this build. In static
-	// output Astro writes each one as a meta-refresh page with a canonical link;
-	// vercel.json serves the same list as real 301s. Keep both in sync.
+	// URLs that exist on main (the live site) but not on this build. The Vercel
+	// adapter serves them as real 301s, and vercel.json lists the same
+	// redirects. Keep both in sync.
 	redirects: {
 		"/servicios/psicologia-parental": "/servicios/psicologia-perinatal/",
 		"/blog/2": "/blog/",
@@ -112,4 +113,6 @@ export default defineConfig({
 		plugins: [tailwindcss(), basicSsl()],
 	},
 	output: "static",
+	// Needed for the contact form action (serverless function); pages stay prerendered.
+	adapter: vercel(),
 });

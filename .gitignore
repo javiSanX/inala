@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # playwright mcp screenshots and traces
 .playwright-mcp/
+.vercel

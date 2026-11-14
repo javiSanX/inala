@@ -93,7 +93,7 @@ const faqs = [
 		question:
 			"¿Qué confidencialidad tienen los datos que envío por este formulario?",
 		answer:
-			"Todo lo que me cuentes está protegido por el secreto profesional y se trata conforme al RGPD. Ten en cuenta que el formulario no envía nada por sí solo: prepara un mensaje en tu aplicación de correo y eres tú quien lo envía desde tu cuenta. Si prefieres no dar detalles por escrito, basta con tu nombre y tu teléfono.",
+			"Todo lo que me cuentes está protegido por el secreto profesional y se trata conforme al RGPD. Si prefieres no dar detalles por escrito, basta con tu nombre y tu teléfono.",
 	},
 	{
 		question: "¿Cuánto tardas en responder?",
@@ -230,12 +230,11 @@ const faqs = [
 						Solicita tu primera cita
 					</h2>
 					<p class="text-body text-ink-muted">
-						Completa este formulario y se preparará un mensaje en tu aplicación de
-						correo para que lo envíes. Te responderé para acordar día, hora y
+						Completa este formulario y te responderé para acordar día, hora y
 						modalidad.
 					</p>
 				</div>
-				<form id="contact-booking-form" class="mt-10 flex flex-col gap-8" data-email={email}>
+				<form id="contact-booking-form" class="mt-10 flex flex-col gap-8">
 					<fieldset class="flex flex-col gap-3">
 						<legend class={groupLegend}>
 							1. ¿Qué servicio te interesa? <span aria-hidden="true">*</span>
@@ -368,31 +367,39 @@ const faqs = [
 							>.</label
 						>
 					</div>
-					<!-- Shown after the visitor's mail app opens with the prepared message -->
+					<!-- Shown after the server answers: data-state picks the success or error text -->
 					<div
 						id="booking-confirmation-banner"
-						class="flex items-start gap-3 rounded-field bg-mist p-5 transition-[opacity,translate] duration-250 ease-out starting:translate-y-1 starting:opacity-0 motion-reduce:starting:translate-y-0"
+						class="group flex items-start gap-3 rounded-field bg-mist p-5 transition-[opacity,translate] duration-250 ease-out starting:translate-y-1 starting:opacity-0 motion-reduce:starting:translate-y-0"
+						data-state="success"
 						hidden
 						role="status"
 						tabindex="-1"
 					>
 						<Icon name="mail" class="mt-0.5 text-teal" />
-						<div>
+						<div class="group-data-[state=error]:hidden">
+							<p class="text-small font-semibold text-ink">He recibido tu mensaje</p>
+							<p class="text-small text-ink-muted">
+								Te responderé en un plazo {replyTime} para acordar día, hora y
+								modalidad.
+							</p>
+						</div>
+						<div class="hidden group-data-[state=error]:block">
 							<p class="text-small font-semibold text-ink">
-								He preparado tu mensaje en tu aplicación de correo
+								No se ha podido enviar el mensaje
 							</p>
 							<p class="text-small text-ink-muted">
-								Revísalo y pulsa enviar para que me llegue. Si no se ha abierto,
-								escríbeme directamente a {email}.
+								Inténtalo de nuevo en unos minutos o escríbeme directamente a {email}.
 							</p>
 						</div>
 					</div>
 					<div class="flex flex-col gap-3">
-						<button class:list={[buttonClass(), "w-full sm:w-auto sm:self-start"]} type="submit"
-							><Icon name="send" />Preparar mensaje y solicitar cita</button
+						<button
+							class:list={[buttonClass(), "w-full disabled:cursor-wait disabled:opacity-70 sm:w-auto sm:self-start"]}
+							type="submit"
+							><Icon name="send" /><span data-label>Enviar y solicitar cita</span></button
 						>
 						<p class="text-label text-ink-muted">
-							Al pulsar, se abrirá tu aplicación de correo con el mensaje preparado.
 							Si prefieres no dar detalles por escrito, basta con tu nombre y tu
 							teléfono.
 						</p>
@@ -506,32 +513,39 @@ const faqs = [
 </Layout>
 
 <script>
+	import { actions } from "astro:actions";
 	import { track } from "../scripts/track";
 
-	// There is no form backend yet (static site), so the form prepares an email
-	// in the visitor's mail app instead of pretending the request was sent.
+	// The form posts to the sendData action (serverless on Vercel), which mails
+	// the request to the practice and a confirmation to the visitor, as on main.
 	const form = document.querySelector<HTMLFormElement>("#contact-booking-form");
 	const banner = document.querySelector<HTMLElement>(
 		"#booking-confirmation-banner",
 	);
-	form?.addEventListener("submit", (event) => {
+	const submit = form?.querySelector<HTMLButtonElement>("button[type=submit]");
+	const submitLabel = submit?.querySelector<HTMLElement>("[data-label]");
+	form?.addEventListener("submit", async (event) => {
 		event.preventDefault();
-		const data = new FormData(form);
-		const value = (key: string) => String(data.get(key) ?? "").trim();
-		const body = [
-			`Nombre: ${value("name")}`,
-			`Email: ${value("email")}`,
-			`Teléfono: ${value("phone") || "-"}`,
-			`Servicio: ${value("service_type")}`,
-			`Modalidad: ${value("treatment_modality")}`,
-			`Horario preferido: ${value("slot")}`,
-			"",
-			value("message"),
-		].join("\n");
-		const subject = `Solicitud de cita: ${value("service_type")}`;
-		track("contact_form_submit");
-		window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+		if (!submit || submit.disabled) return;
+		const idleLabel = submitLabel?.textContent ?? "";
+		submit.disabled = true;
+		if (submitLabel) submitLabel.textContent = "Enviando…";
+		if (banner) banner.hidden = true;
+		let ok = false;
+		try {
+			const { error } = await actions.sendData(new FormData(form));
+			ok = !error;
+		} catch {
+			ok = false;
+		}
+		if (ok) {
+			track("contact_form_submit");
+			form.reset();
+		}
+		submit.disabled = false;
+		if (submitLabel) submitLabel.textContent = idleLabel;
 		if (banner) {
+			banner.dataset.state = ok ? "success" : "error";
 			banner.hidden = false;
 			banner.focus();
 		}
