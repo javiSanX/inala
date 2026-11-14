@@ -14,7 +14,12 @@ export const instagramUrl = "https://www.instagram.com/inala_psicoterapia/";
 export const googleBusinessUrl =
 	"https://maps.google.com/?cid=8408552270441370446";
 export const therapistName = "María Sánchez";
-export const licenseNumber = "NA-02300";
+// As written in the Colegio register (see licenseRegistryUrl).
+export const licenseNumber = "N-02300";
+// María's entry in the public register of the Colegio Oficial de la Psicología
+// de Navarra (the search URL returns only her record).
+export const licenseRegistryUrl =
+	"https://www.colpsinavarra.org/es/ventanilla-unica/consumidores-usuarios/registro-colegiados?field_nombre_value=maria&field_apellidos_value=sanchez+cobos";
 export const address = "Calle Dra. Ariz, frente al portal 13";
 export const addressCity = "31006 Pamplona, España";
 export const addressCenter = "Centro Yssana";

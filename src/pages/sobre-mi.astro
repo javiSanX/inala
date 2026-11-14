@@ -19,6 +19,7 @@ import {
 	email,
 	instagramUrl,
 	licenseNumber,
+	licenseRegistryUrl,
 } from "../data/site";
 import Layout from "../layouts/Layout.astro";
 
@@ -102,12 +103,19 @@ const spaceFeatures = [
 			ritmo.
 		</p>
 		<div>
-			<span
-				class="inline-flex min-h-9 items-center gap-2 rounded-full border border-line-strong px-4 text-label font-semibold text-ink tabular-nums"
+			<a
+				href={licenseRegistryUrl}
+				target="_blank"
+				rel="noopener"
+				class="inline-flex min-h-11 items-center gap-2 rounded-full border border-line-strong px-4 text-label font-semibold text-ink tabular-nums transition-[border-color,color] duration-200 hover:border-teal hover:text-teal"
 			>
 				<Icon name="verified" class="text-teal" />
 				<span>Nº col. {licenseNumber}</span>
-			</span>
+				<span class="sr-only"
+					>(ver en el registro del Colegio Oficial de la Psicología de Navarra, se abre en
+					una pestaña nueva)</span
+				>
+			</a>
 		</div>
 		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
 			<Button href={contactHref} arrow>
