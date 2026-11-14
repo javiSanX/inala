@@ -4,6 +4,7 @@ import portraitImage from "../assets/images/maria2.webp";
 import purposeImage from "../assets/images/maria3.webp";
 import vocationImage from "../assets/images/maria4.webp";
 import beginningsImage from "../assets/images/maria5.webp";
+import OtherServices from "../components/OtherServices.astro";
 import PageHero from "../components/PageHero.astro";
 import Button from "../components/ui/Button.astro";
 import CtaBand from "../components/ui/CtaBand.astro";
@@ -21,8 +22,7 @@ import {
 } from "../data/site";
 import Layout from "../layouts/Layout.astro";
 
-const title =
-	"Sobre mí: María Sánchez, psicóloga en Pamplona | Inala Psicoterapia";
+const title = "María Sánchez, psicóloga en Pamplona | Inala Psicoterapia";
 
 const description =
 	"María Sánchez, psicóloga general sanitaria con formación en terapia familiar y de pareja y en salud mental perinatal. En Pamplona y online.";
@@ -334,4 +334,5 @@ const spaceFeatures = [
 			</div>
 		</div>
 	</Section>
+	<OtherServices heading="Servicios" />
 </Layout>

@@ -3,7 +3,13 @@ import { serviceMenuLinks } from "../data/site";
 
 // Closing section for every service page: compact links to all services,
 // with the page being viewed marked as current. It sits on the cypress field
-// between the closing call to action and the footer.
+// between the closing call to action and the footer. Pages that are not a
+// service (Sobre mí, Cómo trabajo) reuse it as plain links to every service.
+interface Props {
+	heading?: string;
+}
+
+const { heading = "Otros servicios" } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, "");
 ---
 
@@ -15,7 +21,7 @@ const path = Astro.url.pathname.replace(/\/$/, "");
 		class="mx-auto flex max-w-content flex-col gap-6 px-5 py-12 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10"
 	>
 		<h2 id="otros-servicios" class="font-display text-subheading font-normal">
-			Otros servicios
+			{heading}
 		</h2>
 		<ul class="flex flex-wrap gap-2">
 			{

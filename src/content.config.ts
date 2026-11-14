@@ -11,6 +11,8 @@ const blog = defineCollection({
 			subtitle: z.string().optional(),
 			description: z.string(),
 			pubDate: z.coerce.date(),
+			/** Set when a post is revised; feeds dateModified and the sitemap lastmod. */
+			updatedDate: z.coerce.date().optional(),
 			author: z.string(),
 			image: image().optional(),
 			/** Service pages linked at the end of the post (hrefs from src/data/site.ts). */
