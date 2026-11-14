@@ -337,14 +337,28 @@ const description =
 						<p>Esta página web utiliza las cookies para una serie de finalidades, incluidas:</p>
 						<ul>
 							<li>
+								<strong>Cookies técnicas:</strong> Son las necesarias para que la web funcione. Esta web
+								utiliza una cookie propia, <code>inala_cookie_consent</code>, que guarda durante un año
+								tu elección en el aviso de cookies (aceptar, rechazar o configurar) para no volver a
+								preguntarte en cada visita.
+							</li>
+							<li>
 								<strong>Cookies de análisis:</strong> Son aquellas que son tratadas por nosotros o por
 								terceros, nos permiten cuantificar el número de usuarios y así realizar la medición y
 								análisis estadístico de la utilización que hacen los usuarios del servicio ofertado.
 								Para ello se analiza la navegación en nuestra página web con el fin de mejorar la misma.
 							</li>
 						</ul>
-						<p>La aplicación que utilizamos para obtener y analizar la información es Google Analytics.</p>
-						<p>Las cookies utilizadas para esto (_utma, _utmb, _utmc, _utmt y _utmz) son cookies de Terceros.</p>
+						<p>
+							La aplicación que utilizamos para obtener y analizar la información es Google Analytics,
+							que se carga a través de Google Tag Manager. Google Tag Manager es una herramienta que
+							gestiona estas etiquetas y no instala cookies por sí misma.
+						</p>
+						<p>
+							Las cookies utilizadas para esto (<code>_ga</code> y <code>_ga_&lt;ID&gt;</code>, con una
+							duración de hasta dos años) son cookies de terceros y solo se instalan si aceptas las
+							cookies de análisis.
+						</p>
 						<p>
 							Estas cookies se utilizan para recoger información sobre la navegación de los usuarios
 							por el sitio con el fin de conocer el origen de las visitas y otros datos similares a
@@ -353,10 +367,10 @@ const description =
 						<p>
 							A través de los siguientes enlaces puede ver el detalle de las cookies que utiliza
 							Google Analytics y su propósito: <a
-								href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage"
+								href="https://developers.google.com/tag-platform/security/concepts/cookies"
 								target="_blank"
 								rel="noopener noreferrer"
-								>https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage</a
+								>https://developers.google.com/tag-platform/security/concepts/cookies</a
 							> y <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
 								>Centro de privacidad de Google</a
 							>
@@ -376,10 +390,11 @@ const description =
 
 						<h3>Autorización para el uso de cookies</h3>
 						<p>
-							De conformidad con el aviso de cookies que aparece en el sitio web, el usuario acepta
-							que, al navegar por el mismo, consiente expresamente el uso de cookies según la
-							descripción que a continuación se detalla, sin perjuicio que el usuario pueda modificar
-							la configuración de su navegador para rechazar el uso de las cookies.
+							Al entrar en la web se muestra un aviso de cookies en el que puedes aceptarlas todas,
+							rechazarlas o configurar qué categorías permites. Hasta que eliges, no se instala
+							ninguna cookie de análisis ni de marketing. Puedes cambiar tu elección en cualquier
+							momento desde el enlace «Gestionar Cookies» del pie de página, o rechazar las cookies
+							desde la configuración de tu navegador.
 						</p>
 
 						<h3>¿Quién utiliza las cookies en esta página web?</h3>
@@ -398,17 +413,25 @@ const description =
 							</thead>
 							<tbody>
 								<tr>
+									<td>Inala (esta web)</td>
+									<td>Propia, técnica</td>
+									<td>
+										<code>inala_cookie_consent</code>: guardar durante un año tu elección en el aviso
+										de cookies.
+									</td>
+									<td>Esta política de cookies</td>
+								</tr>
+								<tr>
 									<td>Google Analytics</td>
-									<td>De terceros</td>
+									<td>De terceros, de análisis</td>
 									<td>
 										Recoger información sobre la navegación de los usuarios por el sitio con el fin
 										de conocer el origen de las visitas y otros datos similares a nivel estadístico.
-										Google Analytics utiliza también estas cookies para mostrarle publicidad
-										relacionada con su perfil de navegación.
+										Solo se instalan si aceptas las cookies de análisis.
 									</td>
 									<td>
 										<a
-											href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage"
+											href="https://developers.google.com/tag-platform/security/concepts/cookies"
 											target="_blank"
 											rel="noopener noreferrer">Google Analytics</a
 										><br />
