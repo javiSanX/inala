@@ -7,6 +7,7 @@ pubDate: 2025-12-20
 author: María Sánchez
 description: 'Estrategias de psicoterapia para el estrés de las reuniones familiares en Navidad: límites sanos, regulación emocional y autocuidado para proteger tu bienestar.'
 image: ../../assets/blog/guia-de-supervivencia-navidena.webp
+imageAlt: 'Mujer con una capa azul, sentada a la mesa de una cena de Navidad, mientras sus familiares la señalan.'
 services:
   - /servicios/terapia-familiar
   - /servicios/terapia-individual

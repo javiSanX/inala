@@ -5,6 +5,7 @@ pubDate: 2025-11-01T10:30:00.000Z
 author: María Sánchez
 description: 'La terapia de pareja online ofrece un espacio accesible y flexible para resolver conflictos y mejorar la comunicación. Sus beneficios y cómo funciona.'
 image: ../../assets/blog/terapia-de-pareja-online.webp
+imageAlt: 'Pareja sonriente con tazas de café durante una sesión de terapia online con una psicóloga en el portátil.'
 services:
   - /servicios/terapia-de-pareja
   - /servicios/terapia-online

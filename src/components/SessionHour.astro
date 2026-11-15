@@ -7,10 +7,12 @@ interface Props {
 	items: string[];
 	/** Shown inside the ring; its subject should sit on the right. */
 	image: ImageMetadata;
+	/** Description of the image; empty when it only decorates. */
+	imageAlt?: string;
 	class?: string;
 }
 
-const { items, image, class: className } = Astro.props;
+const { items, image, imageAlt = "", class: className } = Astro.props;
 
 // The ring is drawn in a 200 x 200 box: the hour as one arc per item, a
 // marker where each arc starts and a tick for every minute inside it.
@@ -63,7 +65,7 @@ const ticks = Array.from({ length: 60 }, (_, minute) => {
 				<div class="size-3/4 overflow-hidden rounded-full bg-mist">
 					<Picture
 						src={image}
-						alt=""
+						alt={imageAlt}
 						formats={["avif", "webp"]}
 						widths={[400, 640, 800]}
 						sizes="(min-width: 1024px) 18rem, 15rem"

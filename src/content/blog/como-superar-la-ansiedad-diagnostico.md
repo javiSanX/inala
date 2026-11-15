@@ -5,6 +5,7 @@ pubDate: 2025-12-06
 author: María Sánchez
 description: 'El impacto emocional de esperar un diagnóstico médico: por qué se instala la ansiedad, herramientas prácticas y cómo la terapia, también online, puede ayudarte.'
 image: ../../assets/blog/como-superar-la-ansiedad-diagnostico.webp
+imageAlt: 'Mujer pensativa y preocupada, sentada a una mesa en una consulta médica.'
 services:
   - /servicios/terapia-individual
   - /servicios/terapia-online

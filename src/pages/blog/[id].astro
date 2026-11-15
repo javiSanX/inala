@@ -114,7 +114,7 @@ const schema = [
 					<div class="hero-media mx-auto mt-12 max-w-narrow">
 						<Image
 							src={image}
-							alt=""
+							alt={post.data.imageAlt ?? ""}
 							widths={[680, 1360]}
 							sizes="(min-width: 768px) 768px, 100vw"
 							loading="eager"

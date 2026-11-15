@@ -17,6 +17,8 @@ const blog = defineCollection({
 			updatedDate: z.coerce.date().optional(),
 			author: z.string(),
 			image: image().optional(),
+			/** Description of `image` for the post page; leave out only if it is purely decorative. */
+			imageAlt: z.string().optional(),
 			/** Service pages linked at the end of the post (hrefs from src/data/site.ts). */
 			services: z.array(z.string()).default([]),
 			/** Posts on the same topic, linked at the end so they don't compete blindly. */

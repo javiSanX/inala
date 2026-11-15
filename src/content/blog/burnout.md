@@ -5,6 +5,7 @@ pubDate: 2025-11-15T11:00:00.000Z
 author: María Sánchez
 description: 'El burnout es una respuesta severa al estrés laboral crónico. Qué es, sus síntomas y cómo la terapia y el autocuidado te ayudan a recuperar el equilibrio.'
 image: ../../assets/blog/burnout.webp
+imageAlt: 'Mujer agotada frente a su ordenador, con las manos en la cara.'
 services:
   - /servicios/terapia-individual
 ---

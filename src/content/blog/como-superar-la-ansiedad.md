@@ -5,6 +5,7 @@ pubDate: 2025-11-24T09:00:00.000Z
 author: María Sánchez
 description: 'La ansiedad social es un miedo intenso a ser observado y juzgado. 5 técnicas basadas en la TCC y el mindfulness para gestionar el miedo social.'
 image: ../../assets/blog/como-superar-la-ansiedad.webp
+imageAlt: 'Mujer incómoda con una bebida en la mano en medio de una fiesta llena de gente que ríe.'
 services:
   - /servicios/terapia-individual
 ---

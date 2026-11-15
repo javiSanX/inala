@@ -5,6 +5,7 @@ pubDate: 2025-12-05T11:00:00.000Z
 author: María Sánchez
 description: 'Asumir un diagnóstico psicológico es difícil. Las fases del duelo y cómo la aceptación te ayuda a gestionar el dolor emocional y seguir navegando.'
 image: ../../assets/blog/navegar-en-la-nueva-realidad.webp
+imageAlt: 'Velero en medio de una tormenta en alta mar.'
 services:
   - /servicios/terapia-individual
 ---
