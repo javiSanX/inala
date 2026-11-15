@@ -6,6 +6,7 @@ Lo que queda por hacer fuera del código para mejorar la posición de inala.es, 
 
 - [ ] **Search Console → Sitemaps:** enviar `https://inala.es/sitemap-index.xml`.
 - [ ] **Search Console → Inspección de URLs:** pedir indexación de la home, `/contacto/`, `/sobre-mi/` y las cinco páginas de servicio.
+- [ ] **Redirecciones nuevas:** comprobar que `https://inala.es/servicios` lleva a `/servicios/` y que `/política-de-privacidad` lleva a `/politica-de-privacidad/`.
 - [ ] **Search Console → Páginas:** revisar durante 2–3 semanas que las URLs antiguas de `main` aparecen como «Página con redirección» y no como 404. Si sale un 404 de una URL antigua, hay que añadirla a `vercel.json` y a `redirects` en `astro.config.mjs`.
 - [ ] **Rich Results Test** (https://search.google.com/test/rich-results): pasar la home y un artículo del blog. No debe haber errores.
 - [ ] **PageSpeed Insights** (https://pagespeed.web.dev): pasar la home y una página de servicio en móvil. LCP < 2,5 s, INP < 200 ms, CLS < 0,1.
@@ -21,7 +22,7 @@ La web ya envía estos eventos al `dataLayer`. No incluyen datos personales ni e
 | `phone_click` | Clic en el teléfono |
 | `email_click` | Clic en un enlace de email |
 | `directions_click` | Clic en «Ver la ubicación en Google Maps» |
-| `contact_form_submit` | Envío del formulario de Contacto (abre el programa de correo; no garantiza que el email se envíe) |
+| `contact_form_submit` | Envío correcto del formulario de Contacto (solo cuando el mensaje se ha enviado) |
 
 ### Antes de empezar: evitar contar dos veces
 
@@ -94,7 +95,7 @@ https://inala.es
 - [ ] **Doctoralia** (perfil básico gratuito) y/o **TopDoctors**.
 - [ ] **Centro Yssana:** pedir que incluyan a María en su web con enlace a inala.es.
 - [ ] **COP Navarra:** comprobar si el registro o el «Listado de centros y servicios de psicología» permite añadir la web de Inala.
-- [ ] **Paul (taller de miedo a volar):** enlace mutuo entre las dos webs, mejor desde la página del taller.
+- [ ] **Piloto del taller de miedo a volar:** enlace mutuo entre las dos webs, desde `https://inala.es/taller-miedo-a-volar/`.
 - [ ] **Bing Places** y **Apple Business Connect:** importan los datos desde Google en pocos minutos.
 
 **Mensaje para el Centro Yssana:**
@@ -115,21 +116,17 @@ Son propuestas que María puede aceptar, cambiar o descartar; el texto lo escrib
 | 6 | Cansancio y culpa en la crianza | Psicología perinatal y crianza |
 | 7 | ¿Funciona igual la terapia online que la presencial? | Terapia online |
 | 8 | Duelo: cuándo el dolor necesita acompañamiento | Terapia individual |
-| 9 | Miedo a volar: de dónde viene y cómo se trabaja | Página del taller (cuando exista) |
+| 9 | Miedo a volar: de dónde viene y cómo se trabaja | Taller de miedo a volar (`/taller-miedo-a-volar/`) |
 | 10 | Vuelta al cole y cambios de etapa en familia | Terapia familiar |
 | 11 | Separación con hijos: cómo cuidar a los niños | Terapia familiar |
 | 12 | Navidad y reuniones familiares (actualizar el artículo que ya existe y poner `updatedDate`) | Terapia familiar |
 
-Cuando se revise un artículo antiguo, añadir `updatedDate: AAAA-MM-DD` en su cabecera: actualiza el sitemap y el schema.
+Cuando se revise un artículo antiguo, añadir `updatedDate: AAAA-MM-DD` en su cabecera: actualiza el sitemap y el schema. Cada artículo nuevo debe llevar `imageAlt` (descripción de la imagen) y, si su título pasa de 60 caracteres, `seoTitle`. Al indicar sus `services`, aparece solo en «Artículos relacionados» de esas páginas de servicio.
 
 ## 7. Datos que faltan para seguir con la web
 
 | Para | Necesito |
 | --- | --- |
-| **Página del taller de miedo a volar** | Qué es, a quién va dirigido, duración y formato, quién lo imparte (Paul: nombre profesional y web si la tiene), precio si es público, próximas fechas o si preferís un «avísame». |
-| **Formación en Sobre mí y en el schema (`alumniOf`)** | Universidad del grado, centro del Máster en Psicología General Sanitaria y centro de la especialización en terapia familiar y de pareja. **Ahora mismo Sobre mí muestra «[PENDIENTE: universidad]» en esos tres sitios.** |
-| **Registro de centro sanitario (Sobre mí)** | Número de inscripción de la consulta en el registro de centros sanitarios de Navarra. **Ahora la web muestra «[PENDIENTE: datos de inscripción…]».** En España, los centros sanitarios deben mostrarlo, y además es una señal de confianza. |
-| **Frecuencia de sesiones (Psicología perinatal y crianza)** | La frecuencia habitual. **Ahora la web muestra «[PENDIENTE: confirmar frecuencia habitual]».** |
+| **Taller de miedo a volar** | Hora y lugar de la charla del 27/11/2026 y precio (la página muestra «[PENDIENTE: …]»). Opcional: nombre del piloto y su web. Cuando haya hora y lugar se puede añadir el schema `Event`, que puede salir destacado en Google. Tras cada edición, cambiar la fecha en `src/pages/taller-miedo-a-volar.astro`. |
 | **Páginas por problema** | Qué problemas quiere trabajar María como página propia (por ejemplo ansiedad, duelo) y el texto escrito o revisado por ella. |
-| **Título SEO de «El coraje de seguir adelante»** | Un título de 60 caracteres o menos solo para buscadores, si queréis acortarlo. El titular del artículo no cambiaría. |
 | **Política de cookies** | Revisión por quien lleve lo legal. Ya está corregida con los datos técnicos reales: cookies de GA4, cookie de consentimiento y funcionamiento del aviso. |
