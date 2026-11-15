@@ -67,6 +67,7 @@ const ticks = Array.from({ length: 60 }, (_, minute) => {
 						src={image}
 						alt={imageAlt}
 						formats={["avif", "webp"]}
+						fallbackFormat="jpg"
 						widths={[400, 640, 800]}
 						sizes="(min-width: 1024px) 18rem, 15rem"
 						loading="lazy"

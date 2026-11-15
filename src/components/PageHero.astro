@@ -100,6 +100,7 @@ const hasCaption = Astro.slots.has("caption");
 					src={backgroundImage}
 					alt=""
 					formats={["avif", "webp"]}
+					fallbackFormat="jpg"
 					widths={[640, 960, 1376]}
 					sizes={corner ? "(min-width: 1024px) 100vw, 180vw" : "100vw"}
 					loading="eager"

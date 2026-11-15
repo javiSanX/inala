@@ -57,6 +57,7 @@ const shouldReveal = reveal && !priority;
 			src={src}
 			alt={alt}
 			formats={["avif", "webp"]}
+			fallbackFormat="jpg"
 			widths={widths}
 			sizes={sizes}
 			loading={priority ? "eager" : "lazy"}
