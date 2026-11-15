@@ -7,6 +7,7 @@ import {
 	contactHref,
 	crisisNotice,
 	email,
+	healthCenterRegistry,
 	instagramUrl,
 	legalLinks,
 	logo,
@@ -110,7 +111,10 @@ const iconLink =
 		<div
 			class="mt-10 flex flex-col gap-4 border-t border-cypress-line pt-6 text-label text-on-dark-muted md:flex-row md:items-center md:justify-between"
 		>
-			<p>© {year} INALA Centro de Psicoterapia. Todos los derechos reservados.</p>
+			<p>
+				© {year} INALA Centro de Psicoterapia. Todos los derechos reservados.
+				Centro sanitario nº {healthCenterRegistry}.
+			</p>
 			<div class="flex flex-wrap items-center gap-x-6">
 				{
 					legalLinks.map((item) => (

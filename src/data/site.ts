@@ -20,6 +20,9 @@ export const licenseNumber = "N-02300";
 // de Navarra (the search URL returns only her record).
 export const licenseRegistryUrl =
 	"https://www.colpsinavarra.org/es/ventanilla-unica/consumidores-usuarios/registro-colegiados?field_nombre_value=maria&field_apellidos_value=sanchez+cobos";
+// Navarra register of health centres (Resolución 857/2025, Dirección General
+// de Salud). The resolution allows publishing its data.
+export const healthCenterRegistry = "C03912";
 export const address = "Calle Dra. Ariz, frente al portal 13";
 export const addressCity = "31006 Pamplona, España";
 export const addressCenter = "Centro Yssana";
