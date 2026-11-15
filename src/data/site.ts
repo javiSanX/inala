@@ -138,6 +138,34 @@ export const onlineLink = {
 
 export const serviceMenuLinks = [...services, onlineLink];
 
+// Training, most recent first, as María listed it. `school` also feeds the
+// schema `alumniOf`; courses without a school are left out of it.
+export const training: { title: string; school?: string; year: number }[] = [
+	{ title: "Curso de intervención con IFS para trauma", year: 2026 },
+	{ title: "Curso práctico de intervención en autoestima", year: 2026 },
+	{ title: "Máster en Salud Mental Perinatal", school: "IESMP", year: 2026 },
+	{
+		title: "Máster en Psicología General Sanitaria",
+		school: "Universidad Isabel I",
+		year: 2024,
+	},
+	{
+		title: "Máster en Terapia Sistémica de Familia y Pareja",
+		school: "AVAPSI",
+		year: 2023,
+	},
+	{
+		title: "Grado en Psicología, mención en Psicología Clínica",
+		school: "UNED",
+		year: 2021,
+	},
+	{
+		title: "Ciencias Empresariales",
+		school: "Universidad Pública de Navarra (UPNA)",
+		year: 2013,
+	},
+];
+
 export const legalLinks = [
 	{ name: "Aviso legal y cookies", href: "/aviso-legal-y-politica-de-cookies" },
 	{ name: "Política de privacidad", href: "/política-de-privacidad" },

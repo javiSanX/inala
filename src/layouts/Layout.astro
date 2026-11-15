@@ -23,6 +23,7 @@ import {
 	services,
 	siteName,
 	therapistName,
+	training,
 	whatsappNumber,
 } from "../data/site";
 import "../styles/global.css";
@@ -77,6 +78,9 @@ const offers = services.map((service) => {
 		...(price && { price, priceCurrency: "EUR" }),
 	};
 });
+const schools = [
+	...new Set(training.flatMap((item) => (item.school ? [item.school] : []))),
+];
 const prices = offers.flatMap((offer) => (offer.price ? [Number(offer.price)] : []));
 
 // Only facts that the site states elsewhere: name, address, contact, licence holder.
@@ -126,6 +130,10 @@ const structuredData = {
 				value: licenseNumber,
 			},
 			sameAs: [licenseRegistryUrl],
+			alumniOf: schools.map((name) => ({
+				"@type": "EducationalOrganization",
+				name,
+			})),
 			knowsAbout: [
 				"Terapia familiar",
 				"Terapia de pareja",

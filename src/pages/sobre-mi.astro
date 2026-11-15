@@ -20,6 +20,7 @@ import {
 	instagramUrl,
 	licenseNumber,
 	licenseRegistryUrl,
+	training,
 } from "../data/site";
 import Layout from "../layouts/Layout.astro";
 
@@ -61,25 +62,6 @@ const story = [
 		title: "Mi propósito",
 		text: "Mi propio proceso personal me permitió ver con claridad cómo la familia y el entorno en el que crecemos influyen profundamente en nuestro desarrollo y manera de relacionarnos. Esta comprensión me llevó a especializarme en terapia familiar y de pareja, y a trabajar en el ámbito de la desprotección infantil, acompañando procesos de trauma complejo y duelo en la primera infancia, reforzando mi compromiso con un acompañamiento respetuoso y humano.",
 	},
-];
-
-// Only training confirmed in the existing content; institutions are pending.
-const training = [
-	{
-		title: "Grado en Psicología, mención en Psicología Clínica",
-		place: "[PENDIENTE: universidad]",
-		text: "Formación de base en psicología con itinerario clínico.",
-	},
-	{
-		title: "Máster en Psicología General Sanitaria",
-		place: "[PENDIENTE: universidad o centro]",
-		text: "Habilitación para el ejercicio de la psicología sanitaria.",
-	},
-	{
-		title: "Especialización en Terapia Familiar y de Pareja",
-		place: "[PENDIENTE: centro de formación]",
-		text: "Formación específica para acompañar a parejas y a familias.",
-	}
 ];
 
 const spaceFeatures = [
@@ -276,12 +258,9 @@ const spaceFeatures = [
 								<h4 class="text-lead font-semibold text-ink">
 									{item.title}
 								</h4>
-								{item.place && (
-									<p class="text-label font-semibold text-ink-soft">
-										{item.place}
-									</p>
-								)}
-								<p class="text-body text-ink-muted">{item.text}</p>
+								<p class="text-label font-semibold text-ink-soft tabular-nums">
+									{item.school ? `${item.school} · ${item.year}` : item.year}
+								</p>
 							</li>
 						))
 					}
