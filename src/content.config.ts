@@ -8,6 +8,8 @@ const blog = defineCollection({
 	schema: ({ image }) =>
 		z.object({
 			title: z.string(),
+			/** Shorter title for search results only (60 characters or fewer); the h1 keeps `title`. */
+			seoTitle: z.string().max(60).optional(),
 			subtitle: z.string().optional(),
 			description: z.string(),
 			pubDate: z.coerce.date(),
