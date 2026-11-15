@@ -28,6 +28,8 @@ for (const file of readdirSync(blogDir).filter((name) =>
 // https://astro.build/config
 export default defineConfig({
 	site: "https://inala.es",
+	// One URL per page, matching the canonical and the sitemap (/servicios/).
+	trailingSlash: "always",
 	server: {
 		host: true,
 	},
@@ -56,6 +58,8 @@ export default defineConfig({
 		"/blog/como_superar_la_andiedad":
 			"/blog/como-superar-la-ansiedad-diagnostico/",
 		"/blog/navegar_en_la_nueva_realidad": "/blog/navegar-en-la-nueva-realidad/",
+		// The privacy page URL had an accent; the accent-free slug replaces it.
+		"/política-de-privacidad": "/politica-de-privacidad/",
 	},
 	// Self-hosted faces (Fontshare, ITF Free Font License): Gambetta for headings,
 	// Synonym for text. Files are served unmodified, as the licence requires.

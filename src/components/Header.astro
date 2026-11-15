@@ -11,9 +11,10 @@ import { buttonClass } from "./ui/button";
 import Icon from "./ui/Icon.astro";
 
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
-const current = (href: string) => (path === href ? "page" : undefined);
-const servicesHref = "/servicios";
-const inServices = path.startsWith(servicesHref);
+const current = (href: string) =>
+	path === (href.replace(/\/$/, "") || "/") ? "page" : undefined;
+const servicesHref = "/servicios/";
+const inServices = path.startsWith("/servicios");
 const navLink =
 	"relative inline-flex min-h-11 items-center gap-1 text-small font-medium transition-[color] duration-200 after:absolute after:inset-x-0 after:bottom-1.5 after:h-0.5 after:rounded-full after:transition-[opacity] after:duration-200";
 ---

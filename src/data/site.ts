@@ -6,7 +6,7 @@ export const logo = logoImage;
 export const logoUrl = "/logo-light.webp";
 export const siteName = "INALA Centro de Psicoterapia";
 
-export const contactHref = "/contacto";
+export const contactHref = "/contacto/";
 export const email = "hola@inala.es";
 export const instagramUrl = "https://www.instagram.com/inala_psicoterapia/";
 // Google Business Profile of the practice (stable CID link): map link and
@@ -69,11 +69,11 @@ export const crisisNotice =
 	"Esta consulta no atiende urgencias. Si estás en crisis o piensas en hacerte daño, llama al 024 (gratuito, 24 horas) o al 112.";
 
 export const navLinks = [
-	{ name: "Servicios", href: "/servicios" },
-	{ name: "Cómo trabajo", href: "/nuestro-metodo" },
-	{ name: "Sobre mí", href: "/sobre-mi" },
-	{ name: "Tarifas", href: "/tarifas" },
-	{ name: "Blog", href: "/blog" },
+	{ name: "Servicios", href: "/servicios/" },
+	{ name: "Cómo trabajo", href: "/nuestro-metodo/" },
+	{ name: "Sobre mí", href: "/sobre-mi/" },
+	{ name: "Tarifas", href: "/tarifas/" },
+	{ name: "Blog", href: "/blog/" },
 ];
 
 // Single source for services: services index, home, pricing and the contact
@@ -92,7 +92,7 @@ interface Service {
 export const services: Service[] = [
 	{
 		name: "Terapia Individual",
-		href: "/servicios/terapia-individual",
+		href: "/servicios/terapia-individual/",
 		icon: "person",
 		summary:
 			"Para adultos, adolescentes y niños que atraviesan ansiedad, desánimo, un duelo o un momento de cambio.",
@@ -101,7 +101,7 @@ export const services: Service[] = [
 	},
 	{
 		name: "Terapia de Pareja",
-		href: "/servicios/terapia-de-pareja",
+		href: "/servicios/terapia-de-pareja/",
 		icon: "favorite",
 		summary:
 			"Para parejas que quieren comunicarse mejor, salir de las discusiones que se repiten o tomar decisiones con calma.",
@@ -110,7 +110,7 @@ export const services: Service[] = [
 	},
 	{
 		name: "Terapia Familiar",
-		href: "/servicios/terapia-familiar",
+		href: "/servicios/terapia-familiar/",
 		icon: "diversity_1",
 		summary:
 			"Para familias con tensiones de convivencia, cambios de etapa, separaciones o pérdidas.",
@@ -119,7 +119,7 @@ export const services: Service[] = [
 	},
 	{
 		name: "Psicología Perinatal y Crianza",
-		href: "/servicios/psicologia-perinatal",
+		href: "/servicios/psicologia-perinatal/",
 		icon: "child_care",
 		summary:
 			"Para madres y padres que buscan apoyo en la crianza: cansancio, culpa, límites o desacuerdos educativos.",
@@ -132,14 +132,14 @@ export const services: Service[] = [
 // after the services and link to the page that explains how it works.
 export const onlineLink = {
 	name: "Terapia online",
-	href: "/servicios/terapia-online",
+	href: "/servicios/terapia-online/",
 	icon: "videocam",
 };
 
 // The fear-of-flying talk is not a therapy service, but menus list it with them.
 export const workshopLink = {
 	name: "Taller de miedo a volar",
-	href: "/taller-miedo-a-volar",
+	href: "/taller-miedo-a-volar/",
 	icon: "flight_takeoff",
 };
 
@@ -174,6 +174,9 @@ export const training: { title: string; school?: string; year: number }[] = [
 ];
 
 export const legalLinks = [
-	{ name: "Aviso legal y cookies", href: "/aviso-legal-y-politica-de-cookies" },
-	{ name: "Política de privacidad", href: "/política-de-privacidad" },
+	{
+		name: "Aviso legal y cookies",
+		href: "/aviso-legal-y-politica-de-cookies/",
+	},
+	{ name: "Política de privacidad", href: "/politica-de-privacidad/" },
 ];

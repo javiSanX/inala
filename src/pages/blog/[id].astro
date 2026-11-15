@@ -28,13 +28,16 @@ const pageTitle =
 // Related links shown after the post: services by their current name, then posts on the same topic.
 const relatedLinks = [
 	...post.data.services.map((href) => {
-		const service = serviceMenuLinks.find((item) => item.href === href);
+		// Posts list services without the trailing slash; site hrefs carry it.
+		const service = serviceMenuLinks.find(
+			(item) => item.href.replace(/\/$/, "") === href.replace(/\/$/, ""),
+		);
 		if (!service) throw new Error(`Unknown service "${href}" in post "${post.id}"`);
 		return { name: service.name, href: service.href };
 	}),
 	...(await getEntries(post.data.related)).map((entry) => ({
 		name: entry.data.title,
-		href: `/blog/${entry.id}`,
+		href: `/blog/${entry.id}/`,
 	})),
 ];
 const textLink =
@@ -83,7 +86,7 @@ const schema = [
 		<div class="mx-auto max-w-content px-5 sm:px-8 lg:px-10">
 			<div class="mx-auto max-w-reading">
 				<a
-					href="/blog"
+					href="/blog/"
 					class="group inline-flex min-h-11 items-center gap-2 text-small font-semibold text-teal transition-[color] duration-200 hover:text-teal-strong"
 				>
 					<Icon
@@ -94,7 +97,7 @@ const schema = [
 				</a>
 				<header class="hero-copy mt-8 flex flex-col gap-5">
 					<Breadcrumbs
-						items={[{ name: "Inicio", href: "/" }, { name: "Blog", href: "/blog" }, { name: title }]}
+						items={[{ name: "Inicio", href: "/" }, { name: "Blog", href: "/blog/" }, { name: title }]}
 					/>
 					<h1 class="font-display text-title font-normal text-ink">{title}</h1>
 					{subtitle && <p class="text-lead text-ink-muted">{subtitle}</p>}
@@ -134,7 +137,7 @@ const schema = [
 				</p>
 				<div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
 					<Button href={contactHref} arrow>{ctaLabel}</Button>
-					<Button href="/servicios" variant="secondary">Ver servicios y tarifas</Button>
+					<Button href="/servicios/" variant="secondary">Ver servicios y tarifas</Button>
 				</div>
 				{
 					relatedLinks.length > 0 && (

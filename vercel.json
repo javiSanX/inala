@@ -45,6 +45,11 @@
 			"source": "/blog/navegar_en_la_nueva_realidad",
 			"destination": "/blog/navegar-en-la-nueva-realidad/",
 			"statusCode": 301
+		},
+		{
+			"source": "/política-de-privacidad",
+			"destination": "/politica-de-privacidad/",
+			"statusCode": 301
 		}
 	]
 }

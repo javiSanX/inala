@@ -73,7 +73,7 @@ const offers = services.map((service) => {
 		itemOffered: {
 			"@type": "Service",
 			name: service.name,
-			url: new URL(`${service.href}/`, site).href,
+			url: new URL(service.href, site).href,
 		},
 		...(price && { price, priceCurrency: "EUR" }),
 	};
