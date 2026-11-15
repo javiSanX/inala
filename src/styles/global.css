@@ -204,7 +204,13 @@
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
+		/* Inner pages start the entrance at once; only the home (with its intro)
+		   keeps the original wait. */
 		:root {
+			--hero-start: 0ms;
+		}
+
+		:root:has(.hero-intro) {
 			--hero-start: 600ms;
 		}
 
