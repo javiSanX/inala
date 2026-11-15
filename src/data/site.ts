@@ -136,7 +136,14 @@ export const onlineLink = {
 	icon: "videocam",
 };
 
-export const serviceMenuLinks = [...services, onlineLink];
+// The fear-of-flying talk is not a therapy service, but menus list it with them.
+export const workshopLink = {
+	name: "Taller de miedo a volar",
+	href: "/taller-miedo-a-volar",
+	icon: "flight_takeoff",
+};
+
+export const serviceMenuLinks = [...services, onlineLink, workshopLink];
 
 // Training, most recent first, as María listed it. `school` also feeds the
 // schema `alumniOf`; courses without a school are left out of it.
