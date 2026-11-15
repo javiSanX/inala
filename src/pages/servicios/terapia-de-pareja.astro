@@ -3,6 +3,7 @@ import heroImage from "../../assets/images/terapia_de_pareja.jpeg";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import OtherServices from "../../components/OtherServices.astro";
 import PageHero from "../../components/PageHero.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
 import SessionHour from "../../components/SessionHour.astro";
 import Button from "../../components/ui/Button.astro";
 import CtaBand from "../../components/ui/CtaBand.astro";
@@ -273,6 +274,8 @@ const faqs = [
 			<Faq items={faqs} class="lg:col-span-7" />
 		</div>
 	</Section>
+
+	<RelatedPosts service="/servicios/terapia-de-pareja/" />
 
 	<OtherServices />
 </Layout>
