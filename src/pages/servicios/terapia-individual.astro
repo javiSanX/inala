@@ -7,7 +7,6 @@ import RelatedPosts from "../../components/RelatedPosts.astro";
 import SessionHour from "../../components/SessionHour.astro";
 import Button from "../../components/ui/Button.astro";
 import CtaBand from "../../components/ui/CtaBand.astro";
-import FactList from "../../components/ui/FactList.astro";
 import Faq from "../../components/ui/Faq.astro";
 import Icon from "../../components/ui/Icon.astro";
 import type { IconName } from "../../components/ui/icons";
@@ -15,18 +14,13 @@ import Note from "../../components/ui/Note.astro";
 import Quote from "../../components/ui/Quote.astro";
 import Section from "../../components/ui/Section.astro";
 import SectionHeader from "../../components/ui/SectionHeader.astro";
-import { contactHref, ctaLabel, email, licenseNumber } from "../../data/site";
+import { contactHref, ctaLabel, email } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
 const title = "Terapia individual en Pamplona y online | Inala Psicoterapia";
 
 const description =
 	"Terapia individual para adultos, adolescentes y niños en Pamplona y online: ansiedad, estrés, autoestima, duelo y relaciones. Sesiones de 60 minutos.";
-
-const trustBadges = [
-	{ icon: "schedule", label: "Sesiones de 60 minutos" },
-	{ icon: "pin_drop", label: "Pamplona y online" },
-];
 
 const sessionFeatures = [
 	"60 minutos dedicados a ti.",
