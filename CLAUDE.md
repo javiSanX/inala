@@ -101,6 +101,7 @@ Use skills according to the task. Load only the skills that apply: a one-line co
 | Task | Owner skill | Supporting |
 | --- | --- | --- |
 | Astro pages, components, routing, content collections, integrations, `astro.config.mjs` | `astro` | — |
+| Plain HTML/CSS/client JS in `.astro`/`.tsx`: dialogs/popovers, forms, dark mode, container queries, view transitions, scroll-driven effects, CWV, image loading | `modern-web-guidance` (run it **first**, before writing the markup/CSS/JS) | `astro`, `tailwind-css-patterns` |
 | React island (`.tsx` component, `@astrojs/react`, hydration directives) | `astro` | `impeccable` → `harden` and Operate mode (interaction states, errors, edge cases) |
 | Dependencies, scripts, running tooling | `bun` | — |
 | Tailwind v4 mechanics: `@theme`, variants, responsive utilities, syntax | `tailwind-css-patterns` | — |
@@ -145,6 +146,7 @@ Several skills have opinions about the same thing. When sources disagree, the **
 - **`tailwind-css-patterns` vs design skills.** Tailwind decides *how* to express a style (v4 syntax, `@theme`, variants). The design skills and `DESIGN.md` decide *what* the values are. Values become tokens in `@theme`.
 - **`seo` vs `astro`.** `seo` decides *what* goes in (titles, descriptions, schema types, heading outline). `astro` decides *how* to implement it (`site` config, sitemap integration, layout props). SEO copy is in Spanish.
 - **`bun` vs other skills' commands.** Translate any `npx`, `npm` or `pnpm` command from a skill to `bunx` or `bun`.
+- **`modern-web-guidance`.** It is a search tool, not a design opinion: `bunx modern-web-guidance@latest search "<query>"` then `retrieve "<id>"` (its `npx` becomes `bunx`; keep the `--skill-version` flag from its `SKILL.md`). Use it to pick the native platform feature (`<dialog>`, `popover`, CSS anchor positioning, `<details>`) instead of a script or a dependency. It never overrides this file: no new dependency, polyfill or React island comes from its advice without asking, and its examples are adapted to Tailwind tokens, Biome style and Spanish copy. Skip it for backend, tooling and copy-only changes.
 - **Code style.** `biome.json` beats every skill snippet, including React/TSX examples.
 - **TypeScript.** Prefer simple types and Astro's generated types (`CollectionEntry`, a `Props` interface). No advanced type gymnastics unless a real type problem needs it.
 - **Unresolved tie.** If two skills set contradictory hard rules and nothing above settles it, pick the more conservative option (more accessible, less JS, fewer dependencies) and mention the conflict in your reply.
