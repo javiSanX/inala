@@ -10,7 +10,8 @@ export const contactHref = "/contacto/";
 export const email = "hola@inala.es";
 export const instagramUrl = "https://www.instagram.com/inala_psicoterapia/";
 // Google Business Profile of the practice (stable CID link): map link and
-// schema `sameAs`/`hasMap`. Address, hours and coordinates match this listing.
+// schema `sameAs`/`hasMap`. Hours match this listing; the address follows the
+// health authorisation (Resolución 857/2025).
 export const googleBusinessUrl =
 	"https://maps.google.com/?cid=8408552270441370446";
 export const therapistName = "María Sánchez";
@@ -23,22 +24,20 @@ export const licenseRegistryUrl =
 // Navarra register of health centres (Resolución 857/2025, Dirección General
 // de Salud). The resolution allows publishing its data.
 export const healthCenterRegistry = "C03912";
-export const address = "Calle Dra. Ariz, frente al portal 13";
-export const addressCity = "31006 Pamplona, España";
+export const address = "Calle María Lacunza 6, portal 4, local 4.1";
+export const addressCity = "31011 Pamplona, España";
 export const addressCenter = "Centro Yssana";
 export const whatsappNumber = "+34 623 050 773";
 export const whatsappUrl = "https://wa.me/34623050773";
 export const phoneHref = `tel:${whatsappNumber.replaceAll(" ", "")}`;
 // The same address split into fields, for structured data. The street stays
-// plain (no centre name) so it matches the Google Business Profile.
+// plain (no centre name), as in the health authorisation.
 export const postalAddress = {
 	streetAddress: address,
-	postalCode: "31006",
+	postalCode: "31011",
 	addressLocality: "Pamplona",
 	addressCountry: "ES",
 };
-// Coordinates of the Google Business Profile pin.
-export const geo = { latitude: 42.8069008, longitude: -1.6253869 };
 
 // Opening hours, as listed on the Google Business Profile. `spec` feeds the structured data.
 interface OpeningHours {

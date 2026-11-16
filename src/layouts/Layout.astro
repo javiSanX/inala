@@ -12,7 +12,6 @@ import {
 } from "../data/analytics";
 import {
 	email,
-	geo,
 	googleBusinessUrl,
 	healthCenterRegistry,
 	instagramUrl,
@@ -105,7 +104,6 @@ const structuredData = {
 			email,
 			telephone: whatsappNumber.replaceAll(" ", ""),
 			address: { "@type": "PostalAddress", ...postalAddress },
-			geo: { "@type": "GeoCoordinates", ...geo },
 			hasMap: googleBusinessUrl,
 			identifier: {
 				"@type": "PropertyValue",
