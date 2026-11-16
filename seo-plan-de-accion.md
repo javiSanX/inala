@@ -1,16 +1,43 @@
 # SEO local: plan de acción
 
-Lo que queda por hacer fuera del código para mejorar la posición de inala.es, en orden. Los cambios en la web ya están hechos en la rama `web2`.
+Lo que queda por hacer para mejorar la posición de inala.es, en orden. Los cambios en la web están hechos en la rama `web2`, que todavía no está publicada: la web actual (`main`) no los tiene.
+
+Última actualización: 15/11/2026.
+
+## Ya hecho en la web (`web2`)
+
+- **Datos de la consulta:** dirección de la autorización sanitaria (María Lacunza 6, portal 4, local 4.1, 31011), registro de centro sanitario **C03912** en Sobre mí y en el pie, número de colegiada **N-02300** enlazado al registro del COP Navarra, horario y enlace a la ficha de Google.
+- **Datos estructurados (schema):** consulta (`MedicalBusiness`) con dirección, horario, servicios y precios, registro sanitario e Instagram; María (`Person`) con colegiación, registro del COP y formación (`alumniOf`); artículos (`BlogPosting`) con fecha de publicación y de actualización; migas de pan.
+- **Sobre mí:** formación completa con centro y año.
+- **Taller de miedo a volar:** página nueva en `/taller-miedo-a-volar/`, enlazada desde el menú de servicios, el pie y «Otros servicios».
+- **Enlaces internos:** cada servicio enlaza a sus artículos del blog («Artículos relacionados») y cada artículo a sus servicios. Sobre mí y Cómo trabajo enlazan a los servicios.
+- **Títulos y descripciones:** todos los títulos con 60 caracteres o menos y todas las descripciones entre 110 y 160.
+- **URLs:** todas terminan en `/`, igual que el sitemap y la URL canónica. La política de privacidad pasa a `/politica-de-privacidad/` con redirección desde la URL antigua. Las URLs antiguas del blog de `main` redirigen a las nuevas.
+- **Sitemap** con fecha de actualización (`lastmod`) en los artículos.
+- **Imágenes:** texto alternativo en las fotos del blog y en las ilustraciones de los servicios. Cada página comparte su propia imagen en redes y WhatsApp.
+- **Medición:** GTM, Consent Mode y eventos de contacto (ver punto 2).
+- **Técnico:** cabeceras de seguridad, cookies descritas con datos reales, imágenes y código sin usar eliminados, despliegue más ligero (de 36 a 19 MB de imágenes).
+
+## 0. Antes de publicar: dirección de la ficha de Google
+
+La web usa ya la dirección de la autorización sanitaria (Resolución 857/2025, registro **C03912**): **Calle María Lacunza 6, portal 4, local 4.1, 31011 Pamplona**. La ficha de Google todavía dice **Calle Dra. Ariz, frente al portal 13, 31006**, con la chincheta en esa calle.
+
+- [ ] **Corregir la ficha de Google Business Profile:** Editar perfil → Ubicación → dirección y chincheta en María Lacunza 6. Google puede pedir verificar de nuevo (vídeo o postal). Mientras no se corrija, el botón «Ver la ubicación en Google Maps» de la web lleva a la ubicación antigua.
+- [ ] **Confirmar el código postal.** La resolución no lo indica; la web usa 31011, el mismo que la web actual (`main`).
+- [ ] **Usar la misma dirección en todas partes:** Google, Bing Places, Apple Business Connect, directorios y COP.
+- [ ] **Convalidar la autorización** antes del **12 de noviembre de 2030**: dura cinco años.
 
 ## 1. Justo después de publicar `web2`
 
 - [ ] **Search Console → Sitemaps:** enviar `https://inala.es/sitemap-index.xml`.
-- [ ] **Search Console → Inspección de URLs:** pedir indexación de la home, `/contacto/`, `/sobre-mi/` y las cinco páginas de servicio.
+- [ ] **Search Console → Inspección de URLs:** pedir indexación de la home, `/contacto/`, `/sobre-mi/`, las cinco páginas de servicio y `/taller-miedo-a-volar/`.
 - [ ] **Redirecciones nuevas:** comprobar que `https://inala.es/servicios` lleva a `/servicios/` y que `/política-de-privacidad` lleva a `/politica-de-privacidad/`.
 - [ ] **Search Console → Páginas:** revisar durante 2–3 semanas que las URLs antiguas de `main` aparecen como «Página con redirección» y no como 404. Si sale un 404 de una URL antigua, hay que añadirla a `vercel.json` y a `redirects` en `astro.config.mjs`.
 - [ ] **Rich Results Test** (https://search.google.com/test/rich-results): pasar la home y un artículo del blog. No debe haber errores.
 - [ ] **PageSpeed Insights** (https://pagespeed.web.dev): pasar la home y una página de servicio en móvil. LCP < 2,5 s, INP < 200 ms, CLS < 0,1.
 - [ ] **Bing Webmaster Tools** (https://www.bing.com/webmasters): «Importar desde Google Search Console».
+- [ ] **Cabeceras de seguridad:** comprobar en https://securityheaders.com que salen HSTS, `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options` y `Permissions-Policy`.
+- [ ] **Compartir un enlace** de un servicio y de Sobre mí por WhatsApp: cada página debe mostrar su propia imagen.
 
 ## 2. Medir contactos en Google Tag Manager
 
@@ -77,17 +104,17 @@ Objetivo: pasar de 4 a 15–20 reseñas, poco a poco. La frecuencia también cue
 - [ ] **Servicios:** uno por cada servicio de la web, con su descripción corta y enlace a su página (`https://inala.es/servicios/terapia-de-pareja/`, etc.).
 - [ ] **Descripción:** la misma idea que la home: psicoterapia para adultos, parejas y familias en Pamplona y online, con María Sánchez, psicóloga general sanitaria, Nº col. N-02300.
 - [ ] **Fotos:** consulta, sala de espera y entrada del Centro Yssana, para que la gente reconozca el sitio al llegar.
-- [ ] **Publicaciones:** una al mes, por ejemplo cada artículo nuevo del blog o cada taller.
+- [ ] **Publicaciones:** una al mes, por ejemplo cada artículo nuevo del blog o cada taller. La primera puede ser la charla de miedo a volar del 27/11/2026, con enlace a `https://inala.es/taller-miedo-a-volar/`.
 - [ ] **Preguntas y respuestas:** añadir y responder tú misma las dudas típicas («¿Hacéis sesiones online?», «¿Cuánto dura una sesión?»).
 
 ## 5. Directorios y enlaces locales
 
-Usa **exactamente** estos datos en todas partes. Si un directorio dice otra dirección, Google duda:
+Usa **exactamente** estos datos en todas partes. Si un directorio dice otra dirección, Google duda.
 
 ```
 INALA Centro de Psicoterapia
-Calle Dra. Ariz, frente al portal 13 (Centro Yssana)
-31006 Pamplona, Navarra
+Calle María Lacunza 6, portal 4, local 4.1 (Centro Yssana)
+31011 Pamplona, Navarra
 623 05 07 73
 https://inala.es
 ```
@@ -103,6 +130,8 @@ https://inala.es
 > Hola, ¿qué tal? Soy María Sánchez, psicóloga en el centro. He renovado mi web, inala.es. ¿Sería posible que en vuestra web, en la parte de profesionales, mi nombre enlazara a inala.es? Si necesitáis un texto corto o una foto, os lo paso. ¡Muchas gracias!
 
 ## 6. Calendario de temas para el blog
+
+El blog no publica desde el 20/12/2025: retomar el ritmo de un artículo al mes es lo que más puede ayudar al tráfico. Si da tiempo, adelantar el tema de miedo a volar para publicarlo antes de la charla del 27/11/2026.
 
 Son propuestas que María puede aceptar, cambiar o descartar; el texto lo escribe o lo revisa ella. Cada artículo debe enlazar a su servicio (campo `services` en la cabecera del artículo) y, si hay otro artículo del mismo tema, a ese también (campo `related`).
 
@@ -128,5 +157,24 @@ Cuando se revise un artículo antiguo, añadir `updatedDate: AAAA-MM-DD` en su c
 | Para | Necesito |
 | --- | --- |
 | **Taller de miedo a volar** | Hora y lugar de la charla del 27/11/2026 y precio (la página muestra «[PENDIENTE: …]»). Opcional: nombre del piloto y su web. Cuando haya hora y lugar se puede añadir el schema `Event`, que puede salir destacado en Google. Tras cada edición, cambiar la fecha en `src/pages/taller-miedo-a-volar.astro`. |
+| **Código postal** | Confirmar que es 31011 (ver punto 0). |
+| **Coordenadas de la consulta** | Cuando la ficha de Google tenga la chincheta en María Lacunza 6, pasarme sus coordenadas para volver a ponerlas en el schema (`geo`). Las quité porque eran las de la dirección antigua. |
 | **Páginas por problema** | Qué problemas quiere trabajar María como página propia (por ejemplo ansiedad, duelo) y el texto escrito o revisado por ella. |
 | **Política de cookies** | Revisión por quien lleve lo legal. Ya está corregida con los datos técnicos reales: cookies de GA4, cookie de consentimiento y funcionamiento del aviso. |
+| **`PRODUCT.md`** | Está desactualizado (dirección, número de colegiada NA-02300, horario y formulario antiguos). No afecta a la web, pero conviene actualizarlo para futuras sesiones de trabajo. |
+
+## 8. Recomendaciones adicionales de SEO
+
+Por orden de impacto aproximado. Las que necesitan texto nuevo las escribe o revisa María: no se inventan datos, resultados ni testimonios.
+
+1. **Un artículo para Psicología perinatal.** Es el único servicio sin «Artículos relacionados». El tema 6 del calendario («Cansancio y culpa en la crianza») lo cubre.
+2. **Autoría visible en cada artículo:** «Escrito por María Sánchez, psicóloga general sanitaria, Nº col. N-02300», con enlace a Sobre mí. Ya está en el schema, pero Google valora que se vea quién firma, sobre todo en temas de salud.
+3. **Enlaces dentro del texto de los artículos** hacia el servicio y los artículos relacionados, además del bloque del final. Con anclas descriptivas («terapia de pareja en Pamplona»), no «aquí».
+4. **Más preguntas frecuentes** con lo que la gente busca: «¿cuánto cuesta un psicólogo en Pamplona?», «¿cuántas sesiones necesito?», «¿la primera sesión es diferente?». Pueden ir en la página de cada servicio o en una página general.
+5. **Schema `Event` en el taller** en cuanto haya hora y lugar. Google puede mostrar la fecha en los resultados.
+6. **Fotos reales:** de la consulta, de la entrada del Centro Yssana y de María, en la web y en la ficha de Google. Ayudan en Maps y en Google Imágenes, y dan confianza. Ojo: según la resolución sanitaria, publicar imágenes puede requerir autorización previa de publicidad sanitaria; consultarlo antes.
+7. **Reseñas en la web** cuando haya 10 o más en Google: solo con un enlace o un widget oficial, nunca copiadas como testimonios propios.
+8. **Contenido local:** una sección o artículo sobre cómo llegar (barrio, aparcamiento, villavesa) ayuda en las búsquedas de «psicóloga cerca de mí» y «psicólogo en [barrio de la consulta]».
+9. **Revisión mensual en Search Console:** buscar consultas con muchas impresiones y pocos clics y mejorar el título y la descripción de esas páginas. Revisar también qué artículos antiguos bajan y actualizarlos con `updatedDate`.
+10. **Velocidad real con la web publicada.** El vídeo de la home (1,9 MB) es lo que más pesa. Si PageSpeed da un LCP en móvil por encima de 2,5 s, preparar una versión más ligera para móvil o usar solo la imagen.
+11. **Más enlaces locales de calidad:** asociaciones de Pamplona (crianza, duelo, salud mental perinatal), colegios o escuelas de padres donde María dé charlas, y medios locales si hay ocasión (por ejemplo, una entrevista sobre el miedo a volar). Un buen enlace local vale más que muchos directorios.
