@@ -30,7 +30,8 @@ const title = "María Sánchez, psicóloga en Pamplona | Inala Psicoterapia";
 const description =
 	"María Sánchez, psicóloga general sanitaria con formación en terapia familiar y de pareja y en salud mental perinatal. En Pamplona y online.";
 
-// Credentials and story come from the existing site content on main.
+// Credentials and story come from the existing site content on main. Each
+// chapter links to the services it led to.
 
 const story = [
 	{
@@ -41,6 +42,7 @@ const story = [
 		icon: "work",
 		label: "01. Inicios",
 		title: "Mis inicios",
+		links: [{ name: "Terapia individual", href: "/servicios/terapia-individual/" }],
 		text: "Mi camino profesional comenzó en el mundo empresarial, donde aprendí a trabajar bajo presión y en entornos competitivos. Esa experiencia me permitió comprender cómo el estrés y la autoexigencia afectan tanto al rendimiento laboral como al bienestar personal y a las relaciones. Hoy, esa vivencia enriquece mi manera de acompañar, aportando una mirada más amplia, empática y real sobre los desafíos que enfrentan muchas personas en su día a día.",
 	},
 	{
@@ -50,6 +52,7 @@ const story = [
 		tag: "Psicología clínica y sanitaria",
 		icon: "psychology",
 		label: "02. Vocación",
+		links: [],
 		title: "Mi vocación",
 		text: "Pronto descubrí que mi verdadero interés estaba en las emociones, las relaciones y la forma en que nos vinculamos con los demás, lo que me llevó a estudiar Psicología, graduarme con mención en clínica y realizar el Máster General Sanitario. Acompañar a personas en su salud mental me ha enseñado el valor de comprender los procesos de enfermedad, duelo y la influencia que tiene todo ello en el entorno más cercano de la persona que lo padece.",
 	},
@@ -60,14 +63,20 @@ const story = [
 		tag: "Familia, pareja e infancia",
 		icon: "favorite",
 		label: "03. Propósito",
+		links: [
+			{ name: "Terapia de pareja", href: "/servicios/terapia-de-pareja/" },
+			{ name: "Terapia familiar", href: "/servicios/terapia-familiar/" },
+			{
+				name: "Psicología perinatal y crianza",
+				href: "/servicios/psicologia-perinatal/",
+			},
+		],
 		title: "Mi propósito",
 		text: "Mi propio proceso personal me permitió ver con claridad cómo la familia y el entorno en el que crecemos influyen profundamente en nuestro desarrollo y manera de relacionarnos. Esta comprensión me llevó a especializarme en terapia familiar y de pareja, y a trabajar en el ámbito de la desprotección infantil, acompañando procesos de trauma complejo y duelo en la primera infancia, reforzando mi compromiso con un acompañamiento respetuoso y humano.",
 	},
 ];
 
 const spaceFeatures = [
-	{ icon: "wb_sunny", label: "Luz natural" },
-	{ icon: "chair", label: "Un espacio tranquilo y cómodo" },
 	{ icon: "lock", label: "Secreto profesional" },
 	{ icon: "location_on", label: `En el ${addressCenter}` },
 ];
@@ -191,6 +200,19 @@ const spaceFeatures = [
 									<p class="story-text text-lead text-ink-muted">
 										{chapter.text}
 									</p>
+									{chapter.links.length > 0 && (
+										<p class="story-text flex flex-wrap items-center gap-x-6 text-small text-ink-muted">
+											<span>Por eso hoy acompaño en:</span>
+											{chapter.links.map((link) => (
+												<a
+													href={link.href}
+													class="inline-flex min-h-11 items-center font-semibold text-teal underline underline-offset-4 transition-[color] duration-200 hover:text-teal-strong"
+												>
+													{link.name}
+												</a>
+											))}
+										</p>
+									)}
 								</div>
 							</div>
 						</div>
@@ -200,25 +222,6 @@ const spaceFeatures = [
 		</ol>
 	</Section>
 
-	<CtaBand
-		id="contacto"
-		label="Primera cita"
-		title="¿Damos el primer paso juntos?"
-	>
-		<p>
-			Si sientes que ha llegado el momento de cuidarte, estaré encantada de
-			acompañarte. Solicita tu primera cita o escríbeme si tienes cualquier
-			duda antes de empezar.
-		</p>
-		<Fragment slot="actions">
-			<Button href={contactHref} variant="inverse" icon="calendar_today">
-				<span>{ctaLabel}</span>
-			</Button>
-			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
-				<span>Escríbeme a {email}</span>
-			</Button>
-		</Fragment>
-	</CtaBand>
 
 	<!-- Formación -->
 	<Section>
@@ -322,5 +325,25 @@ const spaceFeatures = [
 			</div>
 		</div>
 	</Section>
+
+	<CtaBand
+		id="contacto"
+		label="Primera cita"
+		title="¿Damos el primer paso juntos?"
+	>
+		<p>
+			Si sientes que ha llegado el momento de cuidarte, estaré encantada de
+			acompañarte. Solicita tu primera cita o escríbeme si tienes cualquier
+			duda antes de empezar.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>Escríbeme a {email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
 	<OtherServices heading="Servicios" />
 </Layout>
