@@ -117,36 +117,55 @@ const steps: {
 	},
 ];
 
-const areas: { icon: IconName; title: string; text: string }[] = [
+// Each reason links to the service that covers it, or to a post on it.
+const areas: {
+	icon: IconName;
+	title: string;
+	text: string;
+	href: string;
+	linkLabel: string;
+}[] = [
 	{
 		icon: "favorite",
 		title: "Gestión emocional y autoestima",
 		text: "Entender lo que sientes, tratarte con más amabilidad y dejar de vivir pendiente de la autocrítica.",
+		href: "/servicios/terapia-individual/",
+		linkLabel: "Terapia individual",
 	},
 	{
 		icon: "air",
 		title: "Ansiedad y estrés",
 		text: "Manejar la tensión física, las preocupaciones constantes y los pensamientos que te bloquean.",
+		href: "/blog/burnout/",
+		linkLabel: "Leer sobre el burnout",
 	},
 	{
 		icon: "light_mode",
 		title: "Depresión y desánimo",
 		text: "Comprender de dónde viene el malestar, recuperar la motivación y volver a encontrar sentido a tu día a día.",
+		href: "/servicios/terapia-individual/",
+		linkLabel: "Terapia individual",
 	},
 	{
 		icon: "diversity_1",
 		title: "Relaciones con los demás",
 		text: "Comunicarte mejor, poner límites sin culpa y construir vínculos más seguros.",
+		href: "/servicios/terapia-individual/",
+		linkLabel: "Terapia individual",
 	},
 	{
 		icon: "healing",
 		title: "Duelo, pérdidas y experiencias difíciles",
 		text: "Atravesar una pérdida o un cambio importante y recuperar la sensación de seguridad.",
+		href: "/blog/navegar-en-la-nueva-realidad/",
+		linkLabel: "Leer sobre el duelo ante un diagnóstico",
 	},
 	{
 		icon: "psychology",
 		title: "Autoconocimiento",
 		text: "Conocer tu historia, tus valores y lo que quieres, para vivir de forma más coherente contigo.",
+		href: "/servicios/terapia-individual/",
+		linkLabel: "Terapia individual",
 	},
 ];
 
@@ -218,10 +237,8 @@ const arrow =
 		<Fragment slot="title">
 			{/* Below lg each run is its own line, sized from the viewport width so
 			  the lead is the larger. */}
-			<span class="max-lg:block max-lg:text-hero-lead">Psicóloga en Pamplona,</span>{" "}
-			<span class="hero-accent max-lg:block max-lg:text-hero-run"
-				>terapia adaptada a cada situación</span
-			>
+			<span class="max-lg:block max-lg:text-hero-lead">Psicóloga en Pamplona</span>{" "}
+			<span class="hero-accent max-lg:block max-lg:text-hero-run">y online</span>
 		</Fragment>
 		<p
 			class="max-w-xl text-lead text-ink-muted max-lg:hidden"
@@ -353,7 +370,7 @@ const arrow =
 					<p data-reveal style="--reveal: 3" class="text-lead text-ink-muted">
 						Fundé Inala para acompañar a personas, parejas y familias en los
 						momentos complicados de la vida. Mi trabajo es crear un espacio
-						en el que puedas hablar con libertad, sin sentirte juzgado/a.
+						en el que puedas hablar con libertad, sin miedo a que te juzguen.
 					</p>
 					<blockquote
 						data-reveal
@@ -428,6 +445,10 @@ const arrow =
 								{area.title}
 							</h3>
 							<p class="text-small text-ink-muted">{area.text}</p>
+							<a class:list={[textLink, "self-start"]} href={area.href}>
+								<span>{area.linkLabel}</span>
+								<Icon name="arrow_forward" class={arrow} />
+							</a>
 						</li>
 					))
 				}
