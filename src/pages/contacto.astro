@@ -55,10 +55,14 @@ const privacyHref =
 	legalLinks.find((link) => link.name === "Política de privacidad")?.href ??
 	"/";
 
-// Same names as the rest of the site, plus a general enquiry option.
+// Same names as the rest of the site, plus a general enquiry option that also
+// covers the fear-of-flying workshop.
 const services = [
 	...siteServices.map((service) => ({ label: service.name, wide: false })),
-	{ label: "Consulta general / Información", wide: true },
+	{
+		label: "Consulta general, información o taller de miedo a volar",
+		wide: true,
+	},
 ];
 
 const modalities = [
@@ -425,8 +429,7 @@ const faqs = [
 					La consulta, en el {addressCenter} (Pamplona)
 				</h2>
 				<p class="text-lead text-ink-muted">
-					Una consulta tranquila y con luz natural. Si te resulta más cómodo,
-					también podemos vernos por videollamada.
+					Si te resulta más cómodo, también podemos vernos por videollamada.
 				</p>
 				<div class="flex flex-col gap-4 border-t border-line pt-6 text-body text-ink">
 					<div class="flex items-start gap-3">
