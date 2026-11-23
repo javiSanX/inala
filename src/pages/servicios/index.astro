@@ -10,6 +10,7 @@ import {
 	ctaLabel,
 	onlineLink,
 	services,
+	workshopLink,
 } from "../../data/site";
 import Layout from "../../layouts/Layout.astro";
 
@@ -46,6 +47,10 @@ const description =
 							</a>
 						</h2>
 						<p class="max-w-md text-lead text-ink-muted">{service.summary}</p>
+					<p class="flex items-center gap-2 text-small text-ink tabular-nums">
+						<Icon name="schedule" class="text-teal" />
+						<span>{service.duration} · {service.price}</span>
+					</p>
 						<p class="mt-auto flex items-center gap-2 text-small font-semibold text-teal tabular-nums">
 							Saber más
 							<Icon
@@ -60,7 +65,8 @@ const description =
 		<div
 			class="mt-14 grid gap-x-12 gap-y-8 lg:grid-cols-12 lg:items-center"
 		>
-			<p class="text-lead text-ink-muted lg:col-span-7">
+			<div class="flex flex-col gap-6 lg:col-span-7">
+			<p class="text-lead text-ink-muted">
 				Todas las sesiones pueden ser presenciales en {address} ({addressCenter},
 				Pamplona) u online por videollamada.<br>
 				<a
@@ -68,6 +74,14 @@ const description =
 					href={onlineLink.href}>Cómo funciona la terapia online</a
 				>.
 			</p>
+			<p class="text-lead text-ink-muted">
+				También imparto un taller de miedo a volar, en grupo o de forma individual.<br>
+				<a
+					class="font-semibold text-teal underline underline-offset-4 transition-[color] duration-200 hover:text-teal-strong"
+					href={workshopLink.href}>Ver el {workshopLink.name.toLowerCase()}</a
+				>.
+			</p>
+			</div>
 			<div class="flex flex-col items-start gap-3 lg:col-span-5 lg:items-end">
 				<Button href={contactHref} arrow>{ctaLabel}</Button>
 			</div>
