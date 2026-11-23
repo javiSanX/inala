@@ -1,6 +1,7 @@
 ---
-title: 'Navegar en la nueva realidad: el duelo ante un diagnóstico'
-subtitle: 'El duelo que llega con un diagnóstico psicológico, sus fases y el lugar que ocupa la aceptación.'
+title: 'Navegar en la nueva realidad: el duelo tras un diagnóstico psicológico'
+seoTitle: 'El duelo tras un diagnóstico psicológico'
+subtitle: 'Qué se mueve por dentro al recibir un diagnóstico de salud mental: las fases del duelo y el lugar de la aceptación.'
 pubDate: 2025-12-05T11:00:00.000Z
 author: María Sánchez
 description: 'Asumir un diagnóstico psicológico es difícil. Las fases del duelo y cómo la aceptación te ayuda a gestionar el dolor emocional y seguir navegando.'

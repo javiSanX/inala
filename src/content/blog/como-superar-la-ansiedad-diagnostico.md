@@ -1,6 +1,6 @@
 ---
-title: Cómo superar la ansiedad ante un diagnóstico
-subtitle: 'Qué le pasa a la mente durante la espera de un diagnóstico médico y cómo sostener la incertidumbre sin que te paralice.'
+title: Cómo manejar la ansiedad ante un diagnóstico médico
+subtitle: 'Una guía práctica: por qué se dispara la ansiedad durante la espera y qué te ayuda a sostener la incertidumbre sin que te paralice.'
 pubDate: 2025-12-06
 author: María Sánchez
 description: 'El impacto emocional de esperar un diagnóstico médico: por qué se instala la ansiedad, herramientas prácticas y cómo la terapia, también online, puede ayudarte.'
@@ -12,7 +12,7 @@ services:
 related:
   - el-coraje-de-seguir-adelante
 ---
-## **Cómo superar la ansiedad y el miedo ante la incertidumbre de un diagnóstico médico**
+## **Cuando la vida se detiene**
 
 Hoy necesito hablar de uno de esos momentos que pueden romperlo todo sin hacer ruido. Ese instante en el que la vida parece detenerse y deja a la vista nuestra fragilidad más profunda: la incertidumbre ante un problema serio de salud.
 

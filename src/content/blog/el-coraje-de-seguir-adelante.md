@@ -1,9 +1,9 @@
 ---
-title: 'El coraje de seguir adelante: ansiedad ante la incertidumbre médica'
-seoTitle: 'El coraje de seguir adelante ante la incertidumbre médica'
+title: 'El coraje de seguir adelante: vivir la espera de un diagnóstico'
+seoTitle: 'El coraje de seguir adelante: vivir la espera'
 subtitle: >-
-  Ansiedad y enfermedad: cómo vivir la incertidumbre médica y el miedo a la
-  espera.
+  Una reflexión sobre lo que se siente al esperar un diagnóstico: el miedo, la
+  necesidad de saber y la incertidumbre que vuelve.
 pubDate: 2025-12-05
 author: María Sánchez
 description: 'La incertidumbre médica genera ansiedad por enfermedad y miedo al diagnóstico. Cómo recuperar el control, gestionar la espera y encontrar apoyo emocional.'

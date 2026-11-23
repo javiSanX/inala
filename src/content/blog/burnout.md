@@ -1,6 +1,6 @@
 ---
 title: 'Burnout: el agotamiento crónico'
-subtitle: 'Más allá del cansancio: una inmersión en el síndrome de quemarse y las vías para recuperar tu bienestar mental y físico.'
+subtitle: 'Qué es el síndrome de estar quemado, cómo reconocerlo y qué ayuda a recuperarse.'
 pubDate: 2025-11-15T11:00:00.000Z
 author: María Sánchez
 description: 'El burnout es una respuesta severa al estrés laboral crónico. Qué es, sus síntomas y cómo la terapia y el autocuidado te ayudan a recuperar el equilibrio.'
@@ -10,7 +10,7 @@ services:
   - /servicios/terapia-individual
 ---
 
-## Burnout: cuando el estrés se vuelve agotamiento crónico
+## Cuando el estrés se vuelve crónico
 
 En nuestra sociedad actual, la presión por rendir y la constante conectividad han dado lugar a un fenómeno cada vez más extendido: el **burnout** o **síndrome de quemarse**. No es un simple cansancio pasajero, sino un estado de agotamiento físico, emocional y mental profundo que se instala cuando el estrés laboral o de cuidado se vuelve crónico y abrumador.
 
@@ -47,7 +47,7 @@ La **terapia psicológica** juega un papel fundamental en la superación del **s
 - **Reevaluar valores y metas:** Acompañarte en la reflexión sobre tus objetivos vitales y profesionales para encontrar un camino más alineado con tu bienestar.
 - **Prevenir futuras recaídas:** Dotarte de estrategias para mantener un equilibrio sostenible a largo plazo.
 
-## Tu camino hacia el bienestar: no estás solo/a
+## Tu camino hacia el bienestar: no tienes que hacerlo en soledad
 
 Reconocer que sufres **burnout** es un acto de valentía y el primer paso hacia la recuperación. Es una oportunidad para aprender a escucharte, a priorizar tu **salud mental** y a construir una vida más plena y equilibrada.
 

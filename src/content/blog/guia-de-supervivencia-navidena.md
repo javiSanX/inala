@@ -12,11 +12,11 @@ services:
   - /servicios/terapia-familiar
   - /servicios/terapia-individual
 ---
-## Estrés en Navidad y familia: guía de supervivencia emocional para tus reuniones
+## Por qué las fiestas pueden desbordarte
 
 La Navidad suele venir acompañada de una mezcla compleja de emociones. Para algunas personas trae alegría; para otras, nostalgia, y para muchas, un profundo **estrés por las reuniones familiares**.
 
-Si sientes que los encuentros navideños te desbordan, quiero recordarte algo importante: no estás sola/o. Esta guía te acompañará a regular tus emociones y te enseñará cómo poner límites para proteger tu bienestar mental durante las fiestas.
+Si sientes que los encuentros navideños te desbordan, quiero recordarte algo importante: no te pasa solo a ti. Esta guía te acompañará a regular tus emociones y te enseñará cómo poner límites para proteger tu bienestar mental durante las fiestas.
 
 ## Comprender tus emociones: el primer paso para el bienestar
 
@@ -32,7 +32,7 @@ Tus emociones son indicadores de cómo te sientes y señales vitales para tu sup
 
 ## Cómo prepararse emocionalmente para las fiestas navideñas
 
-Prepararse es un acto de responsabilidad propia. Antes del encuentro, dedica unos minutos a identificar tus **límites internos**: qué temas estás dispuesta/o a abordar y cuáles prefieres evitar.
+Prepararse es un acto de responsabilidad propia. Antes del encuentro, dedica unos minutos a identificar tus **límites internos**: qué temas quieres abordar y cuáles prefieres evitar.
 
 ### Herramientas prácticas: el "chubasquero invisible"
 
@@ -66,7 +66,7 @@ Poner límites no es un acto de guerra, sino de autocuidado. Cuando dices *“pr
 
 ## Cómo manejar preguntas incómodas en la cena de Navidad
 
-A menudo, la familia sigue un "guion social" sobre el éxito (pareja, hijos, hipoteca). Si te sientes presionada/o, puedes:
+A menudo, la familia sigue un "guion social" sobre el éxito (pareja, hijos, hipoteca). Si sientes esa presión, puedes:
 
 1. **Redireccionar:** Cambia el tema hacia algo que sepas que a la otra persona le gusta contar.
 1. **Neutralizar:** *"Aún no lo sé, cuando tenga novedades te aviso"*.
