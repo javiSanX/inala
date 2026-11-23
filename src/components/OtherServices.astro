@@ -1,8 +1,8 @@
 ---
 import { serviceMenuLinks } from "../data/site";
 
-// Closing section for every service page: compact links to all services,
-// with the page being viewed marked as current. It sits on the cypress field
+// Closing section for every service page: compact links to the other
+// services (the page being viewed is left out). It sits on the cypress field
 // between the closing call to action and the footer. Pages that are not a
 // service (Sobre mí, Cómo trabajo) reuse it as plain links to every service.
 interface Props {
@@ -11,6 +11,9 @@ interface Props {
 
 const { heading = "Otros servicios" } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, "");
+const otherServices = serviceMenuLinks.filter(
+	(service) => service.href.replace(/\/$/, "") !== path,
+);
 ---
 
 <section
@@ -25,25 +28,16 @@ const path = Astro.url.pathname.replace(/\/$/, "");
 		</h2>
 		<ul class="flex flex-wrap gap-2">
 			{
-				serviceMenuLinks.map((service) => {
-					const current = service.href.replace(/\/$/, "") === path;
-					return (
-						<li>
-							<a
-								href={service.href}
-								aria-current={current ? "page" : undefined}
-								class:list={[
-									"inline-flex min-h-11 items-center rounded-full border px-5 text-small font-semibold transition-[background-color,border-color,color] duration-200",
-									current
-										? "border-seafoam bg-seafoam text-cypress"
-										: "border-cypress-line text-on-dark hover:border-seafoam hover:text-seafoam-soft",
-								]}
-							>
-								{service.name}
-							</a>
-						</li>
-					);
-				})
+				otherServices.map((service) => (
+					<li>
+						<a
+							href={service.href}
+							class="inline-flex min-h-11 items-center rounded-full border border-cypress-line px-5 text-small font-semibold text-on-dark transition-[border-color,color] duration-200 hover:border-seafoam hover:text-seafoam-soft"
+						>
+							{service.name}
+						</a>
+					</li>
+				))
 			}
 		</ul>
 	</div>
