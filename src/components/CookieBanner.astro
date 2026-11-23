@@ -1,5 +1,6 @@
 ---
-// Cookie consent (GDPR and LSSI-CE). Copy is carried over verbatim from main.
+// Cookie consent (GDPR and LSSI-CE). The site uses technical and analytics cookies
+// only; there are no advertising cookies, so ad consent always stays denied.
 // Choices are stored in the same cookie as main and pushed to Google Consent Mode.
 import { consentCookieName } from "../data/analytics";
 import { buttonClass } from "./ui/button";
@@ -16,8 +17,8 @@ const small =
 	hidden
 >
 	<p class="text-small">
-		Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación y
-		analizar el uso de nuestra web.{" "}
+		Uso cookies técnicas para que la web funcione y, si lo aceptas, cookies de análisis
+		para saber qué páginas se leen. No uso cookies publicitarias.{" "}
 		<a
 			href="/aviso-legal-y-politica-de-cookies/"
 			target="_blank"
@@ -27,7 +28,7 @@ const small =
 	</p>
 	<div class="mt-4 flex flex-wrap gap-2">
 		<button type="button" data-cookie-action="accept" class={`${small} bg-seafoam text-cypress hover:bg-seafoam-soft`}>
-			Aceptar todas
+			Aceptar
 		</button>
 		<button
 			type="button"
@@ -52,7 +53,7 @@ const small =
 	class="m-auto w-[calc(100%-2rem)] max-w-xl rounded-frame bg-white p-0 text-ink shadow-float backdrop:bg-ink/60"
 >
 	<div class="flex items-center justify-between gap-4 border-b border-line p-5">
-		<h2 id="cookie-modal-title" class="font-display text-subheading">Configuración de Cookies</h2>
+		<h2 id="cookie-modal-title" class="font-display text-subheading">Configuración de cookies</h2>
 		<button
 			type="button"
 			data-cookie-action="close"
@@ -65,31 +66,20 @@ const small =
 	<div class="divide-y divide-line px-5">
 		<div class="py-5">
 			<div class="flex items-center justify-between gap-4">
-				<label for="technical-cookies" class="text-body font-semibold">Cookies Técnicas</label>
+				<label for="technical-cookies" class="text-body font-semibold">Cookies técnicas</label>
 				<input id="technical-cookies" type="checkbox" class="size-5 accent-teal" checked disabled />
 			</div>
 			<p class="mt-2 text-small text-ink-muted">
-				Necesarias para el correcto funcionamiento del sitio web. No se pueden desactivar.
+				Las necesarias para que la web funcione. No se pueden desactivar.
 			</p>
 		</div>
 		<div class="py-5">
 			<div class="flex items-center justify-between gap-4">
-				<label for="analytics-cookies" class="text-body font-semibold">Cookies de Análisis</label>
+				<label for="analytics-cookies" class="text-body font-semibold">Cookies de análisis</label>
 				<input id="analytics-cookies" type="checkbox" class="size-5 accent-teal" />
 			</div>
 			<p class="mt-2 text-small text-ink-muted">
-				Nos ayudan a mejorar el sitio web analizando cómo los usuarios interactúan con el
-				contenido (Google Analytics).
-			</p>
-		</div>
-		<div class="py-5">
-			<div class="flex items-center justify-between gap-4">
-				<label for="marketing-cookies" class="text-body font-semibold">Cookies de Marketing</label>
-				<input id="marketing-cookies" type="checkbox" class="size-5 accent-teal" />
-			</div>
-			<p class="mt-2 text-small text-ink-muted">
-				Se utilizan para rastrear a los visitantes en los sitios web para mostrar anuncios
-				relevantes y atractivos.
+				Me ayudan a saber qué páginas se leen y a mejorar la web (Google Analytics).
 			</p>
 		</div>
 	</div>
@@ -104,14 +94,14 @@ const small =
 	interface Consent {
 		technical: true;
 		analytics: boolean;
-		marketing: boolean;
+		/** Kept for cookies saved before the marketing category was removed; always false now. */
+		marketing: false;
 		timestamp: number;
 	}
 
 	const banner = document.getElementById("cookie-banner") as HTMLElement;
 	const modal = document.getElementById("cookie-modal") as HTMLDialogElement;
 	const analyticsBox = document.getElementById("analytics-cookies") as HTMLInputElement;
-	const marketingBox = document.getElementById("marketing-cookies") as HTMLInputElement;
 	const cookieName = banner.dataset.cookieName ?? "inala_cookie_consent";
 
 	// Same trigger as main: show after 200px of scroll or 5 s, whichever comes first.
@@ -135,16 +125,12 @@ const small =
 		const state = (granted: boolean) => (granted ? "granted" : "denied");
 		window.gtag?.("consent", "update", {
 			analytics_storage: state(consent.analytics),
-			ad_storage: state(consent.marketing),
-			ad_user_data: state(consent.marketing),
-			ad_personalization: state(consent.marketing),
 		});
 		analyticsBox.checked = consent.analytics;
-		marketingBox.checked = consent.marketing;
 	}
 
-	function saveConsent(analytics: boolean, marketing: boolean) {
-		const consent: Consent = { technical: true, analytics, marketing, timestamp: Date.now() };
+	function saveConsent(analytics: boolean) {
+		const consent: Consent = { technical: true, analytics, marketing: false, timestamp: Date.now() };
 		const expires = new Date();
 		expires.setFullYear(expires.getFullYear() + 1);
 		// biome-ignore lint/suspicious/noDocumentCookie: the Cookie Store API is not available in every browser we support.
@@ -189,10 +175,10 @@ const small =
 		if (!target) return;
 		switch (target.dataset.cookieAction) {
 			case "accept":
-				saveConsent(true, true);
+				saveConsent(true);
 				break;
 			case "reject":
-				saveConsent(false, false);
+				saveConsent(false);
 				break;
 			case "configure":
 				modal.showModal();
@@ -201,7 +187,7 @@ const small =
 				modal.close();
 				break;
 			case "save":
-				saveConsent(analyticsBox.checked, marketingBox.checked);
+				saveConsent(analyticsBox.checked);
 				break;
 		}
 	});

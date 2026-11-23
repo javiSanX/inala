@@ -175,11 +175,9 @@ const structuredData = {
 				if (match) {
 					const consent = JSON.parse(decodeURIComponent(match[1]));
 					const state = (granted) => (granted ? "granted" : "denied");
+					// No advertising cookies: ad consent stays denied whatever an old cookie says.
 					gtag("consent", "update", {
 						analytics_storage: state(consent.analytics),
-						ad_storage: state(consent.marketing),
-						ad_user_data: state(consent.marketing),
-						ad_personalization: state(consent.marketing),
 					});
 				}
 			} catch {}
