@@ -21,6 +21,7 @@ import Layout from "../layouts/Layout.astro";
 const title = "Taller de miedo a volar en Pamplona | Inala Psicoterapia";
 const description =
 	"Charla presencial en Pamplona, en grupo pequeño, con una psicóloga y un piloto comercial: entender el miedo a volar, herramientas y dudas técnicas del vuelo.";
+const pilotName = "Paul Bowles Belzunegui";
 
 // Next group talk. The block switches to "próximas fechas" on the first build
 // after the day has passed, so update this date when a new edition is set.
@@ -38,10 +39,9 @@ const talkFacts = [
 	{ title: nextTalkLabel, subtitle: "Tercera edición", icon: "calendar_today" },
 	{
 		title: "Presencial, en grupo pequeño",
-		subtitle: "[PENDIENTE: hora y lugar]",
+		subtitle: "Escríbeme y te paso hora, lugar y precio",
 		icon: "location_on",
 	},
-	{ title: "Precio", subtitle: "[PENDIENTE: precio]", icon: "info" },
 ];
 
 const whatsappWorkshop = `${whatsappUrl}?text=${encodeURIComponent(
@@ -59,7 +59,7 @@ const topics = [
 	},
 	{
 		title: "La parte técnica del vuelo",
-		text: "Un piloto comercial explica cómo funciona un vuelo y resuelve las dudas que te preocupan.",
+		text: `${pilotName}, piloto comercial, explica cómo funciona un vuelo y resuelve las dudas que te preocupan.`,
 	},
 	{
 		title: "Una hoja de ruta",
@@ -91,7 +91,8 @@ const formats = [
 			items={[{ name: "Inicio", href: "/" }, { name: workshopLink.name }]}
 		/>
 		<p class="max-w-2xl text-lead text-ink-muted">
-			Una charla en grupo pequeño que imparto junto a un piloto comercial.
+			Una charla en grupo pequeño que imparto junto a {pilotName}, piloto
+			comercial.
 			Hablamos de qué es el miedo y cómo se convierte en ansiedad o en fobia,
 			te damos herramientas y resolvemos tus dudas sobre cómo funciona un
 			vuelo, para que salgas con una hoja de ruta más clara.
@@ -152,8 +153,8 @@ const formats = [
 			<div class="flex flex-col gap-5 lg:col-span-5">
 				<SectionHeader title="Formatos" layout="stack">
 					<p>
-						Lo imparto junto a un piloto comercial: yo me ocupo de la parte
-						psicológica y él, de la técnica.
+						Lo imparto junto a {pilotName}, piloto comercial: yo me ocupo de
+						la parte psicológica y él, de la técnica.
 					</p>
 				</SectionHeader>
 				<p class="text-body text-ink-muted">
