@@ -3,6 +3,7 @@ import sessionImage from "../assets/images/maria2.webp";
 import PageHero from "../components/PageHero.astro";
 import Button from "../components/ui/Button.astro";
 import CtaBand from "../components/ui/CtaBand.astro";
+import Faq from "../components/ui/Faq.astro";
 import Figure from "../components/ui/Figure.astro";
 import Icon from "../components/ui/Icon.astro";
 import Section from "../components/ui/Section.astro";
@@ -108,10 +109,24 @@ const includes = [
 		title: "Presencial u online",
 		text: "En la consulta de Pamplona o por videollamada, según prefieras. También puedes combinar ambas.",
 	},
+];
+
+// Payment and cancellation terms as confirmed by María.
+const faqs = [
 	{
-		icon: "route",
-		title: "Acompañamiento durante todo el proceso",
-		text: "Te acompaño desde la primera sesión hasta que sientas que puedes seguir por tu cuenta.",
+		question: "¿Cómo se pagan las sesiones?",
+		answer:
+			"Las sesiones se pagan <strong>en efectivo</strong>.",
+	},
+	{
+		question: "¿Puedo cancelar o cambiar una cita?",
+		answer:
+			"Sí. Puedes cancelarla o cambiarla sin coste si me avisas con <strong>al menos 24 horas</strong> de antelación.",
+	},
+	{
+		question: "¿Qué pasa si cancelo con menos de 24 horas?",
+		answer:
+			"La sesión se cobra aunque no puedas venir, porque esa hora estaba reservada para ti y ya no puedo ofrecérsela a otra persona.",
 	},
 ];
 
@@ -191,6 +206,22 @@ const isPending = (value: string) => value.startsWith("[PENDIENTE");
 		</p>
 	</Section>
 
+	<!-- Pago y cancelación -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Pago y cancelación"
+				layout="stack"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
+			>
+				<p>
+					Lo práctico, antes de empezar. Si tienes otra duda, escríbeme y te
+					respondo.
+				</p>
+			</SectionHeader>
+			<Faq items={faqs} class="lg:col-span-7" />
+		</div>
+	</Section>
 
 	<CtaBand title="¿Tienes dudas sobre el formato o las tarifas?">
 		<p>Escríbeme y lo vemos. Si ya lo tienes claro, solicita tu primera cita.</p>
