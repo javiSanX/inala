@@ -53,25 +53,25 @@ const steps = [
 	{
 		number: "01",
 		icon: "chat_bubble_outline",
-		title: "Primer contacto",
+		title: "Me escribes o me llamas",
 		text: "No tienes que traer nada preparado ni preocuparte por decir lo correcto. No existen respuestas perfectas ni formas «ideales» de empezar: ese camino lo construimos juntos.",
 	},
 	{
 		number: "02",
 		icon: "visibility",
-		title: "Primera sesión",
+		title: "Primera sesión para conocernos",
 		text: "En la primera sesión mi objetivo es conocerte y entender qué te ha traído a consulta. Tú decides cuánto quieres contar.",
 	},
 	{
 		number: "03",
 		icon: "flag",
-		title: "Estableciendo objetivos",
+		title: "Definimos los objetivos",
 		text: "Te ayudo a poner en palabras lo que necesitas y lo que esperas de la terapia. Juntos definimos los primeros objetivos para que el proceso tenga un rumbo claro desde el inicio.",
 	},
 	{
 		number: "04",
 		icon: "shield_with_heart",
-		title: "A tu ritmo",
+		title: "Sesiones a tu ritmo",
 		text: "Tú marcas el ritmo de cada sesión. Te acompaño, te guío y revisamos juntos cómo vas avanzando.",
 	},
 ];
@@ -84,7 +84,7 @@ const sessionSteps: {
 }[] = [
 	{
 		icon: "hearing",
-		title: "Escucha activa real",
+		title: "Te escucho sin prisas",
 		text: "Sin prisas, interrupciones ni diagnósticos apresurados. Escucho tu historia con atención y respeto.",
 		tag: "Un espacio para ti",
 	},
@@ -92,13 +92,7 @@ const sessionSteps: {
 		icon: "explore",
 		title: "Claridad y dirección",
 		text: "Te explicaré en qué punto estamos, qué estamos trabajando y hacia dónde vamos.",
-		tag: "Transparencia activa",
-	},
-	{
-		icon: "build_circle",
-		title: "Herramientas aplicables",
-		text: "No nos quedamos en la teoría: trabajaremos recursos prácticos que puedas usar en tu día a día.",
-		tag: "Autonomía vital",
+		tag: "Sabes en qué punto estás",
 	},
 	{
 		icon: "hourglass_empty",
@@ -120,11 +114,6 @@ const benefits: { icon: IconName; title: string; text: string }[] = [
 		text: "Entender mejor tus emociones, pensamientos, necesidades y fortalezas, para tomar decisiones más coherentes contigo y cuidar tus relaciones.",
 	},
 	{
-		icon: "handyman",
-		title: "Herramientas",
-		text: "Estrategias y recursos prácticos para afrontar dificultades y resolver conflictos en tu día a día.",
-	},
-	{
 		icon: "eco",
 		title: "Autonomía",
 		text: "Consolidar lo aprendido para que puedas seguir cuidándote por tu cuenta cuando termine la terapia.",
@@ -133,16 +122,16 @@ const benefits: { icon: IconName; title: string; text: string }[] = [
 
 const therapistHighlights = [
 	{
-		icon: "favorite",
-		label: "Acompañamiento respetuoso y sin juicios",
+		icon: "diversity_1",
+		label: "Máster en Terapia Sistémica de Familia y Pareja",
 	},
 	{
-		icon: "science",
-		label: "Enfoque integrador basado en la evidencia",
+		icon: "child_care",
+		label: "Máster en Salud Mental Perinatal",
 	},
 	{
-		icon: "pace",
-		label: "Atención personalizada, a tu ritmo",
+		icon: "verified",
+		label: "Experiencia en desprotección infantil, trauma complejo y duelo en la primera infancia",
 	},
 ];
 
@@ -153,7 +142,7 @@ const modalities = [
 		imageAlt:
 			"Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua, armarios a juego y luz natural.",
 		title: "En mi consulta de Pamplona",
-		text: "Una consulta tranquila y con luz natural, dentro del Centro Yssana.",
+		text: `Mi consulta, dentro del ${addressCenter}, en Pamplona.`,
 		features: [
 			{
 				icon: "location_on",
@@ -264,7 +253,7 @@ const modalities = [
 					</p>
 					<p class="font-display text-lead text-teal">
 						«Te acompaño con rigor y calidez para que encuentres un lugar
-						donde ser tú mismo/a»
+						donde puedas ser tal como eres»
 					</p>
 				</div>
 			</div>
@@ -304,7 +293,7 @@ const modalities = [
 			>
 				<p>
 					La psicoterapia no es un monólogo ni un proceso misterioso. Es una
-					conversación en la que trabajamos juntas o juntos, con objetivos claros.
+					conversación en la que trabajamos juntos, con objetivos claros.
 				</p>
 			</SectionHeader>
 		</SessionExpect>
@@ -322,7 +311,7 @@ const modalities = [
 			</p>
 		</SectionHeader>
 		<ul
-			class="benefits -mx-5 mt-14 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4"
+			class="benefits -mx-5 mt-14 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3"
 		>
 			{
 				benefits.map((benefit, index) => (
@@ -396,9 +385,6 @@ const modalities = [
 			>
 				<Icon name="verified" class="text-teal" />
 				<span>
-					<span class="block">
-						Formación en terapia familiar y de pareja y en salud perinatal
-					</span>
 					<span class="block font-semibold text-ink">María Sánchez</span>
 					<span class="block"
 						>Psicóloga general sanitaria · Nº col. {licenseNumber}</span
