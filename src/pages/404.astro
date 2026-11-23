@@ -5,18 +5,19 @@ import Button from "../components/ui/Button.astro";
 import { logo, navLinks } from "../data/site";
 import Layout from "../layouts/Layout.astro";
 
-// Copy from main's 404 page, with the accent and opening mark corrected.
+// Calm, first-person copy in the same voice as the rest of the site.
 const title = "Página no encontrada | Inala Psicoterapia";
 const description =
-	"La página que buscas no existe o ha cambiado de dirección. Puedes volver al inicio o visitar nuestras páginas principales.";
+	"La página que buscas no existe o ha cambiado de dirección. Puedes volver al inicio o ir a las páginas principales de la web.";
 ---
 
 <Layout title={title} description={description} noindex>
 	<PageHero>
-		<Fragment slot="title">¡Ups!<br />Esta página no existe</Fragment>
+		<Fragment slot="title">Esta página no existe</Fragment>
 		<p class="max-w-xl text-lead text-ink-muted">
-			Parece que nos hemos perdido en el camino y no hemos encontrado la página que
-			buscabas. ¡No te preocupes! Vamos a volver al sendero principal juntos.
+			Puede que la dirección haya cambiado o que el enlace no esté bien escrito.
+			Desde aquí puedes volver al inicio o ir a cualquiera de las páginas
+			principales.
 		</p>
 		<div class="flex flex-wrap gap-3 pt-2">
 			<Button href="/" arrow>Volver al inicio</Button>
