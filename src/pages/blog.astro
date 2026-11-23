@@ -2,14 +2,22 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import PageHero from "../components/PageHero.astro";
+import Button from "../components/ui/Button.astro";
+import CtaBand from "../components/ui/CtaBand.astro";
 import Icon from "../components/ui/Icon.astro";
 import Section from "../components/ui/Section.astro";
-import { logo } from "../data/site";
+import {
+	contactHref,
+	ctaLabel,
+	licenseNumber,
+	logo,
+	therapistName,
+} from "../data/site";
 import Layout from "../layouts/Layout.astro";
 
 const title = "Blog de Psicología | Inala Psicoterapia";
 const description =
-	"Artículos sobre ansiedad, burnout, terapia de pareja y bienestar emocional, escritos desde la consulta de Inala Psicoterapia.";
+	"Artículos sobre ansiedad, burnout, terapia de pareja y bienestar emocional, escritos por María Sánchez, psicóloga general sanitaria en Pamplona.";
 
 const posts = (await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -115,4 +123,16 @@ const titleLink =
 			}
 		</ul>
 	</Section>
+
+	<CtaBand label="Quién escribe" title={`Soy ${therapistName}, psicóloga`}>
+		<p>
+			Psicóloga general sanitaria (Nº col. {licenseNumber}), con consulta en
+			Pamplona y online. Escribo sobre lo que veo a menudo en consulta. Si te
+			has reconocido en algún artículo y quieres hablarlo, puedes escribirme.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" arrow>{ctaLabel}</Button>
+			<Button href="/sobre-mi/" variant="inverse-outline">Conocer mi trayectoria</Button>
+		</Fragment>
+	</CtaBand>
 </Layout>
