@@ -49,17 +49,17 @@ const audiences: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "favorite",
 		title: "Parejas en crisis o distanciamiento",
-		text: "Para parejas que sienten que conviven como extraños o meros compañeros de piso, con falta de afecto, desconexión física y emocional, o pérdida paulatina de la complicidad y la intimidad.",
+		text: "Cuando sentís que convivís como compañeros de piso y la complicidad se ha ido apagando poco a poco.",
 	},
 	{
 		icon: "forum",
 		title: "Dificultades de comunicación",
-		text: "Para quienes sienten que cualquier conversación termina en discusiones estériles, malentendidos recurrentes, reproches acumulados o dinámicas desgastantes de ataque y silencio defensivo.",
+		text: "Cuando cualquier conversación acaba en discusión, en reproches o en silencio, y ya no sabéis cómo hablar de lo importante.",
 	},
 	{
 		icon: "call_split",
 		title: "Transiciones o separación consciente",
-		text: "Para parejas que afrontan la llegada del primer hijo, duelo compartido, infidelidades o la decisión de separarse, intentando cuidar el bienestar de los dos y de los hijos durante el proceso.",
+		text: "Cuando atravesáis un cambio grande (la llegada de un hijo, un duelo, una infidelidad) o estáis valorando separaros y queréis hacerlo con cuidado.",
 	},
 ];
 
@@ -67,12 +67,12 @@ const problems: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "repeat",
 		title: "Crisis de comunicación y discusiones circulares",
-		text: "Salir del bucle de reproches y malentendidos, y practicar una escucha sin ponerse a la defensiva.",
+		text: "Salir del bucle de reproches y malentendidos, y aprender a escucharos sin poneros a la defensiva.",
 	},
 	{
 		icon: "heart_broken",
 		title: "Distanciamiento emocional y falta de intimidad",
-		text: "Reconexión afectiva, recuperación de los momentos compartidos, y reconstrucción del espacio íntimo, sensorial y erótico de la pareja.",
+		text: "Volver a acercaros, recuperar los momentos compartidos y cuidar vuestra intimidad, también la sexual.",
 	},
 	{
 		icon: "healing",
@@ -87,12 +87,12 @@ const problems: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "checklist_rtl",
 		title: "Reparto desigual de la carga mental y tareas",
-		text: "Reequilibrio de las responsabilidades domésticas y logísticas, visibilización del esfuerzo invisible y prevención del resentimiento silencioso.",
+		text: "Repartir de forma más justa las tareas y la carga mental, hacer visible lo que hoy no se ve y evitar que se acumule el resentimiento.",
 	},
 	{
 		icon: "door_open",
 		title: "Acompañamiento en la separación consciente",
-		text: "Acompañamiento para cerrar la relación con el mayor cuidado posible, para los dos y para los hijos si los hay.",
+		text: "Cerrar la relación con el mayor cuidado posible, para los dos y para los hijos si los hay.",
 	},
 ];
 
@@ -142,7 +142,7 @@ const faqs = [
 			  the lead is the larger and both always fit on one line. */
 			}
 			<span class="max-lg:block max-lg:text-hero-lead">Terapia de pareja</span
-			>{" "}
+			><span class="sr-only">:</span>{" "}
 			<span class="hero-accent max-lg:block max-lg:text-hero-run"
 				>volver a entenderos</span
 			>
@@ -245,6 +245,10 @@ const faqs = [
 		label="Primera cita en pareja"
 		title="Dar el paso juntos requiere valor, y no tenéis que hacerlo solos"
 	>
+		<p>
+			Tengo un Máster en Terapia Sistémica de Familia y Pareja (AVAPSI, 2023):
+			trabajo con la relación, no con un culpable.
+		</p>
 		<p class="tabular-nums">
 			Solicitad vuestra primera cita o escribidme si antes queréis resolver
 			alguna duda. Sesión de 60 minutos · 75 €.

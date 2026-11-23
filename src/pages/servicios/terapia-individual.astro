@@ -34,17 +34,17 @@ const audiences: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "person",
 		title: "Adultos",
-		text: "Acompaño a personas adultas que desean comprender lo que sienten y adquirir herramientas para vivir de forma más consciente. Trabajo ansiedad, estrés laboral, rupturas de pareja, duelo, sobrecarga emocional, bloqueos vitales e inseguridades cotidianas.",
+		text: "Si llevas tiempo con un malestar que no se va, atraviesas un cambio importante o notas que repites patrones que no te hacen bien, y quieres entender qué te pasa y tener herramientas para vivir de forma más consciente.",
 	},
 	{
 		icon: "chat",
 		title: "Adolescentes",
-		text: "Un lugar sin juicios donde expresar lo que viven en esta etapa de cambio: gestión de emociones intensas, presión social o académica, autodescubrimiento, dudas sobre la identidad y dificultades en la convivencia familiar o escolar.",
+		text: "Un lugar sin juicios y propio, donde poner palabras a lo que viven en esta etapa de cambio, a su ritmo y sin sentirse evaluados.",
 	},
 	{
 		icon: "child_care",
-		title: "Niños y niñas",
-		text: "A través del juego y la expresión plástica y emocional, trabajo miedos infantiles, inseguridades, ansiedad, adaptación ante cambios familiares y habilidades para relacionarse de forma saludable con su entorno.",
+		title: "Niños",
+		text: "Con los más pequeños trabajo a través del juego y la expresión plástica y emocional, y cuento con los padres o tutores durante todo el proceso.",
 	},
 ];
 
@@ -52,32 +52,32 @@ const problems: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "air",
 		title: "Ansiedad y estrés",
-		text: "Sensación de agitación permanente, pensar demasiado, tensión en el cuerpo, dificultad para calmarte y sobrecarga en el día a día.",
+		text: "Calmar la agitación y la tensión del cuerpo, dejar de darle vueltas a todo y aliviar la sobrecarga del día a día, también la que viene del trabajo.",
 	},
 	{
 		icon: "light_mode",
 		title: "Tristeza, desánimo y gestión emocional",
-		text: "Sensación de vacío o falta de energía, apatía, desbordamiento emocional y dificultad para reconectar con el disfrute y el sentido vital.",
+		text: "Entender de dónde vienen el vacío o la falta de energía, manejar los momentos de desborde y volver a conectar con lo que te hace disfrutar.",
 	},
 	{
 		icon: "person",
 		title: "Autoestima, autocrítica e identidad",
-		text: "Sensación de insuficiencia, síndrome del impostor, necesidad constante de complacer y autoexigencia severa que frena tu autenticidad.",
+		text: "Dejar de sentir que nunca es suficiente, rebajar la autoexigencia y la necesidad de complacer, y tratarte con más amabilidad.",
 	},
 	{
 		icon: "healing",
 		title: "Duelo, pérdidas y transiciones vitales",
-		text: "Acompañamiento ante el fallecimiento de personas queridas, rupturas de pareja, cambios de etapa y adaptación a nuevos ciclos vitales.",
+		text: "Atravesar la muerte de alguien querido, una ruptura o un cambio de etapa, y adaptarte a lo que viene después.",
 	},
 	{
 		icon: "diversity_1",
 		title: "Relaciones, apego y límites saludables",
-		text: "Patrones vinculares repetitivos, dependencia, dificultades para poner límites respetuosos sin culpa y resolución constructiva de conflictos.",
+		text: "Reconocer los patrones que se repiten en tus relaciones, poner límites sin culpa y afrontar los conflictos de otra manera.",
 	},
 	{
 		icon: "psychology",
 		title: "Crecimiento personal y claridad vital",
-		text: "Bloqueos e indecisión vital, búsqueda de coherencia interior, mejora del autocuidado y alineamiento de tus decisiones con tus valores.",
+		text: "Salir de la indecisión, cuidarte mejor y tomar decisiones más coherentes con lo que de verdad te importa.",
 	},
 ];
 
@@ -133,7 +133,7 @@ const faqs = [
 			}
 			<span class="max-lg:block max-lg:text-hero-lead"
 				>Terapia individual</span
-			>{" "}
+			><span class="sr-only">:</span>{" "}
 			<span class="hero-accent max-lg:block max-lg:text-hero-run"
 				>entender lo que te pasa</span
 			>
@@ -240,8 +240,12 @@ const faqs = [
 	<CtaBand
 		id="contacto-reserva"
 		label="Primera cita"
-		title="Dar el primer paso requiere valentía, pero no tienes que hacerlo solo/a."
+		title="Dar el primer paso requiere valentía, pero no tienes que hacerlo en soledad."
 	>
+		<p>
+			Antes de dedicarme a la psicología trabajé en la empresa, así que conozco
+			de cerca el estrés laboral y la autoexigencia.
+		</p>
 		<p class="tabular-nums">
 			Solicita tu primera cita o escríbeme si antes quieres resolver alguna
 			duda. Sesión de 60 minutos · 65 €.

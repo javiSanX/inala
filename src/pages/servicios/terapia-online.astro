@@ -73,8 +73,8 @@ const situations: {
 
 const steps = [
 	{
-		title: "Me escribes",
-		text: "Me escribes por el formulario, por correo o por WhatsApp y acordamos día y hora.",
+		title: "Me escribes o me llamas",
+		text: "Me escribes por el formulario, por correo o por WhatsApp, o me llamas, y acordamos día y hora.",
 	},
 	{
 		title: "Te envío el enlace",
@@ -85,8 +85,8 @@ const steps = [
 		text: "Un lugar tranquilo donde nadie te interrumpa y, si puedes, auriculares para más intimidad.",
 	},
 	{
-		title: "Sesión de 60 minutos",
-		text: "Hablamos con calma de lo que te trae, a tu ritmo, y vemos qué herramientas te pueden ayudar.",
+		title: "Sesiones a tu ritmo",
+		text: "Sesiones de 60 minutos en las que hablamos con calma de lo que te trae y vemos qué herramientas te pueden ayudar.",
 	},
 ];
 
@@ -126,6 +126,11 @@ const faqs = [
 			"Sí, atiendo online a personas que viven fuera de España. Si estás en otra zona horaria, buscamos juntos una hora que encaje.",
 	},
 	{
+		question: "¿La terapia online sirve para cualquier caso?",
+		answer:
+			"Online trabajo los mismos temas que en consulta. Aun así, si en algún caso no es el formato adecuado, te lo diré.",
+	},
+	{
 		question: "¿Puedo combinar sesiones online y presenciales en Pamplona?",
 		answer:
 			"Sí. Puedes alternar sesiones online con sesiones en mi consulta de la calle María Lacunza, en Pamplona, según te encaje en cada momento.",
@@ -154,7 +159,7 @@ const faqs = [
 			  the lead is the larger and both always fit on one line. */
 			}
 			<span class="max-lg:block max-lg:text-hero-lead">Terapia online</span
-			>{" "}
+			><span class="sr-only">:</span>{" "}
 			<span class="hero-accent max-lg:block max-lg:text-hero-run"
 				>la misma cercanía, estés donde estés</span
 			>

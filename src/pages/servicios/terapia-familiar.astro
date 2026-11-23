@@ -48,18 +48,18 @@ const sessionSteps = [
 const audiences: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "escalator_warning",
-		title: "Familias con hijos/as o adolescentes",
-		text: "Para hogares donde la convivencia se ha vuelto tensa por la rebeldía, el aislamiento adolescente, dificultades escolares o diferencias en estilos de crianza entre progenitores.",
+		title: "Familias con hijos pequeños o adolescentes",
+		text: "Cuando la convivencia en casa se ha vuelto tensa y no sabéis cómo recuperar la calma ni poneros de acuerdo.",
 	},
 	{
 		icon: "sync_alt",
 		title: "Familias en transición o cambio de ciclo",
-		text: "Acompañamiento en momentos clave: llegada de un nuevo miembro, familias reconstituidas (nuevas parejas e hijos), emancipación de los hijos o cuidado de familiares mayores.",
+		text: "Cuando la familia cambia: llega alguien nuevo, se forma una familia reconstituida, los hijos se independizan o toca cuidar de un familiar mayor.",
 	},
 	{
 		icon: "healing",
 		title: "Crisis familiares, duelos o pérdidas",
-		text: "Familias que atraviesan procesos de pérdida, separaciones, enfermedades imprevistas o conflictos enquistados entre hermanos o con la familia extensa.",
+		text: "Cuando atravesáis una pérdida, una separación o una enfermedad, o hay conflictos enquistados entre hermanos o con la familia extensa.",
 	},
 ];
 
@@ -67,32 +67,32 @@ const problems: { icon: IconName; title: string; text: string }[] = [
 	{
 		icon: "forum",
 		title: "Conflictos recurrentes y discusiones continuas",
-		text: "Discusiones que se repiten en bucle sin llegar a soluciones constructivas, generando tensión permanente y agotamiento emocional en todos.",
+		text: "Salir de las discusiones que se repiten sin llegar a nada y bajar la tensión que os agota a todos.",
 	},
 	{
 		icon: "comments_disabled",
 		title: "Desconexión emocional y silencios defensivos",
-		text: "Sensación de vivir como extraños bajo el mismo techo, aislamiento de los hijos o frialdad afectiva por heridas no resueltas.",
+		text: "Volver a acercaros cuando vivís como extraños bajo el mismo techo y cuidar las heridas que han traído distancia.",
 	},
 	{
 		icon: "rule",
 		title: "Límites, normas y dificultades de convivencia",
-		text: "Falta de acuerdos en normas del hogar, desautorización mutua entre figuras parentales o dificultad para poner límites claros con amor y firmeza.",
+		text: "Poneros de acuerdo en las normas de casa, no desautorizaros entre vosotros y poner límites claros con cariño y firmeza.",
 	},
 	{
 		icon: "family_restroom",
 		title: "Familias reconstituidas y segundas uniones",
-		text: "Adaptación a nuevas figuras parentales, celos entre hermanos, conflictos de lealtad y encaje de diferentes ritmos y hábitos de vida.",
+		text: "Hacer sitio a las nuevas figuras de la familia y manejar los celos entre hermanos, los conflictos de lealtad y las costumbres distintas.",
 	},
 	{
 		icon: "heart_broken",
 		title: "Procesos de duelo, enfermedad y pérdidas",
-		text: "Apoyo ante fallecimientos, diagnósticos médicos crónicos o cambios imprevistos que alteran y desestabilizan el equilibrio y la calma familiar.",
+		text: "Sosteneros como familia ante un fallecimiento, un diagnóstico o un cambio inesperado que rompe el equilibrio de casa.",
 	},
 	{
 		icon: "share_location",
 		title: "Tensiones con la familia extensa o política",
-		text: "Injerencias de familiares externos, discrepancias en la crianza y la necesidad de proteger la intimidad y la autonomía del núcleo familiar.",
+		text: "Poner límites a las intromisiones de otros familiares y proteger la intimidad y la autonomía de vuestra familia.",
 	},
 ];
 
@@ -144,7 +144,7 @@ const faqs = [
 			  the lead is the larger and both always fit on one line. */
 			}
 			<span class="max-lg:block max-lg:text-hero-lead">Terapia familiar</span
-			>{" "}
+			><span class="sr-only">:</span>{" "}
 			<span class="hero-accent max-lg:block max-lg:text-hero-run"
 				>mejorar la convivencia y cuidar los vínculos</span
 			>
@@ -247,6 +247,10 @@ const faqs = [
 		label="Primera cita familiar"
 		title="Cuidar de vuestra familia es cuidar de cada uno de vosotros"
 	>
+		<p>
+			Tengo un Máster en Terapia Sistémica de Familia y Pareja (AVAPSI, 2023):
+			miro a la familia en su conjunto, sin buscar culpables.
+		</p>
 		<p class="tabular-nums">
 			Solicitad vuestra primera cita o escribidme si antes queréis resolver
 			alguna duda. Sesión de 60 minutos · 75 €.
