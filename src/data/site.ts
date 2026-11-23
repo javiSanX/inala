@@ -76,6 +76,7 @@ export const navLinks = [
 	{ name: "Sobre mí", href: "/sobre-mi/" },
 	{ name: "Tarifas", href: "/tarifas/" },
 	{ name: "Blog", href: "/blog/" },
+	{ name: "Contacto", href: "/contacto/" },
 ];
 
 // Single source for services: services index, home, pricing and the contact

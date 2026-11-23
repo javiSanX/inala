@@ -46,7 +46,7 @@ const navLink =
 				>
 			</span>
 		</a>
-		<nav class="hidden items-center gap-8 lg:flex" aria-label="Principal">
+		<nav class="hidden items-center gap-8 xl:flex" aria-label="Principal">
 			{
 				navLinks.map((link) =>
 					link.href === servicesHref ? (
@@ -110,9 +110,9 @@ const navLink =
 		<div class="flex items-center gap-3">
 			<a class:list={[buttonClass(), "min-h-11 px-5 max-sm:hidden"]} href={contactHref}>
 				<Icon name="calendar_today" />
-				Solicitar cita
+				{ctaLabel}
 			</a>
-			<details class="mobile-menu group/menu lg:hidden">
+			<details class="mobile-menu group/menu xl:hidden">
 				<summary
 					class="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-line-strong bg-white px-4 text-small font-semibold text-ink transition-[border-color,color] duration-200 hover:border-teal hover:text-teal [&::-webkit-details-marker]:hidden"
 				>
