@@ -2,30 +2,16 @@
 
 Lo que queda por hacer para mejorar la posición de inala.es, en orden. Los cambios en la web están hechos en la rama `web2`, que todavía no está publicada: la web actual (`main`) no los tiene.
 
-Última actualización: 15/11/2026.
+Última actualización: 16/11/2026.
 
-## Ya hecho en la web (`web2`)
-
-- **Datos de la consulta:** dirección de la autorización sanitaria (María Lacunza 6, portal 4, local 4.1, 31011), registro de centro sanitario **C03912** en Sobre mí y en el pie, número de colegiada **N-02300** enlazado al registro del COP Navarra, horario y enlace a la ficha de Google.
-- **Datos estructurados (schema):** consulta (`MedicalBusiness`) con dirección, horario, servicios y precios, registro sanitario e Instagram; María (`Person`) con colegiación, registro del COP y formación (`alumniOf`); artículos (`BlogPosting`) con fecha de publicación y de actualización; migas de pan.
-- **Sobre mí:** formación completa con centro y año.
-- **Taller de miedo a volar:** página nueva en `/taller-miedo-a-volar/`, enlazada desde el menú de servicios, el pie y «Otros servicios».
-- **Enlaces internos:** cada servicio enlaza a sus artículos del blog («Artículos relacionados») y cada artículo a sus servicios. Sobre mí y Cómo trabajo enlazan a los servicios.
-- **Títulos y descripciones:** todos los títulos con 60 caracteres o menos y todas las descripciones entre 110 y 160.
-- **URLs:** todas terminan en `/`, igual que el sitemap y la URL canónica. La política de privacidad pasa a `/politica-de-privacidad/` con redirección desde la URL antigua. Las URLs antiguas del blog de `main` redirigen a las nuevas.
-- **Sitemap** con fecha de actualización (`lastmod`) en los artículos.
-- **Imágenes:** texto alternativo en las fotos del blog y en las ilustraciones de los servicios. Cada página comparte su propia imagen en redes y WhatsApp.
-- **Medición:** GTM, Consent Mode y eventos de contacto (ver punto 2).
-- **Técnico:** cabeceras de seguridad, cookies descritas con datos reales, imágenes y código sin usar eliminados, despliegue más ligero (de 36 a 19 MB de imágenes).
 
 ## 0. Antes de publicar: dirección de la ficha de Google
 
-La web usa ya la dirección de la autorización sanitaria (Resolución 857/2025, registro **C03912**): **Calle María Lacunza 6, portal 4, local 4.1, 31011 Pamplona**. La ficha de Google todavía dice **Calle Dra. Ariz, frente al portal 13, 31006**, con la chincheta en esa calle.
+La web usa ya la dirección de la autorización sanitaria (Resolución 857/2025, registro **C03912**): **Calle María Lacunza 6, portal 4, local 4.1, 31011 Pamplona**. La ficha de Google ya está actualizada con esa dirección (antes decía «Calle Dra. Ariz, frente al portal 13, 31006»).
 
-- [ ] **Corregir la ficha de Google Business Profile:** Editar perfil → Ubicación → dirección y chincheta en María Lacunza 6. Google puede pedir verificar de nuevo (vídeo o postal). Mientras no se corrija, el botón «Ver la ubicación en Google Maps» de la web lleva a la ubicación antigua.
+- [x] **Corregir la ficha de Google Business Profile:** dirección actualizada a María Lacunza 6 (16/11/2026). El botón «Ver la ubicación en Google Maps» de la web usa el enlace estable de la ficha, así que ya lleva a la ubicación nueva.
 - [ ] **Confirmar el código postal.** La resolución no lo indica; la web usa 31011, el mismo que la web actual (`main`).
 - [ ] **Usar la misma dirección en todas partes:** Google, Bing Places, Apple Business Connect, directorios y COP.
-- [ ] **Convalidar la autorización** antes del **12 de noviembre de 2030**: dura cinco años.
 
 ## 1. Justo después de publicar `web2`
 
@@ -158,7 +144,7 @@ Cuando se revise un artículo antiguo, añadir `updatedDate: AAAA-MM-DD` en su c
 | --- | --- |
 | **Taller de miedo a volar** | Hora y lugar de la charla del 27/11/2026 y precio (la página muestra «[PENDIENTE: …]»). Opcional: nombre del piloto y su web. Cuando haya hora y lugar se puede añadir el schema `Event`, que puede salir destacado en Google. Tras cada edición, cambiar la fecha en `src/pages/taller-miedo-a-volar.astro`. |
 | **Código postal** | Confirmar que es 31011 (ver punto 0). |
-| **Coordenadas de la consulta** | Cuando la ficha de Google tenga la chincheta en María Lacunza 6, pasarme sus coordenadas para volver a ponerlas en el schema (`geo`). Las quité porque eran las de la dirección antigua. |
+| **Coordenadas de la consulta** | La ficha de Google ya tiene la dirección de María Lacunza 6: comprobar que la chincheta está en el portal 4 y pasarme sus coordenadas para volver a ponerlas en el schema (`geo`). Las quité porque eran las de la dirección antigua. |
 | **Páginas por problema** | Qué problemas quiere trabajar María como página propia (por ejemplo ansiedad, duelo) y el texto escrito o revisado por ella. |
 | **Política de cookies** | Revisión por quien lleve lo legal. Ya está corregida con los datos técnicos reales: cookies de GA4, cookie de consentimiento y funcionamiento del aviso. |
 | **`PRODUCT.md`** | Está desactualizado (dirección, número de colegiada NA-02300, horario y formulario antiguos). No afecta a la web, pero conviene actualizarlo para futuras sesiones de trabajo. |
