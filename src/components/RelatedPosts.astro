@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import Section from "./ui/Section.astro";
+import SectionHeader from "./ui/SectionHeader.astro";
+
+// Blog posts that list this service in their `services` frontmatter, newest
+// first. The reverse of the service links at the end of each post. Renders
+// nothing when no post points to the service.
+interface Props {
+	/** Service href from src/data/site.ts. */
+	service: string;
+	limit?: number;
+}
+
+const { service, limit = 3 } = Astro.props;
+const normalize = (href: string) => href.replace(/\/$/, "");
+const posts = (
+	await getCollection("blog", (post) =>
+		post.data.services.some((href) => normalize(href) === normalize(service)),
+	)
+)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, limit);
+
+const formatDate = (date: Date) =>
+	date.toLocaleDateString("es-ES", {
+		day: "numeric",
+		month: "long",
+		year: "numeric",
+	});
+---
+
+{
+	posts.length > 0 && (
+		<Section tone="white">
+			<SectionHeader title="Artículos relacionados del blog" layout="stack" />
+			<ul class="mt-10 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+				{posts.map((post) => (
+					<li class="group relative flex flex-col gap-2 border-t border-line py-7">
+						<time
+							datetime={post.data.pubDate.toISOString()}
+							class="text-label font-semibold text-teal"
+						>
+							{formatDate(post.data.pubDate)}
+						</time>
+						<h3 class="font-display text-subheading font-normal text-ink">
+							<a
+								href={`/blog/${post.id}/`}
+								class="transition-[color] duration-200 after:absolute after:inset-0 group-hover:text-teal"
+							>
+								{post.data.title}
+							</a>
+						</h3>
+						<p class="line-clamp-3 text-body text-ink-muted">
+							{post.data.description}
+						</p>
+					</li>
+				))}
+			</ul>
+		</Section>
+	)
+}

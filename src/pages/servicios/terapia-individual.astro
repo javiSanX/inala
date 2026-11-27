@@ -1,291 +1,283 @@
 ---
-import { Image } from 'astro:assets';
-import Hero from '../../components/custom/BasicHeroCTA.astro';
-import Frases from '../../components/custom/Frases.astro';
-import JoinBox from '../../components/custom/JoinBox.astro';
-import TitleSection from '../../components/custom/TitleSection.astro';
-import Col from '../../components/ui/Col.astro';
-import Row from '../../components/ui/Row.astro';
-import Section from '../../components/ui/Section.astro';
-import Card from '../../components/ui/cards/Card.astro';
-import Layout from '../../layouts/Layout.astro';
+import heroImage from "../../assets/images/terapia_individual.jpeg";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import OtherServices from "../../components/OtherServices.astro";
+import PageHero from "../../components/PageHero.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
+import SessionHour from "../../components/SessionHour.astro";
+import Button from "../../components/ui/Button.astro";
+import CtaBand from "../../components/ui/CtaBand.astro";
+import Faq from "../../components/ui/Faq.astro";
+import Icon from "../../components/ui/Icon.astro";
+import type { IconName } from "../../components/ui/icons";
+import Note from "../../components/ui/Note.astro";
+import Quote from "../../components/ui/Quote.astro";
+import Section from "../../components/ui/Section.astro";
+import SectionHeader from "../../components/ui/SectionHeader.astro";
+import { contactHref, ctaLabel, email } from "../../data/site";
+import Layout from "../../layouts/Layout.astro";
 
-const SEO = {
-   title: 'Terapia individual en Pamplona | Psicóloga para adultos, adolescentes y niños',
-   description:
-      'Terapia individual en Pamplona para ansiedad, autoestima, estrés, duelo, emociones intensas y bienestar emocional. Atención a adultos, adolescentes y niños. Espacio seguro, cercano y profesional.',
-};
+const title = "Terapia individual en Pamplona y online | Inala Psicoterapia";
 
-const preguntas = [
-   {
-      question: '¿Cuándo debería acudir a terapia individual?',
-      answer:
-         'Es recomendable acudir cuando sientes que algo te supera, te genera malestar, te bloquea o afecta a tu vida diaria. También si estás pasando por ansiedad, estrés, indecisión, problemas de autoestima, dificultades relacionales, duelo o simplemente necesitas un espacio para comprenderte mejor.',
-   },
+const description =
+	"Terapia individual para adultos, adolescentes y niños en Pamplona y online: ansiedad, estrés, autoestima, duelo y relaciones. Sesiones de 60 minutos.";
 
-   {
-      question: '¿Cuánto dura un proceso de terapia individual?',
-      answer:
-         'Cada proceso es único. Algunas personas encuentran mejoras en pocas sesiones y otras necesitan un acompañamiento más profundo. Lo habitual es que al inicio las sesiones sean semanales y después se espacien según tus necesidades y evolución.',
-   },
-   {
-      question: '¿Qué se hace en una sesión de terapia individual?',
-      answer:
-         'En cada sesión hablamos sobre tus emociones, pensamientos y experiencias recientes. Trabajamos herramientas prácticas de regulación emocional, patrones de pensamiento, traumas pasados, gestión de relaciones y construcción de nuevos hábitos internos. Todo adaptado a ti y a tu ritmo.',
-   },
-   {
-      question: '¿Cómo puedo empezar mi proceso de terapia individual?',
-      answer:
-         'Solo necesitas reservar tu primera sesión. En esa primera toma de contacto revisaremos tu situación, tus objetivos y definiremos un plan personalizado para comenzar tu proceso con claridad.',
-   },
-   {
-      question: '¿Cuántas sesiones voy a necesitar?',
-      answer:
-         'No existe un número fijo. Depende de tus objetivos, tu historia y tu ritmo personal. En la primera sesión definiremos un plan aproximado y lo iremos ajustando según tu evolución.',
-   },
+const sessionFeatures = [
+	"60 minutos dedicados a ti.",
+	"En mi consulta o por videollamada. Puedes combinar ambas modalidades.",
+	"Confidencial y sin juicios. Lo que hablamos queda protegido por el secreto profesional.",
+	"Recursos sencillos para entender y regular tus emociones, que puedes poner en práctica.",
+	"Definimos juntos qué quieres conseguir, con un enfoque integrador que tiene en cuenta emociones, pensamientos, cuerpo y relaciones.",
+];
+
+const audiences: { icon: IconName; title: string; text: string }[] = [
+	{
+		icon: "person",
+		title: "Adultos",
+		text: "Si llevas tiempo con un malestar que no se va, atraviesas un cambio importante o notas que repites patrones que no te hacen bien, y quieres entender qué te pasa y tener herramientas para vivir de forma más consciente.",
+	},
+	{
+		icon: "chat",
+		title: "Adolescentes",
+		text: "Un lugar sin juicios y propio, donde poner palabras a lo que viven en esta etapa de cambio, a su ritmo y sin sentirse evaluados.",
+	},
+	{
+		icon: "child_care",
+		title: "Niños",
+		text: "Con los más pequeños trabajo a través del juego y la expresión plástica y emocional, y cuento con los padres o tutores durante todo el proceso.",
+	},
+];
+
+const problems: { icon: IconName; title: string; text: string }[] = [
+	{
+		icon: "air",
+		title: "Ansiedad y estrés",
+		text: "Calmar la agitación y la tensión del cuerpo, dejar de darle vueltas a todo y aliviar la sobrecarga del día a día, también la que viene del trabajo.",
+	},
+	{
+		icon: "light_mode",
+		title: "Tristeza, desánimo y gestión emocional",
+		text: "Entender de dónde vienen el vacío o la falta de energía, manejar los momentos de desborde y volver a conectar con lo que te hace disfrutar.",
+	},
+	{
+		icon: "person",
+		title: "Autoestima, autocrítica e identidad",
+		text: "Dejar de sentir que nunca es suficiente, rebajar la autoexigencia y la necesidad de complacer, y tratarte con más amabilidad.",
+	},
+	{
+		icon: "healing",
+		title: "Duelo, pérdidas y transiciones vitales",
+		text: "Atravesar la muerte de alguien querido, una ruptura o un cambio de etapa, y adaptarte a lo que viene después.",
+	},
+	{
+		icon: "diversity_1",
+		title: "Relaciones, apego y límites saludables",
+		text: "Reconocer los patrones que se repiten en tus relaciones, poner límites sin culpa y afrontar los conflictos de otra manera.",
+	},
+	{
+		icon: "psychology",
+		title: "Crecimiento personal y claridad vital",
+		text: "Salir de la indecisión, cuidarte mejor y tomar decisiones más coherentes con lo que de verdad te importa.",
+	},
+];
+
+// Answers contain <strong>, so they are rendered with set:html.
+const faqs = [
+	{
+		question: "¿Cuánto dura cada sesión?",
+		answer:
+			"Cada sesión dura <strong>60 minutos</strong>. Es tiempo suficiente para profundizar con calma y cerrar cada encuentro sin prisas.",
+	},
+	{
+		question: "¿Con qué frecuencia se realizan las sesiones?",
+		answer:
+			"Al principio suelo recomendar sesiones <strong>semanales</strong>, para crear confianza y empezar a notar alivio. A medida que ganas recursos y autonomía, las sesiones se espacian a <strong>quincenales</strong> o mensuales.",
+	},
+	{
+		question: "¿Cómo sé si la terapia individual es para mí?",
+		answer:
+			"No hace falta estar en una crisis para venir. La terapia puede ayudarte si sientes un malestar que no se va, si quieres entenderte mejor, si atraviesas un cambio difícil o si quieres aprender a tratarte con más amabilidad.",
+	},
+	{
+		question: "¿Qué pasa si nunca he ido al psicólogo antes?",
+		answer:
+			"Es normal sentir nervios o no saber por dónde empezar. Yo guío la conversación con suavidad, te hago preguntas que ayudan a ordenar lo que sientes y tú marcas el ritmo con el que quieres contar tu historia.",
+	},
+	{
+		question: "¿Atiendes a niños y adolescentes?",
+		answer:
+			"Sí. Con menores, la primera entrevista suele hacerse solo con los padres o tutores legales, sin el menor, para que podáis contarme con libertad el motivo de consulta, la situación familiar o escolar y los antecedentes importantes. En las sesiones siguientes empiezo a trabajar directamente con el menor o propongo sesiones mixtas, según su edad y lo que necesite.",
+	},
 ];
 ---
 
-<Layout title={SEO.title} description={SEO.description}>
-   <Hero
-      title="Terapia individual"
-      text="La terapia individual es un espacio seguro donde explorar lo que sientes, comprender tus emociones y acompañarte hacia un mayor bienestar. Desde un enfoque cercano e integral, acompaño a adultos, adolescentes y niños/as que desean mejorar su salud emocional, atravesar un momento difícil o iniciar un proceso de crecimiento personal."
-   />
+<Layout title={title} description={description} image={heroImage} heroFont>
+	<PageHero
+		size="display"
+		accent
+		backgroundImage={heroImage}
+		mobileBackground="corner"
+	>
+		<Breadcrumbs
+			slot="breadcrumbs"
+			items={[
+				{ name: "Inicio", href: "/" },
+				{ name: "Servicios", href: "/servicios/" },
+				{ name: "Terapia Individual" },
+			]}
+		/>
+		<Fragment slot="title">
+			{
+				/* Below lg each run is its own line, sized from the viewport width so
+			  "Terapia psicológica" is the larger and both always fit on one line. */
+			}
+			<span class="max-lg:block max-lg:text-hero-lead"
+				>Terapia individual</span
+			><span class="sr-only">:</span>{" "}
+			<span class="hero-accent max-lg:block max-lg:text-hero-run"
+				>entender lo que te pasa</span
+			>
+		</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Sesiones de 60 minutos, en Pamplona u online, para ordenar lo que
+			sientes, salir de los bloqueos y aprender a cuidarte con más calma.
+			Para adultos, adolescentes y niños.
+		</p>
 
-   <Section classes="mt-0! pt-0!">
-      <TitleSection
-         title="¿En qué consiste la terapia individual?"
-         text="La terapia individual es un proceso donde podemos detenernos, mirar hacia dentro y poner palabras a lo que te ocurre. En las sesiones trabajamos tus emociones, pensamientos y vivencias para que puedas:"
-         classes="lg:pb-15!"
-      />
-      <Row classes="!gap-5 max-[500px]:px-0">
-         <Col span="6">
-            <Card>
-               <div class="text-lg">
-                  <ul>
-                     <li>Reducir la ansiedad y el estrés</li>
-                     <li>Reforzar tu autoestima</li>
-                     <li>Comprender tus reacciones emocionales</li>
-                     <li>Afrontar cambios vitales</li>
-                     <li>Superar situaciones dolorosas</li>
-                     <li>Cultivar una relación más compasiva contigo</li>
-                     <li>Desarrollar herramientas de autorregulación emocional</li>
-                     <li>Mejorar tus relaciones interpersonales</li>
-                  </ul>
-               </div>
-            </Card>
-         </Col>
-         <Col span="6">
-            <Card>
-               <div class="text-lg">
-                  <ul>
-                     <li>Sesiones de 60 minutos para cuidarte y escucharte</li>
-                     <li>Modalidad presencial u online, donde y cuando quieras</li>
-                     <li>Espacio seguro y confidencial, a tu ritmo</li>
-                     <li>Terapia personalizada y adaptada a tus necesidades</li>
-                     <li>Abordaje integral orientado a objetivos</li>
-                     <li>Seguimiento profesional continuo</li>
-                     <li>Herramientas prácticas para tu día a día</li>
-                     <li>Recursos complementarios entre sesiones</li>
-                  </ul>
-               </div>
-            </Card>
-         </Col>
-      </Row>
-   </Section>
+		<div class="flex flex-wrap gap-3 pt-2">
+			<Button href={contactHref} icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+		</div>
 
-   <Frases
-      title="Regálate un espacio para reconectar y cuidar de ti"
-      text="Cuando la mente no descansa y el cuerpo lo siente, es momento de escucharte. Encuentra en la terapia un lugar seguro y profesional para comprenderte, aliviar el malestar y recuperar tu equilibrio. Cada parte de ti merece atención y cuidado."
-   />
 
-   <!-- PARA QUIÉN ES -->
-   <Section decoration="all" type="none" classes="pt-0!">
-      <TitleSection title="¿Para quién es la terapia individual?" text="" classes="lg:pb-15!" />
+	</PageHero>
 
-      <Row classes="!p-0 !m-0">
-         <Card classes="relative col-span-12 lg:col-span-4 p-0">
-            <div class="flex h-full flex-col gap-6 lg:gap-12">
-               <div class="">
-                  <Image
-                     src={'/assets/images/terapia_adultos.webp'}
-                     alt={'imagen 01'}
-                     width={800}
-                     height={800}
-                     inferSize
-                     class="aspect-video object-cover"
-                  />
-               </div>
-               <div class="flex flex-col gap-2">
-                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!">Adultos</span>
-                  <p class="text-lg">
-                     Acompaño a personas adultas que desean comprender lo que sienten y desarrollar
-                     herramientas para vivir de forma más consciente. Trabajamos ansiedad, estrés
-                     laboral, rupturas, duelo, sobrecarga emocional, bloqueos o inseguridades.
-                  </p>
-               </div>
-            </div>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-4 p-0">
-            <div class="flex h-full flex-col gap-6 lg:gap-12">
-               <div class="">
-                  <Image
-                     src={'/assets/images/adolescentes.webp'}
-                     alt={'imagen 11'}
-                     width={800}
-                     height={800}
-                     inferSize
-                     class="aspect-video object-cover"
-                  />
-               </div>
-               <div class="flex flex-col gap-2">
-                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!">Adolescentes</span>
-                  <p class="text-lg">
-                     Un espacio donde expresar sin juicio lo que viven: emociones intensas, presión
-                     social, identidad, dificultades escolares o familiares.
-                  </p>
-               </div>
-            </div>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-4 p-0">
-            <div class="flex h-full flex-col gap-6 lg:gap-12">
-               <div class="">
-                  <Image
-                     src={'/assets/images/psicologia_infantil.webp'}
-                     alt={'imagen 18'}
-                     width={800}
-                     height={800}
-                     inferSize
-                     class="aspect-video object-cover"
-                  />
-               </div>
-               <div class="flex flex-col gap-2">
-                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!">Niños y niñas</span>
-                  <p class="text-lg">
-                     A través del juego y la expresión emocional, trabajamos miedos, inseguridad,
-                     ansiedad, cambios familiares o dificultades sociales.
-                  </p>
-               </div>
-            </div>
-         </Card>
-      </Row>
-   </Section>
+	<!-- ¿En qué consiste? -->
+	<Section tone="white" class="max-lg:pt-10">
+		<SessionHour
+			items={sessionFeatures}
+			image={heroImage}
+			imageAlt="Ilustración en papel de una persona meditando entre hojas y flores en tonos verdes."
+		>
+			<SectionHeader
+				slot="header"
+				title="¿Qué ocurre durante una sesión?"
+				size="large"
+			/>
+			<Quote class="italic">
+				«Cuidar de tu mente es el primer paso para habitar tu propia vida con
+				calma y presencia.»
+			</Quote>
+		</SessionHour>
+	</Section>
 
-   <JoinBox
-      title="Ahora es tu oportunidad. Comienza a priorizarte."
-      subtitle="Ahora es tu oportunidad de dar el primer paso y comenzar a priorizarte, cuidando tu bienestar y dedicando tiempo a lo que realmente necesitas."
-      buttonText="Dar el primer paso"
-   />
+	<!-- ¿Para quién? -->
+	<Section tone="mist">
+		<SectionHeader size="large">
+			<Fragment slot="title">
+				¿Para quién es la terapia individual?
+			</Fragment>
 
-   <Section classes="mt-0! pt-0!">
-      <TitleSection title="¿Que problemas se trabajan?" text="" classes="lg:pb-15!" />
-      <Row classes="!gap-5 max-[500px]:px-0">
-         <Col span="6">
-            <Card>
-               <div class="text-lg">
-                  <ul>
-                     <li>Ansiedad y estrés</li>
-                     <li>Tristeza o desmotivación</li>
-                     <li>Baja autoestima y inseguridades</li>
-                     <li>Duelo y procesos de pérdida</li>
-                     <li>Emociones intensas o desbordamiento</li>
-                     <li>Bloqueos personales y profesionales</li>
-                  </ul>
-               </div>
-            </Card>
-         </Col>
-         <Col span="6">
-            <Card>
-               <div class="text-lg">
-                  <ul>
-                     <li>Transiciones vitales importantes</li>
-                     <li>Dificultades en relaciones o comunicación</li>
-                     <li>Problemas de sueño y descanso</li>
-                     <li>Gestión del tiempo y prioridades</li>
-                     <li>Conflictos familiares o laborales</li>
-                     <li>Crecimiento personal y autoconocimiento</li>
-                  </ul>
-               </div>
-            </Card>
-         </Col>
-      </Row>
-   </Section>
+		</SectionHeader>
+		<ul class="mt-24 grid gap-x-12 gap-y-20 lg:grid-cols-3">
+			{
+				audiences.map((audience, index) => (
+					<li
+						class="reveal-blur relative border-t border-seafoam pt-16"
+						data-reveal
+						style={`--reveal: ${index}`}
+					>
+						<span class="absolute top-0 left-0 grid size-16 -translate-y-1/2 place-items-center rounded-full bg-white text-3xl text-teal ring-8 ring-mist">
+							<Icon name={audience.icon} />
+						</span>
+						<h3 class="font-display text-heading font-normal text-ink">
+							{audience.title}
+						</h3>
+						<p class="mt-4 text-body text-ink-muted">{audience.text}</p>
+					</li>
+				))
+			}
+		</ul>
+		<Note class="mt-16">
+			Sea cual sea tu momento vital, la terapia se adapta a tu ritmo y a lo
+			que tú necesitas.
+		</Note>
+	</Section>
 
-   <JoinBox
-      title="Empieza tu proceso de terapia individual"
-      subtitle="Reserva tu primera sesión y da el primer paso hacia un mayor bienestar emocional y autoconocimiento."
-      buttonText="Reservar sesión"
-   />
+	<!-- ¿Qué problemas se trabajan? -->
+	<Section tone="white">
+		<SectionHeader size="large">
+			<Fragment slot="title">
+				¿Qué problemas se trabajan?
+			</Fragment>
 
-   <Section decoration="all" type="" classes="">
-      <Row classes="">
-         <Col span="5">
-            <h2 class="text-left">Preguntas Frecuentes</h2>
-         </Col>
-         <Col span="7">
-            {
-               preguntas.map((pregunta) => (
-                  <Card classes="mb-5">
-                     <details class="group">
-                        <summary class="flex cursor-pointer list-none items-center justify-between">
-                           <h4 class="!m-0 p-0">{pregunta.question}</h4>
-                           <span class="transition group-open:rotate-180">
-                              <svg
-                                 fill="none"
-                                 height="24"
-                                 shape-rendering="geometricPrecision"
-                                 stroke="currentColor"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 stroke-width="1.5"
-                                 viewBox="0 0 24 24"
-                                 width="24"
-                              >
-                                 <path d="M6 9l6 6 6-6" />
-                              </svg>
-                           </span>
-                        </summary>
-                        <p class="group-open:animate-fadeIn mt-3">{pregunta.answer}</p>
-                     </details>
-                  </Card>
-               ))
-            }
-         </Col>
-      </Row>
-   </Section>
+		</SectionHeader>
+		<ul class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				problems.map((problem, index) => (
+					<li
+						class="reveal-blur flex flex-col gap-3"
+						data-reveal
+						style={`--reveal: ${index}`}
+					>
+						<div class="flex items-center gap-4">
+							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-seafoam-soft text-xl text-teal">
+								<Icon name={problem.icon} />
+							</span>
+							<span class="h-px flex-1 bg-line" aria-hidden="true" />
+						</div>
+						<h3 class="font-display text-lead font-normal text-ink">
+							{problem.title}
+						</h3>
+						<p class="text-body text-ink-muted">{problem.text}</p>
+					</li>
+				))
+			}
+		</ul>
+	</Section>
 
-   <!-- ENLACES INTERNOS -->
-   <Section decoration="all" type="none" classes="pt-0!">
-      <h3>También te puede interesar</h3>
-      <Row classes="!p-0 !m-0">
-         <Card classes="relative col-span-12 lg:col-span-3 !p-0">
-            <a href="/servicios/terapia-de-pareja" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Terapia de pareja {'>'}</button
-               >
-            </a>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-3 p-0">
-            <a href="/servicios/terapia-familiar" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Terapia familiar {'>'}</button
-               >
-            </a>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-3 p-0">
-            <a href="/servicios/psicologia-perinatal" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Psicología perinatal {'>'}</button
-               >
-            </a>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-3 p-0">
-            <a href="/servicios/terapia-online" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Terapia online {'>'}</button
-               >
-            </a>
-         </Card>
-      </Row>
-   </Section>
+	<CtaBand
+		id="contacto-reserva"
+		label="Primera cita"
+		title="Dar el primer paso requiere valentía, pero no tienes que hacerlo en soledad."
+	>
+		<p>
+			Antes de dedicarme a la psicología trabajé en la empresa, así que conozco
+			de cerca el estrés laboral y la autoexigencia.
+		</p>
+		<p class="tabular-nums">
+			Solicita tu primera cita o escríbeme si antes quieres resolver alguna
+			duda. Sesión de 60 minutos · 65 €.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" arrow>
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>{email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
+	<!-- Preguntas frecuentes -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Preguntas frecuentes sobre la terapia individual"
+				layout="stack"
+				size="large"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
+			>
+				<p>
+					Es normal tener dudas antes de empezar. Si la tuya no está aquí,
+					escríbeme y te respondo.
+				</p>
+			</SectionHeader>
+			<Faq items={faqs} class="lg:col-span-7" />
+		</div>
+	</Section>
+
+	<RelatedPosts service="/servicios/terapia-individual/" />
+
+	<OtherServices />
 </Layout>

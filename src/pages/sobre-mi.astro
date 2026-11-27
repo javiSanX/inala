@@ -1,198 +1,349 @@
 ---
-// About Page
-// ------------
-// Description: The about page is a page that displays information about the company.
+import consultaImage from "../assets/images/maria1.webp";
+import portraitImage from "../assets/images/maria2.webp";
+import purposeImage from "../assets/images/maria3.webp";
+import vocationImage from "../assets/images/maria4.webp";
+import beginningsImage from "../assets/images/maria5.webp";
+import OtherServices from "../components/OtherServices.astro";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/ui/Button.astro";
+import CtaBand from "../components/ui/CtaBand.astro";
+import Figure from "../components/ui/Figure.astro";
+import Icon from "../components/ui/Icon.astro";
+import Section from "../components/ui/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import {
+	addressCenter,
+	contactHref,
+	ctaLabel,
+	email,
+	healthCenterRegistry,
+	instagramUrl,
+	licenseNumber,
+	licenseRegistryUrl,
+	training,
+} from "../data/site";
+import Layout from "../layouts/Layout.astro";
 
-import { Image } from 'astro:assets';
-import BasicHeroCTA from '../components/custom/BasicHeroCTA.astro';
-import TwoColVideoSection from '../components/custom/TwoColVideoSection.astro';
-import Card from '../components/ui/cards/Card.astro';
-import Col from '../components/ui/Col.astro';
-import Row from '../components/ui/Row.astro';
-import Section from '../components/ui/Section.astro';
-import Layout from '../layouts/Layout.astro';
+const title = "María Sánchez, psicóloga en Pamplona | Inala Psicoterapia";
 
-// Content
-// - SEO
-const SEO = {
-   title: 'María Sánchez · Psicóloga Sanitaria en Pamplona | Nº Colegiada NA-02300',
-   description:
-      'Conoce a María Sánchez, Psicóloga Sanitaria en Pamplona (Nº Colegiada NA-02300). Enfoque cercano, integrador y basado en la evidencia para acompañarte en tu bienestar emocional, presencial y online.',
-};
-// - Hero
-const hero = {
-   title: 'El equipo detrás de Inala',
-};
+const description =
+	"María Sánchez, psicóloga general sanitaria con formación en terapia familiar y de pareja y en salud mental perinatal. En Pamplona y online.";
+
+// Credentials and story come from the existing site content on main. Each
+// chapter links to the services it led to.
+
+const story = [
+	{
+		image: beginningsImage,
+		alt: "María Sánchez sonriendo, de pie, con chaqueta azul marino y blusa blanca.",
+		tagIcon: "psychology_alt",
+		tag: "Antes, en la empresa",
+		icon: "work",
+		label: "01. Inicios",
+		title: "Mis inicios",
+		links: [{ name: "Terapia individual", href: "/servicios/terapia-individual/" }],
+		text: "Mi camino profesional comenzó en el mundo empresarial, donde aprendí a trabajar bajo presión y en entornos competitivos. Esa experiencia me permitió comprender cómo el estrés y la autoexigencia afectan tanto al rendimiento laboral como al bienestar personal y a las relaciones. Hoy, esa vivencia enriquece mi manera de acompañar, aportando una mirada más amplia, empática y real sobre los desafíos que enfrentan muchas personas en su día a día.",
+	},
+	{
+		image: vocationImage,
+		alt: "María Sánchez sonriendo, de pie, con traje verde salvia y camiseta gris.",
+		tagIcon: "center_focus_strong",
+		tag: "Psicología clínica y sanitaria",
+		icon: "psychology",
+		label: "02. Vocación",
+		links: [],
+		title: "Mi vocación",
+		text: "Pronto descubrí que mi verdadero interés estaba en las emociones, las relaciones y la forma en que nos vinculamos con los demás, lo que me llevó a estudiar Psicología, graduarme con mención en clínica y realizar el Máster General Sanitario. Acompañar a personas en su salud mental me ha enseñado el valor de comprender los procesos de enfermedad, duelo y la influencia que tiene todo ello en el entorno más cercano de la persona que lo padece.",
+	},
+	{
+		image: purposeImage,
+		alt: "María Sánchez sonriendo, de pie ante una pared blanca, con chaleco negro y blusa blanca.",
+		tagIcon: "volunteer_activism",
+		tag: "Familia, pareja e infancia",
+		icon: "favorite",
+		label: "03. Propósito",
+		links: [
+			{ name: "Terapia de pareja", href: "/servicios/terapia-de-pareja/" },
+			{ name: "Terapia familiar", href: "/servicios/terapia-familiar/" },
+			{
+				name: "Psicología perinatal y crianza",
+				href: "/servicios/psicologia-perinatal/",
+			},
+		],
+		title: "Mi propósito",
+		text: "Mi propio proceso personal me permitió ver con claridad cómo la familia y el entorno en el que crecemos influyen profundamente en nuestro desarrollo y manera de relacionarnos. Esta comprensión me llevó a especializarme en terapia familiar y de pareja, y a trabajar en el ámbito de la desprotección infantil, acompañando procesos de trauma complejo y duelo en la primera infancia, reforzando mi compromiso con un acompañamiento respetuoso y humano.",
+	},
+];
+
+const spaceFeatures = [
+	{ icon: "lock", label: "Secreto profesional" },
+	{ icon: "location_on", label: `En el ${addressCenter}` },
+];
 ---
 
-<Layout title={SEO.title} description={SEO.description}>
-   <BasicHeroCTA title={hero.title} titleSpan="12" classes="[&_h1]:max-w-[920px]" />
+<Layout title={title} description={description} image={portraitImage}>
+	<PageHero>
+		<Fragment slot="title">
+			Hola, soy María.<br />
+			<span>Te acompaño a entender lo que te pasa</span> con calma y sin juicios.
+		</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Psicóloga general sanitaria, con consulta en Pamplona y online. Trabajo
+			con un enfoque integrador y basado en la evidencia, y sobre todo
+			cercano: para que puedas comprender lo que te pasa y avanzar a tu
+			ritmo.
+		</p>
+		<div>
+			<a
+				href={licenseRegistryUrl}
+				target="_blank"
+				rel="noopener"
+				class="inline-flex min-h-11 items-center gap-2 rounded-full border border-line-strong px-4 text-label font-semibold text-ink tabular-nums transition-[border-color,color] duration-200 hover:border-teal hover:text-teal"
+			>
+				<Icon name="verified" class="text-teal" />
+				<span>Nº col. {licenseNumber}</span>
+				<span class="sr-only"
+					>(ver en el registro del Colegio Oficial de la Psicología de Navarra, se abre en
+					una pestaña nueva)</span
+				>
+			</a>
+		</div>
+		<div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+			<Button href={contactHref} arrow>
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button
+				href={instagramUrl}
+				variant="secondary"
+				icon="photo_camera"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Instagram de Inala Psicoterapia (se abre en una pestaña nueva)"
+			>
+				<span>@inala_psicoterapia</span>
+			</Button>
+		</div>
+		<div slot="media">
+			<Figure
+				src={portraitImage}
+				alt="María Sánchez, psicóloga sanitaria y fundadora de Inala, sentada en un sillón azul."
+				ratio="portrait"
+				priority
+				sizes="(min-width: 1024px) 34vw, 100vw"
+			>
+				<span
+					class="flex flex-1 flex-wrap items-center justify-between gap-x-4 gap-y-1"
+				>
+					<span>
+						<span class="block font-semibold text-ink">María Sánchez</span
+						>
+						<span class="block"
+							>Psicóloga general sanitaria · Fundadora</span
+						>
+					</span>
+					<span
+						class="inline-flex items-center gap-1.5 font-semibold text-teal"
+					>
+						<Icon name="location_on" />
+						<span>Pamplona y online</span>
+					</span>
+				</span>
+			</Figure>
+		</div>
+	</PageHero>
 
-   <TwoColVideoSection image="/assets/images/oficina.webp">
-      <Card>
-         <h3 class="!m-0 !p-0">Maria Sanchez</h3>
-         <p class="!m-0 !mb-2 !p-0 text-sm font-light">
-            Psicologa Sanitaria - Numero de colegiada 02300
-         </p>
-         <div class="flex gap-2">
-            <a href="https://www.instagram.com/inala_psicoterapia/" target="_blank" rel="noopener">
-               <Image
-                  src={'/assets/images/instagram.webp'}
-                  alt={'imagen instagram'}
-                  width={30}
-                  height={30}
-                  inferSize
-               />
-            </a>
-            <a href="https://www.instagram.com/inala_psicoterapia/" target="_blank" rel="noopener">
-               <Image
-                  src={'/assets/images/tikTok.webp'}
-                  alt={'imagen tikTok'}
-                  width={30}
-                  height={30}
-                  inferSize
-               />
-            </a>
-             <a href="https://www.instagram.com/inala_psicoterapia/" target="_blank" rel="noopener">
-               <Image
-                  src={'/assets/images/youtube.webp'}
-                  alt={'imagen youtube'}
-                  width={30}
-                  height={30}
-                  inferSize
-               />
-            </a>
-             <a href="https://www.instagram.com/inala_psicoterapia/" target="_blank" rel="noopener">
-               <Image
-                  src={'/assets/images/facebook.webp'}
-                  alt={'imagen facebook'}
-                  width={30}
-                  height={30}
-                  inferSize
-               />
-            </a>
-         </div>
+	<!-- Historia: each chapter's photo unveils from its side and the copy follows, on scroll (global.css, .story-chapter). -->
+	<Section tone="white" id="historia-y-recorrido">
+		<SectionHeader
+			title="Mi camino hacia la psicología: vocación, experiencia y propósito"
 
-         <p class="mt-5 mb-9! last:mb-0">
-            Me llamo María, soy Psicóloga sanitaria especializada en terapia familiar y de pareja, y
-            experta en la salud mental perinatal.
-         </p>
-         <p class="mb-9! last:mb-0">
-            Detrás de Inala encontrarás a una profesional comprometida con tu bienestar emocional.
-            Mi misión es acompañarte con cercanía, empatía y experiencia en cada paso de tu proceso
-            personal. Creo en el poder de la escucha, el respeto y la atención personalizada para
-            ayudarte a alcanzar una vida más plena y equilibrada. Conoce más sobre la persona que te
-            guiará en este camino de transformación.
-         </p>
-      </Card>
-   </TwoColVideoSection>
+		>
+			<p>
+				Así llegué a la psicología y esto es lo que traigo a cada sesión.
+			</p>
+		</SectionHeader>
+		<ol class="mt-16 flex flex-col gap-20 lg:gap-28">
+			{
+				story.map((chapter, index) => (
+					<li class="story-chapter grid gap-x-16 gap-y-8 lg:grid-cols-12 lg:items-center">
+						<Figure
+							src={chapter.image}
+							alt={chapter.alt}
+							ratio="tall"
+							sizes="(min-width: 1024px) 34vw, 100vw"
+							reveal={false}
+							imgClass="story-photo"
+							class:list={[
+								"story-figure lg:col-span-4",
+								index % 2 === 1 && "lg:order-2 lg:col-start-9",
+							]}
+						>
+							<span class="font-semibold text-ink">{chapter.tag}</span>
+						</Figure>
+						<div
+							class:list={[
+								"flex flex-col gap-4",
+								index % 2 === 1
+									? "lg:order-1 lg:col-span-8 lg:col-start-1"
+									: "lg:col-span-8 lg:col-start-5",
+							]}
+						>
+							<div class="flex flex-col gap-3 sm:flex-row sm:gap-8">
+								<span class="story-label shrink-0 whitespace-nowrap font-display text-lead text-teal sm:w-36 sm:pt-3">
+									{chapter.label}
+								</span>
+								<div class="flex flex-col gap-4">
+									<h3 class="story-title font-display text-heading font-normal text-ink">
+										{chapter.title}
+									</h3>
+									<p class="story-text text-lead text-ink-muted">
+										{chapter.text}
+									</p>
+									{chapter.links.length > 0 && (
+										<p class="story-text flex flex-wrap items-center gap-x-6 text-small text-ink-muted">
+											<span>Por eso hoy acompaño en:</span>
+											{chapter.links.map((link) => (
+												<a
+													href={link.href}
+													class="inline-flex min-h-11 items-center font-semibold text-teal underline underline-offset-4 transition-[color] duration-200 hover:text-teal-strong"
+												>
+													{link.name}
+												</a>
+											))}
+										</p>
+									)}
+								</div>
+							</div>
+						</div>
+					</li>
+				))
+			}
+		</ol>
+	</Section>
 
-   <Section>
-      <Row classes="pb-12">
-         <Col span="4" classes="lg:block">
-            <Card
-               image="/assets/images/maria5.webp"
-               cardMediaClasses="max-h-[429px] lg:max-h-[600px] object-cover object-top w-full"
-               mediaEffect="parallax"
-            />
-         </Col>
 
-         <Col span="4" classes="lg:block">
-            <Card
-               title="Mis inicios"
-               subtitle=""
-               classes="col-span-3 row-span-1"
-               cardHeaderClasses="gap-0!"
-            >
-               <p>
-                  Mi camino profesional comenzó en el mundo empresarial, donde aprendí a trabajar
-                  bajo presión y en entornos competitivos, esa experiencia me permitió comprender
-                  cómo el estrés y la autoexigencia afectan tanto el rendimiento laboral como el
-                  bienestar personal y las relaciones. Hoy, esa vivencia enriquece mi manera de
-                  acompañar, aportando una mirada más amplia, empática y real sobre los desafíos que
-                  enfrentan muchas personas en su día a día.
-               </p>
-            </Card>
-         </Col>
-      </Row>
-      <Row classes="pb-12 sel">
-         <Col span="4" classes="lg:block">
-            {/* Este espacio queda vacío para crear el margen inicial */}
-         </Col>
-         <Col span="4" classes="lg:block">
-            <Card
-               title="Mi vocación"
-               subtitle=""
-               classes="col-span-3 row-span-1"
-               cardHeaderClasses="gap-0!"
-            >
-               <p>
-                  Pronto descubrí que mi verdadero interés estaba en las emociones, las relaciones y
-                  la forma en que nos vinculamos con los demás, lo que me llevó a estudiar
-                  Psicología, graduarme con mención en clínica y realizar el Máster General
-                  Sanitario. Acompañar a personas en su salud mental me ha enseñado el valor de
-                  comprender los procesos de enfermedad, duelo y la influencia que tiene todo ello
-                  en el entorno mas cercano de la persona que lo padece. Todo ello dentro de una
-                  sociedad que necesita avanzar hacia una visión más profunda y libre de estigmas.
-               </p>
-            </Card>
-         </Col>
-         <Col span="4" classes="lg:block">
-            <Card
-               image="/assets/images/maria3.webp"
-               cardMediaClasses="max-h-[429px] lg:max-h-[600px] object-cover object-top w-full"
-               mediaEffect="parallax"
-            />
-         </Col>
-      </Row>
-      <Row classes="pb-12">
-         <Col span="4" classes="lg:block">
-            <Card
-               image="/assets/images/maria2.webp"
-               cardMediaClasses="max-h-[429px] lg:max-h-[600px] object-cover object-top w-full"
-               mediaEffect="parallax"
-            />
-         </Col>
+	<!-- Formación -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12">
+			<div class="flex flex-col gap-8 lg:col-span-5">
+				<SectionHeader
+					title="Mi formación"
+					label="Mi trayectoria"
+					layout="stack"
+				>
+					<p>
+						Entiendo la psicoterapia como un compromiso ético que exige
+						seguir formándose. Esta es la formación que respalda mi
+						trabajo.
+					</p>
+				</SectionHeader>
+				<div class="flex flex-col gap-2 border-t border-line pt-6">
+					<span
+						class="inline-flex items-center gap-2 text-small font-semibold text-ink"
+					>
+						<Icon name="info" class="text-teal" />
+						Registro de centro sanitario
+					</span>
+					<p class="text-small text-ink-muted">
+						Centro sanitario inscrito en el Registro de Centros, Servicios y
+						Establecimientos Sanitarios de Navarra con el nº {healthCenterRegistry}.
+					</p>
+				</div>
+			</div>
+			<div class="lg:col-span-7">
+				<h3 class="font-display text-subheading font-normal text-ink">
+					Formación y experiencia
+				</h3>
+				<ul class="mt-6">
+					{
+						training.map((item) => (
+							<li class="flex flex-col gap-1.5 border-t border-line py-6">
+								<h4 class="text-lead font-semibold text-ink">
+									{item.title}
+								</h4>
+								<p class="text-label font-semibold text-ink-soft tabular-nums">
+									{item.school ? `${item.school} · ${item.year}` : item.year}
+								</p>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+	</Section>
 
-         <Col span="8" classes="lg:block">
-            <Card
-               title="Mi proposito"
-               subtitle=""
-               classes="col-span-3 row-span-1"
-               cardHeaderClasses="gap-0!"
-            >
-               <p>
-                  Mi propio proceso personal me permitió ver con claridad cómo la familia y el
-                  entorno en el que crecemos influyen profundamente en nuestro desarrollo y manera
-                  de relacionarnos. Esta comprensión me llevó a especializarme en terapia familiar y
-                  de pareja, y a trabajar en el ámbito de la desprotección infantil, acompañando
-                  procesos de trauma complejo y duelo en la primera infancia, lo que reforzó mi
-                  compromiso con un acompañamiento respetuoso y humano.
-               </p>
-               <p>
-                  Como madre, y habiendome formado en Salud Mental Perinatal, conozco de primera
-                  mano la intensidad de los procesos vitales que acompañan la maternidad y la
-                  crianza, asi como una visión profesional de todo este cambio vital. Estoy en
-                  constante formación y creo que cada persona merece una atención personalizada y
-                  actualizada, adaptada a sus necesidades. Acompaño a personas de todas las edades,
-                  parejas y familias en procesos de cambio y bienestar emocional, desde una mirada
-                  integradora y respetuosa, ofreciendo un espacio de escucha y cuidado.
-               </p>
-            </Card>
-         </Col>
-      </Row>
-   </Section>
+	<!-- La consulta -->
+	<Section tone="mist">
+		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:items-center">
+			<Figure
+				src={consultaImage}
+				alt="María sentada en su consulta junto a una planta y una mesa auxiliar con una taza."
+				ratio="landscape"
+				sizes="(min-width: 1024px) 45vw, 100vw"
+				class="lg:col-span-6"
+			>
+				<Icon name="location_on" class="text-teal" />
+				<span>Calle María Lacunza 6, portal 4, Pamplona</span>
+			</Figure>
+			<div class="flex flex-col gap-6 lg:col-span-6">
+				<SectionHeader
+					title="La consulta"
+					label="El espacio"
+					layout="stack"
+				>
+					<p>
+						Una consulta tranquila y con luz natural, en el {
+							addressCenter
+						}
+						(Pamplona). Si te resulta más cómodo, también podemos vernos por
+						videollamada.
+					</p>
+				</SectionHeader>
+				<ul class="grid gap-x-6 gap-y-3 sm:grid-cols-2">
+					{
+						spaceFeatures.map((feature) => (
+							<li class="flex items-center gap-3 text-body text-ink">
+								<Icon name="check" class="text-teal" />
+								<span>{feature.label}</span>
+							</li>
+						))
+					}
+				</ul>
+				<div class="flex flex-wrap gap-2">
+					<span
+						class="inline-flex min-h-9 items-center rounded-full bg-white px-4 text-label font-semibold text-ink"
+					>
+						Presencial en Pamplona
+					</span>
+					<span
+						class="inline-flex min-h-9 items-center rounded-full bg-white px-4 text-label font-semibold text-ink"
+					>
+						Online
+					</span>
+				</div>
+			</div>
+		</div>
+	</Section>
 
-   <Section>
-      <Row classes="mt-15 lg:mt-25">
-         <Col span="3" />
-         <Col span="9" classes="self-end justify-self-end">
-            <h2 class="md:text-right">
-               Cuidar de tu salud mental es el primer paso para descubrir tu verdadera fortaleza y
-               transformar cada desafío en una oportunidad de crecimiento.
-            </h2>
-            <p class="text-lead md:text-right"></p>
-         </Col>
-      </Row>
-   </Section>
+	<CtaBand
+		id="contacto"
+		label="Primera cita"
+		title="¿Damos el primer paso juntos?"
+	>
+		<p>
+			Si sientes que ha llegado el momento de cuidarte, estaré encantada de
+			acompañarte. Solicita tu primera cita o escríbeme si tienes cualquier
+			duda antes de empezar.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>Escríbeme a {email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
+	<OtherServices heading="Servicios" />
 </Layout>

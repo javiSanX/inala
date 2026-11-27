@@ -1,55 +1,45 @@
 ---
-// 404 Page
-// ------------
-// Description: The 404 page is a page that displays when a page is not found.
+import { Image } from "astro:assets";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/ui/Button.astro";
+import { logo, navLinks } from "../data/site";
+import Layout from "../layouts/Layout.astro";
 
-// Components
-// - Layout
-import Col from '../components/ui/Col.astro';
-import Row from '../components/ui/Row.astro';
-import Section from '../components/ui/Section.astro';
-import Layout from '../layouts/Layout.astro';
-// - UI
-import Decoration from '../components/ui/Decor.astro';
-import Video from '../components/ui/Video.astro';
-import BasicCard from '../components/ui/cards/Card.astro';
-
-// Content
-// - SEO
-const SEO = {
-   title: 'Página no encontrada | Inala Psicoterapia',
-   description:
-      'La página que buscas no existe o ha cambiado de dirección. Puedes volver al inicio o visitar nuestras páginas principales.',
-};
+// Calm, first-person copy in the same voice as the rest of the site.
+const title = "Página no encontrada | Inala Psicoterapia";
+const description =
+	"La página que buscas no existe o ha cambiado de dirección. Puedes volver al inicio o ir a las páginas principales de la web.";
 ---
 
-<Layout title={SEO.title} description={SEO.description} noindex={true}>
-   <Section>
-      <Row>
-         <Col span="6" classes="flex justify-center flex-col">
-            <h1>Ups! <br />Esta pagina no existe</h1>
-            <BasicCard decoration="all" style="transparent">
-               <p>
-                  Parece que nos hemos perdido en el camino y no hemos encontrado la página que
-                  buscabas. ¡No te preocupes! Vamos a volver al sendero principal juntos.
-               </p>
-            </BasicCard>
-         </Col>
-         <Col span="6" classes="lg:order-1">
-            <div class="border-neutral-100 dark:border-neutral-800">
-               <Video
-                  video="https://oxygenna-themes.b-cdn.net/toki-astro/videos/404-video.mp4"
-                  id="video404"
-                  width={470}
-                  height={600}
-                  loop={true}
-                  autoplay={true}
-                  muted={false}
-                  classes="w-full object-cover lg:h-[800px]!"
-               />
-            </div>
-            <Decoration type="all" />
-         </Col>
-      </Row>
-   </Section>
+<Layout title={title} description={description} noindex>
+	<PageHero>
+		<Fragment slot="title">Esta página no existe</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Puede que la dirección haya cambiado o que el enlace no esté bien escrito.
+			Desde aquí puedes volver al inicio o ir a cualquiera de las páginas
+			principales.
+		</p>
+		<div class="flex flex-wrap gap-3 pt-2">
+			<Button href="/" arrow>Volver al inicio</Button>
+		</div>
+		<nav aria-label="Páginas principales" class="border-t border-line pt-5">
+			<ul class="flex flex-wrap gap-x-6 gap-y-1">
+				{
+					navLinks.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								class="inline-flex min-h-11 items-center text-small font-semibold text-teal underline decoration-transparent underline-offset-4 transition-[text-decoration-color] duration-200 hover:decoration-current"
+							>
+								{link.name}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+		<div slot="media" class="grid aspect-square place-items-center rounded-frame bg-mist">
+			<Image src={logo} alt="" width={320} height={320} class="w-1/2" />
+		</div>
+	</PageHero>
 </Layout>

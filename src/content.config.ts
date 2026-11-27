@@ -1,58 +1,29 @@
-import { z, defineCollection } from 'astro:content'
-import { glob } from 'astro/loaders'
+import { defineCollection, reference } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
-const work = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/work' }),
-	schema: () =>
-		z.object({
-			title: z.string(),
-			subtitle: z.string(),
-			description: z.string(),
-			list: z.array(z.string()),
-			imageThumbnail: z.string(),
-			image: z.string().optional(),
-			video: z.string().optional(),
-			introduction: z.object({
-				title: z.string(),
-				subtitle: z.string(),
-				body: z.string()
-			}),
-			whatWeDid: z.object({
-				title: z.string(),
-				subtitle: z.string(),
-				images: z.array(z.string()),
-				body: z.string()
-			}),
-			feedback: z.object({
-				title: z.string(),
-				subtitle: z.string(),
-				clientFeedback: z.object({
-					blockquote: z.string(),
-					figcaption: z.string()
-				}),
-				body: z.string()
-			})
-		})
-})
-
+// File names are the post URLs (/blog/<file-name>), kept as on main.
 const blog = defineCollection({
-	loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/blog' }),
-	schema: () =>
+	loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/blog" }),
+	schema: ({ image }) =>
 		z.object({
-			slug: z.string().optional(),
 			title: z.string(),
+			/** Shorter title for search results only (60 characters or fewer); the h1 keeps `title`. */
+			seoTitle: z.string().max(60).optional(),
 			subtitle: z.string().optional(),
-			pubDate: z.date(),
-			author: z.string(),
 			description: z.string(),
-			image: z.string().optional(),
-			video: z.string().optional(),
-			imageThumbnail: z.string().optional(),
-			videoThumbnail: z.string().optional()
-		})
-})
+			pubDate: z.coerce.date(),
+			/** Set when a post is revised; feeds dateModified and the sitemap lastmod. */
+			updatedDate: z.coerce.date().optional(),
+			author: z.string(),
+			image: image().optional(),
+			/** Description of `image` for the post page; leave out only if it is purely decorative. */
+			imageAlt: z.string().optional(),
+			/** Service pages linked at the end of the post (hrefs from src/data/site.ts). */
+			services: z.array(z.string()).default([]),
+			/** Posts on the same topic, linked at the end so they don't compete blindly. */
+			related: z.array(reference("blog")).default([]),
+		}),
+});
 
-export const collections = {
-	work,
-	blog
-}
+export const collections = { blog };

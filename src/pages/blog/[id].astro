@@ -1,0 +1,167 @@
+---
+import { getImage, Image } from "astro:assets";
+import { getCollection, getEntries, render } from "astro:content";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Button from "../../components/ui/Button.astro";
+import Icon from "../../components/ui/Icon.astro";
+import {
+	contactHref,
+	ctaLabel,
+	serviceMenuLinks,
+	therapistName,
+} from "../../data/site";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("blog");
+	return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, subtitle, description, pubDate, updatedDate, author, image } =
+	post.data;
+// Search results cut titles at about 60 characters: drop the suffix when it won't fit.
+const searchTitle = post.data.seoTitle ?? title;
+const pageTitle =
+	`${searchTitle} | Blog Inala`.length <= 60
+		? `${searchTitle} | Blog Inala`
+		: searchTitle;
+
+// Related links shown after the post: services by their current name, then posts on the same topic.
+const relatedLinks = [
+	...post.data.services.map((href) => {
+		// Posts list services without the trailing slash; site hrefs carry it.
+		const service = serviceMenuLinks.find(
+			(item) => item.href.replace(/\/$/, "") === href.replace(/\/$/, ""),
+		);
+		if (!service) throw new Error(`Unknown service "${href}" in post "${post.id}"`);
+		return { name: service.name, href: service.href };
+	}),
+	...(await getEntries(post.data.related)).map((entry) => ({
+		name: entry.data.title,
+		href: `/blog/${entry.id}/`,
+	})),
+];
+const textLink =
+	"group inline-flex min-h-11 items-center gap-2 text-small font-semibold text-teal underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-teal-strong hover:decoration-current";
+
+const date = pubDate.toLocaleDateString("es-ES", {
+	day: "numeric",
+	month: "long",
+	year: "numeric",
+});
+
+// Article data for search engines, taken from the post itself.
+const site = Astro.site ?? Astro.url;
+const home = new URL("/", site).href;
+const schemaImage = image
+	? new URL((await getImage({ src: image, width: 1200 })).src, site).href
+	: undefined;
+const schema = [
+	{
+		"@type": "BlogPosting",
+		headline: title,
+		description,
+		datePublished: pubDate.toISOString(),
+		dateModified: (updatedDate ?? pubDate).toISOString(),
+		inLanguage: "es-ES",
+		// The therapist already has a Person node in the layout's graph.
+		author:
+			author === therapistName
+				? { "@id": `${home}#maria` }
+				: { "@type": "Person", name: author },
+		publisher: { "@id": `${home}#consulta` },
+		mainEntityOfPage: new URL(Astro.url.pathname, site).href,
+		...(schemaImage && { image: schemaImage }),
+	},
+];
+---
+
+<Layout
+	title={pageTitle}
+	description={description}
+	image={image}
+	type="article"
+	schema={schema}
+>
+	<article class="bg-paper pb-20 pt-8 lg:pb-28 lg:pt-10">
+		<div class="mx-auto max-w-content px-5 sm:px-8 lg:px-10">
+			<div class="mx-auto max-w-reading">
+				<a
+					href="/blog/"
+					class="group inline-flex min-h-11 items-center gap-2 text-small font-semibold text-teal transition-[color] duration-200 hover:text-teal-strong"
+				>
+					<Icon
+						name="arrow_back"
+						class="transition-[translate] duration-200 ease-out motion-safe:group-hover-fine:-translate-x-0.5"
+					/>
+					Volver al blog
+				</a>
+				<header class="hero-copy mt-8 flex flex-col gap-5">
+					<Breadcrumbs
+						items={[{ name: "Inicio", href: "/" }, { name: "Blog", href: "/blog/" }, { name: title }]}
+					/>
+					<h1 class="font-display text-title font-normal text-ink">{title}</h1>
+					{subtitle && <p class="text-lead text-ink-muted">{subtitle}</p>}
+					<p class="text-label font-semibold text-ink-muted">
+						{author} · <time datetime={pubDate.toISOString()}>{date}</time>
+					</p>
+				</header>
+			</div>
+			{
+				image && (
+					<div class="hero-media mx-auto mt-12 max-w-narrow">
+						<Image
+							src={image}
+							alt={post.data.imageAlt ?? ""}
+							widths={[680, 1360]}
+							sizes="(min-width: 768px) 768px, 100vw"
+							loading="eager"
+							fetchpriority="high"
+							class="aspect-3/2 w-full rounded-frame object-cover"
+						/>
+					</div>
+				)
+			}
+			<div class="prose-inala mx-auto mt-12 max-w-reading">
+				<Content />
+			</div>
+			<aside
+				class="mx-auto mt-20 flex max-w-reading flex-col gap-5 border-t border-line pt-10"
+				aria-labelledby="post-cta"
+			>
+				<h2 id="post-cta" class="font-display text-subheading font-normal text-ink">
+					¿Te has reconocido en este artículo?
+				</h2>
+				<p class="text-body text-ink-muted">
+					Si quieres hablarlo con calma, puedo acompañarte en mi consulta de
+					Pamplona o por videollamada.
+				</p>
+				<div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+					<Button href={contactHref} arrow>{ctaLabel}</Button>
+					<Button href="/servicios/" variant="secondary">Ver servicios y tarifas</Button>
+				</div>
+				{
+					relatedLinks.length > 0 && (
+						<nav aria-label="Contenido relacionado">
+							<ul class="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:gap-x-8">
+								{relatedLinks.map((link) => (
+									<li>
+										<a class={textLink} href={link.href}>
+											<span>{link.name}</span>
+											<Icon
+												name="arrow_forward"
+												class="transition-[translate] duration-200 ease-out motion-safe:group-hover-fine:translate-x-0.5"
+											/>
+										</a>
+									</li>
+								))}
+							</ul>
+						</nav>
+					)
+				}
+			</aside>
+		</div>
+	</article>
+</Layout>

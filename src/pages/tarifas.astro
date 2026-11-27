@@ -1,153 +1,262 @@
 ---
-import JoinBox from '../components/custom/JoinBox.astro';
-import Button from '../components/ui/Button.astro';
-import { default as BasicCard, default as Card } from '../components/ui/cards/Card.astro';
-import Col from '../components/ui/Col.astro';
-import Row from '../components/ui/Row.astro';
-import Section from '../components/ui/Section.astro';
-import Layout from '../layouts/Layout.astro';
-import Frases from '../components/custom/Frases.astro';
+import sessionImage from "../assets/images/maria2.webp";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/ui/Button.astro";
+import CtaBand from "../components/ui/CtaBand.astro";
+import Faq from "../components/ui/Faq.astro";
+import Figure from "../components/ui/Figure.astro";
+import Icon from "../components/ui/Icon.astro";
+import Section from "../components/ui/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import TopicList from "../components/ui/TopicList.astro";
+import {
+	contactHref,
+	ctaLabel,
+	email,
+	services,
+} from "../data/site";
+import Layout from "../layouts/Layout.astro";
 
-const SEO = {
-   title: 'Tarifas de Terapia | Precios Psicóloga Sanitaria en Pamplona y Online',
-   description:
-      'Consulta las tarifas de terapia individual, de pareja, familiar y online. Precios claros, sin sorpresas y con opción de sesiones presenciales en Pamplona u online. Conoce cómo trabajo y el valor de cada proceso terapéutico.',
+const title = "Tarifas de psicoterapia en Pamplona y online | Inala";
+
+const description =
+	"Terapia individual 65 €, de pareja o familiar 75 €. Sesiones de 60 minutos en Pamplona u online por videollamada, sin cuotas ni permanencias.";
+
+const serviceByName = (name: string) => {
+	const service = services.find((item) => item.name === name);
+	if (!service) throw new Error(`Unknown service: ${name}`);
+	return service;
 };
+
+const individual = serviceByName("Terapia Individual");
+
+const couple = serviceByName("Terapia de Pareja");
+
+const family = serviceByName("Terapia Familiar");
+
+const perinatal = serviceByName("Psicología Perinatal y Crianza");
+
+// Prices and durations come from `services` (site.ts), which mirrors main.
+const plans = [
+	{
+		title: individual.name,
+		summary: individual.summary,
+		price: individual.price,
+		duration: individual.duration,
+		modality: "Presencial en Pamplona u online",
+		bullets: [
+			"Para adultos, adolescentes y niños",
+			"Ansiedad, desánimo, autoestima, duelo o cambios vitales",
+			"Herramientas prácticas para tu día a día",
+		],
+		href: individual.href,
+	},
+	{
+		title: couple.name,
+		summary: couple.summary,
+		price: couple.price,
+		duration: couple.duration,
+		modality: "Presencial en Pamplona u online",
+		bullets: [
+			"Un espacio neutral: no tomo partido",
+			"Comunicación y discusiones que se repiten",
+			"Distanciamiento, confianza e intimidad",
+		],
+		href: couple.href,
+	},
+	{
+		title: family.name,
+		summary: family.summary,
+		price: family.price,
+		duration: family.duration,
+		modality: "Presencial en Pamplona u online",
+		bullets: [
+			"Un espacio donde se escucha a todos",
+			"Comunicación y límites en la convivencia",
+			"Cambios de etapa, separaciones y pérdidas",
+		],
+		href: family.href,
+	},
+	{
+		title: perinatal.name,
+		summary: perinatal.summary,
+		price: perinatal.price,
+		duration: perinatal.duration,
+		modality: "Presencial en Pamplona u online",
+		bullets: [
+			"Cansancio, culpa y autoexigencia",
+			"Límites, rabietas y etapas de cambio",
+			"Desacuerdos de crianza en la pareja",
+		],
+		href: perinatal.href,
+	},
+];
+
+// Only what main's pricing page already listed for every session.
+const includes = [
+	{
+		icon: "lock",
+		title: "Un espacio seguro y confidencial",
+		text: "Lo que compartes en sesión queda protegido por el secreto profesional.",
+	},
+	{
+		icon: "tune",
+		title: "Atención personalizada",
+		text: "Adapto cada sesión a tu situación, a tus necesidades y a tu ritmo.",
+	},
+	{
+		icon: "devices",
+		title: "Presencial u online",
+		text: "En la consulta de Pamplona o por videollamada, según prefieras. También puedes combinar ambas.",
+	},
+];
+
+// Payment and cancellation terms as confirmed by María.
+const faqs = [
+	{
+		question: "¿Cómo se pagan las sesiones?",
+		answer:
+			"Puedes pagar <strong>en efectivo, con tarjeta o por transferencia</strong>.",
+	},
+	{
+		question: "¿Puedo cancelar o cambiar una cita?",
+		answer:
+			"Sí. Puedes cancelarla o cambiarla sin coste si me avisas con <strong>al menos 24 horas</strong> de antelación.",
+	},
+	{
+		question: "¿Qué pasa si cancelo con menos de 24 horas?",
+		answer:
+			"La sesión se cobra aunque no puedas venir, porque esa hora estaba reservada para ti y ya no puedo ofrecérsela a otra persona.",
+	},
+];
+
+const isPending = (value: string) => value.startsWith("[PENDIENTE");
 ---
 
-<Layout title={SEO.title} description={SEO.description}>
-   <Section>
-      <Row>
-         <Col>
-            <h1>El primer paso hacia tu meta</h1>
-         </Col>
-         <Col span="6" classes="self-end">
-            <BasicCard decoration="all" style="transparent">
-               <p class="text-lead">
-                  Descubre nuestras tarifas accesibles para servicios de psicología general
-                  sanitaria en Inala.
-               </p>
-            </BasicCard>
-         </Col>
-      </Row>
-   </Section>
+<Layout title={title} description={description}>
+	<PageHero title="Tarifas y duración de las sesiones">
+		<p class="max-w-2xl text-lead text-ink-muted">
+			Pagas cada sesión por separado, sin cuotas ni permanencias. Todas las
+			sesiones duran 60 minutos y puedes hacerlas en Pamplona u online.
+		</p>
+	</PageHero>
 
-   <Section classes="mt-0! pt-0!">
-      <Row classes="!gap-5 max-[500px]:px-0">
-         <Col span="6">
-            <Card>
-               <div class="text-lg">
-                  <div class="flex">
-                     <h3>Sesion individual u online</h3>
-                     <h3 class="absolute right-10">65 €</h3>
-                  </div>
+	<!-- Tarifas -->
+	<Section tone="white" class="pt-4 lg:pt-6">
+		<div class="grid border-t border-line md:grid-cols-2 xl:grid-cols-4">
+			{
+				plans.map((plan) => (
+					<div class="row-span-5 grid grid-rows-subgrid gap-y-6 border-b border-line py-10 md:px-8 md:odd:border-r xl:border-b-0 xl:border-r xl:first:pl-0 xl:last:border-r-0 xl:last:pr-0 md:max-xl:odd:pl-0 md:max-xl:even:pr-0">
+						<div class="flex flex-col gap-3">
+							<h2 class="font-display text-subheading font-normal text-ink">
+								{plan.title}
+							</h2>
+							<p class="text-body text-ink-muted">{plan.summary}</p>
+						</div>
+						<div class="min-h-16">
+							{isPending(plan.price) ? (
+								<span class="text-small font-semibold text-ink-soft">
+									{plan.price}
+								</span>
+							) : (
+								<div class="flex items-baseline gap-2">
+									<span class="font-display text-title font-normal text-teal tabular-nums">
+										{plan.price}
+									</span>
+									<span class="text-small text-ink-muted">/ sesión</span>
+								</div>
+							)}
+						</div>
+						<div class="flex flex-col gap-2 border-t border-line pt-5 text-small text-ink">
+							<div class="flex items-start gap-2.5">
+								<Icon name="schedule" class="mt-0.5 text-teal" />
+								<span class="tabular-nums">
+									<strong class="font-semibold">Duración:</strong> {plan.duration}
+								</span>
+							</div>
+							<div class="flex items-start gap-2.5">
+								<Icon name="location_on" class="mt-0.5 text-teal" />
+								<span>{plan.modality}</span>
+							</div>
+						</div>
+						<ul class="flex flex-col gap-2.5">
+							{plan.bullets.map((bullet) => (
+								<li class="flex items-start gap-2.5 text-small text-ink-muted">
+									<Icon name="check" class="mt-0.5 text-teal" />
+									<span>{bullet}</span>
+								</li>
+							))}
+						</ul>
+						<div class="flex flex-col gap-3">
+							<Button href={contactHref}>{ctaLabel}</Button>
+							<a
+								href={plan.href}
+								class="inline-flex min-h-11 items-center justify-center text-small font-semibold text-teal underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:decoration-current"
+							>
+								Más sobre {plan.title.toLowerCase()}
+							</a>
+						</div>
+					</div>
+				))
+			}
+		</div>
+		<p class="mt-10 max-w-2xl text-lead text-ink-muted">
+			¿Primera vez? En la primera sesión revisamos tu situación y tus objetivos, y
+			definimos juntos cómo empezar.
+		</p>
+	</Section>
 
-                  <ul>
-                     <li>Sesión de 60 minutos para ti, enfocada en tu bienestar emocional.</li>
-                     <li>Espacio seguro y confidencial para expresarte libremente.</li>
-                     <li>Atención personalizada y adaptada a tus necesidades.</li>
-                     <li>Acceso online o presencial, según tu preferencia.</li>
-                     <li>Acompañamiento profesional durante todo el proceso terapéutico.</li>
-                     <li>
-                        <a href="/servicios/terapia-individual">Saber mas individual...</a>
-                     </li>
-                     <li>
-                        <a href="/servicios/terapia-online">Saber mas online...</a>
-                     </li>
-                  </ul>
+	<!-- Pago y cancelación -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Pago y cancelación"
+				layout="stack"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
+			>
+				<p>
+					Lo práctico, antes de empezar. Si tienes otra duda, escríbeme y te
+					respondo.
+				</p>
+			</SectionHeader>
+			<Faq items={faqs} class="lg:col-span-7" />
+		</div>
+	</Section>
 
-                  <Button
-                     style="primary"
-                     type="link"
-                     link="/contacto"
-                     size="lg"
-                     classes="absolute right-0 mt-5"
-                  >
-                     Reserva tu cita
-                  </Button>
-               </div>
-            </Card>
-         </Col>
-         <Col span="6">
-            <Card>
-               <div class="text-lg">
-                  <div class="flex">
-                     <h3>Sesion de pareja o familiar</h3>
-                     <h3 class="absolute right-10">75 €</h3>
-                  </div>
-                  <ul>
-                     <li>Sesión de 60 minutos para ti, enfocada en tu bienestar emocional.</li>
-                     <li>Espacio seguro y confidencial para expresarte libremente.</li>
-                     <li>Atención personalizada y adaptada a tus necesidades.</li>
-                     <li>Acceso online o presencial, según tu preferencia.</li>
-                     <li>Acompañamiento profesional durante todo el proceso terapéutico.</li>
-                     <li>
-                        <a href="/servicios/terapia-de-pareja">Saber mas pareja...</a>
-                     </li>
-                     <li>
-                        <a href="/servicios/terapia-familiar">Saber mas familiar...</a>
-                     </li>
-                  </ul>
-                  <Button
-                     style="primary"
-                     type="link"
-                     link="/contacto"
-                     size="lg"
-                     classes="absolute right-0 mt-5"
-                  >
-                     Reserva tu cita
-                  </Button>
-               </div>
-            </Card>
-         </Col>
-      </Row>
-   </Section>
+	<CtaBand title="¿Tienes dudas sobre el formato o las tarifas?">
+		<p>Escríbeme y lo vemos. Si ya lo tienes claro, solicita tu primera cita.</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse">{ctaLabel}</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>Escribirme a {email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
 
-   <JoinBox
-      title="Da el primer paso hacia tu bienestar: agenda tu sesión hoy mismo."
-      subtitle=""
-      buttonText="reserva tu cita"
-   />
+	<!-- Qué incluye cada sesión -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12">
+			<div class="flex flex-col gap-8 lg:col-span-5">
+				<SectionHeader title="¿Qué incluye cada sesión?" layout="stack">
+					<p>
+						Sea cual sea el formato, cada sesión parte de lo mismo: escucharte con
+						calma y trabajar sobre lo que necesitas.
+					</p>
+				</SectionHeader>
+				<Figure
+					src={sessionImage}
+					alt="María, psicóloga de Inala, sentada en un sillón azul en su consulta."
+					ratio="tall"
+					sizes="(min-width: 1024px) 34vw, 100vw"
+				>
+					<Icon name="location_on" class="text-teal" />
+					<span>Consulta en Pamplona</span>
+				</Figure>
+			</div>
+			<div class="lg:col-span-7 lg:pt-2">
+				<TopicList items={includes} columns={1} />
+			</div>
+		</div>
+	</Section>
 
-    <Frases
-      title="Ahora es el momento de cuidar de ti"
-      text="Invertir en tu bienestar emocional es el primer paso hacia una vida más plena y satisfactoria. No esperes más para comenzar tu viaje de autodescubrimiento y crecimiento personal."
-      type="none"
-      />
-
-
-   <!-- ENLACES INTERNOS -->
-   <Section decoration="all" type="none" classes="pt-0!">
-      <h3>También te puede interesar</h3>
-      <Row classes="!p-0 !m-0">
-         <Card classes="relative col-span-12 lg:col-span-3 !p-0">
-            <a href="/servicios/terapia-individual" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Terapia individual {'>'}</button
-               >
-            </a>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-3 p-0">
-            <a href="/servicios/terapia-de-pareja" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Terapia de pareja {'>'}</button
-               >
-            </a>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-3 p-0">
-            <a href="/servicios/terapia-familiar" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Terapia familiar {'>'}</button
-               >
-            </a>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-3 p-0">
-            <a href="/servicios/psicologia-perinatal" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Psicología perinatal {'>'}</button
-               >
-            </a>
-         </Card>
-      </Row>
-   </Section>
 </Layout>

@@ -1,0 +1,547 @@
+{
+	"schemaVersion": 2,
+	"generatedAt": "2026-10-20T18:48:45+00:00",
+	"title": "Design System: INALA Centro de Psicoterapia",
+	"extensions": {
+		"colorMeta": {
+			"paper": {
+				"role": "neutral",
+				"displayName": "Cool Paper",
+				"canonical": "oklch(98.0% 0.003 174.5)",
+				"tonalRamp": [
+					"#0a0c0b",
+					"#232625",
+					"#404342",
+					"#5f6261",
+					"#808382",
+					"#a3a6a5",
+					"#c7cac9",
+					"#ecefee"
+				]
+			},
+			"white": {
+				"role": "neutral",
+				"displayName": "White",
+				"canonical": "oklch(100.0% 0.000 89.9)",
+				"tonalRamp": [
+					"#0b0b0b",
+					"#252525",
+					"#424242",
+					"#616161",
+					"#828282",
+					"#a5a5a5",
+					"#c9c9c9",
+					"#eeeeee"
+				]
+			},
+			"mist": {
+				"role": "neutral",
+				"displayName": "Mist",
+				"canonical": "oklch(95.8% 0.012 178.0)",
+				"tonalRamp": [
+					"#060d0b",
+					"#1f2725",
+					"#3b4442",
+					"#5a6461",
+					"#7b8582",
+					"#9da8a5",
+					"#c1ccc9",
+					"#e6f1ee"
+				]
+			},
+			"line": {
+				"role": "neutral",
+				"displayName": "Hairline",
+				"canonical": "oklch(91.0% 0.012 178.0)",
+				"tonalRamp": [
+					"#060d0b",
+					"#1f2725",
+					"#3b4442",
+					"#5a6461",
+					"#7b8582",
+					"#9da8a5",
+					"#c1ccc9",
+					"#e6f1ee"
+				]
+			},
+			"line-strong": {
+				"role": "neutral",
+				"displayName": "Strong Hairline",
+				"canonical": "oklch(81.7% 0.022 178.2)",
+				"tonalRamp": [
+					"#020e0b",
+					"#192925",
+					"#364642",
+					"#546561",
+					"#758782",
+					"#97aaa5",
+					"#bbcec9",
+					"#e0f4ee"
+				]
+			},
+			"ink": {
+				"role": "neutral",
+				"displayName": "Green Ink",
+				"canonical": "oklch(23.6% 0.017 183.4)",
+				"tonalRamp": [
+					"#040e0c",
+					"#1c2826",
+					"#384543",
+					"#576562",
+					"#778683",
+					"#9aa9a6",
+					"#becdca",
+					"#e3f3ef"
+				]
+			},
+			"ink-muted": {
+				"role": "neutral",
+				"displayName": "Muted Ink",
+				"canonical": "oklch(40.1% 0.017 185.2)",
+				"tonalRamp": [
+					"#040d0c",
+					"#1c2826",
+					"#384543",
+					"#576562",
+					"#788684",
+					"#9aa9a6",
+					"#becdca",
+					"#e3f2f0"
+				]
+			},
+			"ink-soft": {
+				"role": "neutral",
+				"displayName": "Soft Ink",
+				"canonical": "oklch(50.2% 0.017 180.2)",
+				"tonalRamp": [
+					"#040d0b",
+					"#1c2825",
+					"#394542",
+					"#586461",
+					"#788683",
+					"#9ba9a5",
+					"#becdc9",
+					"#e3f2ef"
+				]
+			},
+			"seafoam": {
+				"role": "secondary",
+				"displayName": "Logo Seafoam",
+				"canonical": "oklch(77.8% 0.074 193.5)",
+				"tonalRamp": [
+					"#001314",
+					"#002f2f",
+					"#004e4d",
+					"#1f6e6d",
+					"#46908f",
+					"#6ab4b2",
+					"#8ed9d7",
+					"#b4fffd"
+				]
+			},
+			"seafoam-soft": {
+				"role": "secondary",
+				"displayName": "Seafoam Wash",
+				"canonical": "oklch(91.6% 0.033 179.9)",
+				"tonalRamp": [
+					"#000f0c",
+					"#112a26",
+					"#2e4843",
+					"#4d6862",
+					"#6e8983",
+					"#90aca6",
+					"#b3d1ca",
+					"#d8f6ef"
+				]
+			},
+			"teal": {
+				"role": "primary",
+				"displayName": "Practice Teal",
+				"canonical": "oklch(47.3% 0.072 177.1)",
+				"tonalRamp": [
+					"#00130b",
+					"#003024",
+					"#004e41",
+					"#2b6f60",
+					"#4e9182",
+					"#72b4a4",
+					"#95d9c8",
+					"#baffee"
+				]
+			},
+			"teal-strong": {
+				"role": "primary",
+				"displayName": "Deep Practice Teal",
+				"canonical": "oklch(39.9% 0.060 178.9)",
+				"tonalRamp": [
+					"#00120c",
+					"#002e26",
+					"#144c42",
+					"#376c62",
+					"#598e83",
+					"#7cb2a6",
+					"#9fd6ca",
+					"#c4fcef"
+				]
+			},
+			"cypress": {
+				"role": "tertiary",
+				"displayName": "Cypress Field",
+				"canonical": "oklch(33.8% 0.046 184.3)",
+				"tonalRamp": [
+					"#00110d",
+					"#012c28",
+					"#234a45",
+					"#426a64",
+					"#638c85",
+					"#85afa8",
+					"#a9d3cc",
+					"#cdf9f2"
+				]
+			},
+			"cypress-line": {
+				"role": "tertiary",
+				"displayName": "Cypress Rule",
+				"canonical": "oklch(43.5% 0.049 184.0)",
+				"tonalRamp": [
+					"#00110d",
+					"#002d28",
+					"#1f4b45",
+					"#3f6b64",
+					"#608c86",
+					"#83b0a8",
+					"#a6d4cd",
+					"#cbfaf2"
+				]
+			},
+			"on-dark": {
+				"role": "neutral",
+				"displayName": "On Dark",
+				"canonical": "oklch(100.0% 0.000 89.9)",
+				"tonalRamp": [
+					"#0b0b0b",
+					"#252525",
+					"#424242",
+					"#616161",
+					"#828282",
+					"#a5a5a5",
+					"#c9c9c9",
+					"#eeeeee"
+				]
+			},
+			"on-dark-muted": {
+				"role": "neutral",
+				"displayName": "On Dark Muted",
+				"canonical": "oklch(87.7% 0.024 180.6)",
+				"tonalRamp": [
+					"#010e0c",
+					"#172926",
+					"#344643",
+					"#536662",
+					"#738783",
+					"#95aaa6",
+					"#b9cfca",
+					"#def4ef"
+				]
+			},
+			"error": {
+				"role": "error",
+				"displayName": "Error",
+				"canonical": "oklch(50.1% 0.178 28.7)",
+				"tonalRamp": [
+					"#2c0000",
+					"#560000",
+					"#820000",
+					"#b0221b",
+					"#d84c3f",
+					"#f9796a",
+					"#ffa595",
+					"#ffd1c2"
+				]
+			},
+			"error-soft": {
+				"role": "error",
+				"displayName": "Error Wash",
+				"canonical": "oklch(95.5% 0.016 22.1)",
+				"tonalRamp": [
+					"#110808",
+					"#2d2221",
+					"#4a3f3e",
+					"#6a5e5d",
+					"#8c7f7e",
+					"#afa1a0",
+					"#d4c5c4",
+					"#f9eae9"
+				]
+			}
+		},
+		"typographyMeta": {
+			"display": {
+				"displayName": "Display",
+				"purpose": "Home h1 and display-size step numerals."
+			},
+			"title": {
+				"displayName": "Title",
+				"purpose": "The h1 of every page except home."
+			},
+			"heading": {
+				"displayName": "Heading",
+				"purpose": "Section h2s, closing call to action, large quotes."
+			},
+			"subheading": {
+				"displayName": "Subheading",
+				"purpose": "Service names, topic rows, quotes, closing notes, subtitles under headings."
+			},
+			"lead": {
+				"displayName": "Lead",
+				"purpose": "Intro paragraphs; at 600 for FAQ questions and short list titles."
+			},
+			"body": {
+				"displayName": "Body",
+				"purpose": "Running text; long-form prose is 1.125rem / 1.75."
+			},
+			"small": {
+				"displayName": "Small",
+				"purpose": "Buttons (600), navigation (500), notes, footer text."
+			},
+			"label": {
+				"displayName": "Label",
+				"purpose": "Breadcrumbs, captions, durations and prices, footer column headings. Sentence case."
+			}
+		},
+		"shadows": [
+			{
+				"name": "float",
+				"value": "0 1px 2px rgb(21 33 31 / 0.05), 0 12px 32px -12px rgb(21 33 31 / 0.18)",
+				"purpose": "Desktop services dropdown and open mobile menu panel only."
+			}
+		],
+		"motion": [
+			{
+				"name": "ease-out",
+				"value": "cubic-bezier(0.23, 1, 0.32, 1)",
+				"purpose": "Entrances, reveals, presses, dropdown and FAQ."
+			},
+			{
+				"name": "ease-in-out",
+				"value": "cubic-bezier(0.77, 0, 0.175, 1)",
+				"purpose": "On-screen movement."
+			},
+			{
+				"name": "default-transition-timing",
+				"value": "ease",
+				"purpose": "Colour and border state changes (200ms)."
+			},
+			{
+				"name": "hero-rise",
+				"value": "rise 700ms ease-out, translateY(14px) to none, 80ms stagger per child",
+				"purpose": "Hero copy entrance."
+			},
+			{
+				"name": "hero-settle",
+				"value": "settle 900ms ease-out 120ms, translateY(18px) scale(0.985) to none",
+				"purpose": "Hero image entrance."
+			},
+			{
+				"name": "figure-reveal",
+				"value": "opacity + translateY(18px) 800ms ease-out, 70ms stagger",
+				"purpose": "One-shot reveal of figures below the fold (src/scripts/reveal.ts)."
+			},
+			{
+				"name": "dropdown",
+				"value": "opacity + scale 0.97 to 1, 200ms ease-out",
+				"purpose": "Desktop services menu."
+			},
+			{
+				"name": "mobile-menu",
+				"value": "opacity + translateY(-8px) 250ms ease-out via @starting-style",
+				"purpose": "Mobile menu panel."
+			},
+			{
+				"name": "faq",
+				"value": "::details-content block-size 200ms ease-out",
+				"purpose": "FAQ answers."
+			},
+			{
+				"name": "press",
+				"value": "scale 0.97, 150ms ease-out",
+				"purpose": "Buttons and icon buttons on :active."
+			},
+			{
+				"name": "reduced-motion",
+				"value": "fade 200ms ease",
+				"purpose": "Only motion kept under prefers-reduced-motion: reduce (hero)."
+			}
+		],
+		"breakpoints": [
+			{
+				"name": "xs",
+				"value": "22.5rem"
+			},
+			{
+				"name": "sm",
+				"value": "40rem"
+			},
+			{
+				"name": "md",
+				"value": "48rem"
+			},
+			{
+				"name": "lg",
+				"value": "64rem"
+			},
+			{
+				"name": "xl",
+				"value": "80rem"
+			}
+		]
+	},
+	"components": [
+		{
+			"name": "Primary Button",
+			"kind": "button",
+			"refersTo": "button-primary",
+			"description": "Every action on light grounds, e.g. «Solicitar primera cita»; optional trailing arrow.",
+			"html": "<a class=\"ds-btn-primary\" href=\"#\">Solicitar primera cita <svg width=\"20\" height=\"20\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M647-440H160v-80h487L423-744l57-56 320 320-320 320-57-56 224-224Z\"/></svg></a>",
+			"css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:9999px;font-family:var(--font-synonym, Synonym), system-ui, sans-serif;font-size:0.9375rem;line-height:1.55;font-weight:600;text-decoration:none;transition:background-color 150ms cubic-bezier(0.23,1,0.32,1),border-color 150ms cubic-bezier(0.23,1,0.32,1),color 150ms cubic-bezier(0.23,1,0.32,1),scale 150ms cubic-bezier(0.23,1,0.32,1);background:var(--color-teal, #24695b);color:#fff;} .ds-btn-primary svg{transition:translate 200ms cubic-bezier(0.23,1,0.32,1);} .ds-btn-primary:hover{background:var(--color-teal-strong, #1b5248);} .ds-btn-primary:hover svg{translate:2px 0;} .ds-btn-primary:focus-visible{outline:2px solid var(--color-teal, #24695b);outline-offset:3px;} .ds-btn-primary:active{scale:0.97;}"
+		},
+		{
+			"name": "Secondary Button",
+			"kind": "button",
+			"refersTo": "button-secondary",
+			"description": "The second action beside a primary one.",
+			"html": "<a class=\"ds-btn-secondary\" href=\"#\">Ver servicios y tarifas</a>",
+			"css": ".ds-btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:9999px;font-family:var(--font-synonym, Synonym), system-ui, sans-serif;font-size:0.9375rem;line-height:1.55;font-weight:600;text-decoration:none;transition:background-color 150ms cubic-bezier(0.23,1,0.32,1),border-color 150ms cubic-bezier(0.23,1,0.32,1),color 150ms cubic-bezier(0.23,1,0.32,1),scale 150ms cubic-bezier(0.23,1,0.32,1);background:#fff;color:var(--color-ink, #15211f);border:1px solid var(--color-line-strong, #b5c8c3);} .ds-btn-secondary:hover{border-color:var(--color-teal, #24695b);color:var(--color-teal, #24695b);} .ds-btn-secondary:focus-visible{outline:2px solid var(--color-teal, #24695b);outline-offset:3px;} .ds-btn-secondary:active{scale:0.97;}"
+		},
+		{
+			"name": "Inverse Buttons",
+			"kind": "button",
+			"refersTo": "button-inverse",
+			"description": "Actions on the cypress closing field: seafoam fill, or outline.",
+			"html": "<div class=\"ds-dark\"><a class=\"ds-btn-inverse\" href=\"#\">Solicitar primera cita</a><a class=\"ds-btn-inverse-outline\" href=\"#\">hola@inala.es</a></div>",
+			"css": ".ds-dark{display:flex;flex-wrap:wrap;gap:12px;padding:32px;background:var(--color-cypress, #173f3a);} .ds-btn-inverse{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:9999px;font-family:var(--font-synonym, Synonym), system-ui, sans-serif;font-size:0.9375rem;line-height:1.55;font-weight:600;text-decoration:none;transition:background-color 150ms cubic-bezier(0.23,1,0.32,1),border-color 150ms cubic-bezier(0.23,1,0.32,1),color 150ms cubic-bezier(0.23,1,0.32,1),scale 150ms cubic-bezier(0.23,1,0.32,1);background:var(--color-seafoam, #7cc6c4);color:var(--color-cypress, #173f3a);} .ds-btn-inverse:hover{background:var(--color-seafoam-soft, #cdebe4);} .ds-btn-inverse-outline{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:9999px;font-family:var(--font-synonym, Synonym), system-ui, sans-serif;font-size:0.9375rem;line-height:1.55;font-weight:600;text-decoration:none;transition:background-color 150ms cubic-bezier(0.23,1,0.32,1),border-color 150ms cubic-bezier(0.23,1,0.32,1),color 150ms cubic-bezier(0.23,1,0.32,1),scale 150ms cubic-bezier(0.23,1,0.32,1);color:#fff;border:1px solid var(--color-cypress-line, #2f5a54);} .ds-btn-inverse-outline:hover{border-color:var(--color-seafoam, #7cc6c4);color:var(--color-seafoam-soft, #cdebe4);} .ds-dark a:focus-visible{outline:2px solid var(--color-seafoam, #7cc6c4);outline-offset:3px;} .ds-dark a:active{scale:0.97;}"
+		},
+		{
+			"name": "Text Field",
+			"kind": "input",
+			"refersTo": "input",
+			"description": "Contact form field with label above; error only after interaction.",
+			"html": "<label class=\"ds-field\"><span>Nombre</span><input type=\"text\" placeholder=\"Tu nombre\"></label>",
+			"css": ".ds-field{display:block;max-width:360px;font-family:var(--font-synonym, Synonym), system-ui, sans-serif;} .ds-field span{display:block;font-size:0.9375rem;font-weight:600;color:var(--color-ink, #15211f);} .ds-field input{display:block;width:100%;margin-top:8px;min-height:48px;padding:12px 16px;border:1px solid var(--color-line-strong, #b5c8c3);border-radius:12px;background:#fff;font:inherit;font-size:1.0625rem;color:var(--color-ink, #15211f);caret-color:var(--color-teal, #24695b);transition:border-color 200ms ease;} .ds-field input::placeholder{color:var(--color-ink-soft, #5a6764);} .ds-field input:hover{border-color:var(--color-ink-soft, #5a6764);} .ds-field input:focus-visible{border-color:var(--color-teal, #24695b);outline:2px solid var(--color-teal, #24695b);outline-offset:0;} .ds-field input:user-invalid{border-color:var(--color-error, #b3261e);background:var(--color-error-soft, #fbeceb);}"
+		},
+		{
+			"name": "Header Navigation",
+			"kind": "nav",
+			"refersTo": "",
+			"description": "Sticky paper header; current link carries a 2px seafoam underline.",
+			"html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Servicios</a><a href=\"#\">Cómo trabajo</a><a href=\"#\">Sobre mí</a><a href=\"#\">Tarifas</a><a href=\"#\">Blog</a></nav>",
+			"css": ".ds-nav{display:flex;gap:32px;padding:0 24px;height:72px;align-items:center;background:var(--color-paper, #f6f9f8);border-bottom:1px solid var(--color-line, #d9e4e1);font-family:var(--font-synonym, Synonym), system-ui, sans-serif;} .ds-nav a{position:relative;display:inline-flex;align-items:center;min-height:44px;font-size:0.9375rem;font-weight:500;color:var(--color-ink-muted, #3e4b49);text-decoration:none;transition:color 200ms ease;} .ds-nav a::after{content:'';position:absolute;left:0;right:0;bottom:6px;height:2px;border-radius:9999px;background:var(--color-seafoam, #7cc6c4);opacity:0;transition:opacity 200ms ease;} .ds-nav a:hover,.ds-nav a[aria-current]{color:var(--color-ink, #15211f);} .ds-nav a[aria-current]::after{opacity:1;} .ds-nav a:focus-visible{outline:2px solid var(--color-teal, #24695b);outline-offset:3px;border-radius:4px;}"
+		},
+		{
+			"name": "Service Chips",
+			"kind": "chip",
+			"refersTo": "service-chip",
+			"description": "«Otros servicios» band on the cypress field; current service seafoam-filled.",
+			"html": "<ul class=\"ds-chips\"><li><a href=\"#\" aria-current=\"page\">Terapia Individual</a></li><li><a href=\"#\">Terapia de Pareja</a></li><li><a href=\"#\">Terapia Familiar</a></li></ul>",
+			"css": ".ds-chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:32px;background:var(--color-cypress, #173f3a);} .ds-chips a{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:9999px;border:1px solid var(--color-cypress-line, #2f5a54);color:#fff;font-family:var(--font-synonym, Synonym), system-ui, sans-serif;font-size:0.9375rem;font-weight:600;text-decoration:none;transition:background-color 200ms ease,border-color 200ms ease,color 200ms ease;} .ds-chips a:hover{border-color:var(--color-seafoam, #7cc6c4);color:var(--color-seafoam-soft, #cdebe4);} .ds-chips a[aria-current]{background:var(--color-seafoam, #7cc6c4);border-color:var(--color-seafoam, #7cc6c4);color:var(--color-cypress, #173f3a);} .ds-chips a:focus-visible{outline:2px solid var(--color-seafoam, #7cc6c4);outline-offset:3px;}"
+		},
+		{
+			"name": "Topic List",
+			"kind": "custom",
+			"refersTo": "",
+			"description": "Hairline-ruled rows instead of icon cards: Gambetta heading beside its text.",
+			"html": "<ul class=\"ds-topics\"><li><h3>Ansiedad y estrés</h3><p>Sensación de agitación permanente, pensar demasiado, tensión en el cuerpo.</p></li><li><h3>Duelo, pérdidas y transiciones vitales</h3><p>Acompañamiento ante el fallecimiento de personas queridas y cambios de etapa.</p></li></ul>",
+			"css": ".ds-topics{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--color-line, #d9e4e1);} .ds-topics li{display:grid;grid-template-columns:5fr 7fr;gap:12px 48px;padding:32px 0;border-top:1px solid var(--color-line, #d9e4e1);} .ds-topics h3{margin:0;font-family:var(--font-gambetta, Gambetta), Georgia, serif;font-weight:400;font-size:1.625rem;line-height:1.3;color:var(--color-ink, #15211f);} .ds-topics p{margin:4px 0 0;font-family:var(--font-synonym, Synonym), system-ui, sans-serif;font-size:1.0625rem;line-height:1.65;color:var(--color-ink-muted, #3e4b49);}"
+		},
+		{
+			"name": "Numbered Steps",
+			"kind": "custom",
+			"refersTo": "",
+			"description": "Ordered sequences only: teal Gambetta numerals at display size.",
+			"html": "<ol class=\"ds-steps\"><li><span>01</span><h3>Primer contacto</h3></li><li><span>02</span><h3>Primera sesión</h3></li><li><span>03</span><h3>Estableciendo objetivos</h3></li></ol>",
+			"css": ".ds-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px;list-style:none;margin:0;padding:0;} .ds-steps li{display:flex;flex-direction:column;gap:20px;padding:24px 0 32px;border-top:1px solid var(--color-line, #d9e4e1);} .ds-steps span{font-family:var(--font-gambetta, Gambetta), Georgia, serif;font-size:4rem;line-height:1;color:var(--color-teal, #24695b);font-variant-numeric:tabular-nums;} .ds-steps h3{margin:0;font-family:var(--font-synonym, Synonym), system-ui, sans-serif;font-size:1.1875rem;font-weight:600;color:var(--color-ink, #15211f);}"
+		},
+		{
+			"name": "FAQ Row",
+			"kind": "custom",
+			"refersTo": "",
+			"description": "Native details between hairlines; round toggle rotates its plus 45 degrees.",
+			"html": "<details class=\"ds-faq\"><summary><span>¿Cuánto dura cada sesión?</span><i><svg width=\"20\" height=\"20\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z\"/></svg></i></summary><p>Cada sesión dura <strong>60 minutos</strong>. Es tiempo suficiente para profundizar con calma y cerrar cada encuentro sin prisas.</p></details>",
+			"css": ".ds-faq{border-top:1px solid var(--color-line, #d9e4e1);border-bottom:1px solid var(--color-line, #d9e4e1);font-family:var(--font-synonym, Synonym), system-ui, sans-serif;} .ds-faq summary{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;padding:20px 0;list-style:none;cursor:pointer;font-size:1.1875rem;font-weight:600;color:var(--color-ink, #15211f);transition:color 200ms ease;} .ds-faq summary::-webkit-details-marker{display:none;} .ds-faq summary:hover{color:var(--color-teal, #24695b);} .ds-faq summary:focus-visible{outline:2px solid var(--color-teal, #24695b);outline-offset:3px;} .ds-faq i{display:grid;place-items:center;width:40px;height:40px;flex-shrink:0;border-radius:9999px;border:1px solid var(--color-line-strong, #b5c8c3);color:var(--color-teal, #24695b);transition:rotate 200ms cubic-bezier(0.23,1,0.32,1),background-color 200ms cubic-bezier(0.23,1,0.32,1);} .ds-faq[open] i{rotate:45deg;background:var(--color-mist, #e9f4f1);} .ds-faq p{margin:0;padding:0 64px 28px 0;font-size:1.0625rem;color:var(--color-ink-muted, #3e4b49);}"
+		}
+	],
+	"narrative": {
+		"northStar": "The Quiet Practice",
+		"overview": "The site is the arrangement a visitor already expects from a psychology practice: who she is, what she treats, how it works, what it costs, how to ask. Its distinction is finish, not novelty; the quality bar is premium wellness products (Headspace, Calm) for polish, never for their look. Cool paper and pure white grounds carry near-black green ink; the logo's seafoam is the recognisable brand note; deep teal marks every action; one deep cypress field closes every page.\n\nContent is separated by hairline rules and generous whitespace, not by cards. Photographs sit in one consistent rounded frame. Headlines are set in Gambetta at regular weight, text and interface in Synonym. Motion is one calm, authored hero entrance per page and quiet one-shot reveals of figures below the fold, transform and opacity only, reduced to short fades when the visitor asks for less motion.\n\nThe world rejects, by the owner's choice: glassmorphism, decorative gradients, blurred blobs, heavy shadows, and walls of rounded icon-tile cards (the incumbent mint wash it replaces).",
+		"keyCharacteristics": [
+			"Cool paper, white and mist grounds; one cypress field that closes each page.",
+			"Gambetta headlines at weight 400; Synonym for everything else.",
+			"Hairline rules and whitespace instead of cards.",
+			"Pill buttons in deep teal for every action.",
+			"One rounded photo frame for all imagery.",
+			"Numerals for steps the reader follows in order.",
+			"One authored hero entrance; everything else is still."
+		],
+		"rules": [
+			{
+				"name": "The Seafoam Is Not Text Rule",
+				"body": "Seafoam is never text on paper, white or mist; it is a fill, a hairline or an accent. On the cypress field it may be text (headings, subtitles, the focus ring).",
+				"section": "colors"
+			},
+			{
+				"name": "The One Action Colour Rule",
+				"body": "Every clickable action on a light ground is teal. Nothing else is teal-filled.",
+				"section": "colors"
+			},
+			{
+				"name": "The Closing Field Rule",
+				"body": "Cypress appears once per page, at the end: the final call to action, then (on service pages) the other services, then the footer, as one continuous dark field.",
+				"section": "colors"
+			},
+			{
+				"name": "The Subtitle, Not Eyebrow Rule",
+				"body": "A short label kept from the content renders as a Gambetta subtitle under its heading (muted ink on light grounds, seafoam on cypress), never as a small label above it. A label the heading already contains renders as a small body caption in soft ink. A label typed in capitals in the content stays in capitals, set one size smaller (lead instead of subheading).",
+				"section": "typography"
+			},
+			{
+				"name": "The Regular Weight Rule",
+				"body": "Gambetta headings stay at weight 400. Hierarchy comes from size, not weight.",
+				"section": "typography"
+			},
+			{
+				"name": "The Rules Not Boxes Rule",
+				"body": "Groups of content are separated by a 1px hairline and whitespace. A topic, service or step is never a filled or shadowed card.",
+				"section": "layout"
+			},
+			{
+				"name": "The Only Floats Float Rule",
+				"body": "A shadow means the element sits above the page. Static content never carries one.",
+				"section": "elevation"
+			},
+			{
+				"name": "The One Frame Rule",
+				"body": "Every photograph and illustration sits in the same frame: 20px radius, clipped, with a mist ground while loading, in one of five fixed ratios (4:5 portrait, 3:4 tall, 4:3 landscape, 16:10 wide, square). Imagery is never borderless, tilted or masked into other shapes. Only María's small portrait on Contacto is a circle.",
+				"section": "shapes"
+			}
+		],
+		"dos": [
+			"**Do** use teal (#24695b) for every action on light grounds and teal-strong for its hover.",
+			"**Do** separate content with 1px hairlines and whitespace, alternating paper, white and mist sections.",
+			"**Do** set short content labels as Gambetta subtitles under their heading; keep labels typed in capitals in capitals, one size smaller.",
+			"**Do** close every page on the cypress field: final call to action, other services where relevant, footer.",
+			"**Do** put every image in the one frame (20px radius) at one of the five ratios.",
+			"**Do** number only sequences the reader follows in order, in teal Gambetta numerals.",
+			"**Do** keep motion to transform and opacity, and give every animation a reduced-motion fallback.",
+			"**Do** keep all copy the site's original text; mark any gap as `[PENDIENTE: ...]`."
+		],
+		"donts": [
+			"**Don't** set seafoam (#7cc6c4) as text on paper, white or mist.",
+			"**Don't** put a small label or kicker above a heading.",
+			"**Don't** build grids of rounded icon-tile cards, or give static content a shadow.",
+			"**Don't** use glassmorphism, decorative gradients, blurred blobs or heavy shadows.",
+			"**Don't** italicise headings for emphasis; colour the run teal instead.",
+			"**Don't** add a second icon family, hand-drawn icon paths or Tailwind default colours.",
+			"**Don't** add motion beyond the hero entrance and figure reveals, or animate layout properties."
+		]
+	}
+}

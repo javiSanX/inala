@@ -1,0 +1,44 @@
+---
+import { serviceMenuLinks } from "../data/site";
+
+// Closing section for every service page: compact links to the other
+// services (the page being viewed is left out). It sits on the cypress field
+// between the closing call to action and the footer. Pages that are not a
+// service (Sobre mí, Cómo trabajo) reuse it as plain links to every service.
+interface Props {
+	heading?: string;
+}
+
+const { heading = "Otros servicios" } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, "");
+const otherServices = serviceMenuLinks.filter(
+	(service) => service.href.replace(/\/$/, "") !== path,
+);
+---
+
+<section
+	class="on-dark border-t border-cypress-line bg-cypress text-on-dark"
+	aria-labelledby="otros-servicios"
+>
+	<div
+		class="mx-auto flex max-w-content flex-col gap-6 px-5 py-12 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-10"
+	>
+		<h2 id="otros-servicios" class="font-display text-subheading font-normal">
+			{heading}
+		</h2>
+		<ul class="flex flex-wrap gap-2">
+			{
+				otherServices.map((service) => (
+					<li>
+						<a
+							href={service.href}
+							class="inline-flex min-h-11 items-center rounded-full border border-cypress-line px-5 text-small font-semibold text-on-dark transition-[border-color,color] duration-200 hover:border-seafoam hover:text-seafoam-soft"
+						>
+							{service.name}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

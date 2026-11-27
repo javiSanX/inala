@@ -1,0 +1,195 @@
+---
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import OtherServices from "../components/OtherServices.astro";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/ui/Button.astro";
+import CtaBand from "../components/ui/CtaBand.astro";
+import FactList from "../components/ui/FactList.astro";
+import Note from "../components/ui/Note.astro";
+import Section from "../components/ui/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import TopicList from "../components/ui/TopicList.astro";
+import {
+	email,
+	licenseNumber,
+	therapistName,
+	whatsappUrl,
+	workshopLink,
+} from "../data/site";
+import Layout from "../layouts/Layout.astro";
+
+const title = "Taller de miedo a volar en Pamplona | Inala Psicoterapia";
+const description =
+	"Charla presencial en Pamplona, en grupo pequeño, con una psicóloga y un piloto comercial: entender el miedo a volar, herramientas y dudas técnicas del vuelo.";
+const pilotName = "Paul Bowles Belzunegui";
+
+// Next group talk. The block switches to "próximas fechas" on the first build
+// after the day has passed, so update this date when a new edition is set.
+const nextTalk = new Date("2026-11-27T12:00:00+01:00");
+const upcoming = nextTalk.getTime() >= Date.now();
+const nextTalkLabel = new Intl.DateTimeFormat("es-ES", {
+	weekday: "long",
+	day: "numeric",
+	month: "long",
+	year: "numeric",
+	timeZone: "Europe/Madrid",
+}).format(nextTalk);
+
+const talkFacts = [
+	{ title: nextTalkLabel, subtitle: "Tercera edición", icon: "calendar_today" },
+	{
+		title: "Presencial, en grupo pequeño",
+		subtitle: "Escríbeme y te paso hora, lugar y precio",
+		icon: "location_on",
+	},
+];
+
+const whatsappWorkshop = `${whatsappUrl}?text=${encodeURIComponent(
+	"Hola, me gustaría información sobre el taller de miedo a volar.",
+)}`;
+
+const topics = [
+	{
+		title: "Entender el miedo",
+		text: "Psicoeducación sobre el miedo, la ansiedad y la fobia: qué le pasa a tu cuerpo y por qué.",
+	},
+	{
+		title: "Herramientas",
+		text: "Recursos prácticos para relacionarte con el miedo de otra manera.",
+	},
+	{
+		title: "La parte técnica del vuelo",
+		text: `${pilotName}, piloto comercial, explica cómo funciona un vuelo y resuelve las dudas que te preocupan.`,
+	},
+	{
+		title: "Una hoja de ruta",
+		text: "Sales con una idea más clara de cómo seguir avanzando en tu proceso con el miedo a volar.",
+	},
+];
+
+const formats = [
+	{
+		title: "En grupo, presencial",
+		text: "Un grupo pequeño, para que haya cercanía y dé tiempo a resolver todas las dudas. El año pasado hicimos dos ediciones.",
+	},
+	{
+		title: "Individual",
+		text: "Si prefieres trabajarlo en un espacio solo para ti, también se puede hacer de forma individual.",
+	},
+	{
+		title: "En grupo, online",
+		text: "Para quien no pueda venir a Pamplona.",
+		note: "Próximamente",
+	},
+];
+---
+
+<Layout title={title} description={description}>
+	<PageHero title="Taller de miedo a volar">
+		<Breadcrumbs
+			slot="breadcrumbs"
+			items={[{ name: "Inicio", href: "/" }, { name: workshopLink.name }]}
+		/>
+		<p class="max-w-2xl text-lead text-ink-muted">
+			Una charla en grupo pequeño que imparto junto a {pilotName}, piloto
+			comercial.
+			Hablamos de qué es el miedo y cómo se convierte en ansiedad o en fobia,
+			te damos herramientas y resolvemos tus dudas sobre cómo funciona un
+			vuelo, para que salgas con una hoja de ruta más clara.
+		</p>
+	</PageHero>
+
+	<!-- Próxima charla -->
+	<Section tone="white">
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12 lg:items-end">
+			<div class="flex flex-col gap-8 lg:col-span-7">
+				{
+					upcoming ? (
+						<SectionHeader title="Próxima charla" layout="stack">
+							<p>
+								La próxima charla es presencial y en grupo. Escríbeme para
+								reservar tu plaza o si tienes alguna duda.
+							</p>
+						</SectionHeader>
+					) : (
+						<SectionHeader title="Próximas fechas" layout="stack">
+							<p>
+								Estoy preparando la próxima edición. Escríbeme y te aviso
+								cuando haya fecha.
+							</p>
+						</SectionHeader>
+					)
+				}
+				{upcoming && <FactList facts={talkFacts} />}
+			</div>
+			<div class="flex flex-col items-start gap-3 lg:col-span-5 lg:items-end">
+				<Button href={whatsappWorkshop} icon="chat">
+					<span>Pedir información por WhatsApp</span>
+				</Button>
+				<Button href={`mailto:${email}`} variant="secondary" icon="mail">
+					<span>{email}</span>
+				</Button>
+			</div>
+		</div>
+	</Section>
+
+	<!-- Qué se trabaja -->
+	<Section tone="mist">
+		<SectionHeader title="¿Qué se trabaja en el taller?" size="large" />
+		<TopicList items={topics} columns={2} class="mt-12" />
+		<Note class="mt-16">
+			La idea no es eliminar el miedo, sino aceptarlo, entenderlo y enseñarle
+			al cuerpo que volar es seguro.
+		</Note>
+		<p class="mt-6 max-w-3xl text-body text-ink-muted">
+			No se pretende que salgas de la charla sin miedo, sino con más
+			motivación, ganas y empoderamiento para seguir avanzando a tu ritmo.
+		</p>
+	</Section>
+
+	<!-- Formatos -->
+	<Section tone="white">
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<div class="flex flex-col gap-5 lg:col-span-5">
+				<SectionHeader title="Formatos" layout="stack">
+					<p>
+						Lo imparto junto a {pilotName}, piloto comercial: yo me ocupo de
+						la parte psicológica y él, de la técnica.
+					</p>
+				</SectionHeader>
+				<p class="text-body text-ink-muted">
+					<a
+						href="/sobre-mi/"
+						class="font-semibold text-teal underline underline-offset-4 transition-[color] duration-200 hover:text-teal-strong"
+						>{therapistName}</a
+					>, psicóloga general sanitaria, Nº col. {licenseNumber}.
+				</p>
+			</div>
+			<TopicList
+				items={formats}
+				columns={1}
+				class="lg:col-span-7"
+			/>
+		</div>
+	</Section>
+
+	<CtaBand
+		title="Volar con miedo también se puede trabajar"
+		label="Taller de miedo a volar"
+	>
+		<p>
+			Escríbeme para reservar plaza en la próxima charla o para preguntar por
+			la modalidad individual.
+		</p>
+		<Fragment slot="actions">
+			<Button href={whatsappWorkshop} variant="inverse" icon="chat">
+				<span>WhatsApp</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>{email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
+
+	<OtherServices />
+</Layout>

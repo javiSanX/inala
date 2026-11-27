@@ -1,337 +1,483 @@
 ---
-// Services Page
-// ------------
-// Description: The services page is a page that displays all the services.
+import processImage from "../assets/images/maria3.webp";
+import heroImage from "../assets/images/nuestro_metodo.jpeg";
+import officeImage from "../assets/images/oficina.webp";
+import OtherServices from "../components/OtherServices.astro";
+import PageHero from "../components/PageHero.astro";
+import SessionExpect from "../components/SessionExpect.astro";
+import Button from "../components/ui/Button.astro";
+import CtaBand from "../components/ui/CtaBand.astro";
+import Figure from "../components/ui/Figure.astro";
+import Icon from "../components/ui/Icon.astro";
+import type { IconName } from "../components/ui/icons";
+import Section from "../components/ui/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import {
+	address,
+	addressCenter,
+	addressCity,
+	contactHref,
+	ctaLabel,
+	email,
+	licenseNumber,
+} from "../data/site";
+import Layout from "../layouts/Layout.astro";
 
-// Components
-// - Layout
-import Layout from '../layouts/Layout.astro';
-// - Blocks
-import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
-import Hero from '../components/custom/BasicHeroCTA.astro';
-import Frases from '../components/custom/Frases.astro';
-import JoinBox from '../components/custom/JoinBox.astro';
-import TitleSection from '../components/custom/TitleSection.astro';
-import Card from '../components/ui/cards/Card.astro';
-import Col from '../components/ui/Col.astro';
-import Row from '../components/ui/Row.astro';
-import Section from '../components/ui/Section.astro';
+const title = "Cómo trabajo: terapia integradora en Pamplona | Inala";
 
-const SEO = {
-   title: 'Nuestro Método Terapéutico | Cómo Trabajamos y Beneficios de la Terapia en Pamplona y Online',
-   description:
-      'Descubre nuestro método de trabajo: un enfoque cercano, integrador y basado en la evidencia. Conoce cómo es la terapia, sus beneficios y en qué áreas puede ayudarte, tanto presencial en Pamplona como online.',
-};
+const description =
+	"Un enfoque cercano, integrador y basado en la evidencia: qué esperar de la primera sesión y cómo avanza el proceso, en Pamplona y online.";
 
-const preguntas = [
-   {
-      question: '¿La terapia es presencial, online o ambas?',
-      answer: 'Es tanto terapia presencial y online. Depende de lo que quieras.',
-   },
+const pillars: { icon: IconName; title: string; text: string; tag: string }[] = [
+	{
+		icon: "psychology",
+		title: "Enfoque integrador y basado en la evidencia",
+		text: "Combino distintos enfoques con respaldo científico y elijo en cada caso los que mejor encajan con tu historia y con lo que necesitas.",
+		tag: "Adaptado a ti",
+	},
+	{
+		icon: "favorite",
+		title: "Una relación de confianza",
+		text: "La relación entre tú y yo es lo que hace posible el cambio. Aquí puedes hablar con libertad, sin juicios y con total confidencialidad.",
+		tag: "Sin juicios",
+	},
+	{
+		icon: "self_improvement",
+		title: "Herramientas prácticas",
+		text: "Desde las primeras sesiones te llevas recursos concretos para entender y manejar tus emociones en tu día a día.",
+		tag: "Para el día a día",
+	},
+];
 
-   {
-      question: '¿Qué tipos de terapia ofrecen?',
-      answer:
-         'Depende de cada persona y sus necesidades. Desde INALA el abordaje es integral, por lo que se ajusta a cada persona.',
-   },
-   {
-      question: '¿Con qué frecuencia recomiendas asistir a terapia?',
-      answer: 'Depende de cada persona y la situación en la que se encuentre.',
-   },
-   {
-      question: '¿Cuánto dura cada sesión?',
-      answer: '60 minutos',
-   },
-   {
-      question: '¿Trabajan con adultos, adolescentes y/o niños?',
-      answer: 'Si, trabajamos tanto con con niños/as, adolescentes y adultos',
-   },
+const steps = [
+	{
+		number: "01",
+		icon: "chat_bubble_outline",
+		title: "Me escribes o me llamas",
+		text: "No tienes que traer nada preparado ni preocuparte por decir lo correcto. No existen respuestas perfectas ni formas «ideales» de empezar: ese camino lo construimos juntos.",
+	},
+	{
+		number: "02",
+		icon: "visibility",
+		title: "Primera sesión para conocernos",
+		text: "En la primera sesión mi objetivo es conocerte y entender qué te ha traído a consulta. Tú decides cuánto quieres contar.",
+	},
+	{
+		number: "03",
+		icon: "flag",
+		title: "Definimos los objetivos",
+		text: "Te ayudo a poner en palabras lo que necesitas y lo que esperas de la terapia. Juntos definimos los primeros objetivos para que el proceso tenga un rumbo claro desde el inicio.",
+	},
+	{
+		number: "04",
+		icon: "shield_with_heart",
+		title: "Sesiones a tu ritmo",
+		text: "Tú marcas el ritmo de cada sesión. Te acompaño, te guío y revisamos juntos cómo vas avanzando.",
+	},
+];
+
+const sessionSteps: {
+	icon: IconName;
+	title: string;
+	text: string;
+	tag: string;
+}[] = [
+	{
+		icon: "hearing",
+		title: "Te escucho sin prisas",
+		text: "Sin prisas, interrupciones ni diagnósticos apresurados. Escucho tu historia con atención y respeto.",
+		tag: "Un espacio para ti",
+	},
+	{
+		icon: "explore",
+		title: "Claridad y dirección",
+		text: "Te explicaré en qué punto estamos, qué estamos trabajando y hacia dónde vamos.",
+		tag: "Sabes en qué punto estás",
+	},
+	{
+		icon: "hourglass_empty",
+		title: "Respeto a tus tiempos",
+		text: "Jamás te forzaré a abrir recuerdos o heridas para los que tu sistema nervioso aún no esté preparado. Caminamos a tu velocidad.",
+		tag: "Seguridad primero",
+	},
+];
+
+const benefits: { icon: IconName; title: string; text: string }[] = [
+	{
+		icon: "favorite",
+		title: "Bienestar emocional",
+		text: "Aprender a comprender, aceptar y gestionar tus emociones, para afrontar los retos del día a día con más serenidad y menos autoexigencia.",
+	},
+	{
+		icon: "psychology",
+		title: "Autoconocimiento",
+		text: "Entender mejor tus emociones, pensamientos, necesidades y fortalezas, para tomar decisiones más coherentes contigo y cuidar tus relaciones.",
+	},
+	{
+		icon: "eco",
+		title: "Autonomía",
+		text: "Consolidar lo aprendido para que puedas seguir cuidándote por tu cuenta cuando termine la terapia.",
+	},
+];
+
+const therapistHighlights = [
+	{
+		icon: "diversity_1",
+		label: "Máster en Terapia Sistémica de Familia y Pareja",
+	},
+	{
+		icon: "child_care",
+		label: "Máster en Salud Mental Perinatal",
+	},
+	{
+		icon: "verified",
+		label: "Experiencia en desprotección infantil, trauma complejo y duelo en la primera infancia",
+	},
+];
+
+const modalities = [
+	{
+		badge: "Presencial · Pamplona",
+		image: officeImage,
+		imageAlt:
+			"Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua, armarios a juego y luz natural.",
+		title: "En mi consulta de Pamplona",
+		text: `Mi consulta, dentro del ${addressCenter}, en Pamplona.`,
+		features: [
+			{
+				icon: "location_on",
+				label: `${address}, ${addressCity}`,
+			},
+			{
+				icon: "apartment",
+				label: addressCenter,
+			},
+		],
+		cta: ctaLabel,
+	},
+	{
+		badge: "Online",
+		visualTitle: "Terapia online",
+		visualText: "Por videollamada",
+		title: "Por videollamada, desde donde estés",
+		text: "Útil si vives lejos de Pamplona, viajas a menudo o te resulta más cómodo desde casa. Trabajo igual que en la consulta presencial.",
+		features: [
+			{
+				icon: "lock",
+				label: "Plataforma segura y cifrada que cumple la normativa de protección de datos",
+			},
+			{
+				icon: "sync_alt",
+				label: "Puedes combinar sesiones online y presenciales",
+			},
+		],
+		cta: ctaLabel,
+	},
 ];
 ---
 
-<Layout title={SEO.title} description={SEO.description}>
-   <Hero
-      title="Nuestro método terapéutico"
-      text="Un espacio seguro y acompañamiento profesional que integra técnicas basadas en evidencia científica para alcanzar el bienestar que buscas."
-   />
+<Layout title={title} description={description} image={heroImage} heroFont>
+	<PageHero
+		size="display"
+		accent
+		backgroundImage={heroImage}
+		mobileBackground="corner"
+	>
+		<Fragment slot="title">
+			{
+				/* Below lg each run is its own line, sized from the viewport width so
+			  the lead is the larger and both always fit on one line. */
+			}
+			<span class="max-lg:block max-lg:text-hero-lead">Cómo trabajo:</span
+			>{" "}
+			<span class="hero-accent max-lg:block max-lg:text-hero-run"
+				>cercanía y a tu propio ritmo</span
+			>
+		</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Combino una relación de confianza con enfoques respaldados por la
+			investigación. El objetivo: que entiendas lo que te pasa y tengas
+			herramientas para sentirte mejor, sin prisas.
+		</p>
 
-   <Section classes="mt-0! pt-0!">
-      <TitleSection title="Como trabajamos" text="" classes="lg:pb-15! pl-0!" />
-      <Row classes="!gap-5 max-[500px]:px-0">
-         <Col span="6">
-            <Card>
-               <Image
-                  src={'/assets/images/maria4.webp'}
-                  alt={'imagen 02'}
-                  width={800}
-                  height={800}
-                  inferSize
-                  class="aspect-[3/4] object-cover"
-               />
-            </Card>
-         </Col>
-         <Col span="6" classes="flex flex-col gap-5">
-            <Card>
-               <div class="text-lg">
-                  <h3>1. Primer contacto</h3>
-                  <p class="">
-                     No tienes que traer nada preparado ni preocuparte por decir lo correcto. No
-                     existen respuestas perfectas ni formas «ideales» de empezar: estamos aquí para
-                     construir juntos ese camino.
-                  </p>
-               </div>
-            </Card>
+		<div class="flex flex-wrap gap-3 pt-2">
+			<Button href={contactHref} icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+		</div>
+	</PageHero>
 
-            <Card>
-               <div class="text-lg">
-                  <h3>2. ¿Qué puedes esperar?</h3>
-                  <p class="">
-                     En esta primera sesión, nuestro objetivo es conocerte. Nos enfocamos en
-                     comprender que es lo que te ha traido a consulta, con el objetivo de dar tus
-                     primeros pasos hacia el bienestar emocional .
-                  </p>
-               </div>
-            </Card>
+	<!-- Pilares del método: three discs joined by a thread that draws on scroll (global.css, .pillars). -->
+	<Section tone="white">
+		<SectionHeader title="Tres principios de mi forma de trabajar" />
+		<ul class="pillars mt-14 grid gap-12 lg:grid-cols-3 lg:gap-x-10">
+			{
+				pillars.map((pillar, index) => (
+					<li class="pillar relative flex gap-6 lg:flex-col lg:gap-8" style={`--i: ${index}`}>
+						<span class="pillar-disc relative z-10 grid size-16 shrink-0 place-items-center rounded-full bg-seafoam-soft text-heading text-teal lg:size-24">
+							<Icon name={pillar.icon} class="pillar-icon" />
+						</span>
+						<div class="pillar-copy flex flex-col gap-3 pt-3 lg:pt-0 lg:pr-4">
+							<h3 class="font-display text-subheading font-normal text-ink">
+								{pillar.title}
+							</h3>
+							<p class="text-body text-ink-muted">{pillar.text}</p>
+							<p class="mt-1 flex items-center gap-3 text-small font-semibold text-teal">
+								<span class="h-px w-8 bg-seafoam" aria-hidden="true" />
+								<span>{pillar.tag}</span>
+							</p>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</Section>
 
-            <Card>
-               <div class="text-lg">
-                  <h3>3. Estableciendo objetivos</h3>
-                  <p class="">
-                     Te ayudamos a identificar tus necesidades y expectativas. Juntos definimos los
-                     primeros objetivos, para que el proceso terapéutico tenga un rumbo claro y
-                     adaptado a ti desde el inicio.
-                  </p>
-               </div>
-            </Card>
+	<!-- Cómo es el proceso: a rail that fills to the reading line, lighting each step (global.css, .process). -->
+	<Section id="proceso">
+		<SectionHeader title="Cómo es el proceso" />
+		<div class="mt-14 grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:items-start">
+			<div class="flex flex-col gap-6 lg:col-span-5">
+				<Figure src={heroImage} alt="" ratio="portrait">
+					<Icon name="verified" class="text-teal" />
+					<span>Acompañamiento cercano y personalizado</span>
+				</Figure>
+				<div class="flex flex-col gap-3 border-t border-line pt-5">
+					<p class="flex flex-col">
+						<span class="font-display text-subheading text-ink"
+							>María Sánchez</span
+						>
+						<span class="text-label text-ink-muted"
+							>Psicóloga general sanitaria</span
+						>
+					</p>
+					<p class="font-display text-lead text-teal">
+						«Te acompaño con rigor y calidez para que encuentres un lugar
+						donde puedas ser tal como eres»
+					</p>
+				</div>
+			</div>
+			<ol class="process -mt-8 lg:col-span-7">
+				{
+					steps.map((step) => (
+						<li class="process-step relative flex gap-5 py-8 lg:gap-8">
+							<span
+								class="process-node relative z-10 mt-1 size-6 shrink-0 rounded-full border border-line-strong bg-paper lg:mt-2.5"
+								aria-hidden="true"
+							/>
+							<div class="flex flex-col gap-3">
+								<div class="flex items-baseline gap-4">
+									<span class="font-display text-heading leading-none text-teal tabular-nums">
+										{step.number}
+									</span>
+									<h3 class="font-display text-subheading font-normal text-ink">
+										{step.title}
+									</h3>
+								</div>
+								<p class="text-body text-ink-muted">{step.text}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</Section>
 
-            <Card>
-               <div class="text-lg">
-                  <h3>4. Tu espacio seguro</h3>
-                  <p class="">
-                     Tú marcas el ritmo de cada encuentro. Te acompañamos, te guiamos y te cuidamos,
-                     ofreciéndote un espacio seguro donde puedes expresarte libremente y sentirte
-                     acogido/a.
-                  </p>
-               </div>
-            </Card>
-         </Col>
-      </Row>
-   </Section>
+	<!-- Qué esperar en sesión: a pinned slider the scroll carries across (SessionExpect.astro, global.css). -->
+	<Section tone="mist" class="overflow-x-clip scroll-driven:py-0">
+		<SessionExpect items={sessionSteps}>
+			<SectionHeader
+				slot="header"
+				title="¿Qué puedes esperar en sesión conmigo?"
+			
+			>
+				<p>
+					La psicoterapia no es un monólogo ni un proceso misterioso. Es una
+					conversación en la que trabajamos juntos, con objetivos claros.
+				</p>
+			</SectionHeader>
+		</SessionExpect>
+	</Section>
 
-   <JoinBox
-      title="Ahora es tu oportunidad. Comienza a priorizarte."
-      subtitle="Ahora es tu oportunidad de dar el primer paso y comenzar a priorizarte, cuidando tu bienestar y dedicando tiempo a lo que realmente necesitas."
-      buttonText="Dar el primer paso"
-   />
+	<!-- Beneficios: swipeable on phones, panels unfold on scroll, discs light on hover (global.css, .benefits). -->
+	<Section tone="white">
+		<SectionHeader
+			title="Lo que la terapia puede ayudarte a trabajar"
+			label="Qué puedes trabajar"
+		>
+			<p>
+				Estos son algunos de los cambios que se trabajan en terapia. Cada
+				proceso es distinto y avanza a su ritmo.
+			</p>
+		</SectionHeader>
+		<ul
+			class="benefits -mx-5 mt-14 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3"
+		>
+			{
+				benefits.map((benefit, index) => (
+					<li
+						class="benefit group flex shrink-0 basis-4/5 snap-center flex-col gap-5 rounded-frame bg-paper p-7 sm:basis-auto"
+						style={`--i: ${index}`}
+					>
+						<span class="benefit-disc relative grid size-16 place-items-center rounded-full bg-seafoam-soft text-heading text-teal">
+							<Icon name={benefit.icon} class="benefit-icon relative" />
+						</span>
+						<div class="flex flex-col gap-2.5">
+							<h3 class="font-display text-subheading font-normal text-ink hyphens-auto">
+								{benefit.title}
+							</h3>
+							<p class="text-body text-ink-muted">{benefit.text}</p>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</Section>
 
-   <Section classes="">
-      <TitleSection
-         title="Los beneficios de nuestro método"
-         text="Descubre cómo otras personas han transformado su vida y bienestar emocional gracias a nuestro acompañamiento profesional."
-         classes="lg:pb-15! pl-0!"
-      />
-      <Row classes="!gap-5 max-[500px]:px-0">
-         <Col span="6" classes="flex flex-col gap-5">
-            <Card>
-               <div class="mb-4 flex items-center gap-4">
-                  <Icon
-                     name="check-circle"
-                     class="testimonial__quote"
-                     size={40}
-                     width={40}
-                     height={40}
-                  />
-                  <h3>Bienestar emocional</h3>
-               </div>
+	<!-- Conoce a tu terapeuta: the photo drifts in its frame, the highlights tick in on scroll (global.css). -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-12 lg:grid-cols-12 lg:items-center">
+			<div class="therapist-copy flex flex-col gap-6 lg:order-2 lg:col-span-7">
+				<SectionHeader
+					title="Cercanía, rigor y una mirada humana"
+					label="Quién te acompaña"
+					layout="stack"
+				>
+					<p>
+						Me llamo María y soy quien te atenderá en Inala. Mi propósito
+						es acompañarte con empatía, rigor y presencia en cada paso de
+						tu proceso.
+					</p>
+					<p class="mt-4">
+						Antes de la psicología trabajé en la empresa, y eso me ayuda a
+						entender de cerca el estrés y la autoexigencia.
+					</p>
+				</SectionHeader>
+				<ul class="highlights flex flex-col gap-3">
+					{
+						therapistHighlights.map((item, index) => (
+							<li class="flex items-start gap-3 text-body text-ink" style={`--i: ${index}`}>
+								<span class="highlight-tick grid size-7 shrink-0 place-items-center rounded-full bg-seafoam-soft text-teal">
+									<Icon name="check" class="highlight-check" />
+								</span>
+								<span class="highlight-label pt-0.5">{item.label}</span>
+							</li>
+						))
+					}
+				</ul>
+				<a
+					href="/sobre-mi/"
+					class="group inline-flex min-h-11 items-center gap-2 self-start text-small font-semibold text-teal underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-200 hover:text-teal-strong hover:decoration-current"
+				>
+					<span>Conocer mi trayectoria</span>
+					<Icon
+						name="arrow_forward"
+						class="transition-[translate] duration-200 ease-out motion-safe:group-hover-fine:translate-x-0.5"
+					/>
+				</a>
+			</div>
+			<Figure
+				src={processImage}
+				alt="María Sánchez sonriendo, de pie, con traje verde salvia y camiseta gris."
+				ratio="portrait"
+				class="lg:order-1 lg:col-span-5"
+				imgClass="therapist-photo"
+			>
+				<Icon name="verified" class="text-teal" />
+				<span>
+					<span class="block font-semibold text-ink">María Sánchez</span>
+					<span class="block"
+						>Psicóloga general sanitaria · Nº col. {licenseNumber}</span
+					>
+				</span>
+			</Figure>
+		</div>
+	</Section>
+<CtaBand label="Cuando lo sientas" title="¿Te gustaría empezar?">
+		<p>
+			En la primera sesión nos conocemos, hablamos de tu momento y valoramos
+			juntos cómo puedo acompañarte.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button href={`mailto:${email}`} variant="inverse-outline" icon="mail">
+				<span>Escribirme a {email}</span>
+			</Button>
+		</Fragment>
+	</CtaBand>
 
-               <p class="">
-                  La terapia te ayuda a encontrar tu equilibrio interior, te permite comprender,
-                  aceptar, y gestionar las emociones de forma saludable. Para que te sientas capaz
-                  de afrontar los retos de la vida con serenidad, flexibilidad y autocompasión.
-               </p>
-            </Card>
-            <Card>
-               <div class="mb-4 flex items-center gap-4">
-                  <Icon
-                     name="check-circle"
-                     class="testimonial__quote"
-                     size={40}
-                     width={40}
-                     height={40}
-                  />
-                  <h3>Autoconocimiento</h3>
-               </div>
-               <p class="">
-                  La terapia te guía en la exploración y comprensión de tus emociones, pensamientos,
-                  necesidades, fortalezas. De esta manera, desarrollarás una mayor claridad
-                  interior, y podrás tomar decisiones más coherentes, mejorar las relaciones y vivir
-                  de una manera plena.
-               </p>
-            </Card>
-            <Card>
-               <div class="mb-4 flex items-center gap-4">
-                  <Icon
-                     name="check-circle"
-                     class="testimonial__quote"
-                     size={40}
-                     width={40}
-                     height={40}
-                  />
-                  <h3>Herramientas</h3>
-               </div>
-               <p class="">
-                  Aprenderás estrategias y recursos prácticos para enfrentar retos personales,
-                  superar obstáculos y resolver conflictos de manera efectiva.
-               </p>
-            </Card>
-            <Card>
-               <div class="mb-4 flex items-center gap-4">
-                  <Icon
-                     name="check-circle"
-                     class="testimonial__quote"
-                     size={40}
-                     width={40}
-                     height={40}
-                  />
-                  <h3>Cambio duradero</h3>
-               </div>
-               <p class="">
-                  La terapia te ayuda a lograr mejoras duraderas, consolidando hábitos y recursos
-                  que te permiten mantener tu bienestar emocional a largo plazo.
-               </p>
-            </Card>
-         </Col>
-         <Col span="6">
-            <Card>
-               <Image
-                  src={'/assets/images/image7.png'}
-                  alt={'imagen 02'}
-                  width={800}
-                  height={800}
-                  inferSize
-                  class={'object-cover aspect-[3/4]'}
-               />
-            </Card>
-         </Col>
-      </Row>
-   </Section>
-
-   <Section type="alt">
-      <TitleSection
-         title="Áreas en las que la terapia puede ayudarte"
-         text="La terapia psicológica es un espacio de acompañamiento, comprensión y crecimiento personal. A través del proceso terapéutico, puedes aprender a conocerte mejor, gestionar tus emociones y mejorar tu salud mental y relacional. Algunas de las áreas más comunes en las que la terapia te puede ayudar, son las siguientes:"
-         classes="lg:pb-15! pl-0!"
-      />
-      <Row classes="mb-5">
-         <Col span="4">
-            <Card>
-               <Icon name="bell" class="size-15 pb-3" />
-               <h3>Gestión emocional, autoestima y autocofianza</h3>
-               <p class="last:mb-0">
-                  Aprender a identificar, comprender y regular las emociones. Fortalecer la relación
-                  contigo mismo/a, desarrollar una imagen más realista y amable, superando la
-                  autocrítica.
-               </p>
-            </Card>
-         </Col>
-         <Col span="4">
-            <Card>
-               <Icon name="bell" class="size-15 pb-3" />
-               <h3>Ansiedad y estrés</h3>
-               <p class="last:mb-0">
-                  Reducir dicha sintomatología física, junto con aquellas preocupaciones,
-                  pensamientos y creencias no funcionales.
-               </p>
-            </Card>
-         </Col>
-         <Col span="4">
-            <Card>
-               <Icon name="bell" class="size-15 pb-3" />
-               <h3>Depresión y desanimo</h3>
-               <p class="last:mb-0">
-                  Comprender las causas del malestar emocional, recuperar la motivación y
-                  reconstruir el sentido vital.
-               </p>
-            </Card>
-         </Col>
-      </Row>
-      <Row>
-         <Col span="4">
-            <Card>
-               <Icon name="bell" class="size-15 pb-3" />
-               <h3>Relaciones interpersonales</h3>
-               <p class="last:mb-0">
-                  Mejorar la comunicación, establecer límites saludables y cultivar vínculos más
-                  seguros y equiibrados.
-               </p>
-            </Card>
-         </Col>
-         <Col span="4">
-            <Card>
-               <Icon name="bell" class="size-15 pb-3" />
-               <h3>Duelos y pérdidas. Traumas y experiencias difíciles</h3>
-               <p class="last:mb-0">
-                  Acompañar en el proceso de la aceptación y adaptación ante una pérdida o cambio
-                  significativo, integrando el dolor y dando paso a una nueva etapa de vida. Poder
-                  reconstruir la sensación de seguridad y confianza en ti mismo/a y los demás, así
-                  como reducir la sintomatología que acompaña a estas experiencias.
-               </p>
-            </Card>
-         </Col>
-         <Col span="4">
-            <Card>
-               <Icon name="bell" class="size-15 pb-3" />
-               <h3>Autoconocimiento y crecimiento personal</h3>
-               <p class="last:mb-0">
-                  Explorar tu historia, tus valores y tus metas, para vivir de manera más consciente
-                  y coherente contigo mismo/a.
-               </p>
-            </Card>
-         </Col>
-      </Row>
-   </Section>
-
-   <!-- <Section decoration="all" type="" classes="">
-      <Row classes="">
-         <Col span="5">
-            <h2 class="text-left">Preguntas Frecuentes</h2>
-         </Col>
-         <Col span="7">
-            {
-               preguntas.map((pregunta) => (
-                  <Card classes="mb-5">
-                     <details class="group">
-                        <summary class="flex cursor-pointer list-none items-center justify-between">
-                           <h4 class="!m-0 p-0">{pregunta.question}</h4>
-                           <span class="transition group-open:rotate-180">
-                              <svg
-                                 fill="none"
-                                 height="24"
-                                 shape-rendering="geometricPrecision"
-                                 stroke="currentColor"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 stroke-width="1.5"
-                                 viewBox="0 0 24 24"
-                                 width="24"
-                              >
-                                 <path d="M6 9l6 6 6-6" />
-                              </svg>
-                           </span>
-                        </summary>
-                        <p class="group-open:animate-fadeIn mt-3">{pregunta.answer}</p>
-                     </details>
-                  </Card>
-               ))
-            }
-         </Col>
-      </Row>
-   </Section> -->
-
-   <Frases
-      title="La terapia es un espacio donde puedes reencontrarte contigo mismo/a y descubrir nuevas formas de crecer y sanar."
-      classes="lg:pb-15! pl-0!"
-      type="block"
-   />
+	<!-- Modalidades de consulta -->
+	<Section tone="white">
+		<SectionHeader title="Dónde son las sesiones" label="Presencial u online">
+			<p>
+				Elige la opción que mejor encaje con tu vida. Las sesiones duran 60
+				minutos en ambos casos.
+			</p>
+		</SectionHeader>
+		<ul class="mt-14 grid gap-x-12 gap-y-14 md:grid-cols-2">
+			{
+				modalities.map((modality, index) => (
+					<li class="flex flex-col gap-6">
+						{modality.image ? (
+							<Figure
+								src={modality.image}
+								alt={modality.imageAlt ?? ""}
+								ratio="wide"
+								sizes="(min-width: 768px) 45vw, 100vw"
+							>
+								<Icon name="location_on" class="text-teal" />
+								<span class="font-semibold text-ink">
+									{modality.badge}
+								</span>
+							</Figure>
+						) : (
+							<div class="flex flex-col gap-3">
+								<div class="flex aspect-16/10 flex-col items-start justify-end gap-2 rounded-frame bg-cypress p-8 text-on-dark">
+									<Icon name="videocam" class="size-10 text-seafoam" />
+									<span class="font-display text-heading">
+										{modality.visualTitle}
+									</span>
+									<span class="text-small text-on-dark-muted">
+										{modality.visualText}
+									</span>
+								</div>
+								<p class="flex items-center gap-2 text-label">
+									<Icon name="videocam" class="text-teal" />
+									<span class="font-semibold text-ink">
+										{modality.badge}
+									</span>
+								</p>
+							</div>
+						)}
+						<div class="flex flex-1 flex-col gap-3">
+							<h3 class="font-display text-subheading font-normal text-ink">
+								{modality.title}
+							</h3>
+							<p class="text-body text-ink-muted">{modality.text}</p>
+							<ul class="mt-2 flex flex-col gap-2 border-t border-line pt-4">
+								{modality.features.map((feature) => (
+									<li class="flex items-start gap-3 text-small text-ink">
+										<Icon name="check" class="mt-0.5 text-teal" />
+										<span>{feature.label}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+						<div>
+							<Button
+								href={contactHref}
+								variant={index === 0 ? "secondary" : "primary"}
+								arrow
+							>
+								<span>{modality.cta}</span>
+							</Button>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</Section>
+	<OtherServices heading="Servicios" />
 </Layout>

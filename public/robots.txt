@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://inala.es/sitemap-index.xml

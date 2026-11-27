@@ -1,0 +1,283 @@
+---
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Icon from "./ui/Icon.astro";
+import type { IconName } from "./ui/icons";
+
+interface Props {
+	situations: {
+		icon: IconName;
+		label: string;
+		text: string;
+		/** Transform that frames the part of the photo this situation is about. */
+		frame: string;
+	}[];
+	image: ImageMetadata;
+	imageAlt: string;
+	/** Closing link under the active situation. */
+	href: string;
+	linkLabel: string;
+	class?: string;
+}
+
+const {
+	situations,
+	image,
+	imageAlt,
+	href,
+	linkLabel,
+	class: className,
+} = Astro.props;
+
+// Without the script every situation is listed in the card; the script turns
+// them into tabs (data-ready) that swap the card and reframe the photo.
+const id = "situacion";
+---
+
+<div
+	class:list={[
+		"online-situations group grid *:min-w-0 gap-x-16 gap-y-8 lg:grid-cols-12 lg:items-center",
+		className,
+	]}
+	data-situations
+>
+	<div
+		role="tablist"
+		aria-label="Situaciones"
+		aria-orientation="vertical"
+		class="hidden lg:col-span-5 lg:group-data-ready:flex lg:flex-col"
+	>
+		{
+			situations.map((situation, index) => (
+				<button
+					type="button"
+					role="tab"
+					id={`${id}-tab-${index}`}
+					aria-controls={`${id}-panel-${index}`}
+					aria-selected={index === 0 ? "true" : "false"}
+					tabindex={index === 0 ? 0 : -1}
+					data-frame={situation.frame}
+					class="group/tab flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line-strong bg-white py-2 pr-4 pl-3 text-left text-small font-semibold text-ink-muted transition-[color,background-color,border-color] duration-200 not-aria-selected:hover-fine:border-teal not-aria-selected:hover-fine:text-teal aria-selected:border-teal aria-selected:bg-teal aria-selected:text-white lg:w-full lg:gap-5 lg:rounded-none lg:border-0 lg:border-t lg:border-line lg:bg-transparent lg:px-0 lg:py-5 lg:font-display lg:text-subheading lg:font-normal lg:text-ink-soft lg:last:border-b lg:not-aria-selected:hover-fine:border-line lg:not-aria-selected:hover-fine:text-ink lg:aria-selected:bg-transparent lg:aria-selected:text-ink"
+				>
+					<span
+						class="grid shrink-0 place-items-center text-lg lg:size-12 lg:rounded-full lg:bg-mist lg:text-2xl lg:text-teal lg:transition-[color,background-color] lg:duration-200 lg:group-aria-selected/tab:bg-teal lg:group-aria-selected/tab:text-white"
+					>
+						<Icon name={situation.icon} />
+					</span>
+					<span class="flex-1 transition-[translate] duration-300 ease-out motion-reduce:transition-none lg:group-hover/tab:translate-x-1.5">{situation.label}</span>
+					<span
+						class="hidden text-teal opacity-0 transition-[opacity,translate] duration-300 ease-out -translate-x-2 motion-reduce:transition-none lg:block lg:group-hover/tab:translate-x-0 lg:group-hover/tab:opacity-50 lg:group-aria-selected/tab:translate-x-0 lg:group-aria-selected/tab:opacity-100"
+						aria-hidden="true"
+					>
+						<Icon name="arrow_forward" />
+					</span>
+				</button>
+			))
+		}
+	</div>
+
+	<div class="relative lg:col-span-7">
+		<div class="relative aspect-16/10 overflow-hidden rounded-frame bg-mist">
+			<Picture
+				src={image}
+				alt={imageAlt}
+				formats={["avif", "webp"]}
+				fallbackFormat="jpg"
+				widths={[480, 720, 960, 1280]}
+				sizes="(min-width: 1024px) 40vw, 100vw"
+				loading="lazy"
+				class="situations-photo size-full object-cover"
+				data-photo
+			/>
+			<p
+				class="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-label text-ink"
+			>
+				<span class="relative grid size-2.5 place-items-center" aria-hidden="true">
+					<span class="situations-live absolute size-full rounded-full bg-seafoam"></span>
+					<span class="relative size-2 rounded-full bg-teal"></span>
+				</span>
+				Sesión por videollamada
+			</p>
+		</div>
+
+		<div
+			class="relative z-10 mx-3 -mt-10 sm:-mt-20 rounded-frame bg-white p-6 shadow-float sm:mx-8 sm:p-8"
+		>
+			<div
+					data-track
+					class="relative grid gap-6 group-data-ready:flex group-data-ready:snap-x group-data-ready:snap-mandatory group-data-ready:gap-6 group-data-ready:overflow-x-auto group-data-ready:overscroll-x-contain lg:group-data-ready:grid lg:group-data-ready:gap-0 lg:group-data-ready:overflow-visible"
+				>
+				{
+					situations.map((situation, index) => (
+						<div
+							id={`${id}-panel-${index}`}
+							data-panel
+							class="situations-panel flex flex-col gap-3 border-line not-first:border-t not-first:pt-6 group-data-ready:w-full group-data-ready:shrink-0 group-data-ready:snap-center group-data-ready:border-0 group-data-ready:pt-0 lg:group-data-ready:col-start-1 lg:group-data-ready:row-start-1"
+							data-active={index === 0 ? "" : undefined}
+						>
+							<h3 class="flex items-center gap-3 font-display text-subheading font-normal text-ink">
+								<span class="text-teal group-data-ready:hidden">
+									<Icon name={situation.icon} />
+								</span>
+								{situation.label}
+							</h3>
+							<p class="max-w-reading text-lead text-ink-muted">
+								{situation.text}
+							</p>
+						</div>
+					))
+				}
+			</div>
+			<div class="lg:hidden">
+				<div class="hidden items-center justify-between pt-5 group-data-ready:flex">
+					<button
+						type="button"
+						data-step={-1}
+						aria-label="Situación anterior"
+						class="grid size-11 cursor-pointer place-items-center rounded-full border border-line-strong text-lg text-teal transition-[color,background-color,border-color] duration-200 hover-fine:border-teal hover-fine:bg-mist disabled:cursor-default disabled:opacity-40 disabled:hover-fine:border-line-strong disabled:hover-fine:bg-transparent"
+					>
+						<Icon name="arrow_back" />
+					</button>
+					<div class="flex gap-2" aria-hidden="true">
+						{
+							situations.map(() => (
+								<span
+									data-dot
+									class="size-2 rounded-full bg-line-strong transition-[background-color] duration-200 data-active:bg-teal"
+								/>
+							))
+						}
+					</div>
+					<button
+						type="button"
+						data-step={1}
+						aria-label="Situación siguiente"
+						class="grid size-11 cursor-pointer place-items-center rounded-full border border-line-strong text-lg text-teal transition-[color,background-color,border-color] duration-200 hover-fine:border-teal hover-fine:bg-mist disabled:cursor-default disabled:opacity-40 disabled:hover-fine:border-line-strong disabled:hover-fine:bg-transparent"
+					>
+						<Icon name="arrow_forward" />
+					</button>
+				</div>
+			</div>
+			<a
+				href={href}
+				class="group/link mt-6 inline-flex items-center gap-2 border-t border-line pt-5 text-small font-semibold text-teal transition-[color] duration-200 hover-fine:text-teal-strong"
+			>
+				<span class="underline decoration-teal/30 underline-offset-4 group-hover-fine/link:decoration-teal-strong"
+					>{linkLabel}</span
+				>
+				<span
+					class="transition-[translate] duration-200 ease-out group-hover-fine/link:translate-x-0.5"
+					aria-hidden="true"
+				>
+					<Icon name="arrow_forward" />
+				</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<script>
+	// Tabs with automatic activation: arrows, Home and End move the selection,
+	// which swaps the card and reframes the photo.
+	for (const root of document.querySelectorAll<HTMLElement>(
+		"[data-situations]",
+	)) {
+		const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+		const panels = [...root.querySelectorAll<HTMLElement>("[data-panel]")];
+		const photo = root.querySelector<HTMLElement>("[data-photo]");
+		const track = root.querySelector<HTMLElement>("[data-track]");
+		const dots = [...root.querySelectorAll<HTMLElement>("[data-dot]")];
+		const steps = [...root.querySelectorAll<HTMLButtonElement>("[data-step]")];
+		const desktop = window.matchMedia("(min-width: 64rem)");
+		const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+		const select = (index: number, focus = false) => {
+			tabs.forEach((tab, i) => {
+				const selected = i === index;
+				tab.setAttribute("aria-selected", String(selected));
+				tab.tabIndex = selected ? 0 : -1;
+				panels[i].toggleAttribute("data-active", selected);
+				// On mobile every slide stays reachable while swiping.
+				panels[i].toggleAttribute("inert", !selected && desktop.matches);
+				dots[i]?.toggleAttribute("data-active", selected);
+			});
+			if (photo) photo.style.transform = tabs[index].dataset.frame ?? "";
+			for (const step of steps) {
+				const target = index + Number(step.dataset.step);
+				step.disabled = target < 0 || target >= tabs.length;
+			}
+			if (focus) tabs[index].focus();
+		};
+
+		panels.forEach((panel, index) => {
+			panel.setAttribute("role", "tabpanel");
+			panel.setAttribute("aria-labelledby", tabs[index].id);
+		});
+
+		tabs.forEach((tab, index) => {
+			tab.addEventListener("click", () => select(index));
+			tab.addEventListener("keydown", (event) => {
+				const last = tabs.length - 1;
+				const next: Record<string, number> = {
+					ArrowDown: index === last ? 0 : index + 1,
+					ArrowRight: index === last ? 0 : index + 1,
+					ArrowUp: index === 0 ? last : index - 1,
+					ArrowLeft: index === 0 ? last : index - 1,
+					Home: 0,
+					End: last,
+				};
+				if (!(event.key in next)) return;
+				event.preventDefault();
+				select(next[event.key], true);
+			});
+		});
+
+		// Mobile: the panels are a swipeable carousel; the visible slide drives the
+		// photo framing.
+		if (track) {
+			track.tabIndex = 0;
+			track.setAttribute("aria-label", "Situaciones");
+			let frame = 0;
+			track.addEventListener(
+				"scroll",
+				() => {
+					cancelAnimationFrame(frame);
+					frame = requestAnimationFrame(() => {
+						if (desktop.matches) return;
+						let nearest = 0;
+						panels.forEach((panel, i) => {
+							const d = Math.abs(panel.offsetLeft - track.scrollLeft);
+							if (d < Math.abs(panels[nearest].offsetLeft - track.scrollLeft))
+								nearest = i;
+						});
+						if (tabs[nearest].getAttribute("aria-selected") !== "true")
+							select(nearest);
+					});
+				},
+				{ passive: true },
+			);
+			for (const step of steps) {
+				step.addEventListener("click", () => {
+					const current = tabs.findIndex(
+						(tab) => tab.getAttribute("aria-selected") === "true",
+					);
+					const target = current + Number(step.dataset.step);
+					if (!panels[target]) return;
+					track.scrollTo({
+						left: panels[target].offsetLeft,
+						behavior: reduceMotion.matches ? "instant" : "smooth",
+					});
+				});
+			}
+			desktop.addEventListener("change", () => {
+				const current = tabs.findIndex(
+					(tab) => tab.getAttribute("aria-selected") === "true",
+				);
+				select(Math.max(current, 0));
+			});
+		}
+
+		root.dataset.ready = "";
+		select(0);
+	}
+</script>

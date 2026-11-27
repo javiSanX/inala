@@ -1,0 +1,206 @@
+---
+// Cookie consent (GDPR and LSSI-CE). The site uses technical and analytics cookies
+// only; there are no advertising cookies, so ad consent always stays denied.
+// Choices are stored in the same cookie as main and pushed to Google Consent Mode.
+import { consentCookieName } from "../data/analytics";
+import { buttonClass } from "./ui/button";
+
+const small =
+	"inline-flex min-h-11 items-center justify-center rounded-full px-5 text-small font-semibold transition-[background-color,border-color,color] duration-150";
+---
+
+<section
+	id="cookie-banner"
+	aria-label="Aviso de cookies"
+	data-cookie-name={consentCookieName}
+	class="on-dark fixed inset-x-4 bottom-4 z-50 rounded-frame bg-cypress p-5 text-on-dark shadow-float transition-[opacity,translate] duration-300 ease-out not-data-open:pointer-events-none not-data-open:translate-y-4 not-data-open:opacity-0 motion-reduce:transition-none sm:left-auto sm:max-w-md"
+	hidden
+>
+	<p class="text-small">
+		Uso cookies técnicas para que la web funcione y, si lo aceptas, cookies de análisis
+		para saber qué páginas se leen. No uso cookies publicitarias.{" "}
+		<a
+			href="/aviso-legal-y-politica-de-cookies/"
+			target="_blank"
+			class="font-semibold text-seafoam underline hover:text-seafoam-soft"
+			>Más información</a
+		>
+	</p>
+	<div class="mt-4 flex flex-wrap gap-2">
+		<button type="button" data-cookie-action="accept" class={`${small} bg-seafoam text-cypress hover:bg-seafoam-soft`}>
+			Aceptar
+		</button>
+		<button
+			type="button"
+			data-cookie-action="reject"
+			class={`${small} border border-cypress-line hover:border-seafoam hover:text-seafoam-soft`}
+		>
+			Rechazar
+		</button>
+		<button
+			type="button"
+			data-cookie-action="configure"
+			class={`${small} border border-cypress-line hover:border-seafoam hover:text-seafoam-soft`}
+		>
+			Configurar
+		</button>
+	</div>
+</section>
+
+<dialog
+	id="cookie-modal"
+	aria-labelledby="cookie-modal-title"
+	class="m-auto w-[calc(100%-2rem)] max-w-xl rounded-frame bg-white p-0 text-ink shadow-float backdrop:bg-ink/60"
+>
+	<div class="flex items-center justify-between gap-4 border-b border-line p-5">
+		<h2 id="cookie-modal-title" class="font-display text-subheading">Configuración de cookies</h2>
+		<button
+			type="button"
+			data-cookie-action="close"
+			class="grid size-11 place-items-center rounded-full text-2xl text-ink-soft transition-[color] duration-150 hover:text-ink"
+		>
+			<span aria-hidden="true">&times;</span>
+			<span class="sr-only">Cerrar</span>
+		</button>
+	</div>
+	<div class="divide-y divide-line px-5">
+		<div class="py-5">
+			<div class="flex items-center justify-between gap-4">
+				<label for="technical-cookies" class="text-body font-semibold">Cookies técnicas</label>
+				<input id="technical-cookies" type="checkbox" class="size-5 accent-teal" checked disabled />
+			</div>
+			<p class="mt-2 text-small text-ink-muted">
+				Las necesarias para que la web funcione. No se pueden desactivar.
+			</p>
+		</div>
+		<div class="py-5">
+			<div class="flex items-center justify-between gap-4">
+				<label for="analytics-cookies" class="text-body font-semibold">Cookies de análisis</label>
+				<input id="analytics-cookies" type="checkbox" class="size-5 accent-teal" />
+			</div>
+			<p class="mt-2 text-small text-ink-muted">
+				Me ayudan a saber qué páginas se leen y a mejorar la web (Google Analytics).
+			</p>
+		</div>
+	</div>
+	<div class="flex justify-end border-t border-line p-5">
+		<button type="button" data-cookie-action="save" class={buttonClass("primary")}>
+			Guardar preferencias
+		</button>
+	</div>
+</dialog>
+
+<script>
+	interface Consent {
+		technical: true;
+		analytics: boolean;
+		/** Kept for cookies saved before the marketing category was removed; always false now. */
+		marketing: false;
+		timestamp: number;
+	}
+
+	const banner = document.getElementById("cookie-banner") as HTMLElement;
+	const modal = document.getElementById("cookie-modal") as HTMLDialogElement;
+	const analyticsBox = document.getElementById("analytics-cookies") as HTMLInputElement;
+	const cookieName = banner.dataset.cookieName ?? "inala_cookie_consent";
+
+	// Same trigger as main: show after 200px of scroll or 5 s, whichever comes first.
+	const scrollThreshold = 200;
+	const autoShowDelay = 5000;
+
+	function readConsent(): Consent | null {
+		const entry = document.cookie
+			.split(";")
+			.map((part) => part.trim())
+			.find((part) => part.startsWith(`${cookieName}=`));
+		if (!entry) return null;
+		try {
+			return JSON.parse(decodeURIComponent(entry.slice(cookieName.length + 1)));
+		} catch {
+			return null;
+		}
+	}
+
+	function applyConsent(consent: Consent) {
+		const state = (granted: boolean) => (granted ? "granted" : "denied");
+		window.gtag?.("consent", "update", {
+			analytics_storage: state(consent.analytics),
+		});
+		analyticsBox.checked = consent.analytics;
+	}
+
+	function saveConsent(analytics: boolean) {
+		const consent: Consent = { technical: true, analytics, marketing: false, timestamp: Date.now() };
+		const expires = new Date();
+		expires.setFullYear(expires.getFullYear() + 1);
+		// biome-ignore lint/suspicious/noDocumentCookie: the Cookie Store API is not available in every browser we support.
+		document.cookie = `${cookieName}=${encodeURIComponent(JSON.stringify(consent))}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
+		applyConsent(consent);
+		hideBanner();
+		if (modal.open) modal.close();
+	}
+
+	function showBanner() {
+		banner.hidden = false;
+		requestAnimationFrame(() => {
+			banner.dataset.open = "";
+		});
+	}
+
+	function hideBanner() {
+		delete banner.dataset.open;
+		window.setTimeout(() => {
+			banner.hidden = true;
+		}, 300);
+	}
+
+	function scheduleBanner() {
+		let shown = false;
+		const show = () => {
+			if (shown) return;
+			shown = true;
+			window.clearTimeout(timer);
+			window.removeEventListener("scroll", onScroll);
+			showBanner();
+		};
+		const onScroll = () => {
+			if (window.scrollY > scrollThreshold) show();
+		};
+		const timer = window.setTimeout(show, autoShowDelay);
+		window.addEventListener("scroll", onScroll, { passive: true });
+	}
+
+	document.addEventListener("click", (event) => {
+		const target = (event.target as Element).closest<HTMLElement>("[data-cookie-action]");
+		if (!target) return;
+		switch (target.dataset.cookieAction) {
+			case "accept":
+				saveConsent(true);
+				break;
+			case "reject":
+				saveConsent(false);
+				break;
+			case "configure":
+				modal.showModal();
+				break;
+			case "close":
+				modal.close();
+				break;
+			case "save":
+				saveConsent(analyticsBox.checked);
+				break;
+		}
+	});
+
+	// Close the modal when the backdrop is clicked.
+	modal.addEventListener("click", (event) => {
+		if (event.target === modal) modal.close();
+	});
+
+	const stored = readConsent();
+	if (stored) {
+		applyConsent(stored);
+	} else {
+		scheduleBanner();
+	}
+</script>

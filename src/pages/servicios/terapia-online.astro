@@ -1,295 +1,377 @@
 ---
-import { Image } from 'astro:assets';
-import Hero from '../../components/custom/BasicHeroCTA.astro';
-import Frases from '../../components/custom/Frases.astro';
-import JoinBox from '../../components/custom/JoinBox.astro';
-import TitleSection from '../../components/custom/TitleSection.astro';
-import Col from '../../components/ui/Col.astro';
-import Row from '../../components/ui/Row.astro';
-import Section from '../../components/ui/Section.astro';
-import Card from '../../components/ui/cards/Card.astro';
-import Layout from '../../layouts/Layout.astro';
+import therapistImage from "../../assets/images/maria5.webp";
+import officeImage from "../../assets/images/oficina.webp";
+import heroImage from "../../assets/images/terapia_online.jpeg";
+import situationsImage from "../../assets/images/terapia-online.jpg";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import OnlineSituations from "../../components/OnlineSituations.astro";
+import OtherServices from "../../components/OtherServices.astro";
+import PageHero from "../../components/PageHero.astro";
+import RelatedPosts from "../../components/RelatedPosts.astro";
+import Button from "../../components/ui/Button.astro";
+import CtaBand from "../../components/ui/CtaBand.astro";
+import Faq from "../../components/ui/Faq.astro";
+import Figure from "../../components/ui/Figure.astro";
+import Icon from "../../components/ui/Icon.astro";
+import type { IconName } from "../../components/ui/icons";
+import Section from "../../components/ui/Section.astro";
+import SectionHeader from "../../components/ui/SectionHeader.astro";
+import {
+	contactHref,
+	ctaLabel,
+	email,
+	licenseNumber,
+	therapistName,
+	whatsappUrl,
+} from "../../data/site";
+import Layout from "../../layouts/Layout.astro";
 
-const SEO = {
-   title: 'Terapia online en Pamplona | Psicóloga especialista en terapia virtual',
-   description:
-      'Terapia online desde Pamplona. Sesiones de psicología virtual para terapia individual, de pareja, familiar y perinatal. Acceso desde cualquier lugar con total confidencialidad y profesionalidad.',
-};
+const title = "Terapia online por videollamada | Inala Psicoterapia";
 
-const preguntas = [
-   {
-      question: '¿Es tan efectiva la terapia online como la presencial?',
-      answer:
-         'Sí, múltiples estudios demuestran que la terapia online es igual de efectiva que la presencial. La clave está en la conexión terapéutica, que se puede establecer perfectamente a través de videoconferencia cuando se cuenta con un profesional especializado.',
-   },
-   {
-      question: '¿Qué necesito para una sesión de terapia online?',
-      answer:
-         'Solo necesitas un dispositivo con cámara y micrófono (ordenador, tablet o móvil), conexión a internet estable y un espacio privado donde te sientas cómodo/a. Te proporcionaré las instrucciones técnicas antes de la primera sesión.',
-   },
-   {
-      question: '¿Cómo se garantiza la confidencialidad online?',
-      answer:
-         'Utilizo plataformas seguras y cifradas específicas para terapia online que cumplen con la normativa de protección de datos. Además, te orientaré sobre cómo crear un espacio privado para tus sesiones desde casa.',
-   },
-   {
-      question: '¿Puedo alternar sesiones online y presenciales?',
-      answer:
-         'Por supuesto. Muchos pacientes combinan ambas modalidades según sus necesidades, horarios y circunstancias. La flexibilidad es una de las grandes ventajas de ofrecer ambas opciones de atención.',
-   },
-   {
-      question: '¿Qué tipos de terapia se pueden hacer online?',
-      answer:
-         'Todos mis servicios están disponibles online: terapia individual, de pareja, familiar y psicología perinatal. La modalidad online permite mantener la continuidad terapéutica independientemente de la ubicación geográfica.',
-   },
+const description =
+	"Terapia psicológica online por videollamada segura con María Sánchez, psicóloga general sanitaria. Combinable con la consulta presencial en Pamplona.";
+
+// Each frame glides the photo towards the part of the scene it speaks to
+// (scale, then a translate kept within the scaled margin).
+const situations: {
+	icon: IconName;
+	label: string;
+	text: string;
+	frame: string;
+}[] = [
+	{
+		icon: "language",
+		label: "Vives lejos de Pamplona",
+		text: "La distancia deja de ser un obstáculo: haces terapia con el mismo enfoque que en la consulta, desde donde estés.",
+		frame: "none",
+	},
+	{
+		icon: "accessible_forward",
+		label: "Te cuesta desplazarte",
+		text: "Por movilidad reducida, dolor o cansancio, la sesión llega a ti sin el esfuerzo del trayecto.",
+		frame: "scale(1.2) translate(-8%, 0%)",
+	},
+	{
+		icon: "schedule",
+		label: "Vas justo de tiempo",
+		text: "Sin traslados, es más fácil encajar una hora para ti entre el trabajo, la crianza y todo lo demás.",
+		frame: "scale(1.2) translate(8%, -6%)",
+	},
+	{
+		icon: "flight_takeoff",
+		label: "Viajas a menudo",
+		text: "Mantienes la continuidad de tu proceso aunque pases unas semanas en otra ciudad.",
+		frame: "scale(1.12) translate(-4%, 4%)",
+	},
+	{
+		icon: "cottage",
+		label: "Te sientes mejor en casa",
+		text: "A algunas personas les ayuda empezar desde un lugar que ya sienten como suyo.",
+		frame: "scale(1.2) translate(8%, 6%)",
+	},
+];
+
+const steps = [
+	{
+		title: "Me escribes o me llamas",
+		text: "Me escribes por el formulario, por correo o por WhatsApp, o me llamas, y acordamos día y hora.",
+	},
+	{
+		title: "Te envío el enlace",
+		text: "Unos minutos antes de la sesión te envío el enlace de la videollamada por correo electrónico o WhatsApp.",
+	},
+	{
+		title: "Preparas tu rincón",
+		text: "Un lugar tranquilo donde nadie te interrumpa y, si puedes, auriculares para más intimidad.",
+	},
+	{
+		title: "Sesiones a tu ritmo",
+		text: "Sesiones de 60 minutos en las que hablamos con calma de lo que te trae y vemos qué herramientas te pueden ayudar.",
+	},
+];
+
+const myths = [
+	{
+		myth: "«La terapia online es impersonal y fría.»",
+		reality:
+			"A los pocos minutos de conversación la pantalla pasa a un segundo plano. Lo que importa es la escucha y la relación que se construye.",
+	},
+	{
+		myth: "«No sirve para problemas profundos.»",
+		reality:
+			"Online trabajo los mismos temas que en consulta: duelos, ansiedad, relaciones o heridas del pasado. Si en algún caso no es el formato adecuado, te lo diré.",
+	},
+	{
+		myth: "«Es complicado a nivel informático.»",
+		reality:
+			"Basta con abrir el enlace que te envío desde el móvil, la tablet o el ordenador, sin instalaciones complicadas.",
+	},
+];
+
+const faqs = [
+	{
+		question: "¿Qué necesito para hacer la sesión?",
+		answer:
+			"Un móvil, tablet u ordenador con cámara y micrófono, y una conexión a internet estable. Te recomiendo usar auriculares para tener más intimidad y oír mejor.",
+		open: true,
+	},
+	{
+		question: "¿Qué pasa si falla la conexión durante la sesión?",
+		answer:
+			"Si se corta, volvemos a conectar o seguimos por teléfono. Intento recuperar el tiempo perdido en ese momento si la agenda lo permite; si no, valoramos compensarlo en la siguiente sesión.",
+	},
+	{
+		question: "Vivo en otra zona horaria, ¿cómo lo coordinamos?",
+		answer:
+			"Sí, atiendo online a personas que viven fuera de España. Si estás en otra zona horaria, buscamos juntos una hora que encaje.",
+	},
+	{
+		question: "¿La terapia online sirve para cualquier caso?",
+		answer:
+			"Online trabajo los mismos temas que en consulta. Aun así, si en algún caso no es el formato adecuado, te lo diré.",
+	},
+	{
+		question: "¿Puedo combinar sesiones online y presenciales en Pamplona?",
+		answer:
+			"Sí. Puedes alternar sesiones online con sesiones en mi consulta de la calle María Lacunza, en Pamplona, según te encaje en cada momento.",
+	},
 ];
 ---
 
-<Layout title={SEO.title} description={SEO.description}>
-   <Hero
-      title="Terapia online"
-      text="La terapia online te permite acceder a apoyo psicológico profesional desde cualquier lugar. Desde un enfoque empático y especializado, ofrezco sesiones virtuales de terapia individual, de pareja, familiar y psicología perinatal con la misma calidad y efectividad que las sesiones presenciales."
-   />
+<Layout title={title} description={description} image={heroImage}>
+	<PageHero
+		size="display"
+		accent
+		backgroundImage={heroImage}
+		mobileBackground="corner"
+	>
+		<Breadcrumbs
+			slot="breadcrumbs"
+			items={[
+				{ name: "Inicio", href: "/" },
+				{ name: "Servicios", href: "/servicios/" },
+				{ name: "Terapia online" },
+			]}
+		/>
+		<Fragment slot="title">
+			{
+				/* Below lg each run is its own line, sized from the viewport width so
+			  the lead is the larger and both always fit on one line. */
+			}
+			<span class="max-lg:block max-lg:text-hero-lead">Terapia online</span
+			><span class="sr-only">:</span>{" "}
+			<span class="hero-accent max-lg:block max-lg:text-hero-run"
+				>la misma cercanía, estés donde estés</span
+			>
+		</Fragment>
+		<p class="max-w-xl text-lead text-ink-muted">
+			Sesiones por videollamada segura, con el mismo enfoque que en mi consulta
+			de Pamplona: terapia individual, de pareja, familiar o psicología perinatal.
+			Una buena opción si vives lejos, viajas a menudo o te cuesta encajar los
+			desplazamientos en tu semana.
+		</p>
 
-   <Section classes="mt-0! pt-0!">
-      <TitleSection
-         title="¿En qué consiste la terapia online?"
-         text="La terapia online es una modalidad que utiliza tecnología segura para brindar apoyo psicológico a distancia. A través de videoconferencia, puedes acceder a todos mis servicios terapéuticos y trabajar en:"
-         classes="lg:pb-15!"
-      />
-      <Row classes="!gap-5 max-[500px]:px-0">
-         <Col span="6">
-            <Card>
-               <div class="text-lg">
-                  <ul>
-                     <li>Terapia individual desde tu espacio seguro</li>
-                     <li>Terapia de pareja sin desplazamientos</li>
-                     <li>Terapia familiar con todos los miembros</li>
-                     <li>Psicología perinatal especializada</li>
-                     <li>Flexibilidad de horarios ampliada</li>
-                     <li>Continuidad terapéutica garantizada</li>
-                     <li>Comodidad de tu entorno familiar</li>
-                     <li>Acceso desde cualquier ubicación</li>
-                  </ul>
-               </div>
-            </Card>
-         </Col>
-         <Col span="6">
-            <Card>
-               <div class="text-lg">
-                  <ul>
-                     <li>Sesiones de 60 minutos por videoconferencia</li>
-                     <li>Plataforma segura y confidencial</li>
-                     <li>Misma calidad que terapia presencial</li>
-                     <li>Horarios flexibles adaptados a ti</li>
-                     <li>Sin limitaciones geográficas</li>
-                     <li>Apoyo técnico incluido</li>
-                     <li>Opción de grabación de sesiones (con consentimiento)</li>
-                     <li>Recursos digitales complementarios</li>
-                  </ul>
-               </div>
-            </Card>
-         </Col>
-      </Row>
-   </Section>
+		<div class="flex flex-wrap gap-3 pt-2">
+			<Button href={contactHref} icon="calendar_today">
+				<span>{ctaLabel}</span>
+			</Button>
+		</div>
+	</PageHero>
 
-   <Frases
-      title="La distancia no es un obstáculo para tu bienestar"
-      text="La terapia online elimina barreras geográficas y temporales, permitiéndote acceder a apoyo psicológico profesional cuando y donde lo necesites. Tu salud mental merece atención especializada sin importar las circunstancias."
-   />
+	<!-- Para quién -->
+	<Section tone="white">
+		<SectionHeader title="¿Para quién es la terapia online?" size="large">
 
-   <!-- PARA QUIÉN ES -->
-   <Section decoration="all" type="none" classes="pt-0!">
-      <TitleSection title="¿Para quién es la terapia online?" text="" classes="lg:pb-15!" />
+		</SectionHeader>
+		<OnlineSituations
+			situations={situations}
+			image={situationsImage}
+			imageAlt="Mujer sonriente en el sillón de su casa, con una taza en la mano, durante una sesión por videollamada en su portátil."
+			href={contactHref}
+			linkLabel="¿Te reconoces? Escríbeme y lo hablamos"
+			class="mt-14"
+		/>
+	</Section>
 
-      <Row classes="!p-0 !m-0">
-         <Card classes="relative col-span-12 lg:col-span-4 p-0">
-            <div class="flex h-full flex-col gap-6 lg:gap-12">
-               <div class="">
-                  <Image
-                     src={'/assets/images/limitaciones_movi_idad_terapia_online.webp'}
-                     alt={'personas con movilidad reducida'}
-                     width={800}
-                     height={800}
-                     inferSize
-                     class="aspect-video object-cover"
-                  />
-               </div>
-               <div class="flex flex-col gap-2">
-                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!"
-                     >Limitaciones de movilidad</span
-                  >
-                  <p class="text-lg">
-                     Ideal para personas con dificultades de desplazamiento, movilidad reducida,
-                     enfermedades crónicas, responsabilidades de cuidado o que viven en zonas
-                     rurales alejadas de servicios psicológicos especializados.
-                  </p>
-               </div>
-            </div>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-4 p-0">
-            <div class="flex h-full flex-col gap-6 lg:gap-12">
-               <div class="">
-                  <Image
-                     src={'/assets/images/horarios_complicados.webp'}
-                     alt={'personas con horarios complicados'}
-                     width={800}
-                     height={800}
-                     inferSize
-                     class="aspect-video object-cover"
-                  />
-               </div>
-               <div class="flex flex-col gap-2">
-                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!">Horarios complicados</span>
-                  <p class="text-lg">
-                     Perfecto para profesionales con horarios intensivos, padres y madres con niños
-                     pequeños, estudiantes, personas con turnos rotativos o quienes necesitan mayor
-                     flexibilidad horaria para acceder a terapia.
-                  </p>
-               </div>
-            </div>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-4 p-0">
-            <div class="flex h-full flex-col gap-6 lg:gap-12">
-               <div class="">
-                  <Image
-                     src={'/assets/images/comodidad_terapia_online.webp'}
-                     alt={'comodidad y privacidad'}
-                     width={800}
-                     height={800}
-                     inferSize
-                     class="aspect-video object-cover"
-                  />
-               </div>
-               <div class="flex flex-col gap-2">
-                  <span class="h4 text-2xl! lg:text-3xl! lg:leading-9!">Comodidad y privacidad</span
-                  >
-                  <p class="text-lg">
-                     Para quienes prefieren la comodidad de su hogar, valoran la privacidad
-                     adicional, tienen ansiedad social, dificultades para salir o simplemente se
-                     sienten más cómodos en su entorno familiar conocido.
-                  </p>
-               </div>
-            </div>
-         </Card>
-      </Row>
-   </Section>
+		<!-- Mitos y realidad -->
+	<Section>
+		<SectionHeader
+			title="Mitos y realidad de la terapia online"
 
-   <JoinBox
-      title="Tu bienestar no conoce distancias"
-      subtitle="La terapia online te acerca el apoyo psicológico profesional que necesitas, adaptándose a tu vida, horarios y circunstancias sin comprometer la calidad del tratamiento."
-      buttonText="Comenzar online"
-   />
+		/>
+		<ul class="mt-14 grid gap-6 lg:grid-cols-3">
+			{
+				myths.map((item) => (
+					<li class="flex flex-col overflow-hidden rounded-frame border border-line bg-white">
+						<div class="p-6 sm:p-8">
+							<p class="font-display text-subheading font-normal text-ink">{item.myth}</p>
+						</div>
+						<div class="flex flex-1 items-start gap-3 bg-mist p-6 sm:p-8">
+							<Icon name="check" class="mt-0.5 shrink-0 text-teal" />
+							<div class="flex flex-col gap-2">
+								<span class="text-label font-semibold text-teal">La realidad</span>
+								<p class="text-body text-ink-muted">{item.reality}</p>
+							</div>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</Section>
 
-   <Section classes="mt-0! pt-0!">
-      <TitleSection title="¿Qué ventajas ofrece la terapia online?" text="" classes="lg:pb-15!" />
-      <Row classes="!gap-5 max-[500px]:px-0">
-         <Col span="6">
-            <Card>
-               <div class="text-lg">
-                  <ul>
-                     <li>Eliminación de desplazamientos y esperas</li>
-                     <li>Mayor flexibilidad de horarios</li>
-                     <li>Comodidad de tu espacio personal</li>
-                     <li>Continuidad en situaciones imprevistas</li>
-                     <li>Acceso desde cualquier ubicación</li>
-                     <li>Mayor privacidad y discreción</li>
-                  </ul>
-               </div>
-            </Card>
-         </Col>
-         <Col span="6">
-            <Card>
-               <div class="text-lg">
-                  <ul>
-                     <li>Reducción de barreras geográficas</li>
-                     <li>Ahorro de tiempo y costes de transporte</li>
-                     <li>Ideal para personas con movilidad reducida</li>
-                     <li>Mantenimiento de rutinas familiares</li>
-                     <li>Tecnología segura y confidencial</li>
-                     <li>Mismo nivel profesional que presencial</li>
-                  </ul>
-               </div>
-            </Card>
-         </Col>
-      </Row>
-   </Section>
+	<!-- Paso a paso -->
+	<Section tone="white">
+		<SectionHeader title="¿Cómo funciona la terapia online?">
 
-   <JoinBox
-      title="Empieza tu camino hacia el bienestar emocional"
-      subtitle="Empieza tu proceso terapéutico desde la comodidad de tu hogar u oficina. La terapia online te ofrece la flexibilidad y accesibilidad que necesitas para cuidar de tu salud mental sin comprometer la calidad del tratamiento."
-      buttonText="Reserva tu cita"
-   />
+		</SectionHeader>
+		{
+			/* One path through the four steps: teal numerals joined by a hairline,
+			  down a left rail on mobile and across the row from lg. */
+		}
+		<ol class="mt-14 grid lg:grid-cols-4 lg:gap-x-10">
+			{
+				steps.map((step, index) => {
+					const last = index === steps.length - 1;
+					return (
+						<li
+							data-reveal
+							style={`--reveal: ${index}`}
+							class="grid grid-cols-[3.5rem_1fr] gap-x-5 lg:flex lg:flex-col lg:gap-y-6"
+						>
+							<span
+								class="flex flex-col items-center lg:flex-row lg:items-end"
+								aria-hidden="true"
+							>
+								<span class="font-display text-display leading-none text-teal tabular-nums">
+									{index + 1}
+								</span>
+								<span
+									class:list={[
+										"my-4 w-px flex-1 lg:mx-0 lg:my-0 lg:mb-3 lg:ml-5 lg:h-px lg:w-auto",
+										last
+											? "max-lg:hidden lg:bg-line"
+											: "bg-line-strong lg:-mr-5",
+									]}
+								></span>
+							</span>
+							<div class:list={["flex flex-col gap-2.5 pt-2 lg:pt-0", !last && "pb-12 lg:pb-0"]}>
+								<h3 class="text-lead font-semibold text-ink">{step.title}</h3>
+								<p class="text-body text-ink-muted">{step.text}</p>
+							</div>
+						</li>
+					);
+				})
+			}
+		</ol>
+	</Section>
 
-   <Section decoration="all" type="" classes="">
-      <Row classes="">
-         <Col span="5">
-            <h2 class="text-left">Preguntas Frecuentes</h2>
-         </Col>
-         <Col span="7">
-            {
-               preguntas.map((pregunta) => (
-                  <Card classes="mb-5">
-                     <details class="group">
-                        <summary class="flex cursor-pointer list-none items-center justify-between">
-                           <h4 class="!m-0 p-0">{pregunta.question}</h4>
-                           <span class="transition group-open:rotate-180">
-                              <svg
-                                 fill="none"
-                                 height="24"
-                                 shape-rendering="geometricPrecision"
-                                 stroke="currentColor"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round"
-                                 stroke-width="1.5"
-                                 viewBox="0 0 24 24"
-                                 width="24"
-                              >
-                                 <path d="M6 9l6 6 6-6" />
-                              </svg>
-                           </span>
-                        </summary>
-                        <p class="group-open:animate-fadeIn mt-3">{pregunta.answer}</p>
-                     </details>
-                  </Card>
-               ))
-            }
-         </Col>
-      </Row>
-   </Section>
+	<CtaBand title="¿Sientes que es el momento de cuidarte, estés donde estés?">
+		<p class="tabular-nums">
+			Solicita tu primera cita o escríbeme si antes quieres resolver alguna duda.
+			Sesión online de 60 minutos: 65 € individual; 75 € en pareja o familia.
+		</p>
+		<Fragment slot="actions">
+			<Button href={contactHref} variant="inverse" arrow>
+				<span>{ctaLabel}</span>
+			</Button>
+			<Button
+				href={whatsappUrl}
+				variant="inverse-outline"
+				icon="chat"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Escribir por WhatsApp (se abre en una pestaña nueva)"
+			>
+				<span>Escribir por WhatsApp</span>
+			</Button>
+		</Fragment>
+		<p slot="note" class="flex items-start gap-2">
+			<Icon name="mail" class="mt-0.5 text-seafoam" />
+			<span
+				>También puedes escribirme a <a
+					class="text-seafoam underline underline-offset-4 transition-[color] duration-200 hover:text-white"
+					href={`mailto:${email}`}>{email}</a
+				>.</span
+			>
+		</p>
+	</CtaBand>
 
-   <!-- ENLACES INTERNOS -->
-   <Section decoration="all" type="none" classes="pt-0!">
-      <h3>También te puede interesar</h3>
-      <Row classes="!p-0 !m-0">
-         <Card classes="relative col-span-12 lg:col-span-3 !p-0">
-            <a href="/servicios/terapia-individual" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Terapia individual {'>'}</button
-               >
-            </a>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-3 p-0">
-            <a href="/servicios/terapia-de-pareja" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Terapia de pareja {'>'}</button
-               >
-            </a>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-3 p-0">
-            <a href="/servicios/terapia-familiar" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Terapia familiar {'>'}</button
-               >
-            </a>
-         </Card>
-         <Card classes="relative col-span-12 lg:col-span-3 p-0">
-            <a href="/servicios/psicologia-perinatal" class="h-full w-full cursor-pointer">
-               <button class="h4 h-full w-full cursor-pointer text-lg! lg:text-xl! lg:leading-9!"
-                  >Psicología perinatal {'>'}</button
-               >
-            </a>
-         </Card>
-      </Row>
-   </Section>
+	<!-- Quién te atiende y formato mixto -->
+	<Section tone="white">
+		{
+			/* Below lg the column and header dissolve into one grid so the portrait
+			  sits beside the title, with the quote and the office below both. */
+		}
+		<div class="grid grid-cols-[minmax(0,1fr)_40%] items-start gap-x-5 gap-y-8 sm:gap-x-8 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-12">
+			<div class="contents lg:order-2 lg:col-span-7 lg:flex lg:flex-col lg:gap-10">
+				<SectionHeader
+					title="Un rostro humano y cercano al otro lado de la pantalla"
+					layout="stack"
+					class="max-lg:contents max-lg:*:last:col-span-2"
+				>
+					<p>
+						«Mi objetivo es que la sesión online no se sienta como hablar con una
+						pantalla, sino como un rato para detenerte y mirarte con amabilidad.
+						Trabajo con rigor y respetando tu ritmo.»
+					</p>
+				</SectionHeader>
+				<div class="col-span-2 grid gap-6 border-t border-line pt-8 sm:grid-cols-2 sm:items-center">
+					<Figure
+						src={officeImage}
+						alt="Consulta de Inala en Pamplona: escritorio blanco con dos sillas verde agua y luz natural."
+						ratio="landscape"
+						sizes="(min-width: 1024px) 24vw, (min-width: 640px) 45vw, 100vw"
+					/>
+					<div class="flex flex-col gap-3">
+						<p class="flex items-center gap-2 text-label font-semibold text-teal">
+							<Icon name="location_on" />
+							<span>Online y presencial</span>
+						</p>
+						<h3 class="font-display text-subheading font-normal text-ink">
+							Consulta presencial en Pamplona
+						</h3>
+						<p class="text-body text-ink-muted">
+							Si vienes a Pamplona, puedes combinar las sesiones online con
+							sesiones en mi consulta de la calle María Lacunza 6, portal 4.
+						</p>
+					</div>
+				</div>
+			</div>
+			<Figure
+				src={therapistImage}
+				alt="María Sánchez sonriendo, de pie, con chaqueta azul marino y blusa blanca."
+				ratio="portrait"
+				sizes="40vw"
+				class="col-start-2 row-start-1 lg:order-1 lg:col-span-5 lg:col-start-auto lg:row-start-auto"
+			>
+				<span>
+					<span class="block font-display text-subheading text-ink">
+						{therapistName}
+					</span>
+					<span class="block">
+						Psicóloga general sanitaria ·{" "}
+						<span class="whitespace-nowrap">Nº col. {licenseNumber}</span>
+					</span>
+				</span>
+			</Figure>
+		</div>
+	</Section>
+
+	<!-- Preguntas frecuentes -->
+	<Section>
+		<div class="grid gap-x-16 gap-y-10 lg:grid-cols-12">
+			<SectionHeader
+				title="Preguntas frecuentes sobre la terapia online"
+		
+				layout="stack"
+				class="lg:sticky lg:top-28 lg:col-span-5 lg:self-start"
+			/>
+			<Faq items={faqs} class="lg:col-span-7" />
+		</div>
+	</Section>
+
+
+	<RelatedPosts service="/servicios/terapia-online/" />
+
+	<OtherServices />
 </Layout>

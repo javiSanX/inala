@@ -1,279 +1,1825 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-@plugin "@tailwindcss/typography";
+/* Hover motion only for real pointers: touch fires a false hover on tap. */
+@custom-variant hover-fine {
+	@media (hover: hover) and (pointer: fine) {
+		&:hover {
+			@slot;
+		}
+	}
+}
 
-@source inline("{lg:,}col-{span-{1,2,3,4,5,6,7,8,9,10,11,12},span-mobile-{1,2,3,4,5,6,7,8,9,10,11,12}}");
-@source inline("{lg:,}col-span-{1,2,3,4,5,6,7,8,9,10,11,12}");
-@source inline("{lg:,}col-start-{1,2,3,4,5,6,7,8,9,10,11,12}");
-@source inline("{lg:,}h-{0,2,3,4,6,8,12,16,24,32}");
-@source inline("{lg:,}text-{xs,sm,base,lg,xl,2xl,3xl,4xl,5xl,6xl,7xl,8xl,9xl}");
-@source inline("font-{thin,extralight,light,normal,medium,semibold,bold,extrabold,black}");
-@source inline("text-{left,center,right}");
+/* Layouts that only make sense when a scroll timeline drives them (SessionHour.astro).
+   Short viewports keep the static layout: the pinned stage would not fit. */
+@custom-variant scroll-driven {
+	@media (prefers-reduced-motion: no-preference) and (height >= 40rem) {
+		@supports (animation-timeline: view()) {
+			@slot;
+		}
+	}
+}
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant group-hover-fine {
+	@media (hover: hover) and (pointer: fine) {
+		&:is(:where(.group):hover *) {
+			@slot;
+		}
+	}
+}
 
 @theme {
-	/* Colors */
-	/* Primary */
-	--color-primary-50: oklch(98.5% 0.002 247.839);
-	--color-primary-100: oklch(96.7% 0.003 264.542);
-	--color-primary-200: oklch(92.8% 0.006 264.531);
-	--color-primary-300: oklch(87.2% 0.01 258.338);
-	--color-primary-400: oklch(70.7% 0.022 261.325);
-	--color-primary-500: oklch(55.1% 0.027 264.364);
-	--color-primary-600: oklch(44.6% 0.03 256.802);
-	--color-primary-700: oklch(37.3% 0.034 259.733);
-	--color-primary-800: oklch(27.8% 0.033 256.848);
-	--color-primary-900: oklch(21% 0.034 264.665);
-	--color-primary-950: oklch(13% 0.028 261.692);
-	/* Neutral */
-	--color-neutral-50: oklch(98.5% 0.002 247.839);
-	--color-neutral-100: oklch(96.7% 0.003 264.542);
-	--color-neutral-200: oklch(92.8% 0.006 264.531);
-	--color-neutral-300: oklch(87.2% 0.01 258.338);
-	--color-neutral-400: oklch(70.7% 0.022 261.325);
-	--color-neutral-500: oklch(55.1% 0.027 264.364);
-	--color-neutral-600: oklch(44.6% 0.03 256.802);
-	--color-neutral-700: oklch(37.3% 0.034 259.733);
-	--color-neutral-800: oklch(27.8% 0.033 256.848);
-	--color-neutral-900: oklch(21% 0.034 264.665);
-	--color-neutral-950: oklch(13% 0.028 261.692);
+	/* Colours. The default palette is cleared so only these tokens exist. */
+	--color-*: initial;
+	--color-white: #ffffff;
+	--color-paper: #f6f9f8;
+	--color-mist: #e9f4f1;
+	--color-line: #d9e4e1;
+	--color-line-strong: #b5c8c3;
+	--color-ink: #15211f;
+	--color-ink-muted: #3e4b49;
+	--color-ink-soft: #5a6764;
+	/* Brand: the logo's seafoam, used for fills and accents, never as text on light grounds. */
+	--color-seafoam: #7cc6c4;
+	--color-seafoam-soft: #cdebe4;
+	/* Every action. White on teal is 6.5:1. */
+	--color-teal: #24695b;
+	--color-teal-strong: #1b5248;
+	/* The field that closes each page. White on cypress is 11.6:1, seafoam 5.9:1. */
+	--color-cypress: #173f3a;
+	--color-cypress-line: #2f5a54;
+	--color-on-dark: #ffffff;
+	--color-on-dark-muted: #c6dcd7;
+	--color-error: #b3261e;
+	--color-error-soft: #fbeceb;
 
-	/* Fonts */
-	--font-headings: 'Chillax-Variable', sans-serif;
-	--font-body: 'Synonym-Variable', sans-serif;
+	/* Families come from Astro's font API (astro.config.mjs), self-hosted with fallbacks. */
+	--font-display: var(--font-gambetta);
+	--font-sans: var(--font-synonym);
+	--font-hero: var(--font-cormorant);
 
-	/* Spacing */
-	--spacing-7.5: 30px;
-	--spacing-15: 60px;
+	/* Type scale */
+	--text-display: clamp(2.5rem, 1.55rem + 3.4vw, 4.25rem);
+	--text-display--line-height: 1.04;
+	--text-display--letter-spacing: -0.02em;
+	/* Home h1 on phones: each run fills the line (about 7.4 and 9.3 widths per unit of
+	   font size, over a column of 100vw minus the 1.25rem gutters), capped for tablets. */
+	--text-hero-lead: min(calc((100vw - 2rem)), 4rem);
+	--text-hero-lead--line-height: 1.04;
+	--text-hero-run: min(calc((100vw - 2.5rem) / 9.3), 2.75rem);
+	--text-hero-run--line-height: 1.1;
+	--text-title: clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem);
+	--text-title--line-height: 1.08;
+	--text-title--letter-spacing: -0.018em;
+	--text-section: clamp(2.75rem, 1.6875rem + 4.53vw, 5.3125rem);
+	--text-section--line-height: 1.04;
+	--text-heading: clamp(1.875rem, 1.45rem + 1.6vw, 2.75rem);
+	--text-heading--line-height: 1.12;
+	--text-heading--letter-spacing: -0.012em;
+	--text-subheading: clamp(1.375rem, 1.22rem + 0.6vw, 1.75rem);
+	--text-subheading--line-height: 1.3;
+	--text-subheading--letter-spacing: -0.005em;
+	--text-lead: clamp(1.125rem, 1.06rem + 0.3vw, 1.25rem);
+	--text-lead--line-height: 1.6;
+	--text-body: 1.0625rem;
+	--text-body--line-height: 1.65;
+	--text-small: 0.9375rem;
+	--text-small--line-height: 1.55;
+	--text-label: 0.8125rem;
+	--text-label--line-height: 1.4;
+	--text-label--letter-spacing: 0.01em;
 
-	/* Animations */
-	--animate-dropdown: dropdown 300ms ease-in-out forwards;
-	--animate-fadeUp: fadeUp 500ms ease-in-out forwards;
-	--animate-marquee: marquee 500ms ease-in-out forwards;
-	--animate-marqueeFollowup: marqueefollowup 500ms ease-in-out forwards;
+	/* Widths. "xs" covers the narrowest phones (WCAG reflow at 320px). */
+	--breakpoint-xs: 22.5rem;
+	--container-content: 75rem;
+	--container-narrow: 48rem;
+	--container-reading: 35rem;
+	/* Pinned session clock (SessionHour.astro), on phones and from lg: shrinks on
+	   short screens so the title, clock, current item and quote fit one screen.
+	   The rem subtracted is what the site header and the rest of the stage take
+	   with the longest item. */
+	--container-clock: min(20rem, 35svh, 100svh - 30rem);
+	--container-clock-wide: min(24rem, 100svh - 28rem);
 
-	@keyframes dropdown {
-		0% {
-			transform: 'translateY(-1rem)';
+	/* Shapes */
+	--radius-field: 0.75rem;
+	--radius-frame: 1.25rem;
+
+	/* Depth: one soft, offset shadow for floating panels. */
+	--shadow-float:
+		0 1px 2px rgb(21 33 31 / 0.05), 0 12px 32px -12px rgb(21 33 31 / 0.18);
+
+	/* Motion (animate skill): strong ease-out for entrances, ease-in-out for on-screen movement. */
+	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+	--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+	--default-transition-timing-function: ease;
+
+	--animate-rise: rise 900ms var(--ease-out) both;
+	--animate-fade: fade 200ms ease both;
+
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(32px);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	@keyframes fade {
+		from {
 			opacity: 0;
 		}
-		100% {
-			transform: 'translateY(0)';
+		to {
+			opacity: 1;
+		}
+	}
+}
+
+@layer base {
+	html {
+		/* Keeps focused elements and anchor targets clear of the sticky header (WCAG 2.4.11). */
+		scroll-padding-top: 6rem;
+		scrollbar-color: var(--color-line-strong) var(--color-paper);
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		background-color: var(--color-paper);
+		color: var(--color-ink);
+		font-family: var(--font-sans);
+		font-size: var(--text-body);
+		line-height: var(--text-body--line-height);
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	::selection {
+		background-color: var(--color-seafoam-soft);
+		color: var(--color-ink);
+	}
+
+	:where(input, textarea, select) {
+		caret-color: var(--color-teal);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-teal);
+		outline-offset: 3px;
+		border-radius: 0.25rem;
+	}
+
+	/* On the dark cypress field the ring switches to seafoam (5.9:1). */
+	.on-dark :focus-visible {
+		outline-color: var(--color-seafoam);
+	}
+
+	:where(h1, h2, h3, h4) {
+		text-wrap: balance;
+	}
+
+	:where(p, li, dd, blockquote) {
+		text-wrap: pretty;
+	}
+
+	a {
+		text-underline-offset: 0.22em;
+		text-decoration-thickness: 1px;
+	}
+
+	:where(table) {
+		font-variant-numeric: tabular-nums;
+	}
+}
+
+/* Hero entrance: the one authored moment. Elements are visible by default;
+   the animation only plays when motion is welcome. Copy rises line by line,
+   80ms apart; the image settles in alongside. */
+@layer components {
+	/* Display lives here, not in a utility class: utilities would beat the
+	   components layer and keep the intro hidden. */
+	.hero-intro {
+		display: none;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		/* Inner pages start the entrance at once; only the home (with its intro)
+		   keeps the original wait. */
+		:root {
+			--hero-start: 0ms;
+		}
+
+		:root:has(.hero-intro) {
+			--hero-start: 600ms;
+		}
+
+		.hero-copy > * {
+			animation: var(--animate-rise);
+			animation-delay: var(--hero-start);
+		}
+
+		.hero-copy > :nth-child(2) {
+			animation-delay: calc(var(--hero-start) + 80ms);
+		}
+
+		.hero-copy > :nth-child(3) {
+			animation-delay: calc(var(--hero-start) + 160ms);
+		}
+
+		.hero-copy > :nth-child(4) {
+			animation-delay: calc(var(--hero-start) + 240ms);
+		}
+
+		.hero-copy > :nth-child(5) {
+			animation-delay: calc(var(--hero-start) + 320ms);
+		}
+
+		.hero-copy > :nth-child(n + 6) {
+			animation-delay: calc(var(--hero-start) + 400ms);
+		}
+
+		.hero-media {
+			animation: settle 900ms var(--ease-out) calc(var(--hero-start) + 120ms)
+				both;
+		}
+
+		/* Home intro (HeroIntro.astro), after upscayl.org: the name rises out of a
+		   blur on white, a seafoam circle opens from the centre and swallows it,
+		   then the layer fades onto the hero. Once per session; the hero's copy
+		   waits for it, and children marked data-enter come in from that side. */
+		:root:has(.hero-intro):not([data-intro="seen"]) {
+			--hero-start: 2300ms;
+			/* The background animation starts with the copy and plays in full (PageHero.astro). */
+			--hero-video-start: var(--hero-start);
+		}
+
+		:root:not([data-intro="seen"]) .hero-intro {
+			display: grid;
+			animation: intro-out 600ms var(--ease-out) 2200ms forwards;
+		}
+
+		.hero-intro-title {
+			animation:
+				intro-title-in 1100ms var(--ease-out) 100ms both,
+				intro-title-out 500ms var(--ease-out) 1500ms forwards;
+		}
+
+		.hero-intro-circle {
+			animation: intro-circle 1000ms var(--ease-in-out) 1400ms both;
+		}
+
+		.hero-copy > [data-enter="left"] {
+			animation-name: slide-from-left;
+		}
+
+		.hero-copy > [data-enter="right"] {
+			animation-name: slide-from-right;
+		}
+
+		@keyframes intro-title-in {
+			from {
+				opacity: 0;
+				transform: translateY(60px);
+				filter: blur(10px);
+			}
+		}
+
+		@keyframes intro-title-out {
+			to {
+				opacity: 0;
+				transform: scale(0.96);
+				filter: blur(6px);
+			}
+		}
+
+		@keyframes intro-circle {
+			from {
+				clip-path: circle(4% at 50% 50%);
+				opacity: 0;
+			}
+			to {
+				clip-path: circle(72% at 50% 50%);
+				opacity: 1;
+			}
+		}
+
+		@keyframes intro-out {
+			to {
+				opacity: 0;
+				visibility: hidden;
+			}
+		}
+
+		@keyframes slide-from-left {
+			from {
+				opacity: 0;
+				transform: translateX(-40px);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		@keyframes slide-from-right {
+			from {
+				opacity: 0;
+				transform: translateX(40px);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		@keyframes settle {
+			from {
+				opacity: 0;
+				transform: translateY(18px) scale(0.985);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		/* Native <details>: answers open with a short height transition where supported. */
+		:root {
+			interpolate-size: allow-keywords;
+		}
+
+		.faq::details-content {
+			block-size: 0;
+			overflow: clip;
+			transition:
+				block-size 200ms var(--ease-out),
+				content-visibility 200ms allow-discrete;
+		}
+
+		.faq[open]::details-content {
+			block-size: auto;
+		}
+
+		/* Home services waterfall: a white-backed cutout laid over the section.
+		   Multiply drops its white onto whatever is behind. The mask feathers the
+		   sides and the bottom, where the splash reaches the edge of the frame, so
+		   no cut line shows; the top stays open for the stream to come out of. */
+		.waterfall {
+			mix-blend-mode: multiply;
+			mask-image:
+				linear-gradient(
+					to right,
+					transparent 0,
+					black 16%,
+					black 84%,
+					transparent 100%
+				),
+				linear-gradient(to bottom, black 0, black 76%, transparent 98%);
+			mask-composite: intersect;
+			-webkit-mask-composite: source-in;
+		}
+
+		/* Images below the fold, revealed once by src/scripts/reveal.ts. */
+		[data-reveal="pending"] {
+			opacity: 0;
+			transform: translateY(18px);
+		}
+
+		[data-reveal="shown"] {
+			transition:
+				opacity 800ms var(--ease-out),
+				transform 800ms var(--ease-out);
+			transition-delay: calc(var(--reveal, 0) * 70ms);
+		}
+
+		/* Section title: waits a beat before moving, then travels further and more slowly. */
+		.reveal-title[data-reveal="pending"] {
+			transform: translateY(48px);
+		}
+
+		.reveal-title[data-reveal="shown"] {
+			transition:
+				opacity 1200ms var(--ease-out) 250ms,
+				transform 1400ms var(--ease-out) 250ms;
+		}
+
+		/* Portrait variant: instead of rising, the frame unveils upward while the
+		   photo settles from a slight zoom; the caption follows once it is open. */
+		.reveal-unveil[data-reveal] {
+			opacity: 1;
+			transform: none;
+		}
+
+		.reveal-unveil[data-reveal] > div {
+			clip-path: inset(0 0 0 0 round var(--radius-frame));
+		}
+
+		.reveal-unveil[data-reveal="pending"] > div {
+			clip-path: inset(100% 0 0 0 round var(--radius-frame));
+		}
+
+		.reveal-unveil[data-reveal="pending"] img {
+			transform: scale(1.08);
+		}
+
+		.reveal-unveil[data-reveal="pending"] > figcaption {
+			opacity: 0;
+			transform: translateY(8px);
+		}
+
+		.reveal-unveil[data-reveal="shown"] > div {
+			transition: clip-path 1000ms var(--ease-in-out);
+		}
+
+		.reveal-unveil[data-reveal="shown"] img {
+			transition: transform 1400ms var(--ease-out);
+		}
+
+		.reveal-unveil[data-reveal="shown"] > figcaption {
+			transition:
+				opacity 600ms var(--ease-out) 700ms,
+				transform 600ms var(--ease-out) 700ms;
+		}
+
+		/* Pop variant (home services): each card rises with a slight tilt, a teal
+		   line draws across its top rule and fades back into it, the icon spins in
+		   and settles, then title, text and link follow. Cards are
+		   --reveal (their index) x 80ms apart. */
+		.reveal-pop {
+			--pop-at: calc(var(--reveal, 0) * 80ms);
+		}
+
+		.reveal-pop[data-reveal="shown"] {
+			transition: none;
+			animation: pop-rise 700ms var(--ease-out) var(--pop-at) both;
+		}
+
+		@media (width >= 64rem) {
+			.reveal-pop[data-reveal="shown"] .pop-line::before {
+				content: "";
+				position: absolute;
+				inset-inline-start: var(--pop-line-start, 0);
+				inset-inline-end: 0;
+				top: -1px;
+				height: 2px;
+				background-color: var(--color-teal);
+				transform-origin: left;
+				animation: pop-line 1000ms var(--ease-in-out) calc(var(--pop-at) + 60ms)
+					both;
+			}
+		}
+
+		.reveal-pop[data-reveal="shown"] .pop-icon {
+			animation: pop-icon 600ms var(--ease-out) calc(var(--pop-at) + 100ms) both;
+		}
+
+		.reveal-pop[data-reveal="shown"] .pop-title {
+			animation: pop-up 550ms var(--ease-out) calc(var(--pop-at) + 160ms) both;
+		}
+
+		.reveal-pop[data-reveal="shown"] .pop-text {
+			animation: pop-up 550ms var(--ease-out) calc(var(--pop-at) + 220ms) both;
+		}
+
+		.reveal-pop[data-reveal="shown"] .pop-cta {
+			animation: pop-slide 550ms var(--ease-out) calc(var(--pop-at) + 300ms)
+				both;
+		}
+
+		@keyframes pop-rise {
+			from {
+				opacity: 0;
+				transform: translateY(56px) rotate(-2deg);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		@keyframes pop-line {
+			0% {
+				opacity: 1;
+				transform: scaleX(0);
+			}
+			50% {
+				opacity: 1;
+				transform: scaleX(1);
+			}
+			100% {
+				opacity: 0;
+				transform: scaleX(1);
+			}
+		}
+
+		@keyframes pop-icon {
+			from {
+				opacity: 0;
+				transform: scale(0.5) rotate(-60deg);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		@keyframes pop-up {
+			from {
+				opacity: 0;
+				transform: translateY(16px);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		@keyframes pop-slide {
+			from {
+				opacity: 0;
+				transform: translateX(-16px);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		/* Typewriter variant: the line keeps its final layout and each character
+		   appears at its own --at, with a caret resting on the latest one. After
+		   the last character the caret blinks twice and goes. */
+		.typewriter[data-reveal] {
+			opacity: 1;
+			transform: none;
+		}
+
+		.typewriter[data-reveal="pending"] .typewriter-char {
+			opacity: 0;
+		}
+
+		.typewriter[data-reveal="shown"] .typewriter-char {
+			position: relative;
+			transition: opacity 80ms var(--ease-out) var(--at);
+		}
+
+		.typewriter[data-reveal="shown"] .typewriter-char::after {
+			content: "";
+			position: absolute;
+			inset-block: 0.15em;
+			right: -0.08em;
+			width: 2px;
+			background-color: var(--color-teal);
+			opacity: 0;
+			animation: caret-rest var(--hold) step-end var(--at);
+		}
+
+		.typewriter[data-reveal="shown"]
+			:last-child
+			> .typewriter-char:last-child::after {
+			animation: caret-blink 1000ms step-end var(--at) 2;
+		}
+
+		@keyframes caret-rest {
+			from,
+			to {
+				opacity: 1;
+			}
+		}
+
+		@keyframes caret-blink {
+			0% {
+				opacity: 1;
+			}
+			50%,
+			100% {
+				opacity: 0;
+			}
+		}
+
+		/* Blur variant (home topics): the element settles from 1.5rem below, a
+		   touch too tall and blurred, over 1s; --reveal staggers the title and its
+		   card by 75ms. */
+		.reveal-blur[data-reveal="pending"] {
+			opacity: 0;
+			transform: translateY(1.5rem) scaleY(1.1);
+			filter: blur(0.5rem);
+		}
+
+		.reveal-blur[data-reveal="shown"] {
+			transition-property: opacity, transform, filter;
+			transition-duration: 1s;
+			transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+			transition-delay: calc(var(--reveal, 0) * 75ms);
+		}
+	}
+
+	/* Pinned hero: the content scrolling over it darkens it, and lifts again on the way back up.
+	   Tied to the scroll position, so it reverses by itself; opacity only. */
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: scroll()) {
+			.hero-shade {
+				animation: hero-shade linear both;
+				animation-timeline: scroll(root block);
+				animation-range: 0 100svh;
+			}
+
+			@keyframes hero-shade {
+				to {
+					opacity: 0.5;
+				}
+			}
+		}
+	}
+
+	/* Session hour (SessionHour.astro): the ring is the hour, one arc per item.
+	   While the stage is pinned, the track's scroll is split into one slice of
+	   --session-step per item (--i): in its slice the item's text rises in,
+	   its arc draws round the ring, and the text leaves upward as the next
+	   marker fills. The first item is already there on arrival and the last
+	   one stays. Tied to the scroll position, so it reverses by itself. Same
+	   conditions as the scroll-driven variant, which pins the stage. */
+	@media (prefers-reduced-motion: no-preference) and (height >= 40rem) {
+		@supports (animation-timeline: view()) {
+			.session-hour {
+				view-timeline-name: --session-hour;
+			}
+
+			.session-step,
+			.session-arc,
+			.session-mark {
+				animation-timeline: --session-hour;
+				animation-range: contain calc(var(--i) * var(--session-step)) contain
+					calc((var(--i) + 1) * var(--session-step));
+			}
+
+			.session-step {
+				grid-area: 1 / 1;
+				animation-name: session-step;
+				animation-timing-function: linear;
+				animation-fill-mode: both;
+			}
+
+			.session-step:first-child {
+				animation-name: session-step-first;
+			}
+
+			.session-step:last-child {
+				animation-name: session-step-last;
+			}
+
+			.session-mark {
+				transform-box: fill-box;
+				transform-origin: center;
+				animation-name: session-mark;
+				animation-timing-function: linear;
+				animation-fill-mode: both;
+			}
+
+			.session-arc {
+				animation-name: session-arc;
+				animation-timing-function: linear;
+				animation-fill-mode: both;
+			}
+
+			@keyframes session-step {
+				0% {
+					opacity: 0;
+					transform: translateY(1.5rem);
+				}
+				15%,
+				85% {
+					opacity: 1;
+					transform: none;
+				}
+				100% {
+					opacity: 0;
+					transform: translateY(-1.5rem);
+				}
+			}
+
+			@keyframes session-step-first {
+				85% {
+					opacity: 1;
+					transform: none;
+				}
+				100% {
+					opacity: 0;
+					transform: translateY(-1.5rem);
+				}
+			}
+
+			@keyframes session-step-last {
+				0% {
+					opacity: 0;
+					transform: translateY(1.5rem);
+				}
+				15% {
+					opacity: 1;
+					transform: none;
+				}
+			}
+
+			@keyframes session-mark {
+				0% {
+					opacity: 0;
+					transform: scale(0.4);
+				}
+				10% {
+					opacity: 1;
+					transform: none;
+				}
+			}
+
+			/* At zero length the round cap would still draw a dot: hide it until the arc starts. */
+			@keyframes session-arc {
+				0% {
+					stroke-dasharray: 0 100;
+					opacity: 0;
+				}
+				2% {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	/* Method pillars (nuestro-metodo.astro): each principle sits on a seafoam
+	   disc, and a 2px seafoam thread runs from one disc to the next: down the
+	   left on phones, across from lg. --disc and --gap mirror the disc size
+	   and the list gap (size-16 / gap-12, lg:size-24 / lg:gap-x-10). */
+	.pillars {
+		--disc: 4rem;
+		--gap: 3rem;
+	}
+
+	.pillar-disc::before {
+		content: "";
+		position: absolute;
+		inset: -0.5rem;
+		border: 1px solid var(--color-seafoam);
+		border-radius: 9999px;
+	}
+
+	.pillar:not(:last-child)::after {
+		content: "";
+		position: absolute;
+		left: calc(var(--disc) / 2 - 1px);
+		top: calc(var(--disc) + 0.875rem);
+		bottom: calc(0.875rem - var(--gap));
+		width: 2px;
+		border-radius: 9999px;
+		background-color: var(--color-seafoam);
+		transform-origin: top;
+	}
+
+	@media (width >= 64rem) {
+		.pillars {
+			--disc: 6rem;
+			--gap: 2.5rem;
+		}
+
+		.pillar:not(:last-child)::after {
+			top: calc(var(--disc) / 2 - 1px);
+			bottom: auto;
+			left: calc(var(--disc) + 0.875rem);
+			right: calc(0.875rem - var(--gap));
+			width: auto;
+			height: 2px;
+			transform-origin: left;
+		}
+	}
+
+	/* Tied to each pillar's own view timeline, so it reverses on the way back
+	   up: the disc and its ring open, the icon turns in, the copy rises, then
+	   the thread draws towards the next disc. From lg the three share one row,
+	   so --shift staggers them left to right, each disc arriving as the thread
+	   reaches it. */
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			.pillar {
+				--shift: 0%;
+				view-timeline-name: --pillar;
+			}
+
+			@media (width >= 64rem) {
+				.pillar {
+					--shift: calc(var(--i) * 12%);
+				}
+			}
+
+			.pillar-disc,
+			.pillar-disc::before,
+			.pillar-icon,
+			.pillar-copy,
+			.pillar::after {
+				animation-timeline: --pillar;
+				animation-fill-mode: both;
+				animation-timing-function: var(--ease-out);
+			}
+
+			.pillar-disc {
+				animation-name: pillar-disc;
+				animation-range: cover calc(4% + var(--shift)) cover
+					calc(18% + var(--shift));
+			}
+
+			.pillar-disc::before {
+				animation-name: pillar-ring;
+				animation-range: cover calc(8% + var(--shift)) cover
+					calc(24% + var(--shift));
+			}
+
+			.pillar-icon {
+				animation-name: pillar-icon;
+				animation-range: cover calc(6% + var(--shift)) cover
+					calc(20% + var(--shift));
+			}
+
+			.pillar-copy {
+				animation-name: pillar-copy;
+				animation-range: cover calc(8% + var(--shift)) cover
+					calc(26% + var(--shift));
+			}
+
+			.pillar::after {
+				animation-name: pillar-thread-y;
+				animation-timing-function: linear;
+				animation-range: cover 18% cover 42%;
+			}
+
+			@media (width >= 64rem) {
+				.pillar::after {
+					animation-name: pillar-thread-x;
+					animation-range: cover calc(10% + var(--shift)) cover
+						calc(18% + var(--shift));
+				}
+			}
+
+			@keyframes pillar-disc {
+				from {
+					opacity: 0;
+					transform: scale(0.8);
+				}
+			}
+
+			@keyframes pillar-ring {
+				from {
+					opacity: 0;
+					transform: scale(0.7);
+				}
+			}
+
+			@keyframes pillar-icon {
+				from {
+					opacity: 0;
+					transform: rotate(-30deg) scale(0.85);
+				}
+			}
+
+			@keyframes pillar-copy {
+				from {
+					opacity: 0;
+					transform: translateY(1.5rem);
+				}
+			}
+
+			@keyframes pillar-thread-y {
+				from {
+					transform: scaleY(0);
+				}
+			}
+
+			@keyframes pillar-thread-x {
+				from {
+					transform: scaleX(0);
+				}
+			}
+		}
+	}
+
+	/* Reduced motion: the pillars only fade in, nothing moves. */
+	@media (prefers-reduced-motion: reduce) {
+		@supports (animation-timeline: view()) {
+			.pillar-disc,
+			.pillar-copy {
+				animation: fade linear both;
+				animation-timeline: view();
+				animation-range: cover 4% cover 20%;
+			}
+		}
+	}
+
+	/* Process steps (nuestro-metodo.astro): a rail runs through a node beside
+	   each step. Every step draws its own stretch, from its node down to the
+	   next one: a 2px hairline track with the teal fill on top. --node-y is
+	   the node's centre from the top of the step (py-8 + mt-1 / lg:mt-2.5 +
+	   half of size-6); the stretch spans the same distance past the bottom,
+	   where the next node sits. Without scroll timelines the rail is teal and
+	   every node is lit. */
+	.process {
+		--node-y: 3rem;
+	}
+
+	@media (width >= 64rem) {
+		.process {
+			--node-y: 3.375rem;
+		}
+	}
+
+	.process-step:not(:last-child)::before,
+	.process-step:not(:last-child)::after {
+		content: "";
+		position: absolute;
+		left: calc(0.75rem - 1px);
+		top: var(--node-y);
+		bottom: calc(-1 * var(--node-y));
+		width: 2px;
+		transform-origin: top;
+	}
+
+	.process-step::before {
+		background-color: var(--color-line);
+	}
+
+	.process-step::after {
+		background-color: var(--color-teal);
+	}
+
+	.process-node::after {
+		content: "";
+		position: absolute;
+		inset: 0.3125rem;
+		border-radius: 9999px;
+		background-color: var(--color-teal);
+	}
+
+	/* The reading line is the middle of the viewport: an inset of 50% on both
+	   ends collapses each step's view timeline onto it. A step's stretch fills
+	   while the step crosses that line, so the tip of the rail keeps pace with
+	   the reader, and the next node lights as the step after it arrives. Tied
+	   to the scroll position, so it empties again on the way back up. */
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			.process-step {
+				view-timeline: --process-step block;
+				view-timeline-inset: 50%;
+			}
+
+			.process-step::after,
+			.process-node,
+			.process-node::after {
+				animation-timeline: --process-step;
+				animation-fill-mode: both;
+			}
+
+			.process-step::after {
+				animation-name: process-rail;
+				animation-timing-function: linear;
+				animation-range: cover 0% cover 100%;
+			}
+
+			.process-node {
+				animation-name: process-node;
+				animation-timing-function: var(--ease-out);
+				animation-range: cover 0% cover 10%;
+			}
+
+			.process-node::after {
+				animation-name: process-dot;
+				animation-timing-function: var(--ease-out);
+				animation-range: cover 0% cover 8%;
+			}
+
+			@keyframes process-rail {
+				from {
+					transform: scaleY(0);
+				}
+			}
+
+			@keyframes process-node {
+				from {
+					transform: scale(0.85);
+				}
+				50% {
+					transform: scale(1.15);
+				}
+			}
+
+			@keyframes process-dot {
+				from {
+					opacity: 0;
+					transform: scale(0.4);
+				}
+			}
+		}
+	}
+
+	/* Reduced motion: no growing rail or pulsing node; each dot just fades on
+	   as its step reaches the middle of the screen. */
+	@media (prefers-reduced-motion: reduce) {
+		@supports (animation-timeline: view()) {
+			.process-step {
+				view-timeline: --process-step block;
+				view-timeline-inset: 50%;
+			}
+
+			.process-node::after {
+				animation: fade linear both;
+				animation-timeline: --process-step;
+				animation-range: cover 0% cover 8%;
+			}
+		}
+	}
+
+	/* Benefits (nuestro-metodo.astro): four panels, each opened by an icon
+	   disc. A teal fill sits under the icon (::before) and only shows when a
+	   panel is lit: on hover with a fine pointer, or, on phones, while its
+	   card is the one centred in the swipeable row. */
+	.benefits {
+		scrollbar-width: none;
+	}
+
+	.benefit-disc::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: 9999px;
+		background-color: var(--color-teal);
+		opacity: 0;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.benefit {
+			transition: transform 300ms var(--ease-out);
+		}
+
+		.benefit-disc::before {
+			transform: scale(0.6);
+			transition:
+				opacity 250ms var(--ease-out),
+				transform 250ms var(--ease-out);
+		}
+
+		.benefit-icon {
+			transition:
+				color 200ms ease,
+				transform 300ms var(--ease-out);
+		}
+
+		.benefit:hover .benefit-disc::before {
+			opacity: 1;
+			transform: none;
+		}
+
+		.benefit:hover .benefit-icon {
+			color: var(--color-white);
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			.benefit:hover {
+				transform: translateY(-0.25rem);
+			}
+
+			.benefit:hover .benefit-icon {
+				transform: rotate(-8deg) scale(1.08);
+			}
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			/* Phones: the row's own scroll drives each card. The centred one is
+			   full size with its disc lit; its neighbours sit back slightly. */
+			@media (width < 40rem) {
+				/* Named on the card so the disc and icon follow the card's position, not their own. */
+				.benefit {
+					view-timeline: --benefit inline;
+				}
+
+				.benefit,
+				.benefit-disc::before,
+				.benefit-icon {
+					animation-timeline: --benefit;
+					animation-range: cover 0% cover 100%;
+					animation-fill-mode: both;
+					animation-timing-function: linear;
+				}
+
+				.benefit {
+					animation-name: benefit-focus;
+				}
+
+				.benefit-disc::before {
+					animation-name: benefit-lit;
+				}
+
+				.benefit-icon {
+					animation-name: benefit-lit-icon;
+				}
+			}
+
+			/* From sm: each panel unfolds upward out of its own rounded frame as
+			   it comes into view, the disc turning in just behind it. Across a
+			   row, --shift staggers them left to right. */
+			@media (width >= 40rem) {
+				.benefit {
+					--shift: calc(mod(var(--i), 2) * 6%);
+					animation: benefit-unfold var(--ease-out) both;
+					animation-timeline: view();
+					animation-range: entry calc(10% + var(--shift)) cover
+						calc(35% + var(--shift));
+				}
+
+				.benefit-disc {
+					animation: benefit-disc var(--ease-out) both;
+					animation-timeline: view();
+					animation-range: entry calc(40% + var(--shift)) cover
+						calc(40% + var(--shift));
+				}
+			}
+
+			@media (width >= 64rem) {
+				.benefit {
+					--shift: calc(var(--i) * 6%);
+				}
+			}
+
+			@keyframes benefit-focus {
+				0%,
+				100% {
+					transform: scale(0.92);
+				}
+				40%,
+				60% {
+					transform: none;
+				}
+			}
+
+			@keyframes benefit-lit {
+				0%,
+				25%,
+				75%,
+				100% {
+					opacity: 0;
+					transform: scale(0.6);
+				}
+				42%,
+				58% {
+					opacity: 1;
+					transform: none;
+				}
+			}
+
+			@keyframes benefit-lit-icon {
+				0%,
+				30%,
+				70%,
+				100% {
+					color: var(--color-teal);
+				}
+				42%,
+				58% {
+					color: var(--color-white);
+				}
+			}
+
+			@keyframes benefit-unfold {
+				from {
+					clip-path: inset(100% 0 0 0 round var(--radius-frame));
+				}
+				to {
+					clip-path: inset(0 0 0 0 round var(--radius-frame));
+				}
+			}
+
+			@keyframes benefit-disc {
+				from {
+					opacity: 0;
+					transform: scale(0.8) rotate(-45deg);
+				}
+			}
+		}
+	}
+
+	/* Therapist (nuestro-metodo.astro). The portrait drifts inside its frame
+	   against the scroll, enlarged just enough (1.12 for a ±5% travel) that
+	   its edges never show. The highlights tick in one after another as the
+	   list comes up: each disc turns in, its check pops, and the line slides
+	   in behind it. Tied to the scroll position, so it reverses by itself. */
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			.therapist-photo {
+				animation: therapist-drift linear both;
+				animation-timeline: view();
+			}
+
+			.highlights {
+				view-timeline: --highlights block;
+			}
+
+			.highlight-tick,
+			.highlight-check,
+			.highlight-label {
+				animation-timeline: --highlights;
+				animation-fill-mode: both;
+				animation-timing-function: var(--ease-out);
+			}
+
+			.highlight-tick {
+				animation-name: highlight-tick;
+				animation-range: cover calc(6% + var(--i) * 6%) cover
+					calc(16% + var(--i) * 6%);
+			}
+
+			.highlight-check {
+				animation-name: highlight-check;
+				animation-range: cover calc(9% + var(--i) * 6%) cover
+					calc(19% + var(--i) * 6%);
+			}
+
+			.highlight-label {
+				animation-name: highlight-label;
+				animation-range: cover calc(8% + var(--i) * 6%) cover
+					calc(20% + var(--i) * 6%);
+			}
+
+			/* The rest of the copy (heading, subtitle, intro, link) slides in the
+			   same way, each line on its own view timeline, so they follow one
+			   another down the column as it scrolls up. */
+			.therapist-copy header > div > *,
+			.therapist-copy > a {
+				animation: highlight-label var(--ease-out) both;
+				animation-timeline: view();
+				animation-range: cover 4% cover 18%;
+			}
+
+			@keyframes therapist-drift {
+				from {
+					transform: translateY(-5%) scale(1.12);
+				}
+				to {
+					transform: translateY(5%) scale(1.12);
+				}
+			}
+
+			@keyframes highlight-tick {
+				from {
+					opacity: 0;
+					transform: scale(0.6) rotate(-90deg);
+				}
+			}
+
+			@keyframes highlight-check {
+				from {
+					opacity: 0;
+					transform: scale(0.4);
+				}
+				60% {
+					opacity: 1;
+					transform: scale(1.2);
+				}
+			}
+
+			@keyframes highlight-label {
+				from {
+					opacity: 0;
+					transform: translateX(-0.75rem);
+				}
+			}
+		}
+	}
+
+	/* Watermark: the slide's icon, large and faint, tucked into its corner. */
+	.expect-watermark {
+		font-size: 9rem;
+		line-height: 1;
+	}
+
+	/* Story chapters (sobre-mi.astro). Each chapter is its own view timeline.
+	   The photo's frame opens like a curtain from the side the photo sits on,
+	   while the photo inside eases from a slight zoom into its framing and
+	   then drifts gently against the scroll. The copy follows from the photo's
+	   side: the label slides across, the title and text rise after it. Tied to
+	   the scroll position, so it reverses on the way up. The photo keeps a
+	   1.08 scale at rest so the ±3% drift never shows its edges. */
+	@media (prefers-reduced-motion: no-preference) {
+		@supports (animation-timeline: view()) {
+			.story-chapter {
+				--from: -1.5rem;
+				view-timeline: --chapter block;
+			}
+
+			.story-chapter:nth-child(even) {
+				--from: 1.5rem;
+			}
+
+			.story-figure > div,
+			.story-photo,
+			.story-figure > figcaption,
+			.story-label,
+			.story-title,
+			.story-text {
+				animation-timeline: --chapter;
+				animation-fill-mode: both;
+				animation-timing-function: var(--ease-out);
+			}
+
+			.story-figure > div {
+				animation-name: story-unveil-left;
+				animation-range: cover 20% cover 45%;
+			}
+
+			.story-chapter:nth-child(even) .story-figure > div {
+				animation-name: story-unveil-right;
+			}
+
+			.story-photo {
+				animation-name: story-photo;
+				animation-timing-function: linear;
+				animation-range: cover 0% cover 100%;
+			}
+
+			.story-figure > figcaption {
+				animation-name: fade;
+				animation-range: cover 40% cover 50%;
+			}
+
+			.story-label {
+				animation-name: story-slide;
+				animation-range: cover 25% cover 40%;
+			}
+
+			.story-title {
+				animation-name: story-rise;
+				animation-range: cover 28% cover 44%;
+			}
+
+			.story-text {
+				animation-name: story-rise;
+				animation-range: cover 31% cover 48%;
+			}
+
+			@keyframes story-unveil-left {
+				from {
+					clip-path: inset(0 100% 0 0 round var(--radius-frame));
+				}
+				to {
+					clip-path: inset(0 0 0 0 round var(--radius-frame));
+				}
+			}
+
+			@keyframes story-unveil-right {
+				from {
+					clip-path: inset(0 0 0 100% round var(--radius-frame));
+				}
+				to {
+					clip-path: inset(0 0 0 0 round var(--radius-frame));
+				}
+			}
+
+			@keyframes story-photo {
+				0%,
+				20% {
+					transform: translateY(-3%) scale(1.25);
+				}
+				45% {
+					transform: translateY(-1%) scale(1.08);
+				}
+				100% {
+					transform: translateY(3%) scale(1.08);
+				}
+			}
+
+			@keyframes story-slide {
+				from {
+					opacity: 0;
+					transform: translateX(var(--from));
+				}
+			}
+
+			@keyframes story-rise {
+				from {
+					opacity: 0;
+					transform: translateY(1.5rem);
+				}
+			}
+		}
+	}
+
+	/* Session expectations (SessionExpect.astro): a pinned horizontal slider.
+	   The wrapper is as tall as the stage plus 70svh of scroll per slide; while
+	   it covers the viewport the stage stays pinned and the track slides from
+	   its first panel at the left gutter to its last at the right one. Each
+	   slide grows and lights its icon around the moment it crosses the middle,
+	   and the bar below fills one part per slide. Same conditions as the
+	   scroll-driven variant, which turns the grid into the track. Tied to the
+	   scroll position, so it all runs backwards on the way up. */
+	@media (prefers-reduced-motion: no-preference) and (height >= 40rem) {
+		@supports (animation-timeline: view()) {
+			.session-expect {
+				--gutter: 1.25rem;
+				--slide-w: min(82vw, 24rem);
+				/* The content column the track ends flush with (max-w-content minus the gutters). */
+				--stage-w: calc(
+					min(100vw, var(--container-content)) -
+					2 *
+					var(--gutter)
+				);
+				height: calc(var(--n) * 70svh + 100svh);
+				view-timeline: --expect block;
+			}
+
+			@media (width >= 40rem) {
+				.session-expect {
+					--gutter: 2rem;
+				}
+			}
+
+			@media (width >= 64rem) {
+				.session-expect {
+					--gutter: 2.5rem;
+					--slide-w: 27rem;
+				}
+			}
+
+			/* As tall as its content, pinned under the 72px site header. The
+			   track's run ends when the wrapper's bottom meets the screen's, a
+			   little before the pin lets go, so the last slide holds a moment
+			   and then the next section follows straight after it. */
+			.expect-stage {
+				position: sticky;
+				top: 0;
+				display: flex;
+				flex-direction: column;
+				padding-top: calc(4.5rem + 2.5rem);
+				padding-bottom: 4rem;
+			}
+
+			.expect-track,
+			.expect-slide,
+			.expect-outline,
+			.expect-watermark,
+			.expect-disc-fill,
+			.expect-icon,
+			.expect-progress-fill {
+				animation-timeline: --expect;
+				animation-fill-mode: both;
+				animation-timing-function: linear;
+			}
+
+			.expect-track {
+				animation-name: expect-track;
+				animation-range: contain 0% contain 100%;
+			}
+
+			/* Slide i peaks at i / (n - 1) of the way through. */
+			.expect-slide,
+			.expect-outline,
+			.expect-watermark,
+			.expect-disc-fill,
+			.expect-icon {
+				animation-range: contain calc((var(--i) - 1) / (var(--n) - 1) * 100%)
+					contain calc((var(--i) + 1) / (var(--n) - 1) * 100%);
+			}
+
+			.expect-slide {
+				animation-name: expect-focus;
+			}
+
+			.expect-outline,
+			.expect-disc-fill {
+				animation-name: expect-lit;
+			}
+
+			.expect-watermark {
+				animation-name: expect-watermark;
+			}
+
+			.expect-icon {
+				animation-name: expect-lit-icon;
+			}
+
+			.expect-progress-fill {
+				animation-name: expect-progress;
+				animation-range: contain calc(var(--i) / var(--n) * 100%) contain
+					calc((var(--i) + 1) / var(--n) * 100%);
+			}
+
+			.expect-ring {
+				animation: expect-ring linear both;
+				animation-timeline: --expect;
+				animation-range: contain 0% contain 100%;
+			}
+
+			@keyframes expect-track {
+				to {
+					transform: translateX(calc(-100% + var(--stage-w)));
+				}
+			}
+
+			@keyframes expect-focus {
+				0%,
+				100% {
+					transform: scale(0.94);
+				}
+				40%,
+				60% {
+					transform: none;
+				}
+			}
+
+			@keyframes expect-lit {
+				0%,
+				30%,
+				70%,
+				100% {
+					opacity: 0;
+				}
+				45%,
+				55% {
+					opacity: 1;
+				}
+			}
+
+			@keyframes expect-lit-icon {
+				0%,
+				30%,
+				70%,
+				100% {
+					color: var(--color-teal);
+				}
+				45%,
+				55% {
+					color: var(--color-white);
+				}
+			}
+
+			/* The big icon behind the card turns and drifts the other way. */
+			@keyframes expect-watermark {
+				from {
+					transform: translateX(2rem) rotate(-12deg);
+				}
+				to {
+					transform: translateX(-2rem) rotate(12deg);
+				}
+			}
+
+			@keyframes expect-progress {
+				from {
+					transform: scaleX(0);
+				}
+			}
+
+			@keyframes expect-ring {
+				from {
+					transform: rotate(-180deg);
+				}
+				to {
+					transform: rotate(180deg);
+				}
+			}
+		}
+	}
+
+	/* Online situations (OnlineSituations.astro): once the script has made them
+	   tabs, the panels share one cell so the card keeps the tallest height, and
+	   the selected one crossfades in while the photo glides to its framing. */
+	@media (min-width: 64rem) {
+		.online-situations[data-ready] {
+			.situations-panel {
+				opacity: 0;
+				visibility: hidden;
+				transition:
+					opacity 200ms var(--ease-out),
+					visibility 0s linear 200ms;
+			}
+
+			.situations-panel[data-active] {
+				opacity: 1;
+				visibility: visible;
+				transition:
+					opacity 400ms var(--ease-out) 120ms,
+					transform 400ms var(--ease-out) 120ms;
+			}
+		}
+	}
+
+	.online-situations [data-track] {
+		scrollbar-width: none;
+	}
+
+	@media (prefers-reduced-motion: no-preference) and (min-width: 64rem) {
+		.online-situations[data-ready] {
+			.situations-panel {
+				transform: translateY(0.5rem);
+			}
+
+			.situations-panel[data-active] {
+				transform: none;
+			}
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.situations-photo {
+			transition: transform 900ms var(--ease-in-out);
+		}
+
+		.situations-live {
+			animation: situations-live 2.4s var(--ease-out) infinite;
+		}
+
+		@keyframes situations-live {
+			0% {
+				opacity: 0.8;
+				transform: scale(1);
+			}
+			70%,
+			100% {
+				opacity: 0;
+				transform: scale(2.6);
+			}
+		}
+	}
+
+	/* Reduced motion keeps a short fade and drops all movement. */
+	@media (prefers-reduced-motion: reduce) {
+		.hero-copy > *,
+		.hero-media {
+			animation: var(--animate-fade);
+		}
+	}
+
+	@media print {
+		[data-reveal="pending"] {
+			opacity: 1;
+			transform: none;
+			filter: none;
+		}
+
+		.reveal-unveil[data-reveal="pending"] > div {
+			clip-path: none;
+		}
+
+		.reveal-unveil[data-reveal="pending"] :is(img, figcaption) {
+			opacity: 1;
+			transform: none;
+		}
+
+		.typewriter[data-reveal="pending"] .typewriter-char {
 			opacity: 1;
 		}
 	}
 
-	@keyframes fadeInColorTransparentLight {
-		'100%' {
-			backdropfilter: 'blur(4px)';
-			background: 'rgba(255, 255, 255, .9)';
+	/* Long-form Markdown: blog posts and legal pages. */
+	.prose-inala {
+		font-size: 1.125rem;
+		line-height: 1.75;
+		color: var(--color-ink);
+
+		& > * + * {
+			margin-top: 1.25em;
+		}
+
+		& :where(h2, h3, h4) {
+			color: var(--color-ink);
+			font-family: var(--font-display);
+			font-weight: 500;
+			margin-top: 2.2em;
+			scroll-margin-top: 6rem;
+		}
+
+		& :where(h2, h3, h4) + * {
+			margin-top: 0.75em;
+		}
+
+		& h2 {
+			font-size: var(--text-subheading);
+			line-height: var(--text-subheading--line-height);
+		}
+
+		& :where(h3, h4) {
+			font-size: 1.3125rem;
+			line-height: 1.3;
+		}
+
+		& strong {
+			font-weight: 600;
+		}
+
+		& a {
+			color: var(--color-teal);
+			text-decoration-line: underline;
+
+			&:hover {
+				color: var(--color-teal-strong);
+				text-decoration-thickness: 2px;
+			}
+		}
+
+		& :where(ul, ol) {
+			padding-left: 1.4em;
+		}
+
+		& ul {
+			list-style: disc;
+		}
+
+		& ol {
+			list-style: decimal;
+		}
+
+		& li + li {
+			margin-top: 0.5em;
+		}
+
+		& li::marker {
+			color: var(--color-teal);
+		}
+
+		& blockquote {
+			font-family: var(--font-display);
+			font-size: 1.375rem;
+			line-height: 1.45;
+			font-style: italic;
+			color: var(--color-ink-muted);
+			padding-left: 1.25em;
+			border-left: 1px solid var(--color-line-strong);
+		}
+
+		& hr {
+			border-color: var(--color-line);
+			margin-block: 3em;
+		}
+
+		& table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: var(--text-small);
+		}
+
+		& :where(th, td) {
+			border: 1px solid var(--color-line);
+			padding: 0.6em 0.8em;
+			text-align: left;
+			vertical-align: top;
+			/* Long URLs may still break, but words keep their columns' minimum width. */
+			overflow-wrap: break-word;
+			hyphens: auto;
+
+			@media (width < 40rem) {
+				padding: 0.5em 0.45em;
+			}
+		}
+
+		& th {
+			background-color: var(--color-mist);
+			font-weight: 600;
 		}
 	}
-	@keyframes fadeInColorTransparentDark {
-		'100%' {
-			backdropfilter: 'blur(4px)';
-			background: 'rgba(15, 23, 42, .9)';
+}
+
+/* Session expectations, pinned on phones (SessionExpect.astro). Unlayered on
+   purpose: these trim utilities the header and slides already carry, which a
+   rule inside a layer could not override. The pinned header gives up a little
+   height to the slides; on short screens the decorative progress bar goes and
+   the slides tighten, so the whole stage still fits one screen. */
+@media (prefers-reduced-motion: no-preference) and (height >= 40rem) and (
+		width < 64rem
+	) {
+	@supports (animation-timeline: view()) {
+		.expect-stage {
+			padding-top: calc(4.5rem + 1.5rem);
+			padding-bottom: 3rem;
+		}
+
+		.expect-stage header {
+			row-gap: 0.75rem;
+		}
+
+		.expect-stage header > div:last-child {
+			font-size: var(--text-body);
+			line-height: var(--text-body--line-height);
+		}
+
+		@media (height < 46rem) {
+			.expect-stage {
+				padding-top: calc(4.5rem + 0.75rem);
+			}
+
+			.expect-progress {
+				display: none;
+			}
+
+			.expect-track {
+				margin-top: 1rem;
+			}
+
+			.expect-slide {
+				gap: 0.75rem;
+				padding: 1.5rem;
+			}
 		}
 	}
-	@keyframes fadeInColorTransparentDark {
-		'100%' {
-			backdropfilter: 'blur(4px)';
-			background: 'rgba(15, 23, 42, .9)';
-		}
-	}
-	@keyframes marquee {
-		'0%' {
-			transform: 'translateX(0%)';
-		}
-		'100%' {
-			transform: 'translateX(-100%)';
-		}
-	}
-	@keyframes marqueefollowup {
-		'0%' {
-			transform: 'translateX(100%)';
-		}
-		'100%' {
-			transform: 'translateX(0%)';
-		}
-	}
-	@keyframes fadeUp {
-		'0%' {
-			transform: 'translateY(1rem)';
-			opacity: 0;
-		}
-		'100%' {
-			transform: 'translateY(0)';
-			opacity: 1;
-		}
-	}
-}
-
-@font-face {
-	font-family: 'Synonym-Variable';
-	src:
-		url('/fonts/synonym/Synonym-Variable.woff2') format('woff2'),
-		url('/fonts/synonym/Synonym-Variable.woff') format('woff'),
-		url('/fonts/synonym/Synonym-Variable.ttf') format('truetype');
-	font-weight: 200 700;
-	font-display: swap;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'Chillax-Variable';
-	src:
-		url('/fonts/chillax/Chillax-Variable.woff2') format('woff2'),
-		url('/fonts/chillax/Chillax-Variable.woff') format('woff'),
-		url('/fonts/chillax/Chillax-Variable.ttf') format('truetype');
-	font-weight: 200 700;
-	font-display: swap;
-	font-style: normal;
-}
-
-/* Layout rules */
-html {
-	@apply scroll-smooth antialiased;
-}
-body {
-	@apply font-body bg-neutral-50 bg-[url('/bgs/light.webp')] bg-size-[200px] text-base leading-7 text-neutral-500 selection:bg-neutral-950 selection:text-neutral-50 in-[.dark]:text-neutral-400 in-[.light]:text-neutral-500 has-[.header\_\_menu--open]:overflow-hidden lg:has-[.header\_\_menu--open]:overflow-auto dark:bg-neutral-950 dark:bg-[url('/bgs/dark.webp')] dark:text-neutral-400 dark:selection:bg-neutral-50 dark:selection:text-neutral-950;
-}
-
-/* Main typography */
-p {
-	@apply mb-6 last:mb-0;
-}
-.text-lead {
-	@apply text-[21px] leading-9 font-light;
-}
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3,
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6 {
-	@apply font-headings text-neutral-950 last:mb-0 in-[.dark]:text-neutral-50 in-[.light]:text-neutral-950 dark:text-neutral-50;
-}
-h1 strong,
-h2 strong,
-h3 strong,
-h4 strong,
-h5 strong,
-h6 strong {
-	font-weight: inherit;
-}
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3 {
-	@apply mb-6 font-medium;
-}
-
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6 {
-	@apply mb-4 font-medium;
-}
-
-h1,
-.h1 {
-	@apply text-6xl lg:text-9xl;
-}
-
-h2,
-.h2 {
-	@apply text-4xl lg:text-6xl lg:leading-18;
-}
-
-h3,
-.h3 {
-	@apply text-2xl lg:text-3xl lg:leading-9;
-}
-
-h4,
-.h4 {
-	@apply text-xl lg:text-2xl;
-}
-
-h5,
-.h5 {
-	@apply text-lg lg:text-xl;
-}
-
-h6,
-.h6 {
-	@apply text-base lg:text-lg;
-}
-main a {
-	@apply text-primary-800 hover:text-primary-900 dark:text-primary-200 dark:hover:text-primary-100;
-}
-.small {
-	@apply text-sm font-normal text-neutral-400 dark:text-neutral-500;
-}
-blockquote,
-.blockquote {
-	@apply text-3xl leading-12 font-light;
-}
-
-ul li,
-ol li {
-	@apply marker:text-primary-700 dark:marker:text-primary-300 mb-2 ml-4 pl-2;
-}
-ul li {
-	@apply list-['+'] marker:font-medium;
-}
-ol li {
-	@apply list-decimal;
-}
-form input {
-	@apply relative mb-6 h-12 w-full border border-neutral-200 px-4 text-neutral-700 placeholder-transparent transition-all outline-none autofill:bg-white invalid:border-red-500 invalid:text-red-500 focus:border-neutral-500 focus:outline-none invalid:focus:border-red-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-400 dark:border-neutral-800 dark:bg-neutral-900 dark:autofill:bg-neutral-900 dark:disabled:bg-neutral-600;
-}
-form textarea {
-	@apply relative mb-6 w-full border border-neutral-200 px-4 text-neutral-700 placeholder-transparent -backdrop-hue-rotate-30 transition-all outline-none autofill:bg-white invalid:border-red-500 invalid:text-red-500 focus:border-neutral-500 focus:outline-none invalid:focus:border-red-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-400 dark:border-neutral-800 dark:bg-neutral-900 dark:autofill:bg-neutral-800 dark:disabled:bg-neutral-600;
-}
-form label {
-	@apply font-headings text-sm;
-}
-form button {
-	@apply inline-flex h-12 cursor-pointer items-center justify-center gap-2 bg-neutral-900 bg-[url('/bgs/dark.webp')] bg-size-[200px] px-6 text-sm font-medium tracking-wide whitespace-nowrap text-white transition duration-300 hover:bg-neutral-950 focus:bg-neutral-950 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-neutral-300 disabled:bg-neutral-300 disabled:shadow-none;
-}
-
-/* Global basic styling */
-.basic-text {
-	@apply [&_blockquote_p]:font-headings [&_blockquote]:relative [&_blockquote]:mb-7.5 [&_blockquote]:border-[#EBEBEB] [&_blockquote]:bg-[#f5f5f5] [&_blockquote]:p-7.5 [&_blockquote]:pt-24 [&_blockquote]:transition-colors [&_blockquote]:duration-400 [&_blockquote]:before:absolute [&_blockquote]:before:top-7.5 [&_blockquote]:before:left-7.5 [&_blockquote]:before:z-0 [&_blockquote]:before:block [&_blockquote]:before:text-7xl [&_blockquote]:before:text-neutral-200 [&_blockquote]:before:opacity-50 [&_blockquote]:before:content-['❝'] [&_blockquote]:hover:border-neutral-100 [&_blockquote]:hover:bg-white [&_blockquote]:dark:border-neutral-800 [&_blockquote]:dark:bg-neutral-900/40 [&_blockquote]:dark:hover:border-neutral-700 [&_blockquote]:dark:hover:bg-neutral-900/90 [&_blockquote_p]:p-0! [&_blockquote_p]:pb-6 [&_blockquote_p]:text-2xl [&_blockquote_p]:leading-12 [&_blockquote_p]:text-neutral-950 [&_blockquote_p]:lg:text-3xl [&_blockquote_p]:dark:text-neutral-50 [&_h1:not(:first-child)]:mt-24 [&_h2:not(:first-child)]:mt-24 [&_h3:not(:first-child)]:mt-24 [&_h4:not(:first-child)]:mt-12 [&_img]:rounded-sm [&_img]:border [&_img]:border-neutral-100 dark:[&_img]:border-neutral-600 [&_li]:mb-2 [&_li]:ml-4 [&_li]:pl-2 [&_li]:text-neutral-700 [&_li]:marker:text-neutral-500 [&_li]:dark:text-neutral-400 [&_li]:dark:marker:text-neutral-400 [&_ol_li]:list-decimal [&_pre]:mb-6 [&_pre]:rounded-sm [&_pre]:border [&_pre]:border-neutral-950 [&_pre]:bg-neutral-800! [&_pre]:p-6 [&_pre]:text-base [&_pre]:outline-hidden [&_pre]:dark:border-neutral-800! [&_pre]:dark:bg-neutral-900! [&_ul_li]:list-['+'] [&_ul_li]:marker:font-medium;
-}
-
-/* Scroll animations */
-/* To disable scroll animations remove the class "scroll-animation" from root html in the layout file. To make a col not scroll animated add the class "no-scroll-animation" */
-.scroll-animation .col:not(.no-scroll-animation) {
-	@apply translate-y-6 scale-y-110 transform opacity-0 blur-sm transition-all duration-1000 nth-1:delay-50 nth-10:delay-725 nth-11:delay-800 nth-12:delay-875 nth-2:delay-125 nth-3:delay-200 nth-4:delay-275 nth-5:delay-350 nth-6:delay-425 nth-7:delay-500 nth-8:delay-575 nth-9:delay-650 [&.scroll-animated]:translate-y-0 [&.scroll-animated]:scale-y-100 [&.scroll-animated]:opacity-100 [&.scroll-animated]:blur-none;
-}
-
-/* Button hover effect */
-.button .decor > * {
-	@apply transition-all duration-300;
-}
-.button:hover .decor .decor__top-left {
-	@apply -translate-x-1 -translate-y-1;
-}
-.button:hover .decor .decor__top-right {
-	@apply translate-x-1 -translate-y-1;
-}
-.button:hover .decor .decor__bottom-left {
-	@apply -translate-x-1 translate-y-1;
-}
-.button:hover .decor .decor__bottom-right {
-	@apply translate-x-1 translate-y-1;
 }

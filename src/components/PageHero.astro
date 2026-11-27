@@ -1,0 +1,208 @@
+---
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Figure from "./ui/Figure.astro";
+
+interface Props {
+	/** Plain h1 text; use the "title" slot instead when it carries markup. */
+	title?: string;
+	/** Page label kept from the content, set as a subtitle under the h1. */
+	label?: string;
+	image?: ImageMetadata;
+	imageAlt?: string;
+	imageRatio?: "portrait" | "tall" | "landscape" | "square";
+	/** Narrow pages without an image use a single centred-left column. */
+	size?: "display" | "title";
+	/** Colour the emphasised run of the h1 (home only, where it marks the audiences). */
+	accent?: boolean;
+	/** Decorative full-bleed background; the hero is at least as tall as the image at full width. */
+	backgroundImage?: ImageMetadata;
+	/** Video played once over backgroundImage, which is its poster (the first frame).
+	 * Sources in order of preference; `media` serves a lighter file to small screens. */
+	backgroundVideo?: { src: string; type: string; media?: string }[];
+	/** Below lg, where the image's subject sits: "crop" fills the hero from the top left (so a
+	 * subject on the right is cut off); "corner" anchors a wide copy to the bottom right. */
+	mobileBackground?: "crop" | "corner";
+	/** Keep the hero pinned while the next sections scroll over it (they need `relative z-10`). */
+	pinned?: boolean;
+}
+
+const {
+	title,
+	label,
+	image,
+	imageAlt = "",
+	imageRatio = "portrait",
+	size = "title",
+	accent = false,
+	backgroundImage,
+	backgroundVideo,
+	mobileBackground = "crop",
+	pinned = false,
+} = Astro.props;
+const hasBackground = Boolean(backgroundImage);
+const corner = mobileBackground === "corner" && !backgroundVideo;
+
+const hasMedia = Boolean(image) || Astro.slots.has("media");
+const hasCaption = Astro.slots.has("caption");
+---
+
+<section
+	class:list={[
+		"bg-paper pb-24 lg:pb-24",
+		// The background hero slides under the transparent header: -mt-18 and +4.5rem of top padding.
+		hasBackground
+			? "relative isolate -mt-18 overflow-hidden pt-28 lg:pt-42"
+			: "pt-24 lg:pt-24",
+		// Pinned until its bottom edge reaches the bottom of the viewport, so a hero taller
+		// than the screen is never cut off while it waits for the content to cover it.
+		pinned &&
+			"sticky top-[min(0px,calc(100svh-var(--hero-bg-h)))] max-lg:top-0",
+		hasBackground &&
+			(backgroundVideo || corner
+				? // Below lg the hero fills the visible viewport, so the video it holds
+					// always sits at the very bottom of the screen; from lg it keeps the
+					// background image's own ratio instead.
+					"max-lg:min-h-[100svh] lg:min-h-(--hero-bg-h)"
+				: "min-h-(--hero-bg-h)"),
+	]}
+	style={hasBackground &&
+		`--hero-bg-h: calc(100vw * ${backgroundImage?.height} / ${backgroundImage?.width})`}
+>
+	{
+		hasBackground && (
+			<>
+			{backgroundVideo && backgroundImage ? (
+				<div aria-hidden="true" class="absolute inset-0 -z-10">
+					<video
+						muted
+						playsinline
+						preload="none"
+						poster={backgroundImage.src}
+						width={backgroundImage.width}
+						height={backgroundImage.height}
+						data-hero-video
+						class:list={[
+							"size-full object-cover object-left-top",
+							// Below lg the frame is anchored to the bottom right, wide enough that its
+							// subject (in the right third of the frame) lands in that corner; the top
+							// edge fades into the page.
+							"max-lg:absolute max-lg:right-[-20%] max-lg:bottom-0 max-lg:h-auto max-lg:w-[180%] max-lg:max-w-none max-lg:mask-t-from-60%",
+						]}
+					>
+						{backgroundVideo.map((source) => (
+							<source src={source.src} type={source.type} media={source.media} />
+						))}
+					</video>
+				</div>
+			) : backgroundImage ? (
+				<Picture
+					src={backgroundImage}
+					alt=""
+					formats={["avif", "webp"]}
+					fallbackFormat="jpg"
+					widths={[640, 960, 1376]}
+					sizes={corner ? "(min-width: 1024px) 100vw, 180vw" : "100vw"}
+					loading="eager"
+					fetchpriority="high"
+					class:list={[
+						"absolute -z-10 object-cover object-left-top",
+						corner
+							? // Same placement as the home video: wide enough that the subject lands
+								// in the bottom right corner, with the top edge fading into the page.
+								"max-lg:right-[-20%] max-lg:bottom-0 max-lg:h-auto max-lg:w-[180%] max-lg:max-w-none max-lg:mask-t-from-60% lg:inset-0 lg:size-full"
+							: "inset-0 size-full",
+					]}
+				/>
+			) : null}
+			<div
+				aria-hidden="true"
+				class:list={[
+					"pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/4 bg-linear-to-b from-transparent to-white",
+					(backgroundVideo || corner) && "max-lg:h-16",
+				]}
+			/>
+			</>
+		)
+	}
+	<div class="mx-auto max-w-content px-5 sm:px-8 lg:px-10">
+		<div
+			class:list={[
+				"grid gap-x-16 gap-y-12",
+				hasMedia ? "lg:grid-cols-12 lg:items-center" : "max-w-3xl",
+			]}
+		>
+			<div class:list={["hero-copy flex flex-col gap-6", hasMedia && "lg:col-span-7"]}>
+				<slot name="breadcrumbs" />
+				{Astro.slots.has("eyebrow") && (
+					<div class="self-start">
+						<slot name="eyebrow" />
+					</div>
+				)}
+				<h1
+					class:list={[
+						"text-ink [&_em]:not-italic",
+						accent
+							? "font-hero font-medium tracking-[-0.02em] [&_.hero-accent]:font-normal [&_.hero-accent]:text-teal [&_.hero-accent]:italic"
+							: "font-display font-normal",
+						size === "display" ? "text-display" : "text-title",
+					]}
+				>
+					{title}<slot name="title" />
+				</h1>
+				{
+					label && (
+						<p class="font-display text-subheading text-ink-muted">{label}</p>
+					)
+				}
+				<slot />
+				{
+					hasBackground && hasCaption && (
+						<p class="flex items-center gap-2 text-label text-ink-muted">
+							<slot name="caption" />
+						</p>
+					)
+				}
+			</div>
+			{
+				hasMedia && (
+					<div class="hero-media lg:col-span-5">
+						{image && hasCaption && (
+							<Figure
+								src={image}
+								alt={imageAlt}
+								ratio={imageRatio}
+								priority
+								sizes="(min-width: 1024px) 34vw, 100vw"
+							>
+								<slot name="caption" />
+							</Figure>
+						)}
+						{image && !hasCaption && (
+							<Figure
+								src={image}
+								alt={imageAlt}
+								ratio={imageRatio}
+								priority
+								sizes="(min-width: 1024px) 34vw, 100vw"
+							/>
+						)}
+						{!image && <slot name="media" />}
+					</div>
+				)
+			}
+		</div>
+	</div>
+	{
+		pinned && (
+			<div
+				aria-hidden="true"
+				class="hero-shade pointer-events-none absolute inset-0 z-10 bg-ink opacity-0"
+			/>
+		)
+	}
+</section>
+
+<script>
+	import "../scripts/hero-video";
+</script>

@@ -1,0 +1,211 @@
+---
+import { Image } from "astro:assets";
+import {
+	contactHref,
+	ctaLabel,
+	logo,
+	navLinks,
+	serviceMenuLinks,
+} from "../data/site";
+import { buttonClass } from "./ui/button";
+import Icon from "./ui/Icon.astro";
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const current = (href: string) =>
+	path === (href.replace(/\/$/, "") || "/") ? "page" : undefined;
+const servicesHref = "/servicios/";
+const inServices = path.startsWith("/servicios");
+const navLink =
+	"relative inline-flex min-h-11 items-center gap-1 text-small font-medium transition-[color] duration-200 after:absolute after:inset-x-0 after:bottom-1.5 after:h-0.5 after:rounded-full after:transition-[opacity] after:duration-200";
+---
+
+<header
+	class="sticky top-0 z-50 border-b border-transparent bg-transparent transition-[background-color,border-color] duration-200 data-scrolled:border-line data-scrolled:bg-paper motion-reduce:transition-none"
+	data-site-header
+>
+	<div
+		class="mx-auto flex h-18 max-w-content items-center justify-between gap-3 px-5 sm:gap-6 sm:px-8 lg:px-10"
+	>
+		<a class="flex shrink-0 items-center gap-3" href="/">
+			<Image
+				src={logo}
+				alt="Inala Centro de Psicoterapia"
+				width={44}
+				height={44}
+				densities={[1, 2]}
+				class="size-10 md:size-11"
+				loading="eager"
+			/>
+			<span class="flex flex-col leading-none">
+				<span class="font-display text-2xl font-medium tracking-wide text-ink"
+					>INALA</span
+				>
+				<span
+					class="mt-1 text-xs font-semibold uppercase tracking-wide text-ink-muted sm:tracking-widest"
+					>Centro de Psicoterapia</span
+				>
+			</span>
+		</a>
+		<nav class="hidden items-center gap-8 xl:flex" aria-label="Principal">
+			{
+				navLinks.map((link) =>
+					link.href === servicesHref ? (
+						<div class="services-menu group relative">
+							<a
+								class:list={[
+									navLink,
+									"after:bg-seafoam",
+									inServices
+										? "text-ink after:opacity-100"
+										: "text-ink-muted after:opacity-0 hover:text-ink",
+								]}
+								aria-current={current(link.href)}
+								href={link.href}
+							>
+								{link.name}
+								<Icon
+									name="expand_more"
+									class="transition-[rotate] duration-200 ease-out group-hover:rotate-180 group-focus-within:rotate-180 group-data-closed:rotate-0 motion-reduce:transition-none"
+								/>
+							</a>
+							<div class="invisible absolute left-1/2 top-full -translate-x-1/2 pt-2 opacity-0 transition-[opacity,visibility] duration-200 ease-out group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 group-data-closed:invisible group-data-closed:opacity-0">
+								<ul class="min-w-64 origin-top scale-97 rounded-frame bg-white p-2 shadow-float transition-[scale] duration-200 ease-out group-hover:scale-100 group-focus-within:scale-100 motion-reduce:scale-100">
+									{serviceMenuLinks.map((service) => (
+										<li>
+											<a
+												class:list={[
+													"flex min-h-11 items-center gap-3 rounded-field px-3 text-small transition-[background-color,color] duration-200 hover:bg-mist hover:text-ink",
+													current(service.href)
+														? "font-semibold text-ink"
+														: "text-ink-muted",
+												]}
+												aria-current={current(service.href)}
+												href={service.href}
+											>
+												{service.name}
+											</a>
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
+					) : (
+						<a
+							class:list={[
+								navLink,
+								"after:bg-seafoam",
+								current(link.href)
+									? "text-ink after:opacity-100"
+									: "text-ink-muted after:opacity-0 hover:text-ink",
+							]}
+							aria-current={current(link.href)}
+							href={link.href}
+						>
+							{link.name}
+						</a>
+					),
+				)
+			}
+		</nav>
+		<div class="flex items-center gap-3">
+			<a class:list={[buttonClass(), "min-h-11 px-5 max-sm:hidden"]} href={contactHref}>
+				<Icon name="calendar_today" />
+				{ctaLabel}
+			</a>
+			<details class="mobile-menu group/menu xl:hidden">
+				<summary
+					class="inline-flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full border border-line-strong bg-white px-4 text-small font-semibold text-ink transition-[border-color,color] duration-200 hover:border-teal hover:text-teal [&::-webkit-details-marker]:hidden"
+				>
+					<Icon name="menu" class="group-open/menu:hidden" />
+					<Icon name="close" class="hidden group-open/menu:block" />
+					<span class="max-xs:sr-only">Menú</span>
+				</summary>
+				<nav
+					class="fixed inset-x-0 top-18 max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-b border-line bg-paper px-5 pb-8 pt-2 shadow-float transition-[opacity,translate] duration-250 ease-out sm:px-8 starting:-translate-y-2 starting:opacity-0 motion-reduce:starting:translate-y-0"
+					aria-label="Principal (móvil)"
+				>
+					<ul class="flex flex-col">
+						{
+							navLinks.map((link) => (
+								<li class="border-b border-line">
+									<a
+										class:list={[
+											"flex min-h-14 items-center font-display text-subheading",
+											current(link.href)
+												? "text-teal"
+												: "text-ink hover:text-teal",
+										]}
+										aria-current={current(link.href)}
+										href={link.href}
+									>
+										{link.name}
+									</a>
+									{link.href === servicesHref && (
+										<ul class="grid gap-x-6 pb-4 sm:grid-cols-2">
+											{serviceMenuLinks.map((service) => (
+												<li>
+													<a
+														class:list={[
+															"flex min-h-11 items-center text-body",
+															current(service.href)
+																? "font-semibold text-teal"
+																: "text-ink-muted hover:text-teal",
+														]}
+														aria-current={current(service.href)}
+														href={service.href}
+													>
+														{service.name}
+													</a>
+												</li>
+											))}
+										</ul>
+									)}
+								</li>
+							))
+						}
+					</ul>
+					<a class:list={[buttonClass(), "mt-6 w-full"]} href={contactHref}>
+						{ctaLabel}
+					</a>
+				</nav>
+			</details>
+		</div>
+	</div>
+</header>
+
+<script>
+	// The bar is transparent over the hero and gets its background and border once the page scrolls.
+	const header = document.querySelector<HTMLElement>("[data-site-header]");
+	const syncHeader = () => {
+		header?.toggleAttribute("data-scrolled", window.scrollY > 0);
+	};
+	syncHeader();
+	window.addEventListener("scroll", syncHeader, { passive: true });
+
+	// Escape closes the mobile menu and returns focus to its toggle.
+	for (const menu of document.querySelectorAll<HTMLDetailsElement>(".mobile-menu")) {
+		menu.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && menu.open) {
+				menu.open = false;
+				menu.querySelector("summary")?.focus();
+			}
+		});
+	}
+
+	// Escape dismisses the hover/focus dropdown (WCAG 1.4.13); it reopens on the next hover or focus.
+	for (const menu of document.querySelectorAll<HTMLElement>(".services-menu")) {
+		const reopen = () => delete menu.dataset.closed;
+		menu.addEventListener("keydown", (event) => {
+			if (event.key === "Escape") menu.dataset.closed = "";
+		});
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && menu.matches(":hover")) {
+				menu.dataset.closed = "";
+			}
+		});
+		menu.addEventListener("mouseleave", reopen);
+		menu.addEventListener("focusout", (event) => {
+			if (!menu.contains(event.relatedTarget as Node | null)) reopen();
+		});
+	}
+</script>

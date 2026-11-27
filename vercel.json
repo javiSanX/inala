@@ -1,29 +1,84 @@
 {
-  "redirects": [
-    {
-      "source": "/blog/El_coraje_de_seguir_adelante",
-      "destination": "/blog/el-coraje-de-seguir-adelante",
-      "permanent": true
-    },
-    {
-      "source": "/blog/Guia_de_supervivencia_navideña",
-      "destination": "/blog/guia-de-supervivencia-navidena",
-      "permanent": true
-    },
-    {
-      "source": "/blog/como_superar_la_andiedad",
-      "destination": "/blog/como-superar-la-ansiedad-diagnostico",
-      "permanent": true
-    },
-    {
-      "source": "/blog/navegar_en_la_nueva_realidad",
-      "destination": "/blog/navegar-en-la-nueva-realidad",
-      "permanent": true
-    },
-    {
-      "source": "/blog/author/Maria%20Sanchez",
-      "destination": "/blog/author/maria-sanchez",
-      "permanent": true
-    }
-  ]
+	"$schema": "https://openapi.vercel.sh/vercel.json",
+	"installCommand": "bun install --frozen-lockfile",
+	"buildCommand": "bun run build",
+	"redirects": [
+		{
+			"source": "/servicios/psicologia-parental",
+			"destination": "/servicios/psicologia-perinatal/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/2",
+			"destination": "/blog/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/author",
+			"destination": "/blog/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/author/maria-sanchez",
+			"destination": "/blog/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/author/Maria%20Sanchez",
+			"destination": "/blog/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/El_coraje_de_seguir_adelante",
+			"destination": "/blog/el-coraje-de-seguir-adelante/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/Guia_de_supervivencia_navideña",
+			"destination": "/blog/guia-de-supervivencia-navidena/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/como_superar_la_andiedad",
+			"destination": "/blog/como-superar-la-ansiedad-diagnostico/",
+			"statusCode": 301
+		},
+		{
+			"source": "/blog/navegar_en_la_nueva_realidad",
+			"destination": "/blog/navegar-en-la-nueva-realidad/",
+			"statusCode": 301
+		},
+		{
+			"source": "/política-de-privacidad",
+			"destination": "/politica-de-privacidad/",
+			"statusCode": 301
+		}
+	],
+	"headers": [
+		{
+			"source": "/(.*)",
+			"headers": [
+				{
+					"key": "Strict-Transport-Security",
+					"value": "max-age=63072000; includeSubDomains"
+				},
+				{
+					"key": "X-Content-Type-Options",
+					"value": "nosniff"
+				},
+				{
+					"key": "Referrer-Policy",
+					"value": "strict-origin-when-cross-origin"
+				},
+				{
+					"key": "X-Frame-Options",
+					"value": "SAMEORIGIN"
+				},
+				{
+					"key": "Permissions-Policy",
+					"value": "camera=(), microphone=(), geolocation=()"
+				}
+			]
+		}
+	]
 }
